@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Fragment } from 'react';
 import Button from 'react-bootstrap/Button';
-import { signIn, signOut } from '../Auth';
+import { logout } from '../actions';
 
 const NavigationBar = styled.div`
   margin-bottom: 15px;
@@ -28,10 +28,14 @@ export default ({ user }) => (
     <Link className="btn btn-secondary" to="/new-item">
       + Add New
     </Link>
-    {!user && <Button onClick={signIn}>Login</Button>}
+    {!user && (
+      <Link className="btn btn-secondary" to="/login">
+        Login
+      </Link>
+    )}
     {user && (
       <Fragment>
-        <Button onClick={signOut}>Logout</Button>
+        <Button onClick={logout()}>Logout</Button>
         <Profile>
           <ProfilePicture src={user.profile.picture} />
           {user.profile.email}
