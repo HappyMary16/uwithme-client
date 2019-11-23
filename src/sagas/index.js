@@ -1,5 +1,12 @@
 import { all, call, put, takeEvery, take } from 'redux-saga/effects';
-import { LOAD_TODO_LIST, RENDER_TODO_LIST, LOGIN_REQUEST } from '../actions';
+import {
+  LOAD_TODO_LIST,
+  RENDER_TODO_LIST,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  LOGIN_ERROR
+} from '../actions';
 import { takeLatest } from 'redux-saga/effects';
 import {
   HANDLE_AUTHENTICATION_CALLBACK,
@@ -14,7 +21,7 @@ export function* authorize(username, password) {
       username: username,
       password: password
     });
-    const token = yield call(fetch, endpoint, {
+    const response = yield call(fetch, endpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -23,21 +30,26 @@ export function* authorize(username, password) {
       body: bodydata
     });
 
-    yield put({ type: 'LOGIN_SUCCESS', token });
-    return token;
+    if (response.statusCode === 200) {
+      return response;
+      //return response.token;
+    } else {
+      throw new Error('Required');
+    }
   } catch (error) {
-    yield put({ type: 'LOGIN_ERROR', error });
+    yield put({ type: LOGIN_ERROR, error });
   }
 }
 
 export function* loginFlow() {
   while (true) {
-    const { username, password } = yield take('LOGIN_REQUEST');
+    const { username, password } = yield take(LOGIN_REQUEST);
     const token = yield call(authorize, username, password);
     if (token) {
-      yield put({ type: 'SAVE_TOKEN', token });
-      yield take('LOGOUT');
-      yield put({ type: 'SAVE_TOKEN' });
+      yield put({ type: LOGIN_SUCCESS, token });
+      yield take(LOGOUT);
+      // some actions after logout
+      // yield put({ type: 'SAVE_TOKEN' });
     }
   }
 }

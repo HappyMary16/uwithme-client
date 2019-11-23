@@ -1,4 +1,10 @@
-import { ADD_TODO, LOGIN_REQUEST, SAVE_TOKEN } from '../actions';
+import {
+  ADD_TODO,
+  LOGIN_ERROR,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT
+} from '../actions';
 import { RENDER_TODO_LIST } from '../actions';
 import { USER_PROFILE_LOADED } from '../actions';
 
@@ -6,7 +12,7 @@ const initialState = {
   toDoList: [],
   username: '',
   password: '',
-  token: {}
+  token: null
 };
 
 export default function toDoApp(state = initialState, action) {
@@ -38,10 +44,20 @@ export default function toDoApp(state = initialState, action) {
         username: action.username,
         password: action.password
       };
-    case SAVE_TOKEN:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         token: action.token
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: null
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        error: action.error
       };
     default:
       return state;
