@@ -1,5 +1,46 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { LOAD_TODO_LIST, RENDER_TODO_LIST } from '../actions';
+import { all, call, put, takeEvery, take } from 'redux-saga/effects';
+import { LOAD_TODO_LIST, RENDER_TODO_LIST, LOGIN_REQUEST } from '../actions';
+import { takeLatest } from 'redux-saga/effects';
+import {
+  HANDLE_AUTHENTICATION_CALLBACK,
+  USER_PROFILE_LOADED
+} from '../actions';
+import { handleAuthentication } from '../Auth';
+
+export function* authorize(username, password) {
+  try {
+    const endpoint = 'http://localhost:8080/login';
+    let bodydata = JSON.stringify({
+      username: username,
+      password: password
+    });
+    const token = yield call(fetch, endpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: bodydata
+    });
+
+    yield put({ type: 'LOGIN_SUCCESS', token });
+    return token;
+  } catch (error) {
+    yield put({ type: 'LOGIN_ERROR', error });
+  }
+}
+
+export function* loginFlow() {
+  while (true) {
+    const { username, password } = yield take('LOGIN_REQUEST');
+    const token = yield call(authorize, username, password);
+    if (token) {
+      yield put({ type: 'SAVE_TOKEN', token });
+      yield take('LOGOUT');
+      yield put({ type: 'SAVE_TOKEN' });
+    }
+  }
+}
 
 export function* fetchToDoList() {
   const endpoint =
@@ -13,6 +54,15 @@ export function* loadToDoList() {
   yield takeEvery(LOAD_TODO_LIST, fetchToDoList);
 }
 
+export function* parseHash() {
+  const user = yield call(handleAuthentication);
+  yield put({ type: USER_PROFILE_LOADED, user });
+}
+
+export function* handleAuthenticationCallback() {
+  yield takeLatest(HANDLE_AUTHENTICATION_CALLBACK, parseHash);
+}
+
 export default function* rootSaga() {
-  yield all([loadToDoList()]);
+  yield all([loadToDoList(), handleAuthenticationCallback(), loginFlow()]);
 }

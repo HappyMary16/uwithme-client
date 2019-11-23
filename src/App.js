@@ -3,10 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
 
 import AddToDo from './containers/AddToDo';
 import ToDoListContainer from './containers/ToDoListContainer';
+import Callback from './containers/Callback';
+import NavigationContainer from './containers/NavigationContainer';
+import Login from './containers/Login';
 
 class App extends Component {
   render() {
@@ -15,13 +17,16 @@ class App extends Component {
         <Row className="row">
           <Col xs={12}>
             <h1>To Do List</h1>
-            <Navigation />
+            <NavigationContainer />
             <Route exact path="/" component={ToDoListContainer} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/new-item" component={AddToDo} />
+            <Route exact path="/callback" component={Callback} />
           </Col>
         </Row>
       </Container>
     );
   }
 }
+
 export default App;
