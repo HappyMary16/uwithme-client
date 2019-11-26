@@ -12,30 +12,23 @@ import {
   HANDLE_AUTHENTICATION_CALLBACK,
   USER_PROFILE_LOADED
 } from '../actions';
-import { handleAuthentication } from '../Auth';
+// import { handleAuthentication } from '../Auth';
+import http from '../services/http';
 
 export function* authorize(username, password) {
   try {
-    const endpoint = 'http://localhost:8080/login';
+    const endpoint = 'login';
     let bodydata = JSON.stringify({
       username: username,
       password: password
     });
-    const response = yield call(fetch, endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: bodydata
+    const response = yield call(http, {
+      url: endpoint,
+      method: 'post',
+      data: bodydata
     });
 
-    if (response.statusCode === 200) {
-      return response;
-      //return response.token;
-    } else {
-      throw new Error('Required');
-    }
+    return response;
   } catch (error) {
     yield put({ type: LOGIN_ERROR, error });
   }
@@ -44,9 +37,9 @@ export function* authorize(username, password) {
 export function* loginFlow() {
   while (true) {
     const { username, password } = yield take(LOGIN_REQUEST);
-    const token = yield call(authorize, username, password);
+    const response = yield call(authorize, username, password);
     if (token) {
-      yield put({ type: LOGIN_SUCCESS, token });
+      yield put({ type: LOGIN_SUCCESS, response });
       yield take(LOGOUT);
       // some actions after logout
       // yield put({ type: 'SAVE_TOKEN' });
@@ -66,15 +59,15 @@ export function* loadToDoList() {
   yield takeEvery(LOAD_TODO_LIST, fetchToDoList);
 }
 
-export function* parseHash() {
-  const user = yield call(handleAuthentication);
-  yield put({ type: USER_PROFILE_LOADED, user });
-}
-
-export function* handleAuthenticationCallback() {
-  yield takeLatest(HANDLE_AUTHENTICATION_CALLBACK, parseHash);
-}
-
+// export function* parseHash() {
+//   const user = yield call(handleAuthentication);
+//   yield put({ type: USER_PROFILE_LOADED, user });
+// }
+//
+// export function* handleAuthenticationCallback() {
+//   yield takeLatest(HANDLE_AUTHENTICATION_CALLBACK, parseHash);
+// }
+//
 export default function* rootSaga() {
-  yield all([loadToDoList(), handleAuthenticationCallback(), loginFlow()]);
+  yield all([loadToDoList(), loginFlow()]);
 }

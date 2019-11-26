@@ -9,6 +9,14 @@ import { RENDER_TODO_LIST } from '../actions';
 import { USER_PROFILE_LOADED } from '../actions';
 
 const initialState = {
+  user: {
+    firstName: '',
+    lastName: '',
+    username: '',
+    phone: '',
+    email: '',
+    role: ''
+  },
   toDoList: [],
   username: '',
   password: '',
@@ -47,7 +55,8 @@ export default function toDoApp(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.token
+        token: action.token,
+        user: action.user
       };
     case LOGOUT:
       return {
