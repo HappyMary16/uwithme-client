@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loginRequest } from '../actions';
+import { registrationRequest } from '../actions';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-let Login = ({ dispatch }) => {
+let SignUp = ({ dispatch }) => {
   let username;
   let password;
 
@@ -14,7 +14,7 @@ let Login = ({ dispatch }) => {
       onSubmit={e => {
         e.preventDefault();
 
-        dispatch(loginRequest(username.value, password.value));
+        dispatch(registrationRequest(username.value, password.value));
         username.value = '';
         password.value = '';
       }}
@@ -36,13 +36,13 @@ let Login = ({ dispatch }) => {
             }}
           />
           <InputGroup.Append>
-            <Button type="submit">Login</Button>
+            <Button type="submit">Registration</Button>
           </InputGroup.Append>
         </InputGroup>
       </Form.Group>
     </Form>
   );
 };
-Login = connect()(Login);
+SignUp = connect()(SignUp);
 
-export default Login;
+export default SignUp;

@@ -11,7 +11,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
-export const LOGOUT = 'LOGOUT';
+export const SIGN_OUT = 'LOGOUT';
 
 export function registrationRequest(username, password) {
   return {
@@ -29,9 +29,9 @@ export function loginRequest(username, password) {
   };
 }
 
-export function logout() {
+export function signOut() {
   return {
-    type: LOGOUT
+    type: SIGN_OUT
   };
 }
 
@@ -45,19 +45,10 @@ export function addToDo(title) {
   };
 }
 
-export function addUser(token, user) {
+export function addUser(token) {
   return {
     type: LOGIN_SUCCESS,
-    token,
-    user: {
-      _id,
-      firstName,
-      lastName,
-      username,
-      phone,
-      email,
-      _role
-    }
+    token
   };
 }
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Navigation from '../components/Navigation';
+import TopToolBar from '../components/TopToolBar';
 
 const mapStateToProps = state => {
   return {
@@ -7,6 +7,6 @@ const mapStateToProps = state => {
   };
 };
 
-const NavigationContainer = connect(mapStateToProps)(Navigation);
+const NavigationContainer = connect(mapStateToProps)(TopToolBar);
 
 export default NavigationContainer;

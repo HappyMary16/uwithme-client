@@ -3,7 +3,7 @@ import qs from 'qs';
 import history from '../utils/history';
 import config from '../config';
 
-const apiRoot = `${config.host}`;
+const apiRoot = `http://${config.host}:${config.port}/`;
 
 let updateTokenRequest = null;
 
@@ -27,8 +27,12 @@ const reRequest = request => {
     method: request.method,
     handleToken: handleToken
   };
-  if (request.data) config['data'] = request.data;
-  if (request.params) config['params'] = request.params;
+  if (request.data) {
+    config['data'] = request.data;
+  }
+  if (request.params) {
+    config['params'] = request.params;
+  }
   return http(config)
     .then(res => {
       updateTokenRequest = null;

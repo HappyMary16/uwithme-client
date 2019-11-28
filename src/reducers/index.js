@@ -3,27 +3,13 @@ import {
   LOGIN_ERROR,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGOUT
+  SIGN_OUT
 } from '../actions';
 import { RENDER_TODO_LIST } from '../actions';
 import { USER_PROFILE_LOADED } from '../actions';
+import StateLoader from '../store/StateLoader';
 
-const initialState = {
-  user: {
-    firstName: '',
-    lastName: '',
-    username: '',
-    phone: '',
-    email: '',
-    role: ''
-  },
-  toDoList: [],
-  username: '',
-  password: '',
-  token: null
-};
-
-export default function toDoApp(state = initialState, action) {
+export default function toDoApp(state = new StateLoader().loadState(), action) {
   switch (action.type) {
     case RENDER_TODO_LIST:
       return {
@@ -49,19 +35,22 @@ export default function toDoApp(state = initialState, action) {
     case LOGIN_REQUEST:
       return {
         ...state,
-        username: action.username,
-        password: action.password
+        user: {
+          ...state.user,
+          username: action.username,
+          password: action.password
+        }
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.token,
-        user: action.user
+        token: action.token
       };
-    case LOGOUT:
+    case SIGN_OUT:
       return {
         ...state,
-        token: null
+        token: null,
+        user: null
       };
     case LOGIN_ERROR:
       return {

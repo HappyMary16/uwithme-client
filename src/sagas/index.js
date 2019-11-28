@@ -4,15 +4,10 @@ import {
   RENDER_TODO_LIST,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGOUT,
+  SIGN_OUT,
   LOGIN_ERROR
 } from '../actions';
-import { takeLatest } from 'redux-saga/effects';
-import {
-  HANDLE_AUTHENTICATION_CALLBACK,
-  USER_PROFILE_LOADED
-} from '../actions';
-// import { handleAuthentication } from '../Auth';
+
 import http from '../services/http';
 
 export function* authorize(username, password) {
@@ -38,9 +33,11 @@ export function* loginFlow() {
   while (true) {
     const { username, password } = yield take(LOGIN_REQUEST);
     const response = yield call(authorize, username, password);
-    if (token) {
+    if (response) {
       yield put({ type: LOGIN_SUCCESS, response });
-      yield take(LOGOUT);
+      localStorage.setItem('AuthToken', response);
+      yield take(SIGN_OUT);
+      localStorage.setItem('AuthToken', null);
       // some actions after logout
       // yield put({ type: 'SAVE_TOKEN' });
     }
