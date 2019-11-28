@@ -1,7 +1,9 @@
 export default class StateLoader {
   loadState() {
     try {
-      let serializedState = localStorage.getItem('http://contoso.com:state');
+      let serializedState = localStorage.getItem(
+        'http://education-app.com:state'
+      );
 
       if (serializedState === null) {
         return this.initializeState();
@@ -16,7 +18,7 @@ export default class StateLoader {
   saveState(state) {
     try {
       let serializedState = JSON.stringify(state);
-      localStorage.setItem('http://contoso.com:state', serializedState);
+      localStorage.setItem('http://education-app.com:state', serializedState);
     } catch (err) {}
   }
 

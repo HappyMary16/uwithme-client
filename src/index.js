@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import createAppStore from './store';
+import createAppStore from './store/Store';
 
 const store = createAppStore();
 

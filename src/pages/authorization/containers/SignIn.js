@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import { loginRequest } from '../actions';
+import { signInRequest } from '../actions/authActions';
 
 function Copyright() {
   return (
@@ -52,11 +52,13 @@ const useStyles = makeStyles(theme => ({
 
 let SignIn = ({ dispatch }) => {
   const classes = useStyles();
+
   let username = '';
   let password = '';
+
   let submit = e => {
     e.preventDefault();
-    dispatch(loginRequest(username, password));
+    dispatch(signInRequest(username, password));
   };
 
   return (
@@ -69,7 +71,7 @@ let SignIn = ({ dispatch }) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={e => submit(e)} noValidate>
+        <form className={classes.form} noValidate onSubmit={e => submit(e)}>
           <TextField
             variant="outlined"
             margin="normal"

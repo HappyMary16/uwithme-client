@@ -7,8 +7,8 @@ import { Route } from 'react-router-dom';
 import ToDoListContainer from './containers/ToDoListContainer';
 import Callback from './containers/Callback';
 import NavigationContainer from './containers/NavigationContainer';
-import SignIn from './containers/SignIn';
-import SignUp from './containers/SignUp';
+import SignIn from './pages/authorization/containers/SignIn';
+import SignUp from './pages/authorization/containers/SignUp';
 
 class App extends Component {
   render() {

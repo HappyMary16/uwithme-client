@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import { signOut } from '../actions';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -31,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ user }) => {
+export default ({ user, signOutFunc }) => {
   const classes = useStyles();
 
   return (
@@ -88,11 +87,11 @@ export default ({ user }) => {
         )}
         {user && (
           <Button
-            href="/#"
+            href="/university"
             color="primary"
             variant="outlined"
             className={classes.link}
-            onClick={signOut}
+            onClick={signOutFunc()}
           >
             Sign out
           </Button>
