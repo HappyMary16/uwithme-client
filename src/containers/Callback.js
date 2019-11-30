@@ -5,7 +5,7 @@ import { handleAuthenticationCallback } from '../actions';
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.authReducers.user
   };
 };
 

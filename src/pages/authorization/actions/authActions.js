@@ -1,4 +1,4 @@
-export const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -6,11 +6,22 @@ export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 
 export const SIGN_OUT = 'SIGN_OUT';
 
-export function signUpRequest(username, password) {
+export function signUpRequest(
+  username,
+  password,
+  userType,
+  institute,
+  department,
+  group
+) {
   return {
-    type: REGISTRATION_REQUEST,
+    type: SIGN_UP_REQUEST,
     username,
-    password
+    password,
+    userType,
+    institute,
+    department,
+    group
   };
 }
 

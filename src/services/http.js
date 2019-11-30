@@ -1,9 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 import history from '../utils/history';
-import config from '../config';
-
-const apiRoot = `http://${config.host}:${config.port}/`;
+import { apiRoot } from '../constants/serverApi';
+import { SIGN_IN } from '../constants/links';
 
 let updateTokenRequest = null;
 
@@ -89,7 +88,7 @@ export default function http({ method, url, data, params, handleToken }) {
           })
           .catch(() => {
             updateTokenRequest = null;
-            history.push('/login');
+            history.push(SIGN_IN);
           });
       }
       throw error;

@@ -9,6 +9,7 @@ import Callback from './containers/Callback';
 import NavigationContainer from './containers/NavigationContainer';
 import SignIn from './pages/authorization/containers/SignIn';
 import SignUp from './pages/authorization/containers/SignUp';
+import { SIGN_IN, SIGN_UP } from './constants/links';
 
 class App extends Component {
   render() {
@@ -18,8 +19,8 @@ class App extends Component {
           <Col xs={12}>
             <NavigationContainer />
             <Route exact path="/" component={ToDoListContainer} />
-            <Route exact path="/sign-in" component={SignIn} />
-            <Route exact path="/sign-up" component={SignUp} />
+            <Route exact path={SIGN_IN} component={SignIn} />
+            <Route exact path={SIGN_UP} component={SignUp} />
             <Route exact path="/callback" component={Callback} />
           </Col>
         </Row>

@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import { SIGN_IN } from '../constants/links';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ user, signOutFunc }) => {
+export const TopToolBar = ({ user, signOutFunc }) => {
   const classes = useStyles();
 
   return (
@@ -77,7 +78,7 @@ export default ({ user, signOutFunc }) => {
         </nav>
         {!user && (
           <Button
-            href="/sign-in"
+            href={SIGN_IN}
             color="primary"
             variant="outlined"
             className={classes.link}

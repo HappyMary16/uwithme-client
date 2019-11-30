@@ -3,7 +3,7 @@ import ToDoList from '../components/ToDoList';
 
 const mapStateToProps = state => {
   return {
-    toDoList: state.toDoList
+    toDoList: state.toDoApp.toDoList
   };
 };
 

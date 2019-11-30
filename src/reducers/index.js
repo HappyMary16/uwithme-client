@@ -1,4 +1,9 @@
-import { ADD_TODO } from '../actions';
+import {
+  ADD_TODO,
+  RENDER_DEPARTMENTS,
+  RENDER_INSTITUTES,
+  RENDER_GROUPS
+} from '../actions';
 import StateLoader from '../store/StateLoader';
 
 export default function toDoApp(state = new StateLoader().loadState(), action) {
@@ -13,6 +18,21 @@ export default function toDoApp(state = new StateLoader().loadState(), action) {
       return {
         ...state,
         toDoList: newToDoList
+      };
+    case RENDER_INSTITUTES:
+      return {
+        ...state,
+        institutes: action.institutes
+      };
+    case RENDER_DEPARTMENTS:
+      return {
+        ...state,
+        departments: action.departments
+      };
+    case RENDER_GROUPS:
+      return {
+        ...state,
+        groups: action.groups
       };
     default:
       return state;
