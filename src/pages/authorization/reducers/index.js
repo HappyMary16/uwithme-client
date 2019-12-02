@@ -7,7 +7,7 @@ import {
 } from '../actions/authActions';
 
 export default function authorization(
-  state = new StateLoader().loadState(),
+  state = new StateLoader().loadState().authorization,
   action
 ) {
   switch (action.type) {

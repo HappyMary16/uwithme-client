@@ -24,39 +24,42 @@ export default class StateLoader {
 
   initializeState() {
     return {
-      user: {},
-      toDoList: [],
-      token: null,
-      institutes: [
-        {
-          value: '1',
-          label: 'I'
-        },
-        {
-          value: '2',
-          label: 'KIT'
-        }
-      ],
-      departments: [
-        {
-          value: '1',
-          label: 'd1'
-        },
-        {
-          value: '2',
-          label: 'd2'
-        }
-      ],
-      groups: [
-        {
-          value: '1',
-          label: 'i-26b'
-        },
-        {
-          value: '2',
-          label: 'i-26a'
-        }
-      ]
+      authorization: {
+        user: {},
+        token: null
+      },
+      info: {
+        institutes: [
+          {
+            value: '1',
+            label: 'I'
+          },
+          {
+            value: '2',
+            label: 'KIT'
+          }
+        ],
+        departments: [
+          {
+            value: '1',
+            label: 'd1'
+          },
+          {
+            value: '2',
+            label: 'd2'
+          }
+        ],
+        groups: [
+          {
+            value: '1',
+            label: 'i-26b'
+          },
+          {
+            value: '2',
+            label: 'i-26a'
+          }
+        ]
+      }
     };
   }
 }

@@ -8,8 +8,7 @@ import {
 } from '../actions/authActions';
 
 import http from '../../../services/http';
-import { SIGN_IN } from '../../../constants/serverApi';
-import { SIGN_UP } from '../../../constants/links';
+import { SIGN_IN, SIGN_UP } from '../../../constants/serverApi';
 
 export function* signIn(username, password) {
   try {

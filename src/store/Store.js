@@ -1,9 +1,9 @@
 import StateLoader from './StateLoader';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import toDoApp from '../reducers';
+import info from '../reducers';
 import rootSaga from '../sagas';
-import authReducers from '../pages/authorization/reducers/authReducers';
+import authorization from '../pages/authorization/reducers';
 import { loadDepartments, loadGroups, loadInstitutes } from '../actions';
 
 export default function createAppStore() {
@@ -11,8 +11,8 @@ export default function createAppStore() {
   const sagaMiddleware = createSagaMiddleware();
 
   const rootReducer = combineReducers({
-    toDoApp,
-    authReducers
+    info,
+    authorization
   });
 
   const store = createStore(

@@ -50,9 +50,9 @@ let SignUp = ({ dispatch, institutes, departments, groups }) => {
   const classes = useStyles();
   const [userType, setUserType] = React.useState('STUDENT');
 
-  const [institute, setInstitute] = React.useState(institutes[0].value);
-  const [department, setDepartment] = React.useState(departments[0].value);
-  const [group, setGroup] = React.useState(groups[0].value);
+  const [institute, setInstitute] = React.useState('Select institute');
+  const [department, setDepartment] = React.useState('Select department');
+  const [group, setGroup] = React.useState('Select group');
 
   let firstName = '';
   let lastName = '';
@@ -271,9 +271,9 @@ let SignUp = ({ dispatch, institutes, departments, groups }) => {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.toDoApp.institutes,
-    departments: state.toDoApp.departments,
-    groups: state.toDoApp.groups
+    institutes: state.info.institutes,
+    departments: state.info.departments,
+    groups: state.info.groups
   };
 };
 

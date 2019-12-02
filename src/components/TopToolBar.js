@@ -48,7 +48,7 @@ export const TopToolBar = ({ user, signOutFunc }) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          Company name
+          NTU "KhPI"
         </Typography>
         <nav>
           <Link
