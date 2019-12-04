@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let SignIn = ({ dispatch }) => {
+export const SignIn = ({ signInRequestFunc }) => {
   const classes = useStyles();
 
   let username = '';
@@ -47,7 +47,7 @@ let SignIn = ({ dispatch }) => {
 
   let submit = e => {
     e.preventDefault();
-    dispatch(signInRequest(username, password));
+    signInRequestFunc(username, password);
   };
 
   return (
@@ -122,6 +122,3 @@ let SignIn = ({ dispatch }) => {
     </Container>
   );
 };
-SignIn = connect()(SignIn);
-
-export default SignIn;

@@ -4,25 +4,26 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Route } from 'react-router-dom';
 
-import ToDoListContainer from './containers/ToDoListContainer';
 import Callback from './containers/Callback';
 import NavigationContainer from './containers/NavigationContainer';
-import SignIn from './pages/authorization/containers/SignIn';
-import SignUp from './pages/authorization/containers/SignUp';
 import { SIGN_IN, SIGN_UP } from './constants/links';
+import SingUpContainer from './pages/authorization/containers/SingUpContainer';
+import SingInContainer from './pages/authorization/containers/SignInContainer';
+import StudentContainer from './pages/student/containers/StudentContainer';
+import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
   render() {
     return (
       <Container>
         <Row className="row">
-          <Col xs={12}>
+          <Grid xs={12}>
             <NavigationContainer />
-            <Route exact path="/" component={ToDoListContainer} />
-            <Route exact path={SIGN_IN} component={SignIn} />
-            <Route exact path={SIGN_UP} component={SignUp} />
+            <Route exact path="/" component={StudentContainer} />
+            <Route exact path={SIGN_IN} component={SingInContainer} />
+            <Route exact path={SIGN_UP} component={SingUpContainer} />
             <Route exact path="/callback" component={Callback} />
-          </Col>
+          </Grid>
         </Row>
       </Container>
     );

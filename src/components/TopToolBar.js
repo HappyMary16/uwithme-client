@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { SIGN_IN } from '../constants/links';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -35,69 +36,71 @@ export const TopToolBar = ({ user, signOutFunc }) => {
   const classes = useStyles();
 
   return (
-    <AppBar
-      position="static"
-      color="default"
-      elevation={0}
-      className={classes.appBar}
-    >
-      <Toolbar className={classes.toolbar}>
-        <Typography
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          NTU "KhPI"
-        </Typography>
-        <nav>
-          <Link
-            variant="button"
-            color="textPrimary"
-            href="#"
-            className={classes.link}
+    <Grid xs={12}>
+      <AppBar
+        position="static"
+        color="default"
+        elevation={0}
+        className={classes.appBar}
+      >
+        <Toolbar className={classes.toolbar}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.toolbarTitle}
           >
-            Features
-          </Link>
-          <Link
-            variant="button"
-            color="textPrimary"
-            href="#"
-            className={classes.link}
-          >
-            Enterprise
-          </Link>
-          <Link
-            variant="button"
-            color="textPrimary"
-            href="#"
-            className={classes.link}
-          >
-            Support
-          </Link>
-        </nav>
-        {!user && (
-          <Button
-            href={SIGN_IN}
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-          >
-            Sign In
-          </Button>
-        )}
-        {user && (
-          <Button
-            href="/university"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            onClick={signOutFunc()}
-          >
-            Sign out
-          </Button>
-        )}
-      </Toolbar>
-    </AppBar>
+            NTU "KhPI"
+          </Typography>
+          <nav>
+            <Link
+              variant="button"
+              color="textPrimary"
+              href="#"
+              className={classes.link}
+            >
+              Features
+            </Link>
+            <Link
+              variant="button"
+              color="textPrimary"
+              href="#"
+              className={classes.link}
+            >
+              Enterprise
+            </Link>
+            <Link
+              variant="button"
+              color="textPrimary"
+              href="#"
+              className={classes.link}
+            >
+              Support
+            </Link>
+          </nav>
+          {!user && (
+            <Button
+              href={SIGN_IN}
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+            >
+              Sign In
+            </Button>
+          )}
+          {user && (
+            <Button
+              href="/university"
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+              onClick={signOutFunc()}
+            >
+              Sign out
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Grid>
   );
 };

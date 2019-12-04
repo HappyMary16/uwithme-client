@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -12,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import { signUpRequest } from '../actions/authActions';
 import MenuItem from '@material-ui/core/MenuItem';
 import { UserTypes } from '../../../constants/userTypes';
 import { SIGN_IN } from '../../../constants/links';
@@ -46,13 +44,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let SignUp = ({ dispatch, institutes, departments, groups }) => {
-  const classes = useStyles();
-  const [userType, setUserType] = React.useState('STUDENT');
+export const SignUp = ({
+  signUpRequestFunc,
+  institutes,
+  departments,
+  groups
+}) => {
+  let classes = useStyles();
+  let [userType, setUserType] = React.useState('STUDENT');
 
-  const [institute, setInstitute] = React.useState('Select institute');
-  const [department, setDepartment] = React.useState('Select department');
-  const [group, setGroup] = React.useState('Select group');
+  let [institute, setInstitute] = React.useState('Select institute');
+  let [department, setDepartment] = React.useState('Select department');
+  let [group, setGroup] = React.useState('Select group');
 
   let firstName = '';
   let lastName = '';
@@ -64,7 +67,7 @@ let SignUp = ({ dispatch, institutes, departments, groups }) => {
   let submit = e => {
     e.preventDefault();
     //TODO: send correct data
-    dispatch(signUpRequest(firstName, lastName, email, password));
+    signUpRequestFunc(firstName, lastName, email, password);
   };
 
   return (
@@ -268,15 +271,3 @@ let SignUp = ({ dispatch, institutes, departments, groups }) => {
     </Container>
   );
 };
-
-const mapStateToProps = state => {
-  return {
-    institutes: state.info.institutes,
-    departments: state.info.departments,
-    groups: state.info.groups
-  };
-};
-
-SignUp = connect(mapStateToProps)(SignUp);
-
-export default SignUp;
