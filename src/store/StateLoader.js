@@ -1,9 +1,11 @@
 export default class StateLoader {
   loadState() {
     try {
-      let serializedState = localStorage.getItem(
-        'http://education-app.com:state'
-      );
+      let serializedState = this.initializeState();
+      //TODO uncomment and delete this.initializeState();
+      //   localStorage.getItem(
+      //   'http://education-app.com:state'
+      // );
 
       if (serializedState === null) {
         return this.initializeState();
@@ -57,6 +59,80 @@ export default class StateLoader {
           {
             value: '2',
             label: 'i-26a'
+          }
+        ]
+      },
+      user: {
+        type: 'STUDENT',
+        files: [
+          {
+            subjectName: 'History',
+            lecture: [
+              {
+                name: 'First',
+                link: 'link1'
+              },
+              {
+                name: 'Second',
+                link: 'link2'
+              }
+            ],
+            tasks: [
+              {
+                name: 'First',
+                link: 'link1'
+              },
+              {
+                name: 'Second',
+                link: 'link2'
+              }
+            ]
+          },
+          {
+            subjectName: 'Math',
+            lecture: [
+              {
+                name: 'First',
+                link: 'link1'
+              },
+              {
+                name: 'Second',
+                link: 'link2'
+              }
+            ],
+            tasks: [
+              {
+                name: 'First',
+                link: 'link1'
+              },
+              {
+                name: 'Second',
+                link: 'link2'
+              }
+            ]
+          },
+          {
+            subjectName: 'Programming',
+            lecture: [
+              {
+                name: 'Programming First',
+                link: 'Programming link1'
+              },
+              {
+                name: 'Programming Second',
+                link: 'Programming link2'
+              }
+            ],
+            tasks: [
+              {
+                name: 'Programming First',
+                link: 'Programming link1'
+              },
+              {
+                name: 'Programming Second',
+                link: 'Programming link2'
+              }
+            ]
           }
         ]
       }

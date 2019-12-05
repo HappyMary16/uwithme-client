@@ -5,6 +5,7 @@ import info from '../reducers';
 import rootSaga from '../sagas';
 import authorization from '../pages/authorization/reducers';
 import { loadDepartments, loadGroups, loadInstitutes } from '../actions';
+import userReducers from '../pages/student/reducers/userReducers';
 
 export default function createAppStore() {
   const stateLoader = new StateLoader();
@@ -12,7 +13,8 @@ export default function createAppStore() {
 
   const rootReducer = combineReducers({
     info,
-    authorization
+    authorization,
+    userReducers
   });
 
   const store = createStore(

@@ -4,7 +4,7 @@ import { signOut } from '../pages/authorization/actions/authActions';
 
 const mapStateToProps = state => {
   return {
-    user: state.authorization.user
+    user: state.user
   };
 };
 

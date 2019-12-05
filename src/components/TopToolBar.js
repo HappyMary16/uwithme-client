@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    backgroundColor: '#eeeeee'
   },
   toolbar: {
     flexWrap: 'wrap'
@@ -36,71 +37,69 @@ export const TopToolBar = ({ user, signOutFunc }) => {
   const classes = useStyles();
 
   return (
-    <Grid xs={12}>
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        className={classes.appBar}
-      >
-        <Toolbar className={classes.toolbar}>
-          <Typography
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.toolbarTitle}
+    <AppBar
+      position="static"
+      color="default"
+      elevation={0}
+      className={classes.appBar}
+    >
+      <Toolbar className={classes.toolbar}>
+        <Typography
+          variant="h6"
+          color="inherit"
+          noWrap
+          className={classes.toolbarTitle}
+        >
+          NTU "KhPI"
+        </Typography>
+        <nav>
+          <Link
+            variant="button"
+            color="textPrimary"
+            href="#"
+            className={classes.link}
           >
-            NTU "KhPI"
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-            >
-              Features
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-            >
-              Enterprise
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-            >
-              Support
-            </Link>
-          </nav>
-          {!user && (
-            <Button
-              href={SIGN_IN}
-              color="primary"
-              variant="outlined"
-              className={classes.link}
-            >
-              Sign In
-            </Button>
-          )}
-          {user && (
-            <Button
-              href="/university"
-              color="primary"
-              variant="outlined"
-              className={classes.link}
-              onClick={signOutFunc()}
-            >
-              Sign out
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Grid>
+            Features
+          </Link>
+          <Link
+            variant="button"
+            color="textPrimary"
+            href="#"
+            className={classes.link}
+          >
+            Enterprise
+          </Link>
+          <Link
+            variant="button"
+            color="textPrimary"
+            href="#"
+            className={classes.link}
+          >
+            Support
+          </Link>
+        </nav>
+        {!user && (
+          <Button
+            href={SIGN_IN}
+            color="primary"
+            variant="outlined"
+            className={classes.link}
+          >
+            Sign In
+          </Button>
+        )}
+        {user && (
+          <Button
+            href="/university"
+            color="primary"
+            variant="outlined"
+            className={classes.link}
+            onClick={signOutFunc()}
+          >
+            Sign out
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
