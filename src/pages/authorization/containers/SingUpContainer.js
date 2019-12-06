@@ -4,9 +4,9 @@ import { signUpRequest } from '../actions/authActions';
 
 const mapStateToProps = state => {
   return {
-    institutes: state.info.institutes,
-    departments: state.info.departments,
-    groups: state.info.groups
+    institutes: state.infoReducers.institutes,
+    departments: state.infoReducers.departments,
+    groups: state.infoReducers.groups
   };
 };
 

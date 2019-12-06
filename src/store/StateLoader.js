@@ -1,9 +1,11 @@
 export default class StateLoader {
   loadState() {
     try {
-      let serializedState = localStorage.getItem(
-        'http://education-app.com:state'
-      );
+      let serializedState = this.initializeState();
+
+      //   localStorage.getItem(
+      //   'http://education-app.com:state'
+      // );
 
       console.log(JSON.parse(serializedState));
       if (serializedState === null) {
@@ -66,7 +68,7 @@ export default class StateLoader {
         files: [
           {
             subjectName: 'History',
-            lecture: [
+            lectures: [
               {
                 name: 'First',
                 link: 'link1'
@@ -89,7 +91,7 @@ export default class StateLoader {
           },
           {
             subjectName: 'Math',
-            lecture: [
+            lectures: [
               {
                 name: 'First',
                 link: 'link1'
@@ -112,7 +114,7 @@ export default class StateLoader {
           },
           {
             subjectName: 'Programming',
-            lecture: [
+            lectures: [
               {
                 name: 'Programming First',
                 link: 'Programming link1'
@@ -124,7 +126,7 @@ export default class StateLoader {
             ],
             tasks: [
               {
-                name: 'Programming First',
+                name: 'Programming Task First',
                 link: 'Programming link1'
               },
               {

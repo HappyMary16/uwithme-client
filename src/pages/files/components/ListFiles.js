@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,24 +14,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ListFiles = ({ open }) => {
+export const ListFiles = ({ open, files }) => {
   const classes = useStyles();
 
   return (
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
-        <ListItem button className={classes.nested}>
-          <ListItemIcon>
-            <FolderIcon />
-          </ListItemIcon>
-          <ListItemText primary="Lecture" />
-        </ListItem>
-        <ListItem button className={classes.nested}>
-          <ListItemIcon>
-            <FolderIcon />
-          </ListItemIcon>
-          <ListItemText primary="Tasks" />
-        </ListItem>
+        {files.map((file, i) => (
+          <ListItem button key={i} className={classes.nested} href={file.link}>
+            <ListItemIcon>
+              <FolderIcon />
+            </ListItemIcon>
+            <ListItemText primary={file.name} />
+          </ListItem>
+        ))}
       </List>
     </Collapse>
   );

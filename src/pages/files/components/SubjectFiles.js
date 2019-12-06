@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { ListFiles } from './ListFiles';
+
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,7 +11,6 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import FolderIcon from '@material-ui/icons/Folder';
-import { ListFiles } from './ListFiles';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const SubjectFiles = () => {
+export const SubjectFiles = ({ name, lectures, tasks }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [lectureOpen, setLectureOpen] = React.useState(false);
@@ -40,9 +42,10 @@ export const SubjectFiles = () => {
         <ListItemIcon>
           <FolderIcon />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary={name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItem
@@ -57,7 +60,7 @@ export const SubjectFiles = () => {
             {lectureOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 
-          <ListFiles open={lectureOpen} />
+          <ListFiles open={lectureOpen} files={lectures} />
 
           <ListItem button className={classes.nested} onClick={taskHandleClick}>
             <ListItemIcon>
@@ -67,7 +70,7 @@ export const SubjectFiles = () => {
             {taskOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 
-          <ListFiles open={taskOpen} />
+          <ListFiles open={taskOpen} files={tasks} />
         </List>
       </Collapse>
     </List>
