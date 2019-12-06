@@ -2,7 +2,7 @@ import StateLoader from '../../../store/StateLoader';
 import { LOAD_FILES } from '../actions/userActions';
 
 export default function userReducers(
-  state = new StateLoader().loadState().user,
+  state = new StateLoader().loadState().userReducers,
   action
 ) {
   switch (action.type) {

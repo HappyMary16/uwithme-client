@@ -6,8 +6,8 @@ import {
   SIGN_OUT
 } from '../actions/authActions';
 
-export default function authorization(
-  state = new StateLoader().loadState().authorization,
+export default function authReducers(
+  state = new StateLoader().loadState().authReducers,
   action
 ) {
   switch (action.type) {

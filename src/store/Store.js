@@ -1,19 +1,19 @@
 import StateLoader from './StateLoader';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import info from '../reducers';
+import infoReducers from '../reducers';
 import rootSaga from '../sagas';
-import authorization from '../pages/authorization/reducers';
+import authReducers from '../pages/authorization/reducers';
 import { loadDepartments, loadGroups, loadInstitutes } from '../actions';
-import userReducers from '../pages/student/reducers/userReducers';
+import userReducers from '../pages/student/reducers';
 
 export default function createAppStore() {
   const stateLoader = new StateLoader();
   const sagaMiddleware = createSagaMiddleware();
 
   const rootReducer = combineReducers({
-    info,
-    authorization,
+    infoReducers,
+    authReducers,
     userReducers
   });
 

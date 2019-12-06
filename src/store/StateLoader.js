@@ -1,12 +1,11 @@
 export default class StateLoader {
   loadState() {
     try {
-      let serializedState = this.initializeState();
-      //TODO uncomment and delete this.initializeState();
-      //   localStorage.getItem(
-      //   'http://education-app.com:state'
-      // );
+      let serializedState = localStorage.getItem(
+        'http://education-app.com:state'
+      );
 
+      console.log(JSON.parse(serializedState));
       if (serializedState === null) {
         return this.initializeState();
       }
@@ -26,11 +25,11 @@ export default class StateLoader {
 
   initializeState() {
     return {
-      authorization: {
+      authReducers: {
         user: {},
         token: null
       },
-      info: {
+      infoReducers: {
         institutes: [
           {
             value: '1',
@@ -62,7 +61,7 @@ export default class StateLoader {
           }
         ]
       },
-      user: {
+      userReducers: {
         type: 'STUDENT',
         files: [
           {

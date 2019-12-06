@@ -5,8 +5,8 @@ import {
 } from '../actions';
 import StateLoader from '../store/StateLoader';
 
-export default function info(
-  state = new StateLoader().loadState().info,
+export default function infoReducers(
+  state = new StateLoader().loadState().infoReducers,
   action
 ) {
   switch (action.type) {
