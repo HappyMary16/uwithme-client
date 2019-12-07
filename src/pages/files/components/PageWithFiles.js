@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { ADD_FILE } from '../../../constants/links';
 import Link from '@material-ui/core/Link';
+import { Copyright } from '../../../components/Copyright';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -45,6 +46,10 @@ export const PageWithFiles = ({ userType, files }) => {
           />
         ))}
       </List>
+
+      <Grid xs={12}>
+        <Copyright />
+      </Grid>
     </Grid>
   );
 };

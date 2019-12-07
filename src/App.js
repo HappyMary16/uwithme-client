@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import NavigationContainer from './containers/NavigationContainer';
-import { USER_HOME, SIGN_IN, SIGN_UP, FILES } from './constants/links';
+import {
+  USER_HOME,
+  SIGN_IN,
+  SIGN_UP,
+  FILES,
+  ADD_FILE
+} from './constants/links';
 import SingUpContainer from './pages/authorization/containers/SingUpContainer';
 import SingInContainer from './pages/authorization/containers/SignInContainer';
 import StudentContainer from './pages/student/containers/StudentContainer';
@@ -11,6 +17,7 @@ import PageWithFilesContainer from './pages/files/containers/PageWithFilesContai
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import AddFile from './pages/files/containers/AddFile';
 
 class App extends Component {
   render() {
@@ -30,6 +37,8 @@ class App extends Component {
                 <Route exact path={SIGN_IN} component={SingInContainer} />
                 <Route exact path={SIGN_UP} component={SingUpContainer} />
                 <Route exact path={FILES} component={PageWithFilesContainer} />
+
+                <Route exact path={ADD_FILE} component={AddFile} />
               </Grid>
             </Grid>
           </Grid>

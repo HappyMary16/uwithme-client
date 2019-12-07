@@ -8,3 +8,14 @@ export const UserTypes = [
     label: 'Teacher'
   }
 ];
+
+export const FileTypes = [
+  {
+    value: 'LECTURE',
+    label: 'Lecture'
+  },
+  {
+    value: 'TASK',
+    label: 'Task'
+  }
+];

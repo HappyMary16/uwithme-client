@@ -1,5 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
+import { SIGN_UP } from '../../../constants/links';
+import { Copyright } from '../../../components/Copyright';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,10 +16,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-import { signInRequest } from '../actions/authActions';
-import { SIGN_UP } from '../../../constants/links';
-import { Copyright } from '../../../components/Copyright';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -116,9 +114,8 @@ export const SignIn = ({ signInRequestFunc }) => {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+
+      <Copyright />
     </Container>
   );
 };
