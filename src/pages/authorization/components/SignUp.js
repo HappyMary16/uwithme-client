@@ -15,6 +15,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { signUpRequest } from '../actions/authActions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -43,12 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const SignUp = ({
-  signUpRequestFunc,
-  institutes,
-  departments,
-  groups
-}) => {
+let SignUp = ({ dispatch, institutes, departments, groups }) => {
   let classes = useStyles();
   let [userType, setUserType] = React.useState('STUDENT');
 
@@ -66,7 +63,7 @@ export const SignUp = ({
   let submit = e => {
     e.preventDefault();
     //TODO: send correct data
-    signUpRequestFunc(firstName, lastName, email, password);
+    dispatch(signUpRequest(firstName, lastName, email, password));
   };
 
   return (
@@ -221,3 +218,13 @@ export const SignUp = ({
     </Container>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    institutes: state.infoReducers.institutes,
+    departments: state.infoReducers.departments,
+    groups: state.infoReducers.groups
+  };
+};
+
+export const SingUp = connect(mapStateToProps)(SignUp);

@@ -7,8 +7,10 @@ import {
   SIGN_UP_REQUEST
 } from '../actions/authActions';
 
+import history from '../../../utils/history';
 import http from '../../../services/http';
 import { SIGN_IN, SIGN_UP } from '../../../constants/serverApi';
+import { USER_HOME } from '../../../constants/links';
 
 export function* signIn(username, password) {
   try {
@@ -70,10 +72,13 @@ export function* loginFlow() {
     if (response) {
       yield put({ type: SIGN_IN_SUCCESS, response });
       localStorage.setItem('AuthToken', response);
+      history.push(USER_HOME);
       yield take(SIGN_OUT);
       localStorage.setItem('AuthToken', null);
       // some actions after logout
       // yield put({ type: 'SAVE_TOKEN' });
+    } else {
+      yield put({ type: SIGN_OUT });
     }
   }
 }

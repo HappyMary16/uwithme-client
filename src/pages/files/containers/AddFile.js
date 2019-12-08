@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FileTypes } from '../../../constants/userTypes';
 import { SelectField } from '../../../components/SelectField';
+import { Uploader, UploaderComponent } from '../upload/uploader';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,6 +53,8 @@ let AddFile = ({ dispatch }) => {
             onChange={setFileType}
           />
         </Grid>
+
+        <Uploader />
 
         <Button
           type="submit"

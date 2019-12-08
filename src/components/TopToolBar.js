@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { SIGN_IN } from '../constants/links';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
