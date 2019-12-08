@@ -57,7 +57,7 @@ export function* signUp() {
 
   if (response) {
     yield put({ type: SIGN_IN_SUCCESS, response });
-    localStorage.setItem('AuthToken', response);
+    localStorage.setItem('AuthToken', response.data);
     yield take(SIGN_OUT);
     localStorage.setItem('AuthToken', null);
     // some actions after logout
@@ -69,16 +69,19 @@ export function* loginFlow() {
   while (true) {
     const { username, password } = yield take(SIGN_IN_REQUEST);
     const response = yield call(signIn, username, password);
-    if (response) {
+
+    if (response.status === 200) {
       yield put({ type: SIGN_IN_SUCCESS, response });
-      localStorage.setItem('AuthToken', response);
+      localStorage.setItem('AuthToken', response.data);
+
       history.push(USER_HOME);
+
       yield take(SIGN_OUT);
-      localStorage.setItem('AuthToken', null);
+      //localStorage.setItem('AuthToken', null);
       // some actions after logout
-      // yield put({ type: 'SAVE_TOKEN' });
+      //yield put({ type: 'SAVE_TOKEN' });
     } else {
-      yield put({ type: SIGN_OUT });
+      yield put({ type: SIGN_IN_ERROR, response });
     }
   }
 }

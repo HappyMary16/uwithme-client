@@ -42,8 +42,17 @@ const reRequest = request => {
     });
 };
 
-export default function http({ method, url, data, params, handleToken }) {
-  const token = handleToken ? handleToken : localStorage.getItem('AuthToken');
+export default function http({
+  method,
+  url,
+  data,
+  params,
+  handleToken,
+  isFile
+}) {
+  const token = localStorage.getItem('AuthToken');
+  console.log(token);
+  console.log(localStorage.getItem('AuthToken'));
   const config = {
     method: method.toLowerCase(),
     url: apiRoot + url,
@@ -55,13 +64,17 @@ export default function http({ method, url, data, params, handleToken }) {
   if (data) config['data'] = data;
 
   if (token) {
+    console.log(true);
     config['headers'] = {
-      'Content-Type': 'application/json',
+      //'Accept': 'application/json',
+      'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
       'Access-Control-Allow-Origin': '*',
       Authorization: 'Bearer ' + token
     };
   } else {
+    console.log(false);
     config['headers'] = {
+      //'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     };
@@ -79,8 +92,8 @@ export default function http({ method, url, data, params, handleToken }) {
       ) {
         return refresh()
           .then(res => {
-            localStorage.setItem('AuthToken', res.data.AuthToken);
-            localStorage.setItem('RefreshToken', res.data.RefreshToken);
+            // localStorage.setItem('AuthToken', res.data.AuthToken);
+            // localStorage.setItem('RefreshToken', res.data.RefreshToken);
             return res;
           })
           .then(() => {
@@ -95,5 +108,6 @@ export default function http({ method, url, data, params, handleToken }) {
     }
   );
 
+  console.log(config);
   return axios(config);
 }

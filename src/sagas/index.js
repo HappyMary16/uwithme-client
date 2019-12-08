@@ -15,6 +15,7 @@ import {
   GET_GROUPS,
   GET_INSTITUTES
 } from '../constants/serverApi';
+import { uploadRequestWatcherSaga } from '../pages/files/upload/sagas';
 
 export function* loadInstitutes() {
   yield take(LOAD_INSTITUTES);
@@ -47,5 +48,11 @@ export function* loadGroups() {
 }
 
 export default function* rootSaga() {
-  yield all([loginFlow(), loadDepartments(), loadInstitutes(), loadGroups()]);
+  yield all([
+    loginFlow(),
+    loadDepartments(),
+    loadInstitutes(),
+    loadGroups(),
+    uploadRequestWatcherSaga()
+  ]);
 }
