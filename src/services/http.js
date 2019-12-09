@@ -66,15 +66,13 @@ export default function http({
   if (token) {
     console.log(true);
     config['headers'] = {
-      //'Accept': 'application/json',
-      'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
       'Access-Control-Allow-Origin': '*',
+      'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
       Authorization: 'Bearer ' + token
     };
   } else {
     console.log(false);
     config['headers'] = {
-      //'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     };

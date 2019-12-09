@@ -16,14 +16,12 @@ export function* uploadRequestWatcherSaga() {
 }
 // Upload the specified file
 export function* uploadFileSaga(file) {
-  // const channel = yield call(createUploadFileChannel, 'localhost:8080/api/saveFile', file);
-  let data = JSON.stringify({
-    file: file
-  });
+  let data = new FormData();
+  data.append('file', file);
   const channel = yield call(http, {
     url: '/uploadFile',
     method: 'post',
-    data: file,
+    data: data,
     isFile: true
   });
   while (true) {

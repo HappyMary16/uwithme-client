@@ -4,7 +4,8 @@ import { uploadRequest } from './actions';
 
 export const UploaderComponent = ({ progress, dispatch }) => {
   const upload = e => {
-    const [file] = e.target.files || e.dataTransfer.files;
+    console.log(e.target.files);
+    const [file] = e.target.files;
     dispatch(uploadRequest(file));
   };
   return (
