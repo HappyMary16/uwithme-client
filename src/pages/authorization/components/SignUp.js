@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signUpRequest } from '../actions/authActions';
 import { connect } from 'react-redux';
+import { loadDepartments, loadGroups, loadInstitutes } from '../../../actions';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -46,6 +47,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 let SignUp = ({ dispatch, institutes, departments, groups }) => {
+  dispatch(loadInstitutes());
+  dispatch(loadDepartments());
+  dispatch(loadGroups());
+
   let classes = useStyles();
   let [userType, setUserType] = React.useState('STUDENT');
 

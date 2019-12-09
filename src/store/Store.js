@@ -4,7 +4,6 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import infoReducers from '../reducers';
 import rootSaga from '../sagas';
 import authReducers from '../pages/authorization/reducers';
-import { loadDepartments, loadGroups, loadInstitutes } from '../actions';
 import userReducers from '../pages/student/reducers';
 
 export default function createAppStore() {
@@ -30,10 +29,6 @@ export default function createAppStore() {
   });
 
   sagaMiddleware.run(rootSaga);
-
-  store.dispatch(loadInstitutes());
-  store.dispatch(loadDepartments());
-  store.dispatch(loadGroups());
 
   return store;
 }
