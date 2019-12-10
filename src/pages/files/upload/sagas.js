@@ -1,39 +1,27 @@
-import { call, put, take } from 'redux-saga/effects';
-import {
-  uploadProgress,
-  uploadSuccess,
-  uploadFailure,
-  UPLOAD_REQUEST
-} from './actions';
-import { createUploadFileChannel } from './createFileUploadChannel';
+import { call, take } from 'redux-saga/effects';
+import { UPLOAD_REQUEST, UPLOAD_SUCCESS } from './actions';
 import http from '../../../services/http';
-// Watch for an upload request and then
-// defer to another saga to perform the actual upload
+import { put } from '@redux-saga/core/effects';
+
 export function* uploadRequestWatcherSaga() {
-  const { file } = yield take(UPLOAD_REQUEST);
-  console.log('file');
-  yield call(uploadFileSaga, file);
+  while (true) {
+    const { files } = yield take(UPLOAD_REQUEST);
+    let response = yield call(uploadMultipleFiles, files);
+    console.log(response);
+    yield put({ type: UPLOAD_SUCCESS, response });
+  }
 }
-// Upload the specified file
-export function* uploadFileSaga(file) {
-  let data = new FormData();
-  data.append('file', file);
-  const channel = yield call(http, {
-    url: '/uploadFile',
+
+export function* uploadMultipleFiles(files) {
+  let formData = new FormData();
+  for (let index = 0; index < files.length; index++) {
+    formData.append('files', files[index]);
+  }
+
+  return yield call(http, {
+    url: '/uploadMultipleFiles',
     method: 'post',
-    data: data,
+    data: formData,
     isFile: true
   });
-  while (true) {
-    const { progress = 0, err, success } = yield take(channel);
-    if (err) {
-      yield put(uploadFailure(file, err));
-      return;
-    }
-    if (success) {
-      yield put(uploadSuccess(file));
-      return;
-    }
-    yield put(uploadProgress(file, progress));
-  }
 }

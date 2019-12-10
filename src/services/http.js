@@ -51,8 +51,6 @@ export default function http({
   isFile
 }) {
   const token = localStorage.getItem('AuthToken');
-  console.log(token);
-  console.log(localStorage.getItem('AuthToken'));
   const config = {
     method: method.toLowerCase(),
     url: apiRoot + url,
@@ -64,14 +62,12 @@ export default function http({
   if (data) config['data'] = data;
 
   if (token) {
-    console.log(true);
     config['headers'] = {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
       Authorization: 'Bearer ' + token
     };
   } else {
-    console.log(false);
     config['headers'] = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
@@ -106,6 +102,5 @@ export default function http({
     }
   );
 
-  console.log(config);
   return axios(config);
 }

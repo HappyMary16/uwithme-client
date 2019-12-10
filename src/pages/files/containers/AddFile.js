@@ -26,10 +26,6 @@ let AddFile = ({ dispatch }) => {
 
   let submit = e => {
     e.preventDefault();
-    console.log('value');
-    console.log(subject);
-    console.log('file');
-    console.log(fileType);
     //TODO: send correct data
     //signUpRequestFunc(firstName, lastName, email, password);
   };

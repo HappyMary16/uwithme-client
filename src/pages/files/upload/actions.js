@@ -3,9 +3,9 @@ export const UPLOAD_PROGRESS = 'UPLOAD_PROGRESS';
 export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
 
-export const uploadRequest = file => ({
+export const uploadRequest = files => ({
   type: UPLOAD_REQUEST,
-  file
+  files
 });
 export const uploadProgress = (file, progress) => ({
   type: UPLOAD_PROGRESS,

@@ -4,13 +4,11 @@ import { uploadRequest } from './actions';
 
 export const UploaderComponent = ({ progress, dispatch }) => {
   const upload = e => {
-    console.log(e.target.files);
-    const [file] = e.target.files;
-    dispatch(uploadRequest(file));
+    dispatch(uploadRequest(e.target.files));
   };
   return (
     <span>
-      <input type="file" onChange={upload} />
+      <input type="file" onChange={upload} multiple required />
       <progress value={progress} />
     </span>
   );

@@ -6,32 +6,20 @@ import {
   UPLOAD_FAILURE
 } from './actions';
 
-export default function uploadReducers(
-  state = new StateLoader().loadState().authReducers,
+export default function filesReducers(
+  state = new StateLoader().loadState().filesReducers,
   action
 ) {
   switch (action.type) {
     case UPLOAD_REQUEST:
       return {
         ...state,
-        file: action.file
-      };
-    case UPLOAD_PROGRESS:
-      return {
-        ...state,
-        progress: action.progress
+        files: action.files
       };
     case UPLOAD_SUCCESS:
       return {
         ...state,
-        file: action.file
-      };
-    case UPLOAD_FAILURE:
-      return {
-        ...state,
-        err: action.err,
-        error: action.error,
-        file: action.file
+        files: action.data
       };
     default:
       return state;
