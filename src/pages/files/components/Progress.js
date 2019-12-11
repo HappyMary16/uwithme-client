@@ -1,10 +1,15 @@
 import React from 'react';
 import './Progress.css';
 
-export const Progress = ({ progress }) => {
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import Grid from '@material-ui/core/Grid';
+
+export const Progress = ({ fileUploadProgress }) => {
+  let progress = fileUploadProgress ? fileUploadProgress.percentage : 100;
   return (
-    <div className="ProgressBar">
+    <Grid container={} className="ProgressBar">
       <div className="Progress" style={{ width: progress + '%' }} />
-    </div>
+      {progress === 100 && <CheckCircleOutlineIcon />}
+    </Grid>
   );
 };

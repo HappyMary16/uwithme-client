@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
 import './Dropzone.css';
 
 const useStyles = makeStyles(theme => ({
@@ -20,15 +21,9 @@ const useStyles = makeStyles(theme => ({
 
 export const Dropzone = ({ disabled, onFilesAddedFunk }) => {
   const classes = useStyles();
+
   let fileInputRef = React.createRef();
-  const [hightLight, setHightLight] = React.useState(false);
-  let fileListToArray = list => {
-    const array = [];
-    for (let i = 0; i < list.length; i++) {
-      array.push(list.item(i));
-    }
-    return array;
-  };
+  const [highLight, setHighLight] = React.useState(false);
 
   let openFileDialog = () => {
     if (disabled) return;
@@ -36,11 +31,10 @@ export const Dropzone = ({ disabled, onFilesAddedFunk }) => {
   };
 
   let onFilesAdded = e => {
-    if (this.props.disabled) return;
+    if (disabled) return;
     const files = e.target.files;
     if (onFilesAddedFunk) {
-      const array = fileListToArray(files);
-      onFilesAddedFunk(array);
+      onFilesAddedFunk(files);
     }
   };
 
@@ -49,11 +43,11 @@ export const Dropzone = ({ disabled, onFilesAddedFunk }) => {
 
     if (disabled) return;
 
-    setHightLight(true);
+    setHighLight(true);
   };
 
   let onDragLeave = () => {
-    setHightLight(false);
+    setHighLight(false);
   };
 
   let onDrop = event => {
@@ -63,15 +57,14 @@ export const Dropzone = ({ disabled, onFilesAddedFunk }) => {
 
     const files = event.dataTransfer.files;
     if (onFilesAddedFunk) {
-      const array = fileListToArray(files);
-      onFilesAddedFunk(array);
+      onFilesAddedFunk(files);
     }
-    setHightLight(false);
+    setHighLight(false);
   };
 
   return (
     <div
-      className={`Dropzone ${hightLight ? 'Highlight' : ''}`}
+      className={`Dropzone ${highLight ? 'Highlight' : ''}`}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
@@ -85,7 +78,7 @@ export const Dropzone = ({ disabled, onFilesAddedFunk }) => {
         multiple
         onChange={onFilesAdded}
       />
-      <img alt="upload" className="Icon" src="baseline-cloud_upload-24px.svg" />
+      <CloudUploadIcon />
       <span>Upload Files</span>
     </div>
   );

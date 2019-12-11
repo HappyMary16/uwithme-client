@@ -7,8 +7,10 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FileTypes } from '../../../constants/userTypes';
 import { SelectField } from '../../../components/SelectField';
-import Upload from '../components/Upload';
+import { Upload } from '../components/Upload';
 import { Uploader } from '../upload/uploader';
+import { Dropzone } from '../components/Dropzone';
+import { uploadRequest } from '../upload/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,10 +27,18 @@ let AddFile = ({ dispatch }) => {
   const [subject, setSubject] = React.useState('');
   let [fileType, setFileType] = React.useState('LECTURE');
 
-  let submit = e => {
-    e.preventDefault();
-    //TODO: send correct data
-    //signUpRequestFunc(firstName, lastName, email, password);
+  let files = [];
+  let [uploading, setUploading] = React.useState(false);
+  let [successfulUploaded, setSuccessfulUploaded] = React.useState(false);
+
+  let submit = () => {
+    setUploading(true);
+    dispatch(uploadRequest(files));
+    setSuccessfulUploaded(true);
+  };
+
+  let addFiles = addedFiles => {
+    files = addedFiles;
   };
 
   return (
@@ -52,16 +62,21 @@ let AddFile = ({ dispatch }) => {
         </Grid>
 
         <Uploader />
-        <Upload />
+        <Upload
+          addFiles={addFiles}
+          uploading={uploading}
+          successfulUploaded={successfulUploaded}
+        />
+        <Dropzone />
 
         <Button
           type="submit"
-          fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}
+          onClick={submit}
         >
-          Sign Up
+          Upload
         </Button>
       </form>
     </Grid>
