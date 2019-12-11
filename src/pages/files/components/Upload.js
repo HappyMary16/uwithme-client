@@ -1,8 +1,26 @@
-import React, { useEffect } from 'react';
-import './Upload.css';
+import React from 'react';
 import { Dropzone } from './Dropzone';
 import { FilesProgress } from './FilesProgress';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+  upload: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1',
+    alignItems: 'flex-start',
+    textAlign: 'left',
+    overflow: 'hidden'
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: '16px',
+    boxSizing: 'border-box',
+    width: '100%'
+  }
+}));
 
 export const Upload = ({
   addFiles,
@@ -10,23 +28,25 @@ export const Upload = ({
   uploading,
   successfulUploaded
 }) => {
+  const classes = useStyles();
   let [files, setFiles] = React.useState([]);
 
   let onFilesAdded = filesToAdd => {
-    const array = [];
+    let array = [].concat(files);
 
     for (let i = 0; i < filesToAdd.length; i++) {
-      array.push(filesToAdd.item(i));
+      if (!array.includes(filesToAdd.item(i))) {
+        array.push(filesToAdd.item(i));
+      }
     }
-
-    setFiles(files.concat(array));
-    addFiles(files);
+    setFiles(array);
+    addFiles(array);
   };
 
   return (
     <Container>
-      <div className="Upload">
-        <div className="Content">
+      <div className={classes.upload}>
+        <div className={classes.content}>
           <div>
             <Dropzone
               onFilesAddedFunk={onFilesAdded}

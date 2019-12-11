@@ -29,10 +29,10 @@ const useStyles = makeStyles(theme => ({
 let AddFile = ({ dispatch }) => {
   const classes = useStyles();
 
+  let files = [];
   const [subject, setSubject] = React.useState('');
   let [fileType, setFileType] = React.useState('LECTURE');
 
-  let files = [];
   let [uploading, setUploading] = React.useState(false);
   let [successfulUploaded, setSuccessfulUploaded] = React.useState(false);
 

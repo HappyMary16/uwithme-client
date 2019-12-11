@@ -7,7 +7,6 @@ import List from '@material-ui/core/List';
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { ADD_FILE } from '../../../constants/links';
-import Link from '@material-ui/core/Link';
 import { Copyright } from '../../../components/Copyright';
 
 const useStyles = makeStyles(theme => ({
@@ -37,14 +36,15 @@ export const PageWithFiles = ({ userType, files }) => {
         </Button>
       )}
       <List component="nav" className={classes.list}>
-        {files.map((fileInfo, i) => (
-          <SubjectFiles
-            key={i}
-            name={fileInfo.subjectName}
-            lectures={fileInfo.lectures}
-            tasks={fileInfo.tasks}
-          />
-        ))}
+        {files &&
+          files.map((fileInfo, i) => (
+            <SubjectFiles
+              key={i}
+              name={fileInfo.subjectName}
+              lectures={fileInfo.lectures}
+              tasks={fileInfo.tasks}
+            />
+          ))}
       </List>
 
       <Grid xs={12}>
