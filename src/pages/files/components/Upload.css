@@ -15,14 +15,6 @@
   width: 100%;
 }
 
-.Files {
-  margin-left: 32px;
-  align-items: flex-start;
-  justify-items: flex-start;
-  flex: 1;
-  overflow-y: auto;
-}
-
 .Actions {
   display: flex;
   flex: 1;

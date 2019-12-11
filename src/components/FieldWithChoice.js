@@ -8,7 +8,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles(theme => ({
+  textField: {
+    width: '100%'
+  }
+}));
 
 export const FieldWithChoice = ({ fieldName, listChoices, onChange }) => {
   const classes = useStyles();
@@ -33,7 +37,7 @@ export const FieldWithChoice = ({ fieldName, listChoices, onChange }) => {
         id="field"
         label={fieldName}
         variant="outlined"
-        className={classes.nested}
+        className={classes.textField}
         InputLabelProps={{
           shrink: true
         }}

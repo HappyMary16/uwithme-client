@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './Upload.css';
 import { Dropzone } from './Dropzone';
 import { FilesProgress } from './FilesProgress';
+import Container from '@material-ui/core/Container';
 
 export const Upload = ({
   addFiles,
@@ -23,16 +24,18 @@ export const Upload = ({
   };
 
   return (
-    <div className="Upload">
-      <div className="Content">
-        <div>
-          <Dropzone
-            onFilesAddedFunk={onFilesAdded}
-            disabled={uploading || successfulUploaded}
-          />
+    <Container>
+      <div className="Upload">
+        <div className="Content">
+          <div>
+            <Dropzone
+              onFilesAddedFunk={onFilesAdded}
+              disabled={uploading || successfulUploaded}
+            />
+          </div>
+          <FilesProgress files={files} uploadProgress={uploadProgress} />
         </div>
-        <FilesProgress files={files} uploadProgress={uploadProgress} />
       </div>
-    </div>
+    </Container>
   );
 };

@@ -8,9 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import { FileTypes } from '../../../constants/userTypes';
 import { SelectField } from '../../../components/SelectField';
 import { Upload } from '../components/Upload';
-import { Uploader } from '../upload/uploader';
-import { Dropzone } from '../components/Dropzone';
 import { uploadRequest } from '../upload/actions';
+import { TouchRippleProps as center } from '@material-ui/core/ButtonBase/TouchRipple';
+import Container from 'react-bootstrap/Container';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,6 +18,11 @@ const useStyles = makeStyles(theme => ({
   },
   nested: {
     paddingLeft: theme.spacing(4)
+  },
+  submit: {
+    marginTop: '10px',
+    marginLeft: 'auto',
+    marginRight: '20px'
   }
 }));
 
@@ -42,43 +47,44 @@ let AddFile = ({ dispatch }) => {
   };
 
   return (
-    <Grid xs={12} className={classes.root}>
-      <form className={classes.form} noValidate onSubmit={e => submit(e)}>
-        <Grid item xs={6}>
-          <FieldWithChoice
-            fieldName={'Subject'}
-            listChoices={['name1', 'name2', 'other']}
-            onChange={setSubject}
-          />
-        </Grid>
+    <Grid xs={12} className={classes.root} alignItems={'center'}>
+      <Grid item xs={12}>
+        <FieldWithChoice
+          fieldName={'Subject'}
+          listChoices={['name1', 'name2', 'other']}
+          onChange={setSubject}
+        />
+      </Grid>
 
-        <Grid item xs={6}>
-          <SelectField
-            label={'File type'}
-            initialValue={fileType}
-            values={FileTypes}
-            onChange={setFileType}
-          />
-        </Grid>
+      <Grid item xs={12}>
+        <SelectField
+          label={'File type'}
+          initialValue={fileType}
+          values={FileTypes}
+          onChange={setFileType}
+        />
+      </Grid>
 
-        <Uploader />
+      <Grid item xs={12}>
         <Upload
           addFiles={addFiles}
           uploading={uploading}
           successfulUploaded={successfulUploaded}
         />
-        <Dropzone />
-
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={submit}
-        >
-          Upload
-        </Button>
-      </form>
+      </Grid>
+      <Container>
+        <Grid container alignItems={'right'}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={submit}
+          >
+            Upload
+          </Button>
+        </Grid>
+      </Container>
     </Grid>
   );
 };

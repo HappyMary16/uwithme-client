@@ -52,30 +52,30 @@ export const TopToolBar = ({ user, signOutFunc }) => {
           NTU "KhPI"
         </Typography>
         <nav>
-          <Link
-            variant="button"
-            color="textPrimary"
-            href="#"
-            className={classes.link}
-          >
-            Features
-          </Link>
-          <Link
-            variant="button"
-            color="textPrimary"
-            href="#"
-            className={classes.link}
-          >
-            Enterprise
-          </Link>
-          <Link
-            variant="button"
-            color="textPrimary"
-            href="#"
-            className={classes.link}
-          >
-            Support
-          </Link>
+          {/*<Link*/}
+          {/*  variant="button"*/}
+          {/*  color="textPrimary"*/}
+          {/*  href="#"*/}
+          {/*  className={classes.link}*/}
+          {/*>*/}
+          {/*  Features*/}
+          {/*</Link>*/}
+          {/*<Link*/}
+          {/*  variant="button"*/}
+          {/*  color="textPrimary"*/}
+          {/*  href="#"*/}
+          {/*  className={classes.link}*/}
+          {/*>*/}
+          {/*  Enterprise*/}
+          {/*</Link>*/}
+          {/*<Link*/}
+          {/*  variant="button"*/}
+          {/*  color="textPrimary"*/}
+          {/*  href="#"*/}
+          {/*  className={classes.link}*/}
+          {/*>*/}
+          {/*  Support*/}
+          {/*</Link>*/}
         </nav>
         {!user && (
           <Button
