@@ -32,36 +32,54 @@ export function* signIn(username, password) {
 }
 
 export function* signUp() {
-  const {
-    username,
-    password,
-    userType,
-    institute,
-    department,
-    group
-  } = yield take(SIGN_UP_REQUEST);
-  let data = JSON.stringify({
-    username: username,
-    password: password,
-    userType: userType,
-    institute: institute,
-    department: department,
-    group: group
-  });
+  while (true) {
+    const {
+      firstName,
+      lastName,
+      surname,
+      username,
+      password,
+      confirmPassword,
+      phone,
+      email,
+      userRole,
+      studentId,
+      scienceDegree,
+      institute,
+      department,
+      group
+    } = yield take(SIGN_UP_REQUEST);
+    let data = JSON.stringify({
+      firstName: firstName,
+      lastName: lastName,
+      surname: surname,
+      username: username,
+      password: password,
+      confirmPassword: confirmPassword,
+      phone: phone,
+      email: email,
+      role: userRole,
+      studentId: studentId,
+      scienceDegreeId: scienceDegree,
+      instituteId: institute,
+      departmentId: department,
+      studyGroupId: group
+    });
+    console.log(data);
+    const response = yield call(http, {
+      url: SIGN_UP,
+      method: 'post',
+      data: data
+    });
 
-  const response = yield call(http, {
-    url: SIGN_UP,
-    method: 'post',
-    data: data
-  });
-
-  if (response) {
-    yield put({ type: SIGN_IN_SUCCESS, response });
-    localStorage.setItem('AuthToken', response.data);
-    yield take(SIGN_OUT);
-    localStorage.setItem('AuthToken', null);
-    // some actions after logout
-    // yield put({ type: 'SAVE_TOKEN' });
+    if (response) {
+      yield put({ type: SIGN_IN_SUCCESS, response });
+      localStorage.setItem('AuthToken', response.data);
+      yield take(SIGN_OUT);
+      localStorage.setItem('AuthToken', null);
+      // some actions after logout
+      // yield put({ type: 'SAVE_TOKEN' });
+    }
   }
 }
 

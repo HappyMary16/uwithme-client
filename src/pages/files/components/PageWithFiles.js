@@ -24,12 +24,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const PageWithFiles = ({ userType, files }) => {
+export const PageWithFiles = ({ userRole, files }) => {
   const classes = useStyles();
 
   return (
     <Grid container xs={12} className={classes.root}>
-      {//userType === 'Teacher'
+      {//userRole === 'Teacher'
       true && (
         <Button href={ADD_FILE} variant="outlined" className={classes.link}>
           add file

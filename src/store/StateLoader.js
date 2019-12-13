@@ -1,7 +1,8 @@
 export default class StateLoader {
   loadState() {
     try {
-      let serializedState = localStorage.getItem( //this.initializeState();
+      let serializedState = localStorage.getItem(
+        //this.initializeState()
         'http://education-app.com:state'
       );
 
@@ -57,6 +58,16 @@ export default class StateLoader {
           {
             value: '2',
             label: 'i-26a'
+          }
+        ],
+        scienceDegrees: [
+          {
+            value: '1',
+            label: 'Doctor'
+          },
+          {
+            value: '2',
+            label: 'Docent'
           }
         ]
       },

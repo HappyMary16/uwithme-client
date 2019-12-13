@@ -7,18 +7,34 @@ export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export function signUpRequest(
+  firstName,
+  lastName,
+  surname,
   username,
   password,
-  userType,
+  confirmPassword,
+  phone,
+  email,
+  userRole,
+  studentId,
+  scienceDegree,
   institute,
   department,
   group
 ) {
   return {
     type: SIGN_UP_REQUEST,
+    firstName,
+    lastName,
+    surname,
     username,
     password,
-    userType,
+    confirmPassword,
+    phone,
+    email,
+    userRole,
+    studentId,
+    scienceDegree,
     institute,
     department,
     group

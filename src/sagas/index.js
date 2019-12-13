@@ -1,6 +1,6 @@
 import { all, call, put, take } from 'redux-saga/effects';
 
-import { loginFlow } from '../pages/authorization/sagas/authSagas';
+import { loginFlow, signUp } from '../pages/authorization/sagas/authSagas';
 import {
   LOAD_DEPARTMENTS,
   LOAD_GROUPS,
@@ -53,6 +53,7 @@ export default function* rootSaga() {
     loadDepartments(),
     loadInstitutes(),
     loadGroups(),
-    uploadRequestWatcherSaga()
+    uploadRequestWatcherSaga(),
+    signUp()
   ]);
 }

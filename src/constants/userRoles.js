@@ -1,21 +1,21 @@
-export const UserTypes = [
+export const UserRoles = [
   {
-    value: 'STUDENT',
+    value: '1',
     label: 'Student'
   },
   {
-    value: 'TEACHER',
+    value: '2',
     label: 'Teacher'
   }
 ];
 
 export const FileTypes = [
   {
-    value: 'LECTURE',
+    value: '1',
     label: 'Lecture'
   },
   {
-    value: 'TASK',
+    value: '2',
     label: 'Task'
   }
 ];
