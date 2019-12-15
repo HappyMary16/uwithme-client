@@ -4,7 +4,8 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT,
   SIGN_IN_ERROR,
-  SIGN_UP_REQUEST
+  SIGN_UP_REQUEST,
+  signInRequest
 } from '../actions/authActions';
 
 import history from '../../../utils/history';
@@ -65,21 +66,17 @@ export function* signUp() {
       departmentId: department,
       studyGroupId: group
     });
-    console.log(data);
-    const response = yield call(http, {
+    const signUpResponse = yield call(http, {
       url: SIGN_UP,
       method: 'post',
       data: data
     });
 
-    if (response) {
-      yield put({ type: SIGN_IN_SUCCESS, response });
-      localStorage.setItem('AuthToken', response.data);
-      yield take(SIGN_OUT);
-      localStorage.setItem('AuthToken', null);
-      // some actions after logout
-      // yield put({ type: 'SAVE_TOKEN' });
-    }
+    yield put({
+      type: SIGN_IN_REQUEST,
+      username: signUpResponse.data.username,
+      password: signUpResponse.data.password
+    });
   }
 }
 

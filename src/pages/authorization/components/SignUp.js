@@ -78,9 +78,7 @@ let SignUp = ({
   let [passwordError, setPasswordError] = React.useState(false);
 
   let submit = e => {
-    console.log(firstName);
     e.preventDefault();
-    console.log(firstName);
     dispatch(
       signUpRequest(
         firstName,
