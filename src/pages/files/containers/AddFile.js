@@ -9,7 +9,6 @@ import { FileTypes } from '../../../constants/userRoles';
 import { SelectField } from '../../../components/SelectField';
 import { Upload } from '../components/Upload';
 import { uploadRequest } from '../upload/actions';
-import { TouchRippleProps as center } from '@material-ui/core/ButtonBase/TouchRipple';
 import Container from 'react-bootstrap/Container';
 
 const useStyles = makeStyles(theme => ({

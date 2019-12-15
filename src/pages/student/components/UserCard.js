@@ -1,22 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-
-function createData(time, name) {
-  return { time, name };
-}
-
-const rows = [
-  createData('10:25-12:00', 'History'),
-  createData('12:35-14:10', 'Java')
-];
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -34,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const StudentCard = ({ student }) => {
+export const UserCard = ({ user }) => {
   const classes = useStyles();
 
   return (
@@ -49,23 +36,37 @@ export const StudentCard = ({ student }) => {
             />
           </ButtonBase>
         </Grid>
+
         <Grid item xs={12} sm container className={classes.container}>
           <Grid item xs container direction="column" spacing={2}>
             <Typography gutterBottom variant="h5">
-              {student.lastName} {student.name}
+              {user.lastName + ' ' + user.firstName + ' ' + user.surname}
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              {user.username}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Institute: {student.institute}
+              Phone: {user.phone}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Department: {student.department}
+              Email: {user.email}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Group: {student.group}
+              Institute: {user.instituteName}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Email: {student.email}
+              Department: {user.departmentName}
             </Typography>
+            {user.role === 1 && (
+              <Typography variant="body2" gutterBottom>
+                Group: {user.studyGroupName}
+              </Typography>
+            )}
+            {user.role === 2 && (
+              <Typography variant="body2" gutterBottom>
+                Science degree: {user.scienceDegreeName}
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Grid>

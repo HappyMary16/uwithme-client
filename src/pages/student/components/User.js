@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { TodaySchedule } from './TodaySchedule';
 import { Copyright } from '../../../components/Copyright';
-import { StudentCard } from './StudentCard';
+import { UserCard } from './UserCard';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -22,13 +22,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Student = ({ student, schedules }) => {
+export const User = ({ user, schedules }) => {
   const classes = useStyles();
 
   return (
     <Grid container xs={12} direction={'column'} className={classes.root}>
       <Grid xs={12} className={classes.paper}>
-        <StudentCard student={student} />
+        <UserCard user={user} />
       </Grid>
       <Grid xs={12} className={classes.paper}>
         <Typography variant="h4" gutterBottom>

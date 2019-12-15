@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 import NavigationContainer from './containers/NavigationContainer';
@@ -9,7 +9,7 @@ import {
   FILES,
   ADD_FILE
 } from './constants/links';
-import StudentContainer from './pages/student/containers/StudentContainer';
+import UserContainer from './pages/student/containers/UserContainer';
 import { StudentToolBar } from './pages/student/components/StudentToolBar';
 import PageWithFilesContainer from './pages/files/containers/PageWithFilesContainer';
 
@@ -38,11 +38,15 @@ let App = ({ user }) => {
               {!user && <Route exact path={SIGN_IN} component={SingIn} />}
               {!user && <Route exact path={SIGN_UP} component={SingUp} />}
 
-              <Route exact path={USER_HOME} component={StudentContainer} />
+              {user && (
+                <Route exact path={USER_HOME} component={UserContainer} />
+              )}
 
-              <Route exact path={FILES} component={PageWithFilesContainer} />
+              {user && (
+                <Route exact path={FILES} component={PageWithFilesContainer} />
+              )}
 
-              <Route exact path={ADD_FILE} component={AddFile} />
+              {user && <Route exact path={ADD_FILE} component={AddFile} />}
             </Grid>
           </Grid>
         </Grid>

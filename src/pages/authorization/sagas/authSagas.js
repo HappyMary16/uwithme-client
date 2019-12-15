@@ -4,8 +4,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT,
   SIGN_IN_ERROR,
-  SIGN_UP_REQUEST,
-  signInRequest
+  SIGN_UP_REQUEST
 } from '../actions/authActions';
 
 import history from '../../../utils/history';

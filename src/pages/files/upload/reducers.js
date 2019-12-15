@@ -1,9 +1,9 @@
 import StateLoader from '../../../store/StateLoader';
 import {
   UPLOAD_REQUEST,
-  UPLOAD_PROGRESS,
-  UPLOAD_SUCCESS,
-  UPLOAD_FAILURE
+  // UPLOAD_PROGRESS,
+  UPLOAD_SUCCESS
+  // UPLOAD_FAILURE
 } from './actions';
 
 export default function filesReducers(
