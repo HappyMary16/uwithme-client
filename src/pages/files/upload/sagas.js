@@ -18,6 +18,9 @@ export function* uploadMultipleFiles(files) {
     formData.append('files', files[index]);
   }
 
+  formData.append('subjectId', 1);
+  formData.append('fileTypeId', 1);
+
   return yield call(http, {
     url: '/uploadMultipleFiles',
     method: 'post',

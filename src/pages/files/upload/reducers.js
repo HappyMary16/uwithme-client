@@ -14,7 +14,9 @@ export default function filesReducers(
     case UPLOAD_REQUEST:
       return {
         ...state,
-        files: action.files
+        files: action.files,
+        subjectId: action.subjectId,
+        fileType: action.fileType
       };
     case UPLOAD_SUCCESS:
       return {

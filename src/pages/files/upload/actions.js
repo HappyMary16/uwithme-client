@@ -5,7 +5,9 @@ export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
 
 export const uploadRequest = files => ({
   type: UPLOAD_REQUEST,
-  files
+  files,
+  subjectId,
+  fileType
 });
 export const uploadProgress = (file, progress) => ({
   type: UPLOAD_PROGRESS,

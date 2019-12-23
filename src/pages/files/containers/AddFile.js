@@ -29,7 +29,7 @@ let AddFile = ({ dispatch }) => {
   const classes = useStyles();
 
   let files = [];
-  const [subject, setSubject] = React.useState('');
+  let [subject, setSubject] = React.useState('');
   let [fileType, setFileType] = React.useState('LECTURE');
 
   let [uploading, setUploading] = React.useState(false);
@@ -37,7 +37,7 @@ let AddFile = ({ dispatch }) => {
 
   let submit = () => {
     setUploading(true);
-    dispatch(uploadRequest(files));
+    dispatch(uploadRequest(files, subject.value, fileType.value));
     setSuccessfulUploaded(true);
   };
 
