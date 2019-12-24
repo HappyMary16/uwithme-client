@@ -3,10 +3,10 @@ export const UPLOAD_PROGRESS = 'UPLOAD_PROGRESS';
 export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
 
-export const uploadRequest = files => ({
+export const uploadRequest = (files, subjectName, fileType) => ({
   type: UPLOAD_REQUEST,
   files,
-  subjectId,
+  subjectName,
   fileType
 });
 export const uploadProgress = (file, progress) => ({

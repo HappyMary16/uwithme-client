@@ -33,31 +33,19 @@ export default class StateLoader {
         institutes: [
           {
             value: '1',
-            label: 'I'
-          },
-          {
-            value: '2',
-            label: 'KIT'
+            label: 'TEST'
           }
         ],
         departments: [
           {
             value: '1',
-            label: 'd1'
-          },
-          {
-            value: '2',
-            label: 'd2'
+            label: 'test'
           }
         ],
         groups: [
           {
             value: '1',
-            label: 'i-26b'
-          },
-          {
-            value: '2',
-            label: 'i-26a'
+            label: 'test-group'
           }
         ],
         scienceDegrees: [
@@ -72,7 +60,8 @@ export default class StateLoader {
         ]
       },
       userReducers: {
-        type: 'STUDENT'
+        type: 'STUDENT',
+        subjects: []
       },
       filesReducers: {
         files: [

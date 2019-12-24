@@ -16,6 +16,7 @@ import {
   GET_INSTITUTES
 } from '../constants/serverApi';
 import { uploadRequestWatcherSaga } from '../pages/files/upload/sagas';
+import { loadSubjects, saveSubject } from '../pages/student/sagas';
 
 export function* loadInstitutes() {
   yield take(LOAD_INSTITUTES);
@@ -54,6 +55,8 @@ export default function* rootSaga() {
     loadInstitutes(),
     loadGroups(),
     uploadRequestWatcherSaga(),
-    signUp()
+    signUp(),
+    loadSubjects(),
+    saveSubject()
   ]);
 }

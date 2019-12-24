@@ -1,28 +1,30 @@
-import { call, take } from 'redux-saga/effects';
+import { call, take, put } from 'redux-saga/effects';
 import { UPLOAD_REQUEST, UPLOAD_SUCCESS } from './actions';
 import http from '../../../services/http';
-import { put } from '@redux-saga/core/effects';
 
 export function* uploadRequestWatcherSaga() {
   while (true) {
-    const { files } = yield take(UPLOAD_REQUEST);
-    let response = yield call(uploadMultipleFiles, files);
-    console.log(response);
+    const { files, subjectName, fileType } = yield take(UPLOAD_REQUEST);
+    let response = yield call(
+      uploadMultipleFiles,
+      files,
+      subjectName,
+      fileType
+    );
+
     yield put({ type: UPLOAD_SUCCESS, response });
   }
 }
 
-export function* uploadMultipleFiles(files) {
+export function* uploadMultipleFiles(files, subjectName, fileType) {
   let formData = new FormData();
   for (let index = 0; index < files.length; index++) {
     formData.append('files', files[index]);
   }
 
-  formData.append('subjectId', 1);
-  formData.append('fileTypeId', 1);
-
+  console.log(subjectName);
   return yield call(http, {
-    url: '/uploadMultipleFiles',
+    url: '/uploadMultipleFiles/' + subjectName + '/' + fileType,
     method: 'post',
     data: formData,
     isFile: true

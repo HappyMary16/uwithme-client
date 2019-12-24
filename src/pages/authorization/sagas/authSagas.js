@@ -90,7 +90,8 @@ export function* loginFlow() {
     if (response.status === 200) {
       yield put({ type: SIGN_IN_SUCCESS, response });
 
-      localStorage.setItem('AuthToken', response.data);
+      console.log(response.data.token);
+      localStorage.setItem('AuthToken', response.data.token);
 
       history.push(USER_HOME);
 

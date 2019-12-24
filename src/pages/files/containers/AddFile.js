@@ -10,6 +10,7 @@ import { SelectField } from '../../../components/SelectField';
 import { Upload } from '../components/Upload';
 import { uploadRequest } from '../upload/actions';
 import Container from 'react-bootstrap/Container';
+import { loadSubjects, saveSubject } from '../../student/actions/userActions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,19 +26,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let AddFile = ({ dispatch }) => {
+let AddFile = ({ dispatch, teacherUsername, subjects }) => {
   const classes = useStyles();
 
+  dispatch(loadSubjects(teacherUsername));
+
   let files = [];
-  let [subject, setSubject] = React.useState('');
+  let [subjectValue, setSubject] = React.useState('');
   let [fileType, setFileType] = React.useState('LECTURE');
 
   let [uploading, setUploading] = React.useState(false);
   let [successfulUploaded, setSuccessfulUploaded] = React.useState(false);
 
   let submit = () => {
+    if (!subjects.map(subject => subject.name).includes(subjectValue)) {
+      dispatch(saveSubject(teacherUsername, subjectValue));
+    }
     setUploading(true);
-    dispatch(uploadRequest(files, subject.value, fileType.value));
+    const subjectId = subjects.filter(
+      subject => subject.name === subjectValue
+    )[0].id;
+    dispatch(uploadRequest(files, subjectId, fileType));
     setSuccessfulUploaded(true);
   };
 
@@ -50,7 +59,7 @@ let AddFile = ({ dispatch }) => {
       <Grid item xs={12}>
         <FieldWithChoice
           fieldName={'Subject'}
-          listChoices={['name1', 'name2', 'other']}
+          listChoices={subjects.map(subject => subject.name)}
           onChange={setSubject}
         />
       </Grid>
@@ -88,6 +97,13 @@ let AddFile = ({ dispatch }) => {
   );
 };
 
-AddFile = connect()(AddFile);
+const mapStateToProps = state => {
+  return {
+    teacherUsername: state.authReducers.user.username,
+    subjects: state.userReducers.subjects
+  };
+};
+
+AddFile = connect(mapStateToProps)(AddFile);
 
 export default AddFile;

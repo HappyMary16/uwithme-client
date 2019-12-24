@@ -40,21 +40,3 @@ export function loadGroups() {
     type: LOAD_GROUPS
   };
 }
-
-export function renderInstitutes() {
-  return {
-    type: RENDER_INSTITUTES
-  };
-}
-
-export function renderDepartments() {
-  return {
-    type: RENDER_DEPARTMENTS
-  };
-}
-
-export function renderGroups() {
-  return {
-    type: RENDER_GROUPS
-  };
-}

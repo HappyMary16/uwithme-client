@@ -1,5 +1,5 @@
 import StateLoader from '../../../store/StateLoader';
-import { LOAD_FILES } from '../actions/userActions';
+import { LOAD_FILES, RENDER_SUBJECTS } from '../actions/userActions';
 
 export default function userReducers(
   state = new StateLoader().loadState().userReducers,
@@ -11,6 +11,12 @@ export default function userReducers(
         ...state,
         files: action.files
       };
+    case RENDER_SUBJECTS: {
+      return {
+        ...state,
+        subjects: action.response.data
+      };
+    }
     default:
       return state;
   }
