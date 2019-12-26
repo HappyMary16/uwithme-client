@@ -5,6 +5,7 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FILES, SCHEDULE, USER_HOME } from '../../../constants/links';
 import Link from '@material-ui/core/Link';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -47,13 +48,13 @@ export const StudentToolBar = () => {
           href={USER_HOME}
           className={classes.menuItem}
         >
-          Home
+          {i18n.t('home_page')}
         </MenuItem>
         <MenuItem component={Link} href={FILES} className={classes.menuItem}>
-          Files
+          {i18n.t('page_with_files')}
         </MenuItem>
         <MenuItem component={Link} href={SCHEDULE} className={classes.menuItem}>
-          Schedule
+          {i18n.t('schedule')}
         </MenuItem>
       </MenuList>
     </AppBar>

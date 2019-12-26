@@ -25,9 +25,11 @@ export const FilesProgress = ({ files, uploadProgress }) => {
       {files.map(file => (
         <Grid item xs={12} key={file.name} className={classes.row}>
           <span className={classes.fileName}>{file.name}</span>
-          <Progress
-          // fileUploadProgress={uploadProgress[file.name]}
-          />
+          {uploadProgress && (
+            <Progress
+            // fileUploadProgress={uploadProgress[file.name]}
+            />
+          )}
         </Grid>
       ))}
     </Grid>

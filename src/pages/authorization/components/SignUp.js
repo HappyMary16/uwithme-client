@@ -18,6 +18,7 @@ import { signUpRequest } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { loadDepartments, loadGroups, loadInstitutes } from '../../../actions';
 import { InputField } from '../../../components/InputField';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -65,15 +66,15 @@ let SignUp = ({
   let [userRole, setUserRole] = React.useState('1');
   let [scienceDegree, setScienceDegree] = React.useState('1');
 
-  let [firstName, setFirstName] = React.useState('Mariia');
-  let [lastName, setLastName] = React.useState('Borodin');
-  let [surname, setSurname] = React.useState('Anatoliivna');
-  let [username, setUsername] = React.useState('mariia.borodin');
-  let [password, setPassword] = React.useState('1');
-  let [confirmPassword, setConfirmPassword] = React.useState('1');
-  let [phone, setPhone] = React.useState('0968261865');
-  let [email, setEmail] = React.useState('m.borodin.1999@gmail.com');
-  let [studentId, setStudentId] = React.useState('1');
+  let [firstName, setFirstName] = React.useState('');
+  let [lastName, setLastName] = React.useState('');
+  let [surname, setSurname] = React.useState('');
+  let [username, setUsername] = React.useState('');
+  let [password, setPassword] = React.useState('');
+  let [confirmPassword, setConfirmPassword] = React.useState('');
+  let [phone, setPhone] = React.useState('');
+  let [email, setEmail] = React.useState('');
+  let [studentId, setStudentId] = React.useState('');
 
   let [passwordError, setPasswordError] = React.useState(false);
 
@@ -107,85 +108,88 @@ let SignUp = ({
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {i18n.t('sign_up')}
         </Typography>
         <form className={classes.form} noValidate onSubmit={e => submit(e)}>
           <Grid container spacing={2}>
             <InputField
-              label="First Name"
+              label={i18n.t('first_name')}
               autoFocus={true}
               onBlur={e => {
                 setFirstName(e.target.value);
               }}
             />
             <InputField
-              label="Last Name"
+              label={i18n.t('last_name')}
               onBlur={e => setLastName(e.target.value)}
             />
             <InputField
-              label="Surname"
+              label={i18n.t('surname')}
               onBlur={e => setSurname(e.target.value)}
             />
             <InputField
-              label="Username"
+              label={i18n.t('user_name')}
               onBlur={e => setUsername(e.target.value)}
             />
-            <InputField label="Phone" onBlur={e => setPhone(e.target.value)} />
             <InputField
-              label="Email Address"
+              label={i18n.t('phone')}
+              onBlur={e => setPhone(e.target.value)}
+            />
+            <InputField
+              label={i18n.t('email')}
               autoComplete="email"
               onBlur={e => setEmail(e.target.value)}
             />
             <InputField
-              label="Password"
+              label={i18n.t('password')}
               type="password"
               error={passwordError}
-              helperText={passwordError ? 'Passwords are not equal' : ''}
+              helperText={passwordError ? i18n.t('password_error') : ''}
               onBlur={e => setPassword(e.target.value)}
             />
             <InputField
-              label="Confirm password"
+              label={i18n.t('confirm_password')}
               type="password"
               error={passwordError}
-              helperText={passwordError ? 'Passwords are not equal' : ''}
+              helperText={passwordError ? i18n.t('password_error') : ''}
               onChange={e => setConfirmPassword(e.target.value)}
               onBlur={() => setPasswordError(password !== confirmPassword)}
             />
             <SelectField
-              label={'User type'}
+              label={i18n.t('user_type')}
               initialValue={userRole}
               values={UserRoles}
               onChange={setUserRole}
             />
             {userRole === '1' && (
               <InputField
-                label="Student ID"
+                label={i18n.t('student_id')}
                 onBlur={e => setStudentId(e.target.value)}
               />
             )}
             {userRole === '2' && (
               <SelectField
-                label={'Science degree'}
+                label={i18n.t('science_degree')}
                 initialValue={institute}
                 values={scienceDegrees}
                 onChange={setScienceDegree}
               />
             )}
             <SelectField
-              label={'Institute'}
+              label={i18n.t('institute')}
               initialValue={institute}
               values={institutes}
               onChange={setInstitute}
             />
             <SelectField
-              label={'Department'}
+              label={i18n.t('department')}
               initialValue={department}
               values={departments}
               onChange={setDepartment}
             />
             {userRole === '1' && (
               <SelectField
-                label={'Group'}
+                label={i18n.t('group')}
                 initialValue={group}
                 values={groups}
                 onChange={setGroup}
@@ -198,12 +202,12 @@ let SignUp = ({
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              {i18n.t('sign_up')}
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href={SIGN_IN} variant="body2">
-                  Already have an account? Sign in
+                  {i18n.t('sign_in_button')}
                 </Link>
               </Grid>
             </Grid>

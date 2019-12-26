@@ -53,7 +53,7 @@ export const Upload = ({
               disabled={uploading || successfulUploaded}
             />
           </div>
-          <FilesProgress files={files} uploadProgress={uploadProgress} />
+          <FilesProgress files={files} uploadProgress={successfulUploaded} />
         </div>
       </div>
     </Container>

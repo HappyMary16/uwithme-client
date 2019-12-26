@@ -2,8 +2,8 @@ export default class StateLoader {
   loadState() {
     try {
       let serializedState = localStorage.getItem(
-        //this.initializeState()
-        'http://education-app.com:state'
+        this.initializeState()
+        //'http://education-app.com:state'
       );
 
       if (serializedState === null) {

@@ -21,16 +21,17 @@ const useStyles = makeStyles(theme => ({
 
 export const Progress = ({ fileUploadProgress }) => {
   const classes = useStyles();
-  //TODO change 50 to 100
-  let progress = fileUploadProgress ? fileUploadProgress.percentage : 50;
+  //TODO fix it
+  let progress = fileUploadProgress
+    ? fileUploadProgress.percentage
+    : Math.random() * 5 + 96;
 
   return (
     <Grid container xs={12} alignItems={'center'}>
       <Grid item xs={10} className={classes.progressBar}>
         <div className={classes.progress} style={{ width: progress + '%' }} />
       </Grid>
-      {/*TODO change to 100*/}
-      {progress === 50 && <CheckCircleOutlineIcon fontSize={'small'} />}
+      {progress >= 100 && <CheckCircleOutlineIcon fontSize={'small'} />}
     </Grid>
   );
 };

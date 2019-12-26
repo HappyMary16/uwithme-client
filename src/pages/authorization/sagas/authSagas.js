@@ -1,4 +1,4 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, take, takeEvery } from 'redux-saga/effects';
 import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
@@ -100,6 +100,11 @@ export function* loginFlow() {
       // some actions after logout
       //yield put({ type: 'SAVE_TOKEN' });
     } else {
+      localStorage.setItem('AuthToken', null);
+      yield put({ type: SIGN_IN_ERROR, response });
+    }
+    if (response.status === 401) {
+      localStorage.setItem('AuthToken', null);
       yield put({ type: SIGN_IN_ERROR, response });
     }
   }

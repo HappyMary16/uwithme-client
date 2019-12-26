@@ -1,21 +1,23 @@
+import i18n from '../locales/i18n';
+
 export const UserRoles = [
   {
     value: '1',
-    label: 'Student'
+    label: i18n.t('student')
   },
   {
     value: '2',
-    label: 'Teacher'
+    label: i18n.t('teacher')
   }
 ];
 
 export const FileTypes = [
   {
     value: '1',
-    label: 'Lecture'
+    label: i18n.t('lecture')
   },
   {
     value: '2',
-    label: 'Task'
+    label: i18n.t('task')
   }
 ];

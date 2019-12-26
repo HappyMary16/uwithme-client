@@ -7,7 +7,8 @@ import {
   SIGN_IN,
   SIGN_UP,
   FILES,
-  ADD_FILE
+  ADD_FILE,
+  SHARE_FILES
 } from './constants/links';
 import UserContainer from './pages/student/containers/UserContainer';
 import { StudentToolBar } from './pages/student/components/StudentToolBar';
@@ -19,6 +20,7 @@ import AddFile from './pages/files/containers/AddFile';
 import { SingIn } from './pages/authorization/components/SignIn';
 import { SingUp } from './pages/authorization/components/SignUp';
 import { connect } from 'react-redux';
+import ShareFiles from './pages/files/containers/ShareFiles';
 
 let App = ({ user }) => {
   return (
@@ -47,6 +49,8 @@ let App = ({ user }) => {
               )}
 
               {user && <Route exact path={ADD_FILE} component={AddFile} />}
+
+              {<Route exact path={SHARE_FILES} component={ShareFiles} />}
             </Grid>
           </Grid>
         </Grid>

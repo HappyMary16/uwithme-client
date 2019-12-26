@@ -11,6 +11,7 @@ import { Upload } from '../components/Upload';
 import { uploadRequest } from '../upload/actions';
 import Container from 'react-bootstrap/Container';
 import { loadSubjects, saveSubject } from '../../student/actions/userActions';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,20 +59,21 @@ let AddFile = ({ dispatch, teacherUsername, subjects }) => {
     <Grid xs={12} className={classes.root} alignItems={'center'}>
       <Grid item xs={12}>
         <FieldWithChoice
-          fieldName={'Subject'}
+          fieldName={i18n.t('subject')}
           listChoices={subjects.map(subject => subject.name)}
           onChange={setSubject}
         />
       </Grid>
-
-      <Grid item xs={12}>
-        <SelectField
-          label={'File type'}
-          initialValue={fileType}
-          values={FileTypes}
-          onChange={setFileType}
-        />
-      </Grid>
+      <Container>
+        <Container>
+          <SelectField
+            label={i18n.t('file_type')}
+            initialValue={fileType}
+            values={FileTypes}
+            onChange={setFileType}
+          />
+        </Container>
+      </Container>
 
       <Grid item xs={12}>
         <Upload
@@ -89,7 +91,7 @@ let AddFile = ({ dispatch, teacherUsername, subjects }) => {
             className={classes.submit}
             onClick={submit}
           >
-            Upload
+            {i18n.t('upload')}
           </Button>
         </Grid>
       </Container>

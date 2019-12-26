@@ -7,8 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -17,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
 import { signInRequest } from '../actions/authActions';
+
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -57,7 +57,7 @@ let SignIn = ({ dispatch }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {i18n.t('sign_in')}
         </Typography>
         <form className={classes.form} noValidate onSubmit={e => submit(e)}>
           <TextField
@@ -66,7 +66,7 @@ let SignIn = ({ dispatch }) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={i18n.t('user_name')}
             name="email"
             autoComplete="email"
             autoFocus
@@ -80,7 +80,7 @@ let SignIn = ({ dispatch }) => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={i18n.t('password')}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -88,10 +88,10 @@ let SignIn = ({ dispatch }) => {
               password = e.target.value;
             }}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          {/*<FormControlLabel*/}
+          {/*  control={<Checkbox value="remember" color="primary" />}*/}
+          {/*  label="Remember me"*/}
+          {/*/>*/}
           <Button
             type="submit"
             fullWidth
@@ -99,17 +99,17 @@ let SignIn = ({ dispatch }) => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            {i18n.t('sign_in')}
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+            {/*<Grid item xs>*/}
+            {/*  <Link href="#" variant="body2">*/}
+            {/*    Forgot password?*/}
+            {/*  </Link>*/}
+            {/*</Grid>*/}
             <Grid item>
               <Link href={SIGN_UP} variant="body2">
-                {"Don't have an account? Sign Up"}
+                {i18n.t('sign_up_button')}
               </Link>
             </Grid>
           </Grid>

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { TodaySchedule } from './TodaySchedule';
 import { Copyright } from '../../../components/Copyright';
 import { UserCard } from './UserCard';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,7 +33,7 @@ export const User = ({ user, schedules }) => {
       </Grid>
       <Grid xs={12} className={classes.paper}>
         <Typography variant="h4" gutterBottom>
-          Schedule
+          {i18n.t('schedule')}
         </Typography>
         <TodaySchedule schedules={schedules} />
       </Grid>

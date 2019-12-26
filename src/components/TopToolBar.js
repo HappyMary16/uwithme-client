@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { SIGN_IN } from '../constants/links';
+import i18n from '../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -48,7 +49,7 @@ export const TopToolBar = ({ user, signOutFunc }) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          NTU "KhPI"
+          {i18n.t('university_name')}
         </Typography>
         <nav>
           {/*<Link*/}
@@ -83,7 +84,7 @@ export const TopToolBar = ({ user, signOutFunc }) => {
             variant="outlined"
             className={classes.link}
           >
-            Sign In
+            {i18n.t('sign_in')}
           </Button>
         )}
         {user && (
@@ -94,7 +95,7 @@ export const TopToolBar = ({ user, signOutFunc }) => {
             className={classes.link}
             onClick={signOutFunc()}
           >
-            Sign out
+            {i18n.t('sign_out')}
           </Button>
         )}
       </Toolbar>

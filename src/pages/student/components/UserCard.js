@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -42,29 +43,29 @@ export const UserCard = ({ user }) => {
             <Typography gutterBottom variant="h5">
               {user.lastName + ' ' + user.firstName + ' ' + user.surname}
             </Typography>
-            <Typography gutterBottom variant="h6">
-              {user.username}
+            {/*<Typography gutterBottom variant="h6">*/}
+            {/*  {user.username}*/}
+            {/*</Typography>*/}
+            <Typography variant="body2" gutterBottom>
+              {i18n.t('phone')}: {user.phone}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Phone: {user.phone}
+              {i18n.t('email')}: {user.email}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Email: {user.email}
+              {i18n.t('institute')}: {user.instituteName}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Institute: {user.instituteName}
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-              Department: {user.departmentName}
+              {i18n.t('department')}: {user.departmentName}
             </Typography>
             {user.role === 1 && (
               <Typography variant="body2" gutterBottom>
-                Group: {user.studyGroupName}
+                {i18n.t('group')}: {user.studyGroupName}
               </Typography>
             )}
             {user.role === 2 && (
               <Typography variant="body2" gutterBottom>
-                Science degree: {user.scienceDegreeName}
+                {i18n.t('science_degree')}: {user.scienceDegreeName}
               </Typography>
             )}
           </Grid>

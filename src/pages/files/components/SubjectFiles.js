@@ -11,6 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import FolderIcon from '@material-ui/icons/Folder';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -56,7 +57,7 @@ export const SubjectFiles = ({ name, lectures, tasks }) => {
             <ListItemIcon>
               <FolderIcon />
             </ListItemIcon>
-            <ListItemText primary="Lecture" />
+            <ListItemText primary={i18n.t('lecture')} />
             {lectureOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 
@@ -66,7 +67,7 @@ export const SubjectFiles = ({ name, lectures, tasks }) => {
             <ListItemIcon>
               <FolderIcon />
             </ListItemIcon>
-            <ListItemText primary="Tasks" />
+            <ListItemText primary={i18n.t('task')} />
             {taskOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 

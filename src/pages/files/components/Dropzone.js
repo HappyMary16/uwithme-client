@@ -2,6 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -95,7 +96,7 @@ export const Dropzone = ({ disabled, onFilesAddedFunk }) => {
         onChange={onFilesAdded}
       />
       <CloudUploadIcon />
-      <span>Upload Files</span>
+      <span>{i18n.t('upload_files')}</span>
     </div>
   );
 };

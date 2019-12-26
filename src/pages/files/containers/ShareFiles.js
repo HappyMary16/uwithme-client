@@ -6,15 +6,14 @@ import { FieldWithChoice } from '../../../components/FieldWithChoice';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CreatableSelect from 'react-select/creatable';
-import { Upload } from '../components/Upload';
-import { uploadRequest } from '../upload/actions';
 import Container from 'react-bootstrap/Container';
-import { loadSubjects, saveSubject } from '../../student/actions/userActions';
+import { loadSubjects } from '../../student/actions/userActions';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +26,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: '10px',
     marginLeft: 'auto',
     marginRight: '20px'
-  }
+  },
+  formControl: {
+    marginTop: '10px',
+    marginLeft: '20px'
+  },
+  multipleSelect: {}
 }));
 
 let ShareFiles = ({
@@ -44,83 +48,79 @@ let ShareFiles = ({
 
   let files = [];
   let [subjectValue, setSubject] = React.useState('');
-  let [fileType, setFileType] = React.useState('LECTURE');
 
-  let [uploading, setUploading] = React.useState(false);
-  let [successfulUploaded, setSuccessfulUploaded] = React.useState(false);
+  let submit = () => {};
 
-  let submit = () => {
-    if (!subjects.map(subject => subject.name).includes(subjectValue)) {
-      dispatch(saveSubject(teacherUsername, subjectValue));
-    }
-    setUploading(true);
-    const subjectId = subjects.filter(
-      subject => subject.name === subjectValue
-    )[0].id;
-    dispatch(uploadRequest(files, subjectId, fileType));
-    setSuccessfulUploaded(true);
-  };
-
-  let addFiles = addedFiles => {
-    files = addedFiles;
-  };
+  let onChange = () => {};
 
   return (
     <Grid xs={12} className={classes.root} alignItems={'center'}>
       <Grid item xs={12}>
         <FieldWithChoice
-          fieldName={'Subject'}
+          fieldName={i18n.t('subject')}
           listChoices={subjects.map(subject => subject.name)}
           onChange={setSubject}
         />
       </Grid>
-
-      <Grid item xs={6}>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Lectures</FormLabel>
-          <FormGroup>
-            {lectures.map(lecture => (
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={gilad}
-                    onChange={handleChange('gilad')}
-                    value="gilad"
-                  />
-                }
-                label="Gilad Gray"
-              />
-            ))}
-          </FormGroup>
-        </FormControl>
-      </Grid>
-
-      <Grid item xs={6}>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Tasks</FormLabel>
-          <FormGroup>
-            {tasks.map(task => (
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={gilad}
-                    onChange={handleChange('gilad')}
-                    value="gilad"
-                  />
-                }
-                label="Gilad Gray"
-              />
-            ))}
-          </FormGroup>
-        </FormControl>
-      </Grid>
       <Container>
-        <CreatableSelect
-          isMulti
-          onChange={this.handleChange}
-          options={groups}
-        />
+        <Grid container xs={12}>
+          <Grid item xs={6}>
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
+              <FormGroup>
+                {lectures.map(lecture => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        // checked={false}
+                        color="primary"
+                        onChange={onChange('gilad')}
+                        value={lecture}
+                      />
+                    }
+                    label={lecture}
+                  />
+                ))}
+              </FormGroup>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">{i18n.t('task')}</FormLabel>
+              <FormGroup>
+                {tasks.map(task => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        // checked={false}
+                        color="primary"
+                        onChange={onChange('gilad')}
+                        value={task}
+                      />
+                    }
+                    label={task}
+                  />
+                ))}
+              </FormGroup>
+            </FormControl>
+          </Grid>
+        </Grid>
       </Container>
+
+      <Container>
+        <Grid item xs={12}>
+          <Container>
+            <CreatableSelect
+              className={classes.multipleSelect}
+              isMulti
+              onChange={onChange()}
+              options={groups}
+            />
+          </Container>
+        </Grid>
+      </Container>
+
       <Container>
         <Grid container alignItems={'right'}>
           <Button
@@ -130,7 +130,7 @@ let ShareFiles = ({
             className={classes.submit}
             onClick={submit}
           >
-            Upload
+            {i18n.t('upload')}
           </Button>
         </Grid>
       </Container>
@@ -142,9 +142,9 @@ const mapStateToProps = state => {
   return {
     teacherUsername: state.authReducers.user.username,
     subjects: state.userReducers.subjects,
-    lectures: [],
-    tasks: [],
-    groups: []
+    lectures: ['Лекція 1', 'Лекція 2'],
+    tasks: ['Завдання 1', 'Завдання 2', 'Завдання 3'],
+    groups: state.infoReducers.groups
   };
 };
 
