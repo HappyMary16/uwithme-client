@@ -3,7 +3,7 @@ import {
   RENDER_INSTITUTES,
   RENDER_GROUPS
 } from '../actions';
-import StateLoader from '../store/StateLoader';
+import StateLoader from '../../store/StateLoader';
 
 export default function infoReducers(
   state = new StateLoader().loadState().infoReducers,

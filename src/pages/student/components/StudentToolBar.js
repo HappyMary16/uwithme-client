@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
-import { FILES, SCHEDULE, USER_HOME } from '../../../constants/links';
+import { FILES, SCHEDULE, USER_HOME } from '../../../common/constants/links';
 import Link from '@material-ui/core/Link';
 import i18n from '../../../locales/i18n';
 

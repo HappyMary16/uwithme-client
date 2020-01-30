@@ -9,8 +9,8 @@ import {
 
 import history from '../../../utils/history';
 import http from '../../../services/http';
-import { SIGN_IN, SIGN_UP } from '../../../constants/serverApi';
-import { USER_HOME } from '../../../constants/links';
+import { SIGN_IN, SIGN_UP } from '../../../common/constants/serverApi';
+import { USER_HOME } from '../../../common/constants/links';
 
 export function* signIn(username, password) {
   try {

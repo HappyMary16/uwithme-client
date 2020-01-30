@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { FieldWithChoice } from '../../../components/FieldWithChoice';
+import { FieldWithChoice } from '../../../common/components/FieldWithChoice';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CreatableSelect from 'react-select/creatable';

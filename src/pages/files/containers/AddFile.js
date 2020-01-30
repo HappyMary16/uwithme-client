@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { FieldWithChoice } from '../../../components/FieldWithChoice';
+import { FieldWithChoice } from '../../../common/components/FieldWithChoice';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { FileTypes } from '../../../constants/userRoles';
-import { SelectField } from '../../../components/SelectField';
+import { FileTypes } from '../../../common/constants/userRoles';
+import { SelectField } from '../../../common/components/SelectField';
 import { Upload } from '../components/Upload';
 import { uploadRequest } from '../upload/actions';
 import Container from 'react-bootstrap/Container';

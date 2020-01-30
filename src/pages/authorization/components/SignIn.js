@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SIGN_UP } from '../../../constants/links';
-import { Copyright } from '../../../components/Copyright';
+import { SIGN_UP } from '../../../common/constants/links';
+import { Copyright } from '../../../common/components/Copyright';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';

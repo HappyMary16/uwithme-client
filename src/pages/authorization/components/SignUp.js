@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { UserRoles } from '../../../constants/userRoles';
-import { SIGN_IN } from '../../../constants/links';
-import { Copyright } from '../../../components/Copyright';
-import { SelectField } from '../../../components/SelectField';
+import { UserRoles } from '../../../common/constants/userRoles';
+import { SIGN_IN } from '../../../common/constants/links';
+import { Copyright } from '../../../common/components/Copyright';
+import { SelectField } from '../../../common/components/SelectField';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -16,8 +16,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signUpRequest } from '../actions/authActions';
 import { connect } from 'react-redux';
-import { loadDepartments, loadGroups, loadInstitutes } from '../../../actions';
-import { InputField } from '../../../components/InputField';
+import {
+  loadDepartments,
+  loadGroups,
+  loadInstitutes
+} from '../../../common/actions';
+import { InputField } from '../../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({

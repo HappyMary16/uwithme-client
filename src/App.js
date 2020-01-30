@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import NavigationContainer from './containers/NavigationContainer';
+import NavigationContainer from './common/containers/NavigationContainer';
 import {
   USER_HOME,
   SIGN_IN,
@@ -9,7 +9,7 @@ import {
   FILES,
   ADD_FILE,
   SHARE_FILES
-} from './constants/links';
+} from './common/constants/links';
 import UserContainer from './pages/student/containers/UserContainer';
 import { StudentToolBar } from './pages/student/components/StudentToolBar';
 import PageWithFilesContainer from './pages/files/containers/PageWithFilesContainer';

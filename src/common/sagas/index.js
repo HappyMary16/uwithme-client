@@ -1,6 +1,6 @@
 import { all, call, put, take } from 'redux-saga/effects';
 
-import { loginFlow, signUp } from '../pages/authorization/sagas/authSagas';
+import { loginFlow, signUp } from '../../pages/authorization/sagas/authSagas';
 import {
   LOAD_DEPARTMENTS,
   LOAD_GROUPS,
@@ -9,14 +9,14 @@ import {
   RENDER_GROUPS,
   RENDER_INSTITUTES
 } from '../actions';
-import http from '../services/http';
+import http from '../../services/http';
 import {
   GET_DEPARTMENTS,
   GET_GROUPS,
   GET_INSTITUTES
 } from '../constants/serverApi';
-import { uploadRequestWatcherSaga } from '../pages/files/upload/sagas';
-import { loadSubjects, saveSubject } from '../pages/student/sagas';
+import { uploadRequestWatcherSaga } from '../../pages/files/upload/sagas';
+import { loadSubjects, saveSubject } from '../../pages/student/sagas';
 
 export function* loadInstitutes() {
   yield take(LOAD_INSTITUTES);

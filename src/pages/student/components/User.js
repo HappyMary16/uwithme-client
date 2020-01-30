@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { TodaySchedule } from './TodaySchedule';
-import { Copyright } from '../../../components/Copyright';
+import { Copyright } from '../../../common/components/Copyright';
 import { UserCard } from './UserCard';
 import i18n from '../../../locales/i18n';
 

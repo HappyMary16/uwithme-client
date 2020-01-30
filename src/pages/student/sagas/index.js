@@ -5,7 +5,10 @@ import {
 } from '../actions/userActions';
 import { take, call, put } from 'redux-saga/effects';
 import http from '../../../services/http';
-import { GET_SUBJECTS, POST_SUBJECTS } from '../../../constants/serverApi';
+import {
+  GET_SUBJECTS,
+  POST_SUBJECTS
+} from '../../../common/constants/serverApi';
 
 export function* loadSubjects() {
   const { teacherUsername } = yield take(LOAD_SUBJECTS);

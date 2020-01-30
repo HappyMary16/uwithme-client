@@ -6,8 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { ADD_FILE, SHARE_FILES } from '../../../constants/links';
-import { Copyright } from '../../../components/Copyright';
+import { ADD_FILE, SHARE_FILES } from '../../../common/constants/links';
+import { Copyright } from '../../../common/components/Copyright';
 import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({

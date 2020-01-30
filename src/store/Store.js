@@ -1,8 +1,8 @@
 import StateLoader from './StateLoader';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import infoReducers from '../reducers';
-import rootSaga from '../sagas';
+import infoReducers from '../common/reducers';
+import rootSaga from '../common/sagas';
 import authReducers from '../pages/authorization/reducers';
 import userReducers from '../pages/student/reducers';
 import filesReducers from '../pages/files/upload/reducers';
