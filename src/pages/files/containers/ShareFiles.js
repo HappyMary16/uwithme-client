@@ -7,13 +7,14 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CreatableSelect from 'react-select/creatable';
 import Container from 'react-bootstrap/Container';
-import { loadSubjects } from '../../student/actions/userActions';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import i18n from '../../../locales/i18n';
+import { getLectures, getTasks } from '../../../utils/FileUtil';
+import { loadSubjects } from '../upload/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,10 +45,8 @@ let ShareFiles = ({
 }) => {
   const classes = useStyles();
 
-  dispatch(loadSubjects(teacherUsername));
-
   let files = [];
-  let [subjectValue, setSubject] = React.useState('');
+  let [subject, setSubject] = React.useState('');
 
   let submit = () => {};
 
@@ -68,19 +67,21 @@ let ShareFiles = ({
             <FormControl component="fieldset" className={classes.formControl}>
               <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
               <FormGroup>
-                {lectures.map(lecture => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        // checked={false}
-                        color="primary"
-                        onChange={onChange('gilad')}
-                        value={lecture}
-                      />
-                    }
-                    label={lecture}
-                  />
-                ))}
+                {lectures
+                  .filter(lecture => lecture.id === subject.id)
+                  .map(lecture => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          // checked={false}
+                          color="primary"
+                          onChange={onChange('gilad')}
+                          value={lecture}
+                        />
+                      }
+                      label={lecture}
+                    />
+                  ))}
               </FormGroup>
             </FormControl>
           </Grid>
@@ -89,19 +90,21 @@ let ShareFiles = ({
             <FormControl component="fieldset" className={classes.formControl}>
               <FormLabel component="legend">{i18n.t('task')}</FormLabel>
               <FormGroup>
-                {tasks.map(task => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        // checked={false}
-                        color="primary"
-                        onChange={onChange('gilad')}
-                        value={task}
-                      />
-                    }
-                    label={task}
-                  />
-                ))}
+                {tasks
+                  .filter(lecture => lecture.id === subject.id)
+                  .map(task => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          // checked={false}
+                          color="primary"
+                          onChange={onChange('gilad')}
+                          value={task}
+                        />
+                      }
+                      label={task}
+                    />
+                  ))}
               </FormGroup>
             </FormControl>
           </Grid>
@@ -138,12 +141,13 @@ let ShareFiles = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, dispatch) => {
+  dispatch(loadSubjects(state.authReducers.user.username));
   return {
     teacherUsername: state.authReducers.user.username,
-    subjects: state.userReducers.subjects,
-    lectures: ['Лекція 1', 'Лекція 2'],
-    tasks: ['Завдання 1', 'Завдання 2', 'Завдання 3'],
+    subjects: state.filesReducers.subjects,
+    lectures: getLectures(state.filesReducers.files),
+    tasks: getTasks(state.filesReducers.files),
     groups: state.infoReducers.groups
   };
 };

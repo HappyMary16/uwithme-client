@@ -8,9 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import { FileTypes } from '../../../common/constants/userRoles';
 import { SelectField } from '../../../common/components/SelectField';
 import { Upload } from '../components/Upload';
-import { uploadRequest } from '../upload/actions';
+import { loadSubjects, saveSubject, uploadRequest } from '../upload/actions';
 import Container from 'react-bootstrap/Container';
-import { loadSubjects, saveSubject } from '../../student/actions/userActions';
 import i18n from '../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
@@ -102,7 +101,7 @@ let AddFile = ({ dispatch, teacherUsername, subjects }) => {
 const mapStateToProps = state => {
   return {
     teacherUsername: state.authReducers.user.username,
-    subjects: state.userReducers.subjects
+    subjects: state.filesReducers.subjects
   };
 };
 

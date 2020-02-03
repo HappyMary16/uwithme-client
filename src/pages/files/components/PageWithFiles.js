@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import { ADD_FILE, SHARE_FILES } from '../../../common/constants/links';
 import { Copyright } from '../../../common/components/Copyright';
 import i18n from '../../../locales/i18n';
+import { TEACHER } from '../../../common/constants/userRoles';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -29,20 +30,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const PageWithFiles = ({ userRole, files }) => {
+export const PageWithFiles = ({ userRole, files, subjects }) => {
   const classes = useStyles();
 
   return (
     <Grid container xs={12} className={classes.root}>
       <Grid container xs={6} className={classes.buttons}>
-        {//userRole === 'Teacher'
-        true && (
+        {userRole === TEACHER && (
           <Button href={ADD_FILE} variant="outlined" className={classes.link}>
             {i18n.t('add_files_page')}
           </Button>
         )}
-        {//userRole === 'Teacher'
-        true && (
+        {userRole === TEACHER && (
           <Button
             href={SHARE_FILES}
             variant="outlined"
@@ -53,13 +52,12 @@ export const PageWithFiles = ({ userRole, files }) => {
         )}
       </Grid>
       <List component="nav" className={classes.list}>
-        {files &&
-          files.map((fileInfo, i) => (
+        {subjects &&
+          subjects.map((subject, i) => (
             <SubjectFiles
               key={i}
-              name={fileInfo.subjectName}
-              lectures={fileInfo.lectures}
-              tasks={fileInfo.tasks}
+              name={subject.name}
+              files={files.filter(file => file.id === subject.id)}
             />
           ))}
       </List>

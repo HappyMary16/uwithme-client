@@ -4,7 +4,6 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import infoReducers from '../common/reducers';
 import rootSaga from '../common/sagas';
 import authReducers from '../pages/authorization/reducers';
-import userReducers from '../pages/student/reducers';
 import filesReducers from '../pages/files/upload/reducers';
 
 export default function createAppStore() {
@@ -14,7 +13,6 @@ export default function createAppStore() {
   const rootReducer = combineReducers({
     infoReducers,
     authReducers,
-    userReducers,
     filesReducers
   });
 

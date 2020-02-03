@@ -1,5 +1,7 @@
 import StateLoader from '../../../store/StateLoader';
 import {
+  GET_FILES_BY_SUBJECT,
+  RENDER_SUBJECTS,
   UPLOAD_REQUEST,
   // UPLOAD_PROGRESS,
   UPLOAD_SUCCESS
@@ -23,6 +25,28 @@ export default function filesReducers(
         ...state,
         files: action.data
       };
+    case GET_FILES_BY_SUBJECT:
+      const newFiles = action.response.data.map(obj => {
+        let file = {};
+        file.name = obj.name;
+        file.subjectId = obj.subjectId;
+        file.type = obj.fileTypeId;
+        return file;
+      });
+      const files = state.files.filter(
+        file => file.subjectId !== newFiles[0].subjectId
+      );
+
+      return {
+        ...state,
+        files: files.concat(newFiles)
+      };
+    case RENDER_SUBJECTS: {
+      return {
+        ...state,
+        subjects: action.response.data
+      };
+    }
     default:
       return state;
   }

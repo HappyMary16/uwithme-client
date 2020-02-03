@@ -6,11 +6,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import FolderIcon from '@material-ui/icons/Folder';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { blueGrey, grey } from '@material-ui/core/colors';
+
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
   nested: {
     paddingLeft: theme.spacing(8)
+  },
+  download: {
+    color: grey
   }
 }));
 
@@ -23,9 +31,16 @@ export const ListFiles = ({ open, files }) => {
         {files.map((file, i) => (
           <ListItem button key={i} className={classes.nested} href={file.link}>
             <ListItemIcon>
-              <FolderIcon />
+              <DescriptionIcon />
             </ListItemIcon>
             <ListItemText primary={file.name} />
+            <ListItemSecondaryAction>
+              <a href={file.link} download={file.name}>
+                <IconButton>
+                  <GetAppIcon style={{ color: blueGrey[500] }} />
+                </IconButton>
+              </a>
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>

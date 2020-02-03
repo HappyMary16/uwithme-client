@@ -1,9 +1,11 @@
+import { LECTURE, TASK } from '../common/constants/userRoles';
+
 export default class StateLoader {
   loadState() {
     try {
       let serializedState = localStorage.getItem(
-        this.initializeState()
-        //'http://education-app.com:state'
+        //this.initializeState()
+        'http://education-app.com:state'
       );
 
       if (serializedState === null) {
@@ -59,80 +61,46 @@ export default class StateLoader {
           }
         ]
       },
-      userReducers: {
-        type: 'STUDENT',
-        subjects: []
-      },
       filesReducers: {
+        subjects: [
+          {
+            id: 1,
+            name: 'Subject 1'
+          },
+          {
+            id: 2,
+            name: 'Subject 2'
+          },
+          {
+            id: 3,
+            name: 'Subject 3'
+          }
+        ],
         files: [
           {
-            subjectName: 'History',
-            lectures: [
-              {
-                name: 'First',
-                link: 'link1'
-              },
-              {
-                name: 'Second',
-                link: 'link2'
-              }
-            ],
-            tasks: [
-              {
-                name: 'First',
-                link: 'link1'
-              },
-              {
-                name: 'Second',
-                link: 'link2'
-              }
-            ]
+            name: 'Task 1',
+            subjectId: 1,
+            type: TASK
           },
           {
-            subjectName: 'Math',
-            lectures: [
-              {
-                name: 'First',
-                link: 'link1'
-              },
-              {
-                name: 'Second',
-                link: 'link2'
-              }
-            ],
-            tasks: [
-              {
-                name: 'First',
-                link: 'link1'
-              },
-              {
-                name: 'Second',
-                link: 'link2'
-              }
-            ]
+            name: 'Lecture 1',
+            subjectId: 1,
+            type: LECTURE
           },
           {
-            subjectName: 'Programming',
-            lectures: [
-              {
-                name: 'Programming First',
-                link: 'Programming link1'
-              },
-              {
-                name: 'Programming Second',
-                link: 'Programming link2'
-              }
-            ],
-            tasks: [
-              {
-                name: 'Programming Task First',
-                link: 'Programming link1'
-              },
-              {
-                name: 'Programming Second',
-                link: 'Programming link2'
-              }
-            ]
+            name: 'Task 1',
+            subjectId: 2,
+            type: TASK
+          },
+          {
+            name: 'Task 2',
+            subjectId: 2,
+            type: TASK
+          },
+          {
+            name: 'Lecture 2',
+            subjectId: 1,
+            type: LECTURE
           }
         ]
       }

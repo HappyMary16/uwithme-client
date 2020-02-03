@@ -11,3 +11,6 @@ export const GET_GROUPS = '/info/studyGroups';
 
 export const GET_SUBJECTS = '/subjects/';
 export const POST_SUBJECTS = '/subject/';
+
+export const GET_FILES = '/files/';
+export const UPLOAD_MULTIPLE_FILES = '/uploadMultipleFiles/';

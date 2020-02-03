@@ -3,6 +3,8 @@ export const UPLOAD_PROGRESS = 'UPLOAD_PROGRESS';
 export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
 
+export const GET_FILES_BY_SUBJECT = 'GET_ALL_FILES';
+
 export const uploadRequest = (files, subjectName, fileType) => ({
   type: UPLOAD_REQUEST,
   files,
@@ -24,3 +26,29 @@ export const uploadFailure = (file, err) => ({
   error: true,
   file
 });
+
+export const getFilesBySubjectId = subjectId => ({
+  type: GET_FILES_BY_SUBJECT,
+  subjectId
+});
+
+export const LOAD_FILES = 'LOAD_FILES';
+
+export const SAVE_SUBJECTS = 'SAVE_SUBJECTS';
+export const LOAD_SUBJECTS = 'LOAD_SUBJECTS';
+export const RENDER_SUBJECTS = 'RENDER_SUBJECTS';
+
+export function loadSubjects(teacherUsername) {
+  return {
+    type: LOAD_SUBJECTS,
+    teacherUsername
+  };
+}
+
+export function saveSubject(teacherUsername, subjectName) {
+  return {
+    type: SAVE_SUBJECTS,
+    teacherUsername,
+    subjectName
+  };
+}
