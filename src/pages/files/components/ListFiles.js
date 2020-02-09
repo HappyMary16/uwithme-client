@@ -13,6 +13,7 @@ import { blueGrey, grey } from '@material-ui/core/colors';
 
 import IconButton from '@material-ui/core/IconButton';
 import { apiRoot, DOWNLOAD_FILE } from '../../../common/constants/serverApi';
+import { openFile } from '../upload/sagas';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -34,17 +35,15 @@ export const ListFiles = ({ open, files }) => {
             button
             key={i}
             className={classes.nested}
-            href={apiRoot + DOWNLOAD_FILE + file.id}
+            href={openFile(file.id)}
+            download={openFile(file.id)}
           >
             <ListItemIcon>
               <DescriptionIcon />
             </ListItemIcon>
             <ListItemText primary={file.name} />
             <ListItemSecondaryAction>
-              <a
-                href={apiRoot + DOWNLOAD_FILE + file.id}
-                download={apiRoot + DOWNLOAD_FILE + file.id}
-              >
+              <a href={openFile(file.id)} download={openFile(file.id)}>
                 <IconButton>
                   <GetAppIcon style={{ color: blueGrey[500] }} />
                 </IconButton>

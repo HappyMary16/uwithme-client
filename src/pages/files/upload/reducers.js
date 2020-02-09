@@ -7,6 +7,7 @@ import {
   UPLOAD_SUCCESS
   // UPLOAD_FAILURE
 } from './actions';
+import { SIGN_OUT } from '../../authorization/actions/authActions';
 
 export default function filesReducers(
   state = new StateLoader().loadState().filesReducers,
@@ -53,6 +54,12 @@ export default function filesReducers(
         subjects: action.response.data
       };
     }
+    case SIGN_OUT:
+      return {
+        ...state,
+        subjects: null,
+        files: null
+      };
     default:
       return state;
   }

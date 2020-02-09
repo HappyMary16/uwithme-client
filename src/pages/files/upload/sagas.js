@@ -10,6 +10,7 @@ import {
 } from './actions';
 import http from '../../../services/http';
 import {
+  DOWNLOAD_FILE,
   GET_FILES,
   GET_SUBJECTS,
   POST_SUBJECTS,
@@ -83,4 +84,11 @@ export function* saveSubject() {
   });
 
   yield put({ type: LOAD_SUBJECTS, teacherUsername: teacherUsername });
+}
+
+export function* openFile(fileId) {
+  yield call(http, {
+    url: DOWNLOAD_FILE + fileId,
+    method: 'get'
+  });
 }

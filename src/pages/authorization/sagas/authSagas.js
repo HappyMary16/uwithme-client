@@ -1,4 +1,4 @@
-import { call, put, take, takeEvery } from 'redux-saga/effects';
+import { call, put, take } from 'redux-saga/effects';
 import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
