@@ -2,6 +2,7 @@ import { call, take, put } from 'redux-saga/effects';
 import {
   GET_FILES_BY_SUBJECT,
   LOAD_SUBJECTS,
+  RENDER_FILES,
   RENDER_SUBJECTS,
   SAVE_SUBJECTS,
   UPLOAD_REQUEST,
@@ -45,12 +46,15 @@ export function* uploadMultipleFiles(files, subjectName, fileType) {
 }
 
 export function* downloadFilesBySubject() {
-  const subjectId = yield take(GET_FILES_BY_SUBJECT);
-  return yield call(http, {
-    url: GET_FILES + subjectId,
+  const { userName, subjectId } = yield take(GET_FILES_BY_SUBJECT);
+
+  const response = yield call(http, {
+    url: GET_FILES + userName + '/' + subjectId,
     method: 'get',
     isFile: true
   });
+
+  yield put({ type: RENDER_FILES, response });
 }
 
 export function* loadSubjects() {

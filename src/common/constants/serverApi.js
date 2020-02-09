@@ -1,6 +1,6 @@
 import config from '../../config';
 
-export const apiRoot = `http://${config.host}:${config.port}/api`;
+export const apiRoot = `http://localhost:${config.port}/api`;
 
 export const SIGN_IN = '/auth/signIn';
 export const SIGN_UP = '/auth/signUp';

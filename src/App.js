@@ -12,7 +12,6 @@ import {
 } from './common/constants/links';
 import UserContainer from './pages/student/containers/UserContainer';
 import { StudentToolBar } from './pages/student/components/StudentToolBar';
-import PageWithFilesContainer from './pages/files/containers/PageWithFilesContainer';
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -21,6 +20,7 @@ import { SingIn } from './pages/authorization/components/SignIn';
 import { SingUp } from './pages/authorization/components/SignUp';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/files/containers/ShareFiles';
+import PageWithFiles from './pages/files/containers/PageWithFiles';
 
 let App = ({ user }) => {
   return (
@@ -44,9 +44,7 @@ let App = ({ user }) => {
                 <Route exact path={USER_HOME} component={UserContainer} />
               )}
 
-              {user && (
-                <Route exact path={FILES} component={PageWithFilesContainer} />
-              )}
+              {user && <Route exact path={FILES} component={PageWithFiles} />}
 
               {user && <Route exact path={ADD_FILE} component={AddFile} />}
 
