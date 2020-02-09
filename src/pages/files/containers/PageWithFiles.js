@@ -38,11 +38,9 @@ class PageWithFiles extends React.Component {
     const { dispatch, username } = this.props;
     dispatch(loadSubjects(username));
 
-    this.props.subjects.forEach(subject =>
-      dispatch(getFilesBySubjectId(username, subject.id))
-    );
-
-    console.log(this.props.files);
+    this.props.subjects.forEach(subject => {
+      dispatch(getFilesBySubjectId(username, subject.id));
+    });
   }
 
   render() {

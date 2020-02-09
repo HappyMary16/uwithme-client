@@ -45,7 +45,6 @@ let ShareFiles = ({
 }) => {
   const classes = useStyles();
 
-  let files = [];
   let [subject, setSubject] = React.useState('');
 
   let submit = () => {};

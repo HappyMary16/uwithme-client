@@ -28,7 +28,7 @@ export default function filesReducers(
     case RENDER_FILES:
       const newFiles = action.response.data.map(obj => {
         let file = {};
-        file.id = obj.id;
+        file.id = obj.fileId;
         file.name = obj.fileName;
         file.subjectId = obj.subjectId;
         file.type = obj.type;

@@ -12,6 +12,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { blueGrey, grey } from '@material-ui/core/colors';
 
 import IconButton from '@material-ui/core/IconButton';
+import { apiRoot, DOWNLOAD_FILE } from '../../../common/constants/serverApi';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -29,13 +30,21 @@ export const ListFiles = ({ open, files }) => {
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
         {files.map((file, i) => (
-          <ListItem button key={i} className={classes.nested} href={file.link}>
+          <ListItem
+            button
+            key={i}
+            className={classes.nested}
+            href={apiRoot + DOWNLOAD_FILE + file.id}
+          >
             <ListItemIcon>
               <DescriptionIcon />
             </ListItemIcon>
             <ListItemText primary={file.name} />
             <ListItemSecondaryAction>
-              <a href={file.link} download={file.name}>
+              <a
+                href={apiRoot + DOWNLOAD_FILE + file.id}
+                download={apiRoot + DOWNLOAD_FILE + file.id}
+              >
                 <IconButton>
                   <GetAppIcon style={{ color: blueGrey[500] }} />
                 </IconButton>

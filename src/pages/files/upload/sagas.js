@@ -1,4 +1,4 @@
-import { call, take, put } from 'redux-saga/effects';
+import { call, take, put, takeEvery } from 'redux-saga/effects';
 import {
   GET_FILES_BY_SUBJECT,
   LOAD_SUBJECTS,
@@ -46,15 +46,23 @@ export function* uploadMultipleFiles(files, subjectName, fileType) {
 }
 
 export function* downloadFilesBySubject() {
-  const { userName, subjectId } = yield take(GET_FILES_BY_SUBJECT);
+  yield takeEvery(GET_FILES_BY_SUBJECT, action => downloadFiles(action));
+}
 
-  const response = yield call(http, {
-    url: GET_FILES + userName + '/' + subjectId,
-    method: 'get',
-    isFile: true
-  });
+function* downloadFiles(action) {
+  try {
+    const { userName, subjectId } = action;
 
-  yield put({ type: RENDER_FILES, response });
+    const response = yield call(http, {
+      url: GET_FILES + userName + '/' + subjectId,
+      method: 'get',
+      isFile: true
+    });
+
+    yield put({ type: RENDER_FILES, response });
+  } catch (e) {
+    //TODO add error
+  }
 }
 
 export function* loadSubjects() {
@@ -69,7 +77,7 @@ export function* loadSubjects() {
 
 export function* saveSubject() {
   const { teacherUsername, subjectName } = yield take(SAVE_SUBJECTS);
-  const response = yield call(http, {
+  yield call(http, {
     url: POST_SUBJECTS + teacherUsername + '/' + subjectName,
     method: 'post'
   });
