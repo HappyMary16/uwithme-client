@@ -12,8 +12,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { blueGrey, grey } from '@material-ui/core/colors';
 
 import IconButton from '@material-ui/core/IconButton';
-import { apiRoot, DOWNLOAD_FILE } from '../../../common/constants/serverApi';
-import { openFile } from '../upload/sagas';
+import { loadFile } from '../upload/actions';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -26,24 +25,18 @@ const useStyles = makeStyles(theme => ({
 
 export const ListFiles = ({ open, files }) => {
   const classes = useStyles();
-
+  loadFile(2);
   return (
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
         {files.map((file, i) => (
-          <ListItem
-            button
-            key={i}
-            className={classes.nested}
-            href={openFile(file.id)}
-            download={openFile(file.id)}
-          >
+          <ListItem button key={i} className={classes.nested}>
             <ListItemIcon>
               <DescriptionIcon />
             </ListItemIcon>
             <ListItemText primary={file.name} />
             <ListItemSecondaryAction>
-              <a href={openFile(file.id)} download={openFile(file.id)}>
+              <a href={loadFile(file.id)} download={loadFile(file.id)}>
                 <IconButton>
                   <GetAppIcon style={{ color: blueGrey[500] }} />
                 </IconButton>

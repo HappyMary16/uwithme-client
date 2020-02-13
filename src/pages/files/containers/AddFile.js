@@ -39,6 +39,7 @@ let AddFile = ({ dispatch, teacherUsername, subjects }) => {
   let [successfulUploaded, setSuccessfulUploaded] = React.useState(false);
 
   let submit = () => {
+    console.log(files);
     if (!subjects.map(subject => subject.name).includes(subjectValue)) {
       dispatch(saveSubject(teacherUsername, subjectValue));
     }

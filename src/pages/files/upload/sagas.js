@@ -1,6 +1,7 @@
 import { call, take, put, takeEvery } from 'redux-saga/effects';
 import {
   GET_FILES_BY_SUBJECT,
+  LOAD_FILES,
   LOAD_SUBJECTS,
   RENDER_FILES,
   RENDER_SUBJECTS,
@@ -86,9 +87,16 @@ export function* saveSubject() {
   yield put({ type: LOAD_SUBJECTS, teacherUsername: teacherUsername });
 }
 
-export function* openFile(fileId) {
-  yield call(http, {
+export function* openFile() {
+  const { fileId } = yield take(LOAD_FILES);
+  console.log(fileId);
+  let result = yield call(http, {
     url: DOWNLOAD_FILE + fileId,
-    method: 'get'
+    method: 'get',
+    isFile: true
   });
+
+  console.log('hkhk');
+  console.log(fileId);
+  console.log(result);
 }

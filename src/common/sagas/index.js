@@ -18,6 +18,7 @@ import {
 import {
   downloadFilesBySubject,
   loadSubjects,
+  openFile,
   saveSubject,
   uploadRequestWatcherSaga
 } from '../../pages/files/upload/sagas';
@@ -62,6 +63,7 @@ export default function* rootSaga() {
     signUp(),
     loadSubjects(),
     saveSubject(),
-    downloadFilesBySubject()
+    downloadFilesBySubject(),
+    openFile()
   ]);
 }

@@ -34,6 +34,12 @@ export const LOAD_SUBJECTS = 'LOAD_SUBJECTS';
 export const RENDER_SUBJECTS = 'RENDER_SUBJECTS';
 export const RENDER_FILES = 'RENDER_FILES';
 
+export function loadFile(fileId) {
+  return {
+    type: LOAD_FILES,
+    fileId
+  };
+}
 export function loadSubjects(teacherUsername) {
   return {
     type: LOAD_SUBJECTS,
