@@ -5,9 +5,10 @@ export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
 
 export const GET_FILES_BY_SUBJECT = 'GET_ALL_FILES';
 
-export const uploadRequest = (files, subjectName, fileType) => ({
+export const uploadRequest = (files, username, subjectName, fileType) => ({
   type: UPLOAD_REQUEST,
   files,
+  username,
   subjectName,
   fileType
 });
@@ -42,10 +43,11 @@ export function loadFile(fileId, fileName, loading) {
     loading
   };
 }
-export function loadSubjects(teacherUsername) {
+
+export function loadSubjects(username) {
   return {
     type: LOAD_SUBJECTS,
-    teacherUsername
+    username
   };
 }
 
@@ -57,10 +59,10 @@ export function getFilesBySubjectId(userName, subjectId) {
   };
 }
 
-export function saveSubject(teacherUsername, subjectName) {
+export function saveSubject(username, subjectName) {
   return {
     type: SAVE_SUBJECTS,
-    teacherUsername,
+    username,
     subjectName
   };
 }

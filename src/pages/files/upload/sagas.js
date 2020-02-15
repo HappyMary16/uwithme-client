@@ -20,9 +20,12 @@ import {
 
 export function* uploadRequestWatcherSaga() {
   while (true) {
-    const { files, subjectName, fileType } = yield take(UPLOAD_REQUEST);
+    const { files, subjectName, fileType, username } = yield take(
+      UPLOAD_REQUEST
+    );
     let response = yield call(
       uploadMultipleFiles,
+      username,
       files,
       subjectName,
       fileType
@@ -32,14 +35,14 @@ export function* uploadRequestWatcherSaga() {
   }
 }
 
-export function* uploadMultipleFiles(files, subjectName, fileType) {
+export function* uploadMultipleFiles(username, files, subjectName, fileType) {
   let formData = new FormData();
   for (let index = 0; index < files.length; index++) {
     formData.append('files', files[index]);
   }
 
   return yield call(http, {
-    url: UPLOAD_MULTIPLE_FILES + subjectName + '/' + fileType,
+    url: UPLOAD_MULTIPLE_FILES + username + '/' + subjectName + '/' + fileType,
     method: 'post',
     data: formData,
     isFile: true
@@ -67,9 +70,13 @@ function* downloadFiles(action) {
 }
 
 export function* loadSubjects() {
-  const { teacherUsername } = yield take(LOAD_SUBJECTS);
+  yield takeEvery(LOAD_SUBJECTS, action => loadSubjectsImpl(action));
+}
+
+function* loadSubjectsImpl(action) {
+  const { username } = action;
   const response = yield call(http, {
-    url: GET_SUBJECTS + teacherUsername,
+    url: GET_SUBJECTS + username,
     method: 'get'
   });
 
@@ -77,13 +84,13 @@ export function* loadSubjects() {
 }
 
 export function* saveSubject() {
-  const { teacherUsername, subjectName } = yield take(SAVE_SUBJECTS);
+  const { username, subjectName } = yield take(SAVE_SUBJECTS);
   yield call(http, {
-    url: POST_SUBJECTS + teacherUsername + '/' + subjectName,
+    url: POST_SUBJECTS + username + '/' + subjectName,
     method: 'post'
   });
 
-  yield put({ type: LOAD_SUBJECTS, teacherUsername: teacherUsername });
+  yield put({ type: LOAD_SUBJECTS, username });
 }
 
 export function* openOrSaveFile() {
