@@ -9,7 +9,7 @@ import { ADD_FILE, SHARE_FILES } from '../../../common/constants/links';
 import { Copyright } from '../../../common/components/Copyright';
 import i18n from '../../../locales/i18n';
 import { TEACHER } from '../../../common/constants/userRoles';
-import { getFilesBySubjectId, loadFile, loadSubjects } from '../upload/actions';
+import { getFilesBySubjectId, loadSubjects } from '../upload/actions';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
@@ -37,7 +37,7 @@ class PageWithFiles extends React.Component {
   componentDidMount() {
     const { dispatch, username } = this.props;
     dispatch(loadSubjects(username));
-    dispatch(loadFile(2));
+
     if (this.props.subjects) {
       this.props.subjects.forEach(subject => {
         dispatch(getFilesBySubjectId(username, subject.id));

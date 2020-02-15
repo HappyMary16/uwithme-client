@@ -13,6 +13,7 @@ import { blueGrey, grey } from '@material-ui/core/colors';
 
 import IconButton from '@material-ui/core/IconButton';
 import { loadFile } from '../upload/actions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -23,9 +24,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ListFiles = ({ open, files }) => {
+let ListFiles = ({ open, files, dispatch }) => {
   const classes = useStyles();
-  loadFile(2);
   return (
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
@@ -36,11 +36,11 @@ export const ListFiles = ({ open, files }) => {
             </ListItemIcon>
             <ListItemText primary={file.name} />
             <ListItemSecondaryAction>
-              <a href={loadFile(file.id)} download={loadFile(file.id)}>
-                <IconButton>
-                  <GetAppIcon style={{ color: blueGrey[500] }} />
-                </IconButton>
-              </a>
+              <IconButton
+                onClick={() => dispatch(loadFile(file.id, file.name, false))}
+              >
+                <GetAppIcon style={{ color: blueGrey[500] }} />
+              </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
         ))}
@@ -48,3 +48,6 @@ export const ListFiles = ({ open, files }) => {
     </Collapse>
   );
 };
+
+ListFiles = connect()(ListFiles);
+export default ListFiles;

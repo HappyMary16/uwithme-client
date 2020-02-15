@@ -1,4 +1,4 @@
-import { call, take, put, takeEvery } from 'redux-saga/effects';
+import { call, put, take, takeEvery } from 'redux-saga/effects';
 import {
   GET_FILES_BY_SUBJECT,
   LOAD_FILES,
@@ -38,7 +38,6 @@ export function* uploadMultipleFiles(files, subjectName, fileType) {
     formData.append('files', files[index]);
   }
 
-  console.log(subjectName);
   return yield call(http, {
     url: UPLOAD_MULTIPLE_FILES + subjectName + '/' + fileType,
     method: 'post',
@@ -87,16 +86,41 @@ export function* saveSubject() {
   yield put({ type: LOAD_SUBJECTS, teacherUsername: teacherUsername });
 }
 
-export function* openFile() {
-  const { fileId } = yield take(LOAD_FILES);
+export function* openOrSaveFile() {
+  yield takeEvery(LOAD_FILES, action => openFileImpl(action));
+}
+
+function* openFileImpl(action) {
+  const { fileId, fileName, loading } = action;
   console.log(fileId);
-  let result = yield call(http, {
+  let response = yield call(http, {
     url: DOWNLOAD_FILE + fileId,
     method: 'get',
-    isFile: true
+    loadFile: true
   });
 
-  console.log('hkhk');
-  console.log(fileId);
-  console.log(result);
+  let blob = new Blob([response.data], {
+    type: response.headers['content-type']
+  });
+  let url = URL.createObjectURL(blob);
+
+  if (loading) {
+    saveFile(url, fileName);
+  } else {
+    openFile(url);
+  }
+}
+
+function openFile(url) {
+  let newWindow = window.open('/files/loading');
+  newWindow.onload = () => {
+    newWindow.location = url;
+  };
+}
+
+function saveFile(url, fileName) {
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  a.click();
 }

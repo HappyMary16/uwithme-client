@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { ListFiles } from './ListFiles';
-
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,6 +11,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import FolderIcon from '@material-ui/icons/Folder';
 import i18n from '../../../locales/i18n';
 import { getLectures, getTasks } from '../../../utils/FileUtil';
+import ListFiles from '../containers/ListFiles';
 
 const useStyles = makeStyles(theme => ({
   nested: {

@@ -1,9 +1,9 @@
 import { call, put, take } from 'redux-saga/effects';
 import {
+  SIGN_IN_ERROR,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_OUT,
-  SIGN_IN_ERROR,
   SIGN_UP_REQUEST
 } from '../actions/authActions';
 
@@ -90,7 +90,6 @@ export function* loginFlow() {
     if (response.status === 200) {
       yield put({ type: SIGN_IN_SUCCESS, response });
 
-      console.log(response.data.token);
       localStorage.setItem('AuthToken', response.data.token);
 
       history.push(USER_HOME);

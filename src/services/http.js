@@ -48,7 +48,8 @@ export default function http({
   data,
   params,
   handleToken,
-  isFile
+  isFile,
+  loadFile
 }) {
   const token = localStorage.getItem('AuthToken');
   const config = {
@@ -60,6 +61,10 @@ export default function http({
     }
   };
   if (data) config['data'] = data;
+
+  if (loadFile) {
+    config['responseType'] = 'arraybuffer';
+  }
 
   if (token) {
     config['headers'] = {
