@@ -4,7 +4,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import infoReducers from '../common/reducers';
 import rootSaga from '../common/sagas';
 import authReducers from '../pages/authorization/reducers';
-import filesReducers from '../pages/files/upload/reducers';
+import filesReducers from '../pages/files/reducers';
 
 export default function createAppStore() {
   const stateLoader = new StateLoader();

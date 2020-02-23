@@ -3,24 +3,24 @@ import { Route } from 'react-router-dom';
 
 import NavigationContainer from './common/containers/NavigationContainer';
 import {
-  USER_HOME,
+  ADD_FILE,
+  FILES,
+  SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
-  FILES,
-  ADD_FILE,
-  SHARE_FILES
+  USER_HOME
 } from './common/constants/links';
 import UserContainer from './pages/student/containers/UserContainer';
 import { StudentToolBar } from './pages/student/components/StudentToolBar';
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import AddFile from './pages/files/containers/AddFile';
+import AddFile from './pages/files/add/containers/AddFile';
 import { SingIn } from './pages/authorization/components/SignIn';
 import { SingUp } from './pages/authorization/components/SignUp';
 import { connect } from 'react-redux';
-import ShareFiles from './pages/files/containers/ShareFiles';
-import PageWithFiles from './pages/files/containers/PageWithFiles';
+import ShareFiles from './pages/files/share/containers/ShareFiles';
+import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 
 let App = ({ user }) => {
   return (
@@ -37,7 +37,7 @@ let App = ({ user }) => {
               </Grid>
             )}
             <Grid item xs={10}>
-              {!user && <Route exact path={SIGN_IN} component={SingIn} />}
+              {<Route exact path={SIGN_IN} component={SingIn} />}
               {!user && <Route exact path={SIGN_UP} component={SingUp} />}
 
               {user && (

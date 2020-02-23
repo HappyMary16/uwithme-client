@@ -16,3 +16,5 @@ export const GET_FILES = '/files/';
 export const UPLOAD_MULTIPLE_FILES = '/uploadMultipleFiles/';
 
 export const DOWNLOAD_FILE = '/downloadFile/';
+
+export const ADD_ACCESS = '/addAccess/';

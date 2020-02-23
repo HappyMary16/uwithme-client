@@ -2,7 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
   card: {

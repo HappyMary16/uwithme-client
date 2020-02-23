@@ -1,53 +1,17 @@
-import { call, put, take, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   GET_FILES_BY_SUBJECT,
   LOAD_FILES,
   LOAD_SUBJECTS,
   RENDER_FILES,
-  RENDER_SUBJECTS,
-  SAVE_SUBJECTS,
-  UPLOAD_REQUEST,
-  UPLOAD_SUCCESS
+  RENDER_SUBJECTS
 } from './actions';
-import http from '../../../services/http';
+import http from '../../services/http';
 import {
   DOWNLOAD_FILE,
   GET_FILES,
-  GET_SUBJECTS,
-  POST_SUBJECTS,
-  UPLOAD_MULTIPLE_FILES
-} from '../../../common/constants/serverApi';
-
-export function* uploadRequestWatcherSaga() {
-  while (true) {
-    const { files, subjectName, fileType, username } = yield take(
-      UPLOAD_REQUEST
-    );
-    let response = yield call(
-      uploadMultipleFiles,
-      username,
-      files,
-      subjectName,
-      fileType
-    );
-
-    yield put({ type: UPLOAD_SUCCESS, response });
-  }
-}
-
-export function* uploadMultipleFiles(username, files, subjectName, fileType) {
-  let formData = new FormData();
-  for (let index = 0; index < files.length; index++) {
-    formData.append('files', files[index]);
-  }
-
-  return yield call(http, {
-    url: UPLOAD_MULTIPLE_FILES + username + '/' + subjectName + '/' + fileType,
-    method: 'post',
-    data: formData,
-    isFile: true
-  });
-}
+  GET_SUBJECTS
+} from '../../common/constants/serverApi';
 
 export function* downloadFilesBySubject() {
   yield takeEvery(GET_FILES_BY_SUBJECT, action => downloadFiles(action));
@@ -81,16 +45,6 @@ function* loadSubjectsImpl(action) {
   });
 
   yield put({ type: RENDER_SUBJECTS, response });
-}
-
-export function* saveSubject() {
-  const { username, subjectName } = yield take(SAVE_SUBJECTS);
-  yield call(http, {
-    url: POST_SUBJECTS + username + '/' + subjectName,
-    method: 'post'
-  });
-
-  yield put({ type: LOAD_SUBJECTS, username });
 }
 
 export function* openOrSaveFile() {

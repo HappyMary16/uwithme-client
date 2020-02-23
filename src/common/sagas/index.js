@@ -18,10 +18,13 @@ import {
 import {
   downloadFilesBySubject,
   loadSubjects,
-  openOrSaveFile,
-  saveSubject,
+  openOrSaveFile
+} from '../../pages/files/sagas';
+import {
+  saveSubjectSaga,
   uploadRequestWatcherSaga
-} from '../../pages/files/upload/sagas';
+} from '../../pages/files/add/sagas';
+import { addAccessToFilesSaga } from '../../pages/files/share/sagas';
 
 export function* loadInstitutes() {
   yield take(LOAD_INSTITUTES);
@@ -62,8 +65,9 @@ export default function* rootSaga() {
     uploadRequestWatcherSaga(),
     signUp(),
     loadSubjects(),
-    saveSubject(),
+    saveSubjectSaga(),
     downloadFilesBySubject(),
-    openOrSaveFile()
+    openOrSaveFile(),
+    addAccessToFilesSaga()
   ]);
 }

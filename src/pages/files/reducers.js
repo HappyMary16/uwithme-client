@@ -1,31 +1,13 @@
-import StateLoader from '../../../store/StateLoader';
-import {
-  RENDER_FILES,
-  RENDER_SUBJECTS,
-  UPLOAD_REQUEST,
-  // UPLOAD_PROGRESS,
-  UPLOAD_SUCCESS
-  // UPLOAD_FAILURE
-} from './actions';
-import { SIGN_OUT } from '../../authorization/actions/authActions';
+import StateLoader from '../../store/StateLoader';
+import { RENDER_FILES, RENDER_SUBJECTS } from './actions';
+import { SIGN_OUT } from '../authorization/actions/authActions';
+import { UPLOAD_REQUEST, UPLOAD_SUCCESS } from './add/actions';
 
 export default function filesReducers(
   state = new StateLoader().loadState().filesReducers,
   action
 ) {
   switch (action.type) {
-    case UPLOAD_REQUEST:
-      return {
-        ...state,
-        files: action.files,
-        subjectId: action.subjectId,
-        fileType: action.fileType
-      };
-    case UPLOAD_SUCCESS:
-      return {
-        ...state,
-        files: action.data
-      };
     case RENDER_FILES:
       const newFiles = action.response.data.map(obj => {
         let file = {};
@@ -60,6 +42,19 @@ export default function filesReducers(
         subjects: null,
         files: null
       };
+    case UPLOAD_REQUEST:
+      return {
+        ...state,
+        files: action.files,
+        subjectId: action.subjectId,
+        fileType: action.fileType
+      };
+    case UPLOAD_SUCCESS:
+      return {
+        ...state,
+        files: action.data
+      };
+
     default:
       return state;
   }

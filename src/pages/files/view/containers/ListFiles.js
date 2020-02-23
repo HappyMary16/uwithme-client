@@ -12,7 +12,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { blueGrey, grey } from '@material-ui/core/colors';
 
 import IconButton from '@material-ui/core/IconButton';
-import { loadFile } from '../upload/actions';
+import { loadFile } from '../../actions';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({

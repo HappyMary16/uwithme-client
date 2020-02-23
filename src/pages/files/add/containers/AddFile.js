@@ -2,17 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { FieldWithChoice } from '../../../common/components/FieldWithChoice';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { FileTypes, LECTURE } from '../../../common/constants/userRoles';
-import { SelectField } from '../../../common/components/SelectField';
+import { FileTypes, LECTURE } from '../../../../common/constants/userRoles';
+import { SelectField } from '../../../../common/components/SelectField';
 import { Upload } from '../components/Upload';
-import { loadSubjects, saveSubject, uploadRequest } from '../upload/actions';
+import { loadSubjects } from '../../actions';
 import Container from 'react-bootstrap/Container';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { saveSubject, uploadRequest } from '../actions';
+
+import CreatableSelect from 'react-select/creatable';
+import { InputLabel } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,8 +28,21 @@ const useStyles = makeStyles(theme => ({
     marginTop: '10px',
     marginLeft: 'auto',
     marginRight: '20px'
+  },
+  subject: {
+    marginTop: '20px'
   }
 }));
+
+const theme = theme => ({
+  ...theme,
+  colors: {
+    ...theme.colors,
+    primary: '#483D8B',
+    primary50: '#D3D3D3',
+    primary25: '#F5F5F5'
+  }
+});
 
 class AddFile extends React.Component {
   constructor(props) {
@@ -37,12 +53,13 @@ class AddFile extends React.Component {
       subject: '',
       fileType: LECTURE,
       uploading: false,
-      successfulUploaded: false
+      successfulUploaded: false,
+      subjectCreating: false
     };
 
     this.submit = this.submit.bind(this);
     this.addFiles = this.addFiles.bind(this);
-    this.ifSubjectDoesNotExist = this.ifSubjectDoesNotExist.bind(this);
+    this.createSubject = this.createSubject.bind(this);
   }
 
   componentDidMount() {
@@ -54,25 +71,32 @@ class AddFile extends React.Component {
     const { dispatch, username } = this.props;
     const { subject, files, fileType } = this.state;
 
-    this.ifSubjectDoesNotExist(subject);
-
     this.setState({ uploading: true });
 
-    dispatch(uploadRequest(files, username, subject, fileType));
+    dispatch(uploadRequest(files, username, subject.label, fileType));
     this.setState({
       uploading: false,
       successfulUploaded: true
     });
   }
 
-  ifSubjectDoesNotExist(subjectName) {
-    const { dispatch, username } = this.props;
+  createSubject(subjectName) {
+    this.setState({
+      subjectCreating: true
+    });
 
-    if (
-      !this.props.subjects.map(subject => subject.name).includes(subjectName)
-    ) {
+    setTimeout(() => {
+      const { dispatch, username } = this.props;
       dispatch(saveSubject(username, subjectName));
-    }
+
+      this.setState({
+        subject: {
+          value: subjectName,
+          label: subjectName
+        },
+        subjectCreating: false
+      });
+    }, 1000);
   }
 
   addFiles(addedFiles) {
@@ -81,26 +105,40 @@ class AddFile extends React.Component {
 
   render() {
     const { classes, subjects } = this.props;
-    const { fileType, uploading, successfulUploaded } = this.state;
+    const {
+      fileType,
+      uploading,
+      successfulUploaded,
+      subject,
+      subjectCreating
+    } = this.state;
 
     return (
-      <Grid xs={12} className={classes.root} alignItems={'center'}>
-        <Grid item xs={12}>
-          <FieldWithChoice
-            fieldName={i18n.t('subject')}
-            listChoices={subjects.map(subject => subject.name)}
+      <Grid item xs={12} className={classes.root}>
+        <Container className={classes.subject}>
+          <InputLabel />
+          <CreatableSelect
+            theme={theme}
+            placeholder={i18n.t('subject')}
+            options={subjects.map(subject => {
+              return {
+                label: subject.name,
+                value: subject.id
+              };
+            })}
             onChange={subject => this.setState({ subject: subject })}
+            onCreateOption={subject => this.createSubject(subject)}
+            value={subject}
+            isLoading={subjectCreating}
           />
-        </Grid>
+        </Container>
         <Container>
-          <Container>
-            <SelectField
-              label={i18n.t('file_type')}
-              initialValue={fileType}
-              values={FileTypes}
-              onChange={fileType => this.setState({ fileType: fileType })}
-            />
-          </Container>
+          <SelectField
+            label={i18n.t('file_type')}
+            initialValue={fileType}
+            values={FileTypes}
+            onChange={fileType => this.setState({ fileType: fileType })}
+          />
         </Container>
 
         <Grid item xs={12}>
@@ -110,8 +148,8 @@ class AddFile extends React.Component {
             successfulUploaded={successfulUploaded}
           />
         </Grid>
-        <Container>
-          <Grid container alignItems={'right'}>
+        <Container className={classes.submit}>
+          <Grid container alignItems={'flex-end'}>
             <Button
               type="submit"
               variant="contained"

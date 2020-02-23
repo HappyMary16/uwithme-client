@@ -66,14 +66,6 @@ export default class StateLoader {
           {
             id: 1,
             name: 'Subject 1'
-          },
-          {
-            id: 2,
-            name: 'Subject 2'
-          },
-          {
-            id: 3,
-            name: 'Subject 3'
           }
         ],
         files: [
