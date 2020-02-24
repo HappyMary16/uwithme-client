@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FileTypes, LECTURE } from '../../../../common/constants/userRoles';
@@ -11,28 +10,19 @@ import { loadSubjects } from '../../actions';
 import Container from 'react-bootstrap/Container';
 import i18n from '../../../../locales/i18n';
 import { compose } from 'redux';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { saveSubject, uploadRequest } from '../actions';
 
 import CreatableSelect from 'react-select/creatable';
-import { InputLabel } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: theme.spacing(2, 0, 0, 2)
-  },
-  nested: {
-    paddingLeft: theme.spacing(4)
-  },
-  submit: {
-    marginTop: '10px',
-    marginLeft: 'auto',
-    marginRight: '20px'
-  },
-  subject: {
-    marginTop: '20px'
-  }
-}));
+const submit = {
+  marginTop: '10px',
+  marginLeft: 'auto',
+  marginRight: '0px'
+};
+
+const subjectSelector = {
+  marginTop: '20px'
+};
 
 const theme = theme => ({
   ...theme,
@@ -104,7 +94,7 @@ class AddFile extends React.Component {
   }
 
   render() {
-    const { classes, subjects } = this.props;
+    const { subjects } = this.props;
     const {
       fileType,
       uploading,
@@ -114,9 +104,8 @@ class AddFile extends React.Component {
     } = this.state;
 
     return (
-      <Grid item xs={12} className={classes.root}>
-        <Container className={classes.subject}>
-          <InputLabel />
+      <Grid item xs={12}>
+        <Container style={subjectSelector}>
           <CreatableSelect
             theme={theme}
             placeholder={i18n.t('subject')}
@@ -148,13 +137,13 @@ class AddFile extends React.Component {
             successfulUploaded={successfulUploaded}
           />
         </Grid>
-        <Container className={classes.submit}>
+        <Container>
           <Grid container alignItems={'flex-end'}>
             <Button
+              style={submit}
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.submit}
               onClick={this.submit}
             >
               {i18n.t('upload')}
@@ -173,7 +162,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  withStyles(useStyles),
-  connect(mapStateToProps)
-)(AddFile);
+export default compose(connect(mapStateToProps))(AddFile);

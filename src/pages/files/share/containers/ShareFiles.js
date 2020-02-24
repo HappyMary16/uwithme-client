@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CreatableSelect from 'react-select/creatable';
@@ -10,7 +9,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import i18n from '../../../../locales/i18n';
 import { getLectures, getTasks } from '../../../../utils/FileUtil';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
 import FilesToChoose from '../components/FilesToChoose';
 import { SelectField } from '../../../../common/components/SelectField';
@@ -18,24 +16,25 @@ import { addAccessToFiles } from '../actions';
 import { loadGroups } from '../../../../common/actions';
 import { getFilesBySubjectId, loadSubjects } from '../../actions';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: theme.spacing(2, 0, 0, 2)
-  },
-  nested: {
-    paddingLeft: theme.spacing(4)
-  },
-  submit: {
-    marginTop: '10px',
-    marginLeft: 'auto',
-    marginRight: '20px'
-  },
-  formControl: {
-    marginTop: '10px',
-    marginLeft: '20px'
-  },
-  multipleSelect: {}
-}));
+const submit = {
+  marginTop: '10px',
+  marginLeft: 'auto',
+  marginRight: '0px'
+};
+
+const groupSelect = {
+  marginTop: '20px'
+};
+
+const theme = theme => ({
+  ...theme,
+  colors: {
+    ...theme.colors,
+    primary: '#483D8B',
+    primary50: '#D3D3D3',
+    primary25: '#F5F5F5'
+  }
+});
 
 let selectedGroups = [];
 let files = [];
@@ -94,11 +93,11 @@ class ShareFiles extends React.Component {
   }
 
   render() {
-    const { classes, lectures, tasks, groups, subjects } = this.props;
+    const { lectures, tasks, groups, subjects } = this.props;
     const { subjectId } = this.state;
 
     return (
-      <Grid xs={10} className={classes.root} alignItems={'center'}>
+      <Grid xs={12} alignItems={'center'}>
         <Grid item xs={12}>
           <Container>
             <SelectField
@@ -120,7 +119,7 @@ class ShareFiles extends React.Component {
         <Container>
           <Grid container xs={12}>
             <Grid item xs={6}>
-              <FormControl component="fieldset" className={classes.formControl}>
+              <FormControl component="fieldset">
                 <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
                 <FilesToChoose
                   files={lectures.filter(
@@ -132,7 +131,7 @@ class ShareFiles extends React.Component {
             </Grid>
 
             <Grid item xs={6}>
-              <FormControl component="fieldset" className={classes.formControl}>
+              <FormControl component="fieldset">
                 <FormLabel component="legend">{i18n.t('task')}</FormLabel>
                 <FilesToChoose
                   files={tasks.filter(task => task.subjectId === subjectId)}
@@ -143,17 +142,13 @@ class ShareFiles extends React.Component {
           </Grid>
         </Container>
 
-        <Container>
-          <Grid item xs={12}>
-            <Container>
-              <CreatableSelect
-                className={classes.multipleSelect}
-                isMulti
-                onChange={this.handleGroupChange}
-                options={groups}
-              />
-            </Container>
-          </Grid>
+        <Container style={groupSelect}>
+          <CreatableSelect
+            theme={theme}
+            isMulti
+            onChange={this.handleGroupChange}
+            options={groups}
+          />
         </Container>
 
         <Container>
@@ -162,7 +157,7 @@ class ShareFiles extends React.Component {
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.submit}
+              style={submit}
               onClick={this.submit}
             >
               {i18n.t('upload')}
@@ -184,7 +179,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  withStyles(useStyles),
-  connect(mapStateToProps)
-)(ShareFiles);
+export default compose(connect(mapStateToProps))(ShareFiles);
