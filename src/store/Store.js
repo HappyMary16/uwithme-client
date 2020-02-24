@@ -6,11 +6,18 @@ import rootSaga from '../common/sagas';
 import authReducers from '../pages/authorization/reducers';
 import filesReducers from '../pages/files/reducers';
 
+import { connectRouter } from 'connected-react-router';
+
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
+
 export default function createAppStore() {
   const stateLoader = new StateLoader();
   const sagaMiddleware = createSagaMiddleware();
 
   const rootReducer = combineReducers({
+    router: connectRouter(history),
     infoReducers,
     authReducers,
     filesReducers

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import history from '../utils/history';
+import { history } from '../store/Store';
 import { apiRoot } from '../common/constants/serverApi';
 import { SIGN_IN } from '../common/constants/links';
 

@@ -1,18 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import '../src/locales/i18n';
 import App from './App';
-import createAppStore from './store/Store';
+import createAppStore, { history } from './store/Store';
+import { ConnectedRouter } from 'connected-react-router';
 
 const store = createAppStore();
 
 render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

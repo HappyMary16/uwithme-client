@@ -7,7 +7,7 @@ import {
   SIGN_UP_REQUEST
 } from '../actions/authActions';
 
-import history from '../../../utils/history';
+import { history } from '../../../store/Store';
 import http from '../../../services/http';
 import { SIGN_IN, SIGN_UP } from '../../../common/constants/serverApi';
 import { USER_HOME } from '../../../common/constants/links';
