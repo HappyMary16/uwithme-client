@@ -1,10 +1,10 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, delay, put, takeEvery } from 'redux-saga/effects';
 import {
-  GET_FILES_BY_SUBJECT,
+  GET_FILES_BY_USERNAME,
   LOAD_FILES,
   LOAD_SUBJECTS,
-  RENDER_FILES,
-  RENDER_SUBJECTS
+  RENDER_SUBJECTS,
+  renderFiles
 } from './actions';
 import http from '../../services/http';
 import {
@@ -12,22 +12,27 @@ import {
   GET_FILES,
   GET_SUBJECTS
 } from '../../common/constants/serverApi';
+import { END_FETCHING, START_FETCHING } from '../../common/actions';
 
 export function* downloadFilesBySubject() {
-  yield takeEvery(GET_FILES_BY_SUBJECT, action => downloadFiles(action));
+  yield takeEvery(GET_FILES_BY_USERNAME, action => downloadFiles(action));
 }
 
 function* downloadFiles(action) {
   try {
-    const { userName, subjectId } = action;
+    yield put({ type: START_FETCHING });
+
+    const { userName } = action;
 
     const response = yield call(http, {
-      url: GET_FILES + userName + '/' + subjectId,
+      url: GET_FILES + userName,
       method: 'get',
       isFile: true
     });
 
-    yield put({ type: RENDER_FILES, response });
+    yield put(renderFiles(response));
+
+    yield put({ type: END_FETCHING });
   } catch (e) {
     //TODO add error
   }
@@ -38,6 +43,7 @@ export function* loadSubjects() {
 }
 
 function* loadSubjectsImpl(action) {
+  yield put({ type: START_FETCHING });
   const { username } = action;
   const response = yield call(http, {
     url: GET_SUBJECTS + username,
@@ -45,6 +51,8 @@ function* loadSubjectsImpl(action) {
   });
 
   yield put({ type: RENDER_SUBJECTS, response });
+  yield delay(10000);
+  yield put({ type: END_FETCHING });
 }
 
 export function* openOrSaveFile() {

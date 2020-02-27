@@ -9,6 +9,7 @@ import filesReducers from '../pages/files/reducers';
 import { connectRouter } from 'connected-react-router';
 
 import { createBrowserHistory } from 'history';
+import loadingProcess from '../common/reducers/loadingReducer';
 
 export const history = createBrowserHistory();
 
@@ -20,7 +21,8 @@ export default function createAppStore() {
     router: connectRouter(history),
     infoReducers,
     authReducers,
-    filesReducers
+    filesReducers: filesReducers,
+    loadingProcess
   });
 
   const store = createStore(

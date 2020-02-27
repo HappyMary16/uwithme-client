@@ -27,6 +27,9 @@ export default class StateLoader {
 
   initializeState() {
     return {
+      loadingProcess: {
+        isFetching: false
+      },
       authReducers: {
         user: {},
         token: null

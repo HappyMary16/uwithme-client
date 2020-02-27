@@ -1,11 +1,8 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
 import { FILES, SCHEDULE, USER_HOME } from '../../../common/constants/links';
-import Link from '@material-ui/core/Link';
 import i18n from '../../../locales/i18n';
+import Nav from 'react-bootstrap/Nav';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -19,8 +16,9 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    height: '100%',
-    backgroundColor: '#eeeeee'
+    backgroundColor: '#eeeeee',
+    // height: '100vh',
+    overflow: 'auto'
   },
   toolbar: {
     flexWrap: 'wrap'
@@ -36,27 +34,42 @@ export const StudentToolBar = () => {
   const classes = useStyles();
 
   return (
-    <AppBar
-      position="static"
-      color="default"
-      elevation={0}
+    <Nav
+      defaultActiveKey="/home"
+      className="flex-column"
       className={classes.appBar}
     >
-      <MenuList className={classes.toolbar}>
-        <MenuItem
-          component={Link}
-          href={USER_HOME}
-          className={classes.menuItem}
-        >
-          {i18n.t('home_page')}
-        </MenuItem>
-        <MenuItem component={Link} href={FILES} className={classes.menuItem}>
-          {i18n.t('page_with_files')}
-        </MenuItem>
-        <MenuItem component={Link} href={SCHEDULE} className={classes.menuItem}>
-          {i18n.t('schedule')}
-        </MenuItem>
-      </MenuList>
-    </AppBar>
+      <Nav.Item>
+        <Nav.Link href={USER_HOME}>{i18n.t('home_page')}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href={FILES}>{i18n.t('page_with_files')}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href={SCHEDULE}>{i18n.t('schedule')}</Nav.Link>
+      </Nav.Item>
+    </Nav>
+    // <AppBar
+    //   position="static"
+    //   color="default"
+    //   elevation={0}
+    //   className={classes.appBar}
+    // >
+    //   <MenuList className={classes.toolbar}>
+    //     <MenuItem
+    //       component={Link}
+    //       href={USER_HOME}
+    //       className={classes.menuItem}
+    //     >
+    //       {i18n.t('home_page')}
+    //     </MenuItem>
+    //     <MenuItem component={Link} href={FILES} className={classes.menuItem}>
+    //       {i18n.t('page_with_files')}
+    //     </MenuItem>
+    //     <MenuItem component={Link} href={SCHEDULE} className={classes.menuItem}>
+    //       {i18n.t('schedule')}
+    //     </MenuItem>
+    //   </MenuList>
+    // </AppBar>
   );
 };

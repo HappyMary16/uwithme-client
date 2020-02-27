@@ -14,7 +14,7 @@ import FilesToChoose from '../components/FilesToChoose';
 import { SelectField } from '../../../../common/components/SelectField';
 import { addAccessToFiles } from '../actions';
 import { loadGroups } from '../../../../common/actions';
-import { getFilesBySubjectId, loadSubjects } from '../../actions';
+import { getFilesByUsername, loadSubjects } from '../../actions';
 
 const submit = {
   marginTop: '10px',
@@ -60,7 +60,7 @@ class ShareFiles extends React.Component {
 
     if (this.props.subjects) {
       this.props.subjects.forEach(subject => {
-        dispatch(getFilesBySubjectId(username, subject.id));
+        dispatch(getFilesByUsername(username, subject.id));
       });
     }
   }

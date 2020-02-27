@@ -7,6 +7,9 @@ export const RENDER_INSTITUTES = 'RENDER_INSTITUTES';
 export const RENDER_DEPARTMENTS = 'RENDER_DEPARTMENTS';
 export const RENDER_GROUPS = 'RENDER_GROUPS';
 
+export const START_FETCHING = 'START_FETCHING';
+export const END_FETCHING = 'END_FETCHING';
+
 export function addToDo(title) {
   return {
     type: ADD_TODO,
