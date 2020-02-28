@@ -54,10 +54,3 @@ export function signOut() {
     type: SIGN_OUT
   };
 }
-
-export function addUser(token) {
-  return {
-    type: SIGN_IN_SUCCESS,
-    token
-  };
-}

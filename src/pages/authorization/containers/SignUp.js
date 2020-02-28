@@ -6,26 +6,26 @@ import { SelectField } from '../../../common/components/SelectField';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signUpRequest } from '../actions/authActions';
 import { connect } from 'react-redux';
+import { InputField } from '../../../common/components/InputField';
+import i18n from '../../../locales/i18n';
+import { compose } from 'redux';
+import withStyles from '@material-ui/core/styles/withStyles';
 import {
   loadDepartments,
   loadGroups,
   loadInstitutes
 } from '../../../common/actions';
-import { InputField } from '../../../common/components/InputField';
-import i18n from '../../../locales/i18n';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
   paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -48,162 +48,185 @@ const useStyles = makeStyles(theme => ({
   menu: {
     width: 200
   }
-}));
+});
 
-let SignUp = ({
-  dispatch,
-  institutes,
-  departments,
-  scienceDegrees,
-  groups
-}) => {
-  dispatch(loadInstitutes());
-  dispatch(loadDepartments());
-  dispatch(loadGroups());
+class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      institute: '1',
+      department: '1',
+      group: '1',
+      userRole: '1',
+      scienceDegree: '1',
+      firstName: '',
+      lastName: '',
+      surname: '',
+      username: '',
+      password: '',
+      confirmPassword: '',
+      phone: '',
+      email: '',
+      studentId: '',
+      passwordError: false
+    };
 
-  let classes = useStyles();
+    this.submit = this.submit.bind(this);
+    this.setPasswordError = this.setPasswordError.bind(this);
+  }
 
-  let [institute, setInstitute] = React.useState('1');
-  let [department, setDepartment] = React.useState('1');
-  let [group, setGroup] = React.useState('1');
-  let [userRole, setUserRole] = React.useState('1');
-  let [scienceDegree, setScienceDegree] = React.useState('1');
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(loadInstitutes());
+    dispatch(loadDepartments());
+    dispatch(loadGroups());
+  }
 
-  let [firstName, setFirstName] = React.useState('');
-  let [lastName, setLastName] = React.useState('');
-  let [surname, setSurname] = React.useState('');
-  let [username, setUsername] = React.useState('');
-  let [password, setPassword] = React.useState('');
-  let [confirmPassword, setConfirmPassword] = React.useState('');
-  let [phone, setPhone] = React.useState('');
-  let [email, setEmail] = React.useState('');
-  let [studentId, setStudentId] = React.useState('');
+  submit() {
+    const { dispatch } = this.props;
 
-  let [passwordError, setPasswordError] = React.useState(false);
-
-  let submit = e => {
-    e.preventDefault();
     dispatch(
       signUpRequest(
-        firstName,
-        lastName,
-        surname,
-        username,
-        password,
-        confirmPassword,
-        phone,
-        email,
-        userRole,
-        studentId,
-        scienceDegree,
-        institute,
-        department,
-        group
+        this.state.firstName,
+        this.state.lastName,
+        this.state.surname,
+        this.state.username,
+        this.state.password,
+        this.state.confirmPassword,
+        this.state.phone,
+        this.state.email,
+        this.state.userRole,
+        this.state.studentId,
+        this.state.scienceDegree,
+        this.state.institute,
+        this.state.department,
+        this.state.group
       )
     );
-  };
+  }
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {i18n.t('sign_up')}
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={e => submit(e)}>
+  setPasswordError() {
+    if (this.state.password !== this.state.confirmPassword) {
+      this.setState({ passwordError: true });
+    } else {
+      this.setState({ passwordError: false });
+    }
+  }
+
+  render() {
+    const {
+      classes,
+      groups,
+      departments,
+      institutes,
+      scienceDegrees
+    } = this.props;
+    const {
+      passwordError,
+      userRole,
+      scienceDegree,
+      institute,
+      group,
+      department
+    } = this.state;
+
+    return (
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            {i18n.t('sign_up')}
+          </Typography>
           <Grid container spacing={2}>
             <InputField
               label={i18n.t('first_name')}
               autoFocus={true}
-              onBlur={e => {
-                setFirstName(e.target.value);
-              }}
+              onBlur={e => this.setState({ firstName: e.target.value })}
             />
             <InputField
               label={i18n.t('last_name')}
-              onBlur={e => setLastName(e.target.value)}
+              onBlur={e => this.setState({ lastName: e.target.value })}
             />
             <InputField
               label={i18n.t('surname')}
-              onBlur={e => setSurname(e.target.value)}
+              onBlur={e => this.setState({ surname: e.target.value })}
             />
             <InputField
               label={i18n.t('user_name')}
-              onBlur={e => setUsername(e.target.value)}
+              onBlur={e => this.setState({ username: e.target.value })}
             />
             <InputField
               label={i18n.t('phone')}
-              onBlur={e => setPhone(e.target.value)}
+              onBlur={e => this.setState({ phone: e.target.value })}
             />
             <InputField
               label={i18n.t('email')}
               autoComplete="email"
-              onBlur={e => setEmail(e.target.value)}
+              onBlur={e => this.setState({ email: e.target.value })}
             />
             <InputField
               label={i18n.t('password')}
               type="password"
               error={passwordError}
               helperText={passwordError ? i18n.t('password_error') : ''}
-              onBlur={e => setPassword(e.target.value)}
+              onBlur={e => this.setState({ password: e.target.value })}
             />
             <InputField
               label={i18n.t('confirm_password')}
               type="password"
               error={passwordError}
               helperText={passwordError ? i18n.t('password_error') : ''}
-              onChange={e => setConfirmPassword(e.target.value)}
-              onBlur={() => setPasswordError(password !== confirmPassword)}
+              onChange={e => this.setState({ confirmPassword: e.target.value })}
+              onBlur={() => this.setPasswordError}
             />
             <SelectField
               label={i18n.t('user_type')}
               initialValue={userRole}
               values={UserRoles}
-              onChange={setUserRole}
+              onChange={e => this.setState({ userRole: e })}
             />
             {userRole === '1' && (
               <InputField
                 label={i18n.t('student_id')}
-                onBlur={e => setStudentId(e.target.value)}
+                onBlur={e => this.setState({ studentId: e.target.value })}
               />
             )}
             {userRole === '2' && (
               <SelectField
                 label={i18n.t('science_degree')}
-                initialValue={institute}
+                initialValue={scienceDegree}
                 values={scienceDegrees}
-                onChange={setScienceDegree}
+                onChange={e => this.setState({ scienceDegree: e })}
               />
             )}
             <SelectField
               label={i18n.t('institute')}
               initialValue={institute}
               values={institutes}
-              onChange={setInstitute}
+              onChange={e => this.setState({ institute: e })}
             />
             <SelectField
               label={i18n.t('department')}
               initialValue={department}
               values={departments}
-              onChange={setDepartment}
+              onChange={e => this.setState({ department: e })}
             />
             {userRole === '1' && (
               <SelectField
                 label={i18n.t('group')}
                 initialValue={group}
                 values={groups}
-                onChange={setGroup}
+                onChange={e => this.setState({ group: e })}
               />
             )}
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onFocus={this.submit}
             >
               {i18n.t('sign_up')}
             </Button>
@@ -215,11 +238,11 @@ let SignUp = ({
               </Grid>
             </Grid>
           </Grid>
-        </form>
-      </div>
-    </Container>
-  );
-};
+        </div>
+      </Container>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -230,4 +253,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const SingUp = connect(mapStateToProps)(SignUp);
+export default compose(withStyles(useStyles), connect(mapStateToProps))(SignUp);

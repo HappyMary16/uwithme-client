@@ -1,13 +1,14 @@
-import { all, call, put, take } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { loginFlow, signUp } from '../../pages/authorization/sagas/authSagas';
 import {
+  endFetching,
   LOAD_DEPARTMENTS,
   LOAD_GROUPS,
   LOAD_INSTITUTES,
   RENDER_DEPARTMENTS,
   RENDER_GROUPS,
-  RENDER_INSTITUTES
+  RENDER_INSTITUTES,
+  startFetching
 } from '../actions';
 import http from '../../services/http';
 import {
@@ -15,53 +16,58 @@ import {
   GET_GROUPS,
   GET_INSTITUTES
 } from '../constants/serverApi';
-import { fileOperationSagas } from '../../pages/files/sagas';
-import {
-  saveSubjectSaga,
-  uploadRequestWatcherSaga
-} from '../../pages/files/add/sagas';
-import { addAccessToFilesSaga } from '../../pages/files/share/sagas';
 
-export function* loadInstitutes() {
-  yield take(LOAD_INSTITUTES);
-  const response = yield call(http, {
-    url: GET_INSTITUTES,
-    method: 'get'
-  });
-
-  yield put({ type: RENDER_INSTITUTES, response });
+export function* commonDataWatcher() {
+  yield takeEvery(LOAD_INSTITUTES, loadInstitutes);
+  yield takeEvery(LOAD_DEPARTMENTS, loadDepartments);
+  yield takeEvery(LOAD_GROUPS, loadGroups);
 }
 
-export function* loadDepartments() {
-  yield take(LOAD_DEPARTMENTS);
-  const response = yield call(http, {
-    url: GET_DEPARTMENTS,
-    method: 'get'
-  });
+function* loadInstitutes() {
+  try {
+    yield put(startFetching());
 
-  yield put({ type: RENDER_DEPARTMENTS, response });
+    const institutes = yield call(http, {
+      url: GET_INSTITUTES,
+      method: 'get'
+    });
+
+    yield put({ type: RENDER_INSTITUTES, institutes });
+  } catch (e) {
+    //TODO process errors
+  } finally {
+    yield put(endFetching());
+  }
 }
 
-export function* loadGroups() {
-  yield take(LOAD_GROUPS);
-  const response = yield call(http, {
-    url: GET_GROUPS,
-    method: 'get'
-  });
+function* loadDepartments() {
+  try {
+    yield put(startFetching());
 
-  yield put({ type: RENDER_GROUPS, response });
+    const departments = yield call(http, {
+      url: GET_DEPARTMENTS,
+      method: 'get'
+    });
+    yield put({ type: RENDER_DEPARTMENTS, departments });
+  } catch (e) {
+    //TODO process errors
+  } finally {
+    yield put(endFetching());
+  }
 }
 
-export default function* rootSaga() {
-  yield all([
-    loginFlow(),
-    loadDepartments(),
-    loadInstitutes(),
-    loadGroups(),
-    uploadRequestWatcherSaga(),
-    signUp(),
-    fileOperationSagas(),
-    saveSubjectSaga(),
-    addAccessToFilesSaga()
-  ]);
+function* loadGroups() {
+  try {
+    yield put(startFetching());
+
+    const groups = yield call(http, {
+      url: GET_GROUPS,
+      method: 'get'
+    });
+    yield put({ type: RENDER_GROUPS, groups });
+  } catch (e) {
+    //TODO process errors
+  } finally {
+    yield put(endFetching());
+  }
 }

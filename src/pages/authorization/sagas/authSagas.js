@@ -1,4 +1,4 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   SIGN_IN_ERROR,
   SIGN_IN_REQUEST,
@@ -11,100 +11,93 @@ import { history } from '../../../store/Store';
 import http from '../../../services/http';
 import { SIGN_IN, SIGN_UP } from '../../../common/constants/serverApi';
 import { USER_HOME } from '../../../common/constants/links';
+import { endFetching, startFetching } from '../../../common/actions';
 
-export function* signIn(username, password) {
+export function* authorizationWatcher() {
+  yield takeEvery(SIGN_UP_REQUEST, action => signUp(action));
+  yield takeEvery(SIGN_IN_REQUEST, action => signIn(action));
+  yield takeEvery(SIGN_OUT, signOut);
+}
+
+function* signUp(action) {
   try {
+    yield put(startFetching());
+
     let data = JSON.stringify({
-      username: username,
-      password: password
+      firstName: action.firstName,
+      lastName: action.lastName,
+      surname: action.surname,
+      username: action.username,
+      password: action.password,
+      confirmPassword: action.confirmPassword,
+      phone: action.phone,
+      email: action.email,
+      role: action.userRole,
+      studentId: action.studentId,
+      scienceDegreeId: action.scienceDegree,
+      instituteId: action.institute,
+      departmentId: action.department,
+      studyGroupId: action.group
     });
 
+    const response = yield call(http, {
+      url: SIGN_UP,
+      method: 'post',
+      data: data
+    });
+    if (response.status === 200) {
+      yield call(signInSuccess, response);
+    } else {
+      yield call(signInError, response);
+    }
+    //TODO reaction on non-success result
+  } catch (e) {
+    yield call(signInError, e);
+    //TODO message about error
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* signOut() {
+  localStorage.setItem('AuthToken', null);
+}
+
+function* signIn(action) {
+  try {
+    let data = JSON.stringify({
+      username: action.username,
+      password: action.password
+    });
+
+    yield put(startFetching());
     const response = yield call(http, {
       url: SIGN_IN,
       method: 'post',
       data: data
     });
 
-    return response;
-  } catch (error) {
-    yield put({ type: SIGN_IN_ERROR, error });
-  }
-}
-
-export function* signUp() {
-  while (true) {
-    const {
-      firstName,
-      lastName,
-      surname,
-      username,
-      password,
-      confirmPassword,
-      phone,
-      email,
-      userRole,
-      studentId,
-      scienceDegree,
-      institute,
-      department,
-      group
-    } = yield take(SIGN_UP_REQUEST);
-    let data = JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-      surname: surname,
-      username: username,
-      password: password,
-      confirmPassword: confirmPassword,
-      phone: phone,
-      email: email,
-      role: userRole,
-      studentId: studentId,
-      scienceDegreeId: scienceDegree,
-      instituteId: institute,
-      departmentId: department,
-      studyGroupId: group
-    });
-    const signUpResponse = yield call(http, {
-      url: SIGN_UP,
-      method: 'post',
-      data: data
-    });
-
-    yield put({
-      type: SIGN_IN_REQUEST,
-      username: signUpResponse.data.username,
-      password: signUpResponse.data.password
-    });
-  }
-}
-
-export function* loginFlow() {
-  while (true) {
-    const { username, password } = yield take(SIGN_IN_REQUEST);
-
-    //start connect
-    const response = yield call(signIn, username, password);
-    // if cannot connect wait 10000s
-
+    console.log(response);
     if (response.status === 200) {
-      yield put({ type: SIGN_IN_SUCCESS, response });
-
-      localStorage.setItem('AuthToken', response.data.token);
-
-      history.push(USER_HOME);
-
-      yield take(SIGN_OUT);
-      localStorage.setItem('AuthToken', null);
-      // some actions after logout
-      //yield put({ type: 'SAVE_TOKEN' });
+      yield call(signInSuccess, response);
     } else {
-      localStorage.setItem('AuthToken', null);
-      yield put({ type: SIGN_IN_ERROR, response });
+      yield call(signInError, response);
     }
-    if (response.status === 401) {
-      localStorage.setItem('AuthToken', null);
-      yield put({ type: SIGN_IN_ERROR, response });
-    }
+  } catch (error) {
+    yield call(signInError, error);
+  } finally {
+    yield put(endFetching());
   }
+}
+
+function* signInSuccess(response) {
+  yield put({ type: SIGN_IN_SUCCESS, response });
+  localStorage.setItem('AuthToken', response.data.token);
+  history.push(USER_HOME);
+}
+
+function* signInError(message) {
+  localStorage.setItem('AuthToken', null);
+  console.log('error');
+  yield put({ type: SIGN_IN_ERROR, message });
 }

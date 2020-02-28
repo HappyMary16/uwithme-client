@@ -23,13 +23,11 @@ export default function authReducers(
     case SIGN_IN_SUCCESS:
       return {
         ...state,
-        user: action.response.data,
-        token: action.response.data.token
+        user: action.response.data
       };
     case SIGN_OUT:
       return {
         ...state,
-        token: null,
         user: null
       };
     case SIGN_IN_ERROR:

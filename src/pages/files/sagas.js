@@ -12,9 +12,9 @@ import {
   GET_FILES,
   GET_SUBJECTS
 } from '../../common/constants/serverApi';
-import { END_FETCHING, START_FETCHING } from '../../common/actions';
+import { endFetching, startFetching } from '../../common/actions';
 
-export function* fileOperationSagas() {
+export function* fileOperationWatcher() {
   yield takeEvery(GET_FILES_BY_USERNAME, action => downloadFiles(action));
   yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
   yield takeEvery(LOAD_FILES, action => downloadFile(action));
@@ -22,7 +22,7 @@ export function* fileOperationSagas() {
 
 function* downloadFiles(action) {
   try {
-    yield put({ type: START_FETCHING });
+    yield put(startFetching());
 
     const { userName } = action;
 
@@ -33,16 +33,16 @@ function* downloadFiles(action) {
     });
 
     yield put(renderFiles(response));
-
-    yield put({ type: END_FETCHING });
   } catch (e) {
-    yield put({ type: END_FETCHING });
+    //TODO process errors
+  } finally {
+    yield put(endFetching());
   }
 }
 
 function* loadSubjects(action) {
   try {
-    yield put({ type: START_FETCHING });
+    yield put(startFetching());
     const { username } = action;
     const response = yield call(http, {
       url: GET_SUBJECTS + username,
@@ -50,9 +50,10 @@ function* loadSubjects(action) {
     });
 
     yield put({ type: RENDER_SUBJECTS, response });
-    yield put({ type: END_FETCHING });
   } catch (e) {
-    yield put({ type: END_FETCHING });
+    //TODO process errors
+  } finally {
+    yield put(endFetching());
   }
 }
 

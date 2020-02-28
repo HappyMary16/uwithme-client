@@ -10,15 +10,21 @@ export const RENDER_GROUPS = 'RENDER_GROUPS';
 export const START_FETCHING = 'START_FETCHING';
 export const END_FETCHING = 'END_FETCHING';
 
-export function addToDo(title) {
-  return {
-    type: ADD_TODO,
-    toDoItem: {
-      _id: new Date().getTime().toString(),
-      title
-    }
-  };
-}
+export const startFetching = () => ({
+  type: START_FETCHING
+});
+
+export const endFetching = () => ({
+  type: END_FETCHING
+});
+
+export const addToDo = title => ({
+  type: ADD_TODO,
+  toDoItem: {
+    _id: new Date().getTime().toString(),
+    title
+  }
+});
 
 export function handleAuthenticationCallback() {
   return {

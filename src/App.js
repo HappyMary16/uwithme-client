@@ -16,13 +16,13 @@ import { StudentToolBar } from './pages/student/components/StudentToolBar';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import AddFile from './pages/files/add/containers/AddFile';
-import { SingIn } from './pages/authorization/components/SignIn';
-import { SingUp } from './pages/authorization/components/SignUp';
+import { SingIn } from './pages/authorization/containers/SignIn';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/files/share/containers/ShareFiles';
 import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Preloader } from './common/components/Loader';
 import { Copyright } from './common/components/Copyright';
+import SignUp from './pages/authorization/containers/SignUp';
 
 let App = ({ user, isFetching }) => {
   return (
@@ -46,7 +46,7 @@ let App = ({ user, isFetching }) => {
             )}
             <Grid item xs={10}>
               {<Route exact path={SIGN_IN} component={SingIn} />}
-              {!user && <Route exact path={SIGN_UP} component={SingUp} />}
+              {!user && <Route exact path={SIGN_UP} component={SignUp} />}
 
               {user && (
                 <Route exact path={USER_HOME} component={UserContainer} />

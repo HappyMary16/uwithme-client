@@ -1,7 +1,7 @@
 import {
   RENDER_DEPARTMENTS,
-  RENDER_INSTITUTES,
-  RENDER_GROUPS
+  RENDER_GROUPS,
+  RENDER_INSTITUTES
 } from '../actions';
 import StateLoader from '../../store/StateLoader';
 
@@ -13,7 +13,7 @@ export default function infoReducers(
     case RENDER_INSTITUTES:
       return {
         ...state,
-        institutes: action.response.data.map(obj => {
+        institutes: action.institutes.data.map(obj => {
           let institute = {};
           institute.value = obj.id;
           institute.label = obj.name;
@@ -23,7 +23,7 @@ export default function infoReducers(
     case RENDER_DEPARTMENTS:
       return {
         ...state,
-        departments: action.response.data.map(obj => {
+        departments: action.departments.data.map(obj => {
           let department = {};
           department.value = obj.id;
           department.label = obj.name;
@@ -33,7 +33,7 @@ export default function infoReducers(
     case RENDER_GROUPS:
       return {
         ...state,
-        groups: action.response.data.map(obj => {
+        groups: action.groups.data.map(obj => {
           let group = {};
           group.value = obj.id;
           group.label = obj.name;

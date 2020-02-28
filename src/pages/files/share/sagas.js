@@ -3,7 +3,7 @@ import http from '../../../services/http';
 import { ADD_ACCESS } from '../../../common/constants/serverApi';
 import { ADD_ACCESS_TO_FILES } from './actions';
 
-export function* addAccessToFilesSaga() {
+export function* addAccessToFilesWatcher() {
   yield takeEvery(ADD_ACCESS_TO_FILES, action => addAccessToFiles(action));
 }
 

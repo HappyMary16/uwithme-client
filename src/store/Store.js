@@ -1,15 +1,13 @@
 import StateLoader from './StateLoader';
 import createSagaMiddleware from 'redux-saga';
+import { connectRouter } from 'connected-react-router';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { createBrowserHistory } from 'history';
 import infoReducers from '../common/reducers';
-import rootSaga from '../common/sagas';
 import authReducers from '../pages/authorization/reducers';
 import filesReducers from '../pages/files/reducers';
-
-import { connectRouter } from 'connected-react-router';
-
-import { createBrowserHistory } from 'history';
 import loadingProcess from '../common/reducers/loadingReducer';
+import rootSaga from './rootSaga';
 
 export const history = createBrowserHistory();
 

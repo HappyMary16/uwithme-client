@@ -31,8 +31,7 @@ export default class StateLoader {
         isFetching: false
       },
       authReducers: {
-        user: {},
-        token: null
+        user: {}
       },
       infoReducers: {
         institutes: [
