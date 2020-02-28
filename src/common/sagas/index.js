@@ -15,11 +15,7 @@ import {
   GET_GROUPS,
   GET_INSTITUTES
 } from '../constants/serverApi';
-import {
-  downloadFilesBySubject,
-  loadSubjects,
-  openOrSaveFile
-} from '../../pages/files/sagas';
+import { fileOperationSagas } from '../../pages/files/sagas';
 import {
   saveSubjectSaga,
   uploadRequestWatcherSaga
@@ -64,10 +60,8 @@ export default function* rootSaga() {
     loadGroups(),
     uploadRequestWatcherSaga(),
     signUp(),
-    loadSubjects(),
+    fileOperationSagas(),
     saveSubjectSaga(),
-    downloadFilesBySubject(),
-    openOrSaveFile(),
     addAccessToFilesSaga()
   ]);
 }

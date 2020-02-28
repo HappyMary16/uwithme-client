@@ -6,14 +6,12 @@ import List from '@material-ui/core/List';
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { ADD_FILE, SHARE_FILES } from '../../../../common/constants/links';
-import { Copyright } from '../../../../common/components/Copyright';
 import i18n from '../../../../locales/i18n';
 import { TEACHER } from '../../../../common/constants/userRoles';
 import { getFilesByUsername, loadSubjects } from '../../actions';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
-import Spinner from 'react-bootstrap/Spinner';
 
 const useStyles = theme => ({
   list: {
@@ -42,19 +40,7 @@ class PageWithFiles extends React.Component {
   }
 
   render() {
-    const { userRole, subjects, files, classes, isFetching } = this.props;
-
-    if (isFetching !== 0) {
-      return (
-        <Grid>
-          <Spinner animation="grow" />
-          <Spinner animation="grow" />
-          <Spinner animation="grow" />
-          <Spinner animation="grow" />
-          <Spinner animation="grow" />
-        </Grid>
-      );
-    }
+    const { userRole, subjects, files, classes } = this.props;
 
     return (
       <Grid container xs={12} className={classes.root}>
@@ -86,10 +72,6 @@ class PageWithFiles extends React.Component {
               />
             ))}
         </List>
-
-        <Grid xs={12}>
-          <Copyright />
-        </Grid>
       </Grid>
     );
   }

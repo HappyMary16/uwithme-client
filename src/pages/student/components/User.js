@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { TodaySchedule } from './TodaySchedule';
-import { Copyright } from '../../../common/components/Copyright';
 import { UserCard } from './UserCard';
 import i18n from '../../../locales/i18n';
 
@@ -36,9 +35,6 @@ export const User = ({ user, schedules }) => {
           {i18n.t('schedule')}
         </Typography>
         <TodaySchedule schedules={schedules} />
-      </Grid>
-      <Grid xs={12} className={classes.paper}>
-        <Copyright />
       </Grid>
     </Grid>
   );

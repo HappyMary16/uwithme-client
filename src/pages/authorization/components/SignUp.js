@@ -2,7 +2,6 @@ import React from 'react';
 
 import { UserRoles } from '../../../common/constants/userRoles';
 import { SIGN_IN } from '../../../common/constants/links';
-import { Copyright } from '../../../common/components/Copyright';
 import { SelectField } from '../../../common/components/SelectField';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -218,8 +217,6 @@ let SignUp = ({
           </Grid>
         </form>
       </div>
-
-      <Copyright />
     </Container>
   );
 };

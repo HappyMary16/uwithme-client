@@ -1,11 +1,12 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   copyright: {
-    marginTop: '10px'
+    padding: '10px',
+    borderTop: `2px solid ${theme.palette.divider}`
   }
 }));
 
@@ -13,7 +14,7 @@ export const Copyright = () => {
   const classes = useStyles();
 
   return (
-    <Box xs={12}>
+    <Grid xs={12}>
       <Typography
         variant="body2"
         color="textSecondary"
@@ -24,6 +25,6 @@ export const Copyright = () => {
         {new Date().getFullYear()}
         {'.'}
       </Typography>
-    </Box>
+    </Grid>
   );
 };

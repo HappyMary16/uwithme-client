@@ -10,7 +10,7 @@ export default function loadingProcess(state = { isFetching: 0 }, action) {
     case END_FETCHING:
       return {
         ...state,
-        isFetching: state.isFetching - 1
+        isFetching: state.isFetching ? state.isFetching - 1 : state.isFetching
       };
     default:
       return state;

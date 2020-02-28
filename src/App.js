@@ -21,15 +21,23 @@ import { SingUp } from './pages/authorization/components/SignUp';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/files/share/containers/ShareFiles';
 import PageWithFiles from './pages/files/view/containers/PageWithFiles';
+import { Preloader } from './common/components/Loader';
+import { Copyright } from './common/components/Copyright';
 
-let App = ({ user }) => {
+let App = ({ user, isFetching }) => {
   return (
-    <Container>
-      <Grid container xs={12}>
-        <Grid item xs={12}>
-          <NavigationContainer />
-        </Grid>
-        <Grid item xs={12}>
+    <Container style={{ height: '100vh' }}>
+      {isFetching !== 0 && <Preloader />}
+      <Grid
+        container
+        xs={12}
+        alignContent="space-between"
+        style={{ height: '100%' }}
+      >
+        <Grid container xs={12} alignContent={'flex-start'}>
+          <Grid item xs={12}>
+            <NavigationContainer />
+          </Grid>
           <Grid container xs={12}>
             {user && (
               <Grid item xs={2}>
@@ -52,6 +60,10 @@ let App = ({ user }) => {
             </Grid>
           </Grid>
         </Grid>
+
+        <Grid container justify={'center'} xs={12}>
+          <Copyright />
+        </Grid>
       </Grid>
     </Container>
   );
@@ -59,7 +71,8 @@ let App = ({ user }) => {
 
 const mapStateToProps = state => {
   return {
-    user: state.authReducers.user
+    user: state.authReducers.user,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

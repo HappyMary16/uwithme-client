@@ -8,21 +8,9 @@ import { SIGN_IN } from '../constants/links';
 import i18n from '../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
-    ul: {
-      margin: 0,
-      padding: 0
-    },
-    li: {
-      listStyle: 'none'
-    }
-  },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: '#eeeeee'
-  },
-  toolbar: {
-    flexWrap: 'wrap'
   },
   toolbarTitle: {
     flexGrow: 1
@@ -36,12 +24,7 @@ export const TopToolBar = ({ user, signOutFunc }) => {
   const classes = useStyles();
 
   return (
-    <AppBar
-      position="static"
-      color="default"
-      elevation={0}
-      className={classes.appBar}
-    >
+    <AppBar position="relative" color="default" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <Typography
           variant="h6"
