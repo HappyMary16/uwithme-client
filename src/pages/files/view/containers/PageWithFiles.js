@@ -3,7 +3,7 @@ import React from 'react';
 import { SubjectFiles } from '../components/SubjectFiles';
 
 import List from '@material-ui/core/List';
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { ADD_FILE, SHARE_FILES } from '../../../../common/constants/links';
 import i18n from '../../../../locales/i18n';
@@ -15,16 +15,13 @@ import { compose } from 'redux';
 
 const useStyles = theme => ({
   list: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper
+    width: '100%'
   },
   link: {
     marginRight: theme.spacing(1),
     marginTop: theme.spacing(1),
     marginLeft: 'auto',
-    backgroundColor: '#eeeeee',
-    color: '#212121',
-    border: `1px solid ${theme.palette.divider}`
+    backgroundColor: '#eeeeee'
   },
   buttons: {
     marginLeft: 'auto',
@@ -46,13 +43,19 @@ class PageWithFiles extends React.Component {
       <Grid container xs={12} className={classes.root}>
         <Grid container xs={6} className={classes.buttons}>
           {userRole === TEACHER && (
-            <Button href={ADD_FILE} variant="outlined" className={classes.link}>
+            <Button
+              href={ADD_FILE}
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+            >
               {i18n.t('add_files_page')}
             </Button>
           )}
           {userRole === TEACHER && (
             <Button
               href={SHARE_FILES}
+              color="primary"
               variant="outlined"
               className={classes.link}
             >

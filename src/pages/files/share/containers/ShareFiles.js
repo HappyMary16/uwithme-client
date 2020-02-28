@@ -19,7 +19,8 @@ import { getFilesByUsername, loadSubjects } from '../../actions';
 const submit = {
   marginTop: '10px',
   marginLeft: 'auto',
-  marginRight: '0px'
+  marginRight: '0px',
+  backgroundColor: '#eeeeee'
 };
 
 const groupSelect = {
@@ -155,8 +156,8 @@ class ShareFiles extends React.Component {
           <Grid container alignItems={'right'}>
             <Button
               type="submit"
-              variant="contained"
               color="primary"
+              variant="outlined"
               style={submit}
               onClick={this.submit}
             >

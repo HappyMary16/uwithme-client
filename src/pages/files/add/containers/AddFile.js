@@ -17,7 +17,8 @@ import CreatableSelect from 'react-select/creatable';
 const submit = {
   marginTop: '10px',
   marginLeft: 'auto',
-  marginRight: '0px'
+  marginRight: '0px',
+  backgroundColor: '#eeeeee'
 };
 
 const subjectSelector = {
@@ -142,8 +143,8 @@ class AddFile extends React.Component {
             <Button
               style={submit}
               type="submit"
-              variant="contained"
               color="primary"
+              variant="outlined"
               onClick={this.submit}
             >
               {i18n.t('upload')}
