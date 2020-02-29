@@ -1,13 +1,13 @@
-import StateLoader from '../../../store/StateLoader';
+import StateLoader from '../../store/StateLoader';
 import {
   SIGN_IN_ERROR,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_OUT
-} from '../actions/authActions';
+} from './actions';
 
 export default function authReducers(
-  state = new StateLoader().loadState().authReducers,
+  state = new StateLoader().loadState().authReducers || {},
   action
 ) {
   switch (action.type) {

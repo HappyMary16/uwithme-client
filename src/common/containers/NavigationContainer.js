@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { TopToolBar } from '../components/TopToolBar';
-import { signOut } from '../../pages/authorization/actions/authActions';
+import { signOut } from '../../pages/authorization/actions';
 
 const mapStateToProps = state => {
   return {

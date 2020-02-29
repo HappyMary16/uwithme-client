@@ -1,10 +1,10 @@
 import StateLoader from '../../store/StateLoader';
 import { RENDER_FILES, RENDER_SUBJECTS } from './actions';
-import { SIGN_OUT } from '../authorization/actions/authActions';
 import { UPLOAD_REQUEST, UPLOAD_SUCCESS } from './add/actions';
+import { SIGN_OUT } from '../authorization/actions';
 
 export default function filesReducers(
-  state = new StateLoader().loadState().filesReducers,
+  state = new StateLoader().loadState().filesReducers || {},
   action
 ) {
   switch (action.type) {

@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { signInRequest } from '../actions/authActions';
+import { signInRequest } from '../actions';
 
 import i18n from '../../../locales/i18n';
 

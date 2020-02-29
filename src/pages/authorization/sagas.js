@@ -5,13 +5,13 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT,
   SIGN_UP_REQUEST
-} from '../actions/authActions';
+} from './actions';
 
-import { history } from '../../../store/Store';
-import http from '../../../services/http';
-import { SIGN_IN, SIGN_UP } from '../../../common/constants/serverApi';
-import { USER_HOME } from '../../../common/constants/links';
-import { endFetching, startFetching } from '../../../common/actions';
+import { history } from '../../store/Store';
+import http from '../../services/http';
+import { SIGN_IN, SIGN_UP } from '../../common/constants/serverApi';
+import { USER_HOME } from '../../common/constants/links';
+import { endFetching, startFetching } from '../../common/actions';
 
 export function* authorizationWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, action => signUp(action));
@@ -59,7 +59,7 @@ function* signUp(action) {
   }
 }
 
-function* signOut() {
+function signOut() {
   localStorage.setItem('AuthToken', null);
 }
 

@@ -11,7 +11,7 @@ import {
   USER_HOME
 } from './common/constants/links';
 import UserContainer from './pages/student/containers/UserContainer';
-import { StudentToolBar } from './pages/student/components/StudentToolBar';
+import { UserToolBar } from './pages/student/components/UserToolBar';
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -41,7 +41,7 @@ let App = ({ user, isFetching }) => {
           <Grid container xs={12}>
             {user && (
               <Grid item xs={2}>
-                <StudentToolBar />
+                <UserToolBar />
               </Grid>
             )}
             <Grid item xs={10}>

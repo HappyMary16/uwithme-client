@@ -18,3 +18,5 @@ export const UPLOAD_MULTIPLE_FILES = '/uploadMultipleFiles/';
 export const DOWNLOAD_FILE = '/downloadFile/';
 
 export const ADD_ACCESS = '/addAccess/';
+
+export const ADD_UNIVERSITY_API = '/university/add';

@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { signUpRequest } from '../actions/authActions';
+import { signUpRequest } from '../actions';
 import { connect } from 'react-redux';
 import { InputField } from '../../../common/components/InputField';
 import i18n from '../../../locales/i18n';
@@ -226,7 +226,7 @@ class SignUp extends React.Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onFocus={this.submit}
+              onClick={this.submit}
             >
               {i18n.t('sign_up')}
             </Button>

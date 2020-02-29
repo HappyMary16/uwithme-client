@@ -6,7 +6,7 @@ import {
 import StateLoader from '../../store/StateLoader';
 
 export default function infoReducers(
-  state = new StateLoader().loadState().infoReducers,
+  state = new StateLoader().loadState().infoReducers || {},
   action
 ) {
   switch (action.type) {
