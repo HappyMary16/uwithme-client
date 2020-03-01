@@ -27,3 +27,4 @@ export const TASK = 2;
 
 export const STUDENT = 1;
 export const TEACHER = 2;
+export const ADMIN = 3;

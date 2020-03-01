@@ -78,7 +78,6 @@ function* signIn(action) {
       data: data
     });
 
-    console.log(response);
     if (response.status === 200) {
       yield call(signInSuccess, response);
     } else {
@@ -99,6 +98,5 @@ function* signInSuccess(response) {
 
 function* signInError(message) {
   localStorage.setItem('AuthToken', null);
-  console.log('error');
   yield put({ type: SIGN_IN_ERROR, message });
 }

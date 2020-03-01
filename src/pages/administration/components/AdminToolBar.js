@@ -1,7 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { USER_HOME } from '../../../common/constants/links';
+import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
 import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   '@global': {

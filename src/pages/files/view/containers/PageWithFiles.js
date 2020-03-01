@@ -85,8 +85,7 @@ const mapStateToProps = state => {
     userRole: state.authReducers.user.role,
     subjects: state.filesReducers.subjects,
     files: state.filesReducers.files,
-    username: state.authReducers.user.username,
-    isFetching: state.loadingProcess.isFetching
+    username: state.authReducers.user.username
   };
 };
 

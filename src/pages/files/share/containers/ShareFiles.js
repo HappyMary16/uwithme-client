@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import i18n from '../../../../locales/i18n';
-import { getLectures, getTasks } from '../../../../utils/FileUtil';
+import { getLectures, getTasks } from '../../../../common/utils/FileUtil';
 import { compose } from 'redux';
 import FilesToChoose from '../components/FilesToChoose';
 import { SelectField } from '../../../../common/components/SelectField';

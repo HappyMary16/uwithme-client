@@ -83,7 +83,8 @@ class SignUp extends React.Component {
     dispatch(loadGroups());
   }
 
-  submit() {
+  submit(e) {
+    e.preventDefault();
     const { dispatch } = this.props;
 
     dispatch(
@@ -140,7 +141,7 @@ class SignUp extends React.Component {
           <Typography component="h1" variant="h5">
             {i18n.t('sign_up')}
           </Typography>
-          <form className={classes.form} onSubmit={e => this.submit(e)}>
+          <form className={classes.form} onSubmit={this.submit}>
             <InputField
               label={i18n.t('first_name')}
               autoFocus={true}

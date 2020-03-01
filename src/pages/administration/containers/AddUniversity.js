@@ -56,11 +56,8 @@ class AddUniversity extends Component {
     this.setPasswordError = this.setPasswordError.bind(this);
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-  }
-
-  submit() {
+  submit(e) {
+    e.preventDefault();
     const { dispatch } = this.props;
 
     dispatch(
@@ -94,11 +91,7 @@ class AddUniversity extends Component {
           <Typography component="h1" variant="h5">
             {i18n.t('add_university')}
           </Typography>
-          <form
-            className={classes.form}
-            noValidate
-            onSubmit={e => this.submit(e)}
-          >
+          <form className={classes.form} onSubmit={this.submit}>
             <InputField
               label={i18n.t('university')}
               autoFocus={true}
@@ -121,8 +114,10 @@ class AddUniversity extends Component {
               type="password"
               error={passwordError}
               helperText={passwordError ? i18n.t('password_error') : ''}
-              onChange={e => this.setState({ confirmPassword: e.target.value })}
-              onBlur={() => this.setPasswordError}
+              onBlur={e => {
+                this.setState({ confirmPassword: e.target.value });
+                this.setPasswordError();
+              }}
             />
             <Button
               fullWidth
@@ -140,4 +135,13 @@ class AddUniversity extends Component {
   }
 }
 
-export default compose(withStyles(useStyles), connect())(AddUniversity);
+const mapStateToProps = state => {
+  return {
+    user: state.authReducers.user
+  };
+};
+
+export default compose(
+  withStyles(useStyles),
+  connect(mapStateToProps)
+)(AddUniversity);

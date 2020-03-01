@@ -25,6 +25,8 @@ import { Preloader } from './common/components/Loader';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
 import AddUniversity from './pages/administration/containers/AddUniversity';
+import { isAdmin, isTeacher } from './common/utils/UsersUtil';
+import { AdminToolBar } from './pages/administration/components/AdminToolBar';
 
 let App = ({ user, isFetching }) => {
   return (
@@ -56,14 +58,19 @@ let App = ({ user, isFetching }) => {
           {user && (
             <Grid container xs={12}>
               <Grid item xs={2}>
-                <UserToolBar />
+                {!isAdmin(user) && <UserToolBar />}
+                {isAdmin(user) && <AdminToolBar />}
               </Grid>
 
               <Grid item xs={10}>
                 <Route exact path={USER_HOME} component={UserContainer} />
                 <Route exact path={FILES} component={PageWithFiles} />
-                <Route exact path={ADD_FILE} component={AddFile} />
-                <Route exact path={SHARE_FILES} component={ShareFiles} />
+                {isTeacher(user) && (
+                  <Route exact path={ADD_FILE} component={AddFile} />
+                )}
+                {isTeacher(user) && (
+                  <Route exact path={SHARE_FILES} component={ShareFiles} />
+                )}
               </Grid>
             </Grid>
           )}
