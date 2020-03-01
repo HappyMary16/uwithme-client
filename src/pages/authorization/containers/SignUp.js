@@ -25,21 +25,22 @@ import {
 
 const useStyles = theme => ({
   paper: {
-    margin: theme.spacing(1),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: '#483D8B'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#eeeeee'
   },
   container: {
     display: 'flex',
@@ -139,7 +140,7 @@ class SignUp extends React.Component {
           <Typography component="h1" variant="h5">
             {i18n.t('sign_up')}
           </Typography>
-          <Grid container spacing={2}>
+          <form className={classes.form} onSubmit={e => this.submit(e)}>
             <InputField
               label={i18n.t('first_name')}
               autoFocus={true}
@@ -223,10 +224,10 @@ class SignUp extends React.Component {
             )}
             <Button
               fullWidth
-              variant="contained"
+              variant="outlined"
               color="primary"
               className={classes.submit}
-              onClick={this.submit}
+              type="submit"
             >
               {i18n.t('sign_up')}
             </Button>
@@ -237,7 +238,7 @@ class SignUp extends React.Component {
                 </Link>
               </Grid>
             </Grid>
-          </Grid>
+          </form>
         </div>
       </Container>
     );

@@ -10,3 +10,6 @@ export const SCHEDULE = '/user/schedule';
 //teacher
 export const ADD_FILE = '/teacher/files/add';
 export const SHARE_FILES = '/teacher/files/share';
+
+//admin
+export const ADD_UNIVERSITY_PATH = '/university/add';

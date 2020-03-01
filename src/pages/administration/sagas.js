@@ -16,16 +16,19 @@ function* addUniversity(action) {
       url: ADD_UNIVERSITY_API,
       method: 'post',
       data: {
-        university: action.university,
-        username: action.username,
-        password: action.password
+        universityName: action.payload.universityName,
+        username: action.payload.username,
+        password: action.payload.password,
+        confirmPassword: action.payload.confirmPassword
       }
     });
 
+    alert(response);
     //TODO render result
     // as this
     // yield put(renderFiles(response));
   } catch (e) {
+    alert(e);
     //TODO process errors
   } finally {
     yield put(endFetching());

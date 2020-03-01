@@ -76,9 +76,6 @@ class ShareFiles extends React.Component {
     );
     files = [];
     selectedGroups = [];
-    this.setState({
-      subjectId: ''
-    });
   }
 
   handleChange(value, file) {

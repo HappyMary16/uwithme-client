@@ -42,11 +42,13 @@ export const AdminToolBar = () => {
       className={classes.appBar}
     >
       <MenuList className={classes.toolbar}>
-        {/*<MenuItem component={Link}*/}
-        {/*          href={USER_HOME}*/}
-        {/*          className={classes.menuItem}>*/}
-        {/*  {i18n.t('home_page')}*/}
-        {/*</MenuItem>*/}
+        <MenuItem
+          component={Link}
+          href={USER_HOME}
+          className={classes.menuItem}
+        >
+          {i18n.t('home_page')}
+        </MenuItem>
         {/*<MenuItem component={Link}*/}
         {/*          href={FILES}*/}
         {/*          className={classes.menuItem}>*/}

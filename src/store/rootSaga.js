@@ -8,11 +8,11 @@ import { administrationWatcher } from '../pages/administration/sagas';
 
 export default function* rootSaga() {
   yield all([
-    commonDataWatcher,
-    authorizationWatcher,
-    fileOperationWatcher,
-    addFilesAndSubjectsWatcher,
-    addAccessToFilesWatcher,
-    administrationWatcher
+    commonDataWatcher(),
+    authorizationWatcher(),
+    fileOperationWatcher(),
+    addFilesAndSubjectsWatcher(),
+    addAccessToFilesWatcher(),
+    administrationWatcher()
   ]);
 }

@@ -65,12 +65,13 @@ function signOut() {
 
 function* signIn(action) {
   try {
+    yield put(startFetching());
+
     let data = JSON.stringify({
       username: action.username,
       password: action.password
     });
 
-    yield put(startFetching());
     const response = yield call(http, {
       url: SIGN_IN,
       method: 'post',

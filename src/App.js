@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import NavigationContainer from './common/containers/NavigationContainer';
 import {
   ADD_FILE,
+  ADD_UNIVERSITY_PATH,
   FILES,
   SHARE_FILES,
   SIGN_IN,
@@ -23,6 +24,7 @@ import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Preloader } from './common/components/Loader';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
+import AddUniversity from './pages/administration/containers/AddUniversity';
 
 let App = ({ user, isFetching }) => {
   return (
@@ -38,27 +40,33 @@ let App = ({ user, isFetching }) => {
           <Grid item xs={12}>
             <NavigationContainer />
           </Grid>
-          <Grid container xs={12}>
-            {user && (
+
+          {!user && (
+            <Grid container xs={12}>
+              <Route exact path={SIGN_IN} component={SingIn} />
+              <Route
+                exact
+                path={ADD_UNIVERSITY_PATH}
+                component={AddUniversity}
+              />
+              <Route exact path={SIGN_UP} component={SignUp} />
+            </Grid>
+          )}
+
+          {user && (
+            <Grid container xs={12}>
               <Grid item xs={2}>
                 <UserToolBar />
               </Grid>
-            )}
-            <Grid item xs={10}>
-              {<Route exact path={SIGN_IN} component={SingIn} />}
-              {!user && <Route exact path={SIGN_UP} component={SignUp} />}
 
-              {user && (
+              <Grid item xs={10}>
                 <Route exact path={USER_HOME} component={UserContainer} />
-              )}
-
-              {user && <Route exact path={FILES} component={PageWithFiles} />}
-
-              {user && <Route exact path={ADD_FILE} component={AddFile} />}
-
-              {<Route exact path={SHARE_FILES} component={ShareFiles} />}
+                <Route exact path={FILES} component={PageWithFiles} />
+                <Route exact path={ADD_FILE} component={AddFile} />
+                <Route exact path={SHARE_FILES} component={ShareFiles} />
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Grid>
 
         <Grid container justify={'center'} xs={12}>

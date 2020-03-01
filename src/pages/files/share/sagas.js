@@ -2,6 +2,8 @@ import { call, takeEvery } from 'redux-saga/effects';
 import http from '../../../services/http';
 import { ADD_ACCESS } from '../../../common/constants/serverApi';
 import { ADD_ACCESS_TO_FILES } from './actions';
+import { FILES } from '../../../common/constants/links';
+import { history } from '../../../store/Store';
 
 export function* addAccessToFilesWatcher() {
   yield takeEvery(ADD_ACCESS_TO_FILES, action => addAccessToFiles(action));
@@ -19,6 +21,9 @@ function* addAccessToFiles(action) {
         groupIds: groupIds
       }
     });
+
+    alert('Доступ надано');
+    history.push(FILES);
   } catch (e) {
     //TODO add error
   }

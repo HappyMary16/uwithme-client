@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
-import {
-  loadDepartments,
-  loadGroups,
-  loadInstitutes
-} from '../../../common/actions';
-import { signUpRequest } from '../../authorization/actions';
-import Container from '@material-ui/core/Container';
+
 import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
-import Typography from '@material-ui/core/Typography';
-import i18n from '../../../locales/i18n';
-import Grid from '@material-ui/core/Grid';
-import { InputField } from '../../../common/components/InputField';
 import Button from '@material-ui/core/Button';
+import SchoolIcon from '@material-ui/icons/School';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import { connect } from 'react-redux';
+import { InputField } from '../../../common/components/InputField';
+import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { connect } from 'react-redux';
+import { addUniversity } from '../actions';
 
 const useStyles = theme => ({
   paper: {
-    margin: theme.spacing(1),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: '#483D8B'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#eeeeee'
   },
   container: {
     display: 'flex',
@@ -50,7 +46,7 @@ class AddUniversity extends Component {
 
     this.state = {
       universityName: '',
-      adminUsername: '',
+      username: '',
       password: '',
       confirmPassword: '',
       passwordError: false
@@ -62,19 +58,17 @@ class AddUniversity extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(loadInstitutes());
-    dispatch(loadDepartments());
-    dispatch(loadGroups());
   }
 
   submit() {
     const { dispatch } = this.props;
 
     dispatch(
-      signUpRequest(
-        this.state.firstName,
-        this.state.lastName,
-        this.state.surname
+      addUniversity(
+        this.state.universityName,
+        this.state.username,
+        this.state.password,
+        this.state.confirmPassword
       )
     );
   }
@@ -95,12 +89,16 @@ class AddUniversity extends Component {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <SchoolIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {i18n.t('add_university')}
           </Typography>
-          <Grid container spacing={2}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={e => this.submit(e)}
+          >
             <InputField
               label={i18n.t('university')}
               autoFocus={true}
@@ -128,30 +126,18 @@ class AddUniversity extends Component {
             />
             <Button
               fullWidth
-              variant="contained"
+              variant="outlined"
               color="primary"
               className={classes.submit}
-              onClick={this.submit}
+              type="submit"
             >
               {i18n.t('add')}
             </Button>
-          </Grid>
+          </form>
         </div>
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    institutes: state.infoReducers.institutes,
-    departments: state.infoReducers.departments,
-    groups: state.infoReducers.groups,
-    scienceDegrees: state.infoReducers.scienceDegrees
-  };
-};
-
-export default compose(
-  withStyles(useStyles),
-  connect(mapStateToProps)
-)(AddUniversity);
+export default compose(withStyles(useStyles), connect())(AddUniversity);

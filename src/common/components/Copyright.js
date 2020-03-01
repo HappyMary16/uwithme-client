@@ -5,7 +5,8 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   copyright: {
-    padding: '10px',
+    marginTop: '10px',
+    padding: '5px',
     borderTop: `2px solid ${theme.palette.divider}`
   }
 }));
@@ -21,9 +22,7 @@ export const Copyright = () => {
         align="center"
         className={classes.copyright}
       >
-        {'Copyright © Mariia Borodin '}
-        {new Date().getFullYear()}
-        {'.'}
+        {'Copyright © Mariia Borodin 2020'}
       </Typography>
     </Grid>
   );
