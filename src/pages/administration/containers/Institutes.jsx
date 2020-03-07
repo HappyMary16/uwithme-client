@@ -46,7 +46,7 @@ class Institutes extends Component {
 
   componentDidMount() {
     const { dispatch, universityId } = this.props;
-    dispatch(loadInstitutesByUniversityId(universityId));
+    universityId && dispatch(loadInstitutesByUniversityId(universityId));
   }
 
   instituteHandleClick() {
@@ -77,7 +77,7 @@ class Institutes extends Component {
         <List component="nav" className={classes.list}>
           {institutes &&
             institutes.map((institute, i) => (
-              <ListItem button onClick={this.instituteHandleClick}>
+              <ListItem key={i} button onClick={this.instituteHandleClick}>
                 <ListItemText primary={institute.label} />
                 <ListItemSecondaryAction>
                   <IconButton onClick={this.someAction}>

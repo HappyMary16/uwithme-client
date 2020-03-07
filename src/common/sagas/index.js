@@ -51,7 +51,7 @@ function* loadInstitutesByUniversityId(action) {
     const { payload } = action;
 
     const institutes = yield call(http, {
-      url: GET_INSTITUTES_WITH_PARAMETERS + payload.universityId,
+      url: GET_INSTITUTES_WITH_PARAMETERS + payload,
       method: 'get'
     });
 
