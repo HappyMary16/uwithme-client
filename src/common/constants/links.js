@@ -13,3 +13,4 @@ export const SHARE_FILES = '/teacher/files/share';
 
 //admin
 export const ADD_UNIVERSITY_PATH = '/university/add';
+export const ADD_INSTITUTE = '/institute/add';

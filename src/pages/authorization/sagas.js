@@ -37,7 +37,8 @@ function* signUp(action) {
       scienceDegreeId: action.scienceDegree,
       instituteId: action.institute,
       departmentId: action.department,
-      studyGroupId: action.group
+      studyGroupId: action.group,
+      universityId: action.universityId
     });
 
     const response = yield call(http, {

@@ -18,9 +18,8 @@ const useStyles = theme => ({
     width: '100%'
   },
   link: {
-    marginRight: theme.spacing(1),
     marginTop: theme.spacing(1),
-    marginLeft: 'auto',
+    marginLeft: theme.spacing(1),
     backgroundColor: '#eeeeee'
   },
   buttons: {
@@ -41,7 +40,7 @@ class PageWithFiles extends React.Component {
 
     return (
       <Grid container xs={12} className={classes.root}>
-        <Grid container xs={6} className={classes.buttons}>
+        <Grid container className={classes.buttons} justify="flex-end">
           {userRole === TEACHER && (
             <Button
               href={ADD_FILE}

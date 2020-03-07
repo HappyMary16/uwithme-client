@@ -1,6 +1,7 @@
 export const ADD_TODO = 'ADD_TODO';
 export const HANDLE_AUTHENTICATION_CALLBACK = 'HANDLE_AUTHENTICATION_CALLBACK';
 export const LOAD_INSTITUTES = 'LOAD_INSTITUTES';
+export const LOAD_INSTITUTES_BY_UNIVERSITY_ID = 'LOAD_INSTITUTES_BY_PARAMETERS';
 export const LOAD_DEPARTMENTS = 'LOAD_DEPARTMENTS';
 export const LOAD_GROUPS = 'LOAD_GROUPS';
 export const RENDER_INSTITUTES = 'RENDER_INSTITUTES';
@@ -35,6 +36,13 @@ export function handleAuthenticationCallback() {
 export function loadInstitutes() {
   return {
     type: LOAD_INSTITUTES
+  };
+}
+
+export function loadInstitutesByUniversityId(universityId) {
+  return {
+    type: LOAD_INSTITUTES_BY_UNIVERSITY_ID,
+    payload: universityId
   };
 }
 

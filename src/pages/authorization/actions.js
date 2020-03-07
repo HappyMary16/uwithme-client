@@ -20,7 +20,8 @@ export function signUpRequest(
   scienceDegree,
   institute,
   department,
-  group
+  group,
+  universityId
 ) {
   return {
     type: SIGN_UP_REQUEST,
@@ -37,7 +38,8 @@ export function signUpRequest(
     scienceDegree,
     institute,
     department,
-    group
+    group,
+    universityId
   };
 }
 

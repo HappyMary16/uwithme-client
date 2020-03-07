@@ -10,7 +10,7 @@ import { loadSubjects } from '../../actions';
 import Container from 'react-bootstrap/Container';
 import i18n from '../../../../locales/i18n';
 import { compose } from 'redux';
-import { saveSubject, uploadRequest } from '../actions';
+import { uploadRequest } from '../actions';
 
 import CreatableSelect from 'react-select/creatable';
 
@@ -73,21 +73,11 @@ class AddFile extends React.Component {
 
   createSubject(subjectName) {
     this.setState({
-      subjectCreating: true
+      subject: {
+        value: subjectName,
+        label: subjectName
+      }
     });
-
-    setTimeout(() => {
-      const { dispatch, username } = this.props;
-      dispatch(saveSubject(username, subjectName));
-
-      this.setState({
-        subject: {
-          value: subjectName,
-          label: subjectName
-        },
-        subjectCreating: false
-      });
-    }, 1000);
   }
 
   addFiles(addedFiles) {
@@ -117,7 +107,7 @@ class AddFile extends React.Component {
               };
             })}
             onChange={subject => this.setState({ subject: subject })}
-            onCreateOption={subject => this.createSubject(subject)}
+            onCreateOption={this.createSubject}
             value={subject}
             isLoading={subjectCreating}
           />

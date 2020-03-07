@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import CreatableSelect from 'react-select/creatable';
 import Container from 'react-bootstrap/Container';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -15,6 +14,7 @@ import { SelectField } from '../../../../common/components/SelectField';
 import { addAccessToFiles } from '../actions';
 import { loadGroups } from '../../../../common/actions';
 import { getFilesByUsername, loadSubjects } from '../../actions';
+import Select from 'react-select';
 
 const submit = {
   marginTop: '10px',
@@ -141,7 +141,7 @@ class ShareFiles extends React.Component {
         </Container>
 
         <Container style={groupSelect}>
-          <CreatableSelect
+          <Select
             theme={theme}
             isMulti
             onChange={this.handleGroupChange}

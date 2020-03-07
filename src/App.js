@@ -21,17 +21,30 @@ import { SingIn } from './pages/authorization/containers/SignIn';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/files/share/containers/ShareFiles';
 import PageWithFiles from './pages/files/view/containers/PageWithFiles';
-import { Preloader } from './common/components/Loader';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
 import AddUniversity from './pages/administration/containers/AddUniversity';
 import { isAdmin, isTeacher } from './common/utils/UsersUtil';
 import { AdminToolBar } from './pages/administration/components/AdminToolBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import Institutes from './pages/administration/containers/Institutes';
+
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff'
+  }
+}));
 
 let App = ({ user, isFetching }) => {
+  const classes = useStyles();
   return (
     <Container style={{ height: '100vh' }}>
-      {isFetching !== 0 && <Preloader />}
+      <Backdrop className={classes.backdrop} open={isFetching !== 0}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid
         container
         xs={12}
@@ -63,7 +76,12 @@ let App = ({ user, isFetching }) => {
               </Grid>
 
               <Grid item xs={10}>
-                <Route exact path={USER_HOME} component={UserContainer} />
+                {!isAdmin(user) && (
+                  <Route exact path={USER_HOME} component={UserContainer} />
+                )}
+                {isAdmin(user) && (
+                  <Route exact path={USER_HOME} component={Institutes} />
+                )}
                 <Route exact path={FILES} component={PageWithFiles} />
                 {isTeacher(user) && (
                   <Route exact path={ADD_FILE} component={AddFile} />
