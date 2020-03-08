@@ -29,7 +29,7 @@ import { AdminToolBar } from './pages/administration/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import Institutes from './pages/administration/containers/Institutes';
+import InstitutesList from './pages/administration/containers/InstitutesList';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -40,11 +40,13 @@ const useStyles = makeStyles(theme => ({
 
 let App = ({ user, isFetching }) => {
   const classes = useStyles();
+
   return (
     <Container style={{ height: '100vh' }}>
       <Backdrop className={classes.backdrop} open={isFetching !== 0}>
         <CircularProgress color="inherit" />
       </Backdrop>
+
       <Grid
         container
         xs={12}
@@ -80,7 +82,7 @@ let App = ({ user, isFetching }) => {
                   <Route exact path={USER_HOME} component={UserContainer} />
                 )}
                 {isAdmin(user) && (
-                  <Route exact path={USER_HOME} component={Institutes} />
+                  <Route exact path={USER_HOME} component={InstitutesList} />
                 )}
                 <Route exact path={FILES} component={PageWithFiles} />
                 {isTeacher(user) && (

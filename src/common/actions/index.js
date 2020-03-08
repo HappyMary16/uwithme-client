@@ -1,7 +1,11 @@
 export const ADD_TODO = 'ADD_TODO';
 export const HANDLE_AUTHENTICATION_CALLBACK = 'HANDLE_AUTHENTICATION_CALLBACK';
 export const LOAD_INSTITUTES = 'LOAD_INSTITUTES';
-export const LOAD_INSTITUTES_BY_UNIVERSITY_ID = 'LOAD_INSTITUTES_BY_PARAMETERS';
+export const LOAD_INSTITUTES_BY_UNIVERSITY_ID =
+  'LOAD_INSTITUTES_BY_UNIVERSITY_ID';
+export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID =
+  'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
+export const LOAD_GROUPS_BY_UNIVERSITY_ID = 'LOAD_GROUPS_BY_UNIVERSITY_ID';
 export const LOAD_DEPARTMENTS = 'LOAD_DEPARTMENTS';
 export const LOAD_GROUPS = 'LOAD_GROUPS';
 export const RENDER_INSTITUTES = 'RENDER_INSTITUTES';
@@ -42,6 +46,20 @@ export function loadInstitutes() {
 export function loadInstitutesByUniversityId(universityId) {
   return {
     type: LOAD_INSTITUTES_BY_UNIVERSITY_ID,
+    payload: universityId
+  };
+}
+
+export function loadDepartmentsByUniversityId(universityId) {
+  return {
+    type: LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
+    payload: universityId
+  };
+}
+
+export function loadGroupsByUniversityId(universityId) {
+  return {
+    type: LOAD_GROUPS_BY_UNIVERSITY_ID,
     payload: universityId
   };
 }

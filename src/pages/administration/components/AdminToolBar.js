@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { USER_HOME } from '../../../common/constants/links';
 import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -45,25 +45,15 @@ export const AdminToolBar = () => {
       elevation={0}
       className={classes.appBar}
     >
-      <MenuList className={classes.toolbar}>
-        <MenuItem
+      <List className={classes.toolbar}>
+        <ListItem
           component={Link}
           href={USER_HOME}
           className={classes.menuItem}
         >
-          {i18n.t('home_page')}
-        </MenuItem>
-        {/*<MenuItem component={Link}*/}
-        {/*          href={FILES}*/}
-        {/*          className={classes.menuItem}>*/}
-        {/*  {i18n.t('page_with_files')}*/}
-        {/*</MenuItem>*/}
-        {/*<MenuItem component={Link}*/}
-        {/*          href={SCHEDULE}*/}
-        {/*          className={classes.menuItem}>*/}
-        {/*  {i18n.t('schedule')}*/}
-        {/*</MenuItem>*/}
-      </MenuList>
+          {i18n.t('university_structure')}
+        </ListItem>
+      </List>
     </AppBar>
   );
 };

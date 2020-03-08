@@ -17,6 +17,7 @@ export default function infoReducers(
           let institute = {};
           institute.value = obj.id;
           institute.label = obj.name;
+          institute.universityId = obj.universityId;
           return institute;
         })
       };
@@ -27,6 +28,7 @@ export default function infoReducers(
           let department = {};
           department.value = obj.id;
           department.label = obj.name;
+          department.instituteId = obj.instituteId;
           return department;
         })
       };
@@ -37,6 +39,8 @@ export default function infoReducers(
           let group = {};
           group.value = obj.id;
           group.label = obj.name;
+          group.departmentId = obj.departmentId;
+          group.course = obj.course;
           return group;
         })
       };

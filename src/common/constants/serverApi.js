@@ -8,7 +8,9 @@ export const SIGN_UP = '/auth/signUp';
 export const GET_INSTITUTES = '/info/institutes';
 export const GET_INSTITUTES_WITH_PARAMETERS = '/info/institutes/';
 export const GET_DEPARTMENTS = '/info/departments';
+export const GET_DEPARTMENTS_WITH_PARAMETERS = '/info/departments/';
 export const GET_GROUPS = '/info/studyGroups';
+export const GET_GROUPS_WITH_PARAMETERS = '/info/studyGroups/';
 
 export const GET_SUBJECTS = '/subjects/';
 export const POST_SUBJECTS = '/subject/';

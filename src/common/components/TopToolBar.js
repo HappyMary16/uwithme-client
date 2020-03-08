@@ -17,6 +17,12 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     margin: theme.spacing(1, 1.5)
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
   }
 }));
 
@@ -26,6 +32,15 @@ export const TopToolBar = ({ user, signOutFunc }) => {
   return (
     <AppBar position="relative" color="default" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
+        {/*<IconButton*/}
+        {/*  color="inherit"*/}
+        {/*  aria-label="open drawer"*/}
+        {/*  edge="start"*/}
+        {/*  onClick={handleDrawerToggle}*/}
+        {/*  className={classes.menuButton}*/}
+        {/*>*/}
+        {/*  <MenuIcon />*/}
+        {/*</IconButton>*/}
         <Typography
           variant="h6"
           color="inherit"
@@ -34,32 +49,6 @@ export const TopToolBar = ({ user, signOutFunc }) => {
         >
           {i18n.t('university_name')}
         </Typography>
-        <nav>
-          {/*<Link*/}
-          {/*  variant="button"*/}
-          {/*  color="textPrimary"*/}
-          {/*  href="#"*/}
-          {/*  className={classes.link}*/}
-          {/*>*/}
-          {/*  Features*/}
-          {/*</Link>*/}
-          {/*<Link*/}
-          {/*  variant="button"*/}
-          {/*  color="textPrimary"*/}
-          {/*  href="#"*/}
-          {/*  className={classes.link}*/}
-          {/*>*/}
-          {/*  Enterprise*/}
-          {/*</Link>*/}
-          {/*<Link*/}
-          {/*  variant="button"*/}
-          {/*  color="textPrimary"*/}
-          {/*  href="#"*/}
-          {/*  className={classes.link}*/}
-          {/*>*/}
-          {/*  Support*/}
-          {/*</Link>*/}
-        </nav>
         {!user && (
           <Button
             href={ADD_UNIVERSITY_PATH}
