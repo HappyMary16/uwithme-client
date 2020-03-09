@@ -1,8 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 import { history } from '../store/Store';
-import { apiRoot } from '../common/constants/serverApi';
-import { SIGN_IN } from '../common/constants/links';
+import { apiRoot } from '../constants/serverApi';
+import { SIGN_IN } from '../constants/links';
 
 let updateTokenRequest = null;
 

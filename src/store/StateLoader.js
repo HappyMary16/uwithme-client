@@ -1,4 +1,4 @@
-import { LECTURE, TASK } from '../common/constants/userRoles';
+import { LECTURE, TASK } from '../constants/userRoles';
 
 export default class StateLoader {
   loadState() {

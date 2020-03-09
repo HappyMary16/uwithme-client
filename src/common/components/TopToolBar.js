@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { ADD_UNIVERSITY_PATH, SIGN_IN } from '../constants/links';
+import { ADD_UNIVERSITY_PATH, SIGN_IN } from '../../constants/links';
 import i18n from '../../locales/i18n';
 
 const useStyles = makeStyles(theme => ({

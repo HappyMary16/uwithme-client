@@ -10,7 +10,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import FolderIcon from '@material-ui/icons/Folder';
 import i18n from '../../../../locales/i18n';
-import { getLectures, getTasks } from '../../../../common/utils/FileUtil';
+import { getLectures, getTasks } from '../../../../utils/FileUtil';
 import ListFiles from '../containers/ListFiles';
 
 const useStyles = makeStyles(theme => ({

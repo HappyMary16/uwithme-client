@@ -10,10 +10,12 @@ import {
   loadGroupsByUniversityId,
   loadInstitutesByUniversityId
 } from '../../../common/actions';
-import { SelectField } from '../../../common/components/SelectField';
 import Select from 'react-select';
 import Container from '@material-ui/core/Container';
 import { selectorColors } from '../../../common/styles/styles';
+import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
+import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRoles';
+import { addLessonToSchedule } from '../actions';
 
 const useStyles = theme => ({
   list: {
@@ -31,8 +33,8 @@ const useStyles = theme => ({
   nested: {
     paddingLeft: theme.spacing(4)
   },
-  groupSelect: {
-    marginTop: '20px'
+  marginTop: {
+    marginTop: theme.spacing(2)
   },
   submit: {
     marginTop: '10px',
@@ -46,10 +48,17 @@ class AddLesson extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      subject: {},
+      teacher: {},
+      lectureHall: '',
+      selectedGroups: [],
+      weekDay: 0,
+      lessonTime: 0,
+      weekNumber: 1
+    };
 
-    this.someAction = this.someAction.bind(this);
-    this.instituteHandleClick = this.instituteHandleClick.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   componentDidMount() {
@@ -67,87 +76,107 @@ class AddLesson extends Component {
     }
   }
 
-  instituteHandleClick() {
-    const { open } = this.state;
-    this.setState({ open: !open });
-  }
-
-  someAction() {
-    console.log('action');
+  submit() {
+    const { dispatch } = this.props;
+    const { subject, teacher, lectureHall, selectedGroups, weekDay, lessonTime, weekNumber } = this.state;
+    dispatch(addLessonToSchedule(subject.value,
+      subject.label,
+      teacher.value,
+      teacher.label,
+      lectureHall.label,
+      selectedGroups,
+      weekDay,
+      lessonTime,
+      weekNumber));
   }
 
   render() {
     const { teachers, lectureHalls, groups, subjects, classes } = this.props;
-    const { subjectId } = this.state;
 
     return (
       <Grid xs={12} alignItems={'center'}>
-        <Container>
-          <SelectField
-            label={i18n.t('subject')}
-            values={
-              subjects &&
-              subjects.map(s => {
-                return {
-                  value: s.id,
-                  label: s.name
-                };
-              })
-            }
-            onChange={s => {
-              this.setState({
-                subjectId: s
-              });
-            }}
+        <Container className={classes.marginTop}>
+          <CreatableSelect
+            theme={selectorColors}
+            placeholder={i18n.t('subject')}
+            options={subjects &&
+            subjects.map(subject => {
+              return {
+                label: subject.name,
+                value: subject.id
+              };
+            })}
+            onChange={opinion => this.setState({ subject: opinion })}
+            onCreateOption={opinion => this.setState({ subject: opinion })}
           />
         </Container>
 
-        <Container>
-          <SelectField
-            label={i18n.t('subject')}
-            values={
-              teachers &&
-              teachers.map(s => {
-                return {
-                  value: s.id,
-                  label: s.name
-                };
-              })
-            }
-            onChange={s => {
-              this.setState({
-                teacher: s
-              });
-            }}
+        <Container className={classes.marginTop}>
+          <CreatableSelect
+            theme={selectorColors}
+            placeholder={i18n.t('teacher')}
+            options={teachers &&
+            teachers.map(s => {
+              return {
+                value: s.id,
+                label: s.name
+              };
+            })}
+            onChange={opinion => this.setState({ teacher: opinion })}
+            onCreateOption={this.createSubject}
           />
         </Container>
 
-        <Container>
-          <SelectField
-            label={i18n.t('subject')}
-            values={
-              lectureHalls &&
-              lectureHalls.map(s => {
-                return {
-                  value: s.id,
-                  label: s.name
-                };
-              })
-            }
-            onChange={s => {
-              this.setState({
-                teacher: s
-              });
-            }}
+        <Container className={classes.marginTop}>
+          <CreatableSelect
+            theme={selectorColors}
+            placeholder={i18n.t('lecture_hall')}
+            options={lectureHalls &&
+            lectureHalls.map(s => {
+              return {
+                value: s.id,
+                label: s.name
+              };
+            })}
+            onChange={opinion => this.setState({ lectureHall: opinion })}
+            onCreateOption={opinion => this.setState({ lectureHall: opinion })}
           />
         </Container>
 
-        <Container className={classes.groupSelect}>
+        <Container className={classes.marginTop}>
           <Select
+            placeholder={i18n.t('groups')}
             theme={selectorColors}
             isMulti
-            onChange={this.handleGroupChange}
+            onChange={opinion => this.setState({ selectedGroups: opinion })}
             options={groups}
+          />
+        </Container>
+
+        <Container className={classes.marginTop}>
+          <Select
+            theme={selectorColors}
+            onChange={opinion => this.setState({ weekDay: opinion.value })}
+            options={WEEK_DAYS}
+            placeholder={i18n.t('week_day')}
+          />
+        </Container>
+
+        <Container className={classes.marginTop}>
+          <Select
+            theme={selectorColors}
+            onChange={opinion => this.setState({ lessonTime: opinion.value })}
+            options={LESSONS_TIME}
+            placeholder={i18n.t('lesson_time')}
+          />
+        </Container>
+
+        <Container className={classes.marginTop}>
+          <Select
+            theme={selectorColors}
+            onChange={opinion => this.setState({ weekNumber: opinion.value })}
+            options={WEEK_NUMBER}
+            defaultValue={WEEK_NUMBER[0]}
           />
         </Container>
 

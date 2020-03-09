@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { UserRoles } from '../../../common/constants/userRoles';
-import { SIGN_IN } from '../../../common/constants/links';
+import { UserRoles } from '../../../constants/userRoles';
+import { SIGN_IN } from '../../../constants/links';
 import { SelectField } from '../../../common/components/SelectField';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -17,11 +17,7 @@ import { InputField } from '../../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-  loadDepartments,
-  loadGroups,
-  loadInstitutes
-} from '../../../common/actions';
+import { loadDepartments, loadGroups, loadInstitutes } from '../../../common/actions';
 
 const useStyles = theme => ({
   paper: {

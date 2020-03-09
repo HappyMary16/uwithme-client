@@ -12,7 +12,7 @@ import {
   SIGN_IN,
   SIGN_UP,
   USER_HOME
-} from './common/constants/links';
+} from './constants/links';
 import UserContainer from './pages/student/containers/UserContainer';
 import { UserToolBar } from './pages/student/components/UserToolBar';
 
@@ -26,7 +26,7 @@ import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
 import AddUniversity from './pages/administration/containers/AddUniversity';
-import { isAdmin, isTeacher } from './common/utils/UsersUtil';
+import { isAdmin, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/administration/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';

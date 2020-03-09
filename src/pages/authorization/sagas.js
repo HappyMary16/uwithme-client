@@ -1,16 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  SIGN_IN_ERROR,
-  SIGN_IN_REQUEST,
-  SIGN_IN_SUCCESS,
-  SIGN_OUT,
-  SIGN_UP_REQUEST
-} from './actions';
+import { SIGN_IN_ERROR, SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_OUT, SIGN_UP_REQUEST } from './actions';
 
 import { history } from '../../store/Store';
 import http from '../../services/http';
-import { SIGN_IN, SIGN_UP } from '../../common/constants/serverApi';
-import { USER_HOME } from '../../common/constants/links';
+import { SIGN_IN, SIGN_UP } from '../../constants/serverApi';
+import { USER_HOME } from '../../constants/links';
 import { endFetching, startFetching } from '../../common/actions';
 
 export function* authorizationWatcher() {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { FileTypes, LECTURE } from '../../../../common/constants/userRoles';
+import { FileTypes, LECTURE } from '../../../../constants/userRoles';
 import { Upload } from '../components/Upload';
 import { loadSubjects } from '../../actions';
 import i18n from '../../../../locales/i18n';
@@ -12,10 +12,7 @@ import { uploadRequest } from '../actions';
 
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
-import {
-  selectorColors,
-  subjectSelector
-} from '../../../../common/styles/styles';
+import { marginTop, selectorColors } from '../../../../common/styles/styles';
 import Container from '@material-ui/core/Container';
 
 const submit = {
@@ -34,8 +31,7 @@ class AddFile extends React.Component {
       subject: '',
       fileType: LECTURE,
       uploading: false,
-      successfulUploaded: false,
-      subjectCreating: false
+      successfulUploaded: false
     };
 
     this.submit = this.submit.bind(this);
@@ -80,13 +76,12 @@ class AddFile extends React.Component {
       fileType,
       uploading,
       successfulUploaded,
-      subject,
-      subjectCreating
+      subject
     } = this.state;
 
     return (
       <Grid item xs={12}>
-        <Container style={subjectSelector}>
+        <Container style={marginTop}>
           <CreatableSelect
             theme={selectorColors}
             placeholder={i18n.t('subject')}
@@ -99,10 +94,9 @@ class AddFile extends React.Component {
             onChange={subject => this.setState({ subject: subject })}
             onCreateOption={this.createSubject}
             value={subject}
-            isLoading={subjectCreating}
           />
         </Container>
-        <Container style={subjectSelector}>
+        <Container style={marginTop}>
           <Select
             theme={selectorColors}
             onChange={opinion => this.setState({ fileType: opinion.value })}

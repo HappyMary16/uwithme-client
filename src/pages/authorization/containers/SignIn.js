@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SIGN_UP } from '../../../common/constants/links';
+import { SIGN_UP } from '../../../constants/links';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';

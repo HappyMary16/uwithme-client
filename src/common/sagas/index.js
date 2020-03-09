@@ -21,7 +21,7 @@ import {
   GET_GROUPS_WITH_PARAMETERS,
   GET_INSTITUTES,
   GET_INSTITUTES_WITH_PARAMETERS
-} from '../constants/serverApi';
+} from '../../constants/serverApi';
 
 export function* commonDataWatcher() {
   yield takeEvery(LOAD_INSTITUTES, loadInstitutes);

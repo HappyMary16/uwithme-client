@@ -1,11 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
-import { ADD_UNIVERSITY_API } from '../../common/constants/serverApi';
+import { ADD_UNIVERSITY_API } from '../../constants/serverApi';
 import { ADD_UNIVERSITY } from './actions';
 import { SIGN_IN_ERROR, SIGN_IN_SUCCESS } from '../authorization/actions';
 import { history } from '../../store/Store';
-import { USER_HOME } from '../../common/constants/links';
+import { USER_HOME } from '../../constants/links';
 
 export function* administrationWatcher() {
   yield takeEvery(ADD_UNIVERSITY, action => addUniversity(action));

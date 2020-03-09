@@ -1,10 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { LOAD_SUBJECTS } from '../actions';
 import http from '../../../services/http';
-import {
-  POST_SUBJECTS,
-  UPLOAD_MULTIPLE_FILES
-} from '../../../common/constants/serverApi';
+import { POST_SUBJECTS, UPLOAD_MULTIPLE_FILES } from '../../../constants/serverApi';
 import { SAVE_SUBJECTS, UPLOAD_REQUEST, UPLOAD_SUCCESS } from './actions';
 
 export function* addFilesAndSubjectsWatcher() {

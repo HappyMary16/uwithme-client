@@ -1,4 +1,4 @@
-import config from '../../config';
+import config from '../config';
 
 export const apiRoot = `http://localhost:${config.port}/api`;
 

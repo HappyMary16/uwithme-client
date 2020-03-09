@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
-import { ADD_INSTITUTE } from '../../../common/constants/links';
+import { ADD_INSTITUTE } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import {
   loadDepartmentsByUniversityId,
@@ -13,7 +13,7 @@ import {
   loadInstitutesByUniversityId
 } from '../../../common/actions';
 import Institute from '../components/structure/Institute';
-import { getDepartmentsByInstitute } from '../../../common/utils/StructureUtils';
+import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
 
 const useStyles = theme => ({
   list: {

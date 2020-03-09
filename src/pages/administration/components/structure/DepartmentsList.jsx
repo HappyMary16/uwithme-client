@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import List from '@material-ui/core/List';
 import Collapse from '@material-ui/core/Collapse';
 import Department from './Department';
-import { getGroupsByDepartment } from '../../../../common/utils/StructureUtils';
+import { getGroupsByDepartment } from '../../../../utils/StructureUtils';
 
 export default class DepartmentsList extends Component {
   constructor(props) {

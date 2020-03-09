@@ -5,6 +5,7 @@ import { addFilesAndSubjectsWatcher } from '../pages/files/add/sagas';
 import { addAccessToFilesWatcher } from '../pages/files/share/sagas';
 import { commonDataWatcher } from '../common/sagas';
 import { administrationWatcher } from '../pages/administration/sagas';
+import { scheduleOperationWatcher } from '../pages/schedule/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -13,6 +14,7 @@ export default function* rootSaga() {
     fileOperationWatcher(),
     addFilesAndSubjectsWatcher(),
     addAccessToFilesWatcher(),
-    administrationWatcher()
+    administrationWatcher(),
+    scheduleOperationWatcher()
   ]);
 }

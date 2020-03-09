@@ -8,6 +8,6 @@ export const selectorColors = theme => ({
   }
 });
 
-export const subjectSelector = {
+export const marginTop = {
   marginTop: '20px'
 };

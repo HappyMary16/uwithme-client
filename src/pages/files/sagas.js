@@ -1,17 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  GET_FILES_BY_USERNAME,
-  LOAD_FILES,
-  LOAD_SUBJECTS,
-  RENDER_SUBJECTS,
-  renderFiles
-} from './actions';
+import { GET_FILES_BY_USERNAME, LOAD_FILES, LOAD_SUBJECTS, RENDER_SUBJECTS, renderFiles } from './actions';
 import http from '../../services/http';
-import {
-  DOWNLOAD_FILE,
-  GET_FILES,
-  GET_SUBJECTS
-} from '../../common/constants/serverApi';
+import { DOWNLOAD_FILE, GET_FILES, GET_SUBJECTS } from '../../constants/serverApi';
 import { endFetching, startFetching } from '../../common/actions';
 
 export function* fileOperationWatcher() {
