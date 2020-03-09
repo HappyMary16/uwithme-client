@@ -6,24 +6,23 @@ import Grid from '@material-ui/core/Grid';
 import { FileTypes, LECTURE } from '../../../../common/constants/userRoles';
 import { Upload } from '../components/Upload';
 import { loadSubjects } from '../../actions';
-import Container from 'react-bootstrap/Container';
 import i18n from '../../../../locales/i18n';
 import { compose } from 'redux';
 import { uploadRequest } from '../actions';
 
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
-import { selectorColors } from '../../../../common/styles/styles';
+import {
+  selectorColors,
+  subjectSelector
+} from '../../../../common/styles/styles';
+import Container from '@material-ui/core/Container';
 
 const submit = {
   marginTop: '10px',
   marginLeft: 'auto',
   marginRight: '0px',
   backgroundColor: '#eeeeee'
-};
-
-const subjectSelector = {
-  marginTop: '20px'
 };
 
 class AddFile extends React.Component {

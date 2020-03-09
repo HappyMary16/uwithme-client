@@ -7,3 +7,7 @@ export const selectorColors = theme => ({
     primary25: '#F5F5F5'
   }
 });
+
+export const subjectSelector = {
+  marginTop: '20px'
+};

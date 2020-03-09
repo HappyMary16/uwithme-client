@@ -3,19 +3,21 @@ import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Container from 'react-bootstrap/Container';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import i18n from '../../../../locales/i18n';
 import { getLectures, getTasks } from '../../../../common/utils/FileUtil';
 import { compose } from 'redux';
 import FilesToChoose from '../components/FilesToChoose';
-import { SelectField } from '../../../../common/components/SelectField';
 import { addAccessToFiles } from '../actions';
 import { loadGroups } from '../../../../common/actions';
 import { getFilesByUsername, loadSubjects } from '../../actions';
 import Select from 'react-select';
-import { selectorColors } from '../../../../common/styles/styles';
+import {
+  selectorColors,
+  subjectSelector
+} from '../../../../common/styles/styles';
+import Container from '@material-ui/core/Container';
 
 const submit = {
   marginTop: '10px',
@@ -88,25 +90,22 @@ class ShareFiles extends React.Component {
     return (
       <Grid xs={12} alignItems={'center'}>
         <Grid item xs={12}>
-          <Container>
-            <SelectField
-              label={i18n.t('subject')}
-              values={subjects.map(s => {
+          <Container style={subjectSelector}>
+            <Select
+              theme={selectorColors}
+              onChange={opinion => this.setState({ subjectId: opinion.value })}
+              options={subjects.map(s => {
                 return {
                   value: s.id,
                   label: s.name
                 };
               })}
-              onChange={s => {
-                this.setState({
-                  subjectId: s
-                });
-              }}
+              placeholder={i18n.t('subject')}
             />
           </Container>
         </Grid>
         <Container>
-          <Grid container xs={12}>
+          <Grid container xs={12} style={groupSelect}>
             <Grid item xs={6}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
