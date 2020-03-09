@@ -85,6 +85,8 @@ export default function http({
     },
     error => {
       if (
+        error &&
+        error.response &&
         error.response.status === 401 &&
         error.config &&
         !error.config.__isRetryRequest

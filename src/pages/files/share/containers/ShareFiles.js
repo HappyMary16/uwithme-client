@@ -15,6 +15,7 @@ import { addAccessToFiles } from '../actions';
 import { loadGroups } from '../../../../common/actions';
 import { getFilesByUsername, loadSubjects } from '../../actions';
 import Select from 'react-select';
+import { selectorColors } from '../../../../common/styles/styles';
 
 const submit = {
   marginTop: '10px',
@@ -26,16 +27,6 @@ const submit = {
 const groupSelect = {
   marginTop: '20px'
 };
-
-const theme = theme => ({
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary: '#483D8B',
-    primary50: '#D3D3D3',
-    primary25: '#F5F5F5'
-  }
-});
 
 let selectedGroups = [];
 let files = [];
@@ -142,7 +133,7 @@ class ShareFiles extends React.Component {
 
         <Container style={groupSelect}>
           <Select
-            theme={theme}
+            theme={selectorColors}
             isMulti
             onChange={this.handleGroupChange}
             options={groups}

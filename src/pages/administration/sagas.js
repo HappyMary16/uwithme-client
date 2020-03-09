@@ -26,7 +26,7 @@ function* addUniversity(action) {
       }
     });
 
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       yield call(signInSuccess, response);
     } else {
       yield call(signInError, response);

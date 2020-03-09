@@ -16,3 +16,4 @@ export const ADD_UNIVERSITY_PATH = '/university/add';
 export const ADD_INSTITUTE = '/institute/add';
 export const INSTITUTE_INFO = '/institute/info/';
 export const INSTITUTE_EDIT = '/institute/edit/';
+export const ADD_LESSON = '/lesson/add';

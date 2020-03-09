@@ -22,11 +22,12 @@ export const SelectField = ({ label, initialValue, values, onChange }) => {
         variant="outlined"
         fullWidth
       >
-        {values.map(option => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
+        {values &&
+          values.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
       </TextField>
     </Grid>
   );

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FileTypes, LECTURE } from '../../../../common/constants/userRoles';
-import { SelectField } from '../../../../common/components/SelectField';
 import { Upload } from '../components/Upload';
 import { loadSubjects } from '../../actions';
 import Container from 'react-bootstrap/Container';
@@ -13,6 +12,8 @@ import { compose } from 'redux';
 import { uploadRequest } from '../actions';
 
 import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
+import { selectorColors } from '../../../../common/styles/styles';
 
 const submit = {
   marginTop: '10px',
@@ -24,16 +25,6 @@ const submit = {
 const subjectSelector = {
   marginTop: '20px'
 };
-
-const theme = theme => ({
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary: '#483D8B',
-    primary50: '#D3D3D3',
-    primary25: '#F5F5F5'
-  }
-});
 
 class AddFile extends React.Component {
   constructor(props) {
@@ -98,7 +89,7 @@ class AddFile extends React.Component {
       <Grid item xs={12}>
         <Container style={subjectSelector}>
           <CreatableSelect
-            theme={theme}
+            theme={selectorColors}
             placeholder={i18n.t('subject')}
             options={subjects.map(subject => {
               return {
@@ -112,12 +103,12 @@ class AddFile extends React.Component {
             isLoading={subjectCreating}
           />
         </Container>
-        <Container>
-          <SelectField
-            label={i18n.t('file_type')}
-            initialValue={fileType}
-            values={FileTypes}
-            onChange={fileType => this.setState({ fileType: fileType })}
+        <Container style={subjectSelector}>
+          <Select
+            theme={selectorColors}
+            onChange={opinion => this.setState({ fileType: opinion.value })}
+            options={FileTypes}
+            placeholder={i18n.t('file_type')}
           />
         </Container>
 

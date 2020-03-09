@@ -46,13 +46,15 @@ function* signUp(action) {
       method: 'post',
       data: data
     });
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       yield call(signInSuccess, response);
     } else {
+      alert(response);
       yield call(signInError, response);
     }
     //TODO reaction on non-success result
   } catch (e) {
+    alert(e);
     yield call(signInError, e);
     //TODO message about error
   } finally {
@@ -79,12 +81,14 @@ function* signIn(action) {
       data: data
     });
 
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       yield call(signInSuccess, response);
     } else {
+      alert(response);
       yield call(signInError, response);
     }
   } catch (error) {
+    alert(error);
     yield call(signInError, error);
   } finally {
     yield put(endFetching());

@@ -4,8 +4,10 @@ import { Route } from 'react-router-dom';
 import NavigationContainer from './common/containers/NavigationContainer';
 import {
   ADD_FILE,
+  ADD_LESSON,
   ADD_UNIVERSITY_PATH,
   FILES,
+  SCHEDULE,
   SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
@@ -30,6 +32,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import InstitutesList from './pages/administration/containers/InstitutesList';
+import AddLesson from './pages/schedule/containers/AddLesson';
+import ScheduleTable from './pages/schedule/containers/ScheduleTable';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -78,18 +82,27 @@ let App = ({ user, isFetching }) => {
               </Grid>
 
               <Grid item xs={10}>
+                <Route exact path={SCHEDULE} component={ScheduleTable} />
+
                 {!isAdmin(user) && (
-                  <Route exact path={USER_HOME} component={UserContainer} />
+                  <Grid>
+                    <Route exact path={USER_HOME} component={UserContainer} />
+                    <Route exact path={FILES} component={PageWithFiles} />
+                  </Grid>
                 )}
+
+                {isTeacher(user) && (
+                  <Grid>
+                    <Route exact path={ADD_FILE} component={AddFile} />
+                    <Route exact path={SHARE_FILES} component={ShareFiles} />
+                  </Grid>
+                )}
+
                 {isAdmin(user) && (
-                  <Route exact path={USER_HOME} component={InstitutesList} />
-                )}
-                <Route exact path={FILES} component={PageWithFiles} />
-                {isTeacher(user) && (
-                  <Route exact path={ADD_FILE} component={AddFile} />
-                )}
-                {isTeacher(user) && (
-                  <Route exact path={SHARE_FILES} component={ShareFiles} />
+                  <Grid>
+                    <Route exact path={USER_HOME} component={InstitutesList} />
+                    <Route exact path={ADD_LESSON} component={AddLesson} />
+                  </Grid>
                 )}
               </Grid>
             </Grid>
