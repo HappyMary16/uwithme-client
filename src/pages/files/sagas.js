@@ -74,7 +74,7 @@ function* loadSubjectsByUniversityId(action) {
 
 function* downloadFile(action) {
   const { fileId, fileName, loading } = action;
-  console.log(fileId);
+
   let response = yield call(http, {
     url: DOWNLOAD_FILE + fileId,
     method: 'get',

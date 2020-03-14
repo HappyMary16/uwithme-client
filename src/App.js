@@ -33,7 +33,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import InstitutesList from './pages/administration/containers/InstitutesList';
 import AddLesson from './pages/schedule/containers/AddLesson';
-import ScheduleTable from './pages/schedule/containers/ScheduleTable';
+import UserSchedule from './pages/schedule/containers/UserSchedule';
+import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -82,12 +83,12 @@ let App = ({ user, isFetching }) => {
               </Grid>
 
               <Grid item xs={10}>
-                <Route exact path={SCHEDULE} component={ScheduleTable} />
 
                 {!isAdmin(user) && (
                   <Grid>
                     <Route exact path={USER_HOME} component={UserContainer} />
                     <Route exact path={FILES} component={PageWithFiles} />
+                    <Route exact path={SCHEDULE} component={UserSchedule}/>
                   </Grid>
                 )}
 
@@ -102,6 +103,7 @@ let App = ({ user, isFetching }) => {
                   <Grid>
                     <Route exact path={USER_HOME} component={InstitutesList} />
                     <Route exact path={ADD_LESSON} component={AddLesson} />
+                    <Route exact path={SCHEDULE} component={GroupSchedule}/>
                   </Grid>
                 )}
               </Grid>

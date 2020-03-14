@@ -31,47 +31,33 @@ export const addToDo = title => ({
   }
 });
 
-export function handleAuthenticationCallback() {
-  return {
-    type: HANDLE_AUTHENTICATION_CALLBACK
-  };
-}
+export const handleAuthenticationCallback = () => ({
+  type: HANDLE_AUTHENTICATION_CALLBACK
+});
 
-export function loadInstitutes() {
-  return {
-    type: LOAD_INSTITUTES
-  };
-}
+export const loadInstitutes = () => ({
+  type: LOAD_INSTITUTES
+});
 
-export function loadInstitutesByUniversityId(universityId) {
-  return {
-    type: LOAD_INSTITUTES_BY_UNIVERSITY_ID,
-    payload: universityId
-  };
-}
+export const loadInstitutesByUniversityId = (universityId) => ({
+  type: LOAD_INSTITUTES_BY_UNIVERSITY_ID,
+  payload: universityId
+});
 
-export function loadDepartmentsByUniversityId(universityId) {
-  return {
-    type: LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
-    payload: universityId
-  };
-}
+export const loadDepartmentsByUniversityId = (universityId) => ({
+  type: LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
+  payload: universityId
+});
 
-export function loadGroupsByUniversityId(universityId) {
-  return {
-    type: LOAD_GROUPS_BY_UNIVERSITY_ID,
-    payload: universityId
-  };
-}
+export const loadGroupsByUniversityId = (universityId) => ({
+  type: LOAD_GROUPS_BY_UNIVERSITY_ID,
+  payload: universityId
+});
 
-export function loadDepartments() {
-  return {
-    type: LOAD_DEPARTMENTS
-  };
-}
+export const loadDepartments = () => ({
+  type: LOAD_DEPARTMENTS
+});
 
-export function loadGroups() {
-  return {
-    type: LOAD_GROUPS
-  };
-}
+export const loadGroups = () => ({
+  type: LOAD_GROUPS
+});

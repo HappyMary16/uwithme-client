@@ -1,11 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ADD_LESSON_TO_SCHEDULE } from './actions';
+import { ADD_LESSON_TO_SCHEDULE, FIND_LESSONS_BY_GROUP_ID, FIND_LESSONS_BY_USER_ID, renderLessons } from './actions';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
-import { ADD_LESSON } from '../../constants/serverApi';
+import { ADD_LESSON, GET_LESSONS_BY_GROUP_ID, GET_LESSONS_BY_USER_ID } from '../../constants/serverApi';
 
 export function* scheduleOperationWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action => addLessonToSchedule(action));
+  yield takeEvery(FIND_LESSONS_BY_GROUP_ID, action => findLessonsByGroupId(action));
+  yield takeEvery(FIND_LESSONS_BY_USER_ID, action => findLessonsByUserId(action));
 }
 
 function* addLessonToSchedule(action) {
@@ -24,8 +26,6 @@ function* addLessonToSchedule(action) {
       weekNumber
     } = action.payload;
 
-    console.log(action.payload);
-
     let data = {
       subjectId: subjectId === subjectName ? undefined : subjectId,
       subjectName: subjectId === subjectName ? subjectName : undefined,
@@ -38,20 +38,61 @@ function* addLessonToSchedule(action) {
       weekNumber
     };
 
-    console.log(data);
-
     const response = yield call(http, {
       url: ADD_LESSON,
       method: 'post',
       data
     });
 
-    alert(response);
-    console.log(response);
-    //TODO continue...
+    if (response.code === 200) {
+      alert('Пари додані в розклад');
+    }
 
   } catch (e) {
-    //TODO process errors
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* findLessonsByGroupId(action) {
+  try {
+    yield put(startFetching());
+
+    const {
+      groupId
+    } = action.payload;
+
+    const { data } = yield call(http, {
+      url: GET_LESSONS_BY_GROUP_ID + groupId,
+      method: 'get'
+    });
+    yield put(renderLessons(data));
+
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* findLessonsByUserId(action) {
+  try {
+    yield put(startFetching());
+
+    const {
+      userId
+    } = action.payload;
+
+    const { data } = yield call(http, {
+      url: GET_LESSONS_BY_USER_ID + userId,
+      method: 'get'
+    });
+
+    yield put(renderLessons(data));
+
+  } catch (e) {
+    alert(e);
   } finally {
     yield put(endFetching());
   }
