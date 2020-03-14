@@ -1,12 +1,20 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { GET_FILES_BY_USERNAME, LOAD_FILES, LOAD_SUBJECTS, RENDER_SUBJECTS, renderFiles } from './actions';
+import {
+  GET_FILES_BY_USERNAME,
+  LOAD_FILES,
+  LOAD_SUBJECTS,
+  LOAD_SUBJECTS_BY_UNIVERSITY_ID,
+  renderFiles,
+  renderSubjects
+} from './actions';
 import http from '../../services/http';
-import { DOWNLOAD_FILE, GET_FILES, GET_SUBJECTS } from '../../constants/serverApi';
+import { DOWNLOAD_FILE, GET_FILES, GET_SUBJECTS, GET_SUBJECTS_BY_UNIVERSITY_ID } from '../../constants/serverApi';
 import { endFetching, startFetching } from '../../common/actions';
 
 export function* fileOperationWatcher() {
   yield takeEvery(GET_FILES_BY_USERNAME, action => downloadFiles(action));
   yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
+  yield takeEvery(LOAD_SUBJECTS_BY_UNIVERSITY_ID, action => loadSubjectsByUniversityId(action));
   yield takeEvery(LOAD_FILES, action => downloadFile(action));
 }
 
@@ -39,9 +47,26 @@ function* loadSubjects(action) {
       method: 'get'
     });
 
-    yield put({ type: RENDER_SUBJECTS, response });
+    yield put(renderSubjects(response));
   } catch (e) {
     //TODO process errors
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* loadSubjectsByUniversityId(action) {
+  try {
+    yield put(startFetching());
+    const { universityId } = action.payload;
+    const response = yield call(http, {
+      url: GET_SUBJECTS_BY_UNIVERSITY_ID + universityId,
+      method: 'get'
+    });
+
+    yield put(renderSubjects(response));
+  } catch (e) {
+    alert(e);
   } finally {
     yield put(endFetching());
   }

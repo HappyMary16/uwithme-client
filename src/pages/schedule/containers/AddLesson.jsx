@@ -16,8 +16,14 @@ import { selectorColors } from '../../../common/styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRoles';
 import { addLessonToSchedule } from '../actions';
+import { loadTeachersByUniversityId } from '../../teachers/actions';
+import { loadSubjectsByUniversityId } from '../../files/actions';
 
 const useStyles = theme => ({
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
   list: {
     width: '100%'
   },
@@ -67,18 +73,21 @@ class AddLesson extends Component {
       dispatch(loadInstitutesByUniversityId(universityId));
       dispatch(loadDepartmentsByUniversityId(universityId));
       dispatch(loadGroupsByUniversityId(universityId));
+      dispatch(loadTeachersByUniversityId(universityId));
+      dispatch(loadSubjectsByUniversityId(universityId));
 
       //TODO
-      // load teachers by university id
-      // load subjects by university id
-      // load auditory by university id
+      // load auditory by university id (feature)
       // load lessons time (feature)
     }
   }
 
-  submit() {
+  submit(e) {
+    e.preventDefault();
+
     const { dispatch } = this.props;
     const { subject, teacher, lectureHall, selectedGroups, weekDay, lessonTime, weekNumber } = this.state;
+
     dispatch(addLessonToSchedule(subject.value,
       subject.label,
       teacher.value,
@@ -95,104 +104,102 @@ class AddLesson extends Component {
 
     return (
       <Grid xs={12} alignItems={'center'}>
-        <Container className={classes.marginTop}>
-          <CreatableSelect
-            theme={selectorColors}
-            placeholder={i18n.t('subject')}
-            options={subjects &&
-            subjects.map(subject => {
-              return {
-                label: subject.name,
-                value: subject.id
-              };
-            })}
-            onChange={opinion => this.setState({ subject: opinion })}
-            onCreateOption={opinion => this.setState({ subject: opinion })}
-          />
-        </Container>
+        <form className={classes.form} onSubmit={e => this.submit(e)}>
+          <Container className={classes.marginTop}>
+            <CreatableSelect
+              theme={selectorColors}
+              placeholder={i18n.t('subject')}
+              options={subjects &&
+              subjects.map(subject => {
+                return {
+                  label: subject.name,
+                  value: subject.id
+                };
+              })}
+              onChange={opinion => this.setState({ subject: opinion })}
+            />
+          </Container>
 
-        <Container className={classes.marginTop}>
-          <CreatableSelect
-            theme={selectorColors}
-            placeholder={i18n.t('teacher')}
-            options={teachers &&
-            teachers.map(s => {
-              return {
-                value: s.id,
-                label: s.name
-              };
-            })}
-            onChange={opinion => this.setState({ teacher: opinion })}
-            onCreateOption={this.createSubject}
-          />
-        </Container>
+          <Container className={classes.marginTop}>
+            <CreatableSelect
+              theme={selectorColors}
+              placeholder={i18n.t('teacher')}
+              options={teachers &&
+              teachers.map(s => {
+                return {
+                  value: s.id,
+                  label: s.surname + ' ' + s.firstName + ' ' + s.lastName
+                };
+              })}
+              onChange={opinion => this.setState({ teacher: opinion })}
+            />
+          </Container>
 
-        <Container className={classes.marginTop}>
-          <CreatableSelect
-            theme={selectorColors}
-            placeholder={i18n.t('lecture_hall')}
-            options={lectureHalls &&
-            lectureHalls.map(s => {
-              return {
-                value: s.id,
-                label: s.name
-              };
-            })}
-            onChange={opinion => this.setState({ lectureHall: opinion })}
-            onCreateOption={opinion => this.setState({ lectureHall: opinion })}
-          />
-        </Container>
+          <Container className={classes.marginTop}>
+            <CreatableSelect
+              theme={selectorColors}
+              placeholder={i18n.t('lecture_hall')}
+              options={lectureHalls &&
+              lectureHalls.map(s => {
+                return {
+                  value: s.id,
+                  label: s.name
+                };
+              })}
+              onChange={opinion => this.setState({ lectureHall: opinion })}
+            />
+          </Container>
 
-        <Container className={classes.marginTop}>
-          <Select
-            placeholder={i18n.t('groups')}
-            theme={selectorColors}
-            isMulti
-            onChange={opinion => this.setState({ selectedGroups: opinion })}
-            options={groups}
-          />
-        </Container>
+          <Container className={classes.marginTop}>
+            <Select
+              placeholder={i18n.t('groups')}
+              theme={selectorColors}
+              isMulti
+              onChange={opinion => this.setState({ selectedGroups: opinion })}
+              options={groups}
+            />
+          </Container>
 
-        <Container className={classes.marginTop}>
-          <Select
-            theme={selectorColors}
-            onChange={opinion => this.setState({ weekDay: opinion.value })}
-            options={WEEK_DAYS}
-            placeholder={i18n.t('week_day')}
-          />
-        </Container>
+          <Container className={classes.marginTop}>
+            <Select
+              theme={selectorColors}
+              onChange={opinion => this.setState({ weekDay: opinion.value })}
+              options={WEEK_DAYS}
+              placeholder={i18n.t('week_day')}
+            />
+          </Container>
 
-        <Container className={classes.marginTop}>
-          <Select
-            theme={selectorColors}
-            onChange={opinion => this.setState({ lessonTime: opinion.value })}
-            options={LESSONS_TIME}
-            placeholder={i18n.t('lesson_time')}
-          />
-        </Container>
+          <Container className={classes.marginTop}>
+            <Select
+              theme={selectorColors}
+              onChange={opinion => this.setState({ lessonTime: opinion.value })}
+              options={LESSONS_TIME}
+              placeholder={i18n.t('lesson_time')}
+            />
+          </Container>
 
-        <Container className={classes.marginTop}>
-          <Select
-            theme={selectorColors}
-            onChange={opinion => this.setState({ weekNumber: opinion.value })}
-            options={WEEK_NUMBER}
-            defaultValue={WEEK_NUMBER[0]}
-          />
-        </Container>
+          <Container className={classes.marginTop}>
+            <Select
+              theme={selectorColors}
+              onChange={opinion => this.setState({ weekNumber: opinion.value })}
+              options={WEEK_NUMBER}
+              defaultValue={WEEK_NUMBER[0]}
+            />
+          </Container>
 
-        <Container>
-          <Grid container alignItems={'right'}>
-            <Button
-              type="submit"
-              color="primary"
-              variant="outlined"
-              className={classes.submit}
-              onClick={this.submit}
-            >
-              {i18n.t('upload')}
-            </Button>
-          </Grid>
-        </Container>
+          <Container>
+            <Grid container alignItems={'right'}>
+              <Button
+                type="submit"
+                color="primary"
+                variant="outlined"
+                className={classes.submit}
+              >
+                {i18n.t('upload')}
+              </Button>
+            </Grid>
+          </Container>
+        </form>
       </Grid>
     );
   }
@@ -203,7 +210,9 @@ const mapStateToProps = state => {
     institutes: state.infoReducers.institutes,
     departments: state.infoReducers.departments,
     groups: state.infoReducers.groups,
-    universityId: state.authReducers.user.universityId
+    universityId: state.authReducers.user.universityId,
+    teachers: state.teacherReducer.teachers,
+    subjects: state.filesReducers.subjects
   };
 };
 

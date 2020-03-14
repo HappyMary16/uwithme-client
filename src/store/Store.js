@@ -9,6 +9,7 @@ import filesReducers from '../pages/files/reducers';
 import loadingProcess from '../common/reducers/loadingReducer';
 import rootSaga from './rootSaga';
 import adminReducers from '../pages/administration/reducers';
+import teacherReducer from '../pages/teachers/reducer';
 
 export const history = createBrowserHistory();
 
@@ -19,6 +20,7 @@ export default function createAppStore() {
   const rootReducer = combineReducers({
     router: connectRouter(history),
     infoReducers,
+    teacherReducer: teacherReducer,
     authReducers: authReducers,
     filesReducers: filesReducers,
     loadingProcess,

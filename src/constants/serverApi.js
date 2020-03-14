@@ -14,6 +14,7 @@ export const GET_GROUPS_WITH_PARAMETERS = '/info/studyGroups/';
 
 export const GET_SUBJECTS = '/subjects/';
 export const POST_SUBJECTS = '/subject/';
+export const GET_SUBJECTS_BY_UNIVERSITY_ID = '/university/subjects/';
 
 export const GET_FILES = '/files/';
 export const UPLOAD_MULTIPLE_FILES = '/uploadMultipleFiles/';
@@ -23,3 +24,6 @@ export const DOWNLOAD_FILE = '/downloadFile/';
 export const ADD_ACCESS = '/addAccess/';
 
 export const ADD_UNIVERSITY_API = '/university/add';
+
+export const ADD_LESSON = '/addLesson';
+export const GET_TEACHERS_BY_UNIVERSITY_ID = '/users/teachers/';

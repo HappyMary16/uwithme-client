@@ -33,7 +33,7 @@ export default function filesReducers(
     case RENDER_SUBJECTS: {
       return {
         ...state,
-        subjects: action.response.data
+        subjects: action.payload.subjects.data
       };
     }
     case SIGN_OUT:

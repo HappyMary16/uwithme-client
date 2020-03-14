@@ -7,7 +7,7 @@ export function addLessonToSchedule(subjectId,
                                     lectureHall,
                                     groups,
                                     weekDay,
-                                    time,
+                                    lessonTime,
                                     weekNumber) {
   return {
     type: ADD_LESSON_TO_SCHEDULE,
@@ -19,7 +19,7 @@ export function addLessonToSchedule(subjectId,
       lectureHall,
       groups,
       weekDay,
-      time,
+      lessonTime,
       weekNumber
     }
   };
