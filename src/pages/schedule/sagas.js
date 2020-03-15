@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ADD_LESSON_TO_SCHEDULE, FIND_LESSONS_BY_GROUP_ID, FIND_LESSONS_BY_USER_ID, renderLessons } from './actions';
+import { ADD_LESSON_TO_SCHEDULE, FIND_LESSONS_BY_GROUP_ID, FIND_LESSONS_BY_USER_NAME, renderLessons } from './actions';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
 import { ADD_LESSON, GET_LESSONS_BY_GROUP_ID, GET_LESSONS_BY_USER_ID } from '../../constants/serverApi';
@@ -7,7 +7,7 @@ import { ADD_LESSON, GET_LESSONS_BY_GROUP_ID, GET_LESSONS_BY_USER_ID } from '../
 export function* scheduleOperationWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action => addLessonToSchedule(action));
   yield takeEvery(FIND_LESSONS_BY_GROUP_ID, action => findLessonsByGroupId(action));
-  yield takeEvery(FIND_LESSONS_BY_USER_ID, action => findLessonsByUserId(action));
+  yield takeEvery(FIND_LESSONS_BY_USER_NAME, action => findLessonsByUsername(action));
 }
 
 function* addLessonToSchedule(action) {
@@ -76,16 +76,16 @@ function* findLessonsByGroupId(action) {
   }
 }
 
-function* findLessonsByUserId(action) {
+function* findLessonsByUsername(action) {
   try {
     yield put(startFetching());
 
     const {
-      userId
+      username
     } = action.payload;
 
     const { data } = yield call(http, {
-      url: GET_LESSONS_BY_USER_ID + userId,
+      url: GET_LESSONS_BY_USER_ID + username,
       method: 'get'
     });
 

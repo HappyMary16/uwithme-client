@@ -1,6 +1,6 @@
 export const ADD_LESSON_TO_SCHEDULE = 'ADD_LESSON_TO_SCHEDULE';
 export const FIND_LESSONS_BY_GROUP_ID = 'FIND_LESSONS_BY_GROUP_ID';
-export const FIND_LESSONS_BY_USER_ID = 'FIND_LESSONS_BY_USER_ID';
+export const FIND_LESSONS_BY_USER_NAME = 'FIND_LESSONS_BY_USER_NAME';
 
 export const RENDER_LESSONS = 'RENDER_LESSONS';
 
@@ -35,10 +35,10 @@ export const findLessonsByGroupId = (groupId) => ({
   }
 });
 
-export const findLessonsByUserId = (userId) => ({
-  type: FIND_LESSONS_BY_USER_ID,
+export const findLessonsByUsername = (username) => ({
+  type: FIND_LESSONS_BY_USER_NAME,
   payload: {
-    userId
+    username
   }
 });
 

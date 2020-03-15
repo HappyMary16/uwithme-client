@@ -22,18 +22,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+let lessonFilter = (lesson, weekDay, lessonTime) => {
+  return lesson.weekDay === weekDay && lesson.lessonTime === lessonTime;
+};
+
 let getLesson = (lessons, weekDay, lessonTime) => {
-  console.log(lessons);
+  let filteredLessons = Array.isArray(lessons) && lessons.filter(lesson => lessonFilter(lesson, weekDay, lessonTime));
 
-  let filteredLessons = lessons && lessons.filter(lesson => lesson.weekDay === weekDay && lesson.lessonTime === lessonTime);
-
-  console.log(lessons.filter(lesson => lesson.weekDay === weekDay && lesson.lessonTime === lessonTime));
-
-  if (filteredLessons && filteredLessons.size > 0) {
+  if (Array.isArray(filteredLessons) && filteredLessons.length) {
     return filteredLessons[0];
   }
-
-  return {};
 };
 
 export const ScheduleTable = ({ lessons }) => {
@@ -47,7 +45,7 @@ export const ScheduleTable = ({ lessons }) => {
             <TableRow>
               <TableCell> </TableCell>
               {WEEK_DAYS.map(weekDay =>
-                <TableCell align="center" className={classes.cell}>
+                <TableCell key={weekDay.value} align="center" className={classes.cell}>
                   {weekDay.label}
                 </TableCell>
               )}
@@ -60,10 +58,12 @@ export const ScheduleTable = ({ lessons }) => {
                   <TableCell component="th" scope="row">
                     {lessonTime.label}
                   </TableCell>
-                  {WEEK_DAYS.map(weekDay =>
-                    <TableCell component="th" scope="row">
-                      <Lesson lesson={getLesson(lessons, weekDay.value, lessonTime.value)}/>
-                    </TableCell>
+                  {WEEK_DAYS.map(weekDay => {
+                    let lesson = getLesson(lessons, weekDay.value, lessonTime.value);
+                    return (<TableCell key={weekDay.value} component="th" scope="row" className={classes.cell}>
+                      {lesson && <Lesson lesson={lesson}/>}
+                    </TableCell>);
+                  }
                   )}
                 </TableRow>
               )}

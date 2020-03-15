@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findLessonsByUserId } from '../actions';
+import { findLessonsByUsername } from '../actions';
 import { ScheduleTable } from '../components/ScheduleTable';
 
 
 class UserSchedule extends Component {
   componentDidMount() {
-    const { dispatch, userId } = this.props;
+    const { dispatch, username } = this.props;
 
-    dispatch(findLessonsByUserId(userId));
+    dispatch(findLessonsByUsername(username));
   }
 
   render() {
@@ -22,7 +22,7 @@ class UserSchedule extends Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.authReducers.user.id,
+    username: state.authReducers.user.username,
     lessons: state.scheduleReducers.lessons
   };
 };
