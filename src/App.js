@@ -13,7 +13,6 @@ import {
   SIGN_UP,
   USER_HOME
 } from './constants/links';
-import UserContainer from './pages/student/containers/UserContainer';
 import { UserToolBar } from './pages/student/components/UserToolBar';
 
 import Grid from '@material-ui/core/Grid';
@@ -35,6 +34,7 @@ import InstitutesList from './pages/administration/containers/InstitutesList';
 import AddLesson from './pages/schedule/containers/AddLesson';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
+import UserContainer from './pages/student/containers/UserContainer';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {

@@ -1,23 +1,20 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 export const Lesson = ({ lesson }) => {
 
   return (
-    <Card>
-      <CardContent>
-        <Typography color="textPrimary">
+    <ThemeProvider>
+      <Typography align={'center'} color="textPrimary">
           {lesson.subjectName}
         </Typography>
-        <Typography color="textPrimary">
+      <Typography align={'center'} variant={'h6'} color="textPrimary">
           {lesson.lectureHall}
         </Typography>
-        <Typography color="textSecondary">
+      <Typography align={'center'} variant={'body2'} color="textSecondary">
           {lesson.teacherName}
         </Typography>
-      </CardContent>
-    </Card>
+    </ThemeProvider>
   );
 };

@@ -23,10 +23,6 @@ const submit = {
   backgroundColor: '#eeeeee'
 };
 
-const groupSelect = {
-  marginTop: '20px'
-};
-
 let selectedGroups = [];
 let files = [];
 
@@ -102,7 +98,7 @@ class ShareFiles extends React.Component {
           </Container>
         </Grid>
         <Container>
-          <Grid container xs={12} style={groupSelect}>
+          <Grid container xs={12} style={marginTop}>
             <Grid item xs={6}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
@@ -127,7 +123,7 @@ class ShareFiles extends React.Component {
           </Grid>
         </Container>
 
-        <Container style={groupSelect}>
+        <Container style={marginTop}>
           <Select
             placeholder={i18n.t('groups')}
             theme={selectorColors}

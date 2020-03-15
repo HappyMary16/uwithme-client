@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { TodaySchedule } from './TodaySchedule';
+import { TodaySchedule } from '../../schedule/components/TodaySchedule';
 import { UserCard } from './UserCard';
 import i18n from '../../../locales/i18n';
 
@@ -22,8 +22,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const User = ({ user, schedules }) => {
+export const User = ({ user, lessons }) => {
   const classes = useStyles();
+  const [weekDay, setWeekDay] = React.useState(new Date().getDay());
 
   return (
     <Grid container xs={12} direction={'column'} className={classes.root}>
@@ -34,7 +35,7 @@ export const User = ({ user, schedules }) => {
         <Typography variant="h4" gutterBottom>
           {i18n.t('schedule')}
         </Typography>
-        <TodaySchedule schedules={schedules} />
+        <TodaySchedule lessons={lessons} day={weekDay} user={user}/>
       </Grid>
     </Grid>
   );

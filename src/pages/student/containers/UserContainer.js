@@ -1,22 +1,33 @@
 import { connect } from 'react-redux';
 import { User } from '../components/User';
+import { findLessonsByUsername } from '../../schedule/actions';
+import React, { Component } from 'react';
 
-function createData(time, name) {
-  return { time, name };
+class UserContainer extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    const { dispatch, user } = this.props;
+    dispatch(findLessonsByUsername(user.username));
+  }
+
+  render() {
+    const { user, lessons } = this.props;
+
+    return (
+      <User user={user} lessons={lessons}/>
+    );
+  }
 }
-
-const rows = [
-  createData('10:25-12:00', 'History'),
-  createData('12:35-14:10', 'Java')
-];
 
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    schedules: rows
+    lessons: state.scheduleReducers.lessons
   };
 };
 
-const UserContainer = connect(mapStateToProps)(User);
-
-export default UserContainer;
+export default connect(mapStateToProps)(UserContainer);

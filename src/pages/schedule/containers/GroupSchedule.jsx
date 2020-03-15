@@ -2,27 +2,58 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { findLessonsByGroupId } from '../actions';
 import { ScheduleTable } from '../components/ScheduleTable';
+import { Container } from '@material-ui/core';
+import i18n from '../../../locales/i18n';
+import Select from 'react-select';
+import { marginTop, selectorColors } from '../../../common/styles/styles';
+import { loadGroupsByUniversityId } from '../../../common/actions';
 
 
 class GroupSchedule extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      groupId: ''
+    };
+
+    this.handleGroupChange = this.handleGroupChange.bind(this);
+  }
   componentDidMount() {
-    const { dispatch, groupId } = this.props;
-    dispatch(findLessonsByGroupId(groupId));
+    const { dispatch, universityId } = this.props;
+    dispatch(loadGroupsByUniversityId(universityId));
+  }
+
+  handleGroupChange(groupId) {
+    const { dispatch } = this.props;
+    groupId && dispatch(findLessonsByGroupId(groupId.value));
   }
 
   render() {
-    const { lessons } = this.props;
+    const { groups, lessons } = this.props;
 
     return (
-      <ScheduleTable lessons={lessons}/>
+      <Container>
+        <Container style={marginTop}>
+          <Select
+            placeholder={i18n.t('select_group')}
+            theme={selectorColors}
+            // isMulti
+            onChange={this.handleGroupChange}
+            options={groups}
+          />
+        </Container>
+        {lessons && <ScheduleTable lessons={lessons}/>}
+      </Container>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    //TODO fix it
-    groupId: 1,
+    universityId: state.authReducers.user.universityId,
+    groups: state.infoReducers.groups,
     lessons: state.scheduleReducers.lessons
   };
 };
