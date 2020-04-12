@@ -18,7 +18,7 @@ const useStyles2 = makeStyles({
   }
 });
 
-export const TodaySchedule = ({ lessons, day, user }) => {
+export const TodaySchedule = ({ lessons, day, user, weekNumber }) => {
   const classes = useStyles2();
 
   return (
@@ -45,7 +45,7 @@ export const TodaySchedule = ({ lessons, day, user }) => {
                 {i18n.t('group')}
               </TableCell>}
             </TableRow>
-            {lessons && filterAndSortLessons(lessons, day).map(lesson => (
+            {lessons && filterAndSortLessons(lessons, day, weekNumber).map(lesson => (
               <TableRow key={lesson.name}>
                 <TableCell align={'center'} component="td" scope="row">
                   {getLessonTime(lesson.lessonTime)}

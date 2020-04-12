@@ -5,6 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import { TodaySchedule } from '../../schedule/components/TodaySchedule';
 import { UserCard } from './UserCard';
 import i18n from '../../../locales/i18n';
+import Switch from 'react-switch';
+import { getCurrentWeek } from '../../../utils/ScheduleUtil';
+import { lightGreyColor, switchWeek } from '../../../common/styles/styles';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -25,17 +28,41 @@ const useStyles = makeStyles(theme => ({
 export const User = ({ user, lessons }) => {
   const classes = useStyles();
   const [weekDay, setWeekDay] = React.useState(new Date().getDay());
+  const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
+  //TODO add opportunity to choose day
 
   return (
-    <Grid container xs={12} direction={'column'} className={classes.root}>
+    <Grid container xs={12} direction='column' className={classes.root}>
       <Grid xs={12} className={classes.paper}>
-        <UserCard user={user} />
+        <UserCard user={user}/>
       </Grid>
-      <Grid xs={12} className={classes.paper}>
-        <Typography variant="h4" gutterBottom>
+      <Grid container xs={12} className={classes.paper} direction='row' justify='space-between'>
+        <Typography variant="h4">
           {i18n.t('schedule')}
         </Typography>
-        <TodaySchedule lessons={lessons} day={weekDay} user={user}/>
+
+        <Grid>
+          <Typography>
+            {i18n.t('week')}
+          </Typography>
+          <Switch
+            offColor={lightGreyColor}
+            onColor={lightGreyColor}
+            checked={weekNumber}
+            onChange={() => setWeekNumber(!weekNumber)}
+            uncheckedIcon={<div style={switchWeek}>
+              2
+            </div>}
+            checkedIcon={<div style={switchWeek}>
+              1
+            </div>}
+            className="react-switch"
+            id="icon-switch"
+          />
+        </Grid>
+      </Grid>
+      <Grid xs={12} className={classes.paper}>
+        <TodaySchedule lessons={lessons} day={weekDay} user={user} weekNumber={weekNumber ? 1 : 2}/>
       </Grid>
     </Grid>
   );
