@@ -1,4 +1,4 @@
-import { ADD_UNIVERSITY } from './actions';
+import { ADD_UNIVERSITY, CREATE_INSTITUTE } from './actions';
 
 export default function adminReducers(state = {}, action) {
   switch (action.type) {
@@ -7,7 +7,11 @@ export default function adminReducers(state = {}, action) {
         ...state,
         state
       };
-
+    case CREATE_INSTITUTE:
+      return {
+        ...state,
+        state
+      };
     default:
       return state;
   }

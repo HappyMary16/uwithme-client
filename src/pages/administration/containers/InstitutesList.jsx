@@ -5,7 +5,6 @@ import List from '@material-ui/core/List';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
-import { ADD_INSTITUTE } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import {
   loadDepartmentsByUniversityId,
@@ -14,6 +13,13 @@ import {
 } from '../../../common/actions';
 import Institute from '../components/structure/Institute';
 import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
+import { createInstitute } from '../actions';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import TextField from '@material-ui/core/TextField';
+import DialogActions from '@material-ui/core/DialogActions';
 
 const useStyles = theme => ({
   list: {
@@ -38,11 +44,13 @@ class InstitutesList extends Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      openInstituteDialog: false,
+      instituteName: ''
     };
 
-    this.someAction = this.someAction.bind(this);
-    this.instituteHandleClick = this.instituteHandleClick.bind(this);
+    this.createInstitute = this.createInstitute.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -54,41 +62,77 @@ class InstitutesList extends Component {
     }
   }
 
-  instituteHandleClick() {
-    const { open } = this.state;
-    this.setState({ open: !open });
+  handleClose() {
+    this.setState({ openInstituteDialog: false });
   }
 
-  someAction() {
-    console.log('action');
+  createInstitute(instituteName) {
+    const { dispatch, universityId } = this.props;
+
+    dispatch(createInstitute(universityId, instituteName));
+    this.setState({ openInstituteDialog: false });
   }
 
   render() {
     const { institutes, departments, groups, classes } = this.props;
+    const { openInstituteDialog, instituteName } = this.state;
 
     return (
       <Grid container xs={12} className={classes.root}>
         <Grid container xs={6} className={classes.buttons} justify="flex-end">
           <Button
-            href={ADD_INSTITUTE}
             color="primary"
             variant="outlined"
             className={classes.link}
+            onClick={() => {
+              this.setState({ openInstituteDialog: true });
+            }}
           >
-            {i18n.t('add_institute')}
+            {i18n.t('create_institute')}
           </Button>
+
+
+          <Dialog open={openInstituteDialog} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">{i18n.t('create_institute')}</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {i18n.t('input_institute_name')}
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label={i18n.t('institute_name')}
+                fullWidth
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  this.setState({ instituteName: e.target.value });
+                }}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                {i18n.t('cancel')}
+              </Button>
+              <Button onClick={() => this.createInstitute(instituteName)} color="primary">
+                {i18n.t('create')}
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+
         </Grid>
         <List component="nav" className={classes.list}>
           {institutes &&
-            institutes.map((institute, i) => (
-              <Institute
-                key={i}
-                institute={institute}
-                departments={getDepartmentsByInstitute(departments, institute)}
-                groups={groups}
-                classes={classes}
-              />
-            ))}
+          institutes.map((institute, i) => (
+            <Institute
+              key={i}
+              institute={institute}
+              departments={getDepartmentsByInstitute(departments, institute)}
+              groups={groups}
+              classes={classes}
+            />
+          ))}
         </List>
       </Grid>
     );
