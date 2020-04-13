@@ -3,7 +3,6 @@ import createSagaMiddleware from 'redux-saga';
 import { connectRouter } from 'connected-react-router';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createBrowserHistory } from 'history';
-import infoReducers from '../common/reducers';
 import authReducers from '../pages/authorization/reducers';
 import filesReducers from '../pages/files/reducers';
 import loadingProcess from '../common/reducers/loadingReducer';
@@ -20,13 +19,12 @@ export default function createAppStore() {
 
   const rootReducer = combineReducers({
     router: connectRouter(history),
-    infoReducers,
     scheduleReducers: scheduleReducers,
     teacherReducer: teacherReducer,
     authReducers: authReducers,
     filesReducers: filesReducers,
-    loadingProcess,
-    adminReducers
+    loadingProcess: loadingProcess,
+    adminReducers: adminReducers
   });
 
   const store = createStore(

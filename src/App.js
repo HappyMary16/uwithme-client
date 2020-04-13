@@ -30,7 +30,7 @@ import { AdminToolBar } from './pages/administration/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import InstitutesList from './pages/administration/containers/InstitutesList';
+import UniversityStructure from './pages/administration/containers/UniversityStructure';
 import AddLesson from './pages/schedule/containers/AddLesson';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
@@ -101,8 +101,8 @@ let App = ({ user, isFetching }) => {
 
                 {isAdmin(user) && (
                   <Grid>
-                    <Route exact path={USER_HOME} component={InstitutesList} />
-                    <Route exact path={ADD_LESSON} component={AddLesson} />
+                    <Route exact path={USER_HOME} component={UniversityStructure}/>
+                    <Route exact path={ADD_LESSON} component={AddLesson}/>
                     <Route exact path={SCHEDULE} component={GroupSchedule}/>
                   </Grid>
                 )}

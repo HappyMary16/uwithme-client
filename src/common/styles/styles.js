@@ -12,6 +12,10 @@ export const marginTop = {
   marginTop: '20px'
 };
 
+export const marginLeft = {
+  marginLeft: '10px'
+};
+
 export const purpleColor = '#483D8B';
 export const lightGreyColor = '#D3D3D3';
 

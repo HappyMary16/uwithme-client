@@ -17,7 +17,7 @@ import { InputField } from '../../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { loadDepartments, loadGroups, loadInstitutes } from '../../../common/actions';
+import { loadDepartments, loadGroups, loadInstitutes } from '../../administration/actions';
 
 const useStyles = theme => ({
   paper: {
@@ -244,10 +244,10 @@ class SignUp extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.infoReducers.institutes,
-    departments: state.infoReducers.departments,
-    groups: state.infoReducers.groups,
-    scienceDegrees: state.infoReducers.scienceDegrees
+    institutes: state.adminReducers.institutes,
+    departments: state.adminReducers.departments,
+    groups: state.adminReducers.groups,
+    scienceDegrees: state.adminReducers.scienceDegrees
   };
 };
 

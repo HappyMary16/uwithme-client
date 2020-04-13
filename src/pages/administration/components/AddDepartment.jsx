@@ -8,24 +8,43 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import i18n from '../../../locales/i18n';
+import { selectorColors } from '../../../common/styles/styles';
+import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 
-export const AddInstitute = ({ open, handleClose, handleCreate }) => {
-  const [instituteName, setInstituteName] = React.useState('');
+export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) => {
+  const [institute, setInstitute] = React.useState();
+  const [departmentName, setDepartmentName] = React.useState('');
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{i18n.t('create_institute')}</DialogTitle>
+      <DialogTitle id="form-dialog-title">{i18n.t('create_department')}</DialogTitle>
       <DialogContent>
+
         <DialogContentText>
-          {i18n.t('input_institute_name')}
+          {i18n.t('select_institute')}
+        </DialogContentText>
+        <CreatableSelect
+          theme={selectorColors}
+          placeholder={i18n.t('institute')}
+          options={institutes}
+          onChange={setInstitute}
+          onCreateOption={(e) => setInstitute({
+            value: e,
+            label: e
+          })}
+          value={institute}
+        />
+
+        <DialogContentText>
+          {i18n.t('input_department_name')}
         </DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           id="name"
-          label={i18n.t('institute_name')}
+          label={i18n.t('department_name')}
           fullWidth
-          onChange={(e) => setInstituteName(e.target.value)}
+          onChange={(e) => setDepartmentName(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
@@ -33,12 +52,13 @@ export const AddInstitute = ({ open, handleClose, handleCreate }) => {
           {i18n.t('cancel')}
         </Button>
         <Button onClick={() => {
-          handleCreate(instituteName);
+          handleCreate(institute.label, institute.value, departmentName);
           handleClose();
         }} color="primary">
           {i18n.t('create')}
         </Button>
       </DialogActions>
+
     </Dialog>
   );
 };

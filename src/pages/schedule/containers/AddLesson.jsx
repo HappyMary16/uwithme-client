@@ -5,11 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import i18n from '../../../locales/i18n';
-import {
-  loadDepartmentsByUniversityId,
-  loadGroupsByUniversityId,
-  loadInstitutesByUniversityId
-} from '../../../common/actions';
 import Select from 'react-select';
 import Container from '@material-ui/core/Container';
 import { selectorColors } from '../../../common/styles/styles';
@@ -18,6 +13,11 @@ import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRol
 import { addLessonToSchedule } from '../actions';
 import { loadTeachersByUniversityId } from '../../teachers/actions';
 import { loadSubjectsByUniversityId } from '../../files/actions';
+import {
+  loadDepartmentsByUniversityId,
+  loadGroupsByUniversityId,
+  loadInstitutesByUniversityId
+} from '../../administration/actions';
 
 const useStyles = theme => ({
   form: {
@@ -207,9 +207,9 @@ class AddLesson extends Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.infoReducers.institutes,
-    departments: state.infoReducers.departments,
-    groups: state.infoReducers.groups,
+    institutes: state.adminReducers.institutes,
+    departments: state.adminReducers.departments,
+    groups: state.adminReducers.groups,
     universityId: state.authReducers.user.universityId,
     teachers: state.teacherReducer.teachers,
     subjects: state.filesReducers.subjects

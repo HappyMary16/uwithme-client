@@ -6,8 +6,7 @@ import { Container } from '@material-ui/core';
 import i18n from '../../../locales/i18n';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../common/styles/styles';
-import { loadGroupsByUniversityId } from '../../../common/actions';
-
+import { loadGroupsByUniversityId } from '../../administration/actions';
 
 class GroupSchedule extends Component {
 
@@ -53,7 +52,7 @@ class GroupSchedule extends Component {
 const mapStateToProps = state => {
   return {
     universityId: state.authReducers.user.universityId,
-    groups: state.infoReducers.groups,
+    groups: state.adminReducers.groups,
     lessons: state.scheduleReducers.lessons
   };
 };

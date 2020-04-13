@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
-import { ADD_INSTITUTE_API, ADD_UNIVERSITY_API } from '../../constants/serverApi';
-import { ADD_UNIVERSITY, CREATE_INSTITUTE, instituteCreated } from './actions';
+import { ADD_DEPARTMENT_API, ADD_INSTITUTE_API, ADD_UNIVERSITY_API } from '../../constants/serverApi';
+import { ADD_UNIVERSITY, CREATE_DEPARTMENT, CREATE_INSTITUTE, departmentCreated, instituteCreated } from './actions';
 import { SIGN_IN_ERROR, SIGN_IN_SUCCESS } from '../authorization/actions';
 import { history } from '../../store/Store';
 import { USER_HOME } from '../../constants/links';
@@ -10,6 +10,7 @@ import { USER_HOME } from '../../constants/links';
 export function* administrationWatcher() {
   yield takeEvery(ADD_UNIVERSITY, action => addUniversity(action));
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
+  yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
 }
 
 function* addUniversity(action) {
@@ -35,7 +36,6 @@ function* addUniversity(action) {
   } catch (error) {
     alert(error);
     yield call(signInError, error);
-    //TODO process errors
   } finally {
     yield put(endFetching());
   }
@@ -45,25 +45,52 @@ function* createInstitute(action) {
   try {
     yield put(startFetching());
 
-    console.log(action.payload);
+    const { universityId, instituteName } = action.payload;
+
     const response = yield call(http, {
       url: ADD_INSTITUTE_API,
       method: 'post',
       data: {
-        universityId: action.payload.universityId,
-        instituteName: action.payload.instituteName
+        universityId: universityId,
+        instituteName: instituteName
       }
     });
 
     if (response && response.status === 200) {
-      yield put(instituteCreated(response.data.id, response.data.name));
+      yield put(instituteCreated(response.data));
     } else {
       alert(response);
-      //TODO process errors
     }
   } catch (error) {
     alert(error);
-    //TODO process errors
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* createDepartment(action) {
+  try {
+    yield put(startFetching());
+
+    const { universityId, instituteName, departmentName } = action.payload;
+
+    const response = yield call(http, {
+      url: ADD_DEPARTMENT_API,
+      method: 'post',
+      data: {
+        universityId: universityId,
+        instituteName: instituteName,
+        departmentName: departmentName
+      }
+    });
+
+    if (response && response.status === 200) {
+      yield put(departmentCreated(response.data));
+    } else {
+      alert(response);
+    }
+  } catch (error) {
+    alert(error);
   } finally {
     yield put(endFetching());
   }

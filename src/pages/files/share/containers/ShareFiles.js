@@ -10,11 +10,11 @@ import { getLectures, getTasks } from '../../../../utils/FileUtil';
 import { compose } from 'redux';
 import FilesToChoose from '../components/FilesToChoose';
 import { addAccessToFiles } from '../actions';
-import { loadGroups } from '../../../../common/actions';
 import { getFilesByUsername, loadSubjects } from '../../actions';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../../common/styles/styles';
 import Container from '@material-ui/core/Container';
+import { loadGroups } from '../../../administration/actions';
 
 const submit = {
   marginTop: '10px',
@@ -157,7 +157,7 @@ const mapStateToProps = state => {
     subjects: state.filesReducers.subjects,
     lectures: getLectures(state.filesReducers.files),
     tasks: getTasks(state.filesReducers.files),
-    groups: state.infoReducers.groups
+    groups: state.adminReducers.groups
   };
 };
 

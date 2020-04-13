@@ -33,7 +33,7 @@ export default class StateLoader {
       authReducers: {
         user: {}
       },
-      infoReducers: {
+      adminReducers: {
         institutes: [
           {
             value: '1',

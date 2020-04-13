@@ -1,18 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import {
-  endFetching,
-  LOAD_DEPARTMENTS,
-  LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
-  LOAD_GROUPS,
-  LOAD_GROUPS_BY_UNIVERSITY_ID,
-  LOAD_INSTITUTES,
-  LOAD_INSTITUTES_BY_UNIVERSITY_ID,
-  RENDER_DEPARTMENTS,
-  RENDER_GROUPS,
-  RENDER_INSTITUTES,
-  startFetching
-} from '../actions';
+import { endFetching, startFetching } from '../actions';
 import http from '../../services/http';
 import {
   GET_DEPARTMENTS,
@@ -22,6 +10,17 @@ import {
   GET_INSTITUTES,
   GET_INSTITUTES_WITH_PARAMETERS
 } from '../../constants/serverApi';
+import {
+  LOAD_DEPARTMENTS,
+  LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
+  LOAD_GROUPS,
+  LOAD_GROUPS_BY_UNIVERSITY_ID,
+  LOAD_INSTITUTES,
+  LOAD_INSTITUTES_BY_UNIVERSITY_ID,
+  RENDER_DEPARTMENTS,
+  RENDER_GROUPS,
+  RENDER_INSTITUTES
+} from '../../pages/administration/actions';
 
 export function* commonDataWatcher() {
   yield takeEvery(LOAD_INSTITUTES, loadInstitutes);
@@ -49,7 +48,7 @@ function* loadInstitutes() {
 
     yield put({ type: RENDER_INSTITUTES, institutes });
   } catch (e) {
-    //TODO process errors
+    alert(e);
   } finally {
     yield put(endFetching());
   }
@@ -67,7 +66,7 @@ function* loadInstitutesByUniversityId(action) {
 
     yield put({ type: RENDER_INSTITUTES, institutes });
   } catch (e) {
-    //TODO process errors
+    alert(e);
   } finally {
     yield put(endFetching());
   }
@@ -85,7 +84,7 @@ function* loadDepartmentsByUniversityId(action) {
 
     yield put({ type: RENDER_DEPARTMENTS, departments });
   } catch (e) {
-    //TODO process errors
+    alert(e);
   } finally {
     yield put(endFetching());
   }
@@ -103,7 +102,7 @@ function* loadGroupsByUniversityId(action) {
 
     yield put({ type: RENDER_GROUPS, groups });
   } catch (e) {
-    //TODO process errors
+    alert(e);
   } finally {
     yield put(endFetching());
   }
@@ -119,7 +118,7 @@ function* loadDepartments() {
     });
     yield put({ type: RENDER_DEPARTMENTS, departments });
   } catch (e) {
-    //TODO process errors
+    alert(e);
   } finally {
     yield put(endFetching());
   }
@@ -135,7 +134,7 @@ function* loadGroups() {
     });
     yield put({ type: RENDER_GROUPS, groups });
   } catch (e) {
-    //TODO process errors
+    alert(e);
   } finally {
     yield put(endFetching());
   }
