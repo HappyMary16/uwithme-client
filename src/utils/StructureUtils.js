@@ -7,3 +7,8 @@ export const getDepartmentsByInstitute = (departments, institute) => {
     department => department.instituteId === institute.value
   );
 };
+
+export const getInstituteById = (institutes, instituteId) => {
+  return Array.isArray(institutes)
+    && institutes.filter(institute => institute.value === instituteId)[0];
+};

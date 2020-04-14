@@ -1,8 +1,16 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
-import { ADD_DEPARTMENT_API, ADD_INSTITUTE_API, ADD_UNIVERSITY_API } from '../../constants/serverApi';
-import { ADD_UNIVERSITY, CREATE_DEPARTMENT, CREATE_INSTITUTE, departmentCreated, instituteCreated } from './actions';
+import { ADD_DEPARTMENT_API, ADD_GROUP_API, ADD_INSTITUTE_API, ADD_UNIVERSITY_API } from '../../constants/serverApi';
+import {
+  ADD_UNIVERSITY,
+  CREATE_DEPARTMENT,
+  CREATE_GROUP,
+  CREATE_INSTITUTE,
+  departmentCreated,
+  groupCreated,
+  instituteCreated
+} from './actions';
 import { SIGN_IN_ERROR, SIGN_IN_SUCCESS } from '../authorization/actions';
 import { history } from '../../store/Store';
 import { USER_HOME } from '../../constants/links';
@@ -11,6 +19,7 @@ export function* administrationWatcher() {
   yield takeEvery(ADD_UNIVERSITY, action => addUniversity(action));
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
+  yield takeEvery(CREATE_GROUP, action => createGroup(action));
 }
 
 function* addUniversity(action) {
@@ -86,6 +95,37 @@ function* createDepartment(action) {
 
     if (response && response.status === 200) {
       yield put(departmentCreated(response.data));
+    } else {
+      alert(response);
+    }
+  } catch (error) {
+    alert(error);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* createGroup(action) {
+  try {
+    yield put(startFetching());
+
+    const { universityId, instituteName, departmentName, course, groupName } = action.payload;
+
+    console.log(action.payload);
+    const response = yield call(http, {
+      url: ADD_GROUP_API,
+      method: 'post',
+      data: {
+        universityId: universityId,
+        instituteName: instituteName,
+        departmentName: departmentName,
+        groupName: groupName,
+        course: course
+      }
+    });
+
+    if (response && response.status === 200) {
+      yield put(groupCreated(response.data));
     } else {
       alert(response);
     }

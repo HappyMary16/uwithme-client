@@ -1,5 +1,12 @@
 import StateLoader from '../../store/StateLoader';
-import { DEPARTMENT_CREATED, INSTITUTE_CREATED, RENDER_DEPARTMENTS, RENDER_GROUPS, RENDER_INSTITUTES } from './actions';
+import {
+  DEPARTMENT_CREATED,
+  GROUP_CREATED,
+  INSTITUTE_CREATED,
+  RENDER_DEPARTMENTS,
+  RENDER_GROUPS,
+  RENDER_INSTITUTES
+} from './actions';
 
 export default function adminReducers(
   state = new StateLoader().loadState().adminReducers || {},
@@ -58,6 +65,17 @@ export default function adminReducers(
             value: action.payload.department.id,
             label: action.payload.department.name,
             instituteId: action.payload.department.instituteId
+          }]
+      };
+    case GROUP_CREATED:
+      return {
+        ...state,
+        groups: [...state.groups,
+          {
+            value: action.payload.group.id,
+            label: action.payload.group.name,
+            departmentId: action.payload.group.departmentId,
+            course: action.payload.course
           }]
       };
     default:

@@ -26,6 +26,7 @@ export const ADD_ACCESS = '/addAccess/';
 export const ADD_UNIVERSITY_API = '/university/add';
 export const ADD_INSTITUTE_API = '/institute/add';
 export const ADD_DEPARTMENT_API = '/department/add';
+export const ADD_GROUP_API = '/group/add';
 
 export const ADD_LESSON = '/lesson/add';
 export const GET_LESSONS_BY_GROUP_ID = '/lessons/group/';

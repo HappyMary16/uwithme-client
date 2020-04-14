@@ -2,9 +2,11 @@ export const ADD_UNIVERSITY = 'ADD_UNIVERSITY';
 
 export const CREATE_INSTITUTE = 'CREATE_INSTITUTE';
 export const CREATE_DEPARTMENT = 'CREATE_DEPARTMENT';
+export const CREATE_GROUP = 'CREATE_GROUP';
 
 export const INSTITUTE_CREATED = 'INSTITUTE_CREATED';
 export const DEPARTMENT_CREATED = 'DEPARTMENT_CREATED';
+export const GROUP_CREATED = 'GROUP_CREATED';
 
 export const LOAD_INSTITUTES_BY_UNIVERSITY_ID = 'LOAD_INSTITUTES_BY_UNIVERSITY_ID';
 export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID = 'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
@@ -68,6 +70,30 @@ export const departmentCreated = (department) => ({
   type: DEPARTMENT_CREATED,
   payload: {
     department
+  }
+});
+
+export const createGroup = (
+  universityId,
+  instituteName,
+  departmentName,
+  course,
+  groupName
+) => ({
+  type: CREATE_GROUP,
+  payload: {
+    universityId,
+    instituteName,
+    departmentName,
+    course,
+    groupName
+  }
+});
+
+export const groupCreated = (group) => ({
+  type: GROUP_CREATED,
+  payload: {
+    group
   }
 });
 

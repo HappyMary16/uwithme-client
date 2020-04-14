@@ -18,16 +18,9 @@ export default function filesReducers(
         return file;
       });
 
-      let files = [];
-      if (state.files) {
-        files = state.files.filter(
-          file => file.subjectId !== newFiles[0].subjectId
-        );
-      }
-
       return {
         ...state,
-        files: files.concat(newFiles)
+        files: newFiles
       };
 
     case RENDER_SUBJECTS: {
