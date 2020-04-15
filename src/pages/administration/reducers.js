@@ -3,9 +3,12 @@ import {
   DEPARTMENT_CREATED,
   GROUP_CREATED,
   INSTITUTE_CREATED,
+  LECTURE_HALL_CREATED,
+  RENDER_BUILDINGS,
   RENDER_DEPARTMENTS,
   RENDER_GROUPS,
-  RENDER_INSTITUTES
+  RENDER_INSTITUTES,
+  RENDER_LECTURE_HALLS
 } from './actions';
 
 export default function adminReducers(
@@ -75,7 +78,41 @@ export default function adminReducers(
             value: action.payload.group.id,
             label: action.payload.group.name,
             departmentId: action.payload.group.departmentId,
-            course: action.payload.course
+            course: action.payload.group.course
+          }]
+      };
+    case RENDER_LECTURE_HALLS:
+      return {
+        ...state,
+        lectureHalls: action.payload.lectureHalls.map(lectureHall => {
+          return {
+            value: lectureHall.id,
+            label: lectureHall.name,
+            buildingId: lectureHall.buildingId,
+            placeNumber: lectureHall.placeNumber
+          };
+        })
+      };
+    case RENDER_BUILDINGS:
+      return {
+        ...state,
+        buildings: action.payload.buildings.map(building => {
+          return {
+            value: building.id,
+            label: building.name,
+            universityId: building.universityId
+          };
+        })
+      };
+    case LECTURE_HALL_CREATED:
+      return {
+        ...state,
+        lectureHalls: [...state.lectureHalls,
+          {
+            value: action.payload.lectureHall.id,
+            label: action.payload.lectureHall.name,
+            buildingId: action.payload.lectureHall.buildingId,
+            placeNumber: action.payload.lectureHall.placeNumber
           }]
       };
     default:

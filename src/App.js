@@ -7,6 +7,7 @@ import {
   ADD_LESSON,
   ADD_UNIVERSITY_PATH,
   FILES,
+  LECTURE_HALLS,
   SCHEDULE,
   SHARE_FILES,
   SIGN_IN,
@@ -35,6 +36,7 @@ import AddLesson from './pages/schedule/containers/AddLesson';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 import UserContainer from './pages/student/containers/UserContainer';
+import LectureHalls from './pages/administration/containers/LectureHalls';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -104,6 +106,7 @@ let App = ({ user, isFetching }) => {
                     <Route exact path={USER_HOME} component={UniversityStructure}/>
                     <Route exact path={ADD_LESSON} component={AddLesson}/>
                     <Route exact path={SCHEDULE} component={GroupSchedule}/>
+                    <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
                   </Grid>
                 )}
               </Grid>

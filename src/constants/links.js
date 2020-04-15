@@ -3,7 +3,7 @@ export const SIGN_IN = '/sign-in';
 export const SIGN_UP = '/sign-up';
 
 //user
-export const USER_HOME = '/user/home';
+export const USER_HOME = '/home';
 export const FILES = '/user/files';
 export const SCHEDULE = '/user/schedule';
 
@@ -17,3 +17,5 @@ export const ADD_INSTITUTE = '/institute/add';
 export const INSTITUTE_INFO = '/institute/info/';
 export const INSTITUTE_EDIT = '/institute/edit/';
 export const ADD_LESSON = '/lesson/add';
+
+export const LECTURE_HALLS = '/lectureHalls';

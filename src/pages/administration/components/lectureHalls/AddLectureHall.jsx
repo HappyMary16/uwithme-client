@@ -7,44 +7,59 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
-import i18n from '../../../locales/i18n';
-import { selectorColors } from '../../../common/styles/styles';
+import i18n from '../../../../locales/i18n';
+import { selectorColors } from '../../../../common/styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
+import { number } from 'prop-types';
 
-export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) => {
-  const [institute, setInstitute] = React.useState();
-  const [departmentName, setDepartmentName] = React.useState('');
+export const AddLectureHall = ({ buildings, open, handleClose, handleCreate }) => {
+  const [building, setBuilding] = React.useState();
+  const [lectureHallName, setLectureHall] = React.useState();
+  const [placeNumber, setPlaceNumber] = React.useState();
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{i18n.t('create_department')}</DialogTitle>
+      <DialogTitle id="form-dialog-title">{i18n.t('create_lecture_hall')}</DialogTitle>
       <DialogContent>
 
         <DialogContentText>
-          {i18n.t('select_institute')}
+          {i18n.t('select_building')}
         </DialogContentText>
         <CreatableSelect
           theme={selectorColors}
-          placeholder={i18n.t('institute')}
-          options={institutes}
-          onChange={setInstitute}
-          onCreateOption={(e) => setInstitute({
+          placeholder={i18n.t('building_name')}
+          options={buildings}
+          onChange={setBuilding}
+          onCreateOption={(e) => setBuilding({
             value: e,
             label: e
           })}
-          value={institute}
+          value={building}
         />
 
         <DialogContentText>
-          {i18n.t('input_department_name')}
+          {i18n.t('input_lecture_hall_name')}
         </DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           id="name"
-          label={i18n.t('department_name')}
+          label={i18n.t('lecture_hall_name')}
           fullWidth
-          onChange={(e) => setDepartmentName(e.target.value)}
+          onChange={(e) => setLectureHall(e.target.value)}
+        />
+
+        <DialogContentText>
+          {i18n.t('input_place_number')}
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label={i18n.t('place_number')}
+          fullWidth
+          type={number}
+          onChange={(e) => setPlaceNumber(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
@@ -52,7 +67,7 @@ export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) =
           {i18n.t('cancel')}
         </Button>
         <Button onClick={() => {
-          handleCreate(institute.label, institute.value, departmentName);
+          handleCreate(building.label, building.value, lectureHallName, placeNumber);
           handleClose();
         }} color="primary">
           {i18n.t('create')}

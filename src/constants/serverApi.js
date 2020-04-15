@@ -33,3 +33,6 @@ export const GET_LESSONS_BY_GROUP_ID = '/lessons/group/';
 export const GET_LESSONS_BY_USER_ID = '/lessons/user/';
 
 export const GET_TEACHERS_BY_UNIVERSITY_ID = '/users/teachers/';
+
+export const GET_LECTURE_HALLS = '/lectureHalls/';
+export const GET_BUILDINGS = '/buildings/';

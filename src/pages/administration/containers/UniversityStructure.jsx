@@ -14,7 +14,7 @@ import {
   loadGroupsByUniversityId,
   loadInstitutesByUniversityId
 } from '../actions';
-import { CreateStructurePanel } from '../components/CreatingStructurePanel';
+import { CreateStructurePanel } from '../components/structure/CreatingStructurePanel';
 
 const useStyles = theme => ({
   list: {

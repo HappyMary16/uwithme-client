@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { ADD_LESSON, SCHEDULE, USER_HOME } from '../../../constants/links';
+import { ADD_LESSON, LECTURE_HALLS, SCHEDULE, USER_HOME } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
@@ -43,27 +43,28 @@ export const AdminToolBar = () => {
       position="static"
       color="inherit"
       elevation={0}
-      className={classes.appBar}
-    >
+      className={classes.appBar}>
       <List className={classes.toolbar}>
         <ListItem
           component={Link}
           href={USER_HOME}
-          className={classes.menuItem}
-        >
+          className={classes.menuItem}>
           {i18n.t('university_structure')}
         </ListItem>
 
         <ListItem
           component={Link}
           href={ADD_LESSON}
-          className={classes.menuItem}
-        >
+          className={classes.menuItem}>
           {i18n.t('add_lesson')}
         </ListItem>
 
         <ListItem component={Link} href={SCHEDULE} className={classes.menuItem}>
           {i18n.t('schedule')}
+        </ListItem>
+
+        <ListItem component={Link} href={LECTURE_HALLS} className={classes.menuItem}>
+          {i18n.t('lecture_halls')}
         </ListItem>
       </List>
     </AppBar>
