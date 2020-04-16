@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import InfoIcon from '@material-ui/icons/Info';
 import EditIcon from '@material-ui/icons/Edit';
+import GroupIcon from '@material-ui/icons/Group';
+import { ListItemIcon } from '@material-ui/core';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default class Group extends Component {
   constructor(props) {
@@ -23,16 +25,19 @@ export default class Group extends Component {
 
     return (
       <ListItem button onClick={this.instituteHandleClick}>
-        <ListItemText primary={group.label} />
+        <ListItemIcon>
+          <GroupIcon/>
+        </ListItemIcon>
+        <ListItemText primary={group.label}/>
         <ListItemSecondaryAction>
           <IconButton onClick={this.someAction}>
-            <EditIcon />
+            <EditIcon/>
           </IconButton>
           <IconButton onClick={this.someAction}>
-            <InfoIcon />
+            <InfoIcon/>
           </IconButton>
           <IconButton onClick={this.someAction}>
-            <DeleteIcon />
+            <DeleteIcon/>
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>

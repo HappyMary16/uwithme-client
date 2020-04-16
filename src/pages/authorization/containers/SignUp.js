@@ -17,7 +17,7 @@ import { InputField } from '../../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { loadDepartments, loadGroups, loadInstitutes } from '../../administration/actions';
+import { loadDepartments, loadGroups, loadInstitutes } from '../../administration/structure/actions';
 
 const useStyles = theme => ({
   paper: {

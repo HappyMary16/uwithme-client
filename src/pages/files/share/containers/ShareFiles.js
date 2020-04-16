@@ -14,7 +14,7 @@ import { getFilesByUsername, loadSubjects } from '../../actions';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../../common/styles/styles';
 import Container from '@material-ui/core/Container';
-import { loadGroups } from '../../../administration/actions';
+import { loadGroups } from '../../../administration/structure/actions';
 
 const submit = {
   marginTop: '10px',

@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Button from '@material-ui/core/Button';
-import i18n from '../../../../locales/i18n';
+import i18n from '../../../../../locales/i18n';
 import Grid from '@material-ui/core/Grid';
 import { AddDepartment } from './AddDepartment';
 import { AddInstitute } from './AddInstitute';
-import { marginLeft, marginTop } from '../../../../common/styles/styles';
+import { marginLeft, marginTop } from '../../../../../common/styles/styles';
 import { AddGroup } from './AddGroup';
 
 export const CreateStructurePanel = ({ institutes, departments, createInstitute, createDepartment, createGroup }) => {

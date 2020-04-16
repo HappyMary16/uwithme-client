@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Institute from '../components/structure/Institute';
-import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
+import { getDepartmentsByInstitute } from '../../../../utils/StructureUtils';
 import {
   createDepartment,
   createGroup,
@@ -19,15 +19,6 @@ import { CreateStructurePanel } from '../components/structure/CreatingStructureP
 const useStyles = theme => ({
   list: {
     width: '100%'
-  },
-  link: {
-    marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    backgroundColor: '#eeeeee'
-  },
-  buttons: {
-    marginLeft: 'auto',
-    marginRight: 0
   },
   nested: {
     paddingLeft: theme.spacing(4)
@@ -85,7 +76,7 @@ class UniversityStructure extends Component {
     const { institutes, departments, groups, classes } = this.props;
 
     return (
-      <Grid container xs={12} className={classes.root}>
+      <Grid container xs={12}>
 
         <CreateStructurePanel institutes={institutes}
                               departments={departments}

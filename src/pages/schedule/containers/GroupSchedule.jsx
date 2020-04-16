@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 import i18n from '../../../locales/i18n';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../common/styles/styles';
-import { loadGroupsByUniversityId } from '../../administration/actions';
+import { loadGroupsByUniversityId } from '../../administration/structure/actions';
 
 class GroupSchedule extends Component {
 

@@ -17,7 +17,7 @@ import {
   loadDepartmentsByUniversityId,
   loadGroupsByUniversityId,
   loadInstitutesByUniversityId
-} from '../../administration/actions';
+} from '../../administration/structure/actions';
 
 const useStyles = theme => ({
   form: {

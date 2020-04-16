@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
-import { createLectureHall, loadBuildings, loadLectureHalls } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import { marginLeft, marginTop } from '../../../common/styles/styles';
-import i18n from '../../../locales/i18n';
-import { AddLectureHall } from '../components/lectureHalls/AddLectureHall';
+import { marginLeft, marginTop } from '../../../../common/styles/styles';
+import i18n from '../../../../locales/i18n';
+import { AddLectureHall } from '../components/AddLectureHall';
+import { createLectureHall, loadBuildings, loadLectureHalls } from '../action';
+import { BuildingsList } from '../components/BuildingsList';
 
 const useStyles = theme => ({
   list: {
     width: '100%'
-  },
-  link: {
-    marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    backgroundColor: '#eeeeee'
-  },
-  buttons: {
-    marginLeft: 'auto',
-    marginRight: 0
   },
   nested: {
     paddingLeft: theme.spacing(4)
@@ -72,18 +64,9 @@ class LectureHalls extends Component {
                           buildings={buildings}
                           handleCreate={this.createLectureHall}/>
         </Grid>
-        {/*<List component="nav" className={classes.list}>*/}
-        {/*  {institutes &&*/}
-        {/*  institutes.map((institute, i) => (*/}
-        {/*    <Institute*/}
-        {/*      key={i}*/}
-        {/*      institute={institute}*/}
-        {/*      departments={getDepartmentsByInstitute(departments, institute)}*/}
-        {/*      groups={groups}*/}
-        {/*      classes={classes}*/}
-        {/*    />*/}
-        {/*  ))}*/}
-        {/*</List>*/}
+
+        <BuildingsList buildings={buildings} lectureHalls={lectureHalls} classes={classes}/>
+
       </Grid>
     );
   }
@@ -91,8 +74,8 @@ class LectureHalls extends Component {
 
 const mapStateToProps = state => {
   return {
-    lectureHalls: state.adminReducers.lectureHalls,
-    buildings: state.adminReducers.buildings,
+    lectureHalls: state.lectureHallReducer.lectureHalls,
+    buildings: state.lectureHallReducer.buildings,
     universityId: state.authReducers.user.universityId
   };
 };

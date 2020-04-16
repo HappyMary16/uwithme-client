@@ -25,18 +25,18 @@ import ShareFiles from './pages/files/share/containers/ShareFiles';
 import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
-import AddUniversity from './pages/administration/containers/AddUniversity';
+import AddUniversity from './pages/administration/structure/containers/AddUniversity';
 import { isAdmin, isTeacher } from './utils/UsersUtil';
-import { AdminToolBar } from './pages/administration/components/AdminToolBar';
+import { AdminToolBar } from './pages/administration/structure/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import UniversityStructure from './pages/administration/containers/UniversityStructure';
+import UniversityStructure from './pages/administration/structure/containers/UniversityStructure';
 import AddLesson from './pages/schedule/containers/AddLesson';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 import UserContainer from './pages/student/containers/UserContainer';
-import LectureHalls from './pages/administration/containers/LectureHalls';
+import LectureHalls from './pages/administration/lectureHalls/containers/LectureHalls';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {

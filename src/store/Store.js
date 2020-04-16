@@ -7,9 +7,10 @@ import authReducers from '../pages/authorization/reducers';
 import filesReducers from '../pages/files/reducers';
 import loadingProcess from '../common/reducers/loadingReducer';
 import rootSaga from './rootSaga';
-import adminReducers from '../pages/administration/reducers';
+import adminReducers from '../pages/administration/structure/reducers';
 import teacherReducer from '../pages/teachers/reducer';
 import scheduleReducers from '../pages/schedule/reducers';
+import lectureHallReducer from '../pages/administration/lectureHalls/reducer';
 
 export const history = createBrowserHistory();
 
@@ -24,7 +25,8 @@ export default function createAppStore() {
     authReducers: authReducers,
     filesReducers: filesReducers,
     loadingProcess: loadingProcess,
-    adminReducers: adminReducers
+    adminReducers: adminReducers,
+    lectureHallReducer: lectureHallReducer
   });
 
   const store = createStore(

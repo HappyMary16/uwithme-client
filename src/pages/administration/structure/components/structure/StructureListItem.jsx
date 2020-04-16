@@ -8,7 +8,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import InfoIcon from '@material-ui/icons/Info';
 import EditIcon from '@material-ui/icons/Edit';
-import DepartmentsList from './DepartmentsList';
 
 export default class Institute extends Component {
   constructor(props) {
@@ -18,7 +17,6 @@ export default class Institute extends Component {
       open: false
     };
 
-    this.someAction = this.someAction.bind(this);
     this.instituteHandleClick = this.instituteHandleClick.bind(this);
   }
 
@@ -27,38 +25,32 @@ export default class Institute extends Component {
     this.setState({ open: !open });
   }
 
-  someAction() {
-    console.log('action');
-  }
-
   render() {
-    const { institute, groups, departments, classes } = this.props;
+    const {
+      item,
+      editAction,
+      infoAction,
+      deleteAction
+    } = this.props;
     const { open } = this.state;
 
     return (
       <List>
         <ListItem button onClick={this.instituteHandleClick}>
-          <ListItemText primary={institute.label} />
+          <ListItemText primary={item.label} />
           <ListItemSecondaryAction>
-            <IconButton onClick={this.someAction}>
+            <IconButton onClick={editAction(item.value)}>
               <EditIcon />
             </IconButton>
-            <IconButton onClick={this.someAction}>
+            <IconButton onClick={infoAction(item.value)}>
               <InfoIcon />
             </IconButton>
-            <IconButton onClick={this.someAction}>
+            <IconButton onClick={deleteAction(item.value)}>
               <DeleteIcon />
             </IconButton>
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemSecondaryAction>
         </ListItem>
-
-        <DepartmentsList
-          open={open}
-          groups={groups}
-          departments={departments}
-          classes={classes}
-        />
       </List>
     );
   }

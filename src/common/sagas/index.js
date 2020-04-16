@@ -20,7 +20,7 @@ import {
   RENDER_DEPARTMENTS,
   RENDER_GROUPS,
   RENDER_INSTITUTES
-} from '../../pages/administration/actions';
+} from '../../pages/administration/structure/actions';
 
 export function* commonDataWatcher() {
   yield takeEvery(LOAD_INSTITUTES, loadInstitutes);

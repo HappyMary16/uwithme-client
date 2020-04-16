@@ -9,6 +9,11 @@ export const getDepartmentsByInstitute = (departments, institute) => {
 };
 
 export const getInstituteById = (institutes, instituteId) => {
-  return Array.isArray(institutes)
-    && institutes.filter(institute => institute.value === instituteId)[0];
+  return institutes && institutes
+    .filter(institute => institute.value === instituteId)[0];
+};
+
+export const getLectureHallsByBuilding = (lectureHalls, building) => {
+  return lectureHalls && lectureHalls
+    .filter(lectureHall => lectureHall.buildingId === building.value);
 };

@@ -8,11 +8,14 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import InfoIcon from '@material-ui/icons/Info';
 import EditIcon from '@material-ui/icons/Edit';
-import GroupList from './GroupList';
+import DepartmentsList from './DepartmentsList';
+import { ListItemIcon } from '@material-ui/core';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
-export default class Department extends Component {
+export default class Institute extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       open: false
     };
@@ -31,28 +34,36 @@ export default class Department extends Component {
   }
 
   render() {
-    const { department, groups, classes } = this.props;
+    const { institute, groups, departments, classes } = this.props;
     const { open } = this.state;
 
     return (
       <List>
         <ListItem button onClick={this.instituteHandleClick}>
-          <ListItemText primary={department.label} />
+          <ListItemIcon>
+            <AccountBalanceIcon/>
+          </ListItemIcon>
+          <ListItemText primary={institute.label}/>
           <ListItemSecondaryAction>
             <IconButton onClick={this.someAction}>
-              <EditIcon />
+              <EditIcon/>
             </IconButton>
             <IconButton onClick={this.someAction}>
-              <InfoIcon />
+              <InfoIcon/>
             </IconButton>
             <IconButton onClick={this.someAction}>
-              <DeleteIcon />
+              <DeleteIcon/>
             </IconButton>
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {open ? <ExpandLess/> : <ExpandMore/>}
           </ListItemSecondaryAction>
         </ListItem>
 
-        <GroupList open={open} groups={groups} classes={classes} />
+        <DepartmentsList
+          open={open}
+          groups={groups}
+          departments={departments}
+          classes={classes}
+        />
       </List>
     );
   }
