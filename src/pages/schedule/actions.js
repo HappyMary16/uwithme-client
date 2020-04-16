@@ -10,9 +10,9 @@ export const addLessonToSchedule = (subjectId,
                                     teacherName,
                                     lectureHall,
                                     groups,
-                                    weekDay,
-                                    lessonTime,
-                                    weekNumber) => ({
+                                    weekDays,
+                                    lessonTimes,
+                                    weekNumbers) => ({
   type: ADD_LESSON_TO_SCHEDULE,
   payload: {
     subjectId,
@@ -21,9 +21,9 @@ export const addLessonToSchedule = (subjectId,
     teacherName,
     lectureHall,
     groups,
-    weekDay,
-    lessonTime,
-    weekNumber
+    weekDays,
+    lessonTimes,
+    weekNumbers
   }
 });
 

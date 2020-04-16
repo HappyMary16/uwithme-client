@@ -26,8 +26,7 @@ function* loadLectureHalls(action) {
       url: GET_LECTURE_HALLS + universityId,
       method: 'get'
     });
-    console.log('lectureHalls');
-    console.log(lectureHalls);
+
     yield put(renderLectureHalls(lectureHalls.data));
   } catch (e) {
     alert(e);
@@ -45,8 +44,7 @@ function* loadBuildings(action) {
       url: GET_BUILDINGS + universityId,
       method: 'get'
     });
-    console.log('buildings');
-    console.log(buildings);
+
     yield put(renderBuildings(buildings.data));
   } catch (e) {
     alert(e);

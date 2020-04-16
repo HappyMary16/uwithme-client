@@ -21,9 +21,9 @@ function* addLessonToSchedule(action) {
       teacherName,
       lectureHall,
       groups,
-      weekDay,
-      lessonTime,
-      weekNumber
+      weekDays,
+      lessonTimes,
+      weekNumbers
     } = action.payload;
 
     let data = {
@@ -33,9 +33,9 @@ function* addLessonToSchedule(action) {
       teacherName: teacherId === teacherName ? teacherName : undefined,
       lectureHall,
       groups: groups.map(group => group.value),
-      weekDay,
-      lessonTime,
-      weekNumber
+      weekDays: weekDays.map(weekDay => weekDay.value),
+      lessonTimes: lessonTimes.map(lessonTime => lessonTime.value),
+      weekNumbers: weekNumbers.map(weekNumber => weekNumber.value)
     };
 
     const response = yield call(http, {

@@ -13,11 +13,9 @@ import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRol
 import { addLessonToSchedule } from '../actions';
 import { loadTeachersByUniversityId } from '../../teachers/actions';
 import { loadSubjectsByUniversityId } from '../../files/actions';
-import {
-  loadDepartmentsByUniversityId,
-  loadGroupsByUniversityId,
-  loadInstitutesByUniversityId
-} from '../../administration/structure/actions';
+import { loadGroupsByUniversityId } from '../../administration/structure/actions';
+import { loadBuildings, loadLectureHalls } from '../../administration/lectureHalls/action';
+import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../utils/StructureUtils';
 
 const useStyles = theme => ({
   form: {
@@ -57,11 +55,13 @@ class AddLesson extends Component {
     this.state = {
       subject: {},
       teacher: {},
-      lectureHall: '',
+      building: null,
+      lectureHall: null,
       selectedGroups: [],
-      weekDay: 0,
-      lessonTime: 0,
-      weekNumber: 1
+      weekDays: [],
+      lessonTimes: [],
+      weekNumbers: [],
+      filteredLectureHalls: []
     };
 
     this.submit = this.submit.bind(this);
@@ -70,14 +70,13 @@ class AddLesson extends Component {
   componentDidMount() {
     const { dispatch, universityId } = this.props;
     if (universityId) {
-      dispatch(loadInstitutesByUniversityId(universityId));
-      dispatch(loadDepartmentsByUniversityId(universityId));
       dispatch(loadGroupsByUniversityId(universityId));
       dispatch(loadTeachersByUniversityId(universityId));
       dispatch(loadSubjectsByUniversityId(universityId));
+      dispatch(loadBuildings(universityId));
+      dispatch(loadLectureHalls(universityId));
 
       //TODO
-      // load auditory by university id (feature)
       // load lessons time (feature)
     }
   }
@@ -86,21 +85,26 @@ class AddLesson extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { subject, teacher, lectureHall, selectedGroups, weekDay, lessonTime, weekNumber } = this.state;
+    const { subject, teacher, lectureHall, selectedGroups, weekDays, lessonTimes, weekNumbers } = this.state;
 
     dispatch(addLessonToSchedule(subject.value,
       subject.label,
       teacher.value,
       teacher.label,
-      lectureHall.label,
+      lectureHall.value,
       selectedGroups,
-      weekDay,
-      lessonTime,
-      weekNumber));
+      weekDays,
+      lessonTimes,
+      weekNumbers));
   }
 
   render() {
-    const { teachers, lectureHalls, groups, subjects, classes } = this.props;
+    let { filteredLectureHalls, lectureHall, building } = this.state;
+    const { teachers, lectureHalls, buildings, groups, subjects, classes } = this.props;
+
+    if (!filteredLectureHalls || filteredLectureHalls.length === 0) {
+      filteredLectureHalls = lectureHalls;
+    }
 
     return (
       <Grid xs={12} alignItems={'center'}>
@@ -135,20 +139,44 @@ class AddLesson extends Component {
             />
           </Container>
 
-          <Container className={classes.marginTop}>
-            <CreatableSelect
-              theme={selectorColors}
-              placeholder={i18n.t('lecture_hall')}
-              options={lectureHalls &&
-              lectureHalls.map(s => {
-                return {
-                  value: s.id,
-                  label: s.name
-                };
-              })}
-              onChange={opinion => this.setState({ lectureHall: opinion })}
-            />
-          </Container>
+          <Grid container direction='row' xs={12}>
+            <Grid xs={6}>
+              <Container className={classes.marginTop}>
+                <Select
+                  value={building}
+                  theme={selectorColors}
+                  placeholder={i18n.t('building')}
+                  options={buildings}
+                  onChange={opinion => {
+                    let lectureHallsForBuilding = getLectureHallsByBuilding(lectureHalls, opinion);
+                    this.setState({
+                      building: opinion,
+                      filteredLectureHalls: lectureHallsForBuilding,
+                      lectureHall: lectureHallsForBuilding.includes(lectureHall) ? lectureHall : null
+                    });
+                  }}
+                />
+              </Container>
+            </Grid>
+
+            <Grid xs={6}>
+              <Container className={classes.marginTop}>
+                <Select
+                  value={lectureHall}
+                  theme={selectorColors}
+                  placeholder={i18n.t('lecture_hall')}
+                  options={filteredLectureHalls}
+                  onChange={opinion => {
+                    this.setState({
+                      lectureHall: opinion,
+                      building: getBuildingByLectureHall(buildings, opinion),
+                      filteredLectureHalls: getLectureHallsByBuilding(lectureHalls, opinion)
+                    });
+                  }}
+                />
+              </Container>
+            </Grid>
+          </Grid>
 
           <Container className={classes.marginTop}>
             <Select
@@ -163,27 +191,30 @@ class AddLesson extends Component {
           <Container className={classes.marginTop}>
             <Select
               theme={selectorColors}
-              onChange={opinion => this.setState({ weekDay: opinion.value })}
+              onChange={opinion => this.setState({ weekDays: opinion })}
               options={WEEK_DAYS}
               placeholder={i18n.t('week_day')}
+              isMulti
             />
           </Container>
 
           <Container className={classes.marginTop}>
             <Select
               theme={selectorColors}
-              onChange={opinion => this.setState({ lessonTime: opinion.value })}
+              onChange={opinion => this.setState({ lessonTimes: opinion })}
               options={LESSONS_TIME}
               placeholder={i18n.t('lesson_time')}
+              isMulti
             />
           </Container>
 
           <Container className={classes.marginTop}>
             <Select
+              placeholder={i18n.t('week_number')}
               theme={selectorColors}
-              onChange={opinion => this.setState({ weekNumber: opinion.value })}
+              isMulti
+              onChange={opinion => this.setState({ weekNumbers: opinion })}
               options={WEEK_NUMBER}
-              defaultValue={WEEK_NUMBER[0]}
             />
           </Container>
 
@@ -207,12 +238,12 @@ class AddLesson extends Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.adminReducers.institutes,
-    departments: state.adminReducers.departments,
     groups: state.adminReducers.groups,
     universityId: state.authReducers.user.universityId,
     teachers: state.teacherReducer.teachers,
-    subjects: state.filesReducers.subjects
+    subjects: state.filesReducers.subjects,
+    lectureHalls: state.lectureHallReducer.lectureHalls,
+    buildings: state.lectureHallReducer.buildings
   };
 };
 
