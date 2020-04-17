@@ -12,6 +12,7 @@ import {
   SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
+  TEACHER_SCHEDULE_ROUTER,
   TEACHERS,
   USER_HOME
 } from './constants/links';
@@ -82,8 +83,8 @@ let App = ({ user, isFetching }) => {
           {user && (
             <Grid container xs={12}>
               <Grid item xs={2}>
-                {!isAdmin(user) && <UserToolBar />}
-                {isAdmin(user) && <AdminToolBar />}
+                {!isAdmin(user) && <UserToolBar user={user}/>}
+                {isAdmin(user) && <AdminToolBar/>}
               </Grid>
 
               <Grid item xs={10}>
@@ -117,6 +118,13 @@ let App = ({ user, isFetching }) => {
                     <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
                   </Grid>
                 )}
+                <Grid>
+                  <Route path={TEACHER_SCHEDULE_ROUTER} render={({ match }) => {
+                    console.log('match');
+                    console.log(match);
+                    return <div/>;
+                  }}/>
+                </Grid>
               </Grid>
             </Grid>
           )}

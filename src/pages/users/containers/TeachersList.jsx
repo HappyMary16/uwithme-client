@@ -1,32 +1,31 @@
 import { connect } from 'react-redux';
-import { User } from '../components/User';
-import { findLessonsByUsername } from '../../schedule/actions';
 import React, { Component } from 'react';
+import { loadTeachersByGroupId } from '../actions';
+import List from '@material-ui/core/List';
+import { TeacherListItem } from '../components/TeacherListItem';
 
 class TeachersList extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch, user } = this.props;
-    dispatch(findLessonsByUsername(user.username));
+    dispatch(loadTeachersByGroupId(user.studyGroupId));
   }
 
   render() {
-    const { user, lessons } = this.props;
+    const { teachers } = this.props;
 
     return (
-      <User user={user} lessons={lessons}/>
+      <List>
+        {teachers && teachers.map(teacher => <TeacherListItem key={teacher.id} teacher={teacher}/>)}
+      </List>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user: state.authReducers.user.username,
-    teachers: state
+    user: state.authReducers.user,
+    teachers: state.teacherReducer.teachers
   };
 };
 

@@ -6,9 +6,8 @@ import { ScheduleTable } from '../components/ScheduleTable';
 
 class UserSchedule extends Component {
   componentDidMount() {
-    const { dispatch, username } = this.props;
-
-    dispatch(findLessonsByUsername(username));
+    const { dispatch, user } = this.props;
+    dispatch(findLessonsByUsername(user.username));
   }
 
   render() {
@@ -23,7 +22,6 @@ class UserSchedule extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    username: state.authReducers.user.username,
     lessons: state.scheduleReducers.lessons
   };
 };

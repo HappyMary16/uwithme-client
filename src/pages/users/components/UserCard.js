@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import i18n from '../../../locales/i18n';
+import { getName } from '../../../utils/UsersUtil';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -41,7 +42,7 @@ export const UserCard = ({ user }) => {
         <Grid item xs={12} sm container className={classes.container}>
           <Grid item xs container direction='column' spacing={2}>
             <Typography gutterBottom variant='h5'>
-              {user.lastName + ' ' + user.firstName + ' ' + user.surname}
+              {getName(user)}
             </Typography>
             {/*<Typography gutterBottom variant='h6'>*/}
             {/*  {user.username}*/}

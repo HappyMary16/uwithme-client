@@ -7,6 +7,7 @@ import Link from '@material-ui/core/Link';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
+import { isStudent } from '../../../utils/UsersUtil';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const UserToolBar = () => {
+export const UserToolBar = ({ user }) => {
   const classes = useStyles();
 
   const drawer = (
@@ -48,9 +49,11 @@ export const UserToolBar = () => {
       <ListItem component={Link} href={FILES} className={classes.menuItem}>
         <ListItemText primary={i18n.t('page_with_files')}/>
       </ListItem>
-      <ListItem component={Link} href={TEACHERS} className={classes.menuItem}>
+      {isStudent(user) &&
+      (<ListItem component={Link} href={TEACHERS} className={classes.menuItem}>
         <ListItemText primary={i18n.t('teachers')}/>
-      </ListItem>
+      </ListItem>)
+      }
     </List>
   );
 

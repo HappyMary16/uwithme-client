@@ -9,6 +9,10 @@ export const FILES = '/files';
 
 //student
 export const TEACHERS = '/teachers/list';
+export const TEACHER_SCHEDULE_ROUTER = '/teacher/schedule/:teacherId';
+export const TEACHER_SCHEDULE = teacherId => `/teacher/schedule/${teacherId}`;
+export const TEACHER_HOME_PAGE_ROUTER = '/teacher/:teacherId';
+export const TEACHER_HOME_PAGE = teacherId => `/teacher/${teacherId}`;
 
 //teacher
 export const ADD_FILE = '/files/add';
