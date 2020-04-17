@@ -12,9 +12,10 @@ import {
   SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
+  TEACHERS,
   USER_HOME
 } from './constants/links';
-import { UserToolBar } from './pages/student/components/UserToolBar';
+import { UserToolBar } from './pages/users/components/UserToolBar';
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -26,7 +27,7 @@ import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
 import AddUniversity from './pages/administration/structure/containers/AddUniversity';
-import { isAdmin, isTeacher } from './utils/UsersUtil';
+import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/administration/structure/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -35,7 +36,7 @@ import UniversityStructure from './pages/administration/structure/containers/Uni
 import AddLesson from './pages/schedule/containers/AddLesson';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
-import UserContainer from './pages/student/containers/UserContainer';
+import UserHome from './pages/users/containers/UserHome';
 import LectureHalls from './pages/administration/lectureHalls/containers/LectureHalls';
 
 const useStyles = makeStyles(theme => ({
@@ -88,16 +89,22 @@ let App = ({ user, isFetching }) => {
 
                 {!isAdmin(user) && (
                   <Grid>
-                    <Route exact path={USER_HOME} component={UserContainer} />
-                    <Route exact path={FILES} component={PageWithFiles} />
+                    <Route exact path={USER_HOME} component={UserHome}/>
+                    <Route exact path={FILES} component={PageWithFiles}/>
                     <Route exact path={SCHEDULE} component={UserSchedule}/>
+                  </Grid>
+                )}
+
+                {isStudent(user) && (
+                  <Grid>
+                    <Route exact path={TEACHERS} component={AddFile}/>
                   </Grid>
                 )}
 
                 {isTeacher(user) && (
                   <Grid>
-                    <Route exact path={ADD_FILE} component={AddFile} />
-                    <Route exact path={SHARE_FILES} component={ShareFiles} />
+                    <Route exact path={ADD_FILE} component={AddFile}/>
+                    <Route exact path={SHARE_FILES} component={ShareFiles}/>
                   </Grid>
                 )}
 

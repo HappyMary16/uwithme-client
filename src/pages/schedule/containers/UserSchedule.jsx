@@ -12,16 +12,17 @@ class UserSchedule extends Component {
   }
 
   render() {
-    const { lessons } = this.props;
+    const { lessons, user } = this.props;
 
     return (
-      <ScheduleTable lessons={lessons}/>
+      <ScheduleTable lessons={lessons} user={user}/>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
+    user: state.authReducers.user,
     username: state.authReducers.user.username,
     lessons: state.scheduleReducers.lessons
   };

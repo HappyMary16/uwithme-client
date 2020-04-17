@@ -3,7 +3,7 @@ import i18n from '../locales/i18n';
 export const UserRoles = [
   {
     value: 1,
-    label: i18n.t('student')
+    label: i18n.t('users')
   },
   {
     value: 2,

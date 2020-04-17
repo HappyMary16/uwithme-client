@@ -6,7 +6,7 @@ import { addAccessToFilesWatcher } from '../pages/files/share/sagas';
 import { commonDataWatcher } from '../common/sagas';
 import { administrationWatcher } from '../pages/administration/structure/sagas';
 import { scheduleOperationWatcher } from '../pages/schedule/sagas';
-import { teachersWatcher } from '../pages/teachers/sagas';
+import { teachersWatcher } from '../pages/users/sagas';
 import { lectureHallWatcher } from '../pages/administration/lectureHalls/sagas';
 
 export default function* rootSaga() {

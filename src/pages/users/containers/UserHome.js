@@ -3,7 +3,7 @@ import { User } from '../components/User';
 import { findLessonsByUsername } from '../../schedule/actions';
 import React, { Component } from 'react';
 
-class UserContainer extends Component {
+class UserHome extends Component {
 
   constructor(props) {
     super(props);
@@ -30,4 +30,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UserContainer);
+export default connect(mapStateToProps)(UserHome);

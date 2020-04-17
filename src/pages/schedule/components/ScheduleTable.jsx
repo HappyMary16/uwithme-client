@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ScheduleTable = ({ lessons }) => {
+export const ScheduleTable = ({ lessons, user }) => {
   let classes = useStyles();
   let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
@@ -83,7 +83,7 @@ export const ScheduleTable = ({ lessons }) => {
                   {WEEK_DAYS.map(weekDay => {
                       let lesson = getLesson(lessons, weekDay.value, lessonTime.value, weekNumber ? 1 : 2);
                     return (<TableCell key={weekDay.value} component="th" scope="row" className={classes.cell}>
-                      {lesson && <Lesson lesson={lesson}/>}
+                      {lesson && <Lesson lesson={lesson} user={user}/>}
                     </TableCell>);
                   }
                   )}

@@ -30,7 +30,7 @@ class GroupSchedule extends Component {
   }
 
   render() {
-    const { groups, lessons } = this.props;
+    const { groups, lessons, user } = this.props;
 
     return (
       <Container>
@@ -43,7 +43,7 @@ class GroupSchedule extends Component {
             options={groups}
           />
         </Container>
-        {lessons && <ScheduleTable lessons={lessons}/>}
+        {lessons && <ScheduleTable lessons={lessons} user={user}/>}
       </Container>
     );
   }
@@ -51,6 +51,7 @@ class GroupSchedule extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.authReducers.user,
     universityId: state.authReducers.user.universityId,
     groups: state.adminReducers.groups,
     lessons: state.scheduleReducers.lessons

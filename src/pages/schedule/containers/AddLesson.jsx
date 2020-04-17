@@ -11,7 +11,7 @@ import { selectorColors } from '../../../common/styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRoles';
 import { addLessonToSchedule } from '../actions';
-import { loadTeachersByUniversityId } from '../../teachers/actions';
+import { loadTeachersByUniversityId } from '../../users/actions';
 import { loadSubjectsByUniversityId } from '../../files/actions';
 import { loadGroupsByUniversityId } from '../../administration/structure/actions';
 import { loadBuildings, loadLectureHalls } from '../../administration/lectureHalls/action';

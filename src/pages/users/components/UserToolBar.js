@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FILES, SCHEDULE, USER_HOME } from '../../../constants/links';
+import { FILES, SCHEDULE, TEACHERS, USER_HOME } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
@@ -40,13 +40,16 @@ export const UserToolBar = () => {
   const drawer = (
     <List className={classes.toolbar}>
       <ListItem component={Link} href={USER_HOME} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('home_page')} />
-      </ListItem>
-      <ListItem component={Link} href={FILES} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('page_with_files')} />
+        <ListItemText primary={i18n.t('home_page')}/>
       </ListItem>
       <ListItem component={Link} href={SCHEDULE} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('schedule')} />
+        <ListItemText primary={i18n.t('schedule')}/>
+      </ListItem>
+      <ListItem component={Link} href={FILES} className={classes.menuItem}>
+        <ListItemText primary={i18n.t('page_with_files')}/>
+      </ListItem>
+      <ListItem component={Link} href={TEACHERS} className={classes.menuItem}>
+        <ListItemText primary={i18n.t('teachers')}/>
       </ListItem>
     </List>
   );
