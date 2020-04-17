@@ -8,6 +8,7 @@ import i18n from '../../../locales/i18n';
 import Switch from 'react-switch';
 import { getCurrentWeek } from '../../../utils/ScheduleUtil';
 import { lightGreyColor, switchWeek } from '../../../common/styles/styles';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -33,37 +34,39 @@ export const User = ({ user, lessons }) => {
 
   return (
     <Grid container xs={12} direction='column' className={classes.root}>
-      <Grid xs={12} className={classes.paper}>
+      <Container className={classes.paper}>
         <UserCard user={user}/>
-      </Grid>
-      <Grid container xs={12} className={classes.paper} direction='row' justify='space-between'>
-        <Typography variant="h4">
-          {i18n.t('schedule')}
-        </Typography>
-
-        <Grid>
-          <Typography>
-            {i18n.t('week')}
+      </Container>
+      <Container className={classes.paper}>
+        <Grid container xs={12} direction='row' justify='space-between'>
+          <Typography variant="h4">
+            {i18n.t('schedule')}
           </Typography>
-          <Switch
-            offColor={lightGreyColor}
-            onColor={lightGreyColor}
-            checked={weekNumber}
-            onChange={() => setWeekNumber(!weekNumber)}
-            uncheckedIcon={<div style={switchWeek}>
-              2
-            </div>}
-            checkedIcon={<div style={switchWeek}>
-              1
-            </div>}
-            className="react-switch"
-            id="icon-switch"
-          />
+
+          <Grid>
+            <Typography>
+              {i18n.t('week')}
+            </Typography>
+            <Switch
+              offColor={lightGreyColor}
+              onColor={lightGreyColor}
+              checked={weekNumber}
+              onChange={() => setWeekNumber(!weekNumber)}
+              uncheckedIcon={<div style={switchWeek}>
+                2
+              </div>}
+              checkedIcon={<div style={switchWeek}>
+                1
+              </div>}
+              className="react-switch"
+              id="icon-switch"
+            />
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid xs={12} className={classes.paper}>
+      </Container>
+      <Container className={classes.paper}>
         <TodaySchedule lessons={lessons} day={weekDay} user={user} weekNumber={weekNumber ? 1 : 2}/>
-      </Grid>
+      </Container>
     </Grid>
   );
 };

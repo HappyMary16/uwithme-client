@@ -8,7 +8,7 @@ export const getLessonTime = (lessonNumber) => {
 export const filterAndSortLessons = (lessons, day, weekNumber) => {
   return lessons && lessons.filter(lesson => lesson.weekDay === day)
     .filter(lesson => lesson.weekNumber === weekNumber)
-    .sort((lesson1, lesson2) => lesson1.value > lesson2.value);
+    .sort((lesson1, lesson2) => lesson1.lessonTime - lesson2.lessonTime);
 };
 
 export const areLessonsToday = (lessons, day) => {

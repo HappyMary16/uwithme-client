@@ -38,6 +38,7 @@ import UserSchedule from './pages/schedule/containers/UserSchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 import UserHome from './pages/users/containers/UserHome';
 import LectureHalls from './pages/administration/lectureHalls/containers/LectureHalls';
+import TeachersList from './pages/users/containers/TeachersList';
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -97,7 +98,7 @@ let App = ({ user, isFetching }) => {
 
                 {isStudent(user) && (
                   <Grid>
-                    <Route exact path={TEACHERS} component={AddFile}/>
+                    <Route exact path={TEACHERS} component={TeachersList}/>
                   </Grid>
                 )}
 
