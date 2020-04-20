@@ -8,7 +8,7 @@ import filesReducers from '../pages/files/reducers';
 import loadingProcess from '../common/reducers/loadingReducer';
 import rootSaga from './rootSaga';
 import adminReducers from '../pages/administration/structure/reducers';
-import teacherReducer from '../pages/users/reducer';
+import usersReducer from '../pages/users/reducer';
 import scheduleReducers from '../pages/schedule/reducers';
 import lectureHallReducer from '../pages/administration/lectureHalls/reducer';
 
@@ -21,7 +21,7 @@ export default function createAppStore() {
   const rootReducer = combineReducers({
     router: connectRouter(history),
     scheduleReducers: scheduleReducers,
-    teacherReducer: teacherReducer,
+    usersReducer: usersReducer,
     authReducers: authReducers,
     filesReducers: filesReducers,
     loadingProcess: loadingProcess,

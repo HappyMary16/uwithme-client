@@ -1,7 +1,8 @@
 import { RENDER_LESSONS } from './actions';
+import StateLoader from '../../store/StateLoader';
 
 export default function scheduleReducers(
-  state = {},
+  state = new StateLoader().loadState().scheduleReducers || {},
   action
 ) {
   switch (action.type) {

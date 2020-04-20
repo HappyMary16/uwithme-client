@@ -1,7 +1,8 @@
 import { LECTURE_HALL_CREATED, RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './action';
+import StateLoader from '../../../store/StateLoader';
 
 export default function lectureHallReducer(
-  state = {},
+  state = new StateLoader().loadState().lectureHallReducer || {},
   action
 ) {
   switch (action.type) {

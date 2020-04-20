@@ -25,7 +25,7 @@ class TeachersList extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    teachers: state.teacherReducer.teachers
+    teachers: state.usersReducer.teachers
   };
 };
 

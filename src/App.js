@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, useParams } from 'react-router-dom';
 
 import NavigationContainer from './common/containers/NavigationContainer';
 import {
@@ -12,7 +12,7 @@ import {
   SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
-  TEACHER_SCHEDULE_ROUTER,
+  TEACHER_HOME_PAGE_ROUTER,
   TEACHERS,
   USER_HOME
 } from './constants/links';
@@ -32,7 +32,6 @@ import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/administration/structure/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import UniversityStructure from './pages/administration/structure/containers/UniversityStructure';
 import AddLesson from './pages/schedule/containers/AddLesson';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
@@ -40,102 +39,111 @@ import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 import UserHome from './pages/users/containers/UserHome';
 import LectureHalls from './pages/administration/lectureHalls/containers/LectureHalls';
 import TeachersList from './pages/users/containers/TeachersList';
+import UserPage from './pages/users/containers/UserPage';
+import { compose } from 'redux';
+import withStyles from '@material-ui/core/styles/withStyles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff'
   }
-}));
+});
 
-let App = ({ user, isFetching }) => {
-  const classes = useStyles();
+function OpenUserPage() {
+  const { teacherId } = useParams();
+  return <UserPage teacherId={teacherId}/>;
+}
 
-  return (
-    <Container style={{ height: '100vh' }}>
-      <Backdrop className={classes.backdrop} open={isFetching !== 0}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
+class App extends Component {
 
-      <Grid
-        container
-        xs={12}
-        alignContent="space-between"
-        style={{ height: '100%' }}
-      >
-        <Grid container xs={12} alignContent={'flex-start'}>
-          <Grid item xs={12}>
-            <NavigationContainer />
-          </Grid>
+  render() {
+    const { user, isFetching, classes } = this.props;
 
-          {!user && (
-            <Grid container xs={12}>
-              <Route exact path={SIGN_IN} component={SingIn} />
-              <Route
-                exact
-                path={ADD_UNIVERSITY_PATH}
-                component={AddUniversity}
-              />
-              <Route exact path={SIGN_UP} component={SignUp} />
+    return (
+      <Container style={{ height: '100vh' }}>
+        <Backdrop className={classes.backdrop} open={isFetching !== 0}>
+          <CircularProgress color="inherit"/>
+        </Backdrop>
+
+        <Grid
+          container
+          xs={12}
+          alignContent="space-between"
+          style={{ height: '100%' }}
+        >
+          <Grid container xs={12} alignContent={'flex-start'}>
+            <Grid item xs={12}>
+              <NavigationContainer/>
             </Grid>
-          )}
 
-          {user && (
-            <Grid container xs={12}>
-              <Grid item xs={2}>
-                {!isAdmin(user) && <UserToolBar user={user}/>}
-                {isAdmin(user) && <AdminToolBar/>}
+            {!user && (
+              <Grid container xs={12}>
+                <Route exact path={SIGN_IN} component={SingIn}/>
+                <Route
+                  exact
+                  path={ADD_UNIVERSITY_PATH}
+                  component={AddUniversity}
+                />
+                <Route exact path={SIGN_UP} component={SignUp}/>
               </Grid>
+            )}
 
-              <Grid item xs={10}>
+            {user && (
+              <Grid container xs={12}>
+                <Grid item xs={2}>
+                  {!isAdmin(user) && <UserToolBar user={user}/>}
+                  {isAdmin(user) && <AdminToolBar/>}
+                </Grid>
 
-                {!isAdmin(user) && (
+                <Grid item xs={10}>
+
+                  {!isAdmin(user) && (
+                    <Grid>
+                      <Route exact path={USER_HOME} component={UserHome}/>
+                      <Route exact path={FILES} component={PageWithFiles}/>
+                      <Route exact path={SCHEDULE} component={UserSchedule}/>
+                    </Grid>
+                  )}
+
+                  {isStudent(user) && (
+                    <Grid>
+                      <Route exact path={TEACHERS} component={TeachersList}/>
+                    </Grid>
+                  )}
+
+                  {isTeacher(user) && (
+                    <Grid>
+                      <Route exact path={ADD_FILE} component={AddFile}/>
+                      <Route exact path={SHARE_FILES} component={ShareFiles}/>
+                    </Grid>
+                  )}
+
+                  {isAdmin(user) && (
+                    <Grid>
+                      <Route exact path={USER_HOME} component={UniversityStructure}/>
+                      <Route exact path={ADD_LESSON} component={AddLesson}/>
+                      <Route exact path={SCHEDULE} component={GroupSchedule}/>
+                      <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
+                    </Grid>
+                  )}
                   <Grid>
-                    <Route exact path={USER_HOME} component={UserHome}/>
-                    <Route exact path={FILES} component={PageWithFiles}/>
-                    <Route exact path={SCHEDULE} component={UserSchedule}/>
+                    <Route path={TEACHER_HOME_PAGE_ROUTER}>
+                      <OpenUserPage/>
+                    </Route>
                   </Grid>
-                )}
-
-                {isStudent(user) && (
-                  <Grid>
-                    <Route exact path={TEACHERS} component={TeachersList}/>
-                  </Grid>
-                )}
-
-                {isTeacher(user) && (
-                  <Grid>
-                    <Route exact path={ADD_FILE} component={AddFile}/>
-                    <Route exact path={SHARE_FILES} component={ShareFiles}/>
-                  </Grid>
-                )}
-
-                {isAdmin(user) && (
-                  <Grid>
-                    <Route exact path={USER_HOME} component={UniversityStructure}/>
-                    <Route exact path={ADD_LESSON} component={AddLesson}/>
-                    <Route exact path={SCHEDULE} component={GroupSchedule}/>
-                    <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
-                  </Grid>
-                )}
-                <Grid>
-                  <Route path={TEACHER_SCHEDULE_ROUTER} render={({ match }) => {
-                    console.log('match');
-                    console.log(match);
-                    return <div/>;
-                  }}/>
                 </Grid>
               </Grid>
-            </Grid>
-          )}
-        </Grid>
+            )}
+          </Grid>
 
-        <Grid container justify={'center'} xs={12}>
-          <Copyright />
+          <Grid container justify={'center'} xs={12}>
+            <Copyright/>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
-  );
+      </Container>
+    );
+  }
 };
 
 const mapStateToProps = state => {
@@ -145,4 +153,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default App = connect(mapStateToProps)(App);
+export default compose(
+  withStyles(useStyles),
+  connect(mapStateToProps)
+)(App);
