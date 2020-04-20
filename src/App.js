@@ -13,6 +13,7 @@ import {
   SIGN_IN,
   SIGN_UP,
   TEACHER_HOME_PAGE_ROUTER,
+  TEACHER_SCHEDULE_ROUTER,
   TEACHERS,
   USER_HOME
 } from './constants/links';
@@ -34,7 +35,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import UniversityStructure from './pages/administration/structure/containers/UniversityStructure';
 import AddLesson from './pages/schedule/containers/AddLesson';
-import UserSchedule from './pages/schedule/containers/UserSchedule';
+import MySchedule from './pages/schedule/containers/MySchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 import UserHome from './pages/users/containers/UserHome';
 import LectureHalls from './pages/administration/lectureHalls/containers/LectureHalls';
@@ -42,6 +43,7 @@ import TeachersList from './pages/users/containers/TeachersList';
 import UserPage from './pages/users/containers/UserPage';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
+import UserSchedule from './pages/schedule/containers/UserSchedule';
 
 const useStyles = theme => ({
   backdrop: {
@@ -54,6 +56,12 @@ function OpenUserPage() {
   const { teacherId } = useParams();
   return <UserPage teacherId={teacherId}/>;
 }
+
+function OpenUserSchedule() {
+  const { teacherId } = useParams();
+  return <UserSchedule teacherId={teacherId}/>;
+}
+
 
 class App extends Component {
 
@@ -102,7 +110,7 @@ class App extends Component {
                     <Grid>
                       <Route exact path={USER_HOME} component={UserHome}/>
                       <Route exact path={FILES} component={PageWithFiles}/>
-                      <Route exact path={SCHEDULE} component={UserSchedule}/>
+                      <Route exact path={SCHEDULE} component={MySchedule}/>
                     </Grid>
                   )}
 
@@ -130,6 +138,9 @@ class App extends Component {
                   <Grid>
                     <Route path={TEACHER_HOME_PAGE_ROUTER}>
                       <OpenUserPage/>
+                    </Route>
+                    <Route path={TEACHER_SCHEDULE_ROUTER}>
+                      <OpenUserSchedule/>
                     </Route>
                   </Grid>
                 </Grid>

@@ -25,7 +25,7 @@ class UserPage extends Component {
 
     return (
       <Grid>
-        {teacher && <User user={teacher} lessons={lessons}/>}
+        {teacher && <User user={teacher} lessons={lessons} isMine={false}/>}
       </Grid>
     );
   }

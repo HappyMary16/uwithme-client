@@ -18,7 +18,7 @@ class UserHome extends Component {
     const { user, lessons } = this.props;
 
     return (
-      <User user={user} lessons={lessons}/>
+      <User user={user} lessons={lessons} isMine={true}/>
     );
   }
 }

@@ -16,13 +16,17 @@ import Grid from '@material-ui/core/Grid';
 import { getCurrentWeek, getLesson } from '../../../utils/ScheduleUtil';
 import i18n from '../../../locales/i18n';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { history } from '../../../store/Store';
+import { TEACHER_HOME_PAGE } from '../../../constants/links';
+import { getName } from '../../../utils/UsersUtil';
 
 const useStyles = makeStyles(theme => ({
   table: {
     marginTop: theme.spacing(2)
   },
   switchSpacing: {
-    margin: theme.spacing(2, 2, 2, 2)
+    marginBottom: theme.spacing(2)
   },
   cell: {
     borderColor: '#D3D3D3',
@@ -31,34 +35,42 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ScheduleTable = ({ lessons, user }) => {
+export const ScheduleTable = ({ lessons, user, isMine }) => {
   let classes = useStyles();
   let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
     <Container className={classes.table}>
       <Grid container
-            direction='column'
-            justify='center'
-            alignItems='flex-end'
+            direction='row'
+            justify='space-between'
             className={classes.switchSpacing}>
-        <Typography>
-          {i18n.t('week')}
-        </Typography>
-        <Switch
-          offColor={lightGreyColor}
-          onColor={lightGreyColor}
-          checked={weekNumber}
-          onChange={() => setWeekNumber(!weekNumber)}
-          uncheckedIcon={<div style={switchWeek}>
-            2
-          </div>}
-          checkedIcon={<div style={switchWeek}>
-            1
-          </div>}
-          className="react-switch"
-          id="icon-switch"
-        />
+        {!isMine &&
+        <Button onClick={() => history.push(TEACHER_HOME_PAGE(user.id))}
+                color="primary"
+                variant="text"
+                size='medium'>
+          {getName(user)}
+        </Button>}
+        <Grid>
+          <Typography>
+            {i18n.t('week')}
+          </Typography>
+          <Switch
+            offColor={lightGreyColor}
+            onColor={lightGreyColor}
+            checked={weekNumber}
+            onChange={() => setWeekNumber(!weekNumber)}
+            uncheckedIcon={<div style={switchWeek}>
+              2
+            </div>}
+            checkedIcon={<div style={switchWeek}>
+              1
+            </div>}
+            className="react-switch"
+            id="icon-switch"
+          />
+        </Grid>
       </Grid>
 
       <TableContainer component={Paper}>
@@ -82,10 +94,10 @@ export const ScheduleTable = ({ lessons, user }) => {
                   </TableCell>
                   {WEEK_DAYS.map(weekDay => {
                       let lesson = getLesson(lessons, weekDay.value, lessonTime.value, weekNumber ? 1 : 2);
-                    return (<TableCell key={weekDay.value} component="th" scope="row" className={classes.cell}>
-                      {lesson && <Lesson lesson={lesson} user={user}/>}
-                    </TableCell>);
-                  }
+                      return (<TableCell key={weekDay.value} component="th" scope="row" className={classes.cell}>
+                        {lesson && <Lesson lesson={lesson} user={user}/>}
+                      </TableCell>);
+                    }
                   )}
                 </TableRow>
               )}

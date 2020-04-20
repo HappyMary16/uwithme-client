@@ -16,10 +16,10 @@ export const TeacherListItem = ({ teacher }) => {
     history.push(TEACHER_HOME_PAGE(teacher.id));
   };
 
+  //TODO fix photo
   return (
     <ListItem button
               onClick={handleClick}>
-      //TODO fix photo
       <ListItemAvatar>
         <Avatar alt='Teacher' src='empty-avatar.jpg'/>
       </ListItemAvatar>

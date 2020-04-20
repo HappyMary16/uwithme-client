@@ -9,6 +9,9 @@ import Switch from 'react-switch';
 import { getCurrentWeek } from '../../../utils/ScheduleUtil';
 import { lightGreyColor, switchWeek } from '../../../common/styles/styles';
 import { Container } from '@material-ui/core';
+import { TEACHER_SCHEDULE } from '../../../constants/links';
+import { history } from '../../../store/Store';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const User = ({ user, lessons }) => {
+export const User = ({ user, lessons, isMine }) => {
   const classes = useStyles();
   const [weekDay, setWeekDay] = React.useState(new Date().getDay());
   const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
@@ -39,10 +42,18 @@ export const User = ({ user, lessons }) => {
       </Container>
       <Container className={classes.paper}>
         <Grid container xs={12} direction='row' justify='space-between'>
-          <Typography variant="h4">
-            {i18n.t('schedule')}
-          </Typography>
-
+          <Grid>
+            <Typography variant="h4">
+              {i18n.t('schedule')}
+            </Typography>
+            {!isMine &&
+            <Button onClick={() => history.push(TEACHER_SCHEDULE(user.id))}
+                    color="primary"
+                    variant="text"
+                    size='small'>
+              {i18n.t('open')}
+            </Button>}
+          </Grid>
           <Grid>
             <Typography>
               {i18n.t('week')}
