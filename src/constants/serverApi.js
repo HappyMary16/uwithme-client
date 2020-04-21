@@ -10,7 +10,15 @@ export const GET_INSTITUTES_WITH_PARAMETERS = '/info/institutes/';
 export const GET_DEPARTMENTS = '/info/departments';
 export const GET_DEPARTMENTS_WITH_PARAMETERS = '/info/departments/';
 export const GET_GROUPS = '/info/studyGroups';
-export const GET_GROUPS_WITH_PARAMETERS = '/info/studyGroups/';
+export const GET_GROUPS_WITH_PARAMETERS = '/group/';
+
+export function getGroupByUniversityId(universityId) {
+  return `/group/${universityId}/universityId`;
+}
+
+export function getGroupByTeacherId(teacherId) {
+  return `/group/${teacherId}/teacherId`;
+}
 
 export const GET_SUBJECTS = '/subjects/';
 export const POST_SUBJECTS = '/subject/';
@@ -33,7 +41,14 @@ export const GET_LESSONS_BY_GROUP_ID = '/lessons/group/';
 export const GET_LESSONS_BY_USER_ID = '/lessons/user/';
 
 export const GET_TEACHERS_BY_UNIVERSITY_ID = '/users/teachers/';
-export const GET_TEACHERS_BY_GROUP_ID = (groupId) => `/users/teachers/${groupId}/group`;
+
+export function findTeachersByGroupId(groupId) {
+  return `/users/teachers/${groupId}/group`;
+}
+
+export function findStudentsByTeacherId(teacherId) {
+  return `/users/students/${teacherId}/teacherId`;
+}
 
 export const GET_LECTURE_HALLS = '/lectureHalls/';
 export const GET_BUILDINGS = '/buildings/';

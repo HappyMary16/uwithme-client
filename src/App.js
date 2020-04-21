@@ -12,6 +12,7 @@ import {
   SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
+  STUDENTS,
   TEACHER_HOME_PAGE_ROUTER,
   TEACHER_SCHEDULE_ROUTER,
   TEACHERS,
@@ -44,6 +45,7 @@ import UserPage from './pages/users/containers/UserPage';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
+import StudentsList from './pages/users/containers/StudentsList';
 
 const useStyles = theme => ({
   backdrop: {
@@ -124,6 +126,7 @@ class App extends Component {
                     <Grid>
                       <Route exact path={ADD_FILE} component={AddFile}/>
                       <Route exact path={SHARE_FILES} component={ShareFiles}/>
+                      <Route exact path={STUDENTS} component={StudentsList}/>
                     </Grid>
                   )}
 

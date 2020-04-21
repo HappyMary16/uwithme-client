@@ -29,7 +29,7 @@ class UserSchedule extends Component {
 
 const mapStateToProps = state => {
   return {
-    teachers: state.usersReducer.teachers,
+    teachers: state.usersReducer.users,
     lessons: state.usersReducer.lessons
   };
 };

@@ -1,4 +1,4 @@
-import { RENDER_LESSONS_FOR_CURRENT_USER_PAGE, RENDER_TEACHERS } from './actions';
+import { RENDER_GROUPS_FOR_TEACHER, RENDER_LESSONS_FOR_CURRENT_USER_PAGE, RENDER_USERS } from './actions';
 import StateLoader from '../../store/StateLoader';
 
 
@@ -7,15 +7,27 @@ export default function usersReducer(
   action
 ) {
   switch (action.type) {
-    case RENDER_TEACHERS:
+    case RENDER_USERS:
       return {
         ...state,
-        teachers: action.payload.teachers
+        users: action.payload.users
       };
     case RENDER_LESSONS_FOR_CURRENT_USER_PAGE:
       return {
         ...state,
         lessons: action.payload.lessons
+      };
+    case RENDER_GROUPS_FOR_TEACHER:
+      return {
+        ...state,
+        groups: action.payload.groups.map(obj => {
+          let group = {};
+          group.value = obj.id;
+          group.label = obj.name;
+          group.departmentId = obj.departmentId;
+          group.course = obj.course;
+          return group;
+        })
       };
     default:
       return state;

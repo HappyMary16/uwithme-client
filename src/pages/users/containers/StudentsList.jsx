@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { loadTeachersByGroupId } from '../actions';
+import { loadStudentsByTeacherId } from '../actions';
 import List from '@material-ui/core/List';
-import { TeacherListItem } from '../components/TeacherListItem';
+import { StudentListItem } from '../components/StudentListItem';
 
-class TeachersList extends Component {
+class StudentsList extends Component {
 
   componentDidMount() {
     const { dispatch, user } = this.props;
-    dispatch(loadTeachersByGroupId(user.studyGroupId));
+    dispatch(loadStudentsByTeacherId(user.id));
   }
 
   render() {
@@ -16,7 +16,7 @@ class TeachersList extends Component {
 
     return (
       <List>
-        {teachers && teachers.map(teacher => <TeacherListItem key={teacher.id} teacher={teacher}/>)}
+        {teachers && teachers.map(teacher => <StudentListItem key={teacher.id} student={teacher}/>)}
       </List>
     );
   }
@@ -29,4 +29,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TeachersList);
+export default connect(mapStateToProps)(StudentsList);

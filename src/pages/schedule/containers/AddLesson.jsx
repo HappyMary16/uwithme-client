@@ -240,7 +240,7 @@ const mapStateToProps = state => {
   return {
     groups: state.adminReducers.groups,
     universityId: state.authReducers.user.universityId,
-    teachers: state.usersReducer.teachers,
+    teachers: state.usersReducer.users,
     subjects: state.filesReducers.subjects,
     lectureHalls: state.lectureHallReducer.lectureHalls,
     buildings: state.lectureHallReducer.buildings

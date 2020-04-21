@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FILES, SCHEDULE, TEACHERS, USER_HOME } from '../../../constants/links';
+import { FILES, SCHEDULE, STUDENTS, TEACHERS, USER_HOME } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import { isStudent } from '../../../utils/UsersUtil';
+import { isStudent, isTeacher } from '../../../utils/UsersUtil';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -52,6 +52,11 @@ export const UserToolBar = ({ user }) => {
       {isStudent(user) &&
       (<ListItem component={Link} href={TEACHERS} className={classes.menuItem}>
         <ListItemText primary={i18n.t('teachers')}/>
+      </ListItem>)
+      }
+      {isTeacher(user) &&
+      (<ListItem component={Link} href={STUDENTS} className={classes.menuItem}>
+        <ListItemText primary={i18n.t('students')}/>
       </ListItem>)
       }
     </List>
