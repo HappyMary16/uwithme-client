@@ -16,12 +16,12 @@ export const TeacherListItem = ({ teacher }) => {
     history.push(TEACHER_HOME_PAGE(teacher.id));
   };
 
-  //TODO fix photo
   return (
     <ListItem button
               onClick={handleClick}>
       <ListItemAvatar>
-        <Avatar alt='Teacher' src='empty-avatar.jpg'/>
+        <Avatar alt='photo'
+                src='/empty-avatar.jpg'/>
       </ListItemAvatar>
       <ListItemText
         primary={getName(teacher)}

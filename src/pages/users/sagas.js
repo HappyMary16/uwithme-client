@@ -86,6 +86,7 @@ function* getStudentsByTeacherId(action) {
     yield put(startFetching());
     const { teacherId } = action.payload;
 
+    console.log(findStudentsByTeacherId(teacherId));
     const students = yield call(http, {
       url: findStudentsByTeacherId(teacherId),
       method: 'get'

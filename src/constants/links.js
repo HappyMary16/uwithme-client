@@ -10,9 +10,9 @@ export const FILES = '/files';
 //student
 export const TEACHERS = '/teachers/list';
 export const STUDENTS = '/students/list';
-export const TEACHER_SCHEDULE_ROUTER = '/teacher/schedule/:teacherId';
+export const TEACHER_SCHEDULE_ROUTER = '/user/schedule/:teacherId';
 export const TEACHER_SCHEDULE = teacherId => `/user/schedule/${teacherId}`;
-export const TEACHER_HOME_PAGE_ROUTER = '/teacher/:teacherId';
+export const TEACHER_HOME_PAGE_ROUTER = '/user/:teacherId';
 export const TEACHER_HOME_PAGE = teacherId => `/user/${teacherId}`;
 
 //teacher

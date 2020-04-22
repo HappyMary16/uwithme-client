@@ -33,8 +33,8 @@ export const UserCard = ({ user }) => {
           <ButtonBase className={classes.image}>
             <img
               className={classes.img}
-              alt='complex'
-              src='empty-avatar.jpg'
+              alt='photo'
+              src='/empty-avatar.jpg'
             />
           </ButtonBase>
         </Grid>
