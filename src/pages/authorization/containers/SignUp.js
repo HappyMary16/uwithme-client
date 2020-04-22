@@ -17,7 +17,7 @@ import { InputField } from '../../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { loadDepartments, loadGroups, loadInstitutes } from '../../administration/structure/actions';
+import { loadDepartments, loadGroups, loadInstitutes, loadUniversities } from '../../administration/structure/actions';
 
 const useStyles = theme => ({
   paper: {
@@ -37,13 +37,6 @@ const useStyles = theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#eeeeee'
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  menu: {
-    width: 200
   }
 });
 
@@ -54,7 +47,7 @@ class SignUp extends React.Component {
       institute: '1',
       department: '1',
       group: '1',
-      userRole: '1',
+      userRole: 1,
       scienceDegree: '1',
       firstName: '',
       lastName: '',
@@ -65,7 +58,8 @@ class SignUp extends React.Component {
       phone: '',
       email: '',
       studentId: '',
-      passwordError: false
+      passwordError: false,
+      university: '1'
     };
 
     this.submit = this.submit.bind(this);
@@ -74,6 +68,7 @@ class SignUp extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch(loadUniversities());
     dispatch(loadInstitutes());
     dispatch(loadDepartments());
     dispatch(loadGroups());
@@ -98,7 +93,8 @@ class SignUp extends React.Component {
         this.state.scienceDegree,
         this.state.institute,
         this.state.department,
-        this.state.group
+        this.state.group,
+        this.state.university
       )
     );
   }
@@ -112,27 +108,14 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const {
-      classes,
-      groups,
-      departments,
-      institutes,
-      scienceDegrees
-    } = this.props;
-    const {
-      passwordError,
-      userRole,
-      scienceDegree,
-      institute,
-      group,
-      department
-    } = this.state;
+    const { classes, groups, departments, institutes, scienceDegrees, universities } = this.props;
+    const { passwordError, userRole, scienceDegree, institute, group, department, university } = this.state;
 
     return (
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <LockOutlinedIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
             {i18n.t('sign_up')}
@@ -141,24 +124,26 @@ class SignUp extends React.Component {
             <InputField
               label={i18n.t('first_name')}
               autoFocus={true}
-              onBlur={e => this.setState({ firstName: e.target.value })}
-            />
-            <InputField
-              label={i18n.t('last_name')}
-              onBlur={e => this.setState({ lastName: e.target.value })}
+              onBlur={e => this.setState({ firstName: e.target.value })
+              }
             />
             <InputField
               label={i18n.t('surname')}
               onBlur={e => this.setState({ surname: e.target.value })}
             />
             <InputField
-              label={i18n.t('user_name')}
-              onBlur={e => this.setState({ username: e.target.value })}
+              label={i18n.t('last_name')}
+              onBlur={e => this.setState({ lastName: e.target.value })}
+              required={false}
             />
-            <InputField
-              label={i18n.t('phone')}
-              onBlur={e => this.setState({ phone: e.target.value })}
-            />
+            {/*<InputField*/}
+            {/*  label={i18n.t('user_name')}*/}
+            {/*  onBlur={e => this.setState({ username: e.target.value })}*/}
+            {/*/>*/}
+            {/*<InputField*/}
+            {/*  label={i18n.t('phone')}*/}
+            {/*  onBlur={e => this.setState({ phone: e.target.value })}*/}
+            {/*/>*/}
             <InputField
               label={i18n.t('email')}
               autoComplete="email"
@@ -185,13 +170,13 @@ class SignUp extends React.Component {
               values={UserRoles}
               onChange={e => this.setState({ userRole: e })}
             />
-            {userRole === '1' && (
-              <InputField
-                label={i18n.t('student_id')}
-                onBlur={e => this.setState({ studentId: e.target.value })}
-              />
-            )}
-            {userRole === '2' && (
+            {/*{userRole === '1' && (*/}
+            {/*  <InputField*/}
+            {/*    label={i18n.t('student_id')}*/}
+            {/*    onBlur={e => this.setState({ studentId: e.target.value })}*/}
+            {/*  />*/}
+            {/*)}*/}
+            {userRole === 2 && (
               <SelectField
                 label={i18n.t('science_degree')}
                 initialValue={scienceDegree}
@@ -199,6 +184,12 @@ class SignUp extends React.Component {
                 onChange={e => this.setState({ scienceDegree: e })}
               />
             )}
+            <SelectField
+              label={i18n.t('university')}
+              initialValue={university}
+              values={universities}
+              onChange={e => this.setState({ university: e })}
+            />
             <SelectField
               label={i18n.t('institute')}
               initialValue={institute}
@@ -211,7 +202,7 @@ class SignUp extends React.Component {
               values={departments}
               onChange={e => this.setState({ department: e })}
             />
-            {userRole === '1' && (
+            {userRole === 1 && (
               <SelectField
                 label={i18n.t('group')}
                 initialValue={group}
@@ -247,7 +238,8 @@ const mapStateToProps = state => {
     institutes: state.adminReducers.institutes,
     departments: state.adminReducers.departments,
     groups: state.adminReducers.groups,
-    scienceDegrees: state.adminReducers.scienceDegrees
+    scienceDegrees: state.adminReducers.scienceDegrees,
+    universities: state.adminReducers.universities
   };
 };
 

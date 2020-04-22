@@ -14,7 +14,7 @@ class GroupSchedule extends Component {
     super(props);
 
     this.state = {
-      groupId: ''
+      groupId: null
     };
 
     this.handleGroupChange = this.handleGroupChange.bind(this);
@@ -26,11 +26,15 @@ class GroupSchedule extends Component {
 
   handleGroupChange(groupId) {
     const { dispatch } = this.props;
+    this.setState({
+      groupId: groupId
+    });
     groupId && dispatch(findLessonsByGroupId(groupId.value));
   }
 
   render() {
     const { groups, lessons, user } = this.props;
+    const { groupId } = this.state;
 
     return (
       <Container>
@@ -43,7 +47,7 @@ class GroupSchedule extends Component {
             options={groups}
           />
         </Container>
-        {lessons && <ScheduleTable lessons={lessons} user={user}/>}
+        {groupId && lessons && <ScheduleTable lessons={lessons} user={user} isMine={true}/>}
       </Container>
     );
   }

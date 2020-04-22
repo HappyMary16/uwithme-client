@@ -5,6 +5,7 @@ export const apiRoot = `http://localhost:${config.port}/api`;
 export const SIGN_IN = '/auth/signIn';
 export const SIGN_UP = '/auth/signUp';
 
+export const GET_UNIVERSITIES = '/info/universities';
 export const GET_INSTITUTES = '/info/institutes';
 export const GET_INSTITUTES_WITH_PARAMETERS = '/info/institutes/';
 export const GET_DEPARTMENTS = '/info/departments';

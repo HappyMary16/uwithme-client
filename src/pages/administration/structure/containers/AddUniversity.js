@@ -93,7 +93,7 @@ class AddUniversity extends Component {
           </Typography>
           <form className={classes.form} onSubmit={this.submit}>
             <InputField
-              label={i18n.t('university')}
+              label={i18n.t('university_name')}
               autoFocus={true}
               onBlur={e => this.setState({ universityName: e.target.value })}
             />

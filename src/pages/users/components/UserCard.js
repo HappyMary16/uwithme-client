@@ -44,9 +44,6 @@ export const UserCard = ({ user }) => {
             <Typography gutterBottom variant='h5'>
               {getName(user)}
             </Typography>
-            {/*<Typography gutterBottom variant='h6'>*/}
-            {/*  {user.username}*/}
-            {/*</Typography>*/}
             <Typography variant='body2' gutterBottom>
               {i18n.t('phone')}: {user.phone}
             </Typography>

@@ -27,8 +27,8 @@ function* addLessonToSchedule(action) {
     } = action.payload;
 
     let data = {
-      subjectId: subjectId === subjectName ? undefined : subjectId,
-      subjectName: subjectId === subjectName ? subjectName : undefined,
+      subjectId: subjectId,
+      subjectName: subjectName,
       teacherId: teacherId === teacherName ? undefined : teacherId,
       teacherName: teacherId === teacherName ? teacherName : undefined,
       lectureHall,
@@ -44,7 +44,7 @@ function* addLessonToSchedule(action) {
       data
     });
 
-    if (response.code === 200) {
+    if (response.status === 200) {
       alert('Пари додані в розклад');
     }
 

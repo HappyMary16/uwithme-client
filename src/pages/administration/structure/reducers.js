@@ -5,7 +5,8 @@ import {
   INSTITUTE_CREATED,
   RENDER_DEPARTMENTS,
   RENDER_GROUPS,
-  RENDER_INSTITUTES
+  RENDER_INSTITUTES,
+  RENDER_UNIVERSITIES
 } from './actions';
 
 export default function adminReducers(
@@ -47,6 +48,18 @@ export default function adminReducers(
           return group;
         })
       };
+
+    case RENDER_UNIVERSITIES:
+      return {
+        ...state,
+        universities: action.payload.universities.map(obj => {
+          return {
+            value: obj.id,
+            label: obj.name
+          };
+        })
+      };
+
     case INSTITUTE_CREATED:
       return {
         ...state,

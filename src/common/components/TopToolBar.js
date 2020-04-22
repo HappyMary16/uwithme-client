@@ -47,7 +47,7 @@ export const TopToolBar = ({ user, signOutFunc }) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          {i18n.t('university_name')}
+          {i18n.t('ntu_khpi')}
         </Typography>
         {!user && (
           <Button

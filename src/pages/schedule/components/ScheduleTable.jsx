@@ -43,7 +43,7 @@ export const ScheduleTable = ({ lessons, user, isMine }) => {
     <Container className={classes.table}>
       <Grid container
             direction='row'
-            justify='space-between'
+            justify={!isMine ? 'space-between' : 'flex-end'}
             className={classes.switchSpacing}>
         {!isMine &&
         <Button onClick={() => history.push(TEACHER_HOME_PAGE(user.id))}

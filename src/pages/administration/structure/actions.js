@@ -12,6 +12,7 @@ export const LOAD_INSTITUTES_BY_UNIVERSITY_ID = 'LOAD_INSTITUTES_BY_UNIVERSITY_I
 export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID = 'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
 export const LOAD_GROUPS_BY_UNIVERSITY_ID = 'LOAD_GROUPS_BY_UNIVERSITY_ID';
 
+export const LOAD_UNIVERSITIES = 'LOAD_UNIVERSITIES';
 export const LOAD_INSTITUTES = 'LOAD_INSTITUTES';
 export const LOAD_DEPARTMENTS = 'LOAD_DEPARTMENTS';
 export const LOAD_GROUPS = 'LOAD_GROUPS';
@@ -19,6 +20,7 @@ export const LOAD_GROUPS = 'LOAD_GROUPS';
 export const RENDER_INSTITUTES = 'RENDER_INSTITUTES';
 export const RENDER_DEPARTMENTS = 'RENDER_DEPARTMENTS';
 export const RENDER_GROUPS = 'RENDER_GROUPS';
+export const RENDER_UNIVERSITIES = 'RENDER_UNIVERSITIES';
 
 export const addUniversity = (
   universityName,
@@ -101,6 +103,10 @@ export const loadInstitutes = () => ({
   type: LOAD_INSTITUTES
 });
 
+export const loadUniversities = () => ({
+  type: LOAD_UNIVERSITIES
+});
+
 export const loadInstitutesByUniversityId = (universityId) => ({
   type: LOAD_INSTITUTES_BY_UNIVERSITY_ID,
   payload: universityId
@@ -122,4 +128,11 @@ export const loadDepartments = () => ({
 
 export const loadGroups = () => ({
   type: LOAD_GROUPS
+});
+
+export const renderUniversities = (universities) => ({
+  type: RENDER_UNIVERSITIES,
+  payload: {
+    universities
+  }
 });
