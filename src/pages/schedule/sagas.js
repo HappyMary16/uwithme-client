@@ -27,10 +27,10 @@ function* addLessonToSchedule(action) {
     } = action.payload;
 
     let data = {
-      subjectId: subjectId,
+      subjectId: subjectId === subjectName ? undefined : subjectId,
       subjectName: subjectName,
       teacherId: teacherId === teacherName ? undefined : teacherId,
-      teacherName: teacherId === teacherName ? teacherName : undefined,
+      teacherName: teacherName,
       lectureHall,
       groups: groups.map(group => group.value),
       weekDays: weekDays.map(weekDay => weekDay.value),

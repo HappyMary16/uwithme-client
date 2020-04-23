@@ -3,11 +3,7 @@ import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import DeleteIcon from '@material-ui/icons/Delete';
-import InfoIcon from '@material-ui/icons/Info';
-import EditIcon from '@material-ui/icons/Edit';
 import { GroupList } from './GroupList';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import { ListItemIcon } from '@material-ui/core';
@@ -38,22 +34,22 @@ export default class Department extends Component {
 
     return (
       <List>
-        <ListItem button onClick={this.instituteHandleClick}>
+        <ListItem button onClick={this.instituteHandleClick} className={classes.departmentSpace}>
           <ListItemIcon>
             <HomeWorkIcon/>
           </ListItemIcon>
           <ListItemText primary={department.label}/>
           <ListItemSecondaryAction>
-            <IconButton onClick={this.someAction}>
-              <EditIcon/>
-            </IconButton>
-            <IconButton onClick={this.someAction}>
-              <InfoIcon/>
-            </IconButton>
-            <IconButton onClick={this.someAction}>
-              <DeleteIcon/>
-            </IconButton>
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {/*<IconButton onClick={this.someAction}>*/}
+            {/*  <EditIcon/>*/}
+            {/*</IconButton>*/}
+            {/*<IconButton onClick={this.someAction}>*/}
+            {/*  <InfoIcon/>*/}
+            {/*</IconButton>*/}
+            {/*<IconButton onClick={this.someAction}>*/}
+            {/*  <DeleteIcon/>*/}
+            {/*</IconButton>*/}
+            {open ? <ExpandLess/> : <ExpandMore/>}
           </ListItemSecondaryAction>
         </ListItem>
 

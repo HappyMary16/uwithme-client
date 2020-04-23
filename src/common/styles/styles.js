@@ -1,3 +1,7 @@
+export const purpleColor = '#483D8B';
+export const lightGreyColor = '#D3D3D3';
+export const buttonColor = '#eeeeee';
+
 export const selectorColors = theme => ({
   ...theme,
   colors: {
@@ -13,11 +17,9 @@ export const marginTop = {
 };
 
 export const marginLeft = {
-  marginLeft: '10px'
+  marginLeft: '10px',
+  backgroundColor: buttonColor
 };
-
-export const purpleColor = '#483D8B';
-export const lightGreyColor = '#D3D3D3';
 
 export const switchWeek = {
   display: 'flex',

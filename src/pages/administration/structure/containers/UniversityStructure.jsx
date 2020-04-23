@@ -20,8 +20,11 @@ const useStyles = theme => ({
   list: {
     width: '100%'
   },
-  nested: {
+  departmentSpace: {
     paddingLeft: theme.spacing(4)
+  },
+  groupSpace: {
+    paddingLeft: theme.spacing(8)
   }
 });
 
