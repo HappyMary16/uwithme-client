@@ -30,11 +30,7 @@ export default function filesReducers(
       };
     }
     case SIGN_OUT:
-      return {
-        ...state,
-        subjects: null,
-        files: null
-      };
+      return {};
     case UPLOAD_REQUEST:
       return {
         ...state,

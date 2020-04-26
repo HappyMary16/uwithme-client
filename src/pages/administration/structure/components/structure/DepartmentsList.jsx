@@ -21,7 +21,7 @@ export default class DepartmentsList extends Component {
     return (
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {departments.map((department, i) => (
+          {departments && departments.map((department, i) => (
             <Department
               key={i}
               department={department}

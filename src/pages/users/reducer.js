@@ -1,5 +1,6 @@
 import { RENDER_GROUPS_FOR_TEACHER, RENDER_LESSONS_FOR_CURRENT_USER_PAGE, RENDER_USERS } from './actions';
 import StateLoader from '../../store/StateLoader';
+import { SIGN_OUT } from '../authorization/actions';
 
 
 export default function usersReducer(
@@ -29,6 +30,8 @@ export default function usersReducer(
           return group;
         })
       };
+    case SIGN_OUT:
+      return {};
     default:
       return state;
   }

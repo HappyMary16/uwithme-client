@@ -1,5 +1,6 @@
 import { LECTURE_HALL_CREATED, RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './action';
 import StateLoader from '../../../store/StateLoader';
+import { SIGN_OUT } from '../../authorization/actions';
 
 export default function lectureHallReducer(
   state = new StateLoader().loadState().lectureHallReducer || {},
@@ -40,6 +41,8 @@ export default function lectureHallReducer(
             placeNumber: action.payload.lectureHall.placeNumber
           }]
       };
+    case SIGN_OUT:
+      return {};
     default:
       return state;
   }

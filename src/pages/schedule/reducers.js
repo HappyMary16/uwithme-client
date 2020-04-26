@@ -1,5 +1,6 @@
 import { RENDER_LESSONS } from './actions';
 import StateLoader from '../../store/StateLoader';
+import { SIGN_OUT } from '../authorization/actions';
 
 export default function scheduleReducers(
   state = new StateLoader().loadState().scheduleReducers || {},
@@ -11,7 +12,8 @@ export default function scheduleReducers(
         ...state,
         lessons: action.payload.lessons
       };
-
+    case SIGN_OUT:
+      return {};
     default:
       return state;
   }

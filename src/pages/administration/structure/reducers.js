@@ -8,6 +8,7 @@ import {
   RENDER_INSTITUTES,
   RENDER_UNIVERSITIES
 } from './actions';
+import { SIGN_OUT } from '../../authorization/actions';
 
 export default function adminReducers(
   state = new StateLoader().loadState().adminReducers || {},
@@ -91,6 +92,8 @@ export default function adminReducers(
             course: action.payload.group.course
           }]
       };
+    case SIGN_OUT:
+      return {};
     default:
       return state;
   }

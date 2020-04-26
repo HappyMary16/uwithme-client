@@ -1,10 +1,5 @@
 import StateLoader from '../../store/StateLoader';
-import {
-  SIGN_IN_ERROR,
-  SIGN_IN_REQUEST,
-  SIGN_IN_SUCCESS,
-  SIGN_OUT
-} from './actions';
+import { SIGN_IN_ERROR, SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_OUT } from './actions';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {},
@@ -26,10 +21,7 @@ export default function authReducers(
         user: action.response.data
       };
     case SIGN_OUT:
-      return {
-        ...state,
-        user: null
-      };
+      return {};
     case SIGN_IN_ERROR:
       return {
         ...state,
