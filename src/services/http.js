@@ -4,19 +4,14 @@ import { history } from '../store/Store';
 import { apiRoot } from '../constants/serverApi';
 import { SIGN_IN } from '../constants/links';
 
-let updateTokenRequest = null;
-
 const refresh = () => {
-  if (updateTokenRequest) {
-    return updateTokenRequest;
-  }
-  updateTokenRequest = axios({
-    url:
-      apiRoot + `auth/refresh-token?=${localStorage.getItem('RefreshToken')}`,
-    method: 'get',
-    timeout: 10000
+  return http({
+    url: '/auth/refreshToken',
+    method: 'post',
+    data: {
+      refreshToken: localStorage.getItem('RefreshToken')
+    }
   });
-  return updateTokenRequest;
 };
 
 const reRequest = request => {
@@ -34,7 +29,6 @@ const reRequest = request => {
   }
   return http(config)
     .then(res => {
-      updateTokenRequest = null;
       return res;
     })
     .catch(err => {
@@ -42,15 +36,15 @@ const reRequest = request => {
     });
 };
 
-export default function http({
-  method,
-  url,
-  data,
-  params,
-  handleToken,
-  isFile,
-  loadFile
-}) {
+export default function http(
+  {
+    method,
+    url,
+    data,
+    params,
+    isFile,
+    loadFile
+  }) {
   const token = localStorage.getItem('AuthToken');
   const config = {
     method: method.toLowerCase(),
@@ -87,21 +81,20 @@ export default function http({
       if (
         error &&
         error.response &&
-        error.response.status === 401 &&
+        (error.response.status === 401 || error.response.status === 403) &&
         error.config &&
         !error.config.__isRetryRequest
       ) {
         return refresh()
           .then(res => {
-            // localStorage.setItem('AuthToken', res.data.AuthToken);
-            // localStorage.setItem('RefreshToken', res.data.RefreshToken);
+            localStorage.setItem('AuthToken', res.data.authToken);
+            localStorage.setItem('RefreshToken', res.data.refreshToken);
             return res;
           })
           .then(() => {
             return reRequest(error.config);
           })
           .catch(() => {
-            updateTokenRequest = null;
             history.push(SIGN_IN);
           });
       }

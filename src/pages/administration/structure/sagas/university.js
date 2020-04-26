@@ -41,7 +41,8 @@ function* addUniversity(action) {
 
 function* signInSuccess(response) {
   yield put({ type: SIGN_IN_SUCCESS, response });
-  localStorage.setItem('AuthToken', response.data.token);
+  localStorage.setItem('AuthToken', response.data.authToken);
+  localStorage.setItem('RefreshToken', response.data.refreshToken);
 
   //TODO go to right page
   history.push(USER_HOME);
@@ -49,5 +50,6 @@ function* signInSuccess(response) {
 
 function* signInError(message) {
   localStorage.setItem('AuthToken', null);
+  localStorage.setItem('RefreshToken', null);
   yield put({ type: SIGN_IN_ERROR, message });
 }

@@ -58,6 +58,7 @@ function* signUp(action) {
 
 function signOut() {
   localStorage.setItem('AuthToken', null);
+  localStorage.setItem('RefreshToken', null);
 }
 
 function* signIn(action) {
@@ -91,11 +92,13 @@ function* signIn(action) {
 
 function* signInSuccess(response) {
   yield put({ type: SIGN_IN_SUCCESS, response });
-  localStorage.setItem('AuthToken', response.data.token);
+  localStorage.setItem('AuthToken', response.data.authToken);
+  localStorage.setItem('RefreshToken', response.data.refreshToken);
   history.push(USER_HOME);
 }
 
 function* signInError(message) {
   localStorage.setItem('AuthToken', null);
+  localStorage.setItem('RefreshToken', null);
   yield put({ type: SIGN_IN_ERROR, message });
 }
