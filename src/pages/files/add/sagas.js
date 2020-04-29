@@ -35,5 +35,7 @@ function* uploadFiles(action) {
     isFile: true
   });
 
-  yield put({ type: UPLOAD_SUCCESS, response });
+  if (response) {
+    yield put({ type: UPLOAD_SUCCESS, response });
+  }
 }

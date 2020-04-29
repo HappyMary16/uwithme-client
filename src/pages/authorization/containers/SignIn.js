@@ -9,15 +9,16 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { signInRequest } from '../actions';
+import { signInRequest, signOut } from '../actions';
 
 import i18n from '../../../locales/i18n';
 import { InputField } from '../../../common/components/InputField';
+import { compose } from 'redux';
+import withStyles from '@material-ui/core/styles/withStyles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
   paper: {
     marginTop: theme.spacing(4),
     display: 'flex',
@@ -36,74 +37,89 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#eeeeee'
   }
-}));
+});
 
-let SignIn = ({ dispatch }) => {
-  const classes = useStyles();
+class SignIn extends React.Component {
 
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
 
-  let submit = e => {
+    this.submit = this.submit.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(signOut());
+  }
+
+  submit(e) {
     e.preventDefault();
+
+    const { dispatch } = this.props;
+    const { username, password } = this.state;
+
     dispatch(signInRequest(username, password));
-  };
+  }
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {i18n.t('sign_in')}
-        </Typography>
-        <form className={classes.form} onSubmit={e => submit(e)}>
-          <InputField
-            label={i18n.t('user_name')}
-            autoFocus
-            onChange={e => {
-              setUsername(e.target.value);
-            }}
-          />
-          <InputField
-            label={i18n.t('password')}
-            type="password"
-            autoComplete="current-password"
-            onChange={e => {
-              setPassword(e.target.value);
-            }}
-          />
-          {/*<FormControlLabel*/}
-          {/*  control={<Checkbox value="remember" color="primary" />}*/}
-          {/*  label="Remember me"*/}
-          {/*/>*/}
-          <Button
-            type="submit"
-            fullWidth
-            variant="outlined"
-            color="primary"
-            className={classes.submit}
-          >
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline/>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon/>
+          </Avatar>
+          <Typography component="h1" variant="h5">
             {i18n.t('sign_in')}
-          </Button>
-        </form>
-        <Grid container>
-          {/*<Grid item xs>*/}
-          {/*  <Link href="#" variant="body2">*/}
-          {/*    Forgot password?*/}
-          {/*  </Link>*/}
-          {/*</Grid>*/}
-          <Grid item>
-            <Link href={SIGN_UP} variant="body2">
-              {i18n.t('sign_up_button')}
-            </Link>
+          </Typography>
+          <form className={classes.form} onSubmit={e => this.submit(e)}>
+            <InputField
+              label={i18n.t('user_name')}
+              autoFocus
+              onChange={e => this.setState({ username: e.target.value })}
+            />
+            <InputField
+              label={i18n.t('password')}
+              type="password"
+              autoComplete="current-password"
+              onChange={e => this.setState({ password: e.target.value })}
+            />
+            {/*<FormControlLabel*/}
+            {/*  control={<Checkbox value="remember" color="primary" />}*/}
+            {/*  label="Remember me"*/}
+            {/*/>*/}
+            <Button
+              type="submit"
+              fullWidth
+              variant="outlined"
+              color="primary"
+              className={classes.submit}
+            >
+              {i18n.t('sign_in')}
+            </Button>
+          </form>
+          <Grid container>
+            {/*<Grid item xs>*/}
+            {/*  <Link href="#" variant="body2">*/}
+            {/*    Forgot password?*/}
+            {/*  </Link>*/}
+            {/*</Grid>*/}
+            <Grid item>
+              <Link href={SIGN_UP} variant="body2">
+                {i18n.t('sign_up_button')}
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-    </Container>
-  );
-};
+        </div>
+      </Container>
+    );
+  }
+}
 
-export const SingIn = connect()(SignIn);
+export default compose(withStyles(useStyles), connect())(SignIn);

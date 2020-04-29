@@ -23,12 +23,12 @@ import { UserToolBar } from './pages/users/components/UserToolBar';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import AddFile from './pages/files/add/containers/AddFile';
-import { SingIn } from './pages/authorization/containers/SignIn';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/files/share/containers/ShareFiles';
 import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
+import SignIn from './pages/authorization/containers/SignIn';
 import AddUniversity from './pages/administration/structure/containers/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/administration/structure/components/AdminToolBar';
@@ -87,13 +87,14 @@ class App extends Component {
               <NavigationContainer/>
             </Grid>
 
+            <Grid container xs={12}>
+              <Route exact path={SIGN_IN} component={SignIn}/>
+            </Grid>
+
             {!user && (
               <Grid container xs={12}>
-                <Route exact path={SIGN_IN} component={SingIn}/>
-                <Route
-                  exact
-                  path={ADD_UNIVERSITY_PATH}
-                  component={AddUniversity}
+                <Route exact path={ADD_UNIVERSITY_PATH}
+                       component={AddUniversity}
                 />
                 <Route exact path={SIGN_UP} component={SignUp}/>
               </Grid>

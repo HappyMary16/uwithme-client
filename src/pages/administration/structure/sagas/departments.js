@@ -52,7 +52,9 @@ function* loadDepartmentsByUniversityId(action) {
       method: 'get'
     });
 
-    yield put({ type: RENDER_DEPARTMENTS, departments });
+    if (departments) {
+      yield put({ type: RENDER_DEPARTMENTS, departments });
+    }
   } catch (e) {
     alert(e);
   } finally {

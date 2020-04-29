@@ -4,14 +4,29 @@ import { history } from '../store/Store';
 import { apiRoot } from '../constants/serverApi';
 import { SIGN_IN } from '../constants/links';
 
+let updateTokenRequest = null;
+
 const refresh = () => {
-  return http({
-    url: '/auth/refreshToken',
+  if (updateTokenRequest) {
+    return updateTokenRequest;
+  }
+
+  const config = {
     method: 'post',
+    url: apiRoot + '/auth/refreshToken',
     data: {
       refreshToken: localStorage.getItem('RefreshToken')
-    }
-  });
+    },
+    timeout: 10000
+  };
+
+  config['headers'] = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  };
+
+  updateTokenRequest = axios(config);
+  return updateTokenRequest;
 };
 
 const reRequest = request => {
@@ -21,14 +36,17 @@ const reRequest = request => {
     method: request.method,
     handleToken: handleToken
   };
+
   if (request.data) {
     config['data'] = request.data;
   }
   if (request.params) {
     config['params'] = request.params;
   }
+
   return http(config)
     .then(res => {
+      updateTokenRequest = null;
       return res;
     })
     .catch(err => {
@@ -81,7 +99,7 @@ export default function http(
       if (
         error &&
         error.response &&
-        (error.response.status === 401 || error.response.status === 403) &&
+        error.response.status === 403 &&
         error.config &&
         !error.config.__isRetryRequest
       ) {
@@ -96,8 +114,18 @@ export default function http(
           })
           .catch(() => {
             history.push(SIGN_IN);
+            updateTokenRequest = null;
           });
       }
+
+      if (error &&
+        error.response &&
+        error.response.status === 401) {
+
+        history.push(SIGN_IN);
+        updateTokenRequest = null;
+      }
+
       throw error;
     }
   );

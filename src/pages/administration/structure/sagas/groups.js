@@ -51,7 +51,9 @@ function* loadGroupsByUniversityId(action) {
       method: 'get'
     });
 
-    yield put({ type: RENDER_GROUPS, groups });
+    if (groups) {
+      yield put({ type: RENDER_GROUPS, groups });
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -69,7 +71,9 @@ function* loadGroupsByTeacherId(action) {
       method: 'get'
     });
 
-    yield put(renderGroupsForTeacher(groups.data));
+    if (groups) {
+      yield put(renderGroupsForTeacher(groups.data));
+    }
   } catch (e) {
     alert(e);
   } finally {

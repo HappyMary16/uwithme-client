@@ -46,7 +46,9 @@ function* loadInstitutesByUniversityId(action) {
       method: 'get'
     });
 
-    yield put({ type: RENDER_INSTITUTES, institutes });
+    if (institutes) {
+      yield put({ type: RENDER_INSTITUTES, institutes });
+    }
   } catch (e) {
     alert(e);
   } finally {

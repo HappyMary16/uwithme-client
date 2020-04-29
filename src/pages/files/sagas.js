@@ -30,7 +30,9 @@ function* downloadFiles(action) {
       isFile: true
     });
 
-    yield put(renderFiles(response));
+    if (response) {
+      yield put(renderFiles(response));
+    }
   } catch (e) {
     //TODO process errors
   } finally {
@@ -47,7 +49,9 @@ function* loadSubjects(action) {
       method: 'get'
     });
 
-    yield put(renderSubjects(response));
+    if (response) {
+      yield put(renderSubjects(response));
+    }
   } catch (e) {
     //TODO process errors
   } finally {
@@ -64,7 +68,9 @@ function* loadSubjectsByUniversityId(action) {
       method: 'get'
     });
 
-    yield put(renderSubjects(response));
+    if (response) {
+      yield put(renderSubjects(response));
+    }
   } catch (e) {
     alert(e);
   } finally {
