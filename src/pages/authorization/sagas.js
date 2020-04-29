@@ -91,10 +91,12 @@ function* signIn(action) {
 }
 
 function* signInSuccess(response) {
-  yield put({ type: SIGN_IN_SUCCESS, response });
-  localStorage.setItem('AuthToken', response.data.authToken);
-  localStorage.setItem('RefreshToken', response.data.refreshToken);
-  history.push(USER_HOME);
+  if (response) {
+    yield put({ type: SIGN_IN_SUCCESS, response });
+    localStorage.setItem('AuthToken', response.data.authToken);
+    localStorage.setItem('RefreshToken', response.data.refreshToken);
+    history.push(USER_HOME);
+  }
 }
 
 function* signInError(message) {

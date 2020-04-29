@@ -30,7 +30,9 @@ function* loadUniversities() {
       method: 'get'
     });
 
-    yield put(renderUniversities(universities.data));
+    if (universities) {
+      yield put(renderUniversities(universities.data));
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -47,7 +49,9 @@ function* loadInstitutes() {
       method: 'get'
     });
 
-    yield put({ type: RENDER_INSTITUTES, institutes });
+    if (institutes) {
+      yield put({ type: RENDER_INSTITUTES, institutes });
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -63,7 +67,10 @@ function* loadDepartments() {
       url: GET_DEPARTMENTS,
       method: 'get'
     });
-    yield put({ type: RENDER_DEPARTMENTS, departments });
+
+    if (departments) {
+      yield put({ type: RENDER_DEPARTMENTS, departments });
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -79,7 +86,10 @@ function* loadGroups() {
       url: GET_GROUPS,
       method: 'get'
     });
-    yield put({ type: RENDER_GROUPS, groups });
+
+    if (groups) {
+      yield put({ type: RENDER_GROUPS, groups });
+    }
   } catch (e) {
     alert(e);
   } finally {

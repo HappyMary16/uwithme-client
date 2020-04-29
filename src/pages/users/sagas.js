@@ -33,7 +33,9 @@ function* getTeachersByUniversityId(action) {
       method: 'get'
     });
 
-    yield put(renderUsers(teachers.data));
+    if (teachers) {
+      yield put(renderUsers(teachers.data));
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -51,7 +53,9 @@ function* getTeachersByGroupId(action) {
       method: 'get'
     });
 
-    yield put(renderUsers(teachers.data));
+    if (teachers) {
+      yield put(renderUsers(teachers.data));
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -67,12 +71,14 @@ function* findLessonsByUsername(action) {
       username
     } = action.payload;
 
-    const { data } = yield call(http, {
+    const response = yield call(http, {
       url: GET_LESSONS_BY_USER_ID + username,
       method: 'get'
     });
 
-    yield put(renderLessonsForUser(data));
+    if (response) {
+      yield put(renderLessonsForUser(response.data));
+    }
 
   } catch (e) {
     alert(e);
@@ -91,7 +97,9 @@ function* getStudentsByTeacherId(action) {
       method: 'get'
     });
 
-    yield put(renderUsers(students.data));
+    if (students) {
+      yield put(renderUsers(students.data));
+    }
   } catch (e) {
     alert(e);
   } finally {

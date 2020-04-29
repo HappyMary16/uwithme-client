@@ -44,7 +44,7 @@ function* addLessonToSchedule(action) {
       data
     });
 
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       alert('Пари додані в розклад');
     }
 
@@ -63,11 +63,14 @@ function* findLessonsByGroupId(action) {
       groupId
     } = action.payload;
 
-    const { data } = yield call(http, {
+    const response = yield call(http, {
       url: GET_LESSONS_BY_GROUP_ID + groupId,
       method: 'get'
     });
-    yield put(renderLessons(data));
+
+    if (response) {
+      yield put(renderLessons(response.data));
+    }
 
   } catch (e) {
     alert(e);
@@ -84,12 +87,14 @@ function* findLessonsByUsername(action) {
       username
     } = action.payload;
 
-    const { data } = yield call(http, {
+    const response = yield call(http, {
       url: GET_LESSONS_BY_USER_ID + username,
       method: 'get'
     });
 
-    yield put(renderLessons(data));
+    if (response) {
+      yield put(renderLessons(response.data));
+    }
 
   } catch (e) {
     alert(e);

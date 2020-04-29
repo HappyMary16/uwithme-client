@@ -40,12 +40,13 @@ function* addUniversity(action) {
 }
 
 function* signInSuccess(response) {
-  yield put({ type: SIGN_IN_SUCCESS, response });
-  localStorage.setItem('AuthToken', response.data.authToken);
-  localStorage.setItem('RefreshToken', response.data.refreshToken);
+  if (response) {
+    yield put({ type: SIGN_IN_SUCCESS, response });
+    localStorage.setItem('AuthToken', response.data.authToken);
+    localStorage.setItem('RefreshToken', response.data.refreshToken);
 
-  //TODO go to right page
-  history.push(USER_HOME);
+    history.push(USER_HOME);
+  }
 }
 
 function* signInError(message) {

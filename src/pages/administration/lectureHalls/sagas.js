@@ -27,7 +27,9 @@ function* loadLectureHalls(action) {
       method: 'get'
     });
 
-    yield put(renderLectureHalls(lectureHalls.data));
+    if (lectureHalls) {
+      yield put(renderLectureHalls(lectureHalls.data));
+    }
   } catch (e) {
     alert(e);
   } finally {
@@ -45,7 +47,9 @@ function* loadBuildings(action) {
       method: 'get'
     });
 
-    yield put(renderBuildings(buildings.data));
+    if (buildings) {
+      yield put(renderBuildings(buildings.data));
+    }
   } catch (e) {
     alert(e);
   } finally {
