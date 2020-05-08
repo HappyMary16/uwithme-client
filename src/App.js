@@ -7,16 +7,17 @@ import {
   ADD_LESSON,
   ADD_UNIVERSITY_PATH,
   FILES,
+  GROUP_PAGE_ROUTER,
   LECTURE_HALLS,
   SCHEDULE,
   SHARE_FILES,
   SIGN_IN,
   SIGN_UP,
   STUDENTS,
-  TEACHER_HOME_PAGE_ROUTER,
-  TEACHER_SCHEDULE_ROUTER,
   TEACHERS,
-  USER_HOME
+  USER_HOME,
+  USER_HOME_PAGE_ROUTER,
+  USER_SCHEDULE_ROUTER
 } from './constants/links';
 import { UserToolBar } from './pages/users/components/UserToolBar';
 
@@ -46,6 +47,7 @@ import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import StudentsList from './pages/users/containers/StudentsList';
+import GroupPage from './pages/groups/containers/GroupPage';
 
 const useStyles = theme => ({
   backdrop: {
@@ -53,6 +55,11 @@ const useStyles = theme => ({
     color: '#fff'
   }
 });
+
+function OpenGroupPage() {
+  const { groupId } = useParams();
+  return <GroupPage groupId={groupId}/>;
+}
 
 function OpenUserPage() {
   const { teacherId } = useParams();
@@ -137,13 +144,16 @@ class App extends Component {
                       <Route exact path={ADD_LESSON} component={AddLesson}/>
                       <Route exact path={SCHEDULE} component={GroupSchedule}/>
                       <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
+                      <Route exact path={GROUP_PAGE_ROUTER}>
+                        <OpenGroupPage/>
+                      </Route>
                     </Grid>
                   )}
                   <Grid>
-                    <Route path={TEACHER_HOME_PAGE_ROUTER}>
+                    <Route path={USER_HOME_PAGE_ROUTER}>
                       <OpenUserPage/>
                     </Route>
-                    <Route path={TEACHER_SCHEDULE_ROUTER}>
+                    <Route path={USER_SCHEDULE_ROUTER}>
                       <OpenUserSchedule/>
                     </Route>
                   </Grid>

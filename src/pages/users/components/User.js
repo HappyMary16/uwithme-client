@@ -9,7 +9,7 @@ import Switch from 'react-switch';
 import { getCurrentWeek } from '../../../utils/ScheduleUtil';
 import { lightGreyColor, switchWeek } from '../../../common/styles/styles';
 import { Container } from '@material-ui/core';
-import { TEACHER_SCHEDULE } from '../../../constants/links';
+import { USER_SCHEDULE } from '../../../constants/links';
 import { history } from '../../../store/Store';
 import Button from '@material-ui/core/Button';
 
@@ -47,7 +47,7 @@ export const User = ({ user, lessons, isMine }) => {
               {i18n.t('schedule')}
             </Typography>
             {!isMine &&
-            <Button onClick={() => history.push(TEACHER_SCHEDULE(user.id))}
+            <Button onClick={() => history.push(USER_SCHEDULE(user.id))}
                     color="primary"
                     variant="text"
                     size='small'>

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ListItem from '@material-ui/core/ListItem';
-import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import GroupIcon from '@material-ui/icons/Group';
 import { ListItemIcon } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
+import { GROUP_PAGE } from '../../../../../constants/links';
+import { history } from '../../../../../store/Store';
 
 export default class Group extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class Group extends Component {
     const { group, classes } = this.props;
 
     return (
-      <ListItem button onClick={this.instituteHandleClick} className={classes.groupSpace}>
+      <ListItem button onClick={() => history.push(GROUP_PAGE(group.value))} className={classes.groupSpace}>
         <ListItemIcon>
           <GroupIcon/>
         </ListItemIcon>
@@ -31,9 +31,6 @@ export default class Group extends Component {
           {/*<IconButton onClick={this.someAction}>*/}
           {/*  <EditIcon/>*/}
           {/*</IconButton>*/}
-          <IconButton onClick={this.someAction}>
-            <InfoOutlinedIcon/>
-          </IconButton>
           {/*<IconButton onClick={this.someAction}>*/}
           {/*  <DeleteIcon/>*/}
           {/*</IconButton>*/}

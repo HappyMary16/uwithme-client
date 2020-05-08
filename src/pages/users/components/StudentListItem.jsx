@@ -7,13 +7,13 @@ import { getName } from '../../../utils/UsersUtil';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { TEACHER_HOME_PAGE, TEACHER_SCHEDULE } from '../../../constants/links';
+import { USER_HOME_PAGE, USER_SCHEDULE } from '../../../constants/links';
 import { history } from '../../../store/Store';
 
 export const StudentListItem = ({ student }) => {
 
   let handleClick = () => {
-    history.push(TEACHER_HOME_PAGE(student.id));
+    history.push(USER_HOME_PAGE(student.id));
   };
 
   return (
@@ -29,7 +29,7 @@ export const StudentListItem = ({ student }) => {
       />
       <ListItemSecondaryAction>
         <IconButton
-          href={TEACHER_SCHEDULE(student.id)}
+          href={USER_SCHEDULE(student.id)}
         >
           <AssignmentIcon/>
         </IconButton>
