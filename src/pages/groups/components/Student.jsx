@@ -6,6 +6,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { getName } from '../../../utils/UsersUtil';
 import { USER_HOME_PAGE } from '../../../constants/links';
 import { history } from '../../../store/Store';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 export const Student = ({ student }) => {
 
@@ -24,6 +27,11 @@ export const Student = ({ student }) => {
         primary={getName(student)}
         secondary={student.studyGroupName}
       />
+      <ListItemSecondaryAction>
+        <IconButton onClick={() => console.log('delete student from group')}>
+          <DeleteIcon/>
+        </IconButton>
+      </ListItemSecondaryAction>
     </ListItem>
   );
 };
