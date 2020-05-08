@@ -72,6 +72,7 @@ export const GroupCard = ({ group, groupTeacher }) => {
                 startIcon={<AssignmentIcon/>}>
           {i18n.t('group_schedule')}
         </Button>
+
       </Grid>
     </Paper>
   );

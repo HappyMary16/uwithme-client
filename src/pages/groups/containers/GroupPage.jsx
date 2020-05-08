@@ -4,23 +4,7 @@ import { findUserById } from '../../../utils/UsersUtil';
 import Grid from '@material-ui/core/Grid';
 import { GroupCard } from '../components/GroupCard';
 import { Container } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    margin: theme.spacing(2, 0, 0, 2)
-  },
-  image: {
-    width: 200,
-    height: 200
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%'
-  }
-}));
+import { StudentsList } from '../components/StudentList';
 
 class GroupPage extends Component {
 
@@ -50,11 +34,14 @@ class GroupPage extends Component {
 
   render() {
     const { group, teacher } = this.state;
+    const { users } = this.props;
 
     return (
       <Grid container xs={12}>
         <Container>
           <GroupCard group={group} groupTeacher={teacher}/>
+
+          <StudentsList students={users} addStudent={() => console.log('add student')}/>
         </Container>
       </Grid>
     );
