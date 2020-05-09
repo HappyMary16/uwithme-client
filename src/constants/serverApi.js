@@ -59,5 +59,15 @@ export function findStudentsByGroupId(groupId) {
   return `/users/students/${groupId}/group`;
 }
 
+export function removeStudentFromGroupByStudentId(studentId) {
+  return `/users/student/${studentId}/group/remove`;
+}
+
+export const PUT_ADD_STUDENT_TO_GROUP = '/users/student/add/group';
+
+export function findStudentsWithoutGroupByUniversityId(universityId) {
+  return `/users/students/${universityId}/without/group`;
+}
+
 export const GET_LECTURE_HALLS = '/lectureHalls/';
 export const GET_BUILDINGS = '/buildings/';

@@ -41,6 +41,9 @@ export const GroupCard = ({ group, groupTeacher }) => {
         <Typography variant='body1' gutterBottom>
           {i18n.t('department')}: {group.departmentName}
         </Typography>
+        <Typography variant='body1' gutterBottom>
+          {i18n.t('course')}: {group.course}
+        </Typography>
 
         <FormControlLabel
           control={

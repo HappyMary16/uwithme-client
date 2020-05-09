@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const StudentsList = ({ students, addStudent }) => {
+export const StudentsList = ({ students, addStudent, removeStudent }) => {
 
   const classes = useStyles();
 
@@ -44,7 +44,7 @@ export const StudentsList = ({ students, addStudent }) => {
         </Grid>
 
         <List>
-          {students && students.map(user => <Student key={user.id} student={user}/>)}
+          {students && students.map(user => <Student key={user.id} student={user} removeStudent={removeStudent}/>)}
         </List>
       </Grid>
     </Paper>

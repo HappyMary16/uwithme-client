@@ -4,17 +4,24 @@ import http from '../../services/http';
 import {
   findStudentsByGroupId,
   findStudentsByTeacherId,
+  findStudentsWithoutGroupByUniversityId,
   findTeachersByGroupId,
   GET_LESSONS_BY_USER_ID,
-  GET_TEACHERS_BY_UNIVERSITY_ID
+  GET_TEACHERS_BY_UNIVERSITY_ID,
+  PUT_ADD_STUDENT_TO_GROUP,
+  removeStudentFromGroupByStudentId
 } from '../../constants/serverApi';
 import {
+  ADD_STUDENT_TO_GROUP,
   FIND_LESSONS_FOR_USER,
   LOAD_STUDENTS_BY_GROUP_ID,
   LOAD_STUDENTS_BY_TEACHER_ID,
+  LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID,
   LOAD_TEACHERS_BY_GROUP_ID,
   LOAD_TEACHERS_BY_UNIVERSITY_ID,
+  REMOVE_STUDENT_FROM_GROUP,
   renderLessonsForUser,
+  renderUser,
   renderUsers
 } from './actions';
 
@@ -24,6 +31,9 @@ export function* teachersWatcher() {
   yield takeEvery(FIND_LESSONS_FOR_USER, action => findLessonsByUsername(action));
   yield takeEvery(LOAD_STUDENTS_BY_TEACHER_ID, action => getStudentsByTeacherId(action));
   yield takeEvery(LOAD_STUDENTS_BY_GROUP_ID, action => getStudentsByGroupId(action));
+  yield takeEvery(REMOVE_STUDENT_FROM_GROUP, action => removeStudentFromGroup(action));
+  yield takeEvery(LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID, action => getStudentsWithoutGroupByUniversityId(action));
+  yield takeEvery(ADD_STUDENT_TO_GROUP, action => addStudentToGroup(action));
 }
 
 function* getTeachersByUniversityId(action) {
@@ -115,13 +125,83 @@ function* getStudentsByGroupId(action) {
     yield put(startFetching());
     const { groupId } = action.payload;
 
-    const students = yield call(http, {
-      url: findStudentsByGroupId(groupId),
-      method: 'get'
+    if (groupId) {
+      const students = yield call(http, {
+        url: findStudentsByGroupId(groupId),
+        method: 'get'
+      });
+
+      if (students) {
+        yield put(renderUsers(students.data));
+      }
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* removeStudentFromGroup(action) {
+  try {
+    yield put(startFetching());
+    const { studentId } = action.payload;
+
+    const student = yield call(http, {
+      url: removeStudentFromGroupByStudentId(studentId),
+      method: 'put'
     });
 
-    if (students) {
-      yield put(renderUsers(students.data));
+    if (student) {
+      yield put(renderUser(student.data));
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* getStudentsWithoutGroupByUniversityId(action) {
+  try {
+    yield put(startFetching());
+    const { universityId } = action.payload;
+
+    if (universityId) {
+      const students = yield call(http, {
+        url: findStudentsWithoutGroupByUniversityId(universityId),
+        method: 'get'
+      });
+
+      if (students) {
+        yield put(renderUsers(students.data));
+      }
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* addStudentToGroup(action) {
+  try {
+    yield put(startFetching());
+    const { studentIds, groupId } = action.payload;
+
+    if (studentIds && groupId) {
+      const students = yield call(http, {
+        url: PUT_ADD_STUDENT_TO_GROUP,
+        method: 'put',
+        data: {
+          studentsIds: studentIds,
+          groupId: groupId
+        }
+      });
+
+      if (students) {
+        yield put(renderUsers(students.data));
+      }
     }
   } catch (e) {
     alert(e);

@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-export const Student = ({ student }) => {
+export const Student = ({ student, removeStudent }) => {
 
   let handleClick = () => {
     history.push(USER_HOME_PAGE(student.id));
@@ -27,7 +27,7 @@ export const Student = ({ student }) => {
         primary={getName(student)}
       />
       <ListItemSecondaryAction>
-        <IconButton onClick={() => console.log('delete student from group')}>
+        <IconButton onClick={() => removeStudent(student.id)}>
           <DeleteIcon/>
         </IconButton>
       </ListItemSecondaryAction>
