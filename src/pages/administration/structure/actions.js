@@ -6,11 +6,12 @@ export const CREATE_GROUP = 'CREATE_GROUP';
 
 export const INSTITUTE_CREATED = 'INSTITUTE_CREATED';
 export const DEPARTMENT_CREATED = 'DEPARTMENT_CREATED';
-export const GROUP_CREATED = 'GROUP_CREATED';
+export const RENDER_GROUP = 'RENDER_GROUP';
 
 export const LOAD_INSTITUTES_BY_UNIVERSITY_ID = 'LOAD_INSTITUTES_BY_UNIVERSITY_ID';
 export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID = 'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
 export const LOAD_GROUPS_BY_UNIVERSITY_ID = 'LOAD_GROUPS_BY_UNIVERSITY_ID';
+export const LOAD_GROUP_BY_ID = 'LOAD_GROUPS_BY_ID';
 
 export const LOAD_UNIVERSITIES = 'LOAD_UNIVERSITIES';
 export const LOAD_INSTITUTES = 'LOAD_INSTITUTES';
@@ -92,8 +93,8 @@ export const createGroup = (
   }
 });
 
-export const groupCreated = (group) => ({
-  type: GROUP_CREATED,
+export const renderGroup = (group) => ({
+  type: RENDER_GROUP,
   payload: {
     group
   }
@@ -134,5 +135,12 @@ export const renderUniversities = (universities) => ({
   type: RENDER_UNIVERSITIES,
   payload: {
     universities
+  }
+});
+
+export const loadGroupById = (groupId) => ({
+  type: LOAD_GROUP_BY_ID,
+  payload: {
+    id: groupId
   }
 });

@@ -21,6 +21,10 @@ export function getGroupByTeacherId(teacherId) {
   return `/group/${teacherId}/teacherId`;
 }
 
+export function getGroupById(groupId) {
+  return `/group/${groupId}/groupId`;
+}
+
 export const GET_SUBJECTS = '/subjects/';
 export const POST_SUBJECTS = '/subject/';
 export const GET_SUBJECTS_BY_UNIVERSITY_ID = '/university/subjects/';
