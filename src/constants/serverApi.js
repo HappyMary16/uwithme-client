@@ -55,5 +55,9 @@ export function findStudentsByTeacherId(teacherId) {
   return `/users/students/${teacherId}/teacherId`;
 }
 
+export function findStudentsByGroupId(groupId) {
+  return `/users/students/${groupId}/group`;
+}
+
 export const GET_LECTURE_HALLS = '/lectureHalls/';
 export const GET_BUILDINGS = '/buildings/';

@@ -2,6 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
 import {
+  findStudentsByGroupId,
   findStudentsByTeacherId,
   findTeachersByGroupId,
   GET_LESSONS_BY_USER_ID,
@@ -9,6 +10,7 @@ import {
 } from '../../constants/serverApi';
 import {
   FIND_LESSONS_FOR_USER,
+  LOAD_STUDENTS_BY_GROUP_ID,
   LOAD_STUDENTS_BY_TEACHER_ID,
   LOAD_TEACHERS_BY_GROUP_ID,
   LOAD_TEACHERS_BY_UNIVERSITY_ID,
@@ -21,6 +23,7 @@ export function* teachersWatcher() {
   yield takeEvery(LOAD_TEACHERS_BY_GROUP_ID, action => getTeachersByGroupId(action));
   yield takeEvery(FIND_LESSONS_FOR_USER, action => findLessonsByUsername(action));
   yield takeEvery(LOAD_STUDENTS_BY_TEACHER_ID, action => getStudentsByTeacherId(action));
+  yield takeEvery(LOAD_STUDENTS_BY_GROUP_ID, action => getStudentsByGroupId(action));
 }
 
 function* getTeachersByUniversityId(action) {
@@ -94,6 +97,26 @@ function* getStudentsByTeacherId(action) {
 
     const students = yield call(http, {
       url: findStudentsByTeacherId(teacherId),
+      method: 'get'
+    });
+
+    if (students) {
+      yield put(renderUsers(students.data));
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* getStudentsByGroupId(action) {
+  try {
+    yield put(startFetching());
+    const { groupId } = action.payload;
+
+    const students = yield call(http, {
+      url: findStudentsByGroupId(groupId),
       method: 'get'
     });
 

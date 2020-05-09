@@ -25,7 +25,6 @@ export const Student = ({ student }) => {
       </ListItemAvatar>
       <ListItemText
         primary={getName(student)}
-        secondary={student.studyGroupName}
       />
       <ListItemSecondaryAction>
         <IconButton onClick={() => console.log('delete student from group')}>

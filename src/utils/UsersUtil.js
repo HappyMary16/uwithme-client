@@ -9,3 +9,5 @@ export const isAdmin = user => user && (user.role === ADMIN || user.isAdmin);
 export const getName = user => user && user.lastName + ' ' + user.firstName + ' ' + user.surname;
 
 export const findUserById = (users, id) => users && users.filter(user => user.id === Number(id))[0];
+
+export const findUsersByGroupId = (users, groupId) => users && users.filter(user => user.studyGroupId === Number(groupId));

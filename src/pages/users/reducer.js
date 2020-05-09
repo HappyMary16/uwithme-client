@@ -11,7 +11,8 @@ export default function usersReducer(
     case RENDER_USERS:
       return {
         ...state,
-        users: action.payload.users
+        users: state.users.filter(user => !action.payload.users.map(u => u.id).includes(user.id))
+          .concat(action.payload.users)
       };
     case RENDER_LESSONS_FOR_CURRENT_USER_PAGE:
       return {

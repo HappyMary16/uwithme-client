@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { findUserById } from '../../../utils/UsersUtil';
+import { findUserById, findUsersByGroupId } from '../../../utils/UsersUtil';
 import Grid from '@material-ui/core/Grid';
 import { GroupCard } from '../components/GroupCard';
 import { Container } from '@material-ui/core';
 import { StudentsList } from '../components/StudentList';
 import { loadGroupById } from '../../administration/structure/actions';
+import { loadStudentsByGroupId } from '../../users/actions';
 
 class GroupPage extends Component {
 
   componentDidMount() {
     const { dispatch, groupId } = this.props;
     dispatch(loadGroupById(groupId));
+    dispatch(loadStudentsByGroupId(groupId));
   }
 
   render() {
@@ -25,7 +27,8 @@ class GroupPage extends Component {
         <Container>
           {group && <GroupCard group={group} groupTeacher={findUserById(users, group.teacherId)}/>}
 
-          <StudentsList students={users} addStudent={() => console.log('add student')}/>
+          <StudentsList students={findUsersByGroupId(users, groupId)}
+                        addStudent={() => console.log('add student')}/>
         </Container>
       </Grid>
     );
