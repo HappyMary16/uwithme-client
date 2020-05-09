@@ -41,12 +41,17 @@ export default function adminReducers(
       return {
         ...state,
         groups: action.groups.data.map(obj => {
-          let group = {};
-          group.value = obj.id;
-          group.label = obj.name;
-          group.departmentId = obj.departmentId;
-          group.course = obj.course;
-          return group;
+          return {
+            value: obj.id,
+            label: obj.name,
+            departmentId: obj.departmentId,
+            course: obj.course,
+            departmentName: obj.departmentName,
+            instituteId: obj.instituteId,
+            instituteName: obj.instituteName,
+            teacherId: obj.teacherId,
+            isShowingInRegistration: obj.isShowingInRegistration
+          };
         })
       };
 

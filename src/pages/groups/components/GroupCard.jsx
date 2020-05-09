@@ -33,13 +33,13 @@ export const GroupCard = ({ group, groupTeacher }) => {
       <Grid xs={12} container direction='column' alignItems='flex-start' spacing={2} className={classes.container}>
 
         <Typography gutterBottom variant='h5'>
-          {group.name}
+          {group.label}
         </Typography>
         <Typography variant='body1' gutterBottom>
-          {i18n.t('institute')}: {group.institute}
+          {i18n.t('institute')}: {group.instituteName}
         </Typography>
         <Typography variant='body1' gutterBottom>
-          {i18n.t('department')}: {group.department}
+          {i18n.t('department')}: {group.departmentName}
         </Typography>
 
         <FormControlLabel
@@ -53,6 +53,7 @@ export const GroupCard = ({ group, groupTeacher }) => {
         <Typography variant='body1' gutterBottom>
           {i18n.t('teacher')}:
         </Typography>
+        {groupTeacher &&
         <ListItem button
                   onClick={() => history.push(USER_HOME_PAGE(groupTeacher.id))}>
           <ListItemAvatar>
@@ -61,12 +62,16 @@ export const GroupCard = ({ group, groupTeacher }) => {
           </ListItemAvatar>
           <ListItemText
             primary={getName(groupTeacher)}
-            secondary={groupTeacher.scienceDegreeName}
-          />
-        </ListItem>
+            secondary={groupTeacher.scienceDegreeName}/>
+        </ListItem>}
+
+        {!groupTeacher &&
+        <Typography variant='h6' gutterBottom>
+          {i18n.t('group_does_not_have_teacher')}
+        </Typography>}
 
         <Button style={{ color: textColor }}
-                onClick={() => history.push(GROUP_SCHEDULE(group.id))}
+                onClick={() => history.push(GROUP_SCHEDULE(group.value))}
                 variant='outlined'
                 size='medium'
                 startIcon={<AssignmentIcon/>}>
