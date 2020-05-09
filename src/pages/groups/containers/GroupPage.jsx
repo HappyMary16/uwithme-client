@@ -13,18 +13,22 @@ import {
   removeStudentFromGroup
 } from '../../users/actions';
 import AddStudentToGroup from '../components/AddStudentToGroup';
+import { RemoveStudentFromGroup } from '../components/RemoveStudentFromGroup';
 
 class GroupPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      openAddStudentDialog: false
+      openAddStudentDialog: false,
+      openRemoveStudentDialog: false,
+      studentToRemove: undefined
     };
 
     this.removeStudent = this.removeStudent.bind(this);
     this.loadStudentsAndOpenAddDialog = this.loadStudentsAndOpenAddDialog.bind(this);
     this.addStudentToGroup = this.addStudentToGroup.bind(this);
+    this.openRemoveStudentDialog = this.openRemoveStudentDialog.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +37,13 @@ class GroupPage extends Component {
       dispatch(loadGroupById(groupId));
       dispatch(loadStudentsByGroupId(groupId));
     }
+  }
+
+  openRemoveStudentDialog(student) {
+    this.setState({
+      openRemoveStudentDialog: true,
+      studentToRemove: student
+    });
   }
 
   removeStudent(studentId) {
@@ -55,7 +66,7 @@ class GroupPage extends Component {
 
   render() {
     const { users, groups, groupId } = this.props;
-    const { openAddStudentDialog } = this.state;
+    const { openAddStudentDialog, openRemoveStudentDialog, studentToRemove } = this.state;
 
     const group = groups
       && groups.filter(group => group.value === Number(groupId))[0];
@@ -67,12 +78,22 @@ class GroupPage extends Component {
 
           <StudentsList students={findUsersByGroupId(users, groupId)}
                         addStudent={this.loadStudentsAndOpenAddDialog}
-                        removeStudent={this.removeStudent}/>
+                        removeStudent={this.openRemoveStudentDialog}/>
         </Container>
         <AddStudentToGroup open={openAddStudentDialog}
                            students={findAllStudentsWithoutGroup(users)}
                            handleClose={() => this.setState({ openAddStudentDialog: false })}
                            handleAdd={this.addStudentToGroup}/>
+        <RemoveStudentFromGroup open={openRemoveStudentDialog}
+                                student={studentToRemove}
+                                handleNo={() => {
+                                  this.setState(
+                                    {
+                                      openRemoveStudentDialog: false,
+                                      studentToRemove: undefined
+                                    });
+                                }}
+                                handleYes={this.removeStudent}/>
       </Grid>
     );
   }

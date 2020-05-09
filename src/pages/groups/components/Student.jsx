@@ -27,7 +27,7 @@ export const Student = ({ student, removeStudent }) => {
         primary={getName(student)}
       />
       <ListItemSecondaryAction>
-        <IconButton onClick={() => removeStudent(student.id)}>
+        <IconButton onClick={() => removeStudent(student)}>
           <DeleteIcon/>
         </IconButton>
       </ListItemSecondaryAction>
