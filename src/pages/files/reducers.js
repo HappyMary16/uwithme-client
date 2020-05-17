@@ -34,14 +34,13 @@ export default function filesReducers(
     case UPLOAD_REQUEST:
       return {
         ...state,
-        files: action.files,
-        subjectId: action.subjectId,
-        fileType: action.fileType
+        filesNumber: action.files && action.files.length
       };
     case UPLOAD_SUCCESS:
       return {
         ...state,
-        files: action.payload.files
+        //TODO do this after user see it
+        uploadProgress: state.uploadProgress.length === state.filesNumber ? [] : state.uploadProgress
       };
     case UPLOAD_PROGRESS:
       return {

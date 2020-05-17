@@ -19,19 +19,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Progress = ({ fileUploadProgress }) => {
+export const Progress = ({ progress }) => {
   const classes = useStyles();
-  //TODO fix it
-  let progress = fileUploadProgress
-    ? fileUploadProgress.percentage
-    : Math.random() * 5 + 96;
 
   return (
     <Grid container xs={12} alignItems={'center'}>
       <Grid item xs={10} className={classes.progressBar}>
-        <div className={classes.progress} style={{ width: progress + '%' }} />
+        <div className={classes.progress} style={{ width: progress + '%' }}/>
       </Grid>
-      {progress >= 100 && <CheckCircleOutlineIcon fontSize={'small'} />}
+      {progress === 100 && <CheckCircleOutlineIcon fontSize={'small'}/>}
     </Grid>
   );
 };

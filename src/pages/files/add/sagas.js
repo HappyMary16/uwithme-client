@@ -1,5 +1,5 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects';
-import { LOAD_SUBJECTS } from '../actions';
+import { LOAD_SUBJECTS, renderFiles } from '../actions';
 import http from '../../../services/http';
 import { POST_SUBJECTS, UPLOAD_MULTIPLE_FILES } from '../../../constants/serverApi';
 import { SAVE_SUBJECTS, UPLOAD_REQUEST, uploadProgress, uploadSuccess } from './actions';
@@ -32,9 +32,10 @@ function* uploadFiles(action) {
 
     try {
       const response = yield call(() => uploadPromise);
-      console.log(response);
+
       if (response) {
         yield put(uploadSuccess(response.data));
+        yield put(renderFiles(response));
       }
     } catch (err) {
       put({ type: 'ERROR', payload: err });

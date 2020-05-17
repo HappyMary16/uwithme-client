@@ -23,11 +23,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Upload = ({
-  addFiles,
-  uploadProgress,
-  uploading,
-  successfulUploaded
-}) => {
+                         addFiles,
+                         uploadProgress,
+                         uploading,
+                         successfulUploaded
+                       }) => {
   const classes = useStyles();
   let [files, setFiles] = React.useState([]);
 
@@ -53,7 +53,7 @@ export const Upload = ({
               disabled={uploading || successfulUploaded}
             />
           </div>
-          <FilesProgress files={files} uploadProgress={successfulUploaded} />
+          <FilesProgress files={files} uploadProgress={uploadProgress} uploadStarted={uploading || successfulUploaded}/>
         </div>
       </div>
     </Container>
