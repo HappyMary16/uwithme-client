@@ -26,10 +26,10 @@ export const Upload = ({
                          addFiles,
                          uploadProgress,
                          uploading,
-                         successfulUploaded
+                         successfulUploaded,
+                         files
                        }) => {
   const classes = useStyles();
-  let [files, setFiles] = React.useState([]);
 
   let onFilesAdded = filesToAdd => {
     let array = [].concat(files);
@@ -39,7 +39,6 @@ export const Upload = ({
         array.push(filesToAdd.item(i));
       }
     }
-    setFiles(array);
     addFiles(array);
   };
 

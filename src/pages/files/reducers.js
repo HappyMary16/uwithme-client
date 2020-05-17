@@ -1,6 +1,12 @@
 import StateLoader from '../../store/StateLoader';
 import { RENDER_FILES, RENDER_SUBJECTS } from './actions';
-import { UPLOAD_PROGRESS, UPLOAD_REQUEST, UPLOAD_SUCCESS } from './add/actions';
+import {
+  CLEAR_UPLOAD_PROGRESS,
+  CLEAR_UPLOAD_SUCCESS,
+  UPLOAD_PROGRESS,
+  UPLOAD_REQUEST,
+  UPLOAD_SUCCESS
+} from './add/actions';
 import { SIGN_OUT } from '../authorization/actions';
 
 export default function filesReducers(
@@ -39,8 +45,17 @@ export default function filesReducers(
     case UPLOAD_SUCCESS:
       return {
         ...state,
-        //TODO do this after user see it
-        uploadProgress: state.uploadProgress.length === state.filesNumber ? [] : state.uploadProgress
+        uploadSuccess: state.uploadProgress.length === state.filesNumber
+      };
+    case CLEAR_UPLOAD_PROGRESS:
+      return {
+        ...state,
+        uploadProgress: []
+      };
+    case CLEAR_UPLOAD_SUCCESS:
+      return {
+        ...state,
+        uploadSuccess: false
       };
     case UPLOAD_PROGRESS:
       return {

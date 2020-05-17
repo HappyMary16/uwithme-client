@@ -27,10 +27,10 @@ function* uploadFiles(action) {
 
   for (let index = 0; index < files.length; index++) {
     payload['file'] = files[index];
-    const [uploadPromise, chan] = createUploader(payload);
-    yield fork(watchOnProgress, { fileName: payload.file.name, chan: chan });
-
     try {
+      const [uploadPromise, chan] = createUploader(payload);
+      yield fork(watchOnProgress, { fileName: payload.file.name, chan: chan });
+
       const response = yield call(() => uploadPromise);
 
       if (response) {

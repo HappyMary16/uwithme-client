@@ -8,12 +8,13 @@ import { Upload } from '../components/Upload';
 import { loadSubjects } from '../../actions';
 import i18n from '../../../../locales/i18n';
 import { compose } from 'redux';
-import { uploadRequest } from '../actions';
+import { clearUploadProgress, clearUploadSuccess, uploadRequest } from '../actions';
 
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../../common/styles/styles';
 import Container from '@material-ui/core/Container';
+import { Message } from '../../../../common/components/Message';
 
 const submit = {
   marginTop: '10px',
@@ -37,6 +38,7 @@ class AddFile extends React.Component {
     this.submit = this.submit.bind(this);
     this.addFiles = this.addFiles.bind(this);
     this.createSubject = this.createSubject.bind(this);
+    this.uploadingEnded = this.uploadingEnded.bind(this);
   }
 
   componentDidMount() {
@@ -51,10 +53,6 @@ class AddFile extends React.Component {
     this.setState({ uploading: true });
 
     dispatch(uploadRequest(files, username, subject.label, fileType));
-    this.setState({
-      uploading: false,
-      successfulUploaded: true
-    });
   }
 
   createSubject(subjectName) {
@@ -70,17 +68,24 @@ class AddFile extends React.Component {
     this.setState({ files: addedFiles });
   }
 
+  uploadingEnded() {
+    this.setState({
+      uploading: false,
+      files: []
+    });
+
+    const { dispatch } = this.props;
+    dispatch(clearUploadSuccess());
+    dispatch(clearUploadProgress());
+  }
+
   render() {
-    const { subjects, uploadProgress } = this.props;
-    const {
-      fileType,
-      uploading,
-      successfulUploaded,
-      subject
-    } = this.state;
+    const { subjects, uploadProgress, uploadSuccess } = this.props;
+    const { uploading, subject, files } = this.state;
 
     return (
       <Grid item xs={12}>
+        <Message open={uploadSuccess} handleClose={this.uploadingEnded} message={i18n.t('files_is_uploaded')}/>
         <Container style={marginTop}>
           <CreatableSelect
             theme={selectorColors}
@@ -109,8 +114,9 @@ class AddFile extends React.Component {
           <Upload
             uploadProgress={uploadProgress}
             addFiles={this.addFiles}
+            files={files}
             uploading={uploading}
-            successfulUploaded={successfulUploaded}
+            successfulUploaded={uploadSuccess}
           />
         </Grid>
         <Container>
@@ -135,7 +141,8 @@ const mapStateToProps = state => {
   return {
     username: state.authReducers.user.username,
     subjects: state.filesReducers.subjects,
-    uploadProgress: state.filesReducers.uploadProgress
+    uploadProgress: state.filesReducers.uploadProgress,
+    uploadSuccess: state.filesReducers.uploadSuccess
   };
 };
 
