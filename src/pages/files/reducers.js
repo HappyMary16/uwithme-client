@@ -1,10 +1,10 @@
 import StateLoader from '../../store/StateLoader';
 import { RENDER_FILES, RENDER_SUBJECTS } from './actions';
-import { UPLOAD_REQUEST, UPLOAD_SUCCESS } from './add/actions';
+import { UPLOAD_PROGRESS, UPLOAD_REQUEST, UPLOAD_SUCCESS } from './add/actions';
 import { SIGN_OUT } from '../authorization/actions';
 
 export default function filesReducers(
-  state = new StateLoader().loadState().filesReducers || {},
+  state = new StateLoader().loadState().filesReducers || { uploadProgress: [] },
   action
 ) {
   switch (action.type) {
@@ -41,9 +41,17 @@ export default function filesReducers(
     case UPLOAD_SUCCESS:
       return {
         ...state,
-        files: action.data
+        files: action.payload.files
       };
-
+    case UPLOAD_PROGRESS:
+      return {
+        ...state,
+        uploadProgress: [...state.uploadProgress.filter(p => p.file !== action.payload.file),
+          {
+            file: action.payload.file,
+            progress: action.payload.progress
+          }]
+      };
     default:
       return state;
   }

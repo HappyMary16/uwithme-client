@@ -27,7 +27,7 @@ export const FilesProgress = ({ files, uploadProgress }) => {
           <span className={classes.fileName}>{file.name}</span>
           {uploadProgress && (
             <Progress
-            // fileUploadProgress={uploadProgress[file.name]}
+              fileUploadProgress={uploadProgress[file.name]}
             />
           )}
         </Grid>

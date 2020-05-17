@@ -23,13 +23,17 @@ export const uploadRequest = (files, username, subjectName, fileType) => ({
 
 export const uploadProgress = (file, progress) => ({
   type: UPLOAD_PROGRESS,
-  progress: progress + 1,
-  file
+  payload: {
+    progress,
+    file
+  }
 });
 
-export const uploadSuccess = file => ({
+export const uploadSuccess = files => ({
   type: UPLOAD_SUCCESS,
-  file
+  payload: {
+    files
+  }
 });
 
 export const uploadFailure = (file, err) => ({

@@ -71,7 +71,7 @@ class AddFile extends React.Component {
   }
 
   render() {
-    const { subjects } = this.props;
+    const { subjects, uploadProgress } = this.props;
     const {
       fileType,
       uploading,
@@ -107,6 +107,7 @@ class AddFile extends React.Component {
 
         <Grid item xs={12}>
           <Upload
+            uploadProgress={uploadProgress}
             addFiles={this.addFiles}
             uploading={uploading}
             successfulUploaded={successfulUploaded}
@@ -133,7 +134,8 @@ class AddFile extends React.Component {
 const mapStateToProps = state => {
   return {
     username: state.authReducers.user.username,
-    subjects: state.filesReducers.subjects
+    subjects: state.filesReducers.subjects,
+    uploadProgress: state.filesReducers.uploadProgress
   };
 };
 
