@@ -61,7 +61,8 @@ export default function http(
     data,
     params,
     isFile,
-    loadFile
+    loadFile,
+    onUploadProgress
   }) {
   const token = localStorage.getItem('AuthToken');
   const config = {
@@ -72,6 +73,8 @@ export default function http(
       return qs.stringify(p, { arrayFormat: 'repeat' });
     }
   };
+  if (onUploadProgress) config['onUploadProgress'] = e => onUploadProgress(e);
+
   if (data) config['data'] = data;
 
   if (loadFile) {

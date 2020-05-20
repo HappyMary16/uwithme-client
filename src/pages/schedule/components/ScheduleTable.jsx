@@ -18,7 +18,7 @@ import i18n from '../../../locales/i18n';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { history } from '../../../store/Store';
-import { TEACHER_HOME_PAGE } from '../../../constants/links';
+import { USER_HOME_PAGE } from '../../../constants/links';
 import { getName } from '../../../utils/UsersUtil';
 
 const useStyles = makeStyles(theme => ({
@@ -46,7 +46,7 @@ export const ScheduleTable = ({ lessons, user, isMine }) => {
             justify={!isMine ? 'space-between' : 'flex-end'}
             className={classes.switchSpacing}>
         {!isMine &&
-        <Button onClick={() => history.push(TEACHER_HOME_PAGE(user.id))}
+        <Button onClick={() => history.push(USER_HOME_PAGE(user.id))}
                 color="primary"
                 variant="text"
                 size='medium'>

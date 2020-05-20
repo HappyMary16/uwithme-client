@@ -1,14 +1,20 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { CREATE_GROUP, groupCreated, LOAD_GROUPS_BY_UNIVERSITY_ID, RENDER_GROUPS } from '../actions';
+import { CREATE_GROUP, LOAD_GROUP_BY_ID, LOAD_GROUPS_BY_UNIVERSITY_ID, RENDER_GROUPS, renderGroup } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
-import { ADD_GROUP_API, getGroupByTeacherId, getGroupByUniversityId } from '../../../../constants/serverApi';
+import {
+  ADD_GROUP_API,
+  getGroupById,
+  getGroupByTeacherId,
+  getGroupByUniversityId
+} from '../../../../constants/serverApi';
 import { FIND_GROUPS_FOR_TEACHER, renderGroupsForTeacher } from '../../../users/actions';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, action => createGroup(action));
   yield takeEvery(LOAD_GROUPS_BY_UNIVERSITY_ID, action => loadGroupsByUniversityId(action));
   yield takeEvery(FIND_GROUPS_FOR_TEACHER, action => loadGroupsByTeacherId(action));
+  yield takeEvery(LOAD_GROUP_BY_ID, action => loadGroupById(action));
 }
 
 function* createGroup(action) {
@@ -30,7 +36,7 @@ function* createGroup(action) {
     });
 
     if (response && response.status === 200) {
-      yield put(groupCreated(response.data));
+      yield put(renderGroup(response.data));
     } else {
       alert(response);
     }
@@ -73,6 +79,26 @@ function* loadGroupsByTeacherId(action) {
 
     if (groups) {
       yield put(renderGroupsForTeacher(groups.data));
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* loadGroupById(action) {
+  try {
+    yield put(startFetching());
+    const { id } = action.payload;
+
+    const group = yield call(http, {
+      url: getGroupById(id),
+      method: 'get'
+    });
+
+    if (group) {
+      yield put(renderGroup(group.data));
     }
   } catch (e) {
     alert(e);

@@ -4,6 +4,8 @@ export const UPLOAD_REQUEST = 'UPLOAD_REQUEST';
 export const UPLOAD_PROGRESS = 'UPLOAD_PROGRESS';
 export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
+export const CLEAR_UPLOAD_PROGRESS = 'CLEAR_UPLOAD_PROGRESS';
+export const CLEAR_UPLOAD_SUCCESS = 'CLEAR_UPLOAD_SUCCESS';
 
 export function saveSubject(username, subjectName) {
   return {
@@ -23,13 +25,17 @@ export const uploadRequest = (files, username, subjectName, fileType) => ({
 
 export const uploadProgress = (file, progress) => ({
   type: UPLOAD_PROGRESS,
-  progress: progress + 1,
-  file
+  payload: {
+    progress,
+    file
+  }
 });
 
-export const uploadSuccess = file => ({
+export const uploadSuccess = files => ({
   type: UPLOAD_SUCCESS,
-  file
+  payload: {
+    files
+  }
 });
 
 export const uploadFailure = (file, err) => ({
@@ -37,4 +43,12 @@ export const uploadFailure = (file, err) => ({
   err,
   error: true,
   file
+});
+
+export const clearUploadSuccess = () => ({
+  type: CLEAR_UPLOAD_SUCCESS
+});
+
+export const clearUploadProgress = () => ({
+  type: CLEAR_UPLOAD_PROGRESS
 });

@@ -115,7 +115,7 @@ class ShareFiles extends React.Component {
               <FormControl component="fieldset">
                 <FormLabel component="legend">{i18n.t('task')}</FormLabel>
                 <FilesToChoose
-                  files={tasks.filter(task => task.subjectId === subjectId)}
+                  files={tasks && tasks.filter(task => task.subjectId === subjectId)}
                   onChange={this.handleChange}
                 />
               </FormControl>

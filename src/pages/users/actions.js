@@ -1,13 +1,21 @@
 export const LOAD_TEACHERS_BY_UNIVERSITY_ID = 'LOAD_TEACHERS_BY_UNIVERSITY_ID';
 export const LOAD_TEACHERS_BY_GROUP_ID = 'LOAD_TEACHERS_BY_GROUP_ID';
+
 export const LOAD_STUDENTS_BY_TEACHER_ID = 'LOAD_STUDENTS_BY_TEACHER_ID';
+export const LOAD_STUDENTS_BY_GROUP_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
+export const LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
+
 export const RENDER_USERS = 'RENDER_USERS';
+export const RENDER_USER = 'RENDER_USER';
 
 export const RENDER_LESSONS_FOR_CURRENT_USER_PAGE = 'RENDER_LESSONS_FOR_CURRENT_USER_PAGE';
 export const FIND_LESSONS_FOR_USER = 'FIND_LESSONS_FOR_USER';
 
 export const FIND_GROUPS_FOR_TEACHER = 'FIND_GROUPS_FOR_TEACHER';
 export const RENDER_GROUPS_FOR_TEACHER = 'RENDER_GROUPS_FOR_TEACHER';
+
+export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
+export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
 
 export function loadTeachersByUniversityId(universityId) {
   return {
@@ -32,6 +40,15 @@ export function renderUsers(users) {
     type: RENDER_USERS,
     payload: {
       users
+    }
+  };
+}
+
+export function renderUser(user) {
+  return {
+    type: RENDER_USER,
+    payload: {
+      user
     }
   };
 }
@@ -69,6 +86,43 @@ export function loadStudentsByTeacherId(teacherId) {
     type: LOAD_STUDENTS_BY_TEACHER_ID,
     payload: {
       teacherId
+    }
+  };
+}
+
+export function loadStudentsByGroupId(groupId) {
+  return {
+    type: LOAD_STUDENTS_BY_GROUP_ID,
+    payload: {
+      groupId
+    }
+  };
+}
+
+export function loadStudentsWithoutGroupByUniversityId(universityId) {
+  return {
+    type: LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID,
+    payload: {
+      universityId
+    }
+  };
+}
+
+export function removeStudentFromGroup(studentId) {
+  return {
+    type: REMOVE_STUDENT_FROM_GROUP,
+    payload: {
+      studentId
+    }
+  };
+}
+
+export function addStudentToGroup(studentIds, groupId) {
+  return {
+    type: ADD_STUDENT_TO_GROUP,
+    payload: {
+      studentIds,
+      groupId
     }
   };
 }

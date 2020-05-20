@@ -1,10 +1,16 @@
 import StateLoader from '../../store/StateLoader';
 import { RENDER_FILES, RENDER_SUBJECTS } from './actions';
-import { UPLOAD_REQUEST, UPLOAD_SUCCESS } from './add/actions';
+import {
+  CLEAR_UPLOAD_PROGRESS,
+  CLEAR_UPLOAD_SUCCESS,
+  UPLOAD_PROGRESS,
+  UPLOAD_REQUEST,
+  UPLOAD_SUCCESS
+} from './add/actions';
 import { SIGN_OUT } from '../authorization/actions';
 
 export default function filesReducers(
-  state = new StateLoader().loadState().filesReducers || {},
+  state = new StateLoader().loadState().filesReducers || { uploadProgress: [] },
   action
 ) {
   switch (action.type) {
@@ -30,20 +36,36 @@ export default function filesReducers(
       };
     }
     case SIGN_OUT:
-      return {};
+      return { uploadProgress: [] };
     case UPLOAD_REQUEST:
       return {
         ...state,
-        files: action.files,
-        subjectId: action.subjectId,
-        fileType: action.fileType
+        filesNumber: action.files && action.files.length
       };
     case UPLOAD_SUCCESS:
       return {
         ...state,
-        files: action.data
+        uploadSuccess: state.uploadProgress.length === state.filesNumber
       };
-
+    case CLEAR_UPLOAD_PROGRESS:
+      return {
+        ...state,
+        uploadProgress: []
+      };
+    case CLEAR_UPLOAD_SUCCESS:
+      return {
+        ...state,
+        uploadSuccess: false
+      };
+    case UPLOAD_PROGRESS:
+      return {
+        ...state,
+        uploadProgress: [...state.uploadProgress.filter(p => p.file !== action.payload.file),
+          {
+            file: action.payload.file,
+            progress: action.payload.progress
+          }]
+      };
     default:
       return state;
   }

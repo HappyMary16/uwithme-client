@@ -21,6 +21,10 @@ export function getGroupByTeacherId(teacherId) {
   return `/group/${teacherId}/teacherId`;
 }
 
+export function getGroupById(groupId) {
+  return `/group/${groupId}/groupId`;
+}
+
 export const GET_SUBJECTS = '/subjects/';
 export const POST_SUBJECTS = '/subject/';
 export const GET_SUBJECTS_BY_UNIVERSITY_ID = '/university/subjects/';
@@ -49,6 +53,20 @@ export function findTeachersByGroupId(groupId) {
 
 export function findStudentsByTeacherId(teacherId) {
   return `/users/students/${teacherId}/teacherId`;
+}
+
+export function findStudentsByGroupId(groupId) {
+  return `/users/students/${groupId}/group`;
+}
+
+export function removeStudentFromGroupByStudentId(studentId) {
+  return `/users/student/${studentId}/group/remove`;
+}
+
+export const PUT_ADD_STUDENT_TO_GROUP = '/users/student/add/group';
+
+export function findStudentsWithoutGroupByUniversityId(universityId) {
+  return `/users/students/${universityId}/without/group`;
 }
 
 export const GET_LECTURE_HALLS = '/lectureHalls/';

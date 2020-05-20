@@ -1,9 +1,9 @@
 import StateLoader from '../../../store/StateLoader';
 import {
   DEPARTMENT_CREATED,
-  GROUP_CREATED,
   INSTITUTE_CREATED,
   RENDER_DEPARTMENTS,
+  RENDER_GROUP,
   RENDER_GROUPS,
   RENDER_INSTITUTES,
   RENDER_UNIVERSITIES
@@ -11,7 +11,7 @@ import {
 import { SIGN_OUT } from '../../authorization/actions';
 
 export default function adminReducers(
-  state = new StateLoader().loadState().adminReducers || {},
+  state = new StateLoader().loadState().adminReducers || { groups: [] },
   action
 ) {
   switch (action.type) {
@@ -41,12 +41,17 @@ export default function adminReducers(
       return {
         ...state,
         groups: action.groups.data.map(obj => {
-          let group = {};
-          group.value = obj.id;
-          group.label = obj.name;
-          group.departmentId = obj.departmentId;
-          group.course = obj.course;
-          return group;
+          return {
+            value: obj.id,
+            label: obj.name,
+            departmentId: obj.departmentId,
+            course: obj.course,
+            departmentName: obj.departmentName,
+            instituteId: obj.instituteId,
+            instituteName: obj.instituteName,
+            teacherId: obj.teacherId,
+            isShowingInRegistration: obj.isShowingInRegistration
+          };
         })
       };
 
@@ -81,19 +86,24 @@ export default function adminReducers(
             instituteId: action.payload.department.instituteId
           }]
       };
-    case GROUP_CREATED:
+    case RENDER_GROUP:
       return {
         ...state,
-        groups: [...state.groups,
+        groups: [...state.groups.filter(group => group.value !== action.payload.group.id),
           {
             value: action.payload.group.id,
             label: action.payload.group.name,
             departmentId: action.payload.group.departmentId,
-            course: action.payload.group.course
+            course: action.payload.group.course,
+            departmentName: action.payload.group.departmentName,
+            instituteId: action.payload.group.instituteId,
+            instituteName: action.payload.group.instituteName,
+            teacherId: action.payload.group.teacherId,
+            isShowingInRegistration: action.payload.group.isShowingInRegistration
           }]
       };
     case SIGN_OUT:
-      return {};
+      return { groups: [] };
     default:
       return state;
   }

@@ -52,6 +52,10 @@ export const AdminToolBar = () => {
           {i18n.t('university_structure')}
         </ListItem>
 
+        <ListItem component={Link} href={LECTURE_HALLS} className={classes.menuItem}>
+          {i18n.t('lecture_halls')}
+        </ListItem>
+
         <ListItem
           component={Link}
           href={ADD_LESSON}
@@ -61,10 +65,6 @@ export const AdminToolBar = () => {
 
         <ListItem component={Link} href={SCHEDULE} className={classes.menuItem}>
           {i18n.t('schedule')}
-        </ListItem>
-
-        <ListItem component={Link} href={LECTURE_HALLS} className={classes.menuItem}>
-          {i18n.t('lecture_halls')}
         </ListItem>
       </List>
     </AppBar>

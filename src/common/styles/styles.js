@@ -1,6 +1,7 @@
 export const purpleColor = '#483D8B';
 export const lightGreyColor = '#D3D3D3';
 export const buttonColor = '#eeeeee';
+export const textColor = '#696969';
 
 export const selectorColors = theme => ({
   ...theme,

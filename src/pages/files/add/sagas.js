@@ -1,8 +1,9 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { LOAD_SUBJECTS } from '../actions';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { LOAD_SUBJECTS, renderFiles } from '../actions';
 import http from '../../../services/http';
 import { POST_SUBJECTS, UPLOAD_MULTIPLE_FILES } from '../../../constants/serverApi';
-import { SAVE_SUBJECTS, UPLOAD_REQUEST, UPLOAD_SUCCESS } from './actions';
+import { SAVE_SUBJECTS, UPLOAD_REQUEST, uploadProgress, uploadSuccess } from './actions';
+import { END, eventChannel } from 'redux-saga';
 
 export function* addFilesAndSubjectsWatcher() {
   yield takeEvery(SAVE_SUBJECTS, action => saveSubject(action));
@@ -22,20 +23,64 @@ function* saveSubject(action) {
 
 function* uploadFiles(action) {
   const { files, username, subjectName, fileType } = action;
+  let payload = { username, subjectName, fileType };
+
+  for (let index = 0; index < files.length; index++) {
+    payload['file'] = files[index];
+    try {
+      const [uploadPromise, chan] = createUploader(payload);
+      yield fork(watchOnProgress, { fileName: payload.file.name, chan: chan });
+
+      const response = yield call(() => uploadPromise);
+
+      if (response) {
+        yield put(uploadSuccess(response.data));
+        yield put(renderFiles(response));
+      }
+    } catch (err) {
+      put({ type: 'ERROR', payload: err });
+    }
+  }
+}
+
+function upload(action, onUploadProgress) {
+  const { file, username, subjectName, fileType } = action;
 
   let formData = new FormData();
-  for (let index = 0; index < files.length; index++) {
-    formData.append('files', files[index]);
-  }
+  formData.append('files', file);
 
-  let response = yield call(http, {
+  return http({
     url: UPLOAD_MULTIPLE_FILES + username + '/' + subjectName + '/' + fileType,
     method: 'post',
     data: formData,
-    isFile: true
+    isFile: true,
+    onUploadProgress: onUploadProgress
+  });
+}
+
+function createUploader(payload) {
+  let emit;
+  const chan = eventChannel(emitter => {
+    emit = emitter;
+    return () => {
+    };
   });
 
-  if (response) {
-    yield put({ type: UPLOAD_SUCCESS, response });
-  }
+  const uploadPromise = upload(payload, (event) => {
+    if (event.loaded.total === 1) {
+      emit(END);
+    }
+
+    emit(100 - (event.total - event.loaded) / event.total * 100);
+  });
+
+  return [uploadPromise, chan];
+}
+
+function* watchOnProgress({ fileName, chan }) {
+  yield takeEvery(chan, action => uploadProgressFunc(fileName, action));
+}
+
+function* uploadProgressFunc(fileName, action) {
+  yield put(uploadProgress(fileName, action));
 }

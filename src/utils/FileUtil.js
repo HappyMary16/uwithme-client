@@ -15,3 +15,8 @@ export function getTasks(files) {
     return [];
   }
 }
+
+export function getUploadProgressByFileName(uploadProgress, file) {
+  const progress = uploadProgress && uploadProgress.filter(p => p.file === file)[0];
+  return progress ? progress.progress : 0;
+}
