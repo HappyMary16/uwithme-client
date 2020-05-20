@@ -11,7 +11,7 @@ import {
 import { SIGN_OUT } from '../../authorization/actions';
 
 export default function adminReducers(
-  state = new StateLoader().loadState().adminReducers || {},
+  state = new StateLoader().loadState().adminReducers || { groups: [] },
   action
 ) {
   switch (action.type) {
@@ -103,7 +103,7 @@ export default function adminReducers(
           }]
       };
     case SIGN_OUT:
-      return {};
+      return { groups: [] };
     default:
       return state;
   }

@@ -4,7 +4,7 @@ import { SIGN_OUT } from '../authorization/actions';
 
 
 export default function usersReducer(
-  state = new StateLoader().loadState().usersReducer || {},
+  state = new StateLoader().loadState().usersReducer || { users: [] },
   action
 ) {
   switch (action.type) {
@@ -38,7 +38,7 @@ export default function usersReducer(
         })
       };
     case SIGN_OUT:
-      return {};
+      return { users: [] };
     default:
       return state;
   }

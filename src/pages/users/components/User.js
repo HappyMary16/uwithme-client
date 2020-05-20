@@ -31,9 +31,10 @@ const useStyles = makeStyles(theme => ({
 
 export const User = ({ user, lessons, isMine }) => {
   const classes = useStyles();
+
+  //TODO add opportunity to choose day
   const [weekDay, setWeekDay] = React.useState(new Date().getDay());
   const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
-  //TODO add opportunity to choose day
 
   return (
     <Grid container xs={12} direction='column' className={classes.root}>

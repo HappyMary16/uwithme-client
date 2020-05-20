@@ -36,7 +36,7 @@ export default function filesReducers(
       };
     }
     case SIGN_OUT:
-      return {};
+      return { uploadProgress: [] };
     case UPLOAD_REQUEST:
       return {
         ...state,

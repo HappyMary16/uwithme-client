@@ -5,10 +5,6 @@ import React, { Component } from 'react';
 
 class UserHome extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch, user } = this.props;
     dispatch(findLessonsByUsername(user.username));
