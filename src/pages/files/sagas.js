@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
+  DOWNLOAD_FILES,
   GET_FILES_BY_USERNAME,
-  LOAD_FILES,
   LOAD_SUBJECTS,
   LOAD_SUBJECTS_BY_UNIVERSITY_ID,
   renderFiles,
@@ -15,7 +15,7 @@ export function* fileOperationWatcher() {
   yield takeEvery(GET_FILES_BY_USERNAME, action => downloadFiles(action));
   yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
   yield takeEvery(LOAD_SUBJECTS_BY_UNIVERSITY_ID, action => loadSubjectsByUniversityId(action));
-  yield takeEvery(LOAD_FILES, action => downloadFile(action));
+  yield takeEvery(DOWNLOAD_FILES, action => downloadFile(action));
 }
 
 function* downloadFiles(action) {
