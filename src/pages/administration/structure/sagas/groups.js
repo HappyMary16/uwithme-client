@@ -21,7 +21,7 @@ function* createGroup(action) {
   try {
     yield put(startFetching());
 
-    const { universityId, instituteName, departmentName, course, groupName } = action.payload;
+    const { universityId, instituteName, departmentName, course, groupName, isShowingInRegistration } = action.payload;
 
     const response = yield call(http, {
       url: ADD_GROUP_API,
@@ -31,7 +31,8 @@ function* createGroup(action) {
         instituteName: instituteName,
         departmentName: departmentName,
         groupName: groupName,
-        course: course
+        course: course,
+        isShowingInRegistration: isShowingInRegistration
       }
     });
 
