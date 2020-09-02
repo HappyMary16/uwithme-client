@@ -81,7 +81,8 @@ export const createGroup = (
   instituteName,
   departmentName,
   course,
-  groupName
+  groupName,
+  isShowingInRegistration
 ) => ({
   type: CREATE_GROUP,
   payload: {
@@ -89,7 +90,8 @@ export const createGroup = (
     instituteName,
     departmentName,
     course,
-    groupName
+    groupName,
+    isShowingInRegistration
   }
 });
 
