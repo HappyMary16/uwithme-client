@@ -6,11 +6,12 @@ import SchoolIcon from '@material-ui/icons/School';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { InputField } from '../../../../common/components/InputField';
-import i18n from '../../../../locales/i18n';
+import { InputField } from '../../../common/components/InputField';
+import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { addUniversity } from '../actions';
+import { addUniversity } from '../../administration/structure/actions';
+import { PasswordInput } from '../components/PasswordInput';
 
 const useStyles = theme => ({
   paper: {
@@ -53,7 +54,6 @@ class AddUniversity extends Component {
     };
 
     this.submit = this.submit.bind(this);
-    this.setPasswordError = this.setPasswordError.bind(this);
   }
 
   submit(e) {
@@ -70,17 +70,9 @@ class AddUniversity extends Component {
     );
   }
 
-  setPasswordError() {
-    if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ passwordError: true });
-    } else {
-      this.setState({ passwordError: false });
-    }
-  }
 
   render() {
     const { classes } = this.props;
-    const { passwordError } = this.state;
 
     return (
       <Container component="main" maxWidth="xs">
@@ -102,23 +94,9 @@ class AddUniversity extends Component {
               label={i18n.t('admin_username')}
               onBlur={e => this.setState({ username: e.target.value })}
             />
-            <InputField
-              label={i18n.t('admin_password')}
-              type="password"
-              error={passwordError}
-              helperText={passwordError ? i18n.t('password_error') : ''}
-              onBlur={e => this.setState({ password: e.target.value })}
-            />
-            <InputField
-              label={i18n.t('confirm_password')}
-              type="password"
-              error={passwordError}
-              helperText={passwordError ? i18n.t('password_error') : ''}
-              onBlur={e => {
-                this.setState({ confirmPassword: e.target.value });
-                this.setPasswordError();
-              }}
-            />
+
+            <PasswordInput setPasswordMethod={e => this.setState({ password: e })}
+                           setConfirmPasswordMethod={e => this.setState({ confirmPassword: e })}/>
             <Button
               fullWidth
               variant="outlined"

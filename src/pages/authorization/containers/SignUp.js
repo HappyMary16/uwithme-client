@@ -18,6 +18,7 @@ import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { loadDepartments, loadGroups, loadInstitutes, loadUniversities } from '../../administration/structure/actions';
+import { PasswordInput } from '../components/PasswordInput';
 
 const useStyles = theme => ({
   paper: {
@@ -58,12 +59,10 @@ class SignUp extends React.Component {
       phone: '',
       email: '',
       studentId: '',
-      passwordError: false,
       university: '1'
     };
 
     this.submit = this.submit.bind(this);
-    this.setPasswordError = this.setPasswordError.bind(this);
   }
 
   componentDidMount() {
@@ -99,17 +98,10 @@ class SignUp extends React.Component {
     );
   }
 
-  setPasswordError() {
-    if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ passwordError: true });
-    } else {
-      this.setState({ passwordError: false });
-    }
-  }
-
   render() {
     const { classes, groups, departments, institutes, scienceDegrees, universities } = this.props;
-    const { passwordError, userRole, scienceDegree, institute, group, department, university } = this.state;
+    const { userRole, scienceDegree, institute, group, department, university } = this.state;
+
 
     return (
       <Container component="main" maxWidth="xs">
@@ -149,21 +141,8 @@ class SignUp extends React.Component {
               autoComplete="email"
               onBlur={e => this.setState({ email: e.target.value })}
             />
-            <InputField
-              label={i18n.t('password')}
-              type="password"
-              error={passwordError}
-              helperText={passwordError ? i18n.t('password_error') : ''}
-              onBlur={e => this.setState({ password: e.target.value })}
-            />
-            <InputField
-              label={i18n.t('confirm_password')}
-              type="password"
-              error={passwordError}
-              helperText={passwordError ? i18n.t('password_error') : ''}
-              onChange={e => this.setState({ confirmPassword: e.target.value })}
-              onBlur={() => this.setPasswordError}
-            />
+            <PasswordInput setPasswordMethod={e => this.setState({ password: e })}
+                           setConfirmPasswordMethod={e => this.setState({ confirmPassword: e })}/>
             <SelectField
               label={i18n.t('user_type')}
               initialValue={userRole}
