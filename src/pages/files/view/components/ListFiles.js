@@ -9,11 +9,12 @@ import Collapse from '@material-ui/core/Collapse';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DescriptionIcon from '@material-ui/icons/Description';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import { blueGrey, grey } from '@material-ui/core/colors';
-
+import { grey } from '@material-ui/core/colors';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import IconButton from '@material-ui/core/IconButton';
 import { loadFile } from '../../actions';
 import { connect } from 'react-redux';
+import { isPossibleToOpen } from '../../../../utils/FileUtil';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -26,20 +27,28 @@ const useStyles = makeStyles(theme => ({
 
 let ListFiles = ({ open, files, dispatch }) => {
   const classes = useStyles();
+
   return (
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
         {files.map((file, i) => (
           <ListItem button key={i} className={classes.nested}>
             <ListItemIcon>
-              <DescriptionIcon />
+              <DescriptionIcon/>
             </ListItemIcon>
-            <ListItemText primary={file.name} />
+            <ListItemText primary={file.name}/>
             <ListItemSecondaryAction>
+              {isPossibleToOpen(file.name) &&
               <IconButton
                 onClick={() => dispatch(loadFile(file.id, file.name, false))}
               >
-                <GetAppIcon style={{ color: blueGrey[500] }} />
+                <ImportContactsIcon/>
+              </IconButton>
+              }
+              <IconButton
+                onClick={() => dispatch(loadFile(file.id, file.name, true))}
+              >
+                <GetAppIcon/>
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
