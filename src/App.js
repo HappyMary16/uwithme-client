@@ -30,7 +30,7 @@ import PageWithFiles from './pages/files/view/containers/PageWithFiles';
 import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
 import SignIn from './pages/authorization/containers/SignIn';
-import AddUniversity from './pages/administration/structure/containers/AddUniversity';
+import AddUniversity from './pages/authorization/containers/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/administration/structure/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
