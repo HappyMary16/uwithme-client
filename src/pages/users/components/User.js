@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { TodaySchedule } from '../../schedule/components/TodaySchedule';
@@ -12,36 +11,20 @@ import { Container } from '@material-ui/core';
 import { USER_SCHEDULE } from '../../../constants/links';
 import { history } from '../../../store/Store';
 import Button from '@material-ui/core/Button';
+import '../../../common/styles/userPage.css';
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    margin: theme.spacing(2, 0, 0, 2)
-  },
-  image: {
-    width: 200,
-    height: 200
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%'
-  }
-}));
-
-export const User = ({ user, lessons, isMine }) => {
-  const classes = useStyles();
+export const User = ({ user, lessons, isMine, onSaveAvatar }) => {
 
   //TODO add opportunity to choose day
   const [weekDay, setWeekDay] = React.useState(new Date().getDay());
   const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
-    <Grid container xs={12} direction='column' className={classes.root}>
-      <Container className={classes.paper}>
-        <UserCard user={user}/>
+    <Grid container xs={12} direction='column'>
+      <Container className={'paper'}>
+        <UserCard user={user} onSaveAvatar={onSaveAvatar}/>
       </Container>
-      <Container className={classes.paper}>
+      <Container className={'paper'}>
         <Grid container xs={12} direction='row' justify='space-between'>
           <Grid>
             <Typography variant="h4">
@@ -76,7 +59,7 @@ export const User = ({ user, lessons, isMine }) => {
           </Grid>
         </Grid>
       </Container>
-      <Container className={classes.paper}>
+      <Container className={'paper'}>
         <TodaySchedule lessons={lessons} day={weekDay} user={user} weekNumber={weekNumber ? 1 : 2}/>
       </Container>
     </Grid>

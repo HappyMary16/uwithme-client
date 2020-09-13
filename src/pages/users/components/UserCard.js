@@ -6,35 +6,41 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import i18n from '../../../locales/i18n';
 import { getName } from '../../../utils/UsersUtil';
+import LoadPhoto from './LoadPhoto';
 
 const useStyles = makeStyles(theme => ({
   container: {
     margin: theme.spacing(1)
-  },
-  image: {
-    width: 200,
-    height: 200
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%'
   }
 }));
 
-export const UserCard = ({ user }) => {
+export const UserCard = ({ user, onSaveAvatar }) => {
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  let handleClickAvatar = () => {
+    setOpen(true);
+  };
+
+  let handleSave = (avatar) => {
+    setOpen(false);
+    onSaveAvatar(avatar);
+  };
 
   return (
     <Paper>
+      <LoadPhoto onSave={handleSave} open={open} onClose={() => setOpen(false)}/>
+
       <Grid container spacing={2}>
         <Grid item className={classes.container}>
-          <ButtonBase className={classes.image}>
+          <ButtonBase className={'image'}>
             <img
-              className={classes.img}
+              className={'img'}
               alt='photo'
+              //TODO set saved avatar
               src='/empty-avatar.jpg'
+              onClick={handleClickAvatar}
             />
           </ButtonBase>
         </Grid>

@@ -9,7 +9,8 @@ import {
   GET_LESSONS_BY_USER_ID,
   GET_TEACHERS_BY_UNIVERSITY_ID,
   PUT_ADD_STUDENT_TO_GROUP,
-  removeStudentFromGroupByStudentId
+  removeStudentFromGroupByStudentId,
+  UPLOAD_MULTIPLE_FILES
 } from '../../constants/serverApi';
 import {
   ADD_STUDENT_TO_GROUP,
@@ -22,7 +23,8 @@ import {
   REMOVE_STUDENT_FROM_GROUP,
   renderLessonsForUser,
   renderUser,
-  renderUsers
+  renderUsers,
+  UPLOAD_AVATAR
 } from './actions';
 
 export function* teachersWatcher() {
@@ -34,6 +36,7 @@ export function* teachersWatcher() {
   yield takeEvery(REMOVE_STUDENT_FROM_GROUP, action => removeStudentFromGroup(action));
   yield takeEvery(LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID, action => getStudentsWithoutGroupByUniversityId(action));
   yield takeEvery(ADD_STUDENT_TO_GROUP, action => addStudentToGroup(action));
+  yield takeEvery(UPLOAD_AVATAR, action => uploadAvatar(action));
 }
 
 function* getTeachersByUniversityId(action) {
@@ -203,6 +206,29 @@ function* addStudentToGroup(action) {
         yield put(renderUsers(students.data));
       }
     }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* uploadAvatar(action) {
+  try {
+    yield put(startFetching());
+
+    const { avatar } = action.payload;
+    const formData = new FormData();
+
+    formData.append('files', avatar, 'avatar.png');
+
+    //TODO fix url
+    yield call(http, {
+      url: UPLOAD_MULTIPLE_FILES + 'teacher' + '/' + 'undefined' + '/' + '1',
+      method: 'post',
+      data: formData,
+      isFile: true
+    });
   } catch (e) {
     alert(e);
   } finally {

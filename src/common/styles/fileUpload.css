@@ -38,3 +38,7 @@
     flex-direction: column;
     font-size: 16px
 }
+
+.paddingLeft {
+    padding-left: 1em;
+}

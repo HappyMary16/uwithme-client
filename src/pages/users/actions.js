@@ -17,6 +17,8 @@ export const RENDER_GROUPS_FOR_TEACHER = 'RENDER_GROUPS_FOR_TEACHER';
 export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
 export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
 
+export const UPLOAD_AVATAR = 'UPLOAD_AVATAR';
+
 export function loadTeachersByUniversityId(universityId) {
   return {
     type: LOAD_TEACHERS_BY_UNIVERSITY_ID,
@@ -126,3 +128,10 @@ export function addStudentToGroup(studentIds, groupId) {
     }
   };
 }
+
+export const uploadAvatar = (avatar) => ({
+  type: UPLOAD_AVATAR,
+  payload: {
+    avatar
+  }
+});
