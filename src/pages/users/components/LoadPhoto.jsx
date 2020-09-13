@@ -61,14 +61,14 @@ class LoadPhoto extends Component {
               maxWidth='sm'
               aria-labelledby="form-dialog-title">
 
-        <div className={'upload &content & paddingLeft'}>
+        <div className={'paddingLeft'}>
           <input
-            className={'content & paddingLeft'}
+            className={'paddingOne'}
             type="file"
             multiple
             onChange={this.onFileAdded}
           />
-          <div className={'content & paddingLeft'}>
+          <div className={'paddingOne'}>
             <AvatarEditor
               ref={this.setEditorRef}
               image={photo}

@@ -40,5 +40,9 @@
 }
 
 .paddingLeft {
-    padding-left: 1em;
+    padding-left: 2em;
+}
+
+.paddingOne {
+    padding: 1em;
 }
