@@ -22,3 +22,7 @@ export const getBuildingByLectureHall = (buildings, lectureHall) => {
   return buildings && buildings
     .filter(building => building.value === lectureHall.buildingId)[0];
 };
+
+export const getGroupById = (groups, groupId) => {
+  return groups && groupId && groups.filter(group => Number(group.value) === Number(groupId))[0];
+};
