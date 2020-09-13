@@ -36,7 +36,6 @@ class ShareFiles extends React.Component {
 
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
     this.handleGroupChange = this.handleGroupChange.bind(this);
   }
 

@@ -1,26 +1,8 @@
 import React from 'react';
-import { Dropzone } from './Dropzone';
+import { DropZone } from './DropZone';
 import { FilesProgress } from './FilesProgress';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-  upload: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '1',
-    alignItems: 'flex-start',
-    textAlign: 'left',
-    overflow: 'hidden'
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'row',
-    paddingTop: '16px',
-    boxSizing: 'border-box',
-    width: '100%'
-  }
-}));
+import '../../../../common/styles/fileUpload.css';
 
 export const Upload = ({
                          addFiles,
@@ -29,7 +11,6 @@ export const Upload = ({
                          successfulUploaded,
                          files
                        }) => {
-  const classes = useStyles();
 
   let onFilesAdded = filesToAdd => {
     let array = [].concat(files);
@@ -44,10 +25,10 @@ export const Upload = ({
 
   return (
     <Container>
-      <div className={classes.upload}>
-        <div className={classes.content}>
+      <div className={'upload'}>
+        <div className={'content'}>
           <div>
-            <Dropzone
+            <DropZone
               onFilesAddedFunk={onFilesAdded}
               disabled={uploading || successfulUploaded}
             />
