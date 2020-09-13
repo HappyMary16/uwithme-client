@@ -7,6 +7,7 @@ import i18n from '../../../locales/i18n';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../common/styles/styles';
 import { loadGroupsByUniversityId } from '../../administration/structure/actions';
+import { getGroupById } from '../../../utils/StructureUtils';
 
 class GroupSchedule extends Component {
 
@@ -14,22 +15,25 @@ class GroupSchedule extends Component {
     super(props);
 
     this.state = {
-      groupId: null
+      groupId: props.groupId
     };
 
     this.handleGroupChange = this.handleGroupChange.bind(this);
   }
+
   componentDidMount() {
-    const { dispatch, universityId } = this.props;
+    const { dispatch, groupId, universityId } = this.props;
     dispatch(loadGroupsByUniversityId(universityId));
+
+    groupId && dispatch(findLessonsByGroupId(groupId));
   }
 
   handleGroupChange(groupId) {
     const { dispatch } = this.props;
-    this.setState({
+    groupId && this.setState({
       groupId: groupId
     });
-    groupId && dispatch(findLessonsByGroupId(groupId.value));
+    groupId && dispatch(findLessonsByGroupId(groupId));
   }
 
   render() {
@@ -43,8 +47,9 @@ class GroupSchedule extends Component {
             placeholder={i18n.t('select_group')}
             theme={selectorColors}
             // isMulti
-            onChange={this.handleGroupChange}
+            onChange={(e) => this.handleGroupChange(e.value)}
             options={groups}
+            defaultValue={getGroupById(groups, groupId)}
           />
         </Container>
         {groupId && lessons && <ScheduleTable lessons={lessons} user={user} isMine={true}/>}

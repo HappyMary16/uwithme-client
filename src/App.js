@@ -8,6 +8,7 @@ import {
   ADD_UNIVERSITY_PATH,
   FILES,
   GROUP_PAGE_ROUTER,
+  GROUP_SCHEDULE_ROUTER,
   LECTURE_HALLS,
   SCHEDULE,
   SHARE_FILES,
@@ -71,6 +72,10 @@ function OpenUserSchedule() {
   return <UserSchedule teacherId={teacherId}/>;
 }
 
+function OpenGroupSchedule() {
+  const { groupId } = useParams();
+  return <GroupSchedule groupId={groupId}/>;
+}
 
 class App extends Component {
 
@@ -147,6 +152,9 @@ class App extends Component {
                       <Route exact path={GROUP_PAGE_ROUTER}>
                         <OpenGroupPage/>
                       </Route>
+                      <Route exact path={GROUP_SCHEDULE_ROUTER}>
+                        <OpenGroupSchedule/>
+                      </Route>
                     </Grid>
                   )}
                   <Grid>
@@ -169,7 +177,7 @@ class App extends Component {
       </Container>
     );
   }
-};
+}
 
 const mapStateToProps = state => {
   return {
