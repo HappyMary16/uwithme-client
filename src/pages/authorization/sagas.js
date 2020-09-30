@@ -3,7 +3,7 @@ import { SIGN_IN_ERROR, SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_OUT, SIGN_UP_REQU
 
 import { history } from '../../store/Store';
 import http from '../../services/http';
-import { GET_AVATAR, SIGN_IN, SIGN_UP, UPDATE_AVATAR } from '../../constants/serverApi';
+import { AVATAR, SIGN_IN, SIGN_UP } from '../../constants/serverApi';
 import { USER_HOME } from '../../constants/links';
 import { endFetching, startFetching } from '../../common/actions';
 import { renderMyAvatar, UPLOAD_AVATAR } from '../users/actions';
@@ -98,10 +98,9 @@ function* signInSuccess(response) {
     yield put({ type: SIGN_IN_SUCCESS, response });
     localStorage.setItem('AuthToken', response.data.authToken);
     localStorage.setItem('RefreshToken', response.data.refreshToken);
+    history.push(USER_HOME);
 
     yield call(downloadMyAvatar, response.data.id);
-
-    history.push(USER_HOME);
   }
 }
 
@@ -113,7 +112,7 @@ function* signInError(message) {
 
 function* downloadMyAvatar(userId) {
   const response = yield call(http, {
-    url: GET_AVATAR,
+    url: AVATAR,
     method: 'get',
     loadFile: true
   });
@@ -136,7 +135,7 @@ function* uploadAvatar(action) {
     formData.append('file', avatar, 'avatar.png');
 
     let response = yield call(http, {
-      url: UPDATE_AVATAR + userId,
+      url: AVATAR,
       method: 'post',
       data: formData,
       isFile: true

@@ -1,7 +1,7 @@
 export const LOAD_TEACHERS_BY_UNIVERSITY_ID = 'LOAD_TEACHERS_BY_UNIVERSITY_ID';
-export const LOAD_TEACHERS_BY_GROUP_ID = 'LOAD_TEACHERS_BY_GROUP_ID';
+export const GET_STUDENTS_FRIENDS = 'GET_STUDENTS_FRIENDS';
 
-export const LOAD_STUDENTS_BY_TEACHER_ID = 'LOAD_STUDENTS_BY_TEACHER_ID';
+export const GET_TEACHERS_FRIENDS = 'GET_TEACHERS_FRIENDS';
 export const LOAD_STUDENTS_BY_GROUP_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
 export const LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
 
@@ -11,7 +11,6 @@ export const RENDER_USER = 'RENDER_USER';
 export const RENDER_LESSONS_FOR_CURRENT_USER_PAGE = 'RENDER_LESSONS_FOR_CURRENT_USER_PAGE';
 export const FIND_LESSONS_FOR_USER = 'FIND_LESSONS_FOR_USER';
 
-export const FIND_GROUPS_FOR_TEACHER = 'FIND_GROUPS_FOR_TEACHER';
 export const RENDER_GROUPS_FOR_TEACHER = 'RENDER_GROUPS_FOR_TEACHER';
 
 export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
@@ -30,12 +29,9 @@ export function loadTeachersByUniversityId(universityId) {
   };
 }
 
-export function loadTeachersByGroupId(groupId) {
+export function loadTeachersByGroupId() {
   return {
-    type: LOAD_TEACHERS_BY_GROUP_ID,
-    payload: {
-      groupId
-    }
+    type: GET_STUDENTS_FRIENDS
   };
 }
 
@@ -62,19 +58,9 @@ export const renderLessonsForUser = (lessons) => ({
   }
 });
 
-export const renderGroupsForTeacher = (groups) => ({
-  type: RENDER_GROUPS_FOR_TEACHER,
-  payload: {
-    groups
-  }
-});
-
-export function loadStudentsByTeacherId(teacherId) {
+export function loadStudentsByTeacherId() {
   return {
-    type: LOAD_STUDENTS_BY_TEACHER_ID,
-    payload: {
-      teacherId
-    }
+    type: GET_TEACHERS_FRIENDS
   };
 }
 

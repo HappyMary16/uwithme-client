@@ -35,11 +35,8 @@ export const findLessonsByGroupId = (groupId) => ({
   }
 });
 
-export const findLessonsByUsername = (username) => ({
-  type: FIND_LESSONS_BY_USER_NAME,
-  payload: {
-    username
-  }
+export const findLessons = () => ({
+  type: FIND_LESSONS_BY_USER_NAME
 });
 
 export const renderLessons = (lessons) => ({

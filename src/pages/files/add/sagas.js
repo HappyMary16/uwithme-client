@@ -1,7 +1,7 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects';
 import { LOAD_SUBJECTS, renderFiles } from '../actions';
 import http from '../../../services/http';
-import { POST_SUBJECTS, UPLOAD_MULTIPLE_FILES } from '../../../constants/serverApi';
+import { FILES, SUBJECTS } from '../../../constants/serverApi';
 import { SAVE_SUBJECTS, UPLOAD_REQUEST, uploadProgress, uploadSuccess } from './actions';
 import { END, eventChannel } from 'redux-saga';
 
@@ -14,7 +14,7 @@ function* saveSubject(action) {
   const { username, subjectName } = action;
 
   yield call(http, {
-    url: POST_SUBJECTS + username + '/' + subjectName,
+    url: SUBJECTS + username + '/' + subjectName,
     method: 'post'
   });
 
@@ -44,13 +44,13 @@ function* uploadFiles(action) {
 }
 
 function upload(action, onUploadProgress) {
-  const { file, username, subjectName, fileType } = action;
+  const { file, subjectName, fileType } = action;
 
   let formData = new FormData();
   formData.append('files', file);
 
   return http({
-    url: UPLOAD_MULTIPLE_FILES + username + '/' + subjectName + '/' + fileType,
+    url: FILES + subjectName + '/' + fileType,
     method: 'post',
     data: formData,
     isFile: true,

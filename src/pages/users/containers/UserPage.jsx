@@ -7,10 +7,6 @@ import { findLessonsForUser } from '../actions';
 
 class UserPage extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch, teachers, teacherId } = this.props;
     const teacher = findUserById(teachers, teacherId);

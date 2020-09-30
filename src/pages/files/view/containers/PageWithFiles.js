@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import { ADD_FILE, SHARE_FILES } from '../../../../constants/links';
 import i18n from '../../../../locales/i18n';
 import { TEACHER } from '../../../../constants/userRoles';
-import { getFilesByUsername, loadSubjects } from '../../actions';
+import { getFiles, loadSubjects } from '../../actions';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
@@ -30,9 +30,9 @@ const useStyles = theme => ({
 
 class PageWithFiles extends React.Component {
   componentDidMount() {
-    const { dispatch, username } = this.props;
-    dispatch(loadSubjects(username));
-    dispatch(getFilesByUsername(username));
+    const { dispatch } = this.props;
+    dispatch(loadSubjects());
+    dispatch(getFiles());
   }
 
   render() {

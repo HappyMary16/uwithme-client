@@ -9,7 +9,7 @@ import {
 } from './action';
 import { endFetching, startFetching } from '../../../common/actions';
 import http from '../../../services/http';
-import { GET_BUILDINGS, GET_LECTURE_HALLS } from '../../../constants/serverApi';
+import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';
 
 export function* lectureHallWatcher() {
   yield takeEvery(LOAD_LECTURE_HALLS, action => loadLectureHalls(action));
@@ -23,7 +23,7 @@ function* loadLectureHalls(action) {
     const { universityId } = action.payload;
 
     const lectureHalls = yield call(http, {
-      url: GET_LECTURE_HALLS + universityId,
+      url: LECTURE_HALLS + universityId,
       method: 'get'
     });
 
@@ -64,7 +64,7 @@ function* createLectureHall(action) {
     const { universityId, buildingName, lectureHallName, placeNumber } = action.payload;
 
     const response = yield call(http, {
-      url: GET_LECTURE_HALLS,
+      url: LECTURE_HALLS,
       method: 'post',
       data: {
         universityId: universityId,

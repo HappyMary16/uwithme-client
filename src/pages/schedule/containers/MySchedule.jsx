@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScheduleTable } from '../components/ScheduleTable';
-import { findLessonsByUsername } from '../actions';
+import { findLessons } from '../actions';
 
 
 class MySchedule extends Component {
 
   componentDidMount() {
-    const { dispatch, user } = this.props;
-    dispatch(findLessonsByUsername(user.username));
+    const { dispatch } = this.props;
+    dispatch(findLessons());
   }
 
   render() {

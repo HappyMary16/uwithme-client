@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { User } from '../components/User';
-import { findLessonsByUsername } from '../../schedule/actions';
+import { findLessons } from '../../schedule/actions';
 import React, { Component } from 'react';
 import { uploadAvatar } from '../actions';
 
@@ -13,8 +13,8 @@ class UserHome extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, user } = this.props;
-    dispatch(findLessonsByUsername(user.username));
+    const { dispatch } = this.props;
+    dispatch(findLessons());
   }
 
   onSaveAvatar(avatar) {

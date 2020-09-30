@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { ADD_UNIVERSITY } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
-import { ADD_UNIVERSITY_API } from '../../../../constants/serverApi';
+import { UNIVERSITIES } from '../../../../constants/serverApi';
 import { SIGN_IN_ERROR, SIGN_IN_SUCCESS } from '../../../authorization/actions';
 import { history } from '../../../../store/Store';
 import { USER_HOME } from '../../../../constants/links';
@@ -16,7 +16,7 @@ function* addUniversity(action) {
     yield put(startFetching());
 
     const response = yield call(http, {
-      url: ADD_UNIVERSITY_API,
+      url: UNIVERSITIES,
       method: 'post',
       data: {
         universityName: action.payload.universityName,

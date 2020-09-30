@@ -2,23 +2,22 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
 import {
-  findStudentsByGroupId,
-  findStudentsByTeacherId,
-  findStudentsWithoutGroupByUniversityId,
-  findTeachersByGroupId,
-  GET_AVATAR,
-  GET_LESSONS_BY_USER_ID,
-  GET_TEACHERS_BY_UNIVERSITY_ID,
-  PUT_ADD_STUDENT_TO_GROUP,
-  removeStudentFromGroupByStudentId
+  AVATAR,
+  GROUP_STUDENT_ID,
+  LESSONS_BY_USERNAME,
+  STUDENT_GROUP,
+  STUDENTS_BY_GROUP_ID,
+  STUDENTS_WITHOUT_GROUP,
+  TEACHERS,
+  USERS
 } from '../../constants/serverApi';
 import {
   ADD_STUDENT_TO_GROUP,
   FIND_LESSONS_FOR_USER,
+  GET_STUDENTS_FRIENDS,
+  GET_TEACHERS_FRIENDS,
   LOAD_STUDENTS_BY_GROUP_ID,
-  LOAD_STUDENTS_BY_TEACHER_ID,
   LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID,
-  LOAD_TEACHERS_BY_GROUP_ID,
   LOAD_TEACHERS_BY_UNIVERSITY_ID,
   REMOVE_STUDENT_FROM_GROUP,
   renderAvatar,
@@ -29,9 +28,9 @@ import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 
 export function* teachersWatcher() {
   yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, action => getTeachersByUniversityId(action));
-  yield takeEvery(LOAD_TEACHERS_BY_GROUP_ID, action => getTeachersByGroupId(action));
+  yield takeEvery(GET_STUDENTS_FRIENDS, () => getStudentsFriends());
   yield takeEvery(FIND_LESSONS_FOR_USER, action => findLessonsByUsername(action));
-  yield takeEvery(LOAD_STUDENTS_BY_TEACHER_ID, action => getStudentsByTeacherId(action));
+  yield takeEvery(GET_TEACHERS_FRIENDS, () => getTeachersFriends());
   yield takeEvery(LOAD_STUDENTS_BY_GROUP_ID, action => getStudentsByGroupId(action));
   yield takeEvery(REMOVE_STUDENT_FROM_GROUP, action => removeStudentFromGroup(action));
   yield takeEvery(LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID, action => getStudentsWithoutGroupByUniversityId(action));
@@ -44,7 +43,7 @@ function* getTeachersByUniversityId(action) {
     const { universityId } = action.payload;
 
     const users = yield call(http, {
-      url: GET_TEACHERS_BY_UNIVERSITY_ID + universityId,
+      url: TEACHERS + universityId,
       method: 'get'
     });
 
@@ -58,13 +57,12 @@ function* getTeachersByUniversityId(action) {
   }
 }
 
-function* getTeachersByGroupId(action) {
+function* getStudentsFriends() {
   try {
     yield put(startFetching());
-    const { groupId } = action.payload;
 
     const users = yield call(http, {
-      url: findTeachersByGroupId(groupId),
+      url: USERS,
       method: 'get'
     });
 
@@ -87,7 +85,7 @@ function* findLessonsByUsername(action) {
     } = action.payload;
 
     const response = yield call(http, {
-      url: GET_LESSONS_BY_USER_ID + username,
+      url: LESSONS_BY_USERNAME + username,
       method: 'get'
     });
 
@@ -102,13 +100,12 @@ function* findLessonsByUsername(action) {
   }
 }
 
-function* getStudentsByTeacherId(action) {
+function* getTeachersFriends() {
   try {
     yield put(startFetching());
-    const { teacherId } = action.payload;
 
     const users = yield call(http, {
-      url: findStudentsByTeacherId(teacherId),
+      url: USERS,
       method: 'get'
     });
 
@@ -129,7 +126,7 @@ function* getStudentsByGroupId(action) {
 
     if (groupId) {
       const users = yield call(http, {
-        url: findStudentsByGroupId(groupId),
+        url: STUDENTS_BY_GROUP_ID + groupId,
         method: 'get'
       });
 
@@ -150,8 +147,8 @@ function* removeStudentFromGroup(action) {
     const { studentId } = action.payload;
 
     const users = yield call(http, {
-      url: removeStudentFromGroupByStudentId(studentId),
-      method: 'put'
+      url: GROUP_STUDENT_ID + studentId,
+      method: 'delete'
     });
 
     if (users) {
@@ -171,7 +168,7 @@ function* getStudentsWithoutGroupByUniversityId(action) {
 
     if (universityId) {
       const users = yield call(http, {
-        url: findStudentsWithoutGroupByUniversityId(universityId),
+        url: STUDENTS_WITHOUT_GROUP + universityId,
         method: 'get'
       });
 
@@ -193,7 +190,7 @@ function* addStudentToGroup(action) {
 
     if (studentIds && groupId) {
       const users = yield call(http, {
-        url: PUT_ADD_STUDENT_TO_GROUP,
+        url: STUDENT_GROUP,
         method: 'put',
         data: {
           studentsIds: studentIds,
@@ -216,13 +213,13 @@ function* renderUsersWithAvatars(users) {
   yield put(renderUsers(users));
   for (let i = 0; i < users.length; i++) {
     const user = users[i];
-    yield call(addAvatarToUser, user.id);
+    yield call(downloadAvatarForUser, user.id);
   }
 }
 
-function* addAvatarToUser(userId) {
+function* downloadAvatarForUser(userId) {
   const response = yield call(http, {
-    url: GET_AVATAR + userId,
+    url: AVATAR + userId,
     method: 'get',
     loadFile: true
   });

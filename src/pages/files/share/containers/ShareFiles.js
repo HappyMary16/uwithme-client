@@ -40,9 +40,9 @@ class ShareFiles extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, username } = this.props;
+    const { dispatch } = this.props;
     dispatch(loadGroups());
-    dispatch(loadSubjects(username));
+    dispatch(loadSubjects());
   }
 
   submit() {

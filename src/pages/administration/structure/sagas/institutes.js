@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { CREATE_INSTITUTE, instituteCreated, LOAD_INSTITUTES_BY_UNIVERSITY_ID, RENDER_INSTITUTES } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
-import { ADD_INSTITUTE_API, GET_INSTITUTES_WITH_PARAMETERS } from '../../../../constants/serverApi';
+import { INFO_INSTITUTES, INSTITUTES } from '../../../../constants/serverApi';
 
 export function* instituteWatcher() {
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
@@ -16,7 +16,7 @@ function* createInstitute(action) {
     const { universityId, instituteName } = action.payload;
 
     const response = yield call(http, {
-      url: ADD_INSTITUTE_API,
+      url: INSTITUTES,
       method: 'post',
       data: {
         universityId: universityId,
@@ -42,7 +42,7 @@ function* loadInstitutesByUniversityId(action) {
     const { payload } = action;
 
     const institutes = yield call(http, {
-      url: GET_INSTITUTES_WITH_PARAMETERS + payload,
+      url: INFO_INSTITUTES + payload,
       method: 'get'
     });
 

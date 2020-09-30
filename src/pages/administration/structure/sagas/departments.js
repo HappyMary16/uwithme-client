@@ -8,7 +8,7 @@ import {
 } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
-import { ADD_DEPARTMENT_API, GET_DEPARTMENTS_WITH_PARAMETERS } from '../../../../constants/serverApi';
+import { DEPARTMENTS, INFO_DEPARTMENTS } from '../../../../constants/serverApi';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
@@ -22,7 +22,7 @@ function* createDepartment(action) {
     const { universityId, instituteName, departmentName } = action.payload;
 
     const response = yield call(http, {
-      url: ADD_DEPARTMENT_API,
+      url: DEPARTMENTS,
       method: 'post',
       data: {
         universityId: universityId,
@@ -50,7 +50,7 @@ function* loadDepartmentsByUniversityId(action) {
     const { payload } = action;
 
     const departments = yield call(http, {
-      url: GET_DEPARTMENTS_WITH_PARAMETERS + payload,
+      url: INFO_DEPARTMENTS + payload,
       method: 'get'
     });
 
