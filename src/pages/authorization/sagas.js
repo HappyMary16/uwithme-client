@@ -3,9 +3,11 @@ import { SIGN_IN_ERROR, SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_OUT, SIGN_UP_REQU
 
 import { history } from '../../store/Store';
 import http from '../../services/http';
-import { SIGN_IN, SIGN_UP } from '../../constants/serverApi';
+import { GET_AVATAR, SIGN_IN, SIGN_UP } from '../../constants/serverApi';
 import { USER_HOME } from '../../constants/links';
 import { endFetching, startFetching } from '../../common/actions';
+import { renderMyAvatar } from '../users/actions';
+import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 
 export function* authorizationWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, action => signUp(action));
@@ -95,6 +97,9 @@ function* signInSuccess(response) {
     yield put({ type: SIGN_IN_SUCCESS, response });
     localStorage.setItem('AuthToken', response.data.authToken);
     localStorage.setItem('RefreshToken', response.data.refreshToken);
+
+    yield call(downloadMyAvatar, response.data.id);
+
     history.push(USER_HOME);
   }
 }
@@ -104,3 +109,18 @@ function* signInError(message) {
   localStorage.setItem('RefreshToken', null);
   yield put({ type: SIGN_IN_ERROR, message });
 }
+
+function* downloadMyAvatar(userId) {
+  const response = yield call(http, {
+    url: GET_AVATAR,
+    method: 'get',
+    loadFile: true
+  });
+
+  if (response) {
+    yield put(renderMyAvatar(arrayBufferToDataUrl(response.data)));
+  } else {
+    return { userId };
+  }
+}
+

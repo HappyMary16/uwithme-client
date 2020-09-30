@@ -18,8 +18,8 @@ class UserHome extends Component {
   }
 
   onSaveAvatar(avatar) {
-    const { dispatch } = this.props;
-    dispatch(uploadAvatar(avatar));
+    const { dispatch, user } = this.props;
+    dispatch(uploadAvatar(user.id, avatar));
   }
 
   render() {

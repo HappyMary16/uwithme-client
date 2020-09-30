@@ -31,6 +31,8 @@ export const GET_SUBJECTS_BY_UNIVERSITY_ID = '/university/subjects/';
 
 export const GET_FILES = '/files/';
 export const UPLOAD_MULTIPLE_FILES = '/uploadMultipleFiles/';
+export const UPDATE_AVATAR = '/updateAvatar/';
+export const GET_AVATAR = '/avatar/';
 
 export const DOWNLOAD_FILE = '/downloadFile/';
 

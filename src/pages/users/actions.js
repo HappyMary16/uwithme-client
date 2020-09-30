@@ -18,6 +18,9 @@ export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
 export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
 
 export const UPLOAD_AVATAR = 'UPLOAD_AVATAR';
+export const LOAD_AVATAR = 'LOAD_AVATAR';
+export const RENDER_AVATAR = 'RENDER_AVATAR';
+export const RENDER_MY_AVATAR = 'RENDER_MY_AVATAR';
 
 export function loadTeachersByUniversityId(universityId) {
   return {
@@ -129,8 +132,31 @@ export function addStudentToGroup(studentIds, groupId) {
   };
 }
 
-export const uploadAvatar = (avatar) => ({
+export const uploadAvatar = (userId, avatar) => ({
   type: UPLOAD_AVATAR,
+  payload: {
+    userId,
+    avatar
+  }
+});
+
+export const loadAvatar = (userId) => ({
+  type: UPLOAD_AVATAR,
+  payload: {
+    userId
+  }
+});
+
+export const renderAvatar = (userId, avatar) => ({
+  type: RENDER_AVATAR,
+  payload: {
+    userId,
+    avatar
+  }
+});
+
+export const renderMyAvatar = (avatar) => ({
+  type: RENDER_MY_AVATAR,
   payload: {
     avatar
   }

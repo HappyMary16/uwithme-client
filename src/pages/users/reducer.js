@@ -1,10 +1,16 @@
-import { RENDER_GROUPS_FOR_TEACHER, RENDER_LESSONS_FOR_CURRENT_USER_PAGE, RENDER_USER, RENDER_USERS } from './actions';
+import {
+  RENDER_AVATAR,
+  RENDER_GROUPS_FOR_TEACHER,
+  RENDER_LESSONS_FOR_CURRENT_USER_PAGE,
+  RENDER_USER,
+  RENDER_USERS
+} from './actions';
 import StateLoader from '../../store/StateLoader';
 import { SIGN_OUT } from '../authorization/actions';
 
 
 export default function usersReducer(
-  state = new StateLoader().loadState().usersReducer || { users: [] },
+  state = new StateLoader().loadState().usersReducer || { users: [], avatars: [] },
   action
 ) {
   switch (action.type) {
@@ -37,8 +43,19 @@ export default function usersReducer(
           return group;
         })
       };
+    case RENDER_AVATAR:
+      let userWithAvatar = state.users.filter(user => user.id === action.payload.userId)[0];
+      userWithAvatar.avatar = action.payload.avatar;
+      return {
+        ...state,
+        users: [...state.users.filter(user => user.id !== action.payload.userId),
+          userWithAvatar]
+      };
     case SIGN_OUT:
-      return { users: [] };
+      return {
+        users: [],
+        avatars: []
+      };
     default:
       return state;
   }

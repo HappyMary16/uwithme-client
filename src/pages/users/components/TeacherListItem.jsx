@@ -21,7 +21,7 @@ export const TeacherListItem = ({ teacher }) => {
               onClick={handleClick}>
       <ListItemAvatar>
         <Avatar alt='photo'
-                src='/empty-avatar.jpg'/>
+                src={teacher.avatar === null ? '/empty-avatar.jpg' : teacher.avatar}/>
       </ListItemAvatar>
       <ListItemText
         primary={getName(teacher)}

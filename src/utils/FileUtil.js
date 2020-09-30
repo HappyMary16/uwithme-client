@@ -26,3 +26,17 @@ export function isPossibleToOpen(fileName) {
   const format = partOfFileName[partOfFileName.length - 1];
   return format === 'pdf' || format === 'jpg';
 }
+
+export function arrayBufferToDataUrl(buffer) {
+  let binary = '';
+  let bytes = new Uint8Array(buffer);
+  let len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  if (window.btoa(binary)) {
+    return 'data:image/png;base64,' + window.btoa(binary);
+  } else {
+    return null;
+  }
+}
