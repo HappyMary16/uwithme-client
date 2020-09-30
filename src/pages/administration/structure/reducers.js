@@ -33,7 +33,7 @@ export default function adminReducers(
           let department = {};
           department.value = obj.id;
           department.label = obj.name;
-          department.instituteId = obj.instituteId;
+          department.instituteId = obj.institute.id;
           return department;
         })
       };
@@ -85,7 +85,7 @@ export default function adminReducers(
           {
             value: action.payload.department.id,
             label: action.payload.department.name,
-            instituteId: action.payload.department.instituteId
+            instituteId: action.payload.department.institute.id
           }]
       };
     case RENDER_GROUP:

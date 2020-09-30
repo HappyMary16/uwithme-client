@@ -3,6 +3,7 @@ import {
   CREATE_DEPARTMENT,
   departmentCreated,
   LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
+  loadInstitutesByUniversityId,
   RENDER_DEPARTMENTS
 } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
@@ -32,6 +33,7 @@ function* createDepartment(action) {
 
     if (response && response.status === 200) {
       yield put(departmentCreated(response.data));
+      yield put(loadInstitutesByUniversityId(universityId));
     } else {
       alert(response);
     }

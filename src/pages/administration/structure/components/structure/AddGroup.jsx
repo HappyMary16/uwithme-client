@@ -23,8 +23,8 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
   const [course, setCourse] = React.useState();
   const [isShowingInRegistration, setShowingInRegistration] = React.useState(true);
 
-  const [filteredInstitutes, setFilteredInstitutes] = React.useState(institutes);
-  const [filteredDepartments, setFilteredDepartments] = React.useState(departments);
+  const [filteredInstitutes, setFilteredInstitutes] = React.useState(null);
+  const [filteredDepartments, setFilteredDepartments] = React.useState(null);
 
   let instituteOpinions = () => {
     if (Array.isArray(filteredInstitutes)) {

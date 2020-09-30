@@ -1,5 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { CREATE_GROUP, LOAD_GROUP_BY_ID, LOAD_GROUPS_BY_UNIVERSITY_ID, RENDER_GROUPS, renderGroup } from '../actions';
+import {
+  CREATE_GROUP,
+  LOAD_GROUP_BY_ID,
+  LOAD_GROUPS_BY_UNIVERSITY_ID,
+  loadDepartmentsByUniversityId,
+  loadInstitutesByUniversityId,
+  RENDER_GROUPS,
+  renderGroup
+} from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
 import {
@@ -37,6 +45,8 @@ function* createGroup(action) {
     });
 
     if (response && response.status === 200) {
+      yield put(loadInstitutesByUniversityId(universityId));
+      yield put(loadDepartmentsByUniversityId(universityId));
       yield put(renderGroup(response.data));
     } else {
       alert(response);

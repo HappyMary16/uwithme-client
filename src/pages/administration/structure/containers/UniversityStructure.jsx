@@ -56,23 +56,12 @@ class UniversityStructure extends Component {
     const { dispatch, universityId } = this.props;
 
     dispatch(createDepartment(universityId, instituteName, departmentName));
-
-    if (instituteName === instituteId) {
-      dispatch(loadInstitutesByUniversityId(universityId));
-    }
   }
 
   createGroup(instituteId, instituteName, departmentId, departmentName, course, groupName, isShowingInRegistration) {
     const { dispatch, universityId } = this.props;
 
     dispatch(createGroup(universityId, instituteName, departmentName, course, groupName, isShowingInRegistration));
-
-    if (instituteName === instituteId) {
-      dispatch(loadInstitutesByUniversityId(universityId));
-    }
-    if (departmentName === departmentId) {
-      dispatch(loadDepartmentsByUniversityId(universityId));
-    }
   }
 
   render() {
