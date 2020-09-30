@@ -3,16 +3,17 @@ import { SIGN_IN_ERROR, SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_OUT, SIGN_UP_REQU
 
 import { history } from '../../store/Store';
 import http from '../../services/http';
-import { GET_AVATAR, SIGN_IN, SIGN_UP } from '../../constants/serverApi';
+import { GET_AVATAR, SIGN_IN, SIGN_UP, UPDATE_AVATAR } from '../../constants/serverApi';
 import { USER_HOME } from '../../constants/links';
 import { endFetching, startFetching } from '../../common/actions';
-import { renderMyAvatar } from '../users/actions';
+import { renderMyAvatar, UPLOAD_AVATAR } from '../users/actions';
 import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 
 export function* authorizationWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, action => signUp(action));
   yield takeEvery(SIGN_IN_REQUEST, action => signIn(action));
   yield takeEvery(SIGN_OUT, signOut);
+  yield takeEvery(UPLOAD_AVATAR, action => uploadAvatar(action));
 }
 
 function* signUp(action) {
@@ -121,6 +122,34 @@ function* downloadMyAvatar(userId) {
     yield put(renderMyAvatar(arrayBufferToDataUrl(response.data)));
   } else {
     return { userId };
+  }
+}
+
+
+function* uploadAvatar(action) {
+  try {
+    yield put(startFetching());
+
+    const { userId, avatar } = action.payload;
+    const formData = new FormData();
+
+    formData.append('file', avatar, 'avatar.png');
+
+    let response = yield call(http, {
+      url: UPDATE_AVATAR + userId,
+      method: 'post',
+      data: formData,
+      isFile: true
+    });
+
+    console.log(response);
+    if (response && response.status === 200) {
+      yield call(downloadMyAvatar, userId);
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
   }
 }
 

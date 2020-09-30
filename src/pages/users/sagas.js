@@ -10,24 +10,20 @@ import {
   GET_LESSONS_BY_USER_ID,
   GET_TEACHERS_BY_UNIVERSITY_ID,
   PUT_ADD_STUDENT_TO_GROUP,
-  removeStudentFromGroupByStudentId,
-  UPDATE_AVATAR
+  removeStudentFromGroupByStudentId
 } from '../../constants/serverApi';
 import {
   ADD_STUDENT_TO_GROUP,
   FIND_LESSONS_FOR_USER,
-  LOAD_AVATAR,
   LOAD_STUDENTS_BY_GROUP_ID,
   LOAD_STUDENTS_BY_TEACHER_ID,
   LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID,
   LOAD_TEACHERS_BY_GROUP_ID,
   LOAD_TEACHERS_BY_UNIVERSITY_ID,
-  loadAvatar,
   REMOVE_STUDENT_FROM_GROUP,
   renderAvatar,
   renderLessonsForUser,
-  renderUsers,
-  UPLOAD_AVATAR
+  renderUsers
 } from './actions';
 import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 
@@ -40,8 +36,6 @@ export function* teachersWatcher() {
   yield takeEvery(REMOVE_STUDENT_FROM_GROUP, action => removeStudentFromGroup(action));
   yield takeEvery(LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID, action => getStudentsWithoutGroupByUniversityId(action));
   yield takeEvery(ADD_STUDENT_TO_GROUP, action => addStudentToGroup(action));
-  yield takeEvery(UPLOAD_AVATAR, action => uploadAvatar(action));
-  yield takeEvery(LOAD_AVATAR, action => loadAvatar(action));
 }
 
 function* getTeachersByUniversityId(action) {
@@ -211,29 +205,6 @@ function* addStudentToGroup(action) {
         yield call(renderUsersWithAvatars, users.data);
       }
     }
-  } catch (e) {
-    alert(e);
-  } finally {
-    yield put(endFetching());
-  }
-}
-
-function* uploadAvatar(action) {
-  try {
-    yield put(startFetching());
-
-    const { userId, avatar } = action.payload;
-    const formData = new FormData();
-
-    formData.append('file', avatar, 'avatar.png');
-
-    //TODO fix url
-    yield call(http, {
-      url: UPDATE_AVATAR + userId,
-      method: 'post',
-      data: formData,
-      isFile: true
-    });
   } catch (e) {
     alert(e);
   } finally {
