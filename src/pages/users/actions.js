@@ -17,6 +17,10 @@ export const RENDER_GROUPS_FOR_TEACHER = 'RENDER_GROUPS_FOR_TEACHER';
 export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
 export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
 
+export const UPLOAD_AVATAR = 'UPLOAD_AVATAR';
+export const RENDER_AVATAR = 'RENDER_AVATAR';
+export const RENDER_MY_AVATAR = 'RENDER_MY_AVATAR';
+
 export function loadTeachersByUniversityId(universityId) {
   return {
     type: LOAD_TEACHERS_BY_UNIVERSITY_ID,
@@ -44,15 +48,6 @@ export function renderUsers(users) {
   };
 }
 
-export function renderUser(user) {
-  return {
-    type: RENDER_USER,
-    payload: {
-      user
-    }
-  };
-}
-
 export const findLessonsForUser = (username) => ({
   type: FIND_LESSONS_FOR_USER,
   payload: {
@@ -71,13 +66,6 @@ export const renderGroupsForTeacher = (groups) => ({
   type: RENDER_GROUPS_FOR_TEACHER,
   payload: {
     groups
-  }
-});
-
-export const findGroupsForTeacher = (teacherId) => ({
-  type: FIND_GROUPS_FOR_TEACHER,
-  payload: {
-    teacherId
   }
 });
 
@@ -126,3 +114,26 @@ export function addStudentToGroup(studentIds, groupId) {
     }
   };
 }
+
+export const uploadAvatar = (userId, avatar) => ({
+  type: UPLOAD_AVATAR,
+  payload: {
+    userId,
+    avatar
+  }
+});
+
+export const renderAvatar = (userId, avatar) => ({
+  type: RENDER_AVATAR,
+  payload: {
+    userId,
+    avatar
+  }
+});
+
+export const renderMyAvatar = (avatar) => ({
+  type: RENDER_MY_AVATAR,
+  payload: {
+    avatar
+  }
+});

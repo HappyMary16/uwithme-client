@@ -63,8 +63,8 @@ function OpenGroupPage() {
 }
 
 function OpenUserPage() {
-  const { teacherId } = useParams();
-  return <UserPage teacherId={teacherId}/>;
+  const { userId } = useParams();
+  return <UserPage teacherId={userId}/>;
 }
 
 function OpenUserSchedule() {

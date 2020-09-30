@@ -2,55 +2,57 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import i18n from '../../../locales/i18n';
 import { getName } from '../../../utils/UsersUtil';
+import LoadPhoto from './LoadPhoto';
+import '../../../common/styles/avatar.css';
 
 const useStyles = makeStyles(theme => ({
   container: {
     margin: theme.spacing(1)
-  },
-  image: {
-    width: 200,
-    height: 200
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%'
   }
 }));
 
-export const UserCard = ({ user }) => {
+export const UserCard = ({ user, onSaveAvatar }) => {
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  let handleClickAvatar = () => {
+    setOpen(true);
+  };
+
+  let handleSave = (avatar) => {
+    setOpen(false);
+    onSaveAvatar(avatar);
+  };
 
   return (
     <Paper>
-      <Grid container spacing={2}>
-        <Grid item className={classes.container}>
-          <ButtonBase className={classes.image}>
-            <img
-              className={classes.img}
-              alt='photo'
-              src='/empty-avatar.jpg'
-            />
-          </ButtonBase>
+      <LoadPhoto onSave={handleSave} open={open} onClose={() => setOpen(false)}/>
+
+      <Grid container>
+        <Grid item>
+          <img
+            className={'avatar'}
+            alt='Avatar'
+            src={user.avatar === null ? '/empty-avatar.jpg' : user.avatar}
+            onClick={handleClickAvatar}
+          />
         </Grid>
 
-        <Grid item xs={12} sm container className={classes.container}>
-          <Grid item xs container direction='column' spacing={2}>
-            <Typography gutterBottom variant='h5'>
-              {getName(user)}
-            </Typography>
-            <Typography variant='body2' gutterBottom>
-              {i18n.t('phone')}: {user.phone}
-            </Typography>
-            <Typography variant='body2' gutterBottom>
-              {i18n.t('email')}: {user.email}
-            </Typography>
-            <Typography variant='body2' gutterBottom>
+        <Grid item sm direction='column' spacing={2} className={classes.container}>
+          <Typography gutterBottom variant='h5'>
+            {getName(user)}
+          </Typography>
+          <Typography variant='body2' gutterBottom>
+            {i18n.t('phone')}: {user.phone}
+          </Typography>
+          <Typography variant='body2' gutterBottom>
+            {i18n.t('email')}: {user.email}
+          </Typography>
+          <Typography variant='body2' gutterBottom>
               {i18n.t('institute')}: {user.instituteName}
             </Typography>
             <Typography variant='body2' gutterBottom>
@@ -66,7 +68,6 @@ export const UserCard = ({ user }) => {
                 {i18n.t('science_degree')}: {user.scienceDegreeName}
               </Typography>
             )}
-          </Grid>
         </Grid>
       </Grid>
     </Paper>

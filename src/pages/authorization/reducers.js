@@ -1,5 +1,6 @@
 import StateLoader from '../../store/StateLoader';
 import { SIGN_IN_ERROR, SIGN_IN_SUCCESS, SIGN_OUT } from './actions';
+import { RENDER_MY_AVATAR } from '../users/actions';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {},
@@ -11,6 +12,14 @@ export default function authReducers(
         ...state,
         user: action.response.data
       };
+    case RENDER_MY_AVATAR: {
+      let userWithAvatar = state.user;
+      userWithAvatar.avatar = action.payload.avatar;
+      return {
+        ...state,
+        user: userWithAvatar
+      };
+    }
     case SIGN_OUT:
       return {};
     case SIGN_IN_ERROR:

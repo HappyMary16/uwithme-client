@@ -2,6 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   DOWNLOAD_FILES,
   GET_FILES_BY_USERNAME,
+  getFilesByUsername,
   LOAD_SUBJECTS,
   LOAD_SUBJECTS_BY_UNIVERSITY_ID,
   renderFiles,
@@ -51,6 +52,10 @@ function* loadSubjects(action) {
 
     if (response) {
       yield put(renderSubjects(response));
+      const subjects = response.data;
+      for (let i = 0; i < subjects.length; i++) {
+        yield put(getFilesByUsername(username, subjects[i].id));
+      }
     }
   } catch (e) {
     //TODO process errors
@@ -72,7 +77,8 @@ function* loadSubjectsByUniversityId(action) {
       yield put(renderSubjects(response));
     }
   } catch (e) {
-    alert(e);
+    console.log(1);
+    alert(e + ' loadSubjectsByUniversityId');
   } finally {
     yield put(endFetching());
   }

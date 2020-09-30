@@ -34,7 +34,7 @@ function* loadUniversities() {
       yield put(renderUniversities(universities.data));
     }
   } catch (e) {
-    alert(e);
+    alert(e + ' loadUniversities');
   } finally {
     yield put(endFetching());
   }
@@ -53,7 +53,7 @@ function* loadInstitutes() {
       yield put({ type: RENDER_INSTITUTES, institutes });
     }
   } catch (e) {
-    alert(e);
+    alert(e + ' loadInstitutes()');
   } finally {
     yield put(endFetching());
   }
@@ -72,7 +72,7 @@ function* loadDepartments() {
       yield put({ type: RENDER_DEPARTMENTS, departments });
     }
   } catch (e) {
-    alert(e);
+    alert(e + ' loadDepartments()');
   } finally {
     yield put(endFetching());
   }
@@ -91,7 +91,7 @@ function* loadGroups() {
       yield put({ type: RENDER_GROUPS, groups });
     }
   } catch (e) {
-    alert(e);
+    alert(e + ' loadGroups()');
   } finally {
     yield put(endFetching());
   }

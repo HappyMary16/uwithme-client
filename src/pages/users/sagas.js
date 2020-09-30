@@ -6,6 +6,7 @@ import {
   findStudentsByTeacherId,
   findStudentsWithoutGroupByUniversityId,
   findTeachersByGroupId,
+  GET_AVATAR,
   GET_LESSONS_BY_USER_ID,
   GET_TEACHERS_BY_UNIVERSITY_ID,
   PUT_ADD_STUDENT_TO_GROUP,
@@ -20,10 +21,11 @@ import {
   LOAD_TEACHERS_BY_GROUP_ID,
   LOAD_TEACHERS_BY_UNIVERSITY_ID,
   REMOVE_STUDENT_FROM_GROUP,
+  renderAvatar,
   renderLessonsForUser,
-  renderUser,
   renderUsers
 } from './actions';
+import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 
 export function* teachersWatcher() {
   yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, action => getTeachersByUniversityId(action));
@@ -41,13 +43,13 @@ function* getTeachersByUniversityId(action) {
     yield put(startFetching());
     const { universityId } = action.payload;
 
-    const teachers = yield call(http, {
+    const users = yield call(http, {
       url: GET_TEACHERS_BY_UNIVERSITY_ID + universityId,
       method: 'get'
     });
 
-    if (teachers) {
-      yield put(renderUsers(teachers.data));
+    if (users) {
+      yield call(renderUsersWithAvatars, users.data);
     }
   } catch (e) {
     alert(e);
@@ -61,13 +63,13 @@ function* getTeachersByGroupId(action) {
     yield put(startFetching());
     const { groupId } = action.payload;
 
-    const teachers = yield call(http, {
+    const users = yield call(http, {
       url: findTeachersByGroupId(groupId),
       method: 'get'
     });
 
-    if (teachers) {
-      yield put(renderUsers(teachers.data));
+    if (users) {
+      yield call(renderUsersWithAvatars, users.data);
     }
   } catch (e) {
     alert(e);
@@ -105,13 +107,13 @@ function* getStudentsByTeacherId(action) {
     yield put(startFetching());
     const { teacherId } = action.payload;
 
-    const students = yield call(http, {
+    const users = yield call(http, {
       url: findStudentsByTeacherId(teacherId),
       method: 'get'
     });
 
-    if (students) {
-      yield put(renderUsers(students.data));
+    if (users) {
+      yield call(renderUsersWithAvatars, users.data);
     }
   } catch (e) {
     alert(e);
@@ -126,13 +128,13 @@ function* getStudentsByGroupId(action) {
     const { groupId } = action.payload;
 
     if (groupId) {
-      const students = yield call(http, {
+      const users = yield call(http, {
         url: findStudentsByGroupId(groupId),
         method: 'get'
       });
 
-      if (students) {
-        yield put(renderUsers(students.data));
+      if (users) {
+        yield call(renderUsersWithAvatars, users.data);
       }
     }
   } catch (e) {
@@ -147,13 +149,13 @@ function* removeStudentFromGroup(action) {
     yield put(startFetching());
     const { studentId } = action.payload;
 
-    const student = yield call(http, {
+    const users = yield call(http, {
       url: removeStudentFromGroupByStudentId(studentId),
       method: 'put'
     });
 
-    if (student) {
-      yield put(renderUser(student.data));
+    if (users) {
+      yield call(renderUsersWithAvatars, users.data);
     }
   } catch (e) {
     alert(e);
@@ -168,13 +170,13 @@ function* getStudentsWithoutGroupByUniversityId(action) {
     const { universityId } = action.payload;
 
     if (universityId) {
-      const students = yield call(http, {
+      const users = yield call(http, {
         url: findStudentsWithoutGroupByUniversityId(universityId),
         method: 'get'
       });
 
-      if (students) {
-        yield put(renderUsers(students.data));
+      if (users) {
+        yield call(renderUsersWithAvatars, users.data);
       }
     }
   } catch (e) {
@@ -190,7 +192,7 @@ function* addStudentToGroup(action) {
     const { studentIds, groupId } = action.payload;
 
     if (studentIds && groupId) {
-      const students = yield call(http, {
+      const users = yield call(http, {
         url: PUT_ADD_STUDENT_TO_GROUP,
         method: 'put',
         data: {
@@ -199,13 +201,36 @@ function* addStudentToGroup(action) {
         }
       });
 
-      if (students) {
-        yield put(renderUsers(students.data));
+      if (users) {
+        yield call(renderUsersWithAvatars, users.data);
       }
     }
   } catch (e) {
     alert(e);
   } finally {
     yield put(endFetching());
+  }
+}
+
+function* renderUsersWithAvatars(users) {
+  yield put(renderUsers(users));
+  for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    yield call(addAvatarToUser, user.id);
+  }
+}
+
+function* addAvatarToUser(userId) {
+  const response = yield call(http, {
+    url: GET_AVATAR + userId,
+    method: 'get',
+    loadFile: true
+  });
+
+  if (response) {
+    console.log(response);
+    yield put(renderAvatar(userId, arrayBufferToDataUrl(response.data)));
+  } else {
+    return { userId };
   }
 }

@@ -33,22 +33,24 @@ export default function adminReducers(
           let department = {};
           department.value = obj.id;
           department.label = obj.name;
-          department.instituteId = obj.instituteId;
+          department.instituteId = obj.institute.id;
           return department;
         })
       };
     case RENDER_GROUPS:
+      console.log(action.groups.data);
       return {
         ...state,
         groups: action.groups.data.map(obj => {
           return {
             value: obj.id,
             label: obj.name,
-            departmentId: obj.departmentId,
+            departmentId: obj.department.id,
             course: obj.course,
-            departmentName: obj.departmentName,
-            instituteId: obj.instituteId,
-            instituteName: obj.instituteName,
+            departmentName: obj.department.name,
+            instituteId: obj.department.institute.id,
+            instituteName: obj.department.institute.name,
+            universityId: obj.department.institute.universityId,
             teacherId: obj.teacherId,
             isShowingInRegistration: obj.isShowingInRegistration
           };
@@ -83,7 +85,7 @@ export default function adminReducers(
           {
             value: action.payload.department.id,
             label: action.payload.department.name,
-            instituteId: action.payload.department.instituteId
+            instituteId: action.payload.department.institute.id
           }]
       };
     case RENDER_GROUP:
@@ -93,11 +95,12 @@ export default function adminReducers(
           {
             value: action.payload.group.id,
             label: action.payload.group.name,
-            departmentId: action.payload.group.departmentId,
+            departmentId: action.payload.group.department.id,
             course: action.payload.group.course,
-            departmentName: action.payload.group.departmentName,
-            instituteId: action.payload.group.instituteId,
-            instituteName: action.payload.group.instituteName,
+            departmentName: action.payload.group.department.name,
+            instituteId: action.payload.group.department.institute.id,
+            instituteName: action.payload.group.department.institute.name,
+            universityId: action.payload.group.department.institute.universityId,
             teacherId: action.payload.group.teacherId,
             isShowingInRegistration: action.payload.group.isShowingInRegistration
           }]
