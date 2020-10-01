@@ -19,27 +19,7 @@ import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { loadDepartments, loadGroups, loadInstitutes, loadUniversities } from '../../administration/structure/actions';
 import { PasswordInput } from '../components/PasswordInput';
-
-const useStyles = theme => ({
-  paper: {
-    marginTop: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#483D8B'
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#eeeeee'
-  }
-});
+import { authStyles } from '../../../common/styles/styles';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -104,12 +84,12 @@ class SignUp extends React.Component {
 
 
     return (
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon/>
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             {i18n.t('sign_up')}
           </Typography>
           <form className={classes.form} onSubmit={this.submit}>
@@ -138,7 +118,7 @@ class SignUp extends React.Component {
             {/*/>*/}
             <InputField
               label={i18n.t('email')}
-              autoComplete="email"
+              autoComplete='email'
               onBlur={e => this.setState({ email: e.target.value })}
             />
             <PasswordInput setPasswordMethod={e => this.setState({ password: e })}
@@ -191,16 +171,16 @@ class SignUp extends React.Component {
             )}
             <Button
               fullWidth
-              variant="outlined"
-              color="primary"
+              variant='outlined'
+              color='primary'
               className={classes.submit}
-              type="submit"
+              type='submit'
             >
               {i18n.t('sign_up')}
             </Button>
-            <Grid container justify="flex-end">
+            <Grid container justify='flex-end'>
               <Grid item>
-                <Link href={SIGN_IN} variant="body2">
+                <Link href={SIGN_IN} variant='body2'>
                   {i18n.t('sign_in_button')}
                 </Link>
               </Grid>
@@ -222,4 +202,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(withStyles(useStyles), connect(mapStateToProps))(SignUp);
+export default compose(withStyles(authStyles), connect(mapStateToProps))(SignUp);

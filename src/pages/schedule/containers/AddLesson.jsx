@@ -221,9 +221,9 @@ class AddLesson extends Component {
           <Container>
             <Grid container alignItems={'right'}>
               <Button
-                type="submit"
-                color="primary"
-                variant="outlined"
+                type='submit'
+                color='primary'
+                variant='outlined'
                 className={classes.submit}
               >
                 {i18n.t('upload')}

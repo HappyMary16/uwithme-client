@@ -25,7 +25,7 @@ export const PasswordInput = ({
     <Grid>
       <InputField
         label={i18n.t('password')}
-        type="password"
+        type='password'
         error={error}
         helperText={error ? i18n.t('password_error') : ''}
         onChange={e => {
@@ -36,7 +36,7 @@ export const PasswordInput = ({
       />
       <InputField
         label={i18n.t('confirm_password')}
-        type="password"
+        type='password'
         error={error}
         helperText={error ? i18n.t('password_error') : ''}
         onChange={e => {

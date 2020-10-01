@@ -17,9 +17,9 @@ export const Copyright = () => {
   return (
     <Grid xs={12}>
       <Typography
-        variant="body2"
-        color="textSecondary"
-        align="center"
+        variant='body2'
+        color='textSecondary'
+        align='center'
         className={classes.copyright}
       >
         {'Copyright © Mariia Borodin 2020'}

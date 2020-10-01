@@ -76,7 +76,7 @@ class UniversityStructure extends Component {
                               createDepartment={this.createDepartment}
                               createGroup={this.createGroup}/>
 
-        <List component="nav" className={classes.list}>
+        <List component='nav' className={classes.list}>
           {institutes &&
           institutes.map((institute, i) => (
             <Institute

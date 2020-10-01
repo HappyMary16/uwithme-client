@@ -40,8 +40,8 @@ export const AdminToolBar = () => {
 
   return (
     <AppBar
-      position="static"
-      color="inherit"
+      position='static'
+      color='inherit'
       elevation={0}
       className={classes.appBar}>
       <List className={classes.toolbar}>

@@ -51,11 +51,11 @@ class LectureHalls extends Component {
 
     return (
       <Grid container xs={12} className={classes.root}>
-        <Grid container style={marginTop} justify="flex-end">
+        <Grid container style={marginTop} justify='flex-end'>
           <Button
             style={marginLeft}
-            color="primary"
-            variant="outlined"
+            color='primary'
+            variant='outlined'
             onClick={() => this.setState({ openCreateDialog: true })}>
             {i18n.t('create_lecture_hall')}
           </Button>

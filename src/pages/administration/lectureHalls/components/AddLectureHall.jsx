@@ -18,8 +18,8 @@ export const AddLectureHall = ({ buildings, open, handleClose, handleCreate }) =
   const [placeNumber, setPlaceNumber] = React.useState();
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{i18n.t('create_lecture_hall')}</DialogTitle>
+    <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
+      <DialogTitle id='form-dialog-title'>{i18n.t('create_lecture_hall')}</DialogTitle>
       <DialogContent>
 
         <DialogContentText>
@@ -42,8 +42,8 @@ export const AddLectureHall = ({ buildings, open, handleClose, handleCreate }) =
         </DialogContentText>
         <TextField
           autoFocus
-          margin="dense"
-          id="name"
+          margin='dense'
+          id='name'
           label={i18n.t('lecture_hall_name')}
           fullWidth
           onChange={(e) => setLectureHall(e.target.value)}
@@ -54,8 +54,8 @@ export const AddLectureHall = ({ buildings, open, handleClose, handleCreate }) =
         </DialogContentText>
         <TextField
           autoFocus
-          margin="dense"
-          id="name"
+          margin='dense'
+          id='name'
           label={i18n.t('place_number')}
           fullWidth
           type={number}
@@ -63,13 +63,13 @@ export const AddLectureHall = ({ buildings, open, handleClose, handleCreate }) =
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color='primary'>
           {i18n.t('cancel')}
         </Button>
         <Button onClick={() => {
           handleCreate(building.label, building.value, lectureHallName, placeNumber);
           handleClose();
-        }} color="primary">
+        }} color='primary'>
           {i18n.t('create')}
         </Button>
       </DialogActions>

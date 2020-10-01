@@ -16,8 +16,8 @@ export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) =
   const [departmentName, setDepartmentName] = React.useState('');
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{i18n.t('create_department')}</DialogTitle>
+    <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
+      <DialogTitle id='form-dialog-title'>{i18n.t('create_department')}</DialogTitle>
       <DialogContent>
 
         <DialogContentText>
@@ -40,21 +40,21 @@ export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) =
         </DialogContentText>
         <TextField
           autoFocus
-          margin="dense"
-          id="name"
+          margin='dense'
+          id='name'
           label={i18n.t('department_name')}
           fullWidth
           onChange={(e) => setDepartmentName(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color='primary'>
           {i18n.t('cancel')}
         </Button>
         <Button onClick={() => {
           handleCreate(institute.label, institute.value, departmentName);
           handleClose();
-        }} color="primary">
+        }} color='primary'>
           {i18n.t('create')}
         </Button>
       </DialogActions>

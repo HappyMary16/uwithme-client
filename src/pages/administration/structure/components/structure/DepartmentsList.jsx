@@ -19,8 +19,8 @@ export default class DepartmentsList extends Component {
     const { departments, groups, open, classes } = this.props;
 
     return (
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+      <Collapse in={open} timeout='auto' unmountOnExit>
+        <List component='div' disablePadding>
           {departments && departments.map((department, i) => (
             <Department
               key={i}

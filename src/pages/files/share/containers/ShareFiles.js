@@ -93,8 +93,8 @@ class ShareFiles extends React.Component {
         <Container>
           <Grid container xs={12} style={marginTop}>
             <Grid item xs={6}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
+              <FormControl component='fieldset'>
+                <FormLabel component='legend'>{i18n.t('lecture')}</FormLabel>
                 <FilesToChoose
                   files={lectures.filter(
                     lecture => lecture.subjectId === subjectId
@@ -105,8 +105,8 @@ class ShareFiles extends React.Component {
             </Grid>
 
             <Grid item xs={6}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">{i18n.t('task')}</FormLabel>
+              <FormControl component='fieldset'>
+                <FormLabel component='legend'>{i18n.t('task')}</FormLabel>
                 <FilesToChoose
                   files={tasks && tasks.filter(task => task.subjectId === subjectId)}
                   onChange={this.handleChange}
@@ -129,9 +129,9 @@ class ShareFiles extends React.Component {
         <Container>
           <Grid container alignItems={'right'}>
             <Button
-              type="submit"
-              color="primary"
-              variant="outlined"
+              type='submit'
+              color='primary'
+              variant='outlined'
               style={submit}
               onClick={this.submit}
             >

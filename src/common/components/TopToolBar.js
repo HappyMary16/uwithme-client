@@ -30,20 +30,20 @@ export const TopToolBar = ({ user, signOutFunc }) => {
   const classes = useStyles();
 
   return (
-    <AppBar position="relative" color="default" className={classes.appBar}>
+    <AppBar position='relative' color='default' className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         {/*<IconButton*/}
-        {/*  color="inherit"*/}
-        {/*  aria-label="open drawer"*/}
-        {/*  edge="start"*/}
+        {/*  color='inherit'*/}
+        {/*  aria-label='open drawer'*/}
+        {/*  edge='start'*/}
         {/*  onClick={handleDrawerToggle}*/}
         {/*  className={classes.menuButton}*/}
         {/*>*/}
         {/*  <MenuIcon />*/}
         {/*</IconButton>*/}
         <Typography
-          variant="h6"
-          color="inherit"
+          variant='h6'
+          color='inherit'
           noWrap
           className={classes.toolbarTitle}
         >
@@ -52,8 +52,8 @@ export const TopToolBar = ({ user, signOutFunc }) => {
         {!user && (
           <Button
             href={ADD_UNIVERSITY_PATH}
-            color="primary"
-            variant="outlined"
+            color='primary'
+            variant='outlined'
             className={classes.link}
           >
             {i18n.t('add_university')}
@@ -62,8 +62,8 @@ export const TopToolBar = ({ user, signOutFunc }) => {
         {!user && (
           <Button
             href={SIGN_IN}
-            color="primary"
-            variant="outlined"
+            color='primary'
+            variant='outlined'
             className={classes.link}
           >
             {i18n.t('sign_in')}
@@ -71,9 +71,9 @@ export const TopToolBar = ({ user, signOutFunc }) => {
         )}
         {user && (
           <Button
-            href="/university"
-            color="primary"
-            variant="outlined"
+            href='/university'
+            color='primary'
+            variant='outlined'
             className={classes.link}
             onClick={signOutFunc()}
           >

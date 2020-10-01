@@ -13,29 +13,29 @@ export const AddInstitute = ({ open, handleClose, handleCreate }) => {
   const [instituteName, setInstituteName] = React.useState('');
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{i18n.t('create_institute')}</DialogTitle>
+    <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
+      <DialogTitle id='form-dialog-title'>{i18n.t('create_institute')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           {i18n.t('input_institute_name')}
         </DialogContentText>
         <TextField
           autoFocus
-          margin="dense"
-          id="name"
+          margin='dense'
+          id='name'
           label={i18n.t('institute_name')}
           fullWidth
           onChange={(e) => setInstituteName(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color='primary'>
           {i18n.t('cancel')}
         </Button>
         <Button onClick={() => {
           handleCreate(instituteName);
           handleClose();
-        }} color="primary">
+        }} color='primary'>
           {i18n.t('create')}
         </Button>
       </DialogActions>

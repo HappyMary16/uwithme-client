@@ -123,9 +123,9 @@ class AddFile extends React.Component {
           <Grid container alignItems={'flex-end'}>
             <Button
               style={submit}
-              type="submit"
-              color="primary"
-              variant="outlined"
+              type='submit'
+              color='primary'
+              variant='outlined'
               onClick={this.submit}
             >
               {i18n.t('upload')}

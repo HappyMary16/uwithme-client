@@ -47,8 +47,8 @@ export const ScheduleTable = ({ lessons, user, isMine }) => {
             className={classes.switchSpacing}>
         {!isMine &&
         <Button onClick={() => history.push(USER_HOME_PAGE(user.id))}
-                color="primary"
-                variant="text"
+                color='primary'
+                variant='text'
                 size='medium'>
           {getName(user)}
         </Button>}
@@ -67,19 +67,19 @@ export const ScheduleTable = ({ lessons, user, isMine }) => {
             checkedIcon={<div style={switchWeek}>
               1
             </div>}
-            className="react-switch"
-            id="icon-switch"
+            className='react-switch'
+            id='icon-switch'
           />
         </Grid>
       </Grid>
 
       <TableContainer component={Paper}>
-        <Table aria-label="simple table">
+        <Table aria-label='simple table'>
           <TableHead>
             <TableRow>
               <TableCell> </TableCell>
               {WEEK_DAYS.map(weekDay =>
-                <TableCell key={weekDay.value} align="center" className={classes.cell}>
+                <TableCell key={weekDay.value} align='center' className={classes.cell}>
                   {weekDay.label}
                 </TableCell>
               )}
@@ -89,14 +89,14 @@ export const ScheduleTable = ({ lessons, user, isMine }) => {
             {
               LESSONS_TIME.map(lessonTime =>
                 <TableRow key={lessonTime.value}>
-                  <TableCell component="th" scope="row">
+                  <TableCell component='th' scope='row'>
                     {lessonTime.label}
                   </TableCell>
                   {WEEK_DAYS.map(weekDay => {
                       let lesson = getLesson(lessons, weekDay.value, lessonTime.value, weekNumber ? 1 : 2);
-                      return (<TableCell key={weekDay.value} component="th" scope="row" className={classes.cell}>
-                        {lesson && <Lesson lesson={lesson} user={user}/>}
-                      </TableCell>);
+                    return (<TableCell key={weekDay.value} component='th' scope='row' className={classes.cell}>
+                      {lesson && <Lesson lesson={lesson} user={user}/>}
+                    </TableCell>);
                     }
                   )}
                 </TableRow>

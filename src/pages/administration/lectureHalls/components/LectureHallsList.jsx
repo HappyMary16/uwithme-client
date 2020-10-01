@@ -9,8 +9,8 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
 export const LectureHallsList = ({ lectureHalls, open, classes }) => {
   return (
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding className={classes.nested}>
+    <Collapse in={open} timeout='auto' unmountOnExit>
+      <List component='div' disablePadding className={classes.nested}>
         {lectureHalls && lectureHalls.map((lectureHall, i) => (
           <ListItem key={i}>
             <ListItemIcon>

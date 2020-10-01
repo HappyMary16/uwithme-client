@@ -13,10 +13,10 @@ export const Message = ({ open = false, message, handleClose }) => {
             onClose={handleClose}
             fullWidth={true}
             maxWidth='sm'
-            aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{message}</DialogTitle>
+            aria-labelledby='form-dialog-title'>
+      <DialogTitle id='form-dialog-title'>{message}</DialogTitle>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color='primary'>
           {i18n.t('close')}
         </Button>
       </DialogActions>

@@ -29,7 +29,7 @@ const AddStudentToGroup = ({ open, students, handleClose, handleAdd, classes }) 
       scroll='paper'
       open={open}
       onClose={handleClose}>
-      <DialogTitle id="form-dialog-title">{i18n.t('add_student_to_group')}</DialogTitle>
+      <DialogTitle id='form-dialog-title'>{i18n.t('add_student_to_group')}</DialogTitle>
 
       <DialogContent>
         <DialogContentText>
@@ -50,13 +50,13 @@ const AddStudentToGroup = ({ open, students, handleClose, handleAdd, classes }) 
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color='primary'>
           {i18n.t('cancel')}
         </Button>
         <Button onClick={() => {
           handleAdd(selectedStudents.map(s => s.value));
           handleClose();
-        }} color="primary">
+        }} color='primary'>
           {i18n.t('add')}
         </Button>
       </DialogActions>

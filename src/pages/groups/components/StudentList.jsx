@@ -34,8 +34,8 @@ export const StudentsList = ({ students, addStudent, removeStudent }) => {
                 marginRight: '10px'
               }}
               onClick={addStudent}
-              color="primary"
-              variant="outlined"
+              color='primary'
+              variant='outlined'
               className={classes.link}
               size='small'>
               {i18n.t('add_student')}
