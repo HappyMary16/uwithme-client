@@ -117,7 +117,7 @@ function* downloadMyAvatar(userId) {
     loadFile: true
   });
 
-  if (response) {
+  if (response && response.status !== 204) {
     yield put(renderMyAvatar(arrayBufferToDataUrl(response.data)));
   } else {
     return { userId };
