@@ -12,18 +12,17 @@ import http from '../../../services/http';
 import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';
 
 export function* lectureHallWatcher() {
-  yield takeEvery(LOAD_LECTURE_HALLS, action => loadLectureHalls(action));
-  yield takeEvery(LOAD_BUILDINGS, action => loadBuildings(action));
+  yield takeEvery(LOAD_LECTURE_HALLS, () => loadLectureHalls());
+  yield takeEvery(LOAD_BUILDINGS, () => loadBuildings());
   yield takeEvery(CREATE_LECTURE_HALL, action => createLectureHall(action));
 }
 
-function* loadLectureHalls(action) {
+function* loadLectureHalls() {
   try {
     yield put(startFetching());
-    const { universityId } = action.payload;
 
     const lectureHalls = yield call(http, {
-      url: LECTURE_HALLS + universityId,
+      url: LECTURE_HALLS,
       method: 'get'
     });
 
@@ -37,13 +36,12 @@ function* loadLectureHalls(action) {
   }
 }
 
-function* loadBuildings(action) {
+function* loadBuildings() {
   try {
     yield put(startFetching());
-    const { universityId } = action.payload;
 
     const buildings = yield call(http, {
-      url: GET_BUILDINGS + universityId,
+      url: GET_BUILDINGS,
       method: 'get'
     });
 

@@ -90,7 +90,7 @@ class AddFile extends React.Component {
           <CreatableSelect
             theme={selectorColors}
             placeholder={i18n.t('subject')}
-            options={subjects.map(subject => {
+            options={subjects && subjects.map(subject => {
               return {
                 label: subject.name,
                 value: subject.id

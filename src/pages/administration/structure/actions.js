@@ -110,14 +110,12 @@ export const loadUniversities = () => ({
   type: LOAD_UNIVERSITIES
 });
 
-export const loadInstitutesByUniversityId = (universityId) => ({
-  type: LOAD_INSTITUTES_BY_UNIVERSITY_ID,
-  payload: universityId
+export const loadInstitutesByUniversityId = () => ({
+  type: LOAD_INSTITUTES_BY_UNIVERSITY_ID
 });
 
-export const loadDepartmentsByUniversityId = (universityId) => ({
-  type: LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
-  payload: universityId
+export const loadDepartmentsByUniversityId = () => ({
+  type: LOAD_DEPARTMENTS_BY_UNIVERSITY_ID
 });
 
 export const loadGroupsByUniversityId = (universityId) => ({

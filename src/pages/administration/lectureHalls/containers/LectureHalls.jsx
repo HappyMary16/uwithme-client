@@ -31,8 +31,8 @@ class LectureHalls extends Component {
   componentDidMount() {
     const { dispatch, universityId } = this.props;
     if (universityId) {
-      dispatch(loadBuildings(universityId));
-      dispatch(loadLectureHalls(universityId));
+      dispatch(loadBuildings());
+      dispatch(loadLectureHalls());
     }
   }
 
@@ -41,7 +41,7 @@ class LectureHalls extends Component {
 
     dispatch(createLectureHall(universityId, buildingName, lectureHallName, placeNumber));
     if (buildingName === buildingId) {
-      dispatch(loadBuildings(universityId));
+      dispatch(loadBuildings());
     }
   }
 

@@ -6,7 +6,7 @@ import { INFO_INSTITUTES, INSTITUTES } from '../../../../constants/serverApi';
 
 export function* instituteWatcher() {
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
-  yield takeEvery(LOAD_INSTITUTES_BY_UNIVERSITY_ID, action => loadInstitutesByUniversityId(action));
+  yield takeEvery(LOAD_INSTITUTES_BY_UNIVERSITY_ID, () => loadInstitutesByUniversityId());
 }
 
 function* createInstitute(action) {
@@ -36,13 +36,12 @@ function* createInstitute(action) {
   }
 }
 
-function* loadInstitutesByUniversityId(action) {
+function* loadInstitutesByUniversityId() {
   try {
     yield put(startFetching());
-    const { payload } = action;
 
     const institutes = yield call(http, {
-      url: INFO_INSTITUTES + payload,
+      url: INFO_INSTITUTES,
       method: 'get'
     });
 

@@ -40,8 +40,8 @@ class UniversityStructure extends Component {
   componentDidMount() {
     const { dispatch, universityId } = this.props;
     if (universityId) {
-      dispatch(loadInstitutesByUniversityId(universityId));
-      dispatch(loadDepartmentsByUniversityId(universityId));
+      dispatch(loadInstitutesByUniversityId());
+      dispatch(loadDepartmentsByUniversityId());
       dispatch(loadGroupsByUniversityId(universityId));
     }
   }

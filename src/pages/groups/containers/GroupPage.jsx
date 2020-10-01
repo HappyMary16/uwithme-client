@@ -9,7 +9,7 @@ import { loadGroupById } from '../../administration/structure/actions';
 import {
   addStudentToGroup,
   loadStudentsByGroupId,
-  loadStudentsWithoutGroupByUniversityId,
+  loadStudentsWithoutGroup,
   removeStudentFromGroup
 } from '../../users/actions';
 import AddStudentToGroup from '../components/AddStudentToGroup';
@@ -54,7 +54,7 @@ class GroupPage extends Component {
   loadStudentsAndOpenAddDialog() {
     const { dispatch, universityId } = this.props;
     if (universityId) {
-      dispatch(loadStudentsWithoutGroupByUniversityId(universityId));
+      dispatch(loadStudentsWithoutGroup());
     }
     this.setState({ openAddStudentDialog: true });
   }

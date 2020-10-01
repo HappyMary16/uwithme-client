@@ -6,7 +6,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import i18n from '../../locales/i18n';
 
-export const Message = ({ open, message, handleClose }) => {
+export const Message = ({ open = false, message, handleClose }) => {
 
   return (
     <Dialog open={open}

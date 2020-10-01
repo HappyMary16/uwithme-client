@@ -17,7 +17,7 @@ import {
   GET_STUDENTS_FRIENDS,
   GET_TEACHERS_FRIENDS,
   LOAD_STUDENTS_BY_GROUP_ID,
-  LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID,
+  LOAD_STUDENTS_WITHOUT_GROUP,
   LOAD_TEACHERS_BY_UNIVERSITY_ID,
   REMOVE_STUDENT_FROM_GROUP,
   renderAvatar,
@@ -27,23 +27,22 @@ import {
 import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 
 export function* teachersWatcher() {
-  yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, action => getTeachersByUniversityId(action));
+  yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, () => getTeachersByUniversityId());
   yield takeEvery(GET_STUDENTS_FRIENDS, () => getStudentsFriends());
   yield takeEvery(FIND_LESSONS_FOR_USER, action => findLessonsByUsername(action));
   yield takeEvery(GET_TEACHERS_FRIENDS, () => getTeachersFriends());
   yield takeEvery(LOAD_STUDENTS_BY_GROUP_ID, action => getStudentsByGroupId(action));
   yield takeEvery(REMOVE_STUDENT_FROM_GROUP, action => removeStudentFromGroup(action));
-  yield takeEvery(LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID, action => getStudentsWithoutGroupByUniversityId(action));
+  yield takeEvery(LOAD_STUDENTS_WITHOUT_GROUP, () => getStudentsWithoutGroupByUniversityId());
   yield takeEvery(ADD_STUDENT_TO_GROUP, action => addStudentToGroup(action));
 }
 
-function* getTeachersByUniversityId(action) {
+function* getTeachersByUniversityId() {
   try {
     yield put(startFetching());
-    const { universityId } = action.payload;
 
     const users = yield call(http, {
-      url: TEACHERS + universityId,
+      url: TEACHERS,
       method: 'get'
     });
 
@@ -161,20 +160,17 @@ function* removeStudentFromGroup(action) {
   }
 }
 
-function* getStudentsWithoutGroupByUniversityId(action) {
+function* getStudentsWithoutGroupByUniversityId() {
   try {
     yield put(startFetching());
-    const { universityId } = action.payload;
 
-    if (universityId) {
-      const users = yield call(http, {
-        url: STUDENTS_WITHOUT_GROUP + universityId,
-        method: 'get'
-      });
+    const users = yield call(http, {
+      url: STUDENTS_WITHOUT_GROUP,
+      method: 'get'
+    });
 
-      if (users) {
-        yield call(renderUsersWithAvatars, users.data);
-      }
+    if (users) {
+      yield call(renderUsersWithAvatars, users.data);
     }
   } catch (e) {
     alert(e);
