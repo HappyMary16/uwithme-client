@@ -59,12 +59,12 @@ class LoadPhoto extends Component {
       <Dialog open={open}
               onClose={this.handleClose}
               maxWidth='sm'
-              aria-labelledby="form-dialog-title">
+              aria-labelledby='form-dialog-title'>
 
         <div className={'paddingLeft'}>
           <input
             className={'paddingOne'}
-            type="file"
+            type='file'
             multiple
             onChange={this.onFileAdded}
           />
@@ -83,10 +83,10 @@ class LoadPhoto extends Component {
         </div>
 
         <DialogActions>
-          <Button onClick={this.handleSave} color="primary">
+          <Button onClick={this.handleSave} color='primary'>
             {i18n.t('save')}
           </Button>
-          <Button onClick={this.handleClose} color="primary">
+          <Button onClick={this.handleClose} color='primary'>
             {i18n.t('close')}
           </Button>
         </DialogActions>

@@ -20,7 +20,7 @@ class FilesToChoose extends React.Component {
             key={i}
             control={
               <Checkbox
-                color="primary"
+                color='primary'
                 onChange={e => onChange(e, file.id)}
                 value={file.id}
               />

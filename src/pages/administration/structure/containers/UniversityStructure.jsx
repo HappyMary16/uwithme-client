@@ -40,8 +40,8 @@ class UniversityStructure extends Component {
   componentDidMount() {
     const { dispatch, universityId } = this.props;
     if (universityId) {
-      dispatch(loadInstitutesByUniversityId(universityId));
-      dispatch(loadDepartmentsByUniversityId(universityId));
+      dispatch(loadInstitutesByUniversityId());
+      dispatch(loadDepartmentsByUniversityId());
       dispatch(loadGroupsByUniversityId(universityId));
     }
   }
@@ -76,7 +76,7 @@ class UniversityStructure extends Component {
                               createDepartment={this.createDepartment}
                               createGroup={this.createGroup}/>
 
-        <List component="nav" className={classes.list}>
+        <List component='nav' className={classes.list}>
           {institutes &&
           institutes.map((institute, i) => (
             <Institute

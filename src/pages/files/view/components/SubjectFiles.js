@@ -41,24 +41,24 @@ export const SubjectFiles = ({ name, files }) => {
     <List>
       <ListItem button onClick={subjectHandleClick}>
         <ListItemIcon>
-          <FolderIcon />
+          <FolderIcon/>
         </ListItemIcon>
-        <ListItemText primary={name} />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        <ListItemText primary={name}/>
+        {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItem>
 
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+      <Collapse in={open} timeout='auto' unmountOnExit>
+        <List component='div' disablePadding>
           <ListItem
             button
             onClick={lectureHandleClick}
             className={classes.nested}
           >
             <ListItemIcon>
-              <FolderIcon />
+              <FolderIcon/>
             </ListItemIcon>
-            <ListItemText primary={i18n.t('lecture')} />
-            {lectureOpen ? <ExpandLess /> : <ExpandMore />}
+            <ListItemText primary={i18n.t('lecture')}/>
+            {lectureOpen ? <ExpandLess/> : <ExpandMore/>}
           </ListItem>
 
           <ListFiles open={lectureOpen} files={getLectures(files)} />

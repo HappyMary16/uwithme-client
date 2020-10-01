@@ -3,7 +3,7 @@ export const GET_STUDENTS_FRIENDS = 'GET_STUDENTS_FRIENDS';
 
 export const GET_TEACHERS_FRIENDS = 'GET_TEACHERS_FRIENDS';
 export const LOAD_STUDENTS_BY_GROUP_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
-export const LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
+export const LOAD_STUDENTS_WITHOUT_GROUP = 'LOAD_STUDENTS_WITHOUT_GROUP';
 
 export const RENDER_USERS = 'RENDER_USERS';
 export const RENDER_USER = 'RENDER_USER';
@@ -20,12 +20,9 @@ export const UPLOAD_AVATAR = 'UPLOAD_AVATAR';
 export const RENDER_AVATAR = 'RENDER_AVATAR';
 export const RENDER_MY_AVATAR = 'RENDER_MY_AVATAR';
 
-export function loadTeachersByUniversityId(universityId) {
+export function loadTeachersByUniversityId() {
   return {
-    type: LOAD_TEACHERS_BY_UNIVERSITY_ID,
-    payload: {
-      universityId
-    }
+    type: LOAD_TEACHERS_BY_UNIVERSITY_ID
   };
 }
 
@@ -73,12 +70,9 @@ export function loadStudentsByGroupId(groupId) {
   };
 }
 
-export function loadStudentsWithoutGroupByUniversityId(universityId) {
+export function loadStudentsWithoutGroup() {
   return {
-    type: LOAD_STUDENTS_WITHOUT_GROUP_BY_UNIVERSITY_ID,
-    payload: {
-      universityId
-    }
+    type: LOAD_STUDENTS_WITHOUT_GROUP
   };
 }
 

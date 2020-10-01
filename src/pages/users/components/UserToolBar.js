@@ -64,8 +64,8 @@ export const UserToolBar = ({ user }) => {
 
   return (
     <AppBar
-      position="static"
-      color="inherit"
+      position='static'
+      color='inherit'
       elevation={0}
       className={classes.appBar}
     >

@@ -31,8 +31,8 @@ class LectureHalls extends Component {
   componentDidMount() {
     const { dispatch, universityId } = this.props;
     if (universityId) {
-      dispatch(loadBuildings(universityId));
-      dispatch(loadLectureHalls(universityId));
+      dispatch(loadBuildings());
+      dispatch(loadLectureHalls());
     }
   }
 
@@ -41,7 +41,7 @@ class LectureHalls extends Component {
 
     dispatch(createLectureHall(universityId, buildingName, lectureHallName, placeNumber));
     if (buildingName === buildingId) {
-      dispatch(loadBuildings(universityId));
+      dispatch(loadBuildings());
     }
   }
 
@@ -51,11 +51,11 @@ class LectureHalls extends Component {
 
     return (
       <Grid container xs={12} className={classes.root}>
-        <Grid container style={marginTop} justify="flex-end">
+        <Grid container style={marginTop} justify='flex-end'>
           <Button
             style={marginLeft}
-            color="primary"
-            variant="outlined"
+            color='primary'
+            variant='outlined'
             onClick={() => this.setState({ openCreateDialog: true })}>
             {i18n.t('create_lecture_hall')}
           </Button>

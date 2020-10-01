@@ -40,12 +40,12 @@ class PageWithFiles extends React.Component {
 
     return (
       <Grid container xs={12} className={classes.root}>
-        <Grid container className={classes.buttons} justify="flex-end">
+        <Grid container className={classes.buttons} justify='flex-end'>
           {userRole === TEACHER && (
             <Button
               href={ADD_FILE}
-              color="primary"
-              variant="outlined"
+              color='primary'
+              variant='outlined'
               className={classes.link}
             >
               {i18n.t('add_files_page')}
@@ -54,25 +54,25 @@ class PageWithFiles extends React.Component {
           {userRole === TEACHER && (
             <Button
               href={SHARE_FILES}
-              color="primary"
-              variant="outlined"
+              color='primary'
+              variant='outlined'
               className={classes.link}
             >
               {i18n.t('share_files_page')}
             </Button>
           )}
         </Grid>
-        <List component="nav" className={classes.list}>
+        <List component='nav' className={classes.list}>
           {subjects &&
-            subjects.map((subject, i) => (
-              <SubjectFiles
-                key={i}
-                name={subject.name}
-                files={
-                  files && files.filter(file => file.subjectId === subject.id)
-                }
-              />
-            ))}
+          subjects.map((subject, i) => (
+            <SubjectFiles
+              key={i}
+              name={subject.name}
+              files={
+                files && files.filter(file => file.subjectId === subject.id)
+              }
+            />
+          ))}
         </List>
       </Grid>
     );

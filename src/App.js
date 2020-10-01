@@ -85,13 +85,13 @@ class App extends Component {
     return (
       <Container style={{ height: '100vh' }}>
         <Backdrop className={classes.backdrop} open={isFetching !== 0}>
-          <CircularProgress color="inherit"/>
+          <CircularProgress color='inherit'/>
         </Backdrop>
 
         <Grid
           container
           xs={12}
-          alignContent="space-between"
+          alignContent='space-between'
           style={{ height: '100%' }}
         >
           <Grid container xs={12} alignContent={'flex-start'}>

@@ -19,18 +19,12 @@ export const renderBuildings = (buildings) => ({
   }
 });
 
-export const loadLectureHalls = (universityId) => ({
-  type: LOAD_LECTURE_HALLS,
-  payload: {
-    universityId
-  }
+export const loadLectureHalls = () => ({
+  type: LOAD_LECTURE_HALLS
 });
 
-export const loadBuildings = (universityId) => ({
-  type: LOAD_BUILDINGS,
-  payload: {
-    universityId
-  }
+export const loadBuildings = () => ({
+  type: LOAD_BUILDINGS
 });
 
 export const createLectureHall = (universityId,

@@ -27,13 +27,13 @@ export const User = ({ user, lessons, isMine, onSaveAvatar }) => {
       <Container className={'paper'}>
         <Grid container xs={12} direction='row' justify='space-between'>
           <Grid>
-            <Typography variant="h4">
+            <Typography variant='h4'>
               {i18n.t('schedule')}
             </Typography>
             {!isMine &&
             <Button onClick={() => history.push(USER_SCHEDULE(user.id))}
-                    color="primary"
-                    variant="text"
+                    color='primary'
+                    variant='text'
                     size='small'>
               {i18n.t('open')}
             </Button>}
@@ -53,8 +53,8 @@ export const User = ({ user, lessons, isMine, onSaveAvatar }) => {
               checkedIcon={<div style={switchWeek}>
                 1
               </div>}
-              className="react-switch"
-              id="icon-switch"
+              className='react-switch'
+              id='icon-switch'
             />
           </Grid>
         </Grid>

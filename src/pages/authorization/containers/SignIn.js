@@ -17,27 +17,7 @@ import i18n from '../../../locales/i18n';
 import { InputField } from '../../../common/components/InputField';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-const useStyles = theme => ({
-  paper: {
-    marginTop: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#483D8B'
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#eeeeee'
-  }
-});
+import { authStyles } from '../../../common/styles/styles';
 
 class SignIn extends React.Component {
 
@@ -69,13 +49,13 @@ class SignIn extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline/>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon/>
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             {i18n.t('sign_in')}
           </Typography>
           <form className={classes.form} onSubmit={e => this.submit(e)}>
@@ -86,19 +66,19 @@ class SignIn extends React.Component {
             />
             <InputField
               label={i18n.t('password')}
-              type="password"
-              autoComplete="current-password"
+              type='password'
+              autoComplete='current-password'
               onChange={e => this.setState({ password: e.target.value })}
             />
             {/*<FormControlLabel*/}
-            {/*  control={<Checkbox value="remember" color="primary" />}*/}
-            {/*  label="Remember me"*/}
+            {/*  control={<Checkbox value='remember' color='primary' />}*/}
+            {/*  label='Remember me'*/}
             {/*/>*/}
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="outlined"
-              color="primary"
+              variant='outlined'
+              color='primary'
               className={classes.submit}
             >
               {i18n.t('sign_in')}
@@ -106,12 +86,12 @@ class SignIn extends React.Component {
           </form>
           <Grid container>
             {/*<Grid item xs>*/}
-            {/*  <Link href="#" variant="body2">*/}
+            {/*  <Link href='#' variant='body2'>*/}
             {/*    Forgot password?*/}
             {/*  </Link>*/}
             {/*</Grid>*/}
             <Grid item>
-              <Link href={SIGN_UP} variant="body2">
+              <Link href={SIGN_UP} variant='body2'>
                 {i18n.t('sign_up_button')}
               </Link>
             </Grid>
@@ -122,4 +102,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default compose(withStyles(useStyles), connect())(SignIn);
+export default compose(withStyles(authStyles), connect())(SignIn);

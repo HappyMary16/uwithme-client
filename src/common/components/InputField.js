@@ -17,9 +17,9 @@ export const InputField = ({
 
   return (
     <TextField
-      variant="outlined"
-      margin="dense"
-      size="small"
+      variant='outlined'
+      margin='dense'
+      size='small'
       required={required}
       fullWidth
       id={id}

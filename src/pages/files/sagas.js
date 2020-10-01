@@ -4,7 +4,7 @@ import {
   GET_ALL_FILES,
   getFiles,
   LOAD_SUBJECTS,
-  LOAD_SUBJECTS_BY_UNIVERSITY_ID,
+  LOAD_SUBJECTS_BY_WITHOUT_FILES,
   renderFiles,
   renderSubjects
 } from './actions';
@@ -14,8 +14,8 @@ import { endFetching, startFetching } from '../../common/actions';
 
 export function* fileOperationWatcher() {
   yield takeEvery(GET_ALL_FILES, () => downloadFiles());
-  yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
-  yield takeEvery(LOAD_SUBJECTS_BY_UNIVERSITY_ID, action => loadSubjectsByUniversityId(action));
+  yield takeEvery(LOAD_SUBJECTS, () => loadSubjects());
+  yield takeEvery(LOAD_SUBJECTS_BY_WITHOUT_FILES, action => loadSubjectsWithoutFiles(action));
   yield takeEvery(DOWNLOAD_FILES, action => downloadFile(action));
 }
 
@@ -39,10 +39,14 @@ function* downloadFiles() {
   }
 }
 
-function* loadSubjects(action) {
+function* loadSubjects() {
+  yield call(loadSubjectsWithoutFiles);
+  yield put(getFiles());
+}
+
+function* loadSubjectsWithoutFiles() {
   try {
     yield put(startFetching());
-    const { username } = action;
     const response = yield call(http, {
       url: SUBJECTS,
       method: 'get'
@@ -50,33 +54,9 @@ function* loadSubjects(action) {
 
     if (response) {
       yield put(renderSubjects(response));
-      const subjects = response.data;
-      for (let i = 0; i < subjects.length; i++) {
-        yield put(getFiles(username, subjects[i].id));
-      }
     }
   } catch (e) {
-    //TODO process errors
-  } finally {
-    yield put(endFetching());
-  }
-}
-
-function* loadSubjectsByUniversityId(action) {
-  try {
-    yield put(startFetching());
-    const { universityId } = action.payload;
-    const response = yield call(http, {
-      url: SUBJECTS + universityId,
-      method: 'get'
-    });
-
-    if (response) {
-      yield put(renderSubjects(response));
-    }
-  } catch (e) {
-    console.log(1);
-    alert(e + ' loadSubjectsByUniversityId');
+    alert(e + ' loadSubjectsWithoutFiles');
   } finally {
     yield put(endFetching());
   }

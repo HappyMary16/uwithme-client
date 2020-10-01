@@ -15,11 +15,11 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
   const [openGroupDialog, setOpenGroupDialog] = React.useState(false);
 
   return (
-    <Grid container xs={12} style={marginTop} spacing={1} justify="flex-end">
+    <Grid container xs={12} style={marginTop} spacing={1} justify='flex-end'>
       <Button
         style={marginLeft}
-        color="primary"
-        variant="outlined"
+        color='primary'
+        variant='outlined'
         onClick={() => setOpenInstituteDialog(true)}>
         {i18n.t('create_institute')}
       </Button>
@@ -29,8 +29,8 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
 
       <Button
         style={marginLeft}
-        color="primary"
-        variant="outlined"
+        color='primary'
+        variant='outlined'
         onClick={() => setOpenDepartmentDialog(true)}>
         {i18n.t('create_department')}
       </Button>
@@ -41,8 +41,8 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
 
       <Button
         style={marginLeft}
-        color="primary"
-        variant="outlined"
+        color='primary'
+        variant='outlined'
         onClick={() => setOpenGroupDialog(true)}>
         {i18n.t('create_group')}
       </Button>

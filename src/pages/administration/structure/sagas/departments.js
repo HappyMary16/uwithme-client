@@ -8,11 +8,11 @@ import {
 } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
-import { DEPARTMENTS, INFO_DEPARTMENTS } from '../../../../constants/serverApi';
+import { DEPARTMENTS } from '../../../../constants/serverApi';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
-  yield takeEvery(LOAD_DEPARTMENTS_BY_UNIVERSITY_ID, action => loadDepartmentsByUniversityId(action));
+  yield takeEvery(LOAD_DEPARTMENTS_BY_UNIVERSITY_ID, () => loadDepartmentsByUniversityId());
 }
 
 function* createDepartment(action) {
@@ -33,7 +33,7 @@ function* createDepartment(action) {
 
     if (response && response.status === 200) {
       yield put(departmentCreated(response.data));
-      yield put(loadInstitutesByUniversityId(universityId));
+      yield put(loadInstitutesByUniversityId());
     } else {
       alert(response);
     }
@@ -44,13 +44,12 @@ function* createDepartment(action) {
   }
 }
 
-function* loadDepartmentsByUniversityId(action) {
+function* loadDepartmentsByUniversityId() {
   try {
     yield put(startFetching());
-    const { payload } = action;
 
     const departments = yield call(http, {
-      url: INFO_DEPARTMENTS + payload,
+      url: DEPARTMENTS,
       method: 'get'
     });
 

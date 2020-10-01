@@ -38,8 +38,8 @@ function* createGroup(action) {
     });
 
     if (response && response.status === 200) {
-      yield put(loadInstitutesByUniversityId(universityId));
-      yield put(loadDepartmentsByUniversityId(universityId));
+      yield put(loadInstitutesByUniversityId());
+      yield put(loadDepartmentsByUniversityId());
       yield put(renderGroup(response.data));
     } else {
       alert(response);

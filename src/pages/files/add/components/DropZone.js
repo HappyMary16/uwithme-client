@@ -58,7 +58,7 @@ export const DropZone = ({ disabled, onFilesAddedFunk }) => {
       <input
         ref={fileInputRef}
         className={'fileInput'}
-        type="file"
+        type='file'
         multiple
         onChange={onFilesAdded}
       />

@@ -7,13 +7,13 @@ export const Lesson = ({ lesson, user }) => {
 
   return (
     <ThemeProvider>
-      <Typography align={'center'} color="textPrimary">
+      <Typography align={'center'} color='textPrimary'>
         {lesson.subjectName}
       </Typography>
-      <Typography align={'center'} variant={'h6'} color="textPrimary">
+      <Typography align={'center'} variant={'h6'} color='textPrimary'>
         {lesson.lectureHall}
       </Typography>
-      <Typography align={'center'} variant={'body2'} color="textSecondary">
+      <Typography align={'center'} variant={'body2'} color='textSecondary'>
         {isTeacher(user) ? lesson.groupName : lesson.teacherName}
       </Typography>
     </ThemeProvider>

@@ -78,8 +78,8 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">{i18n.t('create_group')}</DialogTitle>
+    <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
+      <DialogTitle id='form-dialog-title'>{i18n.t('create_group')}</DialogTitle>
       <form onSubmit={e => {
         e.preventDefault();
         handleCreate(institute.value,
@@ -135,8 +135,8 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
 
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
+            margin='dense'
+            id='name'
             label={i18n.t('group_name')}
             fullWidth
             onChange={(e) => setGroupName(e.target.value)}
@@ -144,10 +144,10 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color='primary'>
             {i18n.t('cancel')}
           </Button>
-          <Button type="submit" color="primary">
+          <Button type='submit' color='primary'>
             {i18n.t('create')}
           </Button>
         </DialogActions>

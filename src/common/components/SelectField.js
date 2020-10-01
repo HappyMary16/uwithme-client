@@ -8,7 +8,7 @@ export const SelectField = ({ label, initialValue, values, onChange }) => {
 
   return (
       <TextField
-        id="userRole"
+        id='userRole'
         select
         label={label}
         value={value}
@@ -16,9 +16,9 @@ export const SelectField = ({ label, initialValue, values, onChange }) => {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        margin="dense"
-        size="small"
-        variant="outlined"
+        margin='dense'
+        size='small'
+        variant='outlined'
         fullWidth
       >
         {values &&
