@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import { history } from '../store/Store';
-import { apiRoot } from '../constants/serverApi';
+import { apiRoot, REFRESH_TOKEN } from '../constants/serverApi';
 import { SIGN_IN } from '../constants/links';
 
 let updateTokenRequest = null;
@@ -13,7 +13,7 @@ const refresh = () => {
 
   const config = {
     method: 'post',
-    url: apiRoot + '/auth/refreshToken',
+    url: apiRoot + REFRESH_TOKEN,
     data: {
       refreshToken: localStorage.getItem('RefreshToken')
     },
