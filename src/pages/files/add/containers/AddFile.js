@@ -42,8 +42,8 @@ class AddFile extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, username } = this.props;
-    dispatch(loadSubjects(username));
+    const { dispatch } = this.props;
+    dispatch(loadSubjects());
   }
 
   submit() {

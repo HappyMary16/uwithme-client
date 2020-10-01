@@ -1,32 +1,30 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   DOWNLOAD_FILES,
-  GET_FILES_BY_USERNAME,
-  getFilesByUsername,
+  GET_ALL_FILES,
+  getFiles,
   LOAD_SUBJECTS,
   LOAD_SUBJECTS_BY_UNIVERSITY_ID,
   renderFiles,
   renderSubjects
 } from './actions';
 import http from '../../services/http';
-import { DOWNLOAD_FILE, GET_FILES, GET_SUBJECTS, GET_SUBJECTS_BY_UNIVERSITY_ID } from '../../constants/serverApi';
+import { FILES, SUBJECTS } from '../../constants/serverApi';
 import { endFetching, startFetching } from '../../common/actions';
 
 export function* fileOperationWatcher() {
-  yield takeEvery(GET_FILES_BY_USERNAME, action => downloadFiles(action));
+  yield takeEvery(GET_ALL_FILES, () => downloadFiles());
   yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
   yield takeEvery(LOAD_SUBJECTS_BY_UNIVERSITY_ID, action => loadSubjectsByUniversityId(action));
   yield takeEvery(DOWNLOAD_FILES, action => downloadFile(action));
 }
 
-function* downloadFiles(action) {
+function* downloadFiles() {
   try {
     yield put(startFetching());
 
-    const { userName } = action;
-
     const response = yield call(http, {
-      url: GET_FILES + userName,
+      url: FILES,
       method: 'get',
       isFile: true
     });
@@ -46,7 +44,7 @@ function* loadSubjects(action) {
     yield put(startFetching());
     const { username } = action;
     const response = yield call(http, {
-      url: GET_SUBJECTS + username,
+      url: SUBJECTS,
       method: 'get'
     });
 
@@ -54,7 +52,7 @@ function* loadSubjects(action) {
       yield put(renderSubjects(response));
       const subjects = response.data;
       for (let i = 0; i < subjects.length; i++) {
-        yield put(getFilesByUsername(username, subjects[i].id));
+        yield put(getFiles(username, subjects[i].id));
       }
     }
   } catch (e) {
@@ -69,7 +67,7 @@ function* loadSubjectsByUniversityId(action) {
     yield put(startFetching());
     const { universityId } = action.payload;
     const response = yield call(http, {
-      url: GET_SUBJECTS_BY_UNIVERSITY_ID + universityId,
+      url: SUBJECTS + universityId,
       method: 'get'
     });
 
@@ -88,7 +86,7 @@ function* downloadFile(action) {
   const { fileId, fileName, loading } = action;
 
   let response = yield call(http, {
-    url: DOWNLOAD_FILE + fileId,
+    url: FILES + fileId,
     method: 'get',
     loadFile: true
   });

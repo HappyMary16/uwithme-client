@@ -1,4 +1,4 @@
-export const GET_FILES_BY_USERNAME = 'GET_ALL_FILES';
+export const GET_ALL_FILES = 'GET_ALL_FILES';
 export const DOWNLOAD_FILES = 'LOAD_FILES';
 export const LOAD_SUBJECTS = 'LOAD_SUBJECTS';
 export const LOAD_SUBJECTS_BY_UNIVERSITY_ID = 'LOAD_SUBJECTS_BY_UNIVERSITY_ID';
@@ -26,10 +26,9 @@ export function loadFile(fileId, fileName, loading) {
   };
 }
 
-export function loadSubjects(username) {
+export function loadSubjects() {
   return {
-    type: LOAD_SUBJECTS,
-    username
+    type: LOAD_SUBJECTS
   };
 }
 
@@ -42,9 +41,8 @@ export function loadSubjectsByUniversityId(universityId) {
   };
 }
 
-export function getFilesByUsername(userName) {
+export function getFiles() {
   return {
-    type: GET_FILES_BY_USERNAME,
-    userName
+    type: GET_ALL_FILES
   };
 }

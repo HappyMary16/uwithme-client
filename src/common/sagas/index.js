@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { endFetching, startFetching } from '../actions';
 import http from '../../services/http';
-import { GET_DEPARTMENTS, GET_GROUPS, GET_INSTITUTES, GET_UNIVERSITIES } from '../../constants/serverApi';
+import { INFO_DEPARTMENTS, INFO_GROUPS, INFO_INSTITUTES, INFO_UNIVERSITIES } from '../../constants/serverApi';
 import {
   LOAD_DEPARTMENTS,
   LOAD_GROUPS,
@@ -26,7 +26,7 @@ function* loadUniversities() {
     yield put(startFetching());
 
     const universities = yield call(http, {
-      url: GET_UNIVERSITIES,
+      url: INFO_UNIVERSITIES,
       method: 'get'
     });
 
@@ -45,7 +45,7 @@ function* loadInstitutes() {
     yield put(startFetching());
 
     const institutes = yield call(http, {
-      url: GET_INSTITUTES,
+      url: INFO_INSTITUTES,
       method: 'get'
     });
 
@@ -64,7 +64,7 @@ function* loadDepartments() {
     yield put(startFetching());
 
     const departments = yield call(http, {
-      url: GET_DEPARTMENTS,
+      url: INFO_DEPARTMENTS,
       method: 'get'
     });
 
@@ -83,7 +83,7 @@ function* loadGroups() {
     yield put(startFetching());
 
     const groups = yield call(http, {
-      url: GET_GROUPS,
+      url: INFO_GROUPS,
       method: 'get'
     });
 

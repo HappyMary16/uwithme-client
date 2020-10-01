@@ -1,6 +1,6 @@
 import { call, takeEvery } from 'redux-saga/effects';
 import http from '../../../services/http';
-import { ADD_ACCESS } from '../../../constants/serverApi';
+import { FILES_ACCESS } from '../../../constants/serverApi';
 import { ADD_ACCESS_TO_FILES } from './actions';
 import { FILES } from '../../../constants/links';
 import { history } from '../../../store/Store';
@@ -14,7 +14,7 @@ function* addAccessToFiles(action) {
     const { fileIds, groupIds } = action;
 
     const response = yield call(http, {
-      url: ADD_ACCESS,
+      url: FILES_ACCESS,
       method: 'post',
       data: {
         fileIds: fileIds,
@@ -22,7 +22,11 @@ function* addAccessToFiles(action) {
       }
     });
 
-    alert('Доступ надано');
+    if (response.status === 200) {
+      alert('Доступ надано');
+    } else {
+      alert('Something went wrong, status: ' + response.status);
+    }
     history.push(FILES);
   } catch (e) {
     //TODO add error

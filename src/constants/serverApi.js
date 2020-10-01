@@ -1,75 +1,46 @@
 import config from '../config';
 
-export const apiRoot = `http://localhost:${config.port}/api`;
+export const apiRoot = `http://localhost:${config.port}/api/`;
 
-export const SIGN_IN = '/auth/signIn';
-export const SIGN_UP = '/auth/signUp';
+const INFO = 'info/';
+const AUTH = 'auth/';
 
-export const GET_UNIVERSITIES = '/info/universities';
-export const GET_INSTITUTES = '/info/institutes';
-export const GET_INSTITUTES_WITH_PARAMETERS = '/info/institutes/';
-export const GET_DEPARTMENTS = '/info/departments';
-export const GET_DEPARTMENTS_WITH_PARAMETERS = '/info/departments/';
-export const GET_GROUPS = '/info/studyGroups';
-export const GET_GROUPS_WITH_PARAMETERS = '/group/';
+export const SIGN_IN = AUTH + 'signIn';
+export const SIGN_UP = AUTH + 'signUp';
+export const REFRESH_TOKEN = AUTH + 'refreshToken';
 
-export function getGroupByUniversityId(universityId) {
-  return `/group/${universityId}/universityId`;
-}
+export const GET_BUILDINGS = 'buildings/';
 
-export function getGroupByTeacherId(teacherId) {
-  return `/group/${teacherId}/teacherId`;
-}
+export const DEPARTMENTS = 'departments/';
+export const INFO_DEPARTMENTS = INFO + DEPARTMENTS;
 
-export function getGroupById(groupId) {
-  return `/group/${groupId}/groupId`;
-}
+export const FILES = 'files/';
+export const FILES_ACCESS = FILES + 'access/';
+export const AVATAR = FILES + 'avatar/';
 
-export const GET_SUBJECTS = '/subjects/';
-export const POST_SUBJECTS = '/subject/';
-export const GET_SUBJECTS_BY_UNIVERSITY_ID = '/university/subjects/';
+export const GROUPS = 'groups/';
+export const GROUPS_BY_UNIVERSITY_ID = GROUPS + 'universityId/';
+export const INFO_GROUPS = INFO + GROUPS;
 
-export const GET_FILES = '/files/';
-export const UPLOAD_MULTIPLE_FILES = '/uploadMultipleFiles/';
-export const UPDATE_AVATAR = '/updateAvatar/';
-export const GET_AVATAR = '/avatar/';
+export const INSTITUTES = 'institutes/';
+export const INFO_INSTITUTES = INFO + INSTITUTES;
 
-export const DOWNLOAD_FILE = '/downloadFile/';
+export const LECTURE_HALLS = 'lectureHalls/';
 
-export const ADD_ACCESS = '/addAccess/';
+export const LESSONS = 'lessons/';
+export const GET_LESSONS_BY_GROUP_ID = LESSONS + 'group/';
+export const LESSONS_BY_USERNAME = LESSONS + 'username/';
 
-export const ADD_UNIVERSITY_API = '/university/add';
-export const ADD_INSTITUTE_API = '/institute/add';
-export const ADD_DEPARTMENT_API = '/department/add';
-export const ADD_GROUP_API = '/group/add';
+export const SUBJECTS = 'subjects/';
 
-export const ADD_LESSON = '/lesson/add';
-export const GET_LESSONS_BY_GROUP_ID = '/lessons/group/';
-export const GET_LESSONS_BY_USER_ID = '/lessons/user/';
+export const UNIVERSITIES = 'universities/';
+export const INFO_UNIVERSITIES = INFO + UNIVERSITIES;
 
-export const GET_TEACHERS_BY_UNIVERSITY_ID = '/users/teachers/';
+export const USERS = 'users/';
+export const TEACHERS = USERS + 'teachers/';
+export const STUDENTS = USERS + 'students/';
+export const STUDENTS_BY_GROUP_ID = STUDENTS + 'groupId/';
+export const GROUP_STUDENT_ID = USERS + 'group/studentId/';
+export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/group/';
+export const STUDENT_GROUP = USERS + 'group';
 
-export function findTeachersByGroupId(groupId) {
-  return `/users/teachers/${groupId}/group`;
-}
-
-export function findStudentsByTeacherId(teacherId) {
-  return `/users/students/${teacherId}/teacherId`;
-}
-
-export function findStudentsByGroupId(groupId) {
-  return `/users/students/${groupId}/group`;
-}
-
-export function removeStudentFromGroupByStudentId(studentId) {
-  return `/users/student/${studentId}/group/remove`;
-}
-
-export const PUT_ADD_STUDENT_TO_GROUP = '/users/student/add/group';
-
-export function findStudentsWithoutGroupByUniversityId(universityId) {
-  return `/users/students/${universityId}/without/group`;
-}
-
-export const GET_LECTURE_HALLS = '/lectureHalls/';
-export const GET_BUILDINGS = '/buildings/';

@@ -7,8 +7,8 @@ import { StudentListItem } from '../components/StudentListItem';
 class StudentsList extends Component {
 
   componentDidMount() {
-    const { dispatch, user } = this.props;
-    dispatch(loadStudentsByTeacherId(user.id));
+    const { dispatch } = this.props;
+    dispatch(loadStudentsByTeacherId());
   }
 
   render() {

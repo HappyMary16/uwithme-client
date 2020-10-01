@@ -2,12 +2,12 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { ADD_LESSON_TO_SCHEDULE, FIND_LESSONS_BY_GROUP_ID, FIND_LESSONS_BY_USER_NAME, renderLessons } from './actions';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
-import { ADD_LESSON, GET_LESSONS_BY_GROUP_ID, GET_LESSONS_BY_USER_ID } from '../../constants/serverApi';
+import { GET_LESSONS_BY_GROUP_ID, LESSONS } from '../../constants/serverApi';
 
 export function* scheduleOperationWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action => addLessonToSchedule(action));
   yield takeEvery(FIND_LESSONS_BY_GROUP_ID, action => findLessonsByGroupId(action));
-  yield takeEvery(FIND_LESSONS_BY_USER_NAME, action => findLessonsByUsername(action));
+  yield takeEvery(FIND_LESSONS_BY_USER_NAME, () => findLessons());
 }
 
 function* addLessonToSchedule(action) {
@@ -39,12 +39,12 @@ function* addLessonToSchedule(action) {
     };
 
     const response = yield call(http, {
-      url: ADD_LESSON,
+      url: LESSONS,
       method: 'post',
       data
     });
 
-    if (response && response.status === 200) {
+    if (response && response.status === 201) {
       alert('Пари додані в розклад');
     }
 
@@ -79,16 +79,12 @@ function* findLessonsByGroupId(action) {
   }
 }
 
-function* findLessonsByUsername(action) {
+function* findLessons() {
   try {
     yield put(startFetching());
 
-    const {
-      username
-    } = action.payload;
-
     const response = yield call(http, {
-      url: GET_LESSONS_BY_USER_ID + username,
+      url: LESSONS,
       method: 'get'
     });
 
