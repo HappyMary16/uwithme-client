@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ScheduleTable = ({ lessons, user, isMine }) => {
+export const ScheduleTable = ({ lessons, user, isMine, isEditMode = false, deleteLesson }) => {
   let classes = useStyles();
   let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
@@ -95,7 +95,8 @@ export const ScheduleTable = ({ lessons, user, isMine }) => {
                   {WEEK_DAYS.map(weekDay => {
                       let lesson = getLesson(lessons, weekDay.value, lessonTime.value, weekNumber ? 1 : 2);
                     return (<TableCell key={weekDay.value} component='th' scope='row' className={classes.cell}>
-                      {lesson && <Lesson lesson={lesson} user={user}/>}
+                      {lesson &&
+                      <Lesson lesson={lesson} user={user} isEditMode={isEditMode} deleteLesson={deleteLesson}/>}
                     </TableCell>);
                     }
                   )}

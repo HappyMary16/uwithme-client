@@ -1,5 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ADD_LESSON_TO_SCHEDULE, FIND_LESSONS_BY_GROUP_ID, FIND_LESSONS_BY_USER_NAME, renderLessons } from './actions';
+import {
+  ADD_LESSON_TO_SCHEDULE,
+  DELETE_LESSON,
+  FIND_LESSONS_BY_GROUP_ID,
+  FIND_LESSONS_BY_USER_NAME,
+  renderLessons
+} from './actions';
 import { endFetching, startFetching } from '../../common/actions';
 import http from '../../services/http';
 import { GET_LESSONS_BY_GROUP_ID, LESSONS } from '../../constants/serverApi';
@@ -8,6 +14,7 @@ export function* scheduleOperationWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action => addLessonToSchedule(action));
   yield takeEvery(FIND_LESSONS_BY_GROUP_ID, action => findLessonsByGroupId(action));
   yield takeEvery(FIND_LESSONS_BY_USER_NAME, () => findLessons());
+  yield takeEvery(DELETE_LESSON, action => deleteLesson(action));
 }
 
 function* addLessonToSchedule(action) {
@@ -86,6 +93,35 @@ function* findLessons() {
     const response = yield call(http, {
       url: LESSONS,
       method: 'get'
+    });
+
+    if (response) {
+      yield put(renderLessons(response.data));
+    }
+
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* deleteLesson(action) {
+  try {
+    yield put(startFetching());
+    const { lesson, groups } = action.payload;
+    let data = {
+      lessonId: lesson.id
+    };
+
+    if (groups.length !== lesson.groups.length) {
+      data.groups = groups;
+    }
+
+    const response = yield call(http, {
+      url: LESSONS,
+      method: 'delete',
+      data
     });
 
     if (response) {
