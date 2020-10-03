@@ -35,3 +35,15 @@ export const getLesson = (lessons, weekDay, lessonTime, weekNumber) => {
 let lessonFilter = (lesson, weekDay, lessonTime, weekNumber) => {
   return lesson.weekDay === weekDay && lesson.lessonTime === lessonTime && lesson.weekNumber === weekNumber;
 };
+
+export const getGroupList = (groups) => {
+  let result = '';
+  if (Array.isArray(groups)) {
+    for (let i = 0; i < groups.length - 1; i++) {
+      result += groups[i] + ',';
+    }
+    return result + groups[groups.length - 1];
+  }
+
+  return '';
+};

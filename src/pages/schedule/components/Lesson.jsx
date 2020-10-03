@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { isTeacher } from '../../../utils/UsersUtil';
+import { getGroupList } from '../../../utils/ScheduleUtil';
 
 export const Lesson = ({ lesson, user }) => {
 
@@ -14,7 +15,7 @@ export const Lesson = ({ lesson, user }) => {
         {lesson.lectureHall}
       </Typography>
       <Typography align={'center'} variant={'body2'} color='textSecondary'>
-        {isTeacher(user) ? lesson.groupName : lesson.teacherName}
+        {isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName}
       </Typography>
     </ThemeProvider>
   );
