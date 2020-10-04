@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteLesson, findLessonsByGroupId } from '../actions';
 import { ScheduleTable } from '../components/ScheduleTable';
-import { Container } from '@material-ui/core';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import i18n from '../../../locales/i18n';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../common/styles/styles';
 import { loadGroupsByUniversityId } from '../../administration/structure/actions';
 import { getGroupById } from '../../../utils/StructureUtils';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import { DeleteLessonDialog } from '../components/DeleteLessonDialog';
+import Button from 'react-bootstrap/Button';
 
 class GroupSchedule extends Component {
 
@@ -89,8 +90,8 @@ class GroupSchedule extends Component {
                                                            lesson={lessonToDelete}
                                                            handleClose={this.closeDeleteLessonDialog}
                                                            handleDelete={this.deleteLesson}/>}
-        <Grid container style={marginTop} direction='row' spacing={2}>
-          <Grid item xs={10}>
+        <Row container style={marginTop} spacing={2}>
+          <Col sm={10}>
             <Select
               placeholder={i18n.t('select_group')}
               theme={selectorColors}
@@ -99,16 +100,17 @@ class GroupSchedule extends Component {
               options={groups}
               defaultValue={getGroupById(groups, groupId)}
             />
-          </Grid>
-          <Button
-            color='primary'
-            variant='outlined'
-            size='small'
-            onClick={isEditMode ? () => this.endEditing() : () => this.startEdit()}
-          >
-            {i18n.t(isEditMode ? 'save' : 'edit')}
-          </Button>
-        </Grid>
+          </Col>
+          <Col sm={2}>
+            <Button
+              block
+              variant={'purple'}
+              onClick={isEditMode ? () => this.endEditing() : () => this.startEdit()}
+            >
+              {i18n.t(isEditMode ? 'save' : 'edit')}
+            </Button>
+          </Col>
+        </Row>
         {groupId && lessons && <ScheduleTable lessons={lessons}
                                               user={user}
                                               isMine={true}

@@ -1,0 +1,9 @@
+.list-group-item:focus {
+    outline: none;
+}
+
+.leftButton {
+    display: block;
+    margin-left: auto;
+    margin-right: 1%;
+}

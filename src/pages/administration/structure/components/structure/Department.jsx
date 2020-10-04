@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { GroupList } from './GroupList';
-import HomeWorkIcon from '@material-ui/icons/HomeWork';
-import { ListItemIcon } from '@material-ui/core';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
+import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export default class Department extends Component {
   constructor(props) {
@@ -29,32 +27,27 @@ export default class Department extends Component {
   }
 
   render() {
-    const { department, groups, classes } = this.props;
+    const { department, groups } = this.props;
     const { open } = this.state;
 
     return (
-      <List>
-        <ListItem button onClick={this.instituteHandleClick} className={classes.departmentSpace}>
-          <ListItemIcon>
-            <HomeWorkIcon/>
-          </ListItemIcon>
-          <ListItemText primary={department.label}/>
-          <ListItemSecondaryAction>
-            {/*<IconButton onClick={this.someAction}>*/}
-            {/*  <EditIcon/>*/}
-            {/*</IconButton>*/}
-            {/*<IconButton onClick={this.someAction}>*/}
-            {/*  <InfoIcon/>*/}
-            {/*</IconButton>*/}
-            {/*<IconButton onClick={this.someAction}>*/}
-            {/*  <DeleteIcon/>*/}
-            {/*</IconButton>*/}
-            {open ? <ExpandLess/> : <ExpandMore/>}
-          </ListItemSecondaryAction>
-        </ListItem>
-
-        <GroupList open={open} groups={groups} classes={classes} />
-      </List>
+      <div className={'padding-left'}>
+        <ListGroup.Item action
+                        onClick={this.instituteHandleClick}>
+          <Container>
+            <Row>
+              <Col xs={10}>
+                <img src="/department-icon.jpg" alt="" width="20" height="20" title="Bootstrap"/>
+                {' ' + department.label}
+              </Col>
+              <Col xs={2}>
+                {open ? <ChevronUp class={'leftButton'}/> : <ChevronDown class={'leftButton'}/>}
+              </Col>
+            </Row>
+          </Container>
+        </ListGroup.Item>
+        <GroupList open={open} groups={groups}/>
+      </div>
     );
   }
 }

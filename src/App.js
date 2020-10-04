@@ -49,6 +49,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import UserSchedule from './pages/schedule/containers/UserSchedule';
 import StudentsList from './pages/users/containers/StudentsList';
 import GroupPage from './pages/groups/containers/GroupPage';
+import './common/styles/button.css';
+import './common/styles/listItem.css';
+import './common/styles/spases.css';
 
 const useStyles = theme => ({
   backdrop: {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import List from '@material-ui/core/List';
-import Collapse from '@material-ui/core/Collapse';
 import Department from './Department';
 import { getGroupsByDepartment } from '../../../../../utils/StructureUtils';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Collapse from 'react-bootstrap/Collapse';
 
 export default class DepartmentsList extends Component {
   constructor(props) {
@@ -16,20 +16,19 @@ export default class DepartmentsList extends Component {
   }
 
   render() {
-    const { departments, groups, open, classes } = this.props;
+    const { departments, groups, open } = this.props;
 
     return (
-      <Collapse in={open} timeout='auto' unmountOnExit>
-        <List component='div' disablePadding>
+      <Collapse in={open}>
+        <ListGroup>
           {departments && departments.map((department, i) => (
             <Department
               key={i}
               department={department}
               groups={getGroupsByDepartment(groups, department)}
-              classes={classes}
             />
           ))}
-        </List>
+        </ListGroup>
       </Collapse>
     );
   }

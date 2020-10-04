@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
-import List from '@material-ui/core/List';
-import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
 import Institute from '../components/structure/Institute';
 import { getDepartmentsByInstitute } from '../../../../utils/StructureUtils';
 import {
@@ -15,18 +11,8 @@ import {
   loadInstitutesByUniversityId
 } from '../actions';
 import { CreateStructurePanel } from '../components/structure/CreatingStructurePanel';
-
-const useStyles = theme => ({
-  list: {
-    width: '100%'
-  },
-  departmentSpace: {
-    paddingLeft: theme.spacing(4)
-  },
-  groupSpace: {
-    paddingLeft: theme.spacing(8)
-  }
-});
+import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class UniversityStructure extends Component {
   constructor(props) {
@@ -65,18 +51,17 @@ class UniversityStructure extends Component {
   }
 
   render() {
-    const { institutes, departments, groups, classes } = this.props;
+    const { institutes, departments, groups } = this.props;
 
     return (
-      <Grid container xs={12}>
-
+      <Container>
         <CreateStructurePanel institutes={institutes}
                               departments={departments}
                               createInstitute={this.createInstitute}
                               createDepartment={this.createDepartment}
                               createGroup={this.createGroup}/>
 
-        <List component='nav' className={classes.list}>
+        <ListGroup variant='flush'>
           {institutes &&
           institutes.map((institute, i) => (
             <Institute
@@ -84,11 +69,10 @@ class UniversityStructure extends Component {
               institute={institute}
               departments={getDepartmentsByInstitute(departments, institute)}
               groups={groups}
-              classes={classes}
             />
           ))}
-        </List>
-      </Grid>
+        </ListGroup>
+      </Container>
     );
   }
 }
@@ -102,7 +86,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  withStyles(useStyles),
-  connect(mapStateToProps)
-)(UniversityStructure);
+export default connect(mapStateToProps)(UniversityStructure);
