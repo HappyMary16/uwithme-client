@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
-import i18n from '../../../../../locales/i18n';
+import i18n from '../../../../locales/i18n';
 
 export const AddInstitute = ({ open, handleClose, handleCreate }) => {
   const [instituteName, setInstituteName] = React.useState('');

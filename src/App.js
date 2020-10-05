@@ -33,7 +33,7 @@ import SignUp from './pages/authorization/containers/SignUp';
 import SignIn from './pages/authorization/containers/SignIn';
 import AddUniversity from './pages/authorization/containers/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
-import { AdminToolBar } from './pages/administration/structure/components/AdminToolBar';
+import { AdminToolBar } from './pages/administration/components/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import UniversityStructure from './pages/administration/structure/containers/UniversityStructure';
@@ -117,12 +117,12 @@ class App extends Component {
 
             {user && (
               <Grid container xs={12}>
-                <Grid item xs={2}>
+                <Grid item xs={10} md={2}>
                   {!isAdmin(user) && <UserToolBar user={user}/>}
                   {isAdmin(user) && <AdminToolBar/>}
                 </Grid>
 
-                <Grid item xs={10}>
+                <Grid item xs={12} md={10}>
 
                   {!isAdmin(user) && (
                     <Grid>

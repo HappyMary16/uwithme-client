@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { ADD_LESSON, LECTURE_HALLS, SCHEDULE, USER_HOME } from '../../../../constants/links';
-import i18n from '../../../../locales/i18n';
+import { ADD_LESSON, LECTURE_HALLS, SCHEDULE, USER_HOME } from '../../../constants/links';
+import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
 import ListItem from '@material-ui/core/ListItem';

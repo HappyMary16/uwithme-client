@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Department from './Department';
-import { getGroupsByDepartment } from '../../../../../utils/StructureUtils';
+import { getGroupsByDepartment } from '../../../../utils/StructureUtils';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Collapse from 'react-bootstrap/Collapse';
 

@@ -6,15 +6,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
-import i18n from '../../../../../locales/i18n';
-import { selectorColors } from '../../../../../common/styles/styles';
+import i18n from '../../../../locales/i18n';
+import { selectorColors } from '../../../../common/styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
-import { getDepartmentsByInstitute, getInstituteById } from '../../../../../utils/StructureUtils';
-import { COURSE_NUMBER } from '../../../../../constants/userRoles';
+import { getDepartmentsByInstitute, getInstituteById } from '../../../../utils/StructureUtils';
+import { COURSE_NUMBER } from '../../../../constants/userRoles';
 import Select from 'react-select';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import '../../../../../common/styles/styles.css';
+import '../../../../common/styles/styles.css';
 
 export const AddGroup = ({ institutes, departments, open, handleClose, handleCreate }) => {
   const [institute, setInstitute] = React.useState();

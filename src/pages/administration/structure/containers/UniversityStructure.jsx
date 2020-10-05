@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Institute from '../components/structure/Institute';
+import Institute from '../components/Institute';
 import { getDepartmentsByInstitute } from '../../../../utils/StructureUtils';
 import {
   createDepartment,
@@ -10,7 +10,7 @@ import {
   loadGroupsByUniversityId,
   loadInstitutesByUniversityId
 } from '../actions';
-import { CreateStructurePanel } from '../components/structure/CreatingStructurePanel';
+import { CreateStructurePanel } from '../components/CreatingStructurePanel';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 
