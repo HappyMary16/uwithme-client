@@ -5,17 +5,18 @@ import {
   LOAD_GROUPS_BY_UNIVERSITY_ID,
   loadDepartmentsByUniversityId,
   loadInstitutesByUniversityId,
-  RENDER_GROUPS,
   renderGroup
 } from '../actions';
 import { endFetching, startFetching } from '../../../../common/actions';
 import http from '../../../../services/http';
 import { GROUPS, GROUPS_BY_UNIVERSITY_ID } from '../../../../constants/serverApi';
+import { LOAD_GROUPS_BY_TEACHER, renderGroups } from '../../../groups/actions';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, action => createGroup(action));
   yield takeEvery(LOAD_GROUPS_BY_UNIVERSITY_ID, action => loadGroupsByUniversityId(action));
   yield takeEvery(LOAD_GROUP_BY_ID, action => loadGroupById(action));
+  yield takeEvery(LOAD_GROUPS_BY_TEACHER, () => loadGroupByTeacher());
 }
 
 function* createGroup(action) {
@@ -62,7 +63,7 @@ function* loadGroupsByUniversityId(action) {
     });
 
     if (groups) {
-      yield put({ type: RENDER_GROUPS, groups });
+      yield put(renderGroups(groups.data));
     }
   } catch (e) {
     alert(e);
@@ -83,6 +84,25 @@ function* loadGroupById(action) {
 
     if (group) {
       yield put(renderGroup(group.data));
+    }
+  } catch (e) {
+    alert(e);
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* loadGroupByTeacher() {
+  try {
+    yield put(startFetching());
+
+    const group = yield call(http, {
+      url: GROUPS,
+      method: 'get'
+    });
+
+    if (group) {
+      yield put(renderGroups(group.data));
     }
   } catch (e) {
     alert(e);

@@ -14,7 +14,7 @@ import { loadSubjects } from '../../actions';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../../common/styles/styles';
 import Container from '@material-ui/core/Container';
-import { loadGroups } from '../../../administration/structure/actions';
+import { loadGroupsByTeacher } from '../../../groups/actions';
 
 const submit = {
   marginTop: '10px',
@@ -41,7 +41,7 @@ class ShareFiles extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(loadGroups());
+    dispatch(loadGroupsByTeacher());
     dispatch(loadSubjects());
   }
 

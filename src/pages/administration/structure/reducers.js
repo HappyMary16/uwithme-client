@@ -38,10 +38,9 @@ export default function adminReducers(
         })
       };
     case RENDER_GROUPS:
-      console.log(action.groups.data);
       return {
         ...state,
-        groups: action.groups.data.map(obj => {
+        groups: action.payload.groups.map(obj => {
           return {
             value: obj.id,
             label: obj.name,
@@ -89,6 +88,7 @@ export default function adminReducers(
           }]
       };
     case RENDER_GROUP:
+      console.log(action.groups);
       return {
         ...state,
         groups: [...state.groups.filter(group => group.value !== action.payload.group.id),

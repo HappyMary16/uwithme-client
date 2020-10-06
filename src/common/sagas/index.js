@@ -9,10 +9,10 @@ import {
   LOAD_INSTITUTES,
   LOAD_UNIVERSITIES,
   RENDER_DEPARTMENTS,
-  RENDER_GROUPS,
   RENDER_INSTITUTES,
   renderUniversities
 } from '../../pages/administration/structure/actions';
+import { renderGroups } from '../../pages/groups/actions';
 
 export function* commonDataWatcher() {
   yield takeEvery(LOAD_UNIVERSITIES, loadUniversities);
@@ -88,7 +88,7 @@ function* loadGroups() {
     });
 
     if (groups) {
-      yield put({ type: RENDER_GROUPS, groups });
+      yield put(renderGroups(groups.data));
     }
   } catch (e) {
     alert(e + ' loadGroups()');

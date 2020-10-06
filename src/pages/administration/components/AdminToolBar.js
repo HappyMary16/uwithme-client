@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const AdminToolBar = (isOpen) => {
+export const AdminToolBar = ({ isOpen = false }) => {
   const classes = useStyles();
 
   return (

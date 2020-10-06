@@ -37,7 +37,7 @@ export const UserCard = ({ user, onSaveAvatar }) => {
           <img
             className={'avatar'}
             alt='Avatar'
-            src={user.avatar === null ? '/empty-avatar.jpg' : user.avatar}
+            src={(user.avatar === undefined || user.avatar === null) ? '/empty-avatar.jpg' : user.avatar}
             onClick={handleClickAvatar}
           />
         </Grid>

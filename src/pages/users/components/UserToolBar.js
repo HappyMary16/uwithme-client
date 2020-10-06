@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const UserToolBar = ({ user, isOpen }) => {
+export const UserToolBar = ({ user, isOpen = false }) => {
   const classes = useStyles();
 
   const drawer = (
