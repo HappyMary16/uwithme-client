@@ -9,3 +9,7 @@
 .padding-left {
     padding-left: 5%;
 }
+
+.main-page-container {
+    position: relative;
+}

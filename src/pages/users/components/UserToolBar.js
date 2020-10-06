@@ -3,11 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FILES, SCHEDULE, STUDENTS, TEACHERS, USER_HOME } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
-import Link from '@material-ui/core/Link';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
 import { isStudent, isTeacher } from '../../../utils/UsersUtil';
+import { slide as Menu } from 'react-burger-menu';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -35,31 +32,31 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const UserToolBar = ({ user }) => {
+export const UserToolBar = ({ user, isOpen }) => {
   const classes = useStyles();
 
   const drawer = (
-    <List className={classes.toolbar}>
-      <ListItem component={Link} href={USER_HOME} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('home_page')}/>
-      </ListItem>
-      <ListItem component={Link} href={SCHEDULE} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('schedule')}/>
-      </ListItem>
-      <ListItem component={Link} href={FILES} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('page_with_files')}/>
-      </ListItem>
+    <Menu isOpen={isOpen}>
+      <a href={USER_HOME} className={classes.menuItem}>
+        {i18n.t('home_page')}
+      </a>
+      <a href={SCHEDULE} className={classes.menuItem}>
+        {i18n.t('schedule')}
+      </a>
+      <a href={FILES} className={classes.menuItem}>
+        {i18n.t('page_with_files')}
+      </a>
       {isStudent(user) &&
-      (<ListItem component={Link} href={TEACHERS} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('teachers')}/>
-      </ListItem>)
+      (<a href={TEACHERS} className={classes.menuItem}>
+        {i18n.t('teachers')}
+      </a>)
       }
       {isTeacher(user) &&
-      (<ListItem component={Link} href={STUDENTS} className={classes.menuItem}>
-        <ListItemText primary={i18n.t('students')}/>
-      </ListItem>)
+      (<a href={STUDENTS} className={classes.menuItem}>
+        {i18n.t('students')}
+      </a>)
       }
-    </List>
+    </Menu>
   );
 
   return (

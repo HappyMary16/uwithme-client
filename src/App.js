@@ -22,13 +22,10 @@ import {
 } from './constants/links';
 import { UserToolBar } from './pages/users/components/UserToolBar';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import AddFile from './pages/files/add/containers/AddFile';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/files/share/containers/ShareFiles';
 import PageWithFiles from './pages/files/view/containers/PageWithFiles';
-import { Copyright } from './common/components/Copyright';
 import SignUp from './pages/authorization/containers/SignUp';
 import SignIn from './pages/authorization/containers/SignIn';
 import AddUniversity from './pages/authorization/containers/AddUniversity';
@@ -52,6 +49,8 @@ import GroupPage from './pages/groups/containers/GroupPage';
 import './common/styles/button.css';
 import './common/styles/listItem.css';
 import './common/styles/spases.css';
+import './common/styles/menu.css';
+import Container from 'react-bootstrap/Container';
 
 const useStyles = theme => ({
   backdrop: {
@@ -81,103 +80,84 @@ function OpenGroupSchedule() {
 }
 
 class App extends Component {
-
   render() {
-    const { user, isFetching, classes } = this.props;
+    const { user, isFetching, isMenuOpen, classes } = this.props;
 
     return (
-      <Container style={{ height: '100vh' }}>
+      <div>
+        <NavigationContainer/>
         <Backdrop className={classes.backdrop} open={isFetching !== 0}>
           <CircularProgress color='inherit'/>
         </Backdrop>
 
-        <Grid
-          container
-          xs={12}
-          alignContent='space-between'
-          style={{ height: '100%' }}
-        >
-          <Grid container xs={12} alignContent={'flex-start'}>
-            <Grid item xs={12}>
-              <NavigationContainer/>
-            </Grid>
+        {user && !isAdmin(user) && (
+          <UserToolBar user={user} isOpen={isMenuOpen}/>
+        )}
+        {isAdmin(user) && (
+          <AdminToolBar isOpen={isMenuOpen}/>
+        )}
 
-            <Grid container xs={12}>
+        <Container className={'main-page-container'}>
+
+          {!user && (
+            <div>
+              <Route exact path={ADD_UNIVERSITY_PATH} component={AddUniversity}/>
+              <Route exact path={SIGN_UP} component={SignUp}/>
               <Route exact path={SIGN_IN} component={SignIn}/>
-            </Grid>
+            </div>
+          )}
 
-            {!user && (
-              <Grid container xs={12}>
-                <Route exact path={ADD_UNIVERSITY_PATH}
-                       component={AddUniversity}
-                />
-                <Route exact path={SIGN_UP} component={SignUp}/>
-              </Grid>
-            )}
+          {user && (
+            <div>
+              {!isAdmin(user) && (
+                <div>
+                  <Route exact path={USER_HOME} component={UserHome}/>
+                  <Route exact path={FILES} component={PageWithFiles}/>
+                  <Route exact path={SCHEDULE} component={MySchedule}/>
+                </div>
+              )}
 
-            {user && (
-              <Grid container xs={12}>
-                <Grid item xs={10} md={2}>
-                  {!isAdmin(user) && <UserToolBar user={user}/>}
-                  {isAdmin(user) && <AdminToolBar/>}
-                </Grid>
+              {isStudent(user) && (
+                <div>
+                  <Route exact path={TEACHERS} component={TeachersList}/>
+                </div>
+              )}
 
-                <Grid item xs={12} md={10}>
+              {isTeacher(user) && (
+                <div>
+                  <Route exact path={ADD_FILE} component={AddFile}/>
+                  <Route exact path={SHARE_FILES} component={ShareFiles}/>
+                  <Route exact path={STUDENTS} component={StudentsList}/>
+                </div>
+              )}
 
-                  {!isAdmin(user) && (
-                    <Grid>
-                      <Route exact path={USER_HOME} component={UserHome}/>
-                      <Route exact path={FILES} component={PageWithFiles}/>
-                      <Route exact path={SCHEDULE} component={MySchedule}/>
-                    </Grid>
-                  )}
-
-                  {isStudent(user) && (
-                    <Grid>
-                      <Route exact path={TEACHERS} component={TeachersList}/>
-                    </Grid>
-                  )}
-
-                  {isTeacher(user) && (
-                    <Grid>
-                      <Route exact path={ADD_FILE} component={AddFile}/>
-                      <Route exact path={SHARE_FILES} component={ShareFiles}/>
-                      <Route exact path={STUDENTS} component={StudentsList}/>
-                    </Grid>
-                  )}
-
-                  {isAdmin(user) && (
-                    <Grid>
-                      <Route exact path={USER_HOME} component={UniversityStructure}/>
-                      <Route exact path={ADD_LESSON} component={AddLesson}/>
-                      <Route exact path={SCHEDULE} component={GroupSchedule}/>
-                      <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
-                      <Route exact path={GROUP_PAGE_ROUTER}>
-                        <OpenGroupPage/>
-                      </Route>
-                      <Route exact path={GROUP_SCHEDULE_ROUTER}>
-                        <OpenGroupSchedule/>
-                      </Route>
-                    </Grid>
-                  )}
-                  <Grid>
-                    <Route path={USER_HOME_PAGE_ROUTER}>
-                      <OpenUserPage/>
-                    </Route>
-                    <Route path={USER_SCHEDULE_ROUTER}>
-                      <OpenUserSchedule/>
-                    </Route>
-                  </Grid>
-                </Grid>
-              </Grid>
-            )}
-          </Grid>
-
-          <Grid container justify={'center'} xs={12}>
-            <Copyright/>
-          </Grid>
-        </Grid>
-      </Container>
+              {isAdmin(user) && (
+                <div>
+                  <Route exact path={USER_HOME} component={UniversityStructure}/>
+                  <Route exact path={ADD_LESSON} component={AddLesson}/>
+                  <Route exact path={SCHEDULE} component={GroupSchedule}/>
+                  <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
+                  <Route exact path={GROUP_PAGE_ROUTER}>
+                    <OpenGroupPage/>
+                  </Route>
+                  <Route exact path={GROUP_SCHEDULE_ROUTER}>
+                    <OpenGroupSchedule/>
+                  </Route>
+                </div>
+              )}
+              <div>
+                <Route path={USER_HOME_PAGE_ROUTER}>
+                  <OpenUserPage/>
+                </Route>
+                <Route path={USER_SCHEDULE_ROUTER}>
+                  <OpenUserSchedule/>
+                </Route>
+              </div>
+              <div/>
+            </div>
+          )}
+        </Container>
+      </div>
     );
   }
 }
@@ -185,7 +165,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    isFetching: state.loadingProcess.isFetching
+    isFetching: state.loadingProcess.isFetching,
+    isMenuOpen: state.loadingProcess.isMenuOpen
   };
 };
 

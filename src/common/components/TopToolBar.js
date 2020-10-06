@@ -6,37 +6,32 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ADD_UNIVERSITY_PATH, SIGN_IN } from '../../constants/links';
 import i18n from '../../locales/i18n';
 import Button from 'react-bootstrap/Button';
-import { List } from 'react-bootstrap-icons';
-import useScreenSize, { BreakPoint } from 'use-screen-size';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
+    marginLeft: 0,
+    position: 'relative',
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: '#eeeeee'
   },
   toolbarTitle: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingLeft: 5
   },
   link: {
     margin: theme.spacing(1, 1.5)
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
   }
 }));
 
-export const TopToolBar = ({ user, signOutFunc }) => {
+export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
   const classes = useStyles();
-  const size = useScreenSize();
-  const isSmall = size.screen === BreakPoint.xs || size.screen === BreakPoint.s;
 
   return (
-    <AppBar position='relative' color='default' className={classes.appBar}>
+    <AppBar color='default' className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        {isSmall && <List/>}
+        {user &&
+        <img src={'/menu-icon.png'} width="20" height="20" onClick={openMenu()}/>
+        }
         <Typography
           variant='h6'
           color='inherit'

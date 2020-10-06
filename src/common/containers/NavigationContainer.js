@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { TopToolBar } from '../components/TopToolBar';
 import { signOut } from '../../pages/authorization/actions';
+import { changeIsMenuOpen } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -12,6 +13,12 @@ const mapDispatchToProps = dispatch => ({
   signOutFunc() {
     return () => {
       dispatch(signOut());
+    };
+  },
+
+  openMenu() {
+    return () => {
+      dispatch(changeIsMenuOpen());
     };
   }
 });

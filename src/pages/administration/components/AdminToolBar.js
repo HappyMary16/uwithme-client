@@ -2,10 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ADD_LESSON, LECTURE_HALLS, SCHEDULE, USER_HOME } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
-import AppBar from '@material-ui/core/AppBar';
-import Link from '@material-ui/core/Link';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
+import { slide as Menu } from 'react-burger-menu';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -33,40 +30,33 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const AdminToolBar = () => {
+export const AdminToolBar = (isOpen) => {
   const classes = useStyles();
 
-  //TODO add menu items
-
   return (
-    <AppBar
-      position='static'
-      color='inherit'
-      elevation={0}
-      className={classes.appBar}>
-      <List className={classes.toolbar}>
-        <ListItem
-          component={Link}
-          href={USER_HOME}
-          className={classes.menuItem}>
-          {i18n.t('university_structure')}
-        </ListItem>
+    <Menu isOpen={isOpen}>
+      <a
+        href={USER_HOME}
+        className={classes.menuItem}>
+        {i18n.t('university_structure')}
+      </a>
 
-        <ListItem component={Link} href={LECTURE_HALLS} className={classes.menuItem}>
-          {i18n.t('lecture_halls')}
-        </ListItem>
+      <a
+        href={LECTURE_HALLS}
+        className={classes.menuItem}>
+        {i18n.t('lecture_halls')}
+      </a>
 
-        <ListItem
-          component={Link}
-          href={ADD_LESSON}
-          className={classes.menuItem}>
-          {i18n.t('add_lesson')}
-        </ListItem>
+      <a
+        href={ADD_LESSON}
+        className={classes.menuItem}>
+        {i18n.t('add_lesson')}
+      </a>
 
-        <ListItem component={Link} href={SCHEDULE} className={classes.menuItem}>
-          {i18n.t('schedule')}
-        </ListItem>
-      </List>
-    </AppBar>
+      <a href={SCHEDULE}
+         className={classes.menuItem}>
+        {i18n.t('schedule')}
+      </a>
+    </Menu>
   );
 };
