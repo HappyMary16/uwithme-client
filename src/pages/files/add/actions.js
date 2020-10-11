@@ -1,19 +1,9 @@
-export const SAVE_SUBJECTS = 'SAVE_SUBJECTS';
-
 export const UPLOAD_REQUEST = 'UPLOAD_REQUEST';
 export const UPLOAD_PROGRESS = 'UPLOAD_PROGRESS';
 export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
 export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
 export const CLEAR_UPLOAD_PROGRESS = 'CLEAR_UPLOAD_PROGRESS';
 export const CLEAR_UPLOAD_SUCCESS = 'CLEAR_UPLOAD_SUCCESS';
-
-export function saveSubject(username, subjectName) {
-  return {
-    type: SAVE_SUBJECTS,
-    username,
-    subjectName
-  };
-}
 
 export const uploadRequest = (files, username, subjectName, fileType) => ({
   type: UPLOAD_REQUEST,

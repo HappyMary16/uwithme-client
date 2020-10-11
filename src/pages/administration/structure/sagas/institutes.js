@@ -13,13 +13,12 @@ function* createInstitute(action) {
   try {
     yield put(startFetching());
 
-    const { universityId, instituteName } = action.payload;
+    const { instituteName } = action.payload;
 
     const response = yield call(http, {
       url: INSTITUTES,
       method: 'post',
       data: {
-        universityId: universityId,
         instituteName: instituteName
       }
     });

@@ -1,0 +1,12 @@
+.form-control {
+    margin-top: 2%;
+}
+
+.form-control:focus {
+    border-color: #5c71c5;
+    box-shadow: 0 0 2px 2px #5c71c5;
+}
+
+.form-check {
+    margin-top: 2%;
+}

@@ -1,24 +1,12 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects';
-import { LOAD_SUBJECTS, renderFiles } from '../actions';
+import { renderFiles } from '../actions';
 import http from '../../../services/http';
-import { FILES, SUBJECTS } from '../../../constants/serverApi';
-import { SAVE_SUBJECTS, UPLOAD_REQUEST, uploadProgress, uploadSuccess } from './actions';
+import { FILES } from '../../../constants/serverApi';
+import { UPLOAD_REQUEST, uploadProgress, uploadSuccess } from './actions';
 import { END, eventChannel } from 'redux-saga';
 
 export function* addFilesAndSubjectsWatcher() {
-  yield takeEvery(SAVE_SUBJECTS, action => saveSubject(action));
   yield takeEvery(UPLOAD_REQUEST, action => uploadFiles(action));
-}
-
-function* saveSubject(action) {
-  const { username, subjectName } = action;
-
-  yield call(http, {
-    url: SUBJECTS + username + '/' + subjectName,
-    method: 'post'
-  });
-
-  yield put({ type: LOAD_SUBJECTS, username });
 }
 
 function* uploadFiles(action) {

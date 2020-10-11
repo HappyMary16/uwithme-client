@@ -10,7 +10,7 @@ import { getLectures, getTasks } from '../../../../utils/FileUtil';
 import { compose } from 'redux';
 import FilesToChoose from '../components/FilesToChoose';
 import { addAccessToFiles } from '../actions';
-import { loadSubjects } from '../../actions';
+import { loadSubjectsAndFiles } from '../../actions';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../../common/styles/styles';
 import Container from '@material-ui/core/Container';
@@ -42,7 +42,7 @@ class ShareFiles extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(loadGroupsByTeacher());
-    dispatch(loadSubjects());
+    dispatch(loadSubjectsAndFiles());
   }
 
   submit() {

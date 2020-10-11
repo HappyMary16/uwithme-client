@@ -50,6 +50,7 @@ import './common/styles/button.css';
 import './common/styles/listItem.css';
 import './common/styles/spases.css';
 import './common/styles/menu.css';
+import './common/styles/inputField.css';
 import Container from 'react-bootstrap/Container';
 
 const useStyles = theme => ({

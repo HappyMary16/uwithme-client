@@ -1,28 +1,30 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import TextField from '@material-ui/core/TextField';
-import DialogActions from '@material-ui/core/DialogActions';
 import i18n from '../../../../locales/i18n';
 import { selectorColors } from '../../../../common/styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) => {
   const [institute, setInstitute] = React.useState();
-  const [departmentName, setDepartmentName] = React.useState('');
+  const [departmentName, setDepartmentName] = React.useState();
+
+  let onCreate = () => {
+    handleCreate(institute.label, institute.value, departmentName);
+    handleClose();
+    setInstitute(null);
+    setDepartmentName(null);
+  };
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
-      <DialogTitle id='form-dialog-title'>{i18n.t('create_department')}</DialogTitle>
-      <DialogContent>
+    <Modal show={open} onHide={handleClose} centered>
+      <Modal.Header>
+        <Modal.Title>{i18n.t('create_department')}</Modal.Title>
+      </Modal.Header>
 
-        <DialogContentText>
-          {i18n.t('select_institute')}
-        </DialogContentText>
+      <Modal.Body>
         <CreatableSelect
           theme={selectorColors}
           placeholder={i18n.t('institute')}
@@ -34,31 +36,20 @@ export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) =
           })}
           value={institute}
         />
+        <Form.Group>
+          <Form.Control placeholder={i18n.t('department_name')}
+                        onChange={(e) => setDepartmentName(e.target.value)}/>
+        </Form.Group>
+      </Modal.Body>
 
-        <DialogContentText>
-          {i18n.t('input_department_name')}
-        </DialogContentText>
-        <TextField
-          autoFocus
-          margin='dense'
-          id='name'
-          label={i18n.t('department_name')}
-          fullWidth
-          onChange={(e) => setDepartmentName(e.target.value)}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color='primary'>
+      <Modal.Footer>
+        <Button onClick={handleClose} variant={'purple'}>
           {i18n.t('cancel')}
         </Button>
-        <Button onClick={() => {
-          handleCreate(institute.label, institute.value, departmentName);
-          handleClose();
-        }} color='primary'>
+        <Button onClick={onCreate} variant={'purple'}>
           {i18n.t('create')}
         </Button>
-      </DialogActions>
-
-    </Dialog>
+      </Modal.Footer>
+    </Modal>
   );
 };

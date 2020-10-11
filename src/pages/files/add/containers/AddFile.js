@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FileTypes, LECTURE } from '../../../../constants/userRoles';
 import { Upload } from '../components/Upload';
-import { loadSubjects } from '../../actions';
+import { loadSubjectsAndFiles } from '../../actions';
 import i18n from '../../../../locales/i18n';
 import { compose } from 'redux';
 import { clearUploadProgress, clearUploadSuccess, uploadRequest } from '../actions';
@@ -43,7 +43,7 @@ class AddFile extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(loadSubjects());
+    dispatch(loadSubjectsAndFiles());
   }
 
   submit() {

@@ -2,9 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   DOWNLOAD_FILES,
   GET_ALL_FILES,
-  getFiles,
   LOAD_SUBJECTS,
-  LOAD_SUBJECTS_BY_WITHOUT_FILES,
+  LOAD_SUBJECTS_AND_FILES,
   renderFiles,
   renderSubjects
 } from './actions';
@@ -14,8 +13,8 @@ import { endFetching, startFetching } from '../../common/actions';
 
 export function* fileOperationWatcher() {
   yield takeEvery(GET_ALL_FILES, () => downloadFiles());
-  yield takeEvery(LOAD_SUBJECTS, () => loadSubjects());
-  yield takeEvery(LOAD_SUBJECTS_BY_WITHOUT_FILES, action => loadSubjectsWithoutFiles(action));
+  yield takeEvery(LOAD_SUBJECTS_AND_FILES, () => loadSubjectsWithFiles());
+  yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
   yield takeEvery(DOWNLOAD_FILES, action => downloadFile(action));
 }
 
@@ -39,12 +38,12 @@ function* downloadFiles() {
   }
 }
 
-function* loadSubjects() {
-  yield call(loadSubjectsWithoutFiles);
-  yield put(getFiles());
+function* loadSubjectsWithFiles() {
+  yield call(loadSubjects);
+  yield call(downloadFiles);
 }
 
-function* loadSubjectsWithoutFiles() {
+function* loadSubjects() {
   try {
     yield put(startFetching());
     const response = yield call(http, {
@@ -56,7 +55,7 @@ function* loadSubjectsWithoutFiles() {
       yield put(renderSubjects(response));
     }
   } catch (e) {
-    alert(e + ' loadSubjectsWithoutFiles');
+    alert(e + ' loadSubjects');
   } finally {
     yield put(endFetching());
   }

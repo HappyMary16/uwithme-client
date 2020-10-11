@@ -33,9 +33,9 @@ class UniversityStructure extends Component {
   }
 
   createInstitute(instituteName) {
-    const { dispatch, universityId } = this.props;
+    const { dispatch } = this.props;
 
-    dispatch(createInstitute(universityId, instituteName));
+    dispatch(createInstitute(instituteName));
   }
 
   createDepartment(instituteName, instituteId, departmentName) {

@@ -60,7 +60,7 @@ export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
         )}
         {user && (
           <Button
-            href='/university'
+            href='/sign-in'
             variant={'purple'}
             className={classes.link}
             onClick={signOutFunc()}

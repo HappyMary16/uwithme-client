@@ -39,12 +39,10 @@ export const addUniversity = (
 });
 
 export const createInstitute = (
-  universityId,
   instituteName
 ) => ({
   type: CREATE_INSTITUTE,
   payload: {
-    universityId,
     instituteName
   }
 });

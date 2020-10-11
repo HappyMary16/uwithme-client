@@ -1,7 +1,7 @@
 export const GET_ALL_FILES = 'GET_ALL_FILES';
 export const DOWNLOAD_FILES = 'LOAD_FILES';
+export const LOAD_SUBJECTS_AND_FILES = 'LOAD_SUBJECTS_WITH_FILES';
 export const LOAD_SUBJECTS = 'LOAD_SUBJECTS';
-export const LOAD_SUBJECTS_BY_WITHOUT_FILES = 'LOAD_SUBJECTS_BY_WITHOUT_FILES';
 export const RENDER_SUBJECTS = 'RENDER_SUBJECTS';
 export const RENDER_FILES = 'RENDER_FILES';
 
@@ -26,15 +26,15 @@ export function loadFile(fileId, fileName, loading) {
   };
 }
 
-export function loadSubjects() {
+export function loadSubjectsAndFiles() {
   return {
-    type: LOAD_SUBJECTS
+    type: LOAD_SUBJECTS_AND_FILES
   };
 }
 
-export function loadSubjectsWithoutFiles() {
+export function loadSubjects() {
   return {
-    type: LOAD_SUBJECTS_BY_WITHOUT_FILES
+    type: LOAD_SUBJECTS
   };
 }
 

@@ -12,7 +12,7 @@ import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRoles';
 import { addLessonToSchedule } from '../actions';
 import { loadTeachersByUniversityId } from '../../users/actions';
-import { loadSubjectsWithoutFiles } from '../../files/actions';
+import { loadSubjects } from '../../files/actions';
 import { loadGroupsByUniversityId } from '../../administration/structure/actions';
 import { loadBuildings, loadLectureHalls } from '../../administration/lectureHalls/action';
 import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../utils/StructureUtils';
@@ -72,7 +72,7 @@ class AddLesson extends Component {
     if (universityId) {
       dispatch(loadGroupsByUniversityId(universityId));
       dispatch(loadTeachersByUniversityId());
-      dispatch(loadSubjectsWithoutFiles());
+      dispatch(loadSubjects());
       dispatch(loadBuildings());
       dispatch(loadLectureHalls());
 
