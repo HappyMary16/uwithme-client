@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import i18n from '../../../locales/i18n';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../common/styles/styles';
-import { loadGroupsByUniversityId } from '../../administration/structure/actions';
+import { loadGroupsByUniversityId } from '../../admin/structure/actions';
 import { getGroupById } from '../../../utils/StructureUtils';
 import { DeleteLessonDialog } from '../components/DeleteLessonDialog';
 import Button from 'react-bootstrap/Button';

@@ -13,8 +13,8 @@ import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRol
 import { addLessonToSchedule } from '../actions';
 import { loadTeachersByUniversityId } from '../../users/actions';
 import { loadSubjects } from '../../files/actions';
-import { loadGroupsByUniversityId } from '../../administration/structure/actions';
-import { loadBuildings, loadLectureHalls } from '../../administration/lectureHalls/action';
+import { loadGroupsByUniversityId } from '../../admin/structure/actions';
+import { loadBuildings, loadLectureHalls } from '../../admin/lectureHalls/actions';
 import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../utils/StructureUtils';
 
 const useStyles = theme => ({

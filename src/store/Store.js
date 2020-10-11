@@ -7,10 +7,10 @@ import authReducers from '../pages/authorization/reducers';
 import filesReducers from '../pages/files/reducers';
 import loadingProcess from '../common/reducers/loadingReducer';
 import rootSaga from './rootSaga';
-import adminReducers from '../pages/administration/structure/reducers';
+import adminReducers from '../pages/admin/structure/reducers';
 import usersReducer from '../pages/users/reducer';
 import scheduleReducers from '../pages/schedule/reducers';
-import lectureHallReducer from '../pages/administration/lectureHalls/reducer';
+import lectureHallReducer from '../pages/admin/lectureHalls/reducers';
 
 export const history = createBrowserHistory();
 

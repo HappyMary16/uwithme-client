@@ -1,16 +1,16 @@
 import React from 'react';
-import List from '@material-ui/core/List';
 import { getLectureHallsByBuilding } from '../../../../utils/StructureUtils';
 import { Building } from './Building';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export const BuildingsList = ({ buildings, lectureHalls, classes }) => {
   return (
-    <List component='nav' className={classes.list}>
+    <ListGroup variant='flush'>
       {buildings && buildings.map(building => (
         <Building building={building}
                   lectureHalls={getLectureHallsByBuilding(lectureHalls, building)}
                   classes={classes}/>
       ))}
-    </List>
+    </ListGroup>
   );
 };

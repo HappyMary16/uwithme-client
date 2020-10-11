@@ -6,7 +6,7 @@ import {
   LOAD_LECTURE_HALLS,
   renderBuildings,
   renderLectureHalls
-} from './action';
+} from './actions';
 import { endFetching, startFetching } from '../../../common/actions';
 import http from '../../../services/http';
 import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';

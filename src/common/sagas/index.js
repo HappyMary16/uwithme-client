@@ -11,7 +11,7 @@ import {
   RENDER_DEPARTMENTS,
   RENDER_INSTITUTES,
   renderUniversities
-} from '../../pages/administration/structure/actions';
+} from '../../pages/admin/structure/actions';
 import { renderGroups } from '../../pages/groups/actions';
 
 export function* commonDataWatcher() {

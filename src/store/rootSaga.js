@@ -6,11 +6,11 @@ import { addAccessToFilesWatcher } from '../pages/files/share/sagas';
 import { commonDataWatcher } from '../common/sagas';
 import { scheduleOperationWatcher } from '../pages/schedule/sagas';
 import { teachersWatcher } from '../pages/users/sagas';
-import { lectureHallWatcher } from '../pages/administration/lectureHalls/sagas';
-import { groupWatcher } from '../pages/administration/structure/sagas/groups';
-import { departmentWatcher } from '../pages/administration/structure/sagas/departments';
-import { instituteWatcher } from '../pages/administration/structure/sagas/institutes';
-import { universityWatcher } from '../pages/administration/structure/sagas/university';
+import { lectureHallWatcher } from '../pages/admin/lectureHalls/sagas';
+import { groupWatcher } from '../pages/admin/structure/sagas/groups';
+import { departmentWatcher } from '../pages/admin/structure/sagas/departments';
+import { instituteWatcher } from '../pages/admin/structure/sagas/institutes';
+import { universityWatcher } from '../pages/admin/structure/sagas/university';
 
 export default function* rootSaga() {
   yield all([

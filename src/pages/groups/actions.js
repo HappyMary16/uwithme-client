@@ -1,4 +1,4 @@
-import { RENDER_GROUPS } from '../administration/structure/actions';
+import { RENDER_GROUPS } from '../admin/structure/actions';
 
 export const LOAD_GROUPS_BY_TEACHER = 'LOAD_GROUPS_BY_TEACHER';
 

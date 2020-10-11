@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import { GroupCard } from '../components/GroupCard';
 import { Container } from '@material-ui/core';
 import { StudentsList } from '../components/StudentList';
-import { loadGroupById } from '../../administration/structure/actions';
+import { loadGroupById } from '../../admin/structure/actions';
 import {
   addStudentToGroup,
   loadStudentsByGroupId,

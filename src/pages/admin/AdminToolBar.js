@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { ADD_LESSON, LECTURE_HALLS, SCHEDULE, USER_HOME } from '../../../constants/links';
-import i18n from '../../../locales/i18n';
+import { ADD_LESSON, LECTURE_HALLS, SCHEDULE, USER_HOME } from '../../constants/links';
+import i18n from '../../locales/i18n';
 import { slide as Menu } from 'react-burger-menu';
 
 const useStyles = makeStyles(theme => ({

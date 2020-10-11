@@ -1,4 +1,4 @@
-import { LECTURE_HALL_CREATED, RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './action';
+import { LECTURE_HALL_CREATED, RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './actions';
 import StateLoader from '../../../store/StateLoader';
 import { SIGN_OUT } from '../../authorization/actions';
 
