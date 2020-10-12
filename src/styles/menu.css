@@ -41,7 +41,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Individual item */
 .bm-item {
-    display: inline-block;
     color: #212121;
     padding-top: 0.5em;
     border-bottom: 2px solid;
@@ -49,7 +48,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .bm-item:hover {
-    background-color: #eeeeee;
     color: #212121 !important;
+    background-color: #eeeeee;
     text-decoration: none;
+}
+
+.bm-item:-webkit-any-link:focus {
+    outline-offset: 0;
+}
+
+.bm-item:focus {
+    outline: -webkit-focus-ring-color auto 0;
 }
