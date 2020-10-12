@@ -12,7 +12,7 @@ class MySchedule extends Component {
   render() {
     const { lessons, user } = this.props;
 
-    return <ScheduleTable lessons={lessons} user={user} isMine={true}/>;
+    return <ScheduleTable lessons={lessons} user={user} isMine={true} />;
   }
 }
 

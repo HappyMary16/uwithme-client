@@ -21,7 +21,7 @@ export const User = ({ user, lessons, isMine, onSaveAvatar }) => {
   return (
     <Grid container xs={12} direction="column">
       <Container className={'paper'}>
-        <UserCard user={user} onSaveAvatar={onSaveAvatar}/>
+        <UserCard user={user} onSaveAvatar={onSaveAvatar} />
       </Container>
       <Container className={'paper'}>
         <Grid container xs={12} direction="row" justify="space-between">

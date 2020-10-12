@@ -50,13 +50,13 @@ export const StudentsList = ({ students, addStudent, removeStudent }) => {
 
         <List>
           {students &&
-          students.map(user => (
-            <Student
-              key={user.id}
-              student={user}
-              removeStudent={removeStudent}
-            />
-          ))}
+            students.map(user => (
+              <Student
+                key={user.id}
+                student={user}
+                removeStudent={removeStudent}
+              />
+            ))}
         </List>
       </Grid>
     </Paper>

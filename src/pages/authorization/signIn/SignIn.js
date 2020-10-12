@@ -49,10 +49,10 @@ class SignIn extends React.Component {
 
     return (
       <Container component="main" maxWidth="xs">
-        <CssBaseline/>
+        <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon/>
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {i18n.t('sign_in')}

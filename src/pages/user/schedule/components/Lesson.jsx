@@ -15,19 +15,19 @@ export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
             md={{ offset: 8, span: 1 }}
             lg={{ offset: 9, span: 1 }}
           >
-            <XCircle className={'icon'} onClick={() => deleteLesson(lesson)}/>
+            <XCircle className={'icon'} onClick={() => deleteLesson(lesson)} />
           </Col>
         </Row>
       )}
       <Row className={'lesson'}>
         <Col xs={8}>
           {lesson.subjectName}
-          <br/>
+          <br />
           {isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName}
         </Col>
         <Col xs={4}>
           {lesson.lectureHall}
-          <br/>
+          <br />
           {lesson.building}
         </Col>
       </Row>

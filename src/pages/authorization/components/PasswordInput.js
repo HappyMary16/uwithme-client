@@ -4,9 +4,9 @@ import { InputField } from '../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 
 export const PasswordInput = ({
-                                setPasswordMethod,
-                                setConfirmPasswordMethod
-                              }) => {
+  setPasswordMethod,
+  setConfirmPasswordMethod
+}) => {
   let [error, setError] = React.useState(false);
   let [password, setPassword] = React.useState('');
   let [confirmPassword, setConfirmPassword] = React.useState('');

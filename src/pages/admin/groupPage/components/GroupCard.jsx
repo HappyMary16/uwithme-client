@@ -70,7 +70,7 @@ export const GroupCard = ({ group, groupTeacher }) => {
             onClick={() => history.push(USER_HOME_PAGE(groupTeacher.id))}
           >
             <ListItemAvatar>
-              <Avatar alt="photo" src="/empty-avatar.jpg"/>
+              <Avatar alt="photo" src="/empty-avatar.jpg" />
             </ListItemAvatar>
             <ListItemText
               primary={getName(groupTeacher)}
@@ -90,7 +90,7 @@ export const GroupCard = ({ group, groupTeacher }) => {
           onClick={() => history.push(GROUP_SCHEDULE(group.value))}
           variant="outlined"
           size="medium"
-          startIcon={<AssignmentIcon/>}
+          startIcon={<AssignmentIcon />}
         >
           {i18n.t('group_schedule')}
         </Button>

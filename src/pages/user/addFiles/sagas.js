@@ -50,8 +50,7 @@ function createUploader(payload) {
   let emit;
   const chan = eventChannel(emitter => {
     emit = emitter;
-    return () => {
-    };
+    return () => {};
   });
 
   const uploadPromise = upload(payload, event => {

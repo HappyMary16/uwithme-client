@@ -18,12 +18,12 @@ export const Student = ({ student, removeStudent }) => {
   return (
     <ListItem button onClick={handleClick}>
       <ListItemAvatar>
-        <Avatar alt="photo" src="/empty-avatar.jpg"/>
+        <Avatar alt="photo" src="/empty-avatar.jpg" />
       </ListItemAvatar>
-      <ListItemText primary={getName(student)}/>
+      <ListItemText primary={getName(student)} />
       <ListItemSecondaryAction>
         <IconButton onClick={() => removeStudent(student)}>
-          <DeleteIcon/>
+          <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

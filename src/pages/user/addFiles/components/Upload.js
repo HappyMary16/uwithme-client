@@ -5,12 +5,12 @@ import Container from '@material-ui/core/Container';
 import '../../../../styles/fileUpload.css';
 
 export const Upload = ({
-                         addFiles,
-                         uploadProgress,
-                         uploading,
-                         successfulUploaded,
-                         files
-                       }) => {
+  addFiles,
+  uploadProgress,
+  uploading,
+  successfulUploaded,
+  files
+}) => {
   let onFilesAdded = filesToAdd => {
     let array = [].concat(files);
 

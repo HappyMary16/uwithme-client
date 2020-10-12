@@ -7,11 +7,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 export const AddLectureHall = ({
-                                 buildings,
-                                 open,
-                                 handleClose,
-                                 handleCreate
-                               }) => {
+  buildings,
+  open,
+  handleClose,
+  handleCreate
+}) => {
   const [building, setBuilding] = React.useState();
   const [lectureHallName, setLectureHall] = React.useState();
   const [placeNumber, setPlaceNumber] = React.useState();

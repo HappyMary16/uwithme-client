@@ -63,22 +63,22 @@ const useStyles = theme => ({
 
 function OpenGroupPage() {
   const { groupId } = useParams();
-  return <GroupPage groupId={groupId}/>;
+  return <GroupPage groupId={groupId} />;
 }
 
 function OpenUserPage() {
   const { userId } = useParams();
-  return <UserPage teacherId={userId}/>;
+  return <UserPage teacherId={userId} />;
 }
 
 function OpenUserSchedule() {
   const { userId } = useParams();
-  return <UserSchedule userId={userId}/>;
+  return <UserSchedule userId={userId} />;
 }
 
 function OpenGroupSchedule() {
   const { groupId } = useParams();
-  return <GroupSchedule groupId={groupId}/>;
+  return <GroupSchedule groupId={groupId} />;
 }
 
 class App extends Component {
@@ -87,15 +87,15 @@ class App extends Component {
 
     return (
       <div>
-        <NavigationContainer/>
+        <NavigationContainer />
         <Backdrop className={classes.backdrop} open={isFetching !== 0}>
-          <CircularProgress color="inherit"/>
+          <CircularProgress color="inherit" />
         </Backdrop>
 
         {user && !isAdmin(user) && (
-          <UserToolBar user={user} isOpen={isMenuOpen}/>
+          <UserToolBar user={user} isOpen={isMenuOpen} />
         )}
-        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen}/>}
+        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
 
         <Container className={'main-page-container'}>
           {!user && (
@@ -105,8 +105,8 @@ class App extends Component {
                 path={ADD_UNIVERSITY_PATH}
                 component={AddUniversity}
               />
-              <Route exact path={SIGN_UP} component={SignUp}/>
-              <Route exact path={SIGN_IN} component={SignIn}/>
+              <Route exact path={SIGN_UP} component={SignUp} />
+              <Route exact path={SIGN_IN} component={SignIn} />
             </div>
           )}
 
@@ -114,23 +114,23 @@ class App extends Component {
             <div>
               {!isAdmin(user) && (
                 <div>
-                  <Route exact path={USER_HOME} component={UserHome}/>
-                  <Route exact path={FILES} component={PageWithFiles}/>
-                  <Route exact path={SCHEDULE} component={MySchedule}/>
+                  <Route exact path={USER_HOME} component={UserHome} />
+                  <Route exact path={FILES} component={PageWithFiles} />
+                  <Route exact path={SCHEDULE} component={MySchedule} />
                 </div>
               )}
 
               {isStudent(user) && (
                 <div>
-                  <Route exact path={TEACHERS} component={TeachersList}/>
+                  <Route exact path={TEACHERS} component={TeachersList} />
                 </div>
               )}
 
               {isTeacher(user) && (
                 <div>
-                  <Route exact path={ADD_FILE} component={AddFile}/>
-                  <Route exact path={SHARE_FILES} component={ShareFiles}/>
-                  <Route exact path={STUDENTS} component={StudentsList}/>
+                  <Route exact path={ADD_FILE} component={AddFile} />
+                  <Route exact path={SHARE_FILES} component={ShareFiles} />
+                  <Route exact path={STUDENTS} component={StudentsList} />
                 </div>
               )}
 
@@ -141,26 +141,26 @@ class App extends Component {
                     path={USER_HOME}
                     component={UniversityStructure}
                   />
-                  <Route exact path={ADD_LESSON} component={AddLesson}/>
-                  <Route exact path={SCHEDULE} component={GroupSchedule}/>
-                  <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
+                  <Route exact path={ADD_LESSON} component={AddLesson} />
+                  <Route exact path={SCHEDULE} component={GroupSchedule} />
+                  <Route exact path={LECTURE_HALLS} component={LectureHalls} />
                   <Route exact path={GROUP_PAGE_ROUTER}>
-                    <OpenGroupPage/>
+                    <OpenGroupPage />
                   </Route>
                   <Route exact path={GROUP_SCHEDULE_ROUTER}>
-                    <OpenGroupSchedule/>
+                    <OpenGroupSchedule />
                   </Route>
                 </div>
               )}
               <div>
                 <Route path={USER_HOME_PAGE_ROUTER}>
-                  <OpenUserPage/>
+                  <OpenUserPage />
                 </Route>
                 <Route path={USER_SCHEDULE_ROUTER}>
-                  <OpenUserSchedule/>
+                  <OpenUserSchedule />
                 </Route>
               </div>
-              <div/>
+              <div />
             </div>
           )}
         </Container>

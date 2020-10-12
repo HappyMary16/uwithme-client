@@ -41,10 +41,10 @@ export const SubjectFiles = ({ name, files }) => {
     <List>
       <ListItem button onClick={subjectHandleClick}>
         <ListItemIcon>
-          <FolderIcon/>
+          <FolderIcon />
         </ListItemIcon>
-        <ListItemText primary={name}/>
-        {open ? <ExpandLess/> : <ExpandMore/>}
+        <ListItemText primary={name} />
+        {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -55,10 +55,10 @@ export const SubjectFiles = ({ name, files }) => {
             className={classes.nested}
           >
             <ListItemIcon>
-              <FolderIcon/>
+              <FolderIcon />
             </ListItemIcon>
-            <ListItemText primary={i18n.t('lecture')}/>
-            {lectureOpen ? <ExpandLess/> : <ExpandMore/>}
+            <ListItemText primary={i18n.t('lecture')} />
+            {lectureOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 
           <ListFiles open={lectureOpen} files={getLectures(files)} />

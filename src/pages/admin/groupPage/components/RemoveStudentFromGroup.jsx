@@ -10,11 +10,11 @@ import i18n from '../../../../locales/i18n';
 import { getName } from '../../../../utils/UsersUtil';
 
 export const RemoveStudentFromGroup = ({
-                                         open,
-                                         student,
-                                         handleNo,
-                                         handleYes
-                                       }) => {
+  open,
+  student,
+  handleNo,
+  handleYes
+}) => {
   return (
     <Dialog
       fullWidth={true}

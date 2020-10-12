@@ -6,11 +6,11 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 export const DeleteLessonDialog = ({
-                                     open,
-                                     lesson,
-                                     handleClose,
-                                     handleDelete
-                                   }) => {
+  open,
+  lesson,
+  handleClose,
+  handleDelete
+}) => {
   const [choseGroups, setChoseGroups] = React.useState(lesson.groups);
   const groups = lesson.groups.map(group => {
     return {

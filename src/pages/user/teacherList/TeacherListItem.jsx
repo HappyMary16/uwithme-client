@@ -29,7 +29,7 @@ export const TeacherListItem = ({ teacher }) => {
       />
       <ListItemSecondaryAction>
         <IconButton href={USER_SCHEDULE(teacher.id)}>
-          <AssignmentIcon/>
+          <AssignmentIcon />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

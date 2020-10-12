@@ -34,21 +34,21 @@ let ListFiles = ({ open, files, dispatch }) => {
         {files.map((file, i) => (
           <ListItem button key={i} className={classes.nested}>
             <ListItemIcon>
-              <DescriptionIcon/>
+              <DescriptionIcon />
             </ListItemIcon>
-            <ListItemText primary={file.name}/>
+            <ListItemText primary={file.name} />
             <ListItemSecondaryAction>
               {isPossibleToOpen(file.name) && (
                 <IconButton
                   onClick={() => dispatch(loadFile(file.id, file.name, false))}
                 >
-                  <ImportContactsIcon/>
+                  <ImportContactsIcon />
                 </IconButton>
               )}
               <IconButton
                 onClick={() => dispatch(loadFile(file.id, file.name, true))}
               >
-                <GetAppIcon/>
+                <GetAppIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>

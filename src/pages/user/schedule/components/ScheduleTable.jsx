@@ -15,12 +15,12 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 export const ScheduleTable = ({
-                                lessons,
-                                user,
-                                isMine,
-                                isEditMode = false,
-                                deleteLesson
-                              }) => {
+  lessons,
+  user,
+  isMine,
+  isEditMode = false,
+  deleteLesson
+}) => {
   let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
@@ -58,43 +58,43 @@ export const ScheduleTable = ({
 
       <Table bordered responsive={'md'}>
         <thead>
-        <tr>
-          <th></th>
-          {WEEK_DAYS.map(weekDay => (
-            <th key={weekDay.value}>{weekDay.label}</th>
-          ))}
-        </tr>
+          <tr>
+            <th></th>
+            {WEEK_DAYS.map(weekDay => (
+              <th key={weekDay.value}>{weekDay.label}</th>
+            ))}
+          </tr>
         </thead>
         <tbody>
-        {LESSONS_TIME.map(lessonTime => (
-          <tr key={lessonTime.value}>
-            <th>
-              {lessonTime.start}
-              <br/>
-              {lessonTime.end}
-            </th>
-            {WEEK_DAYS.map(weekDay => {
-              let lesson = getLesson(
-                lessons,
-                weekDay.value,
-                lessonTime.value,
-                weekNumber ? 1 : 2
-              );
-              return (
-                <td key={weekDay.value}>
-                  {lesson && (
-                    <Lesson
-                      lesson={lesson}
-                      user={user}
-                      isEditMode={isEditMode}
-                      deleteLesson={deleteLesson}
-                    />
-                  )}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
+          {LESSONS_TIME.map(lessonTime => (
+            <tr key={lessonTime.value}>
+              <th>
+                {lessonTime.start}
+                <br />
+                {lessonTime.end}
+              </th>
+              {WEEK_DAYS.map(weekDay => {
+                let lesson = getLesson(
+                  lessons,
+                  weekDay.value,
+                  lessonTime.value,
+                  weekNumber ? 1 : 2
+                );
+                return (
+                  <td key={weekDay.value}>
+                    {lesson && (
+                      <Lesson
+                        lesson={lesson}
+                        user={user}
+                        isEditMode={isEditMode}
+                        deleteLesson={deleteLesson}
+                      />
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>

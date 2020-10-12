@@ -22,11 +22,11 @@ export const SelectField = ({ label, initialValue, values, onChange }) => {
       fullWidth
     >
       {values &&
-      values.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
+        values.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
     </TextField>
   );
 };

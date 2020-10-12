@@ -43,9 +43,9 @@ class GroupSchedule extends Component {
   handleGroupChange(groupId) {
     const { dispatch } = this.props;
     groupId &&
-    this.setState({
-      groupId: groupId
-    });
+      this.setState({
+        groupId: groupId
+      });
     groupId && dispatch(findLessonsByGroupId(groupId));
   }
 

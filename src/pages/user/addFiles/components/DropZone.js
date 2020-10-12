@@ -63,7 +63,7 @@ export const DropZone = ({ disabled, onFilesAddedFunk }) => {
         multiple
         onChange={onFilesAdded}
       />
-      <CloudUploadIcon/>
+      <CloudUploadIcon />
       <span>{i18n.t('upload_files')}</span>
     </div>
   );

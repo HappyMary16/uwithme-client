@@ -63,15 +63,15 @@ class PageWithFiles extends React.Component {
         </Grid>
         <List component="nav" className={classes.list}>
           {subjects &&
-          subjects.map((subject, i) => (
-            <SubjectFiles
-              key={i}
-              name={subject.name}
-              files={
-                files && files.filter(file => file.subjectId === subject.id)
-              }
-            />
-          ))}
+            subjects.map((subject, i) => (
+              <SubjectFiles
+                key={i}
+                name={subject.name}
+                files={
+                  files && files.filter(file => file.subjectId === subject.id)
+                }
+              />
+            ))}
         </List>
       </Grid>
     );

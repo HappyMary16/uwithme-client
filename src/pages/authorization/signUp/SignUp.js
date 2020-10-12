@@ -100,7 +100,7 @@ class SignUp extends React.Component {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon/>
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {i18n.t('sign_up')}

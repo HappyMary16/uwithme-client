@@ -25,9 +25,9 @@ export const Progress = ({ progress }) => {
   return (
     <Grid container xs={12} alignItems={'center'}>
       <Grid item xs={10} className={classes.progressBar}>
-        <div className={classes.progress} style={{ width: progress + '%' }}/>
+        <div className={classes.progress} style={{ width: progress + '%' }} />
       </Grid>
-      {progress === 100 && <CheckCircleOutlineIcon fontSize={'small'}/>}
+      {progress === 100 && <CheckCircleOutlineIcon fontSize={'small'} />}
     </Grid>
   );
 };

@@ -50,7 +50,7 @@ class AddUniversity extends Component {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <SchoolIcon/>
+            <SchoolIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {i18n.t('add_university')}

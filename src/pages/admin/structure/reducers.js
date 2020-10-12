@@ -108,10 +108,10 @@ export default function adminReducers(
             instituteId: action.payload.group.department.institute.id,
             instituteName: action.payload.group.department.institute.name,
             universityId:
-            action.payload.group.department.institute.universityId,
+              action.payload.group.department.institute.universityId,
             teacherId: action.payload.group.teacherId,
             isShowingInRegistration:
-            action.payload.group.isShowingInRegistration
+              action.payload.group.isShowingInRegistration
           }
         ]
       };

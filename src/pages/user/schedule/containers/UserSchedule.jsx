@@ -18,7 +18,7 @@ class UserSchedule extends Component {
     const user = findUserById(users, userId);
 
     return (
-      user && <ScheduleTable user={user} lessons={lessons} isMine={false}/>
+      user && <ScheduleTable user={user} lessons={lessons} isMine={false} />
     );
   }
 }

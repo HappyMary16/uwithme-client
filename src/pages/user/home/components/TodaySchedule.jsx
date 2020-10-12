@@ -48,29 +48,29 @@ export const TodaySchedule = ({ lessons, day, user, weekNumber }) => {
               )}
             </TableRow>
             {lessons &&
-            filterAndSortLessons(lessons, day, weekNumber).map(lesson => (
-              <TableRow key={lesson.name}>
-                <TableCell align={'center'} component="td" scope="row">
-                  {getLessonTime(lesson.lessonTime)}
-                </TableCell>
-                <TableCell align={'center'} component="td">
-                  {lesson.subjectName}
-                </TableCell>
-                <TableCell align={'center'} component="td">
-                  {lesson.lectureHall}
-                </TableCell>
-                {isStudent(user) && (
-                  <TableCell align={'center'} component="td">
-                    {lesson.teacherName}
+              filterAndSortLessons(lessons, day, weekNumber).map(lesson => (
+                <TableRow key={lesson.name}>
+                  <TableCell align={'center'} component="td" scope="row">
+                    {getLessonTime(lesson.lessonTime)}
                   </TableCell>
-                )}
-                {isTeacher(user) && (
                   <TableCell align={'center'} component="td">
-                    {getGroupList(lesson.groups)}
+                    {lesson.subjectName}
                   </TableCell>
-                )}
-              </TableRow>
-            ))}
+                  <TableCell align={'center'} component="td">
+                    {lesson.lectureHall}
+                  </TableCell>
+                  {isStudent(user) && (
+                    <TableCell align={'center'} component="td">
+                      {lesson.teacherName}
+                    </TableCell>
+                  )}
+                  {isTeacher(user) && (
+                    <TableCell align={'center'} component="td">
+                      {getGroupList(lesson.groups)}
+                    </TableCell>
+                  )}
+                </TableRow>
+              ))}
             {!areLessonsToday(lessons, day) && (
               <TableRow>
                 <TableCell></TableCell>

@@ -16,9 +16,9 @@ class TeachersList extends Component {
     return (
       <List>
         {teachers &&
-        teachers.map(teacher => (
-          <TeacherListItem key={teacher.id} teacher={teacher}/>
-        ))}
+          teachers.map(teacher => (
+            <TeacherListItem key={teacher.id} teacher={teacher} />
+          ))}
       </List>
     );
   }

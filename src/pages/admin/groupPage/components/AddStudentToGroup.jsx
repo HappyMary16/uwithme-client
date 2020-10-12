@@ -19,12 +19,12 @@ const styles = {
 };
 
 const AddStudentToGroup = ({
-                             open,
-                             students,
-                             handleClose,
-                             handleAdd,
-                             classes
-                           }) => {
+  open,
+  students,
+  handleClose,
+  handleAdd,
+  classes
+}) => {
   const [selectedStudents, setStudents] = React.useState('');
 
   return (

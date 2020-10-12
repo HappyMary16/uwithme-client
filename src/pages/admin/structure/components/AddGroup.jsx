@@ -11,12 +11,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 export const AddGroup = ({
-                           institutes,
-                           departments,
-                           open,
-                           handleClose,
-                           handleCreate
-                         }) => {
+  institutes,
+  departments,
+  open,
+  handleClose,
+  handleCreate
+}) => {
   const [institute, setInstitute] = React.useState();
   const [department, setDepartment] = React.useState();
   const [groupName, setGroupName] = React.useState();

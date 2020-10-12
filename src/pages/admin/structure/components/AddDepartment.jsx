@@ -8,11 +8,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 export const AddDepartment = ({
-                                institutes,
-                                open,
-                                handleClose,
-                                handleCreate
-                              }) => {
+  institutes,
+  open,
+  handleClose,
+  handleCreate
+}) => {
   const [institute, setInstitute] = React.useState();
   const [departmentName, setDepartmentName] = React.useState();
 
