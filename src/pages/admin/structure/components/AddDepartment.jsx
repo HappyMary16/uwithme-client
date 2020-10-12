@@ -1,13 +1,18 @@
 import React from 'react';
 
 import i18n from '../../../../locales/i18n';
-import { selectorColors } from '../../../../common/styles/styles';
+import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) => {
+export const AddDepartment = ({
+                                institutes,
+                                open,
+                                handleClose,
+                                handleCreate
+                              }) => {
   const [institute, setInstitute] = React.useState();
   const [departmentName, setDepartmentName] = React.useState();
 
@@ -30,15 +35,19 @@ export const AddDepartment = ({ institutes, open, handleClose, handleCreate }) =
           placeholder={i18n.t('institute')}
           options={institutes}
           onChange={setInstitute}
-          onCreateOption={(e) => setInstitute({
-            value: e,
-            label: e
-          })}
+          onCreateOption={e =>
+            setInstitute({
+              value: e,
+              label: e
+            })
+          }
           value={institute}
         />
         <Form.Group>
-          <Form.Control placeholder={i18n.t('department_name')}
-                        onChange={(e) => setDepartmentName(e.target.value)}/>
+          <Form.Control
+            placeholder={i18n.t('department_name')}
+            onChange={e => setDepartmentName(e.target.value)}
+          />
         </Form.Group>
       </Modal.Body>
 

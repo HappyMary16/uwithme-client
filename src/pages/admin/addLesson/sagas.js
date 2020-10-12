@@ -1,11 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { ADD_LESSON_TO_SCHEDULE } from './actions';
-import { endFetching, startFetching } from '../../../common/actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
+import { endFetching, startFetching } from '../../navigation/actions';
 
 export function* addLessonWatcher() {
-  yield takeEvery(ADD_LESSON_TO_SCHEDULE, action => addLessonToSchedule(action));
+  yield takeEvery(ADD_LESSON_TO_SCHEDULE, action =>
+    addLessonToSchedule(action)
+  );
 }
 
 function* addLessonToSchedule(action) {
@@ -45,7 +47,6 @@ function* addLessonToSchedule(action) {
     if (response && response.status === 201) {
       alert('Пари додані в розклад');
     }
-
   } catch (e) {
     alert(e);
   } finally {

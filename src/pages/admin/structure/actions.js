@@ -1,5 +1,3 @@
-export const ADD_UNIVERSITY = 'ADD_UNIVERSITY';
-
 export const CREATE_INSTITUTE = 'CREATE_INSTITUTE';
 export const CREATE_DEPARTMENT = 'CREATE_DEPARTMENT';
 export const CREATE_GROUP = 'CREATE_GROUP';
@@ -8,8 +6,10 @@ export const INSTITUTE_CREATED = 'INSTITUTE_CREATED';
 export const DEPARTMENT_CREATED = 'DEPARTMENT_CREATED';
 export const RENDER_GROUP = 'RENDER_GROUP';
 
-export const LOAD_INSTITUTES_BY_UNIVERSITY_ID = 'LOAD_INSTITUTES_BY_UNIVERSITY_ID';
-export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID = 'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
+export const LOAD_INSTITUTES_BY_UNIVERSITY_ID =
+  'LOAD_INSTITUTES_BY_UNIVERSITY_ID';
+export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID =
+  'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
 export const LOAD_GROUPS_BY_UNIVERSITY_ID = 'LOAD_GROUPS_BY_UNIVERSITY_ID';
 export const LOAD_GROUP_BY_ID = 'LOAD_GROUPS_BY_ID';
 
@@ -23,31 +23,14 @@ export const RENDER_DEPARTMENTS = 'RENDER_DEPARTMENTS';
 export const RENDER_GROUPS = 'RENDER_GROUPS';
 export const RENDER_UNIVERSITIES = 'RENDER_UNIVERSITIES';
 
-export const addUniversity = (
-  universityName,
-  username,
-  password,
-  confirmPassword
-) => ({
-  type: ADD_UNIVERSITY,
-  payload: {
-    universityName: universityName,
-    username: username,
-    password: password,
-    confirmPassword: confirmPassword
-  }
-});
-
-export const createInstitute = (
-  instituteName
-) => ({
+export const createInstitute = instituteName => ({
   type: CREATE_INSTITUTE,
   payload: {
     instituteName
   }
 });
 
-export const instituteCreated = (institute) => ({
+export const instituteCreated = institute => ({
   type: INSTITUTE_CREATED,
   payload: {
     institute
@@ -67,7 +50,7 @@ export const createDepartment = (
   }
 });
 
-export const departmentCreated = (department) => ({
+export const departmentCreated = department => ({
   type: DEPARTMENT_CREATED,
   payload: {
     department
@@ -93,7 +76,7 @@ export const createGroup = (
   }
 });
 
-export const renderGroup = (group) => ({
+export const renderGroup = group => ({
   type: RENDER_GROUP,
   payload: {
     group
@@ -116,7 +99,7 @@ export const loadDepartmentsByUniversityId = () => ({
   type: LOAD_DEPARTMENTS_BY_UNIVERSITY_ID
 });
 
-export const loadGroupsByUniversityId = (universityId) => ({
+export const loadGroupsByUniversityId = universityId => ({
   type: LOAD_GROUPS_BY_UNIVERSITY_ID,
   payload: universityId
 });
@@ -129,14 +112,14 @@ export const loadGroups = () => ({
   type: LOAD_GROUPS
 });
 
-export const renderUniversities = (universities) => ({
+export const renderUniversities = universities => ({
   type: RENDER_UNIVERSITIES,
   payload: {
     universities
   }
 });
 
-export const loadGroupById = (groupId) => ({
+export const loadGroupById = groupId => ({
   type: LOAD_GROUP_BY_ID,
   payload: {
     id: groupId

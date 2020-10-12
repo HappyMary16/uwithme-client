@@ -3,7 +3,7 @@ import config from '../config';
 export const apiRoot = `http://${config.host}:${config.port}/api/`;
 
 const INFO = 'info/';
-const AUTH = 'auth/';
+const AUTH = 'authorization/';
 
 export const SIGN_IN = AUTH + 'signIn';
 export const SIGN_UP = AUTH + 'signUp';
@@ -28,7 +28,7 @@ export const INFO_INSTITUTES = INFO + INSTITUTES;
 export const LECTURE_HALLS = 'lectureHalls/';
 
 export const LESSONS = 'lessons/';
-export const GET_LESSONS_BY_GROUP_ID = LESSONS + 'group/';
+export const GET_LESSONS_BY_GROUP_ID = LESSONS + 'groupPage/';
 export const LESSONS_BY_USERNAME = LESSONS + 'username/';
 
 export const SUBJECTS = 'subjects/';
@@ -40,7 +40,7 @@ export const USERS = 'users/';
 export const TEACHERS = USERS + 'teachers/';
 export const STUDENTS = USERS + 'students/';
 export const STUDENTS_BY_GROUP_ID = STUDENTS + 'groupId/';
-export const GROUP_STUDENT_ID = USERS + 'group/studentId/';
-export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/group/';
+export const GROUP_STUDENT_ID = USERS + 'groupPage/studentId/';
+export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/groupPage/';
 export const STUDENT_GROUP = USERS + 'group';
 

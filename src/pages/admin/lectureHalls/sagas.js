@@ -7,7 +7,7 @@ import {
   renderBuildings,
   renderLectureHalls
 } from './actions';
-import { endFetching, startFetching } from '../../../common/actions';
+import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';
 
@@ -59,7 +59,12 @@ function* createLectureHall(action) {
   try {
     yield put(startFetching());
 
-    const { universityId, buildingName, lectureHallName, placeNumber } = action.payload;
+    const {
+      universityId,
+      buildingName,
+      lectureHallName,
+      placeNumber
+    } = action.payload;
 
     const response = yield call(http, {
       url: LECTURE_HALLS,

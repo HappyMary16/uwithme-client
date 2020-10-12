@@ -8,7 +8,7 @@ import {
   RENDER_INSTITUTES,
   RENDER_UNIVERSITIES
 } from './actions';
-import { SIGN_OUT } from '../../authorization/actions';
+import { SIGN_OUT } from '../../authorization/signIn/actions';
 
 export default function adminReducers(
   state = new StateLoader().loadState().adminReducers || { groups: [] },
@@ -70,28 +70,35 @@ export default function adminReducers(
     case INSTITUTE_CREATED:
       return {
         ...state,
-        institutes: [...state.institutes,
+        institutes: [
+          ...state.institutes,
           {
             value: action.payload.institute.id,
             label: action.payload.institute.name,
             universityId: action.payload.institute.universityId
-          }]
+          }
+        ]
       };
     case DEPARTMENT_CREATED:
       return {
         ...state,
-        departments: [...state.departments,
+        departments: [
+          ...state.departments,
           {
             value: action.payload.department.id,
             label: action.payload.department.name,
             instituteId: action.payload.department.institute.id
-          }]
+          }
+        ]
       };
     case RENDER_GROUP:
       console.log(action.groups);
       return {
         ...state,
-        groups: [...state.groups.filter(group => group.value !== action.payload.group.id),
+        groups: [
+          ...state.groups.filter(
+            group => group.value !== action.payload.group.id
+          ),
           {
             value: action.payload.group.id,
             label: action.payload.group.name,
@@ -100,10 +107,13 @@ export default function adminReducers(
             departmentName: action.payload.group.department.name,
             instituteId: action.payload.group.department.institute.id,
             instituteName: action.payload.group.department.institute.name,
-            universityId: action.payload.group.department.institute.universityId,
+            universityId:
+            action.payload.group.department.institute.universityId,
             teacherId: action.payload.group.teacherId,
-            isShowingInRegistration: action.payload.group.isShowingInRegistration
-          }]
+            isShowingInRegistration:
+            action.payload.group.isShowingInRegistration
+          }
+        ]
       };
     case SIGN_OUT:
       return { groups: [] };

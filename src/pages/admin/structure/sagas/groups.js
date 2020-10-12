@@ -7,14 +7,16 @@ import {
   loadInstitutesByUniversityId,
   renderGroup
 } from '../actions';
-import { endFetching, startFetching } from '../../../../common/actions';
+import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { GROUPS, GROUPS_BY_UNIVERSITY_ID } from '../../../../constants/serverApi';
-import { LOAD_GROUPS_BY_TEACHER, renderGroups } from '../../../groups/actions';
+import { LOAD_GROUPS_BY_TEACHER, renderGroups } from '../../groupPage/actions';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, action => createGroup(action));
-  yield takeEvery(LOAD_GROUPS_BY_UNIVERSITY_ID, action => loadGroupsByUniversityId(action));
+  yield takeEvery(LOAD_GROUPS_BY_UNIVERSITY_ID, action =>
+    loadGroupsByUniversityId(action)
+  );
   yield takeEvery(LOAD_GROUP_BY_ID, action => loadGroupById(action));
   yield takeEvery(LOAD_GROUPS_BY_TEACHER, () => loadGroupByTeacher());
 }
@@ -23,7 +25,14 @@ function* createGroup(action) {
   try {
     yield put(startFetching());
 
-    const { universityId, instituteName, departmentName, course, groupName, isShowingInRegistration } = action.payload;
+    const {
+      universityId,
+      instituteName,
+      departmentName,
+      course,
+      groupName,
+      isShowingInRegistration
+    } = action.payload;
 
     const response = yield call(http, {
       url: GROUPS,

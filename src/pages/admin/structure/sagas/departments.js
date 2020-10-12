@@ -6,13 +6,15 @@ import {
   loadInstitutesByUniversityId,
   RENDER_DEPARTMENTS
 } from '../actions';
-import { endFetching, startFetching } from '../../../../common/actions';
+import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { DEPARTMENTS } from '../../../../constants/serverApi';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
-  yield takeEvery(LOAD_DEPARTMENTS_BY_UNIVERSITY_ID, () => loadDepartmentsByUniversityId());
+  yield takeEvery(LOAD_DEPARTMENTS_BY_UNIVERSITY_ID, () =>
+    loadDepartmentsByUniversityId()
+  );
 }
 
 function* createDepartment(action) {

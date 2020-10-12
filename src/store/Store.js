@@ -3,13 +3,13 @@ import createSagaMiddleware from 'redux-saga';
 import { connectRouter } from 'connected-react-router';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createBrowserHistory } from 'history';
-import authReducers from '../pages/authorization/reducers';
-import filesReducers from '../pages/files/reducers';
-import loadingProcess from '../common/reducers/loadingReducer';
+import authReducers from '../pages/authorization/signIn/reducers';
+import filesReducers from '../pages/user/files/reducers';
+import loadingProcess from '../pages/navigation/loadingReducer';
 import rootSaga from './rootSaga';
 import adminReducers from '../pages/admin/structure/reducers';
-import usersReducer from '../pages/users/reducer';
-import scheduleReducers from '../pages/schedule/reducers';
+import usersReducer from '../pages/user/reducer';
+import scheduleReducers from '../pages/user/schedule/reducers';
 import lectureHallReducer from '../pages/admin/lectureHalls/reducers';
 
 export const history = createBrowserHistory();

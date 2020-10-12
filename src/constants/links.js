@@ -14,11 +14,11 @@ export const USER_HOME_PAGE = teacherId => `/user/${teacherId}`;
 //student
 export const TEACHERS = '/teachers/list';
 
-//group
+//groupPage
 export const GROUP_SCHEDULE = groupId => `/group/schedule/${groupId}`;
 export const GROUP_PAGE = groupId => `/group/${groupId}`;
-export const GROUP_SCHEDULE_ROUTER = '/group/schedule/:groupId';
-export const GROUP_PAGE_ROUTER = '/group/:groupId';
+export const GROUP_SCHEDULE_ROUTER = '/groupPage/schedule/:groupId';
+export const GROUP_PAGE_ROUTER = '/groupPage/:groupId';
 
 //teacher
 export const ADD_FILE = '/files/add';

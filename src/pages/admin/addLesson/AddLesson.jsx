@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import i18n from '../../../locales/i18n';
 import Select from 'react-select';
-import { selectorColors } from '../../../common/styles/styles';
+import { selectorColors } from '../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRoles';
-import { loadTeachersByUniversityId } from '../../users/actions';
-import { loadSubjects } from '../../files/actions';
+import { loadTeachersByUniversityId } from '../../user/actions';
+import { loadSubjects } from '../../user/files/actions';
 import { loadGroupsByUniversityId } from '../structure/actions';
 import { loadBuildings, loadLectureHalls } from '../lectureHalls/actions';
 import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../utils/StructureUtils';
@@ -53,17 +53,29 @@ class AddLesson extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { subject, teacher, lectureHall, selectedGroups, weekDays, lessonTimes, weekNumbers } = this.state;
-
-    dispatch(addLessonToSchedule(subject.value,
-      subject.label,
-      teacher.value,
-      teacher.label,
-      lectureHall.value,
+    const {
+      subject,
+      teacher,
+      lectureHall,
       selectedGroups,
       weekDays,
       lessonTimes,
-      weekNumbers));
+      weekNumbers
+    } = this.state;
+
+    dispatch(
+      addLessonToSchedule(
+        subject.value,
+        subject.label,
+        teacher.value,
+        teacher.label,
+        lectureHall.value,
+        selectedGroups,
+        weekDays,
+        lessonTimes,
+        weekNumbers
+      )
+    );
   }
 
   render() {
@@ -79,29 +91,33 @@ class AddLesson extends Component {
         <CreatableSelect
           theme={selectorColors}
           placeholder={i18n.t('subject')}
-          options={subjects &&
-          subjects.map(subject => {
-            return {
-              label: subject.name,
-              value: subject.id
-            };
-          })}
+          options={
+            subjects &&
+            subjects.map(subject => {
+              return {
+                label: subject.name,
+                value: subject.id
+              };
+            })
+          }
           onChange={opinion => this.setState({ subject: opinion })}
-          className='selector'
+          className="selector"
         />
 
         <CreatableSelect
           theme={selectorColors}
           placeholder={i18n.t('teacher')}
-          options={teachers &&
-          teachers.map(s => {
-            return {
-              value: s.id,
-              label: s.surname + ' ' + s.firstName + ' ' + s.lastName
-            };
-          })}
+          options={
+            teachers &&
+            teachers.map(s => {
+              return {
+                value: s.id,
+                label: s.surname + ' ' + s.firstName + ' ' + s.lastName
+              };
+            })
+          }
           onChange={opinion => this.setState({ teacher: opinion })}
-          className='selector'
+          className="selector"
         />
 
         <Row>
@@ -112,14 +128,19 @@ class AddLesson extends Component {
               placeholder={i18n.t('building')}
               options={buildings}
               onChange={opinion => {
-                let lectureHallsForBuilding = getLectureHallsByBuilding(lectureHalls, opinion);
+                let lectureHallsForBuilding = getLectureHallsByBuilding(
+                  lectureHalls,
+                  opinion
+                );
                 this.setState({
                   building: opinion,
                   filteredLectureHalls: lectureHallsForBuilding,
-                  lectureHall: lectureHallsForBuilding.includes(lectureHall) ? lectureHall : null
+                  lectureHall: lectureHallsForBuilding.includes(lectureHall)
+                    ? lectureHall
+                    : null
                 });
               }}
-              className='selector'
+              className="selector"
             />
           </Col>
 
@@ -133,10 +154,13 @@ class AddLesson extends Component {
                 this.setState({
                   lectureHall: opinion,
                   building: getBuildingByLectureHall(buildings, opinion),
-                  filteredLectureHalls: getLectureHallsByBuilding(lectureHalls, opinion)
+                  filteredLectureHalls: getLectureHallsByBuilding(
+                    lectureHalls,
+                    opinion
+                  )
                 });
               }}
-              className='selector'
+              className="selector"
             />
           </Col>
         </Row>
@@ -147,7 +171,7 @@ class AddLesson extends Component {
           isMulti
           onChange={opinion => this.setState({ selectedGroups: opinion })}
           options={groups}
-          className='selector'
+          className="selector"
         />
 
         <Select
@@ -156,7 +180,7 @@ class AddLesson extends Component {
           options={WEEK_DAYS}
           placeholder={i18n.t('week_day')}
           isMulti
-          className='selector'
+          className="selector"
         />
 
         <Select
@@ -165,7 +189,7 @@ class AddLesson extends Component {
           options={LESSONS_TIME}
           placeholder={i18n.t('lesson_time')}
           isMulti
-          className='selector'
+          className="selector"
         />
 
         <Select
@@ -174,16 +198,11 @@ class AddLesson extends Component {
           isMulti
           onChange={opinion => this.setState({ weekNumbers: opinion })}
           options={WEEK_NUMBER}
-          className='selector'
+          className="selector"
         />
 
         <Col xs={12} md={{ offset: 9, span: 3 }}>
-          <Button
-            block
-            type={'submit'}
-            variant={'purple'}
-            className='selector'
-          >
+          <Button block type={'submit'} variant={'purple'} className="selector">
             {i18n.t('upload')}
           </Button>
         </Col>

@@ -1,12 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { CREATE_INSTITUTE, instituteCreated, LOAD_INSTITUTES_BY_UNIVERSITY_ID, RENDER_INSTITUTES } from '../actions';
-import { endFetching, startFetching } from '../../../../common/actions';
+import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { INSTITUTES } from '../../../../constants/serverApi';
 
 export function* instituteWatcher() {
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
-  yield takeEvery(LOAD_INSTITUTES_BY_UNIVERSITY_ID, () => loadInstitutesByUniversityId());
+  yield takeEvery(LOAD_INSTITUTES_BY_UNIVERSITY_ID, () =>
+    loadInstitutesByUniversityId()
+  );
 }
 
 function* createInstitute(action) {

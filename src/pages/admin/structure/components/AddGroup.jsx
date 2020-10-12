@@ -1,7 +1,7 @@
 import React from 'react';
 
 import i18n from '../../../../locales/i18n';
-import { selectorColors } from '../../../../common/styles/styles';
+import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import { getDepartmentsByInstitute, getInstituteById } from '../../../../utils/StructureUtils';
 import { COURSE_NUMBER } from '../../../../constants/userRoles';
@@ -10,12 +10,20 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export const AddGroup = ({ institutes, departments, open, handleClose, handleCreate }) => {
+export const AddGroup = ({
+                           institutes,
+                           departments,
+                           open,
+                           handleClose,
+                           handleCreate
+                         }) => {
   const [institute, setInstitute] = React.useState();
   const [department, setDepartment] = React.useState();
   const [groupName, setGroupName] = React.useState();
   const [course, setCourse] = React.useState();
-  const [isShowingInRegistration, setShowingInRegistration] = React.useState(false);
+  const [isShowingInRegistration, setShowingInRegistration] = React.useState(
+    false
+  );
 
   const [filteredInstitutes, setFilteredInstitutes] = React.useState(null);
   const [filteredDepartments, setFilteredDepartments] = React.useState(null);
@@ -72,13 +80,15 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
   };
 
   let onCreate = () => {
-    handleCreate(institute.value,
+    handleCreate(
+      institute.value,
       institute.label,
       department.value,
       department.label,
       course.value,
       groupName,
-      isShowingInRegistration);
+      isShowingInRegistration
+    );
 
     handleClose();
     setInstitute(null);
@@ -106,7 +116,7 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
             required
           />
           <CreatableSelect
-            className='selector'
+            className="selector"
             theme={selectorColors}
             placeholder={i18n.t('department')}
             options={departmentOpinions()}
@@ -116,14 +126,16 @@ export const AddGroup = ({ institutes, departments, open, handleClose, handleCre
             required
           />
           <Select
-            className='selector'
+            className="selector"
             placeholder={i18n.t('course')}
             theme={selectorColors}
             onChange={setCourse}
             options={COURSE_NUMBER}
           />
-          <Form.Control placeholder={i18n.t('group_name')}
-                        onChange={(e) => setGroupName(e.target.value)}/>
+          <Form.Control
+            placeholder={i18n.t('group_name')}
+            onChange={e => setGroupName(e.target.value)}
+          />
 
           <Form.Check
             type={'checkbox'}

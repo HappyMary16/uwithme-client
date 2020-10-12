@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, useParams } from 'react-router-dom';
 
-import NavigationContainer from './common/containers/NavigationContainer';
+import NavigationContainer from './pages/navigation/NavigationContainer';
 import {
   ADD_FILE,
   ADD_LESSON,
@@ -20,38 +20,38 @@ import {
   USER_HOME_PAGE_ROUTER,
   USER_SCHEDULE_ROUTER
 } from './constants/links';
-import { UserToolBar } from './pages/users/components/UserToolBar';
+import { UserToolBar } from './pages/user/UserToolBar';
 
-import AddFile from './pages/files/add/containers/AddFile';
+import AddFile from './pages/user/addFiles/AddFile';
 import { connect } from 'react-redux';
-import ShareFiles from './pages/files/share/containers/ShareFiles';
-import PageWithFiles from './pages/files/view/containers/PageWithFiles';
-import SignUp from './pages/authorization/containers/SignUp';
-import SignIn from './pages/authorization/containers/SignIn';
-import AddUniversity from './pages/authorization/containers/AddUniversity';
+import ShareFiles from './pages/user/shareFiles/ShareFiles';
+import PageWithFiles from './pages/user/files/PageWithFiles';
+import SignUp from './pages/authorization/signUp/SignUp';
+import SignIn from './pages/authorization/signIn/SignIn';
+import AddUniversity from './pages/authorization/addUniversity/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/admin/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import UniversityStructure from './pages/admin/structure/UniversityStructure';
 import AddLesson from './pages/admin/addLesson/AddLesson';
-import MySchedule from './pages/schedule/containers/MySchedule';
-import GroupSchedule from './pages/schedule/containers/GroupSchedule';
-import UserHome from './pages/users/containers/UserHome';
+import MySchedule from './pages/user/schedule/containers/MySchedule';
+import GroupSchedule from './pages/user/schedule/containers/GroupSchedule';
+import UserHome from './pages/user/home/containers/UserHome';
 import LectureHalls from './pages/admin/lectureHalls/LectureHalls';
-import TeachersList from './pages/users/containers/TeachersList';
-import UserPage from './pages/users/containers/UserPage';
+import TeachersList from './pages/user/teacherList/TeachersList';
+import UserPage from './pages/user/home/containers/UserPage';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import UserSchedule from './pages/schedule/containers/UserSchedule';
-import StudentsList from './pages/users/containers/StudentsList';
-import GroupPage from './pages/groups/containers/GroupPage';
-import './common/styles/button.css';
-import './common/styles/listItem.css';
-import './common/styles/spases.css';
-import './common/styles/menu.css';
-import './common/styles/inputField.css';
-import './common/styles/styles.css';
+import UserSchedule from './pages/user/schedule/containers/UserSchedule';
+import StudentsList from './pages/user/studentList/StudentsList';
+import GroupPage from './pages/admin/groupPage/GroupPage';
+import './styles/button.css';
+import './styles/listItem.css';
+import './styles/spases.css';
+import './styles/menu.css';
+import './styles/inputField.css';
+import './styles/styles.css';
 import Container from 'react-bootstrap/Container';
 
 const useStyles = theme => ({
@@ -89,21 +89,22 @@ class App extends Component {
       <div>
         <NavigationContainer/>
         <Backdrop className={classes.backdrop} open={isFetching !== 0}>
-          <CircularProgress color='inherit'/>
+          <CircularProgress color="inherit"/>
         </Backdrop>
 
         {user && !isAdmin(user) && (
           <UserToolBar user={user} isOpen={isMenuOpen}/>
         )}
-        {isAdmin(user) && (
-          <AdminToolBar isOpen={isMenuOpen}/>
-        )}
+        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen}/>}
 
         <Container className={'main-page-container'}>
-
           {!user && (
             <div>
-              <Route exact path={ADD_UNIVERSITY_PATH} component={AddUniversity}/>
+              <Route
+                exact
+                path={ADD_UNIVERSITY_PATH}
+                component={AddUniversity}
+              />
               <Route exact path={SIGN_UP} component={SignUp}/>
               <Route exact path={SIGN_IN} component={SignIn}/>
             </div>
@@ -135,7 +136,11 @@ class App extends Component {
 
               {isAdmin(user) && (
                 <div>
-                  <Route exact path={USER_HOME} component={UniversityStructure}/>
+                  <Route
+                    exact
+                    path={USER_HOME}
+                    component={UniversityStructure}
+                  />
                   <Route exact path={ADD_LESSON} component={AddLesson}/>
                   <Route exact path={SCHEDULE} component={GroupSchedule}/>
                   <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
@@ -172,7 +177,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  withStyles(useStyles),
-  connect(mapStateToProps)
-)(App);
+export default compose(withStyles(useStyles), connect(mapStateToProps))(App);
