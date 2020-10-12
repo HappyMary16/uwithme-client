@@ -25,7 +25,7 @@ function* addUniversity(action) {
     });
 
     if (response && response.status === 200) {
-      yield put(signInSuccess(response));
+      yield put(signInSuccess(response.data));
     } else {
       yield put(signInError(response));
     }

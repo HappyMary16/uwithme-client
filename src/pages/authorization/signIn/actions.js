@@ -8,16 +8,21 @@ export const RENDER_MY_AVATAR = 'RENDER_MY_AVATAR';
 
 export const signInRequest = (username, password) => ({
   type: SIGN_IN_REQUEST,
-  username,
-  password
+  payload: {
+    username,
+    password
+  }
 });
 
 export const signOut = () => ({
   type: SIGN_OUT
 });
 
-export const signInSuccess = () => ({
-  type: SIGN_IN_SUCCESS
+export const signInSuccess = user => ({
+  type: SIGN_IN_SUCCESS,
+  payload: {
+    user
+  }
 });
 
 export const signInError = () => ({

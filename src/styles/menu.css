@@ -33,11 +33,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-size: 1.15em;
 }
 
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-    fill: #373a47;
-}
-
 /* Wrapper for item list */
 .bm-item-list {
     color: #b8b7ad;
@@ -47,9 +42,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Individual item */
 .bm-item {
     display: inline-block;
+    color: #212121;
+    padding-top: 0.5em;
+    border-bottom: 2px solid;
+    border-color: lightgray;
 }
 
-/* Styling of overlay */
-.bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+.bm-item:hover {
+    background-color: #eeeeee;
+    color: #212121 !important;
+    text-decoration: none;
 }

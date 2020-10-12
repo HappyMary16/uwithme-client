@@ -34,9 +34,11 @@ function* processSignIn(action) {
   try {
     yield put(startFetching());
 
+    const { username, password } = action.payload;
+
     let data = JSON.stringify({
-      username: action.username,
-      password: action.password
+      username,
+      password
     });
 
     const response = yield call(http, {
@@ -46,7 +48,7 @@ function* processSignIn(action) {
     });
 
     if (response && response.status === 200) {
-      yield put(signInSuccess(response));
+      yield put(signInSuccess(response.data));
     } else {
       alert(response);
       yield put(signInError(response));
@@ -59,14 +61,14 @@ function* processSignIn(action) {
   }
 }
 
-export function* processSignInSuccess(response) {
-  if (response) {
-    localStorage.setItem('AuthToken', response.data.authToken);
-    localStorage.setItem('RefreshToken', response.data.refreshToken);
-    history.push(USER_HOME);
+export function* processSignInSuccess(action) {
+  const { user } = action.payload;
 
-    yield put(downloadMyAvatar());
-  }
+  localStorage.setItem('AuthToken', user.authToken);
+  localStorage.setItem('RefreshToken', user.refreshToken);
+  history.push(USER_HOME);
+
+  yield put(downloadMyAvatar());
 }
 
 function processSignInError() {

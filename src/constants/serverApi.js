@@ -3,7 +3,7 @@ import config from '../config';
 export const apiRoot = `http://${config.host}:${config.port}/api/`;
 
 const INFO = 'info/';
-const AUTH = 'authorization/';
+const AUTH = 'auth/';
 
 export const SIGN_IN = AUTH + 'signIn';
 export const SIGN_UP = AUTH + 'signUp';
