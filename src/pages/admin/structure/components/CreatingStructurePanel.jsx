@@ -16,7 +16,7 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
   const [openGroupDialog, setOpenGroupDialog] = React.useState(false);
 
   return (
-    <Container className={'margin-bottom'}>
+    <Container>
       <AddInstitute open={openInstituteDialog}
                     handleClose={() => setOpenInstituteDialog(false)}
                     handleCreate={createInstitute}/>
@@ -32,7 +32,6 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
       <Row sm={12} md={9}>
         <Col sm={12} md={{ offset: 3, span: 3 }}>
           <Button
-            className={'margin-top'}
             block
             variant={'purple'}
             onClick={() => setOpenInstituteDialog(true)}>
@@ -41,7 +40,6 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
         </Col>
         <Col sm={12} md={3}>
           <Button
-            className={'margin-top'}
             block
             variant={'purple'}
             onClick={() => setOpenDepartmentDialog(true)}>
@@ -50,7 +48,6 @@ export const CreateStructurePanel = ({ institutes, departments, createInstitute,
         </Col>
         <Col sm={12} md={3}>
           <Button
-            className={'margin-top'}
             block
             variant={'purple'}
             onClick={() => setOpenGroupDialog(true)}>

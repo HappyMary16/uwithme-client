@@ -13,7 +13,6 @@ import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../ut
 import { addLessonToSchedule } from './actions';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -76,121 +75,119 @@ class AddLesson extends Component {
     }
 
     return (
-      <Container>
-        <Form onSubmit={e => this.submit(e)}>
-          <CreatableSelect
-            theme={selectorColors}
-            placeholder={i18n.t('subject')}
-            options={subjects &&
-            subjects.map(subject => {
-              return {
-                label: subject.name,
-                value: subject.id
-              };
-            })}
-            onChange={opinion => this.setState({ subject: opinion })}
-            className='margin-top'
-            />
+      <Form onSubmit={e => this.submit(e)}>
+        <CreatableSelect
+          theme={selectorColors}
+          placeholder={i18n.t('subject')}
+          options={subjects &&
+          subjects.map(subject => {
+            return {
+              label: subject.name,
+              value: subject.id
+            };
+          })}
+          onChange={opinion => this.setState({ subject: opinion })}
+          className='selector'
+        />
 
-            <CreatableSelect
-              theme={selectorColors}
-              placeholder={i18n.t('teacher')}
-              options={teachers &&
-              teachers.map(s => {
-                return {
-                  value: s.id,
-                  label: s.surname + ' ' + s.firstName + ' ' + s.lastName
-                };
-              })}
-              onChange={opinion => this.setState({ teacher: opinion })}
-              className='margin-top'
-            />
+        <CreatableSelect
+          theme={selectorColors}
+          placeholder={i18n.t('teacher')}
+          options={teachers &&
+          teachers.map(s => {
+            return {
+              value: s.id,
+              label: s.surname + ' ' + s.firstName + ' ' + s.lastName
+            };
+          })}
+          onChange={opinion => this.setState({ teacher: opinion })}
+          className='selector'
+        />
 
-          <Row>
-            <Col xs={6}>
-              <Select
-                value={building}
-                theme={selectorColors}
-                placeholder={i18n.t('building')}
-                options={buildings}
-                onChange={opinion => {
-                  let lectureHallsForBuilding = getLectureHallsByBuilding(lectureHalls, opinion);
-                  this.setState({
-                    building: opinion,
-                    filteredLectureHalls: lectureHallsForBuilding,
-                    lectureHall: lectureHallsForBuilding.includes(lectureHall) ? lectureHall : null
-                  });
-                }}
-                className='margin-top'
-              />
-            </Col>
-
-            <Col xs={6}>
-              <Select
-                value={lectureHall}
-                theme={selectorColors}
-                placeholder={i18n.t('lecture_hall')}
-                options={filteredLectureHalls}
-                onChange={opinion => {
-                  this.setState({
-                    lectureHall: opinion,
-                    building: getBuildingByLectureHall(buildings, opinion),
-                    filteredLectureHalls: getLectureHallsByBuilding(lectureHalls, opinion)
-                  });
-                }}
-                className='margin-top'
-              />
-            </Col>
-          </Row>
-
+        <Row>
+          <Col xs={6}>
             <Select
-              placeholder={i18n.t('groups')}
+              value={building}
               theme={selectorColors}
-              isMulti
-              onChange={opinion => this.setState({ selectedGroups: opinion })}
-              options={groups}
-              className='margin-top'
+              placeholder={i18n.t('building')}
+              options={buildings}
+              onChange={opinion => {
+                let lectureHallsForBuilding = getLectureHallsByBuilding(lectureHalls, opinion);
+                this.setState({
+                  building: opinion,
+                  filteredLectureHalls: lectureHallsForBuilding,
+                  lectureHall: lectureHallsForBuilding.includes(lectureHall) ? lectureHall : null
+                });
+              }}
+              className='selector'
             />
-
-            <Select
-              theme={selectorColors}
-              onChange={opinion => this.setState({ weekDays: opinion })}
-              options={WEEK_DAYS}
-              placeholder={i18n.t('week_day')}
-              isMulti
-              className='margin-top'
-            />
-
-            <Select
-              theme={selectorColors}
-              onChange={opinion => this.setState({ lessonTimes: opinion })}
-              options={LESSONS_TIME}
-              placeholder={i18n.t('lesson_time')}
-              isMulti
-              className='margin-top'
-            />
-
-            <Select
-              placeholder={i18n.t('week_number')}
-              theme={selectorColors}
-              isMulti
-              onChange={opinion => this.setState({ weekNumbers: opinion })}
-              options={WEEK_NUMBER}
-              className='margin-top'
-            />
-
-          <Col xs={12} md={{ offset: 9, span: 3 }}>
-            <Button
-              block
-              type={'submit'}
-              variant={'purple'}
-              className='margin-top'
-            >
-              {i18n.t('upload')}
-            </Button>
           </Col>
-        </Form>
-      </Container>
+
+          <Col xs={6}>
+            <Select
+              value={lectureHall}
+              theme={selectorColors}
+              placeholder={i18n.t('lecture_hall')}
+              options={filteredLectureHalls}
+              onChange={opinion => {
+                this.setState({
+                  lectureHall: opinion,
+                  building: getBuildingByLectureHall(buildings, opinion),
+                  filteredLectureHalls: getLectureHallsByBuilding(lectureHalls, opinion)
+                });
+              }}
+              className='selector'
+            />
+          </Col>
+        </Row>
+
+        <Select
+          placeholder={i18n.t('groups')}
+          theme={selectorColors}
+          isMulti
+          onChange={opinion => this.setState({ selectedGroups: opinion })}
+          options={groups}
+          className='selector'
+        />
+
+        <Select
+          theme={selectorColors}
+          onChange={opinion => this.setState({ weekDays: opinion })}
+          options={WEEK_DAYS}
+          placeholder={i18n.t('week_day')}
+          isMulti
+          className='selector'
+        />
+
+        <Select
+          theme={selectorColors}
+          onChange={opinion => this.setState({ lessonTimes: opinion })}
+          options={LESSONS_TIME}
+          placeholder={i18n.t('lesson_time')}
+          isMulti
+          className='selector'
+        />
+
+        <Select
+          placeholder={i18n.t('week_number')}
+          theme={selectorColors}
+          isMulti
+          onChange={opinion => this.setState({ weekNumbers: opinion })}
+          options={WEEK_NUMBER}
+          className='selector'
+        />
+
+        <Col xs={12} md={{ offset: 9, span: 3 }}>
+          <Button
+            block
+            type={'submit'}
+            variant={'purple'}
+            className='selector'
+          >
+            {i18n.t('upload')}
+          </Button>
+        </Col>
+      </Form>
     );
   }
 }

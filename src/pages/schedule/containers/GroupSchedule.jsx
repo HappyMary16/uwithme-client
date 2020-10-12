@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteLesson, findLessonsByGroupId } from '../actions';
+import { findLessonsByGroupId } from '../actions';
 import { ScheduleTable } from '../components/ScheduleTable';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import i18n from '../../../locales/i18n';
 import Select from 'react-select';
-import { marginTop, selectorColors } from '../../../common/styles/styles';
+import { selectorColors } from '../../../common/styles/styles';
 import { loadGroupsByUniversityId } from '../../admin/structure/actions';
 import { getGroupById } from '../../../utils/StructureUtils';
-import { DeleteLessonDialog } from '../components/DeleteLessonDialog';
+import { DeleteLessonDialog } from '../../admin/deleteLesson/DeleteLessonDialog';
 import Button from 'react-bootstrap/Button';
+import { deleteLesson } from '../../admin/deleteLesson/actions';
 
 class GroupSchedule extends Component {
 
@@ -90,8 +91,8 @@ class GroupSchedule extends Component {
                                                            lesson={lessonToDelete}
                                                            handleClose={this.closeDeleteLessonDialog}
                                                            handleDelete={this.deleteLesson}/>}
-        <Row container style={marginTop} spacing={2}>
-          <Col sm={10}>
+        <Row spacing={2}>
+          <Col sm={12} md={9}>
             <Select
               placeholder={i18n.t('select_group')}
               theme={selectorColors}
@@ -99,9 +100,10 @@ class GroupSchedule extends Component {
               onChange={(e) => this.handleGroupChange(e.value)}
               options={groups}
               defaultValue={getGroupById(groups, groupId)}
+              className='selector'
             />
           </Col>
-          <Col sm={2}>
+          <Col sm={12} md={3}>
             <Button
               block
               variant={'purple'}

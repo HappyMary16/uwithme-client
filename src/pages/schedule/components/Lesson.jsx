@@ -1,31 +1,34 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import { isTeacher } from '../../../utils/UsersUtil';
 import { getGroupList } from '../../../utils/ScheduleUtil';
-import Grid from '@material-ui/core/Grid';
-import CloseIcon from '@material-ui/icons/Close';
-import Button from '@material-ui/core/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { XCircle } from 'react-bootstrap-icons';
 
 export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
 
   return (
-    <Grid>
-
-      {isEditMode && <Grid container justify={'flex-end'}>
-        <Button onClick={() => deleteLesson(lesson)}>
-          <CloseIcon color={'error'}/>
-        </Button>
-      </Grid>}
-
-      <Typography align={'center'} color='textPrimary'>
-        {lesson.subjectName}
-      </Typography>
-      <Typography align={'center'} variant={'body2'} color='textSecondary'>
-        {isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName}
-      </Typography>
-      <Typography align={'center'} variant={'body1'} color='textPrimary'>
-        {lesson.lectureHall}
-      </Typography>
-    </Grid>
+    <div>
+      {isEditMode && <Row>
+        <Col xs={{ offset: 8, span: 1 }}
+             md={{ offset: 8, span: 1 }}
+             lg={{ offset: 9, span: 1 }}>
+          <XCircle className={'icon'}
+                   onClick={() => deleteLesson(lesson)}/>
+        </Col>
+      </Row>}
+      <Row className={'lesson'}>
+        <Col xs={8}>
+          {lesson.subjectName}
+          <br/>
+          {isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName}
+        </Col>
+        <Col xs={4}>
+          {lesson.lectureHall}
+          <br/>
+          {lesson.building}
+        </Col>
+      </Row>
+    </div>
   );
 };

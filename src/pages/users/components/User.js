@@ -6,7 +6,7 @@ import { UserCard } from './UserCard';
 import i18n from '../../../locales/i18n';
 import Switch from 'react-switch';
 import { getCurrentWeek } from '../../../utils/ScheduleUtil';
-import { lightGreyColor, switchWeek } from '../../../common/styles/styles';
+import { lightGreyColor } from '../../../common/styles/styles';
 import { Container } from '@material-ui/core';
 import { USER_SCHEDULE } from '../../../constants/links';
 import { history } from '../../../store/Store';
@@ -47,10 +47,10 @@ export const User = ({ user, lessons, isMine, onSaveAvatar }) => {
               onColor={lightGreyColor}
               checked={weekNumber}
               onChange={() => setWeekNumber(!weekNumber)}
-              uncheckedIcon={<div style={switchWeek}>
+              uncheckedIcon={<div className={'switch-week'}>
                 2
               </div>}
-              checkedIcon={<div style={switchWeek}>
+              checkedIcon={<div className={'switch-week'}>
                 1
               </div>}
               className='react-switch'

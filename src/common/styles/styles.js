@@ -37,16 +37,3 @@ export const selectorColors = theme => ({
 export const marginTop = {
   marginTop: '20px'
 };
-
-export const marginLeft = {
-  marginLeft: '10px',
-  backgroundColor: buttonColor
-};
-
-export const switchWeek = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '100%',
-  fontSize: 15
-};

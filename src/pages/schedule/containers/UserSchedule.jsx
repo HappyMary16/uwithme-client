@@ -3,33 +3,30 @@ import { connect } from 'react-redux';
 import { ScheduleTable } from '../components/ScheduleTable';
 import { findUserById } from '../../../utils/UsersUtil';
 import { findLessonsForUser } from '../../users/actions';
-import Grid from '@material-ui/core/Grid';
 
 
 class UserSchedule extends Component {
   componentDidMount() {
-    const { dispatch, teachers, teacherId } = this.props;
-    const teacher = findUserById(teachers, teacherId);
-    if (teacher) {
-      dispatch(findLessonsForUser(teacher.username));
+    const { dispatch, users, userId } = this.props;
+    const user = findUserById(users, userId);
+    if (user) {
+      dispatch(findLessonsForUser(user.username));
     }
   }
 
   render() {
-    const { teachers, teacherId, lessons } = this.props;
-    const teacher = findUserById(teachers, teacherId);
+    const { users, userId, lessons } = this.props;
+    const user = findUserById(users, userId);
 
     return (
-      <Grid>
-        {teacher && <ScheduleTable user={teacher} lessons={lessons} isMine={false}/>}
-      </Grid>
+      user && <ScheduleTable user={user} lessons={lessons} isMine={false}/>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    teachers: state.usersReducer.users,
+    users: state.usersReducer.users,
     lessons: state.usersReducer.lessons
   };
 };

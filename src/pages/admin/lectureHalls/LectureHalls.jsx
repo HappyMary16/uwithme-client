@@ -44,7 +44,6 @@ class LectureHalls extends Component {
         <Row>
           <Col sm={12} md={{ offset: 9, span: 3 }}>
             <Button
-              className={'margin-top & margin-bottom'}
               block
               variant={'purple'}
               onClick={() => this.setState({ openCreateDialog: true })}>
