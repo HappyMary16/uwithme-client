@@ -34,7 +34,7 @@ import { AdminToolBar } from './pages/admin/AdminToolBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import UniversityStructure from './pages/admin/structure/UniversityStructure';
-import AddLesson from './pages/schedule/containers/AddLesson';
+import AddLesson from './pages/admin/addLesson/AddLesson';
 import MySchedule from './pages/schedule/containers/MySchedule';
 import GroupSchedule from './pages/schedule/containers/GroupSchedule';
 import UserHome from './pages/users/containers/UserHome';
@@ -51,6 +51,7 @@ import './common/styles/listItem.css';
 import './common/styles/spases.css';
 import './common/styles/menu.css';
 import './common/styles/inputField.css';
+import './common/styles/styles.css';
 import Container from 'react-bootstrap/Container';
 
 const useStyles = theme => ({

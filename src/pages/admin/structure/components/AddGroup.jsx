@@ -6,7 +6,6 @@ import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import { getDepartmentsByInstitute, getInstituteById } from '../../../../utils/StructureUtils';
 import { COURSE_NUMBER } from '../../../../constants/userRoles';
 import Select from 'react-select';
-import '../../../../common/styles/styles.css';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

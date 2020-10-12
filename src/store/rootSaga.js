@@ -11,6 +11,7 @@ import { groupWatcher } from '../pages/admin/structure/sagas/groups';
 import { departmentWatcher } from '../pages/admin/structure/sagas/departments';
 import { instituteWatcher } from '../pages/admin/structure/sagas/institutes';
 import { universityWatcher } from '../pages/admin/structure/sagas/university';
+import { addLessonWatcher } from '../pages/admin/addLesson/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     addFilesAndSubjectsWatcher(),
     addAccessToFilesWatcher(),
     scheduleOperationWatcher(),
+    addLessonWatcher(),
     teachersWatcher(),
     lectureHallWatcher(),
     groupWatcher(),
