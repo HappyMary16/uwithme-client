@@ -1,6 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FILES, SCHEDULE, STUDENTS, TEACHERS, USER_HOME } from '../../constants/links';
+import {
+  FILES,
+  SCHEDULE,
+  STUDENTS,
+  TEACHERS,
+  USER_HOME
+} from '../../constants/links';
 import i18n from '../../locales/i18n';
 import AppBar from '@material-ui/core/AppBar';
 import { isStudent, isTeacher } from '../../utils/UsersUtil';

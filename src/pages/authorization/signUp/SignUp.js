@@ -16,7 +16,12 @@ import { InputField } from '../../common/components/InputField';
 import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { loadDepartments, loadGroups, loadInstitutes, loadUniversities } from '../../admin/structure/actions';
+import {
+  loadDepartments,
+  loadGroups,
+  loadInstitutes,
+  loadUniversities
+} from '../../admin/structure/actions';
 import { PasswordInput } from '../components/PasswordInput';
 import { authStyles } from '../../../styles/styles';
 import { signUpRequest } from './actions';

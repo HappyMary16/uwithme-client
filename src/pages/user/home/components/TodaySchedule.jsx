@@ -5,7 +5,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { areLessonsToday, filterAndSortLessons, getGroupList, getLessonTime } from '../../../../utils/ScheduleUtil';
+import {
+  areLessonsToday,
+  filterAndSortLessons,
+  getGroupList,
+  getLessonTime
+} from '../../../../utils/ScheduleUtil';
 import i18n from '../../../../locales/i18n';
 import { isStudent, isTeacher } from '../../../../utils/UsersUtil';
 

@@ -9,7 +9,10 @@ import {
 } from '../actions';
 import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
-import { GROUPS, GROUPS_BY_UNIVERSITY_ID } from '../../../../constants/serverApi';
+import {
+  GROUPS,
+  GROUPS_BY_UNIVERSITY_ID
+} from '../../../../constants/serverApi';
 import { LOAD_GROUPS_BY_TEACHER, renderGroups } from '../../groupPage/actions';
 
 export function* groupWatcher() {

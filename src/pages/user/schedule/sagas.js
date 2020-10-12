@@ -1,5 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { FIND_LESSONS_BY_GROUP_ID, FIND_LESSONS_BY_USER_NAME, renderLessons } from './actions';
+import {
+  FIND_LESSONS_BY_GROUP_ID,
+  FIND_LESSONS_BY_USER_NAME,
+  renderLessons
+} from './actions';
 import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { GET_LESSONS_BY_GROUP_ID, LESSONS } from '../../../constants/serverApi';

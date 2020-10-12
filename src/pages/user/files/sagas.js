@@ -1,5 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { DOWNLOAD_FILES, LOAD_SUBJECTS, LOAD_SUBJECTS_AND_FILES, renderFiles, renderSubjects } from './actions';
+import {
+  DOWNLOAD_FILES,
+  LOAD_SUBJECTS,
+  LOAD_SUBJECTS_AND_FILES,
+  renderFiles,
+  renderSubjects
+} from './actions';
 import http from '../../../services/http';
 import { FILES, SUBJECTS } from '../../../constants/serverApi';
 import { endFetching, startFetching } from '../../navigation/actions';
