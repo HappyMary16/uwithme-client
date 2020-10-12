@@ -11,21 +11,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 export const Student = ({ student, removeStudent }) => {
-
   let handleClick = () => {
     history.push(USER_HOME_PAGE(student.id));
   };
 
   return (
-    <ListItem button
-              onClick={handleClick}>
+    <ListItem button onClick={handleClick}>
       <ListItemAvatar>
-        <Avatar alt='photo'
-                src='/empty-avatar.jpg'/>
+        <Avatar alt="photo" src="/empty-avatar.jpg"/>
       </ListItemAvatar>
-      <ListItemText
-        primary={getName(student)}
-      />
+      <ListItemText primary={getName(student)}/>
       <ListItemSecondaryAction>
         <IconButton onClick={() => removeStudent(student)}>
           <DeleteIcon/>

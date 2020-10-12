@@ -11,30 +11,27 @@ import { USER_HOME_PAGE, USER_SCHEDULE } from '../../../constants/links';
 import { history } from '../../../store/Store';
 
 export const StudentListItem = ({ student }) => {
-
   let handleClick = () => {
     history.push(USER_HOME_PAGE(student.id));
   };
 
   return (
-    <ListItem button
-              onClick={handleClick}>
+    <ListItem button onClick={handleClick}>
       <ListItemAvatar>
-        <Avatar alt='photo'
-                src={student.avatar === null ? '/empty-avatar.jpg' : student.avatar}/>
+        <Avatar
+          alt="photo"
+          src={student.avatar === null ? '/empty-avatar.jpg' : student.avatar}
+        />
       </ListItemAvatar>
       <ListItemText
         primary={getName(student)}
         secondary={student.studyGroupName}
       />
       <ListItemSecondaryAction>
-        <IconButton
-          href={USER_SCHEDULE(student.id)}
-        >
+        <IconButton href={USER_SCHEDULE(student.id)}>
           <AssignmentIcon/>
         </IconButton>
       </ListItemSecondaryAction>
-
     </ListItem>
   );
 };

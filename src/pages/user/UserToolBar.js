@@ -46,23 +46,23 @@ export const UserToolBar = ({ user, isOpen = false }) => {
       <a href={FILES} className={classes.menuItem}>
         {i18n.t('page_with_files')}
       </a>
-      {isStudent(user) &&
-      (<a href={TEACHERS} className={classes.menuItem}>
-        {i18n.t('teachers')}
-      </a>)
-      }
-      {isTeacher(user) &&
-      (<a href={STUDENTS} className={classes.menuItem}>
-        {i18n.t('students')}
-      </a>)
-      }
+      {isStudent(user) && (
+        <a href={TEACHERS} className={classes.menuItem}>
+          {i18n.t('teachers')}
+        </a>
+      )}
+      {isTeacher(user) && (
+        <a href={STUDENTS} className={classes.menuItem}>
+          {i18n.t('students')}
+        </a>
+      )}
     </Menu>
   );
 
   return (
     <AppBar
-      position='static'
-      color='inherit'
+      position="static"
+      color="inherit"
       elevation={0}
       className={classes.appBar}
     >

@@ -43,4 +43,3 @@ export const STUDENTS_BY_GROUP_ID = STUDENTS + 'groupId/';
 export const GROUP_STUDENT_ID = USERS + 'groupPage/studentId/';
 export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/groupPage/';
 export const STUDENT_GROUP = USERS + 'group';
-

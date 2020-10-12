@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import { findLessonsForUser } from '../../actions';
 
 class UserPage extends Component {
-
   componentDidMount() {
     const { dispatch, teachers, teacherId } = this.props;
     const teacher = findUserById(teachers, teacherId);

@@ -29,8 +29,8 @@ let ListFiles = ({ open, files, dispatch }) => {
   const classes = useStyles();
 
   return (
-    <Collapse in={open} timeout='auto' unmountOnExit>
-      <List component='div' disablePadding>
+    <Collapse in={open} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
         {files.map((file, i) => (
           <ListItem button key={i} className={classes.nested}>
             <ListItemIcon>
@@ -38,13 +38,13 @@ let ListFiles = ({ open, files, dispatch }) => {
             </ListItemIcon>
             <ListItemText primary={file.name}/>
             <ListItemSecondaryAction>
-              {isPossibleToOpen(file.name) &&
-              <IconButton
-                onClick={() => dispatch(loadFile(file.id, file.name, false))}
-              >
-                <ImportContactsIcon/>
-              </IconButton>
-              }
+              {isPossibleToOpen(file.name) && (
+                <IconButton
+                  onClick={() => dispatch(loadFile(file.id, file.name, false))}
+                >
+                  <ImportContactsIcon/>
+                </IconButton>
+              )}
               <IconButton
                 onClick={() => dispatch(loadFile(file.id, file.name, true))}
               >

@@ -4,7 +4,6 @@ import { ScheduleTable } from '../components/ScheduleTable';
 import { findUserById } from '../../../../utils/UsersUtil';
 import { findLessonsForUser } from '../../actions';
 
-
 class UserSchedule extends Component {
   componentDidMount() {
     const { dispatch, users, userId } = this.props;

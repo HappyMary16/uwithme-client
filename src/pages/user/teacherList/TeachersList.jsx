@@ -5,7 +5,6 @@ import List from '@material-ui/core/List';
 import { TeacherListItem } from './TeacherListItem';
 
 class TeachersList extends Component {
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(loadTeachersByGroupId());
@@ -16,7 +15,10 @@ class TeachersList extends Component {
 
     return (
       <List>
-        {teachers && teachers.map(teacher => <TeacherListItem key={teacher.id} teacher={teacher}/>)}
+        {teachers &&
+        teachers.map(teacher => (
+          <TeacherListItem key={teacher.id} teacher={teacher}/>
+        ))}
       </List>
     );
   }

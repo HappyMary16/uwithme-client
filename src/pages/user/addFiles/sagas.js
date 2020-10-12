@@ -54,12 +54,12 @@ function createUploader(payload) {
     };
   });
 
-  const uploadPromise = upload(payload, (event) => {
+  const uploadPromise = upload(payload, event => {
     if (event.loaded.total === 1) {
       emit(END);
     }
 
-    emit(100 - (event.total - event.loaded) / event.total * 100);
+    emit(100 - ((event.total - event.loaded) / event.total) * 100);
   });
 
   return [uploadPromise, chan];

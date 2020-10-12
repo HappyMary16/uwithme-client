@@ -6,7 +6,7 @@ export const loadGroupsByTeacher = () => ({
   type: LOAD_GROUPS_BY_TEACHER
 });
 
-export const renderGroups = (groups) => ({
+export const renderGroups = groups => ({
   type: RENDER_GROUPS,
   payload: {
     groups

@@ -16,7 +16,6 @@ import AddStudentToGroup from './components/AddStudentToGroup';
 import { RemoveStudentFromGroup } from './components/RemoveStudentFromGroup';
 
 class GroupPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +25,9 @@ class GroupPage extends Component {
     };
 
     this.removeStudent = this.removeStudent.bind(this);
-    this.loadStudentsAndOpenAddDialog = this.loadStudentsAndOpenAddDialog.bind(this);
+    this.loadStudentsAndOpenAddDialog = this.loadStudentsAndOpenAddDialog.bind(
+      this
+    );
     this.addStudentToGroup = this.addStudentToGroup.bind(this);
     this.openRemoveStudentDialog = this.openRemoveStudentDialog.bind(this);
   }
@@ -66,34 +67,48 @@ class GroupPage extends Component {
 
   render() {
     const { users, groups, groupId } = this.props;
-    const { openAddStudentDialog, openRemoveStudentDialog, studentToRemove } = this.state;
+    const {
+      openAddStudentDialog,
+      openRemoveStudentDialog,
+      studentToRemove
+    } = this.state;
 
-    const group = groups
-      && groups.filter(group => group.value === Number(groupId))[0];
+    const group =
+      groups && groups.filter(group => group.value === Number(groupId))[0];
 
     return (
       <Grid container xs={12}>
         <Container>
-          {group && <GroupCard group={group} groupTeacher={findUserById(users, group.teacherId)}/>}
+          {group && (
+            <GroupCard
+              group={group}
+              groupTeacher={findUserById(users, group.teacherId)}
+            />
+          )}
 
-          <StudentsList students={findUsersByGroupId(users, groupId)}
-                        addStudent={this.loadStudentsAndOpenAddDialog}
-                        removeStudent={this.openRemoveStudentDialog}/>
+          <StudentsList
+            students={findUsersByGroupId(users, groupId)}
+            addStudent={this.loadStudentsAndOpenAddDialog}
+            removeStudent={this.openRemoveStudentDialog}
+          />
         </Container>
-        <AddStudentToGroup open={openAddStudentDialog}
-                           students={findAllStudentsWithoutGroup(users)}
-                           handleClose={() => this.setState({ openAddStudentDialog: false })}
-                           handleAdd={this.addStudentToGroup}/>
-        <RemoveStudentFromGroup open={openRemoveStudentDialog}
-                                student={studentToRemove}
-                                handleNo={() => {
-                                  this.setState(
-                                    {
-                                      openRemoveStudentDialog: false,
-                                      studentToRemove: undefined
-                                    });
-                                }}
-                                handleYes={this.removeStudent}/>
+        <AddStudentToGroup
+          open={openAddStudentDialog}
+          students={findAllStudentsWithoutGroup(users)}
+          handleClose={() => this.setState({ openAddStudentDialog: false })}
+          handleAdd={this.addStudentToGroup}
+        />
+        <RemoveStudentFromGroup
+          open={openRemoveStudentDialog}
+          student={studentToRemove}
+          handleNo={() => {
+            this.setState({
+              openRemoveStudentDialog: false,
+              studentToRemove: undefined
+            });
+          }}
+          handleYes={this.removeStudent}
+        />
       </Grid>
     );
   }

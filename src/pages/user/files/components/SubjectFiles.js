@@ -47,8 +47,8 @@ export const SubjectFiles = ({ name, files }) => {
         {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItem>
 
-      <Collapse in={open} timeout='auto' unmountOnExit>
-        <List component='div' disablePadding>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
           <ListItem
             button
             onClick={lectureHandleClick}
