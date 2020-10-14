@@ -1,4 +1,8 @@
-import { LECTURE_HALL_CREATED, RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './actions';
+import {
+  LECTURE_HALL_CREATED,
+  RENDER_BUILDINGS,
+  RENDER_LECTURE_HALLS
+} from './actions';
 import StateLoader from '../../../store/StateLoader';
 import { SIGN_OUT } from '../../authorization/signIn/actions';
 
@@ -14,7 +18,7 @@ export default function lectureHallReducer(
           return {
             value: lectureHall.id,
             label: lectureHall.name,
-            buildingId: lectureHall.buildingId,
+            buildingId: lectureHall.building.id,
             placeNumber: lectureHall.placeNumber
           };
         })

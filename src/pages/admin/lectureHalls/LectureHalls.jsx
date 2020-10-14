@@ -29,7 +29,14 @@ class LectureHalls extends Component {
   createLectureHall(buildingName, buildingId, lectureHallName, placeNumber) {
     const { dispatch, universityId } = this.props;
 
-    dispatch(createLectureHall(universityId, buildingName, lectureHallName, placeNumber));
+    dispatch(
+      createLectureHall(
+        universityId,
+        buildingName,
+        lectureHallName,
+        placeNumber
+      )
+    );
     if (buildingName === buildingId) {
       dispatch(loadBuildings());
     }
@@ -42,21 +49,24 @@ class LectureHalls extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={12} md={{ offset: 9, span: 3 }}>
+          <Col sm={12} md={{ offset: 8, span: 4 }} lg={{ offset: 9, span: 3 }}>
             <Button
               block
               variant={'purple'}
-              onClick={() => this.setState({ openCreateDialog: true })}>
+              onClick={() => this.setState({ openCreateDialog: true })}
+            >
               {i18n.t('create_lecture_hall')}
             </Button>
-            <AddLectureHall open={openCreateDialog}
-                            handleClose={() => this.setState({ openCreateDialog: false })}
-                            buildings={buildings}
-                            handleCreate={this.createLectureHall}/>
+            <AddLectureHall
+              open={openCreateDialog}
+              handleClose={() => this.setState({ openCreateDialog: false })}
+              buildings={buildings}
+              handleCreate={this.createLectureHall}
+            />
           </Col>
         </Row>
 
-        <BuildingsList buildings={buildings} lectureHalls={lectureHalls}/>
+        <BuildingsList buildings={buildings} lectureHalls={lectureHalls} />
       </Container>
     );
   }

@@ -11,7 +11,6 @@ export const LOAD_INSTITUTES_BY_UNIVERSITY_ID =
 export const LOAD_DEPARTMENTS_BY_UNIVERSITY_ID =
   'LOAD_DEPARTMENTS_BY_UNIVERSITY_ID';
 export const LOAD_GROUPS_BY_UNIVERSITY_ID = 'LOAD_GROUPS_BY_UNIVERSITY_ID';
-export const LOAD_GROUP_BY_ID = 'LOAD_GROUPS_BY_ID';
 
 export const LOAD_UNIVERSITIES = 'LOAD_UNIVERSITIES';
 export const LOAD_INSTITUTES = 'LOAD_INSTITUTES';
@@ -116,12 +115,5 @@ export const renderUniversities = universities => ({
   type: RENDER_UNIVERSITIES,
   payload: {
     universities
-  }
-});
-
-export const loadGroupById = groupId => ({
-  type: LOAD_GROUP_BY_ID,
-  payload: {
-    id: groupId
   }
 });

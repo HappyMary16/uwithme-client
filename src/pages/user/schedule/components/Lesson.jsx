@@ -4,10 +4,11 @@ import { getGroupList } from '../../../../utils/ScheduleUtil';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { XCircle } from 'react-bootstrap-icons';
+import Container from 'react-bootstrap/Container';
 
 export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
   return (
-    <div>
+    <Container className={'lesson'}>
       {isEditMode && (
         <Row>
           <Col
@@ -15,11 +16,14 @@ export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
             md={{ offset: 8, span: 1 }}
             lg={{ offset: 9, span: 1 }}
           >
-            <XCircle className={'icon'} onClick={() => deleteLesson(lesson)} />
+            <XCircle
+              className={'delete-icon'}
+              onClick={() => deleteLesson(lesson)}
+            />
           </Col>
         </Row>
       )}
-      <Row className={'lesson'}>
+      <Row>
         <Col xs={8}>
           {lesson.subjectName}
           <br />
@@ -31,6 +35,6 @@ export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
           {lesson.building}
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };

@@ -8,7 +8,6 @@ import i18n from '../../../../locales/i18n';
 import { history } from '../../../../store/Store';
 import { USER_HOME_PAGE } from '../../../../constants/links';
 import { getName } from '../../../../utils/UsersUtil';
-import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import { Row } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
@@ -24,7 +23,7 @@ export const ScheduleTable = ({
   let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
-    <Container>
+    <div>
       <Row>
         {!isMine && (
           <Col xs={6}>
@@ -40,7 +39,7 @@ export const ScheduleTable = ({
         <Col
           xs={{ offset: isMine ? 9 : 3, span: 3 }}
           md={{ offset: isMine ? 10 : 4, span: 2 }}
-          lg={{ offset: isMine ? 11 : 45, span: 1 }}
+          lg={{ offset: isMine ? 11 : 5, span: 1 }}
         >
           {i18n.t('week')}
           <Switch
@@ -56,7 +55,7 @@ export const ScheduleTable = ({
         </Col>
       </Row>
 
-      <Table bordered responsive={'md'}>
+      <Table bordered responsive size="sm">
         <thead>
           <tr>
             <th></th>
@@ -97,6 +96,6 @@ export const ScheduleTable = ({
           ))}
         </tbody>
       </Table>
-    </Container>
+    </div>
   );
 };

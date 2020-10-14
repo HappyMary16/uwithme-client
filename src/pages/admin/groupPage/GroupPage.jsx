@@ -1,19 +1,22 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { findAllStudentsWithoutGroup, findUserById, findUsersByGroupId } from '../../../utils/UsersUtil';
-import Grid from '@material-ui/core/Grid';
+import {
+  findAllStudentsWithoutGroup,
+  findUserById,
+  findUsersByGroupId
+} from '../../../utils/UsersUtil';
 import { GroupCard } from './components/GroupCard';
-import { Container } from '@material-ui/core';
 import { StudentsList } from './components/StudentList';
-import { loadGroupById } from '../structure/actions';
+import AddStudentToGroup from './components/AddStudentToGroup';
+import { RemoveStudentFromGroup } from './components/RemoveStudentFromGroup';
+import Container from 'react-bootstrap/Container';
 import {
   addStudentToGroup,
+  loadGroupById,
   loadStudentsByGroupId,
   loadStudentsWithoutGroup,
   removeStudentFromGroup
-} from '../../user/actions';
-import AddStudentToGroup from './components/AddStudentToGroup';
-import { RemoveStudentFromGroup } from './components/RemoveStudentFromGroup';
+} from './actions';
 
 class GroupPage extends Component {
   constructor(props) {
@@ -77,7 +80,7 @@ class GroupPage extends Component {
       groups && groups.filter(group => group.value === Number(groupId))[0];
 
     return (
-      <Grid container xs={12}>
+      <div>
         <Container>
           {group && (
             <GroupCard
@@ -109,7 +112,7 @@ class GroupPage extends Component {
           }}
           handleYes={this.removeStudent}
         />
-      </Grid>
+      </div>
     );
   }
 }

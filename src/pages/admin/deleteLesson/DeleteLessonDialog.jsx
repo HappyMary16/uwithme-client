@@ -39,7 +39,13 @@ export const DeleteLessonDialog = ({
           isMulti
           options={groups}
           defaultValue={groups}
-          onChange={e => setChoseGroups(e.map(group => group.value))}
+          onChange={e => {
+            if (!e) {
+              setChoseGroups([]);
+            } else {
+              setChoseGroups(e.map(group => group.value));
+            }
+          }}
         />
       </Modal.Body>
 

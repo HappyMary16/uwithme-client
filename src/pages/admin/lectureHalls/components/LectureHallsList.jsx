@@ -8,14 +8,19 @@ export const LectureHallsList = ({ lectureHalls, open }) => {
   return (
     <Collapse in={open}>
       <ListGroup className={'padding-left'}>
-        {lectureHalls && lectureHalls.map((lectureHall, i) => (
-          <ListGroup.Item key={i}>
-            <DoorOpenFill/>
-            {' ' + lectureHall.label
-            + ' (' + i18n.t('place_number') + ': '
-            + lectureHall.placeNumber + ')'}
-          </ListGroup.Item>
-        ))}
+        {lectureHalls &&
+          lectureHalls.map((lectureHall, i) => (
+            <ListGroup.Item key={i}>
+              <DoorOpenFill />
+              {' ' +
+                lectureHall.label +
+                ' (' +
+                i18n.t('place_number') +
+                ': ' +
+                lectureHall.placeNumber +
+                ')'}
+            </ListGroup.Item>
+          ))}
       </ListGroup>
     </Collapse>
   );

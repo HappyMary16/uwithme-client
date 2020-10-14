@@ -1,7 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   CREATE_GROUP,
-  LOAD_GROUP_BY_ID,
   LOAD_GROUPS_BY_UNIVERSITY_ID,
   loadDepartmentsByUniversityId,
   loadInstitutesByUniversityId,
@@ -13,15 +12,13 @@ import {
   GROUPS,
   GROUPS_BY_UNIVERSITY_ID
 } from '../../../../constants/serverApi';
-import { LOAD_GROUPS_BY_TEACHER, renderGroups } from '../../groupPage/actions';
+import { renderGroups } from '../../groupPage/actions';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, action => createGroup(action));
   yield takeEvery(LOAD_GROUPS_BY_UNIVERSITY_ID, action =>
     loadGroupsByUniversityId(action)
   );
-  yield takeEvery(LOAD_GROUP_BY_ID, action => loadGroupById(action));
-  yield takeEvery(LOAD_GROUPS_BY_TEACHER, () => loadGroupByTeacher());
 }
 
 function* createGroup(action) {
@@ -76,45 +73,6 @@ function* loadGroupsByUniversityId(action) {
 
     if (groups) {
       yield put(renderGroups(groups.data));
-    }
-  } catch (e) {
-    alert(e);
-  } finally {
-    yield put(endFetching());
-  }
-}
-
-function* loadGroupById(action) {
-  try {
-    yield put(startFetching());
-    const { id } = action.payload;
-
-    const group = yield call(http, {
-      url: GROUPS + id,
-      method: 'get'
-    });
-
-    if (group) {
-      yield put(renderGroup(group.data));
-    }
-  } catch (e) {
-    alert(e);
-  } finally {
-    yield put(endFetching());
-  }
-}
-
-function* loadGroupByTeacher() {
-  try {
-    yield put(startFetching());
-
-    const group = yield call(http, {
-      url: GROUPS,
-      method: 'get'
-    });
-
-    if (group) {
-      yield put(renderGroups(group.data));
     }
   } catch (e) {
     alert(e);

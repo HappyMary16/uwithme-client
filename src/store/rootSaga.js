@@ -14,6 +14,7 @@ import { deleteLessonWatcher } from '../pages/admin/deleteLesson/sagas';
 import { signInWatcher } from '../pages/authorization/signIn/sagas';
 import { signUpWatcher } from '../pages/authorization/signUp/sagas';
 import { addUniversityWatcher } from '../pages/authorization/addUniversity/sagas';
+import { groupsWatcher } from '../pages/admin/groupPage/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     addLessonWatcher(),
     deleteLessonWatcher(),
     teachersWatcher(),
+    groupsWatcher(),
     lectureHallWatcher(),
     groupWatcher(),
     departmentWatcher(),

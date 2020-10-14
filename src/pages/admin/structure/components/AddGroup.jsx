@@ -110,6 +110,7 @@ export const AddGroup = ({
       <Modal.Body>
         <Form.Group>
           <CreatableSelect
+            className={'selector'}
             theme={selectorColors}
             placeholder={i18n.t('institute')}
             options={instituteOpinions()}
@@ -119,7 +120,7 @@ export const AddGroup = ({
             required
           />
           <CreatableSelect
-            className="selector"
+            className={'selector'}
             theme={selectorColors}
             placeholder={i18n.t('department')}
             options={departmentOpinions()}
@@ -129,7 +130,7 @@ export const AddGroup = ({
             required
           />
           <Select
-            className="selector"
+            className={'selector'}
             placeholder={i18n.t('course')}
             theme={selectorColors}
             onChange={setCourse}

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { findLessonsByGroupId } from '../actions';
 import { ScheduleTable } from '../components/ScheduleTable';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import i18n from '../../../../locales/i18n';
@@ -13,6 +12,7 @@ import { getGroupById } from '../../../../utils/StructureUtils';
 import { DeleteLessonDialog } from '../../../admin/deleteLesson/DeleteLessonDialog';
 import Button from 'react-bootstrap/Button';
 import { deleteLesson } from '../../../admin/deleteLesson/actions';
+import { getLessonsByGroup } from '../../../../utils/ScheduleUtil';
 
 class GroupSchedule extends Component {
   constructor(props) {
@@ -75,10 +75,6 @@ class GroupSchedule extends Component {
     const { lessonToDelete } = this.state;
 
     dispatch(deleteLesson(lessonToDelete, groups));
-
-    this.setState({
-      deleteDialog: false
-    });
   }
 
   render() {
@@ -86,7 +82,7 @@ class GroupSchedule extends Component {
     const { groupId, isEditMode, deleteDialog, lessonToDelete } = this.state;
 
     return (
-      <Container>
+      <div>
         {isEditMode && deleteDialog && (
           <DeleteLessonDialog
             open={deleteDialog}
@@ -121,14 +117,14 @@ class GroupSchedule extends Component {
         </Row>
         {groupId && lessons && (
           <ScheduleTable
-            lessons={lessons}
+            lessons={getLessonsByGroup(lessons, groups, groupId)}
             user={user}
             isMine={true}
             isEditMode={isEditMode}
             deleteLesson={this.openDeleteLessonDialog}
           />
         )}
-      </Container>
+      </div>
     );
   }
 }

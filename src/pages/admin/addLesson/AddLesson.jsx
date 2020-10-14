@@ -4,12 +4,19 @@ import i18n from '../../../locales/i18n';
 import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
-import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../constants/userRoles';
+import {
+  LESSONS_TIME,
+  WEEK_DAYS,
+  WEEK_NUMBER
+} from '../../../constants/userRoles';
 import { loadTeachersByUniversityId } from '../../user/actions';
 import { loadSubjects } from '../../user/files/actions';
 import { loadGroupsByUniversityId } from '../structure/actions';
 import { loadBuildings, loadLectureHalls } from '../lectureHalls/actions';
-import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../utils/StructureUtils';
+import {
+  getBuildingByLectureHall,
+  getLectureHallsByBuilding
+} from '../../../utils/StructureUtils';
 import { addLessonToSchedule } from './actions';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -101,7 +108,7 @@ class AddLesson extends Component {
             })
           }
           onChange={opinion => this.setState({ subject: opinion })}
-          className="selector"
+          className={'selector'}
         />
 
         <CreatableSelect
@@ -117,7 +124,7 @@ class AddLesson extends Component {
             })
           }
           onChange={opinion => this.setState({ teacher: opinion })}
-          className="selector"
+          className={'selector'}
         />
 
         <Row>
@@ -140,7 +147,7 @@ class AddLesson extends Component {
                     : null
                 });
               }}
-              className="selector"
+              className={'selector'}
             />
           </Col>
 
@@ -160,7 +167,7 @@ class AddLesson extends Component {
                   )
                 });
               }}
-              className="selector"
+              className={'selector'}
             />
           </Col>
         </Row>
@@ -171,7 +178,7 @@ class AddLesson extends Component {
           isMulti
           onChange={opinion => this.setState({ selectedGroups: opinion })}
           options={groups}
-          className="selector"
+          className={'selector'}
         />
 
         <Select
@@ -180,7 +187,7 @@ class AddLesson extends Component {
           options={WEEK_DAYS}
           placeholder={i18n.t('week_day')}
           isMulti
-          className="selector"
+          className={'selector'}
         />
 
         <Select
@@ -189,7 +196,7 @@ class AddLesson extends Component {
           options={LESSONS_TIME}
           placeholder={i18n.t('lesson_time')}
           isMulti
-          className="selector"
+          className={'selector'}
         />
 
         <Select
@@ -198,11 +205,16 @@ class AddLesson extends Component {
           isMulti
           onChange={opinion => this.setState({ weekNumbers: opinion })}
           options={WEEK_NUMBER}
-          className="selector"
+          className={'selector'}
         />
 
         <Col xs={12} md={{ offset: 9, span: 3 }}>
-          <Button block type={'submit'} variant={'purple'} className="selector">
+          <Button
+            block
+            type={'submit'}
+            variant={'purple'}
+            className={'selector'}
+          >
             {i18n.t('upload')}
           </Button>
         </Col>

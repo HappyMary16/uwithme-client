@@ -9,12 +9,11 @@ import i18n from '../../../locales/i18n';
 import { getLectures, getTasks } from '../../../utils/FileUtil';
 import { compose } from 'redux';
 import FilesToChoose from './FilesToChoose';
-import { addAccessToFiles } from './actions';
+import { addAccessToFiles, loadGroupsByTeacher } from './actions';
 import { loadSubjectsAndFiles } from '../files/actions';
 import Select from 'react-select';
 import { marginTop, selectorColors } from '../../../styles/styles';
 import Container from '@material-ui/core/Container';
-import { loadGroupsByTeacher } from '../../admin/groupPage/actions';
 
 const submit = {
   marginTop: '10px',

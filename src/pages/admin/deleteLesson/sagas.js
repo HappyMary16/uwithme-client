@@ -3,7 +3,7 @@ import { DELETE_LESSON } from './actions';
 import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
-import { renderLessons } from '../../user/schedule/actions';
+import { renderLesson } from '../../user/schedule/actions';
 
 export function* deleteLessonWatcher() {
   yield takeEvery(DELETE_LESSON, action => deleteLesson(action));
@@ -17,6 +17,9 @@ function* deleteLesson(action) {
       lessonId: lesson.id
     };
 
+    if (groups.length === 0) {
+      return;
+    }
     if (groups.length !== lesson.groups.length) {
       data.groups = groups;
     }
@@ -28,7 +31,7 @@ function* deleteLesson(action) {
     });
 
     if (response) {
-      yield put(renderLessons(response.data));
+      yield put(renderLesson(lesson.id, response.data));
     }
   } catch (e) {
     alert(e);

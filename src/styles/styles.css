@@ -1,6 +1,5 @@
 .selector {
-    margin-top: 0.7em;
-    margin-bottom: 0.7em;
+    margin-bottom: 0.5em;
 }
 
 .main-page-container {
@@ -21,12 +20,20 @@
     margin-bottom: 0.7em;
 }
 
-.icon {
+.delete-icon {
     color: red;
 }
 
-.icon:hover {
+.delete-icon:hover {
     color: grey;
+}
+
+.icon {
+    color: grey;
+}
+
+.icon:hover {
+    color: #5c71c5;
 }
 
 .lesson {

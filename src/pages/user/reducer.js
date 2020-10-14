@@ -1,6 +1,5 @@
 import {
   RENDER_AVATAR,
-  RENDER_GROUPS_FOR_TEACHER,
   RENDER_LESSONS_FOR_CURRENT_USER_PAGE,
   RENDER_USER,
   RENDER_USERS
@@ -37,18 +36,6 @@ export default function usersReducer(
       return {
         ...state,
         lessons: action.payload.lessons
-      };
-    case RENDER_GROUPS_FOR_TEACHER:
-      return {
-        ...state,
-        groups: action.payload.groups.map(obj => {
-          let group = {};
-          group.value = obj.id;
-          group.label = obj.name;
-          group.departmentId = obj.departmentId;
-          group.course = obj.course;
-          return group;
-        })
       };
     case RENDER_AVATAR:
       let userWithAvatar = state.users.filter(
