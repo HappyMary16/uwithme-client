@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import SchoolIcon from '@material-ui/icons/School';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { InputField } from '../../common/components/InputField';
 import i18n from '../../../locales/i18n';
-import { compose } from 'redux';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { PasswordInput } from '../components/PasswordInput';
-import { authStyles } from '../../../styles/styles';
 import { addUniversity } from './actions';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { PersonFill } from 'react-bootstrap-icons';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class AddUniversity extends Component {
   constructor(props) {
@@ -44,47 +39,41 @@ class AddUniversity extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <Container component="main" maxWidth="xs">
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <SchoolIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {i18n.t('add_university')}
-          </Typography>
-          <form className={classes.form} onSubmit={this.submit}>
-            <InputField
-              label={i18n.t('university_name')}
-              autoFocus={true}
-              onBlur={e => this.setState({ universityName: e.target.value })}
-            />
+      <Row className="justify-content-center">
+        <Col xs={12} md={8} lg={6} xl={5}>
+          <Row className="justify-content-center">
+            {/*TODO change icon*/}
+            {/*<SchoolIcon />*/}
+            <PersonFill className={'avatar-icon'} size={35} />
+          </Row>
+          <Row className="justify-content-center margin-bottom">
+            <h5>{i18n.t('add_university')}</h5>
+          </Row>
 
-            <InputField
-              label={i18n.t('admin_username')}
-              onBlur={e => this.setState({ username: e.target.value })}
+          <Form onSubmit={this.submit}>
+            <Form.Control
+              placeholder={i18n.t('university_name') + ' *'}
+              onChange={e => this.setState({ universityName: e.target.value })}
+              required
             />
-
+            <Form.Control
+              placeholder={i18n.t('admin_username') + ' *'}
+              onChange={e => this.setState({ username: e.target.value })}
+              required
+            />
             <PasswordInput
               setPasswordMethod={e => this.setState({ password: e })}
               setConfirmPasswordMethod={e =>
                 this.setState({ confirmPassword: e })
               }
             />
-            <Button
-              fullWidth
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              type="submit"
-            >
+            <Button block variant={'purple'} type={'submit'}>
               {i18n.t('add')}
             </Button>
-          </form>
-        </div>
-      </Container>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
@@ -95,7 +84,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  withStyles(authStyles),
-  connect(mapStateToProps)
-)(AddUniversity);
+export default connect(mapStateToProps)(AddUniversity);

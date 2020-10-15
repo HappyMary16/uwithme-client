@@ -1,7 +1,4 @@
-export const purpleColor = '#483D8B';
 export const lightGreyColor = '#D3D3D3';
-export const buttonColor = '#eeeeee';
-export const textColor = '#696969';
 
 export const authStyles = theme => ({
   paper: {
@@ -12,7 +9,7 @@ export const authStyles = theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#483D8B'
+    backgroundColor: '#5c71c5'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -28,7 +25,7 @@ export const selectorColors = theme => ({
   ...theme,
   colors: {
     ...theme.colors,
-    primary: purpleColor,
+    primary: '#5c71c5',
     primary50: lightGreyColor,
     primary25: '#F5F5F5'
   }

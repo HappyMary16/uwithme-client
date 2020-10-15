@@ -1,5 +1,5 @@
 .form-control {
-    margin-top: 2%;
+    margin-bottom: 0.5em;
 }
 
 .form-control:focus {
@@ -9,4 +9,9 @@
 
 .form-check {
     margin-top: 2%;
+}
+
+.form-control-error {
+    border-color: red;
+    box-shadow: 0 0 2px 2px red;
 }

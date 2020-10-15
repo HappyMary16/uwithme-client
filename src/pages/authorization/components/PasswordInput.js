@@ -1,6 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { InputField } from '../../common/components/InputField';
+import Form from 'react-bootstrap/Form';
 import i18n from '../../../locales/i18n';
 
 export const PasswordInput = ({
@@ -24,29 +23,39 @@ export const PasswordInput = ({
   };
 
   return (
-    <Grid>
-      <InputField
-        label={i18n.t('password')}
-        type="password"
-        error={error}
-        helperText={error ? i18n.t('password_error') : ''}
+    <Form.Group>
+      <Form.Control
+        className={error ? 'form-control-error' : ''}
+        placeholder={i18n.t('password') + ' *'}
+        type={'password'}
         onChange={e => {
           setPassword(e.target.value);
           setPasswordMethod(e.target.value);
         }}
         onBlur={setPasswordError}
+        required
       />
-      <InputField
-        label={i18n.t('confirm_password')}
-        type="password"
-        error={error}
-        helperText={error ? i18n.t('password_error') : ''}
+      {error && (
+        <Form.Text id={'passwordHelpBlock'} muted>
+          {i18n.t('password_error')}
+        </Form.Text>
+      )}
+      <Form.Control
+        className={error ? 'form-control-error' : ''}
+        placeholder={i18n.t('confirm_password') + ' *'}
+        type={'password'}
         onChange={e => {
           setConfirmPassword(e.target.value);
           setConfirmPasswordMethod(e.target.value);
         }}
         onBlur={setPasswordError}
+        required
       />
-    </Grid>
+      {error && (
+        <Form.Text id={'passwordHelpBlock'} muted>
+          {i18n.t('password_error')}
+        </Form.Text>
+      )}
+    </Form.Group>
   );
 };
