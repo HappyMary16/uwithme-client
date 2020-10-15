@@ -33,6 +33,15 @@ export function renderUsers(users) {
   };
 }
 
+export function renderUser(user) {
+  return {
+    type: RENDER_USER,
+    payload: {
+      user
+    }
+  };
+}
+
 export const findLessonsForUser = username => ({
   type: FIND_LESSONS_FOR_USER,
   payload: {

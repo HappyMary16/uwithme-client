@@ -1,13 +1,9 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
 import i18n from '../../../../locales/i18n';
 import { getName } from '../../../../utils/UsersUtil';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export const RemoveStudentFromGroup = ({
   open,
@@ -16,23 +12,15 @@ export const RemoveStudentFromGroup = ({
   handleYes
 }) => {
   return (
-    <Dialog
-      fullWidth={true}
-      maxWidth="sm"
-      scroll="paper"
-      open={open}
-      onClose={handleNo}
-    >
-      <DialogTitle id="form-dialog-title">
-        {i18n.t('remove_student_from_group')}
-      </DialogTitle>
+    <Modal show={open} onHide={handleNo} centered>
+      <Modal.Header>
+        <Modal.Title>{i18n.t('remove_student_from_group')}</Modal.Title>
+      </Modal.Header>
 
-      <DialogContent>
-        <DialogContentText>{getName(student)}</DialogContentText>
-      </DialogContent>
+      <Modal.Body>{getName(student)}</Modal.Body>
 
-      <DialogActions>
-        <Button onClick={handleNo} color="primary">
+      <Modal.Footer>
+        <Button onClick={handleNo} variant={'purple'}>
           {i18n.t('no')}
         </Button>
         <Button
@@ -40,11 +28,11 @@ export const RemoveStudentFromGroup = ({
             handleYes(student.id);
             handleNo();
           }}
-          color="primary"
+          variant={'purple'}
         >
           {i18n.t('yes')}
         </Button>
-      </DialogActions>
-    </Dialog>
+      </Modal.Footer>
+    </Modal>
   );
 };

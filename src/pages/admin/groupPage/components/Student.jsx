@@ -16,16 +16,22 @@ export const Student = ({ student, removeStudent }) => {
   return (
     <ListGroup.Item action onClick={handleClick}>
       <Row>
-        <Col xs={1}>
+        <Col xs={2} sm={1}>
           <Image
             roundedCircle
             alt="photo"
-            src="/empty-avatar.jpg"
+            src={
+              student.avatar === undefined || student.avatar === null
+                ? '/empty-avatar.jpg'
+                : student.avatar
+            }
             className={'small-avatar'}
           />
         </Col>
-        <Col xs={10}>{getName(student)}</Col>
-        <Col xs={1}>
+        <Col xs={8} sm={10}>
+          {getName(student)}
+        </Col>
+        <Col xs={2} sm={1}>
           <TrashFill
             onClick={e => {
               e.stopPropagation();

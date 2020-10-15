@@ -110,9 +110,9 @@ function* getTeachersFriends() {
   }
 }
 
-function* downloadAvatars(users) {
-  for (let i = 0; i < users.length; i++) {
-    const user = users[i];
+function* downloadAvatars(action) {
+  for (let i = 0; i < action.payload.users.length; i++) {
+    const user = action.payload.users[i];
     yield call(downloadAvatarForUser, user.id);
   }
 }

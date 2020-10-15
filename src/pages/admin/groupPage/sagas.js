@@ -15,7 +15,7 @@ import {
   STUDENTS_BY_GROUP_ID,
   STUDENTS_WITHOUT_GROUP
 } from '../../../constants/serverApi';
-import { renderUsers } from '../../user/actions';
+import { renderUser, renderUsers } from '../../user/actions';
 import { renderGroup } from '../structure/actions';
 
 export function* groupsWatcher() {
@@ -60,13 +60,13 @@ function* removeStudentFromGroup(action) {
     yield put(startFetching());
     const { studentId } = action.payload;
 
-    const users = yield call(http, {
+    const user = yield call(http, {
       url: GROUP_STUDENT_ID + studentId,
       method: 'delete'
     });
 
-    if (users) {
-      yield put(renderUsers(users.data));
+    if (user) {
+      yield put(renderUser(user.data));
     }
   } catch (e) {
     alert(e);
