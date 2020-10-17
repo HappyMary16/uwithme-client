@@ -1,7 +1,6 @@
 import { RENDER_LESSON, RENDER_LESSONS } from './actions';
 import StateLoader from '../../../store/StateLoader';
 import { SIGN_OUT } from '../../authorization/signIn/actions';
-import { loadGroups } from '../../admin/structure/actions';
 
 export default function scheduleReducers(
   state = new StateLoader().loadState().scheduleReducers || {},

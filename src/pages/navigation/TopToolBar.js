@@ -1,75 +1,76 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import { ADD_UNIVERSITY_PATH, SIGN_IN } from '../../constants/links';
 import i18n from '../../locales/i18n';
 import Button from 'react-bootstrap/Button';
-
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    marginLeft: 0,
-    position: 'relative',
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: '#eeeeee'
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-    paddingLeft: 5
-  },
-  link: {
-    margin: theme.spacing(1, 1.5)
-  }
-}));
+import Nav from 'react-bootstrap/Nav';
+import './navigation.css';
+import { MortarBoardIcon, ThreeBarsIcon } from '@primer/octicons-react';
+import Col from 'react-bootstrap/Col';
 
 export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
-  const classes = useStyles();
-
   return (
-    <AppBar color="default" className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
-        {user && (
-          <img
-            src={'/menu-icon.png'}
-            width="20"
-            height="20"
-            onClick={openMenu()}
-          />
-        )}
-        <Typography
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.toolbarTitle}
+    <Nav className={'app-bar'}>
+      {user && (
+        <Col xs={2}>
+          <div onClick={openMenu()}>
+            <ThreeBarsIcon size={35} className={'app-icon icon'} />
+          </div>
+        </Col>
+      )}
+      {user && (
+        <Col
+          xs={{ offset: 6, span: 4 }}
+          sm={{ offset: 7, span: 3 }}
+          md={{ offset: 8, span: 2 }}
+          xl={{ offset: 9, span: 1 }}
         >
-          {i18n.t('ntu_khpi')}
-        </Typography>
-        {!user && (
-          <Button
-            href={ADD_UNIVERSITY_PATH}
-            variant={'purple'}
-            className={classes.link}
-          >
-            {i18n.t('add_university')}
-          </Button>
-        )}
-        {!user && (
-          <Button href={SIGN_IN} variant={'purple'} className={classes.link}>
-            {i18n.t('sign_in')}
-          </Button>
-        )}
-        {user && (
           <Button
             href="/sign-in"
             variant={'purple'}
-            className={classes.link}
+            className={'menu-btn'}
             onClick={signOutFunc()}
+            block
           >
             {i18n.t('sign_out')}
           </Button>
-        )}
-      </Toolbar>
-    </AppBar>
+        </Col>
+      )}
+
+      {!user && (
+        <Col xs={2} sm={1}>
+          <MortarBoardIcon size={35} className={'app-icon'} />
+        </Col>
+      )}
+      {!user && (
+        <Col
+          xs={{ offset: 1, span: 6 }}
+          sm={{ offset: 3, span: 5 }}
+          md={{ offset: 5, span: 4 }}
+          lg={{ offset: 6, span: 3 }}
+          xl={{ offset: 8, span: 2 }}
+        >
+          <Button
+            href={ADD_UNIVERSITY_PATH}
+            variant={'purple'}
+            className={'menu-btn'}
+            block
+          >
+            {i18n.t('add_university')}
+          </Button>
+        </Col>
+      )}
+      {!user && (
+        <Col xs={3} sm={3} md={2} lg={2} xl={1}>
+          <Button
+            href={SIGN_IN}
+            variant={'purple'}
+            className={'menu-btn'}
+            block
+          >
+            {i18n.t('sign_in')}
+          </Button>
+        </Col>
+      )}
+    </Nav>
   );
 };

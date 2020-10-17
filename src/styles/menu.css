@@ -4,6 +4,17 @@
     height: 0;
     left: 0;
     top: 0;
+    z-index: 0 !important;
+}
+.bm-burger-bars {
+    width: 0;
+    height: 0;
+}
+
+div.bm-burger-button button {
+    z-index: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* Position and sizing of clickable cross button */

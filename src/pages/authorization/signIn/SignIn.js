@@ -5,9 +5,9 @@ import i18n from '../../../locales/i18n';
 import { signInRequest, signOut } from './actions';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { PersonFill } from 'react-bootstrap-icons';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { MortarBoardIcon } from '@primer/octicons-react';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class SignIn extends React.Component {
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6} xl={5}>
           <Row className="justify-content-center">
-            <PersonFill className={'avatar-icon'} size={35} />
+            <MortarBoardIcon className={'avatar-icon'} size={35} />
           </Row>
           <Row className="justify-content-center margin-bottom">
             <h5>{i18n.t('sign_in')}</h5>

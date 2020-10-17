@@ -15,9 +15,9 @@ import { selectorColors } from '../../../styles/styles';
 import { signUpRequest } from './actions';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { PersonFill } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 import Select from 'react-select';
+import { MortarBoardIcon } from '@primer/octicons-react';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -83,20 +83,13 @@ class SignUp extends React.Component {
       scienceDegrees,
       universities
     } = this.props;
-    const {
-      userRole,
-      scienceDegree,
-      institute,
-      group,
-      department,
-      university
-    } = this.state;
+    const { userRole } = this.state;
 
     return (
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6} xl={5}>
           <Row className="justify-content-center">
-            <PersonFill className={'avatar-icon'} size={35} />
+            <MortarBoardIcon className={'avatar-icon'} size={35} />
           </Row>
           <Row className="justify-content-center margin-bottom">
             <h5>{i18n.t('sign_up')}</h5>

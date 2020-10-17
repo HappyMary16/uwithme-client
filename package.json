@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
+    "@primer/octicons-react": "^11.0.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.5.2",
     "connected-react-router": "^6.7.0",

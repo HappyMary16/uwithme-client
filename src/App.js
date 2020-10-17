@@ -86,7 +86,7 @@ class App extends Component {
     const { user, isFetching, isMenuOpen, classes } = this.props;
 
     return (
-      <div>
+      <Container fluid className={'main-container'}>
         <NavigationContainer />
         <Backdrop className={classes.backdrop} open={isFetching !== 0}>
           <CircularProgress color="inherit" />
@@ -164,7 +164,7 @@ class App extends Component {
             </div>
           )}
         </Container>
-      </div>
+      </Container>
     );
   }
 }
