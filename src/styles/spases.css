@@ -1,9 +1,17 @@
 .padding-left {
-    padding-left: 5%;
+    padding-left: 30px;
+}
+
+.padding-left-x2 {
+    padding-left: 40px;
 }
 
 .margin-bottom {
     margin-bottom: 0.5em;
+}
+
+.margin-top {
+    margin-top: 0.5em;
 }
 
 

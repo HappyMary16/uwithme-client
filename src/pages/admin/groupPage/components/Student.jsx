@@ -6,7 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { TrashFill } from 'react-bootstrap-icons';
-import Image from 'react-bootstrap/Image';
+import { SmallAvatar } from '../../../common/components/SmallAvatar';
 
 export const Student = ({ student, removeStudent }) => {
   let handleClick = () => {
@@ -17,16 +17,7 @@ export const Student = ({ student, removeStudent }) => {
     <ListGroup.Item action onClick={handleClick}>
       <Row>
         <Col xs={2} sm={1}>
-          <Image
-            roundedCircle
-            alt="photo"
-            src={
-              student.avatar === undefined || student.avatar === null
-                ? '/empty-avatar.jpg'
-                : student.avatar
-            }
-            className={'small-avatar'}
-          />
+          <SmallAvatar avatar={student.avatar} />
         </Col>
         <Col xs={8} sm={10}>
           {getName(student)}

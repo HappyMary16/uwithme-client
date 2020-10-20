@@ -30,27 +30,25 @@ export const AddLectureHall = ({
       </Modal.Header>
 
       <Modal.Body>
-        <CreatableSelect
-          theme={selectorColors}
-          placeholder={i18n.t('building_name')}
-          options={buildings}
-          onChange={setBuilding}
-          onCreateOption={e =>
-            setBuilding({
-              value: e,
-              label: e
-            })
-          }
-          value={building}
-        />
         <Form.Group>
+          <CreatableSelect
+            theme={selectorColors}
+            className={'selector'}
+            placeholder={i18n.t('building_name')}
+            options={buildings}
+            onChange={setBuilding}
+            onCreateOption={e =>
+              setBuilding({
+                value: e,
+                label: e
+              })
+            }
+            value={building}
+          />
           <Form.Control
             placeholder={i18n.t('lecture_hall_name')}
             onChange={e => setLectureHall(e.target.value)}
           />
-        </Form.Group>
-
-        <Form.Group>
           <Form.Control
             placeholder={i18n.t('place_number')}
             onChange={e => setPlaceNumber(e.target.value)}

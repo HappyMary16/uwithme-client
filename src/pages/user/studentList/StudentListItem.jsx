@@ -1,14 +1,12 @@
 import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import { getName } from '../../../utils/UsersUtil';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import { USER_HOME_PAGE, USER_SCHEDULE } from '../../../constants/links';
 import { history } from '../../../store/Store';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Col from 'react-bootstrap/Col';
+import { SmallAvatar } from '../../common/components/SmallAvatar';
+import { CalendarWeekFill } from 'react-bootstrap-icons';
+import Row from 'react-bootstrap/Row';
 
 export const StudentListItem = ({ student }) => {
   let handleClick = () => {
@@ -16,22 +14,26 @@ export const StudentListItem = ({ student }) => {
   };
 
   return (
-    <ListItem button onClick={handleClick}>
-      <ListItemAvatar>
-        <Avatar
-          alt="photo"
-          src={student.avatar === null ? '/empty-avatar.jpg' : student.avatar}
-        />
-      </ListItemAvatar>
-      <ListItemText
-        primary={getName(student)}
-        secondary={student.studyGroupName}
-      />
-      <ListItemSecondaryAction>
-        <IconButton href={USER_SCHEDULE(student.id)}>
-          <AssignmentIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
+    <ListGroup.Item action onClick={handleClick}>
+      <Row>
+        <Col xs={2} sm={1}>
+          <SmallAvatar avatar={student.avatar} />
+        </Col>
+        <Col xs={8} sm={10}>
+          <p className={'text'}>{getName(student)}</p>
+          <p className={'secondary-text text'}>{student.studyGroupName}</p>
+        </Col>
+        <Col xs={2} sm={1}>
+          <CalendarWeekFill
+            onClick={e => {
+              e.stopPropagation();
+              history.push(USER_SCHEDULE(student.id));
+            }}
+            className={'icon'}
+            size={22}
+          />
+        </Col>
+      </Row>
+    </ListGroup.Item>
   );
 };

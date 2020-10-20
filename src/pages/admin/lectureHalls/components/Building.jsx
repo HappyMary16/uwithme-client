@@ -1,10 +1,7 @@
 import React from 'react';
 import { LectureHallsList } from './LectureHallsList';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
-import Container from 'react-bootstrap/Container';
+import { ListItem } from '../../structure/components/ListItem';
 
 export const Building = ({ building, lectureHalls }) => {
   const [open, setOpen] = React.useState(false);
@@ -12,27 +9,19 @@ export const Building = ({ building, lectureHalls }) => {
   return (
     <div>
       <ListGroup.Item action onClick={() => setOpen(!open)}>
-        <Container>
-          <Row>
-            <Col xs={10}>
-              <img
-                src="/department-icon.jpg"
-                alt=""
-                width="20"
-                height="20"
-                title="Bootstrap"
-              />
-              {' ' + building.label}
-            </Col>
-            <Col xs={2}>
-              {open ? (
-                <ChevronUp class={'leftButton'} />
-              ) : (
-                <ChevronDown class={'leftButton'} />
-              )}
-            </Col>
-          </Row>
-        </Container>
+        <ListItem
+          open={open}
+          text={building.label}
+          icon={
+            <img
+              src="/department-icon.jpg"
+              alt=""
+              width="20"
+              height="20"
+              title="building"
+            />
+          }
+        />
       </ListGroup.Item>
       <LectureHallsList lectureHalls={lectureHalls} open={open} />
     </div>

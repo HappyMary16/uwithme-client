@@ -30,20 +30,21 @@ export const AddDepartment = ({
       </Modal.Header>
 
       <Modal.Body>
-        <CreatableSelect
-          theme={selectorColors}
-          placeholder={i18n.t('institute')}
-          options={institutes}
-          onChange={setInstitute}
-          onCreateOption={e =>
-            setInstitute({
-              value: e,
-              label: e
-            })
-          }
-          value={institute}
-        />
         <Form.Group>
+          <CreatableSelect
+            theme={selectorColors}
+            className={'selector'}
+            placeholder={i18n.t('institute')}
+            options={institutes}
+            onChange={setInstitute}
+            onCreateOption={e =>
+              setInstitute({
+                value: e,
+                label: e
+              })
+            }
+            value={institute}
+          />
           <Form.Control
             placeholder={i18n.t('department_name')}
             onChange={e => setDepartmentName(e.target.value)}

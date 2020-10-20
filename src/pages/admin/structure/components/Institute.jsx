@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import DepartmentsList from './DepartmentsList';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
+import { ChevronDown, ChevronUp, FolderFill } from 'react-bootstrap-icons';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { ListItem } from './ListItem';
 
 export default class Institute extends Component {
   constructor(props) {
@@ -34,17 +35,19 @@ export default class Institute extends Component {
     return (
       <div>
         <ListGroup.Item action onClick={this.instituteHandleClick}>
-          <Container>
-            <Row>
-              <Col xs={10}>
-                <img src="/institute-icon.png" alt="" width="20" height="20" title="Bootstrap"/>
-                {' ' + institute.label}
-              </Col>
-              <Col xs={2}>
-                {open ? <ChevronUp class={'leftButton'}/> : <ChevronDown class={'leftButton'}/>}
-              </Col>
-            </Row>
-          </Container>
+          <ListItem
+            open={open}
+            text={institute.label}
+            icon={
+              <img
+                src="/institute-icon.png"
+                alt=""
+                width="20"
+                height="20"
+                title="institute"
+              />
+            }
+          />
         </ListGroup.Item>
 
         <DepartmentsList

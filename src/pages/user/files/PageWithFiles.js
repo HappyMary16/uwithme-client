@@ -1,32 +1,14 @@
 import React from 'react';
-
 import { SubjectFiles } from './components/SubjectFiles';
-
-import List from '@material-ui/core/List';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import { ADD_FILE, SHARE_FILES } from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import { TEACHER } from '../../../constants/userRoles';
 import { loadSubjectsAndFiles } from './actions';
 import { connect } from 'react-redux';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { compose } from 'redux';
-
-const useStyles = theme => ({
-  list: {
-    width: '100%'
-  },
-  link: {
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(1),
-    backgroundColor: '#eeeeee'
-  },
-  buttons: {
-    marginLeft: 'auto',
-    marginRight: 0
-  }
-});
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class PageWithFiles extends React.Component {
   componentDidMount() {
@@ -35,33 +17,30 @@ class PageWithFiles extends React.Component {
   }
 
   render() {
-    const { userRole, subjects, files, classes } = this.props;
+    const { userRole, subjects, files } = this.props;
 
     return (
-      <Grid container xs={12} className={classes.root}>
-        <Grid container className={classes.buttons} justify="flex-end">
-          {userRole === TEACHER && (
-            <Button
-              href={ADD_FILE}
-              color="primary"
-              variant="outlined"
-              className={classes.link}
+      <Col xs={12}>
+        {userRole === TEACHER && (
+          <Row className="justify-content-around">
+            <Col
+              xs={12}
+              md={{ offset: 4, span: 3 }}
+              lg={{ offset: 5, span: 3 }}
+              xl={{ offset: 7, span: 2 }}
             >
-              {i18n.t('add_files_page')}
-            </Button>
-          )}
-          {userRole === TEACHER && (
-            <Button
-              href={SHARE_FILES}
-              color="primary"
-              variant="outlined"
-              className={classes.link}
-            >
-              {i18n.t('share_files_page')}
-            </Button>
-          )}
-        </Grid>
-        <List component="nav" className={classes.list}>
+              <Button href={ADD_FILE} variant={'purple'}>
+                {i18n.t('add_files_page')}
+              </Button>
+            </Col>
+            <Col xs={12} md={5} lg={4} xl={3}>
+              <Button href={SHARE_FILES} variant={'purple'}>
+                {i18n.t('share_files_page')}
+              </Button>
+            </Col>
+          </Row>
+        )}
+        <ListGroup variant={'flush'}>
           {subjects &&
             subjects.map((subject, i) => (
               <SubjectFiles
@@ -72,8 +51,8 @@ class PageWithFiles extends React.Component {
                 }
               />
             ))}
-        </List>
-      </Grid>
+        </ListGroup>
+      </Col>
     );
   }
 }
@@ -87,7 +66,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  withStyles(useStyles),
-  connect(mapStateToProps)
-)(PageWithFiles);
+export default connect(mapStateToProps)(PageWithFiles);

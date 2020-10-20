@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { ListItem } from './ListItem';
 
 export default class Department extends Component {
   constructor(props) {
@@ -31,22 +32,28 @@ export default class Department extends Component {
     const { open } = this.state;
 
     return (
-      <div className={'padding-left'}>
-        <ListGroup.Item action
-                        onClick={this.instituteHandleClick}>
-          <Container>
-            <Row>
-              <Col xs={10}>
-                <img src="/department-icon.jpg" alt="" width="20" height="20" title="Bootstrap"/>
-                {' ' + department.label}
-              </Col>
-              <Col xs={2}>
-                {open ? <ChevronUp class={'leftButton'}/> : <ChevronDown class={'leftButton'}/>}
-              </Col>
-            </Row>
-          </Container>
+      <div>
+        <ListGroup.Item
+          className={'padding-left'}
+          action
+          onClick={this.instituteHandleClick}
+        >
+          <ListItem
+            open={open}
+            text={department.label}
+            icon={
+              <img
+                src="/department-icon.jpg"
+                alt=""
+                width="20"
+                height="20"
+                title="department"
+              />
+            }
+          />
         </ListGroup.Item>
-        <GroupList open={open} groups={groups}/>
+
+        <GroupList open={open} groups={groups} />
       </div>
     );
   }

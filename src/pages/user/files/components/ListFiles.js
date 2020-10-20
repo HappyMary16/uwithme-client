@@ -1,59 +1,54 @@
 import React from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import DescriptionIcon from '@material-ui/icons/Description';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import { grey } from '@material-ui/core/colors';
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import IconButton from '@material-ui/core/IconButton';
 import { loadFile } from '../actions';
 import { connect } from 'react-redux';
 import { isPossibleToOpen } from '../../../../utils/FileUtil';
-
-const useStyles = makeStyles(theme => ({
-  nested: {
-    paddingLeft: theme.spacing(8)
-  },
-  download: {
-    color: grey
-  }
-}));
+import Collapse from 'react-bootstrap/Collapse';
+import ListGroup from 'react-bootstrap/ListGroup';
+import {
+  ArrowDownCircleFill,
+  BookHalf,
+  FileEarmarkRichtextFill
+} from 'react-bootstrap-icons';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 let ListFiles = ({ open, files, dispatch }) => {
-  const classes = useStyles();
-
   return (
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding>
+    <Collapse in={open}>
+      <ListGroup>
         {files.map((file, i) => (
-          <ListItem button key={i} className={classes.nested}>
-            <ListItemIcon>
-              <DescriptionIcon />
-            </ListItemIcon>
-            <ListItemText primary={file.name} />
-            <ListItemSecondaryAction>
-              {isPossibleToOpen(file.name) && (
-                <IconButton
-                  onClick={() => dispatch(loadFile(file.id, file.name, false))}
-                >
-                  <ImportContactsIcon />
-                </IconButton>
-              )}
-              <IconButton
-                onClick={() => dispatch(loadFile(file.id, file.name, true))}
-              >
-                <GetAppIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          <ListGroup.Item className={'padding-left-x2'} action key={i}>
+            <Row className={'show-grid'}>
+              <Col xs={2} sm={1}>
+                <Row className="justify-content-center">
+                  <FileEarmarkRichtextFill className={'icon-color'} size={22} />
+                </Row>
+              </Col>
+              <Col xs={6} sm={8} md={9}>
+                {file.name}
+              </Col>
+              <Col xs={4} sm={3} md={2}>
+                <Row className="justify-content-end">
+                  {isPossibleToOpen(file.name) && (
+                    <BookHalf
+                      className={'icon'}
+                      size={22}
+                      onClick={() =>
+                        dispatch(loadFile(file.id, file.name, false))
+                      }
+                    />
+                  )}
+                  <ArrowDownCircleFill
+                    className={'icon'}
+                    size={22}
+                    onClick={() => dispatch(loadFile(file.id, file.name, true))}
+                  />
+                </Row>
+              </Col>
+            </Row>
+          </ListGroup.Item>
         ))}
-      </List>
+      </ListGroup>
     </Collapse>
   );
 };

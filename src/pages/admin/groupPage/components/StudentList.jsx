@@ -20,7 +20,7 @@ export const StudentsList = ({ students, addStudent, removeStudent }) => {
         </Col>
       </Row>
 
-      <ListGroup variant="flush">
+      <ListGroup variant={'flush'}>
         {students &&
           students.map(user => (
             <Student

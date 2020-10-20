@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { loadTeachersByGroupId } from '../actions';
-import List from '@material-ui/core/List';
 import { TeacherListItem } from './TeacherListItem';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class TeachersList extends Component {
   componentDidMount() {
@@ -14,12 +14,12 @@ class TeachersList extends Component {
     const { teachers } = this.props;
 
     return (
-      <List>
+      <ListGroup variant={'flush'}>
         {teachers &&
           teachers.map(teacher => (
             <TeacherListItem key={teacher.id} teacher={teacher} />
           ))}
-      </List>
+      </ListGroup>
     );
   }
 }
