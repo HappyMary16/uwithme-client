@@ -1,8 +1,10 @@
 import React from 'react';
 import { DropZone } from './DropZone';
 import { FilesProgress } from './FilesProgress';
-import Container from '@material-ui/core/Container';
 import '../../../../styles/fileUpload.css';
+import i18n from '../../../../locales/i18n';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 export const Upload = ({
   addFiles,
@@ -23,22 +25,25 @@ export const Upload = ({
   };
 
   return (
-    <Container>
-      <div className={'upload'}>
-        <div className={'content'}>
-          <div>
-            <DropZone
-              onFilesAddedFunk={onFilesAdded}
-              disabled={uploading || successfulUploaded}
-            />
-          </div>
-          <FilesProgress
-            files={files}
-            uploadProgress={uploadProgress}
-            uploadStarted={uploading || successfulUploaded}
+    <div className={'upload'}>
+      <div className={'content'}>
+        <div>
+          <DropZone
+            onFilesAddedFunk={onFilesAdded}
+            disabled={uploading || successfulUploaded}
           />
         </div>
+        {(!files || files.length === 0) && (
+          <Container>
+            <Row className={'justify-content-center'}>
+              <h5 className={'text'}>{i18n.t('choose_files')}</h5>
+            </Row>
+          </Container>
+        )}
+        {files && files.length > 0 && (
+          <FilesProgress files={files} uploadProgress={uploadProgress} />
+        )}
       </div>
-    </Container>
+    </div>
   );
 };

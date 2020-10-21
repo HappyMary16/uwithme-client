@@ -1,8 +1,7 @@
 import React from 'react';
-
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import i18n from '../../../../locales/i18n';
 import '../../../../styles/fileUpload.css';
+import { CloudArrowUpFill } from 'react-bootstrap-icons';
 
 export const DropZone = ({ disabled, onFilesAddedFunk }) => {
   let fileInputRef = React.createRef();
@@ -63,7 +62,7 @@ export const DropZone = ({ disabled, onFilesAddedFunk }) => {
         multiple
         onChange={onFilesAdded}
       />
-      <CloudUploadIcon />
+      <CloudArrowUpFill size={30} class={'icon-color'} />
       <span>{i18n.t('upload_files')}</span>
     </div>
   );

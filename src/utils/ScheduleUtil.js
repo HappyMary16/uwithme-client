@@ -16,13 +16,17 @@ export const filterAndSortLessons = (lessons, day, weekNumber) => {
   );
 };
 
-export const areLessonsToday = (lessons, day) => {
+export const areLessonsToday = (lessons, day, weekNumber) => {
   return (
-    lessons && lessons.filter(lesson => lesson.weekDay === day).length !== 0
+    lessons &&
+    lessons
+      .filter(lesson => lesson.weekDay === day)
+      .filter(lesson => lesson.weekNumber === weekNumber).length !== 0
   );
 };
 
 export const getCurrentWeek = () => {
+  //TODO fix it
   let now = new Date();
   let firstSeptember = new Date(now);
   firstSeptember.setFullYear(now.getFullYear(), 8, 1);

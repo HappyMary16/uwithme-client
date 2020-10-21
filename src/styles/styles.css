@@ -70,9 +70,18 @@
 }
 
 .text {
+    color: #555;
     margin: 0;
 }
 .secondary-text {
     font-size: 13px;
     color: #707070;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
 }

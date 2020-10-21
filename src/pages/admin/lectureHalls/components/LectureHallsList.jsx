@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '../../../../locales/i18n';
 import Collapse from 'react-bootstrap/Collapse';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { ChevronDown, ChevronUp, DoorOpenFill } from 'react-bootstrap-icons';
+import { DoorOpenFill } from 'react-bootstrap-icons';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 

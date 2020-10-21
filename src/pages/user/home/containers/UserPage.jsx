@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { User } from '../components/User';
 import React, { Component } from 'react';
 import { findUserById } from '../../../../utils/UsersUtil';
-import Grid from '@material-ui/core/Grid';
 import { findLessonsForUser } from '../../actions';
 
 class UserPage extends Component {
@@ -19,9 +18,9 @@ class UserPage extends Component {
     const teacher = findUserById(teachers, teacherId);
 
     return (
-      <Grid>
+      <div>
         {teacher && <User user={teacher} lessons={lessons} isMine={false} />}
-      </Grid>
+      </div>
     );
   }
 }

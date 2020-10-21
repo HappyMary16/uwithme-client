@@ -1,38 +1,21 @@
 import React from 'react';
-import { Progress } from './Progress';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core';
 import { getUploadProgressByFileName } from '../../../../utils/FileUtil';
+import Container from 'react-bootstrap/Container';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import './../../../../styles/progressBar.css';
 
-const useStyles = makeStyles(theme => ({
-  row: {
-    height: 'auto'
-  },
-  fileName: {
-    marginBottom: '8px',
-    fontSize: '16px',
-    color: '#555'
-  },
-  files: {
-    marginLeft: theme.spacing(2)
-  }
-}));
-
-export const FilesProgress = ({ files, uploadProgress, uploadStarted }) => {
-  const classes = useStyles();
-
+export const FilesProgress = ({ files, uploadProgress }) => {
   return (
-    <Grid xs={12} className={classes.files}>
-      {files.map(file => (
-        <Grid item xs={12} key={file.name} className={classes.row}>
-          <span className={classes.fileName}>{file.name}</span>
-          {uploadStarted && (
-            <Progress
-              progress={getUploadProgressByFileName(uploadProgress, file.name)}
-            />
-          )}
-        </Grid>
-      ))}
-    </Grid>
+    <Container>
+      {files.map(file => {
+        const now = getUploadProgressByFileName(uploadProgress, file.name);
+        return (
+          <div className={'margin-bottom'}>
+            <p className={'text'}>{file.name}</p>
+            <ProgressBar now={now} label={`${now}%`} />
+          </div>
+        );
+      })}
+    </Container>
   );
 };

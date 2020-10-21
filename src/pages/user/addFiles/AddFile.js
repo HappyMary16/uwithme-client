@@ -1,27 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import { FileTypes, LECTURE } from '../../../constants/userRoles';
 import { Upload } from './components/Upload';
 import { loadSubjectsAndFiles } from '../files/actions';
 import i18n from '../../../locales/i18n';
 import { compose } from 'redux';
-import { clearUploadProgress, clearUploadSuccess, uploadRequest } from './actions';
-
+import {
+  clearUploadProgress,
+  clearUploadSuccess,
+  uploadRequest
+} from './actions';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
-import { marginTop, selectorColors } from '../../../styles/styles';
-import Container from '@material-ui/core/Container';
+import { selectorColors } from '../../../styles/styles';
 import { Message } from '../../common/components/Message';
-
-const submit = {
-  marginTop: '10px',
-  marginLeft: 'auto',
-  marginRight: '0px',
-  backgroundColor: '#eeeeee'
-};
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 class AddFile extends React.Component {
   constructor(props) {
@@ -84,62 +78,54 @@ class AddFile extends React.Component {
     const { uploading, subject, files } = this.state;
 
     return (
-      <Grid item xs={12}>
+      <div>
         <Message
           open={uploadSuccess}
           handleClose={this.uploadingEnded}
           message={i18n.t('files_is_uploaded')}
         />
-        <Container style={marginTop}>
-          <CreatableSelect
-            theme={selectorColors}
-            placeholder={i18n.t('subject')}
-            options={
-              subjects &&
-              subjects.map(subject => {
-                return {
-                  label: subject.name,
-                  value: subject.id
-                };
-              })
-            }
-            onChange={subject => this.setState({ subject: subject })}
-            onCreateOption={this.createSubject}
-            value={subject}
-          />
-        </Container>
-        <Container style={marginTop}>
-          <Select
-            theme={selectorColors}
-            onChange={opinion => this.setState({ fileType: opinion.value })}
-            options={FileTypes}
-            placeholder={i18n.t('file_type')}
-          />
-        </Container>
-
-        <Grid item xs={12}>
-          <Upload
-            uploadProgress={uploadProgress}
-            addFiles={this.addFiles}
-            files={files}
-            uploading={uploading}
-            successfulUploaded={uploadSuccess}
-          />
-        </Grid>
-        <Container>
-          <Grid container alignItems={'flex-end'}>
-            <Button
-              style={submit}
-              type="submit"
-              color="primary"
-              variant="outlined"
-              onClick={this.submit}
-            >
-              {i18n.t('upload')}
-            </Button>
-          </Grid>
-        </Container>
-      </Grid>
+        <CreatableSelect
+          className={'selector'}
+          theme={selectorColors}
+          placeholder={i18n.t('subject')}
+          options={
+            subjects &&
+            subjects.map(subject => {
+              return {
+                label: subject.name,
+                value: subject.id
+              };
+            })
+          }
+          onChange={subject => this.setState({ subject: subject })}
+          onCreateOption={this.createSubject}
+          value={subject}
+        />
+        <Select
+          className={'selector'}
+          theme={selectorColors}
+          onChange={opinion => this.setState({ fileType: opinion.value })}
+          options={FileTypes}
+          placeholder={i18n.t('file_type')}
+        />
+        <Upload
+          uploadProgress={uploadProgress}
+          addFiles={this.addFiles}
+          files={files}
+          uploading={uploading}
+          successfulUploaded={uploadSuccess}
+        />
+        <Col
+          xs={12}
+          md={{ offset: 9, span: 3 }}
+          lg={{ offset: 9, span: 3 }}
+          xl={{ offset: 10, span: 2 }}
+        >
+          <Button type={'submit'} variant={'purple'} onClick={this.submit}>
+            {i18n.t('upload')}
+          </Button>
+        </Col>
+      </div>
     );
   }
 }

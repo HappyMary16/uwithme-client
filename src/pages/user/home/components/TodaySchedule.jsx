@@ -1,89 +1,74 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import {
   areLessonsToday,
   filterAndSortLessons,
+  getCurrentWeek,
   getGroupList,
   getLessonTime
 } from '../../../../utils/ScheduleUtil';
 import i18n from '../../../../locales/i18n';
 import { isStudent, isTeacher } from '../../../../utils/UsersUtil';
+import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { history } from '../../../../store/Store';
+import { USER_SCHEDULE } from '../../../../constants/links';
+import Row from 'react-bootstrap/Row';
+import { SwitchWeek } from '../../../common/components/SwitchWeek';
 
-const useStyles2 = makeStyles({
-  root: {
-    width: '100%'
-  },
-  tableWrapper: {
-    overflowX: 'auto'
-  }
-});
-
-export const TodaySchedule = ({ lessons, day, user, weekNumber }) => {
-  const classes = useStyles2();
+export const TodaySchedule = ({ isMine, lessons, day, user }) => {
+  const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
-    <Paper className={classes.root}>
-      <div className={classes.tableWrapper}>
-        <Table aria-label="custom pagination table">
-          <TableBody>
-            <TableRow>
-              <TableCell align={'center'} component="th">
-                {i18n.t('lesson_time')}
-              </TableCell>
-              <TableCell align={'center'} component="th">
-                {i18n.t('subject')}
-              </TableCell>
-              <TableCell align={'center'} component="th">
-                {i18n.t('lecture_hall')}
-              </TableCell>
-              {isStudent(user) && (
-                <TableCell align={'center'} component="th">
-                  {i18n.t('teacher')}
-                </TableCell>
-              )}
-              {isTeacher(user) && (
-                <TableCell align={'center'} component="th">
-                  {i18n.t('group')}
-                </TableCell>
-              )}
-            </TableRow>
+    <div>
+      <Row>
+        <Col xs={6}>
+          <h3>{i18n.t('schedule')}</h3>
+          {!isMine && (
+            <Button
+              onClick={() => history.push(USER_SCHEDULE(user.id))}
+              variant={'purple'}
+            >
+              {i18n.t('open')}
+            </Button>
+          )}
+        </Col>
+        <Col
+          xs={{ offset: 3, span: 3 }}
+          md={{ offset: 4, span: 2 }}
+          lg={{ offset: 5, span: 1 }}
+        >
+          <SwitchWeek weekNumber={weekNumber} setWeekNumber={setWeekNumber} />
+        </Col>
+      </Row>
+      {!areLessonsToday(lessons, day, weekNumber ? 1 : 2) && (
+        <h5>{i18n.t('no_lessons_today')}</h5>
+      )}
+      {areLessonsToday(lessons, day, weekNumber ? 1 : 2) && (
+        <Table responsive size="sm">
+          <tbody>
+            <tr>
+              <th>{i18n.t('lesson_time')}</th>
+              <th>{i18n.t('subject')}</th>
+              <th>{i18n.t('lecture_hall')}</th>
+              {isStudent(user) && <th>{i18n.t('teacher')}</th>}
+              {isTeacher(user) && <th>{i18n.t('group')}</th>}
+            </tr>
             {lessons &&
-              filterAndSortLessons(lessons, day, weekNumber).map(lesson => (
-                <TableRow key={lesson.name}>
-                  <TableCell align={'center'} component="td" scope="row">
-                    {getLessonTime(lesson.lessonTime)}
-                  </TableCell>
-                  <TableCell align={'center'} component="td">
-                    {lesson.subjectName}
-                  </TableCell>
-                  <TableCell align={'center'} component="td">
-                    {lesson.lectureHall}
-                  </TableCell>
-                  {isStudent(user) && (
-                    <TableCell align={'center'} component="td">
-                      {lesson.teacherName}
-                    </TableCell>
-                  )}
-                  {isTeacher(user) && (
-                    <TableCell align={'center'} component="td">
-                      {getGroupList(lesson.groups)}
-                    </TableCell>
-                  )}
-                </TableRow>
-              ))}
-            {!areLessonsToday(lessons, day) && (
-              <TableRow>
-                <TableCell></TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+              filterAndSortLessons(lessons, day, weekNumber ? 1 : 2).map(
+                lesson => (
+                  <tr key={lesson.name}>
+                    <td>{getLessonTime(lesson.lessonTime)}</td>
+                    <td>{lesson.subjectName}</td>
+                    <td>{lesson.lectureHall}</td>
+                    {isStudent(user) && <td>{lesson.teacherName}</td>}
+                    {isTeacher(user) && <td>{getGroupList(lesson.groups)}</td>}
+                  </tr>
+                )
+              )}
+          </tbody>
         </Table>
-      </div>
-    </Paper>
+      )}
+    </div>
   );
 };

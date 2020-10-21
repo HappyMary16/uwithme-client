@@ -1,10 +1,7 @@
 import React from 'react';
 import { Lesson } from './Lesson';
 import { LESSONS_TIME, WEEK_DAYS } from '../../../../constants/userRoles';
-import Switch from 'react-switch';
-import { lightGreyColor } from '../../../../styles/styles';
 import { getCurrentWeek, getLesson } from '../../../../utils/ScheduleUtil';
-import i18n from '../../../../locales/i18n';
 import { history } from '../../../../store/Store';
 import { USER_HOME_PAGE } from '../../../../constants/links';
 import { getName } from '../../../../utils/UsersUtil';
@@ -12,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import { Row } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { SwitchWeek } from '../../../common/components/SwitchWeek';
 
 export const ScheduleTable = ({
   lessons,
@@ -41,17 +39,7 @@ export const ScheduleTable = ({
           md={{ offset: isMine ? 10 : 4, span: 2 }}
           lg={{ offset: isMine ? 11 : 5, span: 1 }}
         >
-          {i18n.t('week')}
-          <Switch
-            offColor={lightGreyColor}
-            onColor={lightGreyColor}
-            checked={weekNumber}
-            onChange={() => setWeekNumber(!weekNumber)}
-            uncheckedIcon={<div className={'switch-week'}>2</div>}
-            checkedIcon={<div className={'switch-week'}>1</div>}
-            className="react-switch"
-            id="icon-switch"
-          />
+          <SwitchWeek weekNumber={weekNumber} setWeekNumber={setWeekNumber} />
         </Col>
       </Row>
 

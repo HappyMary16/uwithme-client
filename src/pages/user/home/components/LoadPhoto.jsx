@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import Button from '@material-ui/core/Button';
 import i18n from '../../../../locales/i18n';
 import '../../../../styles/fileUpload.css';
 import AvatarEditor from 'react-avatar-editor-scale';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { Form, Row } from 'react-bootstrap';
 
 class LoadPhoto extends Component {
   constructor(props) {
@@ -54,42 +54,38 @@ class LoadPhoto extends Component {
     const { photo } = this.state;
 
     return (
-      <Dialog
-        open={open}
-        onClose={this.handleClose}
-        maxWidth="sm"
-        aria-labelledby="form-dialog-title"
-      >
-        <div className={'paddingLeft'}>
-          <input
-            className={'paddingOne'}
-            type="file"
-            multiple
-            onChange={this.onFileAdded}
-          />
-          <div className={'paddingOne'}>
-            <AvatarEditor
-              ref={this.setEditorRef}
-              image={photo}
-              width={200}
-              height={200}
-              color={[200, 200, 200, 0.6]} // RGBA
-              scale={1.2}
-              borderRadius={100}
-              onDropFile={this.onFileAdded}
+      <Modal show={open} onHide={this.handleClose} centered>
+        <Row className="align-items-center flex-column">
+          <Form>
+            <Form.File
+              custom
+              label="Custom file input"
+              onChange={this.onFileAdded}
             />
-          </div>
-        </div>
+            <div className={'paddingOne'}>
+              <AvatarEditor
+                ref={this.setEditorRef}
+                image={photo}
+                width={200}
+                height={200}
+                color={[200, 200, 200, 0.6]} // RGBA
+                scale={1.2}
+                borderRadius={100}
+                onDropFile={this.onFileAdded}
+              />
+            </div>
+          </Form>
+        </Row>
 
-        <DialogActions>
-          <Button onClick={this.handleSave} color="primary">
+        <Modal.Footer>
+          <Button onClick={this.handleSave} variant={'purple'}>
             {i18n.t('save')}
           </Button>
-          <Button onClick={this.handleClose} color="primary">
+          <Button onClick={this.handleClose} variant={'purple'}>
             {i18n.t('close')}
           </Button>
-        </DialogActions>
-      </Dialog>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

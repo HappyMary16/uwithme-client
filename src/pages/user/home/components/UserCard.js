@@ -1,22 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import i18n from '../../../../locales/i18n';
 import { getName } from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
 import '../../../../styles/avatar.css';
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    margin: theme.spacing(1)
-  }
-}));
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export const UserCard = ({ user, onSaveAvatar }) => {
-  const classes = useStyles();
-
   const [open, setOpen] = React.useState(false);
 
   let handleClickAvatar = () => {
@@ -29,61 +20,65 @@ export const UserCard = ({ user, onSaveAvatar }) => {
   };
 
   return (
-    <Paper>
+    <div>
       <LoadPhoto
         onSave={handleSave}
         open={open}
         onClose={() => setOpen(false)}
       />
 
-      <Grid container>
-        <Grid item>
-          <img
-            className={'avatar'}
-            alt="Avatar"
-            src={
-              user.avatar === undefined || user.avatar === null
-                ? '/empty-avatar.jpg'
-                : user.avatar
-            }
-            onClick={handleClickAvatar}
-          />
-        </Grid>
+      <Row>
+        <Col xs={12} md={5} lg={4} xl={3}>
+          <Row className="justify-content-center">
+            <img
+              className={'avatar'}
+              alt="Avatar"
+              src={
+                user.avatar === undefined || user.avatar === null
+                  ? '/empty-avatar.jpg'
+                  : user.avatar
+              }
+              onClick={handleClickAvatar}
+            />
+          </Row>
+        </Col>
 
-        <Grid
-          item
-          sm
-          direction="column"
-          spacing={2}
-          className={classes.container}
-        >
-          <Typography gutterBottom variant="h5">
-            {getName(user)}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {i18n.t('phone')}: {user.phone}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {i18n.t('email')}: {user.email}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {i18n.t('institute')}: {user.instituteName}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {i18n.t('department')}: {user.departmentName}
-          </Typography>
-          {user.role === 1 && (
-            <Typography variant="body2" gutterBottom>
-              {i18n.t('group')}: {user.studyGroupName}
-            </Typography>
-          )}
-          {user.role === 2 && (
-            <Typography variant="body2" gutterBottom>
-              {i18n.t('science_degree')}: {user.scienceDegreeName}
-            </Typography>
-          )}
-        </Grid>
-      </Grid>
-    </Paper>
+        <Col>
+          <Card>
+            <Card.Header as="h5">
+              <Row>
+                <Col xs={10} md={11}>
+                  {getName(user)}
+                </Col>
+                {/*<Col xs={2} md={1}>*/}
+                {/*  <CalendarWeekFill*/}
+                {/*    className={'icon'}*/}
+                {/*    // onClick={() => history.push(GROUP_SCHEDULE(group.value))}*/}
+                {/*  />*/}
+                {/*</Col>*/}
+              </Row>
+            </Card.Header>
+            <Card.Body>
+              <Card.Subtitle>
+                {user.role === 1 &&
+                  i18n.t('group') + ': ' + user.studyGroupName}
+              </Card.Subtitle>
+              <Card.Text>
+                {i18n.t('phone')}: {user.phone}
+                <br />
+                {i18n.t('email')}: {user.email}
+                <br />
+                {i18n.t('institute')}: {user.instituteName}
+                <br />
+                {i18n.t('department')}: {user.departmentName}
+                <br />
+                {user.role === 2 &&
+                  i18n.t('science_degree') + ': ' + user.scienceDegreeName}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   );
 };
