@@ -1,26 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import i18n from '../../../locales/i18n';
 import { getLectures, getTasks } from '../../../utils/FileUtil';
 import { compose } from 'redux';
-import FilesToChoose from './FilesToChoose';
 import { addAccessToFiles, loadGroupsByTeacher } from './actions';
 import { loadSubjectsAndFiles } from '../files/actions';
 import Select from 'react-select';
-import { marginTop, selectorColors } from '../../../styles/styles';
-import Container from '@material-ui/core/Container';
-
-const submit = {
-  marginTop: '10px',
-  marginLeft: 'auto',
-  marginRight: '0px',
-  backgroundColor: '#eeeeee'
-};
+import { selectorColors } from '../../../styles/styles';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { SubjectFiles } from './components/SubjectFiles';
 
 let selectedGroups = [];
 let files = [];
@@ -73,74 +62,50 @@ class ShareFiles extends React.Component {
     const { subjectId } = this.state;
 
     return (
-      <Grid xs={12} alignItems={'center'}>
-        <Grid item xs={12}>
-          <Container style={marginTop}>
-            <Select
-              theme={selectorColors}
-              onChange={opinion => this.setState({ subjectId: opinion.value })}
-              options={subjects.map(s => {
-                return {
-                  value: s.id,
-                  label: s.name
-                };
-              })}
-              placeholder={i18n.t('subject')}
-            />
-          </Container>
-        </Grid>
-        <Container>
-          <Grid container xs={12} style={marginTop}>
-            <Grid item xs={6}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">{i18n.t('lecture')}</FormLabel>
-                <FilesToChoose
-                  files={lectures.filter(
-                    lecture => lecture.subjectId === subjectId
-                  )}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-            </Grid>
+      <div>
+        <Select
+          className={'selector'}
+          theme={selectorColors}
+          onChange={opinion => this.setState({ subjectId: opinion.value })}
+          options={subjects.map(s => {
+            return {
+              value: s.id,
+              label: s.name
+            };
+          })}
+          placeholder={i18n.t('subject')}
+        />
+        <SubjectFiles
+          lectures={lectures}
+          tasks={tasks}
+          subjectId={subjectId}
+          handleChoose={this.handleChange}
+        />
+        <Select
+          className={'selector'}
+          placeholder={i18n.t('groups')}
+          theme={selectorColors}
+          isMulti
+          onChange={this.handleGroupChange}
+          options={groups}
+        />
 
-            <Grid item xs={6}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">{i18n.t('task')}</FormLabel>
-                <FilesToChoose
-                  files={
-                    tasks && tasks.filter(task => task.subjectId === subjectId)
-                  }
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-        </Container>
-
-        <Container style={marginTop}>
-          <Select
-            placeholder={i18n.t('groups')}
-            theme={selectorColors}
-            isMulti
-            onChange={this.handleGroupChange}
-            options={groups}
-          />
-        </Container>
-
-        <Container>
-          <Grid container alignItems={'right'}>
-            <Button
-              type="submit"
-              color="primary"
-              variant="outlined"
-              style={submit}
-              onClick={this.submit}
-            >
-              {i18n.t('upload')}
-            </Button>
-          </Grid>
-        </Container>
-      </Grid>
+        <Col
+          xs={12}
+          md={{ offset: 9, span: 3 }}
+          lg={{ offset: 9, span: 3 }}
+          xl={{ offset: 10, span: 2 }}
+        >
+          <Button
+            block
+            type={'submit'}
+            variant={'purple'}
+            onClick={this.submit}
+          >
+            {i18n.t('upload')}
+          </Button>
+        </Col>
+      </div>
     );
   }
 }

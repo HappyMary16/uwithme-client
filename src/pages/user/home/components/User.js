@@ -1,7 +1,6 @@
 import React from 'react';
 import { TodaySchedule } from './TodaySchedule';
 import { UserCard } from './UserCard';
-import '../../../../styles/userPage.css';
 import Container from 'react-bootstrap/Container';
 
 export const User = ({ user, lessons, isMine, onSaveAvatar }) => {

@@ -2,8 +2,16 @@
     outline: none;
 }
 
-.leftButton {
+.left-button {
     display: block;
     margin-left: auto;
     margin-right: 1%;
+}
+
+.padding-left {
+    padding-left: 30px;
+}
+
+.padding-left-x2 {
+    padding-left: 40px;
 }

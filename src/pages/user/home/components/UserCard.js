@@ -2,7 +2,6 @@ import React from 'react';
 import i18n from '../../../../locales/i18n';
 import { getName } from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
-import '../../../../styles/avatar.css';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

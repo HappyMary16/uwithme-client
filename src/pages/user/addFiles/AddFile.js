@@ -121,7 +121,12 @@ class AddFile extends React.Component {
           lg={{ offset: 9, span: 3 }}
           xl={{ offset: 10, span: 2 }}
         >
-          <Button type={'submit'} variant={'purple'} onClick={this.submit}>
+          <Button
+            block
+            type={'submit'}
+            variant={'purple'}
+            onClick={this.submit}
+          >
             {i18n.t('upload')}
           </Button>
         </Col>

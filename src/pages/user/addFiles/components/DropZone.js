@@ -1,6 +1,5 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import '../../../../styles/fileUpload.css';
 import { CloudArrowUpFill } from 'react-bootstrap-icons';
 
 export const DropZone = ({ disabled, onFilesAddedFunk }) => {
@@ -47,7 +46,7 @@ export const DropZone = ({ disabled, onFilesAddedFunk }) => {
   return (
     <div
       className={
-        'dropZone & ' + (highLight ? 'highLightDragOver' : 'highLight')
+        'drop-zone & ' + (highLight ? 'high-light-drag-over' : 'high-light')
       }
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
@@ -57,7 +56,7 @@ export const DropZone = ({ disabled, onFilesAddedFunk }) => {
     >
       <input
         ref={fileInputRef}
-        className={'fileInput'}
+        className={'file-input'}
         type="file"
         multiple
         onChange={onFilesAdded}

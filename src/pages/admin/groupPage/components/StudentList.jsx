@@ -14,7 +14,7 @@ export const StudentsList = ({ students, addStudent, removeStudent }) => {
           <h5 className={'margin-bottom'}>{i18n.t('students')}:</h5>
         </Col>
         <Col>
-          <Button onClick={addStudent} variant={'purple'}>
+          <Button block onClick={addStudent} variant={'purple'}>
             {i18n.t('add_student')}
           </Button>
         </Col>

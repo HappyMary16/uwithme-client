@@ -21,8 +21,10 @@ export const AddInstitute = ({ open, handleClose, handleCreate }) => {
 
       <Modal.Body>
         <Form.Group>
-          <Form.Control placeholder={i18n.t('institute_name')}
-                        onChange={(e) => setInstituteName(e.target.value)}/>
+          <Form.Control
+            placeholder={i18n.t('institute_name')}
+            onChange={e => setInstituteName(e.target.value)}
+          />
         </Form.Group>
       </Modal.Body>
 

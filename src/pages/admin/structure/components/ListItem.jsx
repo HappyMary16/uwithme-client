@@ -17,9 +17,9 @@ export const ListItem = ({ text, secondaryText, open, icon }) => {
       </Col>
       <Col xs={2} sm={1}>
         {open ? (
-          <ChevronUp class={'leftButton'} />
+          <ChevronUp class={'left-button'} />
         ) : (
-          <ChevronDown class={'leftButton'} />
+          <ChevronDown class={'left-button'} />
         )}
       </Col>
     </Row>

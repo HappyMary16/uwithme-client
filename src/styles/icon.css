@@ -1,0 +1,23 @@
+.delete-icon {
+    color: red;
+}
+
+.delete-icon:hover {
+    color: #707070;
+    cursor: pointer;
+}
+
+.icon-color {
+    color: #707070;
+}
+
+.icon {
+    color: #707070;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.icon:hover {
+    color: #5c71c5;
+    cursor: pointer;
+}

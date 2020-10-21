@@ -1,0 +1,23 @@
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.table {
+    margin-top: 0.5em;
+}
+
+.lesson {
+    min-width: 150px;
+}
+
+.switch-week {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 15px;
+}

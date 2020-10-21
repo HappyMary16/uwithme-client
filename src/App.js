@@ -31,8 +31,6 @@ import SignIn from './pages/authorization/signIn/SignIn';
 import AddUniversity from './pages/authorization/addUniversity/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/admin/AdminToolBar';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Backdrop from '@material-ui/core/Backdrop';
 import UniversityStructure from './pages/admin/structure/UniversityStructure';
 import AddLesson from './pages/admin/addLesson/AddLesson';
 import MySchedule from './pages/user/schedule/containers/MySchedule';
@@ -41,8 +39,6 @@ import UserHome from './pages/user/home/containers/UserHome';
 import LectureHalls from './pages/admin/lectureHalls/LectureHalls';
 import TeachersList from './pages/user/teacherList/TeachersList';
 import UserPage from './pages/user/home/containers/UserPage';
-import { compose } from 'redux';
-import withStyles from '@material-ui/core/styles/withStyles';
 import UserSchedule from './pages/user/schedule/containers/UserSchedule';
 import StudentsList from './pages/user/studentList/StudentsList';
 import GroupPage from './pages/admin/groupPage/GroupPage';
@@ -51,15 +47,16 @@ import './styles/listItem.css';
 import './styles/spases.css';
 import './styles/menu.css';
 import './styles/inputField.css';
-import './styles/styles.css';
+import './styles/mainPage.css';
+import './styles/modalBackdrop.css';
+import './styles/icon.css';
+import './styles/link.css';
+import './styles/scheduleTable.css';
+import './styles/text.css';
+import './styles/avatar.css';
 import Container from 'react-bootstrap/Container';
-
-const useStyles = theme => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: '#fff'
-  }
-});
+import Spinner from 'react-bootstrap/Spinner';
+import Row from 'react-bootstrap/Row';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -83,14 +80,22 @@ function OpenGroupSchedule() {
 
 class App extends Component {
   render() {
-    const { user, isFetching, isMenuOpen, classes } = this.props;
+    const { user, isFetching, isMenuOpen } = this.props;
 
     return (
       <Container fluid className={'main-container'}>
         <NavigationContainer />
-        <Backdrop className={classes.backdrop} open={isFetching !== 0}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        {isFetching !== 0 && (
+          <div className="modal-backdrop">
+            <Row className={'justify-content-center'}>
+              <Spinner
+                animation="border"
+                variant="light"
+                className={'spinner'}
+              />
+            </Row>
+          </div>
+        )}
 
         {user && !isAdmin(user) && (
           <UserToolBar user={user} isOpen={isMenuOpen} />
@@ -177,4 +182,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(withStyles(useStyles), connect(mapStateToProps))(App);
+export default connect(mapStateToProps)(App);

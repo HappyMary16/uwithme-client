@@ -15,19 +15,19 @@
     width: 100%;
 }
 
-.fileInput {
+.file-input {
     display: none
 }
 
-.highLightDragOver {
+.high-light-drag-over {
     background-color: rgb(188, 185, 236)
 }
 
-.highLight {
+.high-light {
     background-color: #fff
 }
 
-.dropZone {
+.drop-zone {
     height: 200px;
     width: 200px;
     border: 2px dashed rgb(187, 186, 186);
@@ -39,10 +39,7 @@
     font-size: 16px
 }
 
-.paddingLeft {
-    padding-left: 2em;
-}
-
-.paddingOne {
-    padding: 1em;
+.progress-bar {
+    color: #555;
+    background-color: #5c71c5;
 }

@@ -62,7 +62,7 @@ class LoadPhoto extends Component {
               label="Custom file input"
               onChange={this.onFileAdded}
             />
-            <div className={'paddingOne'}>
+            <div className={'padding-one'}>
               <AvatarEditor
                 ref={this.setEditorRef}
                 image={photo}

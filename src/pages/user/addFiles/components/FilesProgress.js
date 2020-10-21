@@ -2,7 +2,6 @@ import React from 'react';
 import { getUploadProgressByFileName } from '../../../../utils/FileUtil';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import './../../../../styles/progressBar.css';
 
 export const FilesProgress = ({ files, uploadProgress }) => {
   return (

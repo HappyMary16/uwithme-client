@@ -4,15 +4,8 @@ import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
 import { selectorColors } from '../../../../styles/styles';
 import { getName } from '../../../../utils/UsersUtil';
-import withStyles from '@material-ui/core/styles/withStyles';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
-const styles = {
-  dialogPaper: {
-    minHeight: '30vh'
-  }
-};
 
 const AddStudentToGroup = ({ open, students, handleClose, handleAdd }) => {
   const [selectedStudents, setStudents] = React.useState('');
@@ -61,4 +54,4 @@ const AddStudentToGroup = ({ open, students, handleClose, handleAdd }) => {
   );
 };
 
-export default withStyles(styles)(AddStudentToGroup);
+export default AddStudentToGroup;
