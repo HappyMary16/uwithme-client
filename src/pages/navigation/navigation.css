@@ -1,0 +1,16 @@
+.app-bar {
+    position: relative;
+    border-bottom: 1px;
+    background-color: #eeeeee;
+    box-shadow: 0 0 2px 2px #A9A9A9 !important;
+    width: 100%;
+}
+
+.menu-btn {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em !important;
+}
+
+.app-icon {
+    padding-top: 0.3em;
+}

@@ -1,0 +1,45 @@
+.upload {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+    text-align: left;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    padding-top: 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.file-input {
+    display: none
+}
+
+.high-light-drag-over {
+    background-color: rgb(188, 185, 236)
+}
+
+.high-light {
+    background-color: #fff
+}
+
+.drop-zone {
+    height: 200px;
+    width: 200px;
+    border: 2px dashed rgb(187, 186, 186);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 16px
+}
+
+.progress-bar {
+    color: #555;
+    background-color: #5c71c5;
+}

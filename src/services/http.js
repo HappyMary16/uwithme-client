@@ -116,8 +116,8 @@ export default function http(
             return reRequest(error.config);
           })
           .catch(() => {
-            history.push(SIGN_IN);
             updateTokenRequest = null;
+            history.push(SIGN_IN);
           });
       }
 

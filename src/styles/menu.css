@@ -1,0 +1,73 @@
+/* Position and sizing of burger button */
+.bm-burger-button {
+    width: 0;
+    height: 0;
+    left: 0;
+    top: 0;
+    z-index: 0 !important;
+}
+.bm-burger-bars {
+    width: 0;
+    height: 0;
+}
+
+div.bm-burger-button button {
+    z-index: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 0;
+    width: 0;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: white;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    background: white;
+    padding: 2.5em 1em 0;
+    font-size: 1.15em;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+    color: #212121;
+    padding-top: 0.5em;
+    border-bottom: 2px solid;
+    border-color: lightgray;
+}
+
+.bm-item:hover {
+    color: #212121 !important;
+    background-color: #eeeeee;
+    text-decoration: none;
+}
+
+.bm-item:-webkit-any-link:focus {
+    outline-offset: 0;
+}
+
+.bm-item:focus {
+    outline: -webkit-focus-ring-color auto 0;
+}

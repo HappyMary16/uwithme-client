@@ -1,6 +1,6 @@
 import config from '../config';
 
-export const apiRoot = `http://localhost:${config.port}/api/`;
+export const apiRoot = `http://${config.host}:${config.port}/api/`;
 
 const INFO = 'info/';
 const AUTH = 'auth/';
@@ -43,4 +43,3 @@ export const STUDENTS_BY_GROUP_ID = STUDENTS + 'groupId/';
 export const GROUP_STUDENT_ID = USERS + 'group/studentId/';
 export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/group/';
 export const STUDENT_GROUP = USERS + 'group';
-

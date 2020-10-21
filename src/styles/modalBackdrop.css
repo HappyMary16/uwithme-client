@@ -1,0 +1,10 @@
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.spinner {
+    position: relative;
+    text-align: center;
+    margin-top: 45vh;
+}
