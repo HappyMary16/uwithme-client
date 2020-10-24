@@ -3,6 +3,7 @@ import { User } from '../components/User';
 import { findLessons } from '../../schedule/actions';
 import React, { Component } from 'react';
 import { uploadAvatar } from '../../actions';
+import { signInRequest } from '../../../authorization/signIn/actions';
 
 class UserHome extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class UserHome extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch(signInRequest());
     dispatch(findLessons());
   }
 

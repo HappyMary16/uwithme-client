@@ -43,8 +43,7 @@ function* processSignIn(action) {
 
     const response = yield call(http, {
       url: SIGN_IN,
-      method: 'post',
-      data: data
+      method: 'get'
     });
 
     if (response && response.status === 200) {

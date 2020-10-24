@@ -57,6 +57,9 @@ import './styles/avatar.css';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
+import { AuthService } from './services/AuthService';
+import { history } from './store/Store';
+import { signInRequest } from './pages/authorization/signIn/actions';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -79,6 +82,36 @@ function OpenGroupSchedule() {
 }
 
 class App extends Component {
+  authService = new AuthService();
+
+  componentDidMount() {
+    this.authService.loadUser().then(() => {
+      if (this.authService.isLoggingIn) {
+        this.authService.completeLogin().then(() => {
+          this.checkLogin();
+        });
+      } else if (this.authService.isLoggingOut) {
+        this.authService.completeLogout().then(() => {
+          this.checkLogin();
+        });
+      } else {
+        this.checkLogin();
+      }
+    });
+  }
+
+  checkLogin() {
+    if (this.authService.isLoggedIn) {
+      history.push('/home');
+    } else {
+      this.authService.login();
+    }
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
   render() {
     const { user, isFetching, isMenuOpen } = this.props;
 
