@@ -1,39 +1,59 @@
 import { UserManager } from 'oidc-client';
 import * as Config from '../config.json';
 
+export const LOGGING_IN = 'logging_in';
+export const LOGIN_STATE = 'login_state';
+export const LOGGING_OUT = 'logging_out';
 const manager = new UserManager({
   authority: Config.AUTHORITY,
+  metadata: {
+    issuer: Config.AUTHORITY,
+    authorization_endpoint: Config.AUTHORITY + '/protocol/openid-connect/auth',
+    token_endpoint: Config.AUTHORITY + '/protocol/openid-connect/token',
+    userinfo_endpoint: Config.AUTHORITY + '/protocol/openid-connect/userinfo',
+    end_session_endpoint: Config.AUTHORITY + '/protocol/openid-connect/logout'
+  },
   client_id: Config.CLIENT_ID,
   redirect_uri: Config.REDIRECT_URI,
-  post_logout_redirect_uri: Config.POST_LOGOUT_REDIRECT_URI,
-  response_type: 'id_token token'
+  post_logout_redirect_uri: Config.REDIRECT_URI,
+  response_type: 'code'
 });
 
 export class AuthService {
   currentUser = null;
 
   get isLoggedIn() {
-    return this.currentUser != null && !this.currentUser.expired;
+    return this.currentUser != null;
   }
 
-  get getToken() {
+  get isLoggingIn() {
+    return localStorage.getItem(LOGIN_STATE) === LOGGING_IN;
+  }
+
+  get isLoggingOut() {
+    return localStorage.getItem(LOGIN_STATE) === LOGGING_OUT;
+  }
+
+  hasRole(role) {
+    return this.currentUser.profile.realm_access.roles.includes(role);
+  }
+
+  async getToken() {
     if (this.isLoggedIn) {
+      if (this.currentUser.expired) {
+        await manager
+          .signinSilent()
+          .then(user => (this.currentUser = user))
+          .catch(() => this.login());
+      }
       return this.currentUser.access_token;
     } else {
       return null;
     }
   }
 
-  get isLoggingIn() {
-    return localStorage.getItem(Config.LOGIN_STATE) === Config.LOGGING_IN;
-  }
-
-  get isLoggingOut() {
-    return localStorage.getItem(Config.LOGIN_STATE) === Config.LOGGING_OUT;
-  }
-
   login() {
-    localStorage.setItem(Config.LOGIN_STATE, Config.LOGGING_IN);
+    localStorage.setItem(LOGIN_STATE, LOGGING_IN);
     manager.signinRedirect().catch(error => this.handleError(error));
   }
 
@@ -45,7 +65,7 @@ export class AuthService {
   }
 
   async completeLogin() {
-    localStorage.removeItem(Config.LOGIN_STATE);
+    localStorage.removeItem(LOGIN_STATE);
     await manager
       .signinRedirectCallback()
       .then(user => (this.currentUser = user))
@@ -53,12 +73,12 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.setItem(Config.LOGIN_STATE, Config.LOGGING_OUT);
+    localStorage.setItem(LOGIN_STATE, LOGGING_OUT);
     manager.signoutRedirect().catch(error => this.handleError(error));
   }
 
   async completeLogout() {
-    localStorage.removeItem(Config.LOGIN_STATE);
+    localStorage.removeItem(LOGIN_STATE);
     await manager
       .signoutRedirectCallback()
       .then(() => {

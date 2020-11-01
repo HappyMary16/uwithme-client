@@ -59,30 +59,16 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import { AuthService } from './services/AuthService';
 import { history } from './store/Store';
-import { signInRequest } from './pages/authorization/signIn/actions';
-
-function OpenGroupPage() {
-  const { groupId } = useParams();
-  return <GroupPage groupId={groupId} />;
-}
-
-function OpenUserPage() {
-  const { userId } = useParams();
-  return <UserPage teacherId={userId} />;
-}
-
-function OpenUserSchedule() {
-  const { userId } = useParams();
-  return <UserSchedule userId={userId} />;
-}
-
-function OpenGroupSchedule() {
-  const { groupId } = useParams();
-  return <GroupSchedule groupId={groupId} />;
-}
 
 class App extends Component {
-  authService = new AuthService();
+  state = {
+    isAuthenticated: false
+  };
+
+  constructor(props) {
+    super(props);
+    this.authService = new AuthService();
+  }
 
   componentDidMount() {
     this.authService.loadUser().then(() => {
@@ -102,14 +88,33 @@ class App extends Component {
 
   checkLogin() {
     if (this.authService.isLoggedIn) {
-      history.push('/home');
+      this.setState({
+        isAuthenticated: true
+      });
+      history.push('/pre-home');
     } else {
       this.authService.login();
     }
   }
 
-  logout() {
-    this.authService.logout();
+  openGroupPage() {
+    const { groupId } = useParams();
+    return <GroupPage groupId={groupId} />;
+  }
+
+  openUserPage() {
+    const { userId } = useParams();
+    return <UserPage teacherId={userId} />;
+  }
+
+  openUserSchedule() {
+    const { userId } = useParams();
+    return <UserSchedule userId={userId} />;
+  }
+
+  openGroupSchedule() {
+    const { groupId } = useParams();
+    return <GroupSchedule groupId={groupId} />;
   }
 
   render() {
@@ -183,19 +188,19 @@ class App extends Component {
                   <Route exact path={SCHEDULE} component={GroupSchedule} />
                   <Route exact path={LECTURE_HALLS} component={LectureHalls} />
                   <Route exact path={GROUP_PAGE_ROUTER}>
-                    <OpenGroupPage />
+                    {this.openGroupPage()}
                   </Route>
                   <Route exact path={GROUP_SCHEDULE_ROUTER}>
-                    <OpenGroupSchedule />
+                    {this.openGroupSchedule()}
                   </Route>
                 </div>
               )}
               <div>
                 <Route path={USER_HOME_PAGE_ROUTER}>
-                  <OpenUserPage />
+                  {this.openUserPage()}
                 </Route>
                 <Route path={USER_SCHEDULE_ROUTER}>
-                  <OpenUserSchedule />
+                  {this.openUserSchedule()}
                 </Route>
               </div>
               <div />

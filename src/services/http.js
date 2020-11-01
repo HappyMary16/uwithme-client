@@ -3,9 +3,7 @@ import qs from 'qs';
 import { apiRoot } from '../constants/serverApi';
 import { AuthService } from './AuthService';
 
-const authService = new AuthService();
-
-export default function http({
+export default async function http({
   method,
   url,
   data,
@@ -14,6 +12,9 @@ export default function http({
   loadFile,
   onUploadProgress
 }) {
+  const authService = new AuthService();
+  await authService.loadUser();
+
   const config = {
     method: method.toLowerCase(),
     url: apiRoot + url,
@@ -33,7 +34,7 @@ export default function http({
   config['headers'] = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
-    Authorization: 'Bearer ' + authService.getToken
+    Authorization: 'Bearer ' + (await authService.getToken())
   };
 
   axios.interceptors.response.use(
