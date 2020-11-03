@@ -1,7 +1,7 @@
 import StateLoader from '../../../store/StateLoader';
 import {
+  KEYCLOAK_SIGN_IN_SUCCESS,
   RENDER_MY_AVATAR,
-  SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
   SIGN_OUT
 } from './actions';
@@ -17,20 +17,21 @@ export default function authReducers(
         user: action.payload.user
       };
     case RENDER_MY_AVATAR: {
-      let userWithAvatar = state.user;
-      userWithAvatar.avatar = action.payload.avatar;
       return {
         ...state,
-        user: userWithAvatar
+        avatar: action.payload.avatar
       };
     }
     case SIGN_OUT:
-      return {};
-    case SIGN_IN_ERROR:
+      return {
+        isAuthenticated: false,
+        user: null,
+        avatar: null
+      };
+    case KEYCLOAK_SIGN_IN_SUCCESS:
       return {
         ...state,
-        user: null,
-        error: action.error
+        isAuthenticated: true
       };
     default:
       return state;

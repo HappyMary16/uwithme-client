@@ -5,15 +5,13 @@ import NavigationContainer from './pages/navigation/NavigationContainer';
 import {
   ADD_FILE,
   ADD_LESSON,
-  ADD_UNIVERSITY_PATH,
   FILES,
   GROUP_PAGE_ROUTER,
   GROUP_SCHEDULE_ROUTER,
   LECTURE_HALLS,
+  PRE_HOME,
   SCHEDULE,
   SHARE_FILES,
-  SIGN_IN,
-  SIGN_UP,
   STUDENTS,
   TEACHERS,
   USER_HOME,
@@ -26,9 +24,6 @@ import AddFile from './pages/user/addFiles/AddFile';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/user/shareFiles/ShareFiles';
 import PageWithFiles from './pages/user/files/PageWithFiles';
-import SignUp from './pages/authorization/signUp/SignUp';
-import SignIn from './pages/authorization/signIn/SignIn';
-import AddUniversity from './pages/authorization/addUniversity/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/admin/AdminToolBar';
 import UniversityStructure from './pages/admin/structure/UniversityStructure';
@@ -59,12 +54,30 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import { AuthService } from './services/AuthService';
 import { history } from './store/Store';
+import PreHome from './pages/authorization/PreHome';
+import { keycloakSignInSuccess } from './pages/authorization/signIn/actions';
+
+function OpenGroupPage() {
+  const { groupId } = useParams();
+  return <GroupPage groupId={groupId} />;
+}
+
+function OpenUserPage() {
+  const { userId } = useParams();
+  return <UserPage teacherId={userId} />;
+}
+
+function OpenUserSchedule() {
+  const { userId } = useParams();
+  return <UserSchedule userId={userId} />;
+}
+
+function OpenGroupSchedule() {
+  const { groupId } = useParams();
+  return <GroupSchedule groupId={groupId} />;
+}
 
 class App extends Component {
-  state = {
-    isAuthenticated: false
-  };
-
   constructor(props) {
     super(props);
     this.authService = new AuthService();
@@ -88,33 +101,14 @@ class App extends Component {
 
   checkLogin() {
     if (this.authService.isLoggedIn) {
-      this.setState({
-        isAuthenticated: true
-      });
-      history.push('/pre-home');
+      const { user, dispatch } = this.props;
+      dispatch(keycloakSignInSuccess());
+      if (!user) {
+        history.push(PRE_HOME);
+      }
     } else {
       this.authService.login();
     }
-  }
-
-  openGroupPage() {
-    const { groupId } = useParams();
-    return <GroupPage groupId={groupId} />;
-  }
-
-  openUserPage() {
-    const { userId } = useParams();
-    return <UserPage teacherId={userId} />;
-  }
-
-  openUserSchedule() {
-    const { userId } = useParams();
-    return <UserSchedule userId={userId} />;
-  }
-
-  openGroupSchedule() {
-    const { groupId } = useParams();
-    return <GroupSchedule groupId={groupId} />;
   }
 
   render() {
@@ -141,17 +135,7 @@ class App extends Component {
         {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
 
         <Container className={'main-page-container'}>
-          {!user && (
-            <div>
-              <Route
-                exact
-                path={ADD_UNIVERSITY_PATH}
-                component={AddUniversity}
-              />
-              <Route exact path={SIGN_UP} component={SignUp} />
-              <Route exact path={SIGN_IN} component={SignIn} />
-            </div>
-          )}
+          <Route exact path={PRE_HOME} component={PreHome} />
 
           {user && (
             <div>
@@ -188,19 +172,19 @@ class App extends Component {
                   <Route exact path={SCHEDULE} component={GroupSchedule} />
                   <Route exact path={LECTURE_HALLS} component={LectureHalls} />
                   <Route exact path={GROUP_PAGE_ROUTER}>
-                    {this.openGroupPage()}
+                    <OpenGroupPage />
                   </Route>
                   <Route exact path={GROUP_SCHEDULE_ROUTER}>
-                    {this.openGroupSchedule()}
+                    <OpenGroupSchedule />
                   </Route>
                 </div>
               )}
               <div>
                 <Route path={USER_HOME_PAGE_ROUTER}>
-                  {this.openUserPage()}
+                  <OpenUserPage />
                 </Route>
                 <Route path={USER_SCHEDULE_ROUTER}>
-                  {this.openUserSchedule()}
+                  <OpenUserSchedule />
                 </Route>
               </div>
               <div />

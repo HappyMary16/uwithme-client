@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export const UserCard = ({ user, onSaveAvatar }) => {
+export const UserCard = ({ user, avatar, onSaveAvatar }) => {
   const [open, setOpen] = React.useState(false);
 
   let handleClickAvatar = () => {
@@ -32,11 +32,7 @@ export const UserCard = ({ user, onSaveAvatar }) => {
             <img
               className={'avatar'}
               alt="Avatar"
-              src={
-                user.avatar === undefined || user.avatar === null
-                  ? '/empty-avatar.jpg'
-                  : user.avatar
-              }
+              src={!avatar ? '/empty-avatar.jpg' : avatar}
               onClick={handleClickAvatar}
             />
           </Row>

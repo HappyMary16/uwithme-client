@@ -24,11 +24,12 @@ class UserHome extends Component {
   }
 
   render() {
-    const { user, lessons } = this.props;
+    const { user, avatar, lessons } = this.props;
 
     return (
       <User
         user={user}
+        avatar={avatar}
         lessons={lessons}
         isMine={true}
         onSaveAvatar={this.onSaveAvatar}
@@ -40,6 +41,7 @@ class UserHome extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
+    avatar: state.authReducers.avatar,
     lessons: state.scheduleReducers.lessons
   };
 };

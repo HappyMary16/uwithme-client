@@ -1,9 +1,6 @@
 import { UserManager } from 'oidc-client';
 import * as Config from '../config.json';
 
-export const LOGGING_IN = 'logging_in';
-export const LOGIN_STATE = 'login_state';
-export const LOGGING_OUT = 'logging_out';
 const manager = new UserManager({
   authority: Config.AUTHORITY,
   metadata: {
@@ -27,15 +24,11 @@ export class AuthService {
   }
 
   get isLoggingIn() {
-    return localStorage.getItem(LOGIN_STATE) === LOGGING_IN;
+    return localStorage.getItem(Config.LOGIN_STATE) === Config.LOGGING_IN;
   }
 
   get isLoggingOut() {
-    return localStorage.getItem(LOGIN_STATE) === LOGGING_OUT;
-  }
-
-  hasRole(role) {
-    return this.currentUser.profile.realm_access.roles.includes(role);
+    return localStorage.getItem(Config.LOGIN_STATE) === Config.LOGGING_OUT;
   }
 
   async getToken() {
@@ -53,7 +46,7 @@ export class AuthService {
   }
 
   login() {
-    localStorage.setItem(LOGIN_STATE, LOGGING_IN);
+    localStorage.setItem(Config.LOGIN_STATE, Config.LOGGING_IN);
     manager.signinRedirect().catch(error => this.handleError(error));
   }
 
@@ -65,7 +58,7 @@ export class AuthService {
   }
 
   async completeLogin() {
-    localStorage.removeItem(LOGIN_STATE);
+    localStorage.removeItem(Config.LOGIN_STATE);
     await manager
       .signinRedirectCallback()
       .then(user => (this.currentUser = user))
@@ -73,12 +66,12 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.setItem(LOGIN_STATE, LOGGING_OUT);
+    localStorage.setItem(Config.LOGIN_STATE, Config.LOGGING_OUT);
     manager.signoutRedirect().catch(error => this.handleError(error));
   }
 
   async completeLogout() {
-    localStorage.removeItem(LOGIN_STATE);
+    localStorage.removeItem(Config.LOGIN_STATE);
     await manager
       .signoutRedirectCallback()
       .then(() => {

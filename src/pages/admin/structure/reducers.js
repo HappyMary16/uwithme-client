@@ -92,7 +92,6 @@ export default function adminReducers(
         ]
       };
     case RENDER_GROUP:
-      console.log(action.groups);
       return {
         ...state,
         groups: [

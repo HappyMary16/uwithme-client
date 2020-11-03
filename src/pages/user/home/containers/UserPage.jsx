@@ -19,7 +19,14 @@ class UserPage extends Component {
 
     return (
       <div>
-        {teacher && <User user={teacher} lessons={lessons} isMine={false} />}
+        {teacher && (
+          <User
+            user={teacher}
+            avatar={teacher.avatar}
+            lessons={lessons}
+            isMine={false}
+          />
+        )}
       </div>
     );
   }

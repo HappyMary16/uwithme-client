@@ -1,12 +1,12 @@
 {
-  "host": "178.151.34.87",
+  "host": "localhost",
   "port": "8081",
+
   "LOGGING_IN": "logging_in",
   "LOGIN_STATE": "login_state",
   "LOGGING_OUT": "logging_out",
-  "AUTHORITY": "https://auth.tcomad.tk/auth/realms/tCoMaD",
-  "CLIENT_ID": "UniBot-UI",
-  "REDIRECT_URI": "http://localhost:3000",
-  "POST_LOGOUT_REDIRECT_URI": "http://localhost:3000",
-  "BASE_URL": "http://localhost:8080"
+
+  "AUTHORITY": "https://auth.tcomad.tk/auth/realms/test",
+  "CLIENT_ID": "EducationApp-UI",
+  "REDIRECT_URI": "http://localhost:3000"
 }
