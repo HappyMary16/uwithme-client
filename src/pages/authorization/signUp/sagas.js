@@ -14,7 +14,7 @@ import {
   INFO_UNIVERSITIES,
   SIGN_UP
 } from '../../../constants/serverApi';
-import { signInError, signInSuccess } from '../signIn/actions';
+import { signInSuccess } from '../signIn/actions';
 import {
   LOAD_DEPARTMENTS,
   LOAD_GROUPS,
@@ -39,23 +39,7 @@ function* signUp(action) {
   try {
     yield put(startFetching());
 
-    let data = JSON.stringify({
-      firstName: action.firstName,
-      lastName: action.lastName,
-      surname: action.surname,
-      username: action.username,
-      password: action.password,
-      confirmPassword: action.confirmPassword,
-      phone: action.phone,
-      email: action.email,
-      role: action.userRole,
-      studentId: action.studentId,
-      scienceDegreeId: action.scienceDegree,
-      instituteId: action.institute,
-      departmentId: action.department,
-      studyGroupId: action.group,
-      universityId: action.universityId
-    });
+    let data = JSON.stringify(action.payload);
 
     const response = yield call(http, {
       url: SIGN_UP,
@@ -69,10 +53,8 @@ function* signUp(action) {
     } else {
       yield put(addError(response));
     }
-    //TODO reaction on non-success result
   } catch (e) {
     yield put(addError(e));
-    //TODO message about error
   } finally {
     yield put(endFetching());
   }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { loadTeachersByGroupId } from '../actions';
 import { TeacherListItem } from './TeacherListItem';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class TeachersList extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class TeachersList extends Component {
 
     return (
       <ListGroup variant={'flush'}>
+        {(!teachers || teachers.length === 0) && <EmptyPage />}
         {teachers &&
           teachers.map(teacher => (
             <TeacherListItem key={teacher.id} teacher={teacher} />

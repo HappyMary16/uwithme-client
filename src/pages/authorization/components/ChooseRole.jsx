@@ -20,15 +20,7 @@ import { connect } from 'react-redux';
 class ChooseRole extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      institute: '1',
-      department: '1',
-      group: '1',
-      scienceDegree: '1',
-      phone: '',
-      studentId: '',
-      university: '1'
-    };
+    this.state = {};
 
     this.submit = this.submit.bind(this);
   }
@@ -48,24 +40,17 @@ class ChooseRole extends Component {
     dispatch(
       signUpRequest(
         this.state.userRole,
-        this.state.studentId,
-        this.state.scienceDegree,
         this.state.institute,
         this.state.department,
         this.state.group,
-        this.state.university
+        this.state.universityId,
+        this.state.universityName
       )
     );
   }
 
   render() {
-    const {
-      groups,
-      departments,
-      institutes,
-      scienceDegrees,
-      universities
-    } = this.props;
+    const { groups, departments, institutes, universities } = this.props;
     const { userRole } = this.state;
 
     return (
@@ -88,17 +73,10 @@ class ChooseRole extends Component {
             {userRole === 3 && (
               <Form.Control
                 placeholder={i18n.t('university_name') + ' *'}
-                onChange={e => this.setState({ university: e.target.value })}
+                onChange={e =>
+                  this.setState({ universityName: e.target.value })
+                }
                 required
-              />
-            )}
-            {userRole === 2 && (
-              <Select
-                className={'selector'}
-                theme={selectorColors}
-                placeholder={i18n.t('science_degree') + ' *'}
-                options={scienceDegrees}
-                onChange={e => this.setState({ scienceDegree: e.value })}
               />
             )}
             {userRole && userRole !== 3 && (
@@ -108,7 +86,7 @@ class ChooseRole extends Component {
                   theme={selectorColors}
                   placeholder={i18n.t('university') + ' *'}
                   options={universities}
-                  onChange={e => this.setState({ university: e.value })}
+                  onChange={e => this.setState({ universityId: e.value })}
                 />
                 <Select
                   className={'selector'}

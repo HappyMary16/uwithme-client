@@ -39,7 +39,7 @@ export const UserCard = ({ user, avatar, onSaveAvatar }) => {
         </Col>
 
         <Col>
-          <Card>
+          <Card border="light">
             <Card.Header as="h5">
               <Row>
                 <Col xs={10} md={11}>

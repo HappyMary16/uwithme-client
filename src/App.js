@@ -87,6 +87,7 @@ class App extends Component {
     this.authService.loadUser().then(() => {
       if (this.authService.isLoggingIn) {
         this.authService.completeLogin().then(() => {
+          history.push(PRE_HOME);
           this.checkLogin();
         });
       } else if (this.authService.isLoggingOut) {

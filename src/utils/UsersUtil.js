@@ -6,8 +6,16 @@ export const isTeacher = user => user && user.role === TEACHER && !user.isAdmin;
 
 export const isAdmin = user => user && (user.role === ADMIN || user.isAdmin);
 
-export const getName = user =>
-  user && user.surname + ' ' + user.firstName + ' ' + user.lastName;
+export const getName = user => {
+  if (!user) {
+    return '';
+  }
+
+  const surname = typeof user.surname === 'string' ? user.username : '';
+  const firstName = typeof user.firstName === 'string' ? user.firstName : '';
+  const lastName = typeof user.lastName === 'string' ? user.lastName : '';
+  return surname + ' ' + firstName + ' ' + lastName;
+};
 
 export const findUserById = (users, id) =>
   users && users.filter(user => user.id === Number(id))[0];

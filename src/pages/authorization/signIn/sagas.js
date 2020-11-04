@@ -32,8 +32,10 @@ function* processSignIn() {
 
     if (response && response.status === 200) {
       yield put(signInSuccess(response.data));
-    } else {
+    } else if (response && response.status === 404) {
       yield put(addError(USER_DOES_NOT_HAVE_ACCOUNT));
+    } else {
+      yield put(addError(response));
     }
   } catch (error) {
     yield put(addError(error));

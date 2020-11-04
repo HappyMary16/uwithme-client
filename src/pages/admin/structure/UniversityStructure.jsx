@@ -13,6 +13,7 @@ import {
 import { CreateStructurePanel } from './components/CreatingStructurePanel';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class UniversityStructure extends Component {
   constructor(props) {
@@ -44,10 +45,27 @@ class UniversityStructure extends Component {
     dispatch(createDepartment(universityId, instituteName, departmentName));
   }
 
-  createGroup(instituteId, instituteName, departmentId, departmentName, course, groupName, isShowingInRegistration) {
+  createGroup(
+    instituteId,
+    instituteName,
+    departmentId,
+    departmentName,
+    course,
+    groupName,
+    isShowingInRegistration
+  ) {
     const { dispatch, universityId } = this.props;
 
-    dispatch(createGroup(universityId, instituteName, departmentName, course, groupName, isShowingInRegistration));
+    dispatch(
+      createGroup(
+        universityId,
+        instituteName,
+        departmentName,
+        course,
+        groupName,
+        isShowingInRegistration
+      )
+    );
   }
 
   render() {
@@ -55,22 +73,26 @@ class UniversityStructure extends Component {
 
     return (
       <Container>
-        <CreateStructurePanel institutes={institutes}
-                              departments={departments}
-                              createInstitute={this.createInstitute}
-                              createDepartment={this.createDepartment}
-                              createGroup={this.createGroup}/>
+        <CreateStructurePanel
+          institutes={institutes}
+          departments={departments}
+          createInstitute={this.createInstitute}
+          createDepartment={this.createDepartment}
+          createGroup={this.createGroup}
+        />
 
-        <ListGroup variant='flush'>
+        {(!institutes || institutes.length === 0) && <EmptyPage />}
+
+        <ListGroup variant="flush">
           {institutes &&
-          institutes.map((institute, i) => (
-            <Institute
-              key={i}
-              institute={institute}
-              departments={getDepartmentsByInstitute(departments, institute)}
-              groups={groups}
-            />
-          ))}
+            institutes.map((institute, i) => (
+              <Institute
+                key={i}
+                institute={institute}
+                departments={getDepartmentsByInstitute(departments, institute)}
+                groups={groups}
+              />
+            ))}
         </ListGroup>
       </Container>
     );

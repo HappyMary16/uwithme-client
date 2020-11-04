@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class LectureHalls extends Component {
   constructor(props) {
@@ -65,6 +66,8 @@ class LectureHalls extends Component {
             />
           </Col>
         </Row>
+
+        {(!buildings || buildings.length === 0) && <EmptyPage />}
 
         <BuildingsList buildings={buildings} lectureHalls={lectureHalls} />
       </Container>

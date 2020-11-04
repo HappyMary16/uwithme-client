@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class PageWithFiles extends React.Component {
   componentDidMount() {
@@ -41,6 +42,8 @@ class PageWithFiles extends React.Component {
           </Row>
         )}
         <ListGroup variant={'flush'}>
+          {(!subjects || subjects.length === 0) && <EmptyPage />}
+
           {subjects &&
             subjects.map((subject, i) => (
               <SubjectFiles

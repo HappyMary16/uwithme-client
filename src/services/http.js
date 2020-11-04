@@ -42,9 +42,7 @@ export default async function http({
       return response;
     },
     error => {
-      if (error && error.response && error.response.status === 401) {
-        authService.login();
-      }
+      return error && error.response;
     }
   );
 
