@@ -6,7 +6,7 @@ import {
   LOAD_STUDENTS_WITHOUT_GROUP,
   REMOVE_STUDENT_FROM_GROUP
 } from './actions';
-import { endFetching, startFetching } from '../../navigation/actions';
+import { addError, endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import {
   GROUP_STUDENT_ID,
@@ -49,7 +49,7 @@ function* getStudentsByGroupId(action) {
       }
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -69,7 +69,7 @@ function* removeStudentFromGroup(action) {
       yield put(renderUser(user.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -88,7 +88,7 @@ function* getStudentsWithoutGroupByUniversityId() {
       yield put(renderUsers(users.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -114,7 +114,7 @@ function* addStudentToGroup(action) {
       }
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -134,7 +134,7 @@ function* loadGroupById(action) {
       yield put(renderGroup(group.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

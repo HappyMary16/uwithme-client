@@ -5,7 +5,11 @@ import {
   LOAD_INSTITUTES_BY_UNIVERSITY_ID,
   RENDER_INSTITUTES
 } from '../actions';
-import { endFetching, startFetching } from '../../../navigation/actions';
+import {
+  addError,
+  endFetching,
+  startFetching
+} from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { INSTITUTES } from '../../../../constants/serverApi';
 
@@ -35,8 +39,8 @@ function* createInstitute(action) {
     } else {
       alert(response);
     }
-  } catch (error) {
-    alert(error);
+  } catch (e) {
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -55,7 +59,7 @@ function* loadInstitutesByUniversityId() {
       yield put({ type: RENDER_INSTITUTES, institutes });
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

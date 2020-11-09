@@ -44,7 +44,7 @@ class LectureHalls extends Component {
   }
 
   render() {
-    const { buildings, lectureHalls } = this.props;
+    const { buildings, lectureHalls, isFetching } = this.props;
     const { openCreateDialog } = this.state;
 
     return (
@@ -67,7 +67,7 @@ class LectureHalls extends Component {
           </Col>
         </Row>
 
-        {(!buildings || buildings.length === 0) && <EmptyPage />}
+        <EmptyPage list={buildings} isFetching={isFetching} />
 
         <BuildingsList buildings={buildings} lectureHalls={lectureHalls} />
       </Container>
@@ -79,7 +79,8 @@ const mapStateToProps = state => {
   return {
     lectureHalls: state.lectureHallReducer.lectureHalls,
     buildings: state.lectureHallReducer.buildings,
-    universityId: state.authReducers.user.universityId
+    universityId: state.authReducers.user.universityId,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

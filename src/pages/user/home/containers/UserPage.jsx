@@ -9,7 +9,7 @@ class UserPage extends Component {
     const { dispatch, teachers, teacherId } = this.props;
     const teacher = findUserById(teachers, teacherId);
     if (teacher) {
-      dispatch(findLessonsForUser(teacher.username));
+      dispatch(findLessonsForUser(teacher.id));
     }
   }
 

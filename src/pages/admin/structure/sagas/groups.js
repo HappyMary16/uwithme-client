@@ -6,7 +6,11 @@ import {
   loadInstitutesByUniversityId,
   renderGroup
 } from '../actions';
-import { endFetching, startFetching } from '../../../navigation/actions';
+import {
+  addError,
+  endFetching,
+  startFetching
+} from '../../../navigation/actions';
 import http from '../../../../services/http';
 import {
   GROUPS,
@@ -54,8 +58,8 @@ function* createGroup(action) {
     } else {
       alert(response);
     }
-  } catch (error) {
-    alert(error);
+  } catch (e) {
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -75,7 +79,7 @@ function* loadGroupsByUniversityId(action) {
       yield put(renderGroups(groups.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

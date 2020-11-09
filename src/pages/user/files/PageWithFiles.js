@@ -18,7 +18,7 @@ class PageWithFiles extends React.Component {
   }
 
   render() {
-    const { userRole, subjects, files } = this.props;
+    const { userRole, subjects, files, isFetching } = this.props;
 
     return (
       <Col xs={12}>
@@ -42,7 +42,7 @@ class PageWithFiles extends React.Component {
           </Row>
         )}
         <ListGroup variant={'flush'}>
-          {(!subjects || subjects.length === 0) && <EmptyPage />}
+          <EmptyPage list={subjects} isFetching={isFetching} />
 
           {subjects &&
             subjects.map((subject, i) => (
@@ -65,7 +65,8 @@ const mapStateToProps = state => {
     userRole: state.authReducers.user.role,
     subjects: state.filesReducers.subjects,
     files: state.filesReducers.files,
-    username: state.authReducers.user.username
+    username: state.authReducers.user.username,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

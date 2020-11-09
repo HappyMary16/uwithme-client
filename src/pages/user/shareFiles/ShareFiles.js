@@ -61,18 +61,19 @@ class ShareFiles extends React.Component {
   }
 
   render() {
-    const { lectures, tasks, groups, subjects } = this.props;
+    const { lectures, tasks, groups, subjects, isFetching } = this.props;
     const { subjectId } = this.state;
 
     return (
       <div>
-        {(!subjects || subjects.length === 0) && (
-          <EmptyPage
-            message={i18n.t('you_do_not_have_any_file')}
-            href={ADD_FILE}
-            linkText={'add_files_page'}
-          />
-        )}
+        <EmptyPage
+          message={i18n.t('you_do_not_have_any_file')}
+          href={ADD_FILE}
+          linkText={'add_files_page'}
+          list={subjects}
+          isFetching={isFetching}
+        />
+
         {subjects && subjects.length > 0 && (
           <div>
             <Select
@@ -130,7 +131,8 @@ const mapStateToProps = state => {
     subjects: state.filesReducers.subjects,
     lectures: getLectures(state.filesReducers.files),
     tasks: getTasks(state.filesReducers.files),
-    groups: state.adminReducers.groups
+    groups: state.adminReducers.groups,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

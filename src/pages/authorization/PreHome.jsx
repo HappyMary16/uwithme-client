@@ -4,6 +4,7 @@ import ChooseRole from './components/ChooseRole';
 import { history } from '../../store/Store';
 import { signInRequest } from './signIn/actions';
 import { USER_DOES_NOT_HAVE_ACCOUNT } from '../../constants/errors';
+import { USER_HOME } from '../../constants/links';
 
 class PreHome extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class PreHome extends Component {
     const { user, dispatch } = this.props;
     dispatch(signInRequest());
     if (user) {
-      history.push('/home');
+      history.push(USER_HOME);
     }
   }
 

@@ -18,7 +18,7 @@ export const getName = user => {
 };
 
 export const findUserById = (users, id) =>
-  users && users.filter(user => user.id === Number(id))[0];
+  users && users.filter(user => user.id === id)[0];
 
 export const findUsersByGroupId = (users, groupId) =>
   users && users.filter(user => user.studyGroupId === Number(groupId));

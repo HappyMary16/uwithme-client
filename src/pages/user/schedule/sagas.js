@@ -4,7 +4,7 @@ import {
   FIND_LESSONS_BY_USER_NAME,
   renderLessons
 } from './actions';
-import { endFetching, startFetching } from '../../navigation/actions';
+import { addError, endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { GET_LESSONS_BY_GROUP_ID, LESSONS } from '../../../constants/serverApi';
 
@@ -12,7 +12,7 @@ export function* scheduleOperationWatcher() {
   yield takeEvery(FIND_LESSONS_BY_GROUP_ID, action =>
     findLessonsByGroupId(action)
   );
-  yield takeEvery(FIND_LESSONS_BY_USER_NAME, () => findLessons());
+  yield takeEvery(FIND_LESSONS_BY_USER_NAME, findLessons);
 }
 
 function* findLessonsByGroupId(action) {
@@ -26,11 +26,13 @@ function* findLessonsByGroupId(action) {
       method: 'get'
     });
 
-    if (response) {
+    if (response && response.status === 200) {
       yield put(renderLessons(response.data));
+    } else {
+      yield put(addError(response));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -45,11 +47,13 @@ function* findLessons() {
       method: 'get'
     });
 
-    if (response) {
+    if (response && response.status === 200) {
       yield put(renderLessons(response.data));
+    } else {
+      yield put(addError(response));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

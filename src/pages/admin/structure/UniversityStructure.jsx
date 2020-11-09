@@ -69,7 +69,7 @@ class UniversityStructure extends Component {
   }
 
   render() {
-    const { institutes, departments, groups } = this.props;
+    const { institutes, departments, groups, isFetching } = this.props;
 
     return (
       <Container>
@@ -81,7 +81,7 @@ class UniversityStructure extends Component {
           createGroup={this.createGroup}
         />
 
-        {(!institutes || institutes.length === 0) && <EmptyPage />}
+        <EmptyPage list={institutes} isFetching={isFetching} />
 
         <ListGroup variant="flush">
           {institutes &&
@@ -104,7 +104,8 @@ const mapStateToProps = state => {
     institutes: state.adminReducers.institutes,
     departments: state.adminReducers.departments,
     groups: state.adminReducers.groups,
-    universityId: state.authReducers.user.universityId
+    universityId: state.authReducers.user.universityId,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

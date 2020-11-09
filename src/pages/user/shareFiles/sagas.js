@@ -5,7 +5,7 @@ import { ADD_ACCESS_TO_FILES, LOAD_GROUPS_BY_TEACHER } from './actions';
 import { FILES } from '../../../constants/links';
 import { history } from '../../../store/Store';
 import { renderGroups } from '../../admin/groupPage/actions';
-import { endFetching, startFetching } from '../../navigation/actions';
+import { addError, endFetching, startFetching } from '../../navigation/actions';
 
 export function* addAccessToFilesWatcher() {
   yield takeEvery(ADD_ACCESS_TO_FILES, action => addAccessToFiles(action));
@@ -32,7 +32,7 @@ function* addAccessToFiles(action) {
     }
     history.push(FILES);
   } catch (e) {
-    //TODO add error
+    yield put(addError(e));
   }
 }
 
@@ -49,7 +49,7 @@ function* loadGroupByTeacher() {
       yield put(renderGroups(group.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

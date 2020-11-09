@@ -12,11 +12,11 @@ class StudentsList extends Component {
   }
 
   render() {
-    const { teachers } = this.props;
+    const { teachers, isFetching } = this.props;
 
     return (
       <ListGroup variant={'flush'}>
-        {(!teachers || teachers.length === 0) && <EmptyPage />}
+        <EmptyPage list={teachers} isFetching={isFetching} />
         {teachers &&
           teachers.map(teacher => (
             <StudentListItem key={teacher.id} student={teacher} />
@@ -29,7 +29,8 @@ class StudentsList extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    teachers: state.usersReducer.users
+    teachers: state.usersReducer.users,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

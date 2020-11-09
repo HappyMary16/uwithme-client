@@ -9,7 +9,7 @@ class UserSchedule extends Component {
     const { dispatch, users, userId } = this.props;
     const user = findUserById(users, userId);
     if (user) {
-      dispatch(findLessonsForUser(user.username));
+      dispatch(findLessonsForUser(user.id));
     }
   }
 

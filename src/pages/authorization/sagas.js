@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import http from '../../services/http';
 import { AVATAR } from '../../constants/serverApi';
-import { endFetching, startFetching } from '../navigation/actions';
+import { addError, endFetching, startFetching } from '../navigation/actions';
 import { UPLOAD_AVATAR } from '../user/actions';
 import { downloadMyAvatar } from './signIn/actions';
 
@@ -30,7 +30,7 @@ function* uploadAvatar(action) {
       yield put(downloadMyAvatar());
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
