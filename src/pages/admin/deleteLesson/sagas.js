@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { DELETE_LESSON } from './actions';
-import { endFetching, startFetching } from '../../navigation/actions';
+import { addError, endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
 import { renderLesson } from '../../user/schedule/actions';
@@ -34,7 +34,7 @@ function* deleteLesson(action) {
       yield put(renderLesson(lesson.id, response.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

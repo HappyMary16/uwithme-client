@@ -5,15 +5,13 @@ import NavigationContainer from './pages/navigation/NavigationContainer';
 import {
   ADD_FILE,
   ADD_LESSON,
-  ADD_UNIVERSITY_PATH,
   FILES,
   GROUP_PAGE_ROUTER,
   GROUP_SCHEDULE_ROUTER,
   LECTURE_HALLS,
+  PRE_HOME,
   SCHEDULE,
   SHARE_FILES,
-  SIGN_IN,
-  SIGN_UP,
   STUDENTS,
   TEACHERS,
   USER_HOME,
@@ -26,9 +24,6 @@ import AddFile from './pages/user/addFiles/AddFile';
 import { connect } from 'react-redux';
 import ShareFiles from './pages/user/shareFiles/ShareFiles';
 import PageWithFiles from './pages/user/files/PageWithFiles';
-import SignUp from './pages/authorization/signUp/SignUp';
-import SignIn from './pages/authorization/signIn/SignIn';
-import AddUniversity from './pages/authorization/addUniversity/AddUniversity';
 import { isAdmin, isStudent, isTeacher } from './utils/UsersUtil';
 import { AdminToolBar } from './pages/admin/AdminToolBar';
 import UniversityStructure from './pages/admin/structure/UniversityStructure';
@@ -57,6 +52,10 @@ import './styles/avatar.css';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
+import { AuthService } from './services/AuthService';
+import { history } from './store/Store';
+import PreHome from './pages/authorization/PreHome';
+import { keycloakSignInSuccess } from './pages/authorization/signIn/actions';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -79,6 +78,40 @@ function OpenGroupSchedule() {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.authService = new AuthService();
+  }
+
+  componentDidMount() {
+    this.authService.loadUser().then(() => {
+      if (this.authService.isLoggingIn) {
+        this.authService.completeLogin().then(() => {
+          history.push(PRE_HOME);
+          this.checkLogin();
+        });
+      } else if (this.authService.isLoggingOut) {
+        this.authService.completeLogout().then(() => {
+          this.checkLogin();
+        });
+      } else {
+        this.checkLogin();
+      }
+    });
+  }
+
+  checkLogin() {
+    if (this.authService.isLoggedIn) {
+      const { user, dispatch } = this.props;
+      dispatch(keycloakSignInSuccess());
+      if (!user) {
+        history.push(PRE_HOME);
+      }
+    } else {
+      this.authService.login();
+    }
+  }
+
   render() {
     const { user, isFetching, isMenuOpen } = this.props;
 
@@ -103,17 +136,7 @@ class App extends Component {
         {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
 
         <Container className={'main-page-container'}>
-          {!user && (
-            <div>
-              <Route
-                exact
-                path={ADD_UNIVERSITY_PATH}
-                component={AddUniversity}
-              />
-              <Route exact path={SIGN_UP} component={SignUp} />
-              <Route exact path={SIGN_IN} component={SignIn} />
-            </div>
-          )}
+          <Route exact path={PRE_HOME} component={PreHome} />
 
           {user && (
             <div>

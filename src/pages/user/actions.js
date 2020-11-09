@@ -42,10 +42,10 @@ export function renderUser(user) {
   };
 }
 
-export const findLessonsForUser = username => ({
+export const findLessonsForUser = id => ({
   type: FIND_LESSONS_FOR_USER,
   payload: {
-    username
+    id
   }
 });
 

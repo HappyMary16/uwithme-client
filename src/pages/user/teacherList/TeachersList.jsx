@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { loadTeachersByGroupId } from '../actions';
 import { TeacherListItem } from './TeacherListItem';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class TeachersList extends Component {
   componentDidMount() {
@@ -11,10 +12,11 @@ class TeachersList extends Component {
   }
 
   render() {
-    const { teachers } = this.props;
+    const { teachers, isFetching } = this.props;
 
     return (
       <ListGroup variant={'flush'}>
+        <EmptyPage list={teachers} isFetching={isFetching} />
         {teachers &&
           teachers.map(teacher => (
             <TeacherListItem key={teacher.id} teacher={teacher} />
@@ -27,7 +29,8 @@ class TeachersList extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    teachers: state.usersReducer.users
+    teachers: state.usersReducer.users,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

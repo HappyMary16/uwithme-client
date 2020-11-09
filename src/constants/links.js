@@ -1,8 +1,5 @@
-//without authorization
-export const SIGN_IN = '/sign-in';
-export const SIGN_UP = '/sign-up';
-
 //user
+export const PRE_HOME = '/pre-home';
 export const USER_HOME = '/home';
 export const SCHEDULE = '/schedule';
 export const FILES = '/files';

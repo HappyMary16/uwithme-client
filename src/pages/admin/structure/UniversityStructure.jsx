@@ -13,6 +13,7 @@ import {
 import { CreateStructurePanel } from './components/CreatingStructurePanel';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class UniversityStructure extends Component {
   constructor(props) {
@@ -44,33 +45,54 @@ class UniversityStructure extends Component {
     dispatch(createDepartment(universityId, instituteName, departmentName));
   }
 
-  createGroup(instituteId, instituteName, departmentId, departmentName, course, groupName, isShowingInRegistration) {
+  createGroup(
+    instituteId,
+    instituteName,
+    departmentId,
+    departmentName,
+    course,
+    groupName,
+    isShowingInRegistration
+  ) {
     const { dispatch, universityId } = this.props;
 
-    dispatch(createGroup(universityId, instituteName, departmentName, course, groupName, isShowingInRegistration));
+    dispatch(
+      createGroup(
+        universityId,
+        instituteName,
+        departmentName,
+        course,
+        groupName,
+        isShowingInRegistration
+      )
+    );
   }
 
   render() {
-    const { institutes, departments, groups } = this.props;
+    const { institutes, departments, groups, isFetching } = this.props;
 
     return (
       <Container>
-        <CreateStructurePanel institutes={institutes}
-                              departments={departments}
-                              createInstitute={this.createInstitute}
-                              createDepartment={this.createDepartment}
-                              createGroup={this.createGroup}/>
+        <CreateStructurePanel
+          institutes={institutes}
+          departments={departments}
+          createInstitute={this.createInstitute}
+          createDepartment={this.createDepartment}
+          createGroup={this.createGroup}
+        />
 
-        <ListGroup variant='flush'>
+        <EmptyPage list={institutes} isFetching={isFetching} />
+
+        <ListGroup variant="flush">
           {institutes &&
-          institutes.map((institute, i) => (
-            <Institute
-              key={i}
-              institute={institute}
-              departments={getDepartmentsByInstitute(departments, institute)}
-              groups={groups}
-            />
-          ))}
+            institutes.map((institute, i) => (
+              <Institute
+                key={i}
+                institute={institute}
+                departments={getDepartmentsByInstitute(departments, institute)}
+                groups={groups}
+              />
+            ))}
         </ListGroup>
       </Container>
     );
@@ -82,7 +104,8 @@ const mapStateToProps = state => {
     institutes: state.adminReducers.institutes,
     departments: state.adminReducers.departments,
     groups: state.adminReducers.groups,
-    universityId: state.authReducers.user.universityId
+    universityId: state.authReducers.user.universityId,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

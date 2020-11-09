@@ -1,6 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { SIGN_UP_REQUEST } from './actions';
-import { endFetching, startFetching } from '../../navigation/actions';
+import {
+  addError,
+  endFetching,
+  removeError,
+  startFetching
+} from '../../navigation/actions';
 import http from '../../../services/http';
 import {
   INFO_DEPARTMENTS,
@@ -9,7 +14,7 @@ import {
   INFO_UNIVERSITIES,
   SIGN_UP
 } from '../../../constants/serverApi';
-import { signInError, signInSuccess } from '../signIn/actions';
+import { signInSuccess } from '../signIn/actions';
 import {
   LOAD_DEPARTMENTS,
   LOAD_GROUPS,
@@ -20,6 +25,7 @@ import {
   renderUniversities
 } from '../../admin/structure/actions';
 import { renderGroups } from '../../admin/groupPage/actions';
+import { USER_DOES_NOT_HAVE_ACCOUNT } from '../../../constants/errors';
 
 export function* signUpWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, action => signUp(action));
@@ -33,23 +39,7 @@ function* signUp(action) {
   try {
     yield put(startFetching());
 
-    let data = JSON.stringify({
-      firstName: action.firstName,
-      lastName: action.lastName,
-      surname: action.surname,
-      username: action.username,
-      password: action.password,
-      confirmPassword: action.confirmPassword,
-      phone: action.phone,
-      email: action.email,
-      role: action.userRole,
-      studentId: action.studentId,
-      scienceDegreeId: action.scienceDegree,
-      instituteId: action.institute,
-      departmentId: action.department,
-      studyGroupId: action.group,
-      universityId: action.universityId
-    });
+    let data = JSON.stringify(action.payload);
 
     const response = yield call(http, {
       url: SIGN_UP,
@@ -59,15 +49,12 @@ function* signUp(action) {
 
     if (response && response.status === 200) {
       yield put(signInSuccess(response.data));
+      yield put(removeError(USER_DOES_NOT_HAVE_ACCOUNT.code));
     } else {
-      alert(response);
-      yield put(signInError(response));
+      yield put(addError(response));
     }
-    //TODO reaction on non-success result
   } catch (e) {
-    alert(e);
-    yield put(signInError(e));
-    //TODO message about error
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

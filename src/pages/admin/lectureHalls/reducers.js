@@ -26,13 +26,15 @@ export default function lectureHallReducer(
     case RENDER_BUILDINGS:
       return {
         ...state,
-        buildings: action.payload.buildings.map(building => {
-          return {
-            value: building.id,
-            label: building.name,
-            universityId: building.universityId
-          };
-        })
+        buildings:
+          action.payload.buildings &&
+          action.payload.buildings.map(building => {
+            return {
+              value: building.id,
+              label: building.name,
+              universityId: building.universityId
+            };
+          })
       };
     case LECTURE_HALL_CREATED:
       return {

@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { endFetching, startFetching } from '../navigation/actions';
+import { addError, endFetching, startFetching } from '../navigation/actions';
 import http from '../../services/http';
 import {
   AVATAR,
@@ -45,7 +45,7 @@ function* getTeachersByUniversityId() {
       yield put(renderUsers(users.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -64,7 +64,7 @@ function* getStudentsFriends() {
       yield put(renderUsers(users.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -74,18 +74,20 @@ function* findLessonsByUsername(action) {
   try {
     yield put(startFetching());
 
-    const { username } = action.payload;
+    const { id } = action.payload;
 
     const response = yield call(http, {
-      url: LESSONS_BY_USERNAME + username,
+      url: LESSONS_BY_USERNAME + id,
       method: 'get'
     });
 
-    if (response) {
+    if (response && response.status === 200) {
       yield put(renderLessonsForUser(response.data));
+    } else {
+      yield put(addError(response));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -104,7 +106,7 @@ function* getTeachersFriends() {
       yield put(renderUsers(users.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

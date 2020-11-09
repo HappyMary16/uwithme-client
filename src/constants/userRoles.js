@@ -7,7 +7,11 @@ export const UserRoles = [
   },
   {
     value: 2,
-    label: i18n.t('teacher')
+    label: i18n.t('continue_like_teacher')
+  },
+  {
+    value: 3,
+    label: i18n.t('add_university')
   }
 ];
 

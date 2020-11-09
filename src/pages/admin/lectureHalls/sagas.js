@@ -7,7 +7,7 @@ import {
   renderBuildings,
   renderLectureHalls
 } from './actions';
-import { endFetching, startFetching } from '../../navigation/actions';
+import { addError, endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';
 
@@ -30,7 +30,7 @@ function* loadLectureHalls() {
       yield put(renderLectureHalls(lectureHalls.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -49,7 +49,7 @@ function* loadBuildings() {
       yield put(renderBuildings(buildings.data));
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

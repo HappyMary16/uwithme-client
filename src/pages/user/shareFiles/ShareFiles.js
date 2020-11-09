@@ -10,6 +10,9 @@ import { selectorColors } from '../../../styles/styles';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { SubjectFiles } from './components/SubjectFiles';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { ADD_FILE } from '../../../constants/links';
 
 let selectedGroups = [];
 let files = [];
@@ -58,53 +61,65 @@ class ShareFiles extends React.Component {
   }
 
   render() {
-    const { lectures, tasks, groups, subjects } = this.props;
+    const { lectures, tasks, groups, subjects, isFetching } = this.props;
     const { subjectId } = this.state;
 
     return (
       <div>
-        <Select
-          className={'selector'}
-          theme={selectorColors}
-          onChange={opinion => this.setState({ subjectId: opinion.value })}
-          options={subjects.map(s => {
-            return {
-              value: s.id,
-              label: s.name
-            };
-          })}
-          placeholder={i18n.t('subject')}
-        />
-        <SubjectFiles
-          lectures={lectures}
-          tasks={tasks}
-          subjectId={subjectId}
-          handleChoose={this.handleChange}
-        />
-        <Select
-          className={'selector'}
-          placeholder={i18n.t('groups')}
-          theme={selectorColors}
-          isMulti
-          onChange={this.handleGroupChange}
-          options={groups}
+        <EmptyPage
+          message={i18n.t('you_do_not_have_any_file')}
+          href={ADD_FILE}
+          linkText={'add_files_page'}
+          list={subjects}
+          isFetching={isFetching}
         />
 
-        <Col
-          xs={12}
-          md={{ offset: 9, span: 3 }}
-          lg={{ offset: 9, span: 3 }}
-          xl={{ offset: 10, span: 2 }}
-        >
-          <Button
-            block
-            type={'submit'}
-            variant={'purple'}
-            onClick={this.submit}
-          >
-            {i18n.t('upload')}
-          </Button>
-        </Col>
+        {subjects && subjects.length > 0 && (
+          <div>
+            <Select
+              className={'selector'}
+              theme={selectorColors}
+              onChange={opinion => this.setState({ subjectId: opinion.value })}
+              options={subjects.map(s => {
+                return {
+                  value: s.id,
+                  label: s.name
+                };
+              })}
+              placeholder={i18n.t('subject')}
+            />
+            <SubjectFiles
+              lectures={lectures}
+              tasks={tasks}
+              subjectId={subjectId}
+              handleChoose={this.handleChange}
+            />
+            <Select
+              className={'selector'}
+              placeholder={i18n.t('groups')}
+              theme={selectorColors}
+              isMulti
+              onChange={this.handleGroupChange}
+              options={groups}
+            />
+
+            <Col
+              xs={12}
+              md={{ offset: 9, span: 3 }}
+              lg={{ offset: 9, span: 3 }}
+              xl={{ offset: 10, span: 2 }}
+            >
+              <Button
+                block
+                type={'submit'}
+                variant={'purple'}
+                onClick={this.submit}
+              >
+                {i18n.t('upload')}
+              </Button>
+            </Col>
+          </div>
+        )}
       </div>
     );
   }
@@ -116,7 +131,8 @@ const mapStateToProps = state => {
     subjects: state.filesReducers.subjects,
     lectures: getLectures(state.filesReducers.files),
     tasks: getTasks(state.filesReducers.files),
-    groups: state.adminReducers.groups
+    groups: state.adminReducers.groups,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 

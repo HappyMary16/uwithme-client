@@ -3,6 +3,9 @@ export const END_FETCHING = 'END_FETCHING';
 
 export const CHANGE_IS_MENU_OPEN = 'CHANGE_IS_MENU_OPEN';
 
+export const ADD_ERROR = 'ADD_ERROR';
+export const REMOVE_ERROR = 'REMOVE_ERROR';
+
 export const startFetching = () => ({
   type: START_FETCHING
 });
@@ -13,4 +16,18 @@ export const endFetching = () => ({
 
 export const changeIsMenuOpen = () => ({
   type: CHANGE_IS_MENU_OPEN
+});
+
+export const addError = error => ({
+  type: ADD_ERROR,
+  payload: {
+    error
+  }
+});
+
+export const removeError = code => ({
+  type: REMOVE_ERROR,
+  payload: {
+    code
+  }
 });

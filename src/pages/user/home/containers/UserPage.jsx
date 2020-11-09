@@ -9,7 +9,7 @@ class UserPage extends Component {
     const { dispatch, teachers, teacherId } = this.props;
     const teacher = findUserById(teachers, teacherId);
     if (teacher) {
-      dispatch(findLessonsForUser(teacher.username));
+      dispatch(findLessonsForUser(teacher.id));
     }
   }
 
@@ -19,7 +19,14 @@ class UserPage extends Component {
 
     return (
       <div>
-        {teacher && <User user={teacher} lessons={lessons} isMine={false} />}
+        {teacher && (
+          <User
+            user={teacher}
+            avatar={teacher.avatar}
+            lessons={lessons}
+            isMine={false}
+          />
+        )}
       </div>
     );
   }

@@ -3,14 +3,14 @@ import { TodaySchedule } from './TodaySchedule';
 import { UserCard } from './UserCard';
 import Container from 'react-bootstrap/Container';
 
-export const User = ({ user, lessons, isMine, onSaveAvatar }) => {
+export const User = ({ user, avatar, lessons, isMine, onSaveAvatar }) => {
   //TODO add opportunity to choose day
   const [weekDay, setWeekDay] = React.useState(new Date().getDay());
 
   return (
     <div>
       <Container>
-        <UserCard user={user} onSaveAvatar={onSaveAvatar} />
+        <UserCard user={user} avatar={avatar} onSaveAvatar={onSaveAvatar} />
       </Container>
       <Container>
         <TodaySchedule

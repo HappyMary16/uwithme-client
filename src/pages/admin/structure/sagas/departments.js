@@ -6,7 +6,11 @@ import {
   loadInstitutesByUniversityId,
   RENDER_DEPARTMENTS
 } from '../actions';
-import { endFetching, startFetching } from '../../../navigation/actions';
+import {
+  addError,
+  endFetching,
+  startFetching
+} from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { DEPARTMENTS } from '../../../../constants/serverApi';
 
@@ -39,8 +43,8 @@ function* createDepartment(action) {
     } else {
       alert(response);
     }
-  } catch (error) {
-    alert(error);
+  } catch (e) {
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }
@@ -59,7 +63,7 @@ function* loadDepartmentsByUniversityId() {
       yield put({ type: RENDER_DEPARTMENTS, departments });
     }
   } catch (e) {
-    alert(e);
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

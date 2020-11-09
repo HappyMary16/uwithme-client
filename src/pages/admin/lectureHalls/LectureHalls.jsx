@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class LectureHalls extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class LectureHalls extends Component {
   }
 
   render() {
-    const { buildings, lectureHalls } = this.props;
+    const { buildings, lectureHalls, isFetching } = this.props;
     const { openCreateDialog } = this.state;
 
     return (
@@ -66,6 +67,8 @@ class LectureHalls extends Component {
           </Col>
         </Row>
 
+        <EmptyPage list={buildings} isFetching={isFetching} />
+
         <BuildingsList buildings={buildings} lectureHalls={lectureHalls} />
       </Container>
     );
@@ -76,7 +79,8 @@ const mapStateToProps = state => {
   return {
     lectureHalls: state.lectureHallReducer.lectureHalls,
     buildings: state.lectureHallReducer.buildings,
-    universityId: state.authReducers.user.universityId
+    universityId: state.authReducers.user.universityId,
+    isFetching: state.loadingProcess.isFetching
   };
 };
 
