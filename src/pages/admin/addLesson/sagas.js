@@ -2,7 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { ADD_LESSON_TO_SCHEDULE } from './actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
-import { addError, endFetching, startFetching } from '../../navigation/actions';
+import { endFetching, startFetching } from '../../navigation/actions';
+import { addError } from '../../common/action';
 
 export function* addLessonWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action =>

@@ -6,17 +6,14 @@ import {
   loadInstitutesByUniversityId,
   renderGroup
 } from '../actions';
-import {
-  addError,
-  endFetching,
-  startFetching
-} from '../../../navigation/actions';
+import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import {
   GROUPS,
   GROUPS_BY_UNIVERSITY_ID
 } from '../../../../constants/serverApi';
 import { renderGroups } from '../../groupPage/actions';
+import { addError } from '../../../common/action';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, action => createGroup(action));
@@ -56,7 +53,7 @@ function* createGroup(action) {
       yield put(loadDepartmentsByUniversityId());
       yield put(renderGroup(response.data));
     } else {
-      alert(response);
+      yield put(addError(response));
     }
   } catch (e) {
     yield put(addError(e));

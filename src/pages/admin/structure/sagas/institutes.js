@@ -5,13 +5,10 @@ import {
   LOAD_INSTITUTES_BY_UNIVERSITY_ID,
   RENDER_INSTITUTES
 } from '../actions';
-import {
-  addError,
-  endFetching,
-  startFetching
-} from '../../../navigation/actions';
+import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { INSTITUTES } from '../../../../constants/serverApi';
+import { addError } from '../../../common/action';
 
 export function* instituteWatcher() {
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
@@ -37,7 +34,7 @@ function* createInstitute(action) {
     if (response && response.status === 200) {
       yield put(instituteCreated(response.data));
     } else {
-      alert(response);
+      yield put(addError(response));
     }
   } catch (e) {
     yield put(addError(e));

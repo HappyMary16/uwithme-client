@@ -119,10 +119,10 @@ export const COURSE_NUMBER = [
   },
   {
     value: 5,
-    label: '5'
+    label: '5 (1)'
   },
   {
     value: 6,
-    label: '6'
+    label: '6 (2)'
   }
 ];

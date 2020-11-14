@@ -4,7 +4,7 @@ import {
   RENDER_LECTURE_HALLS
 } from './actions';
 import StateLoader from '../../../store/StateLoader';
-import { SIGN_OUT } from '../../authorization/signIn/actions';
+import { SIGN_OUT } from '../../authorization/actions';
 
 export default function lectureHallReducer(
   state = new StateLoader().loadState().lectureHallReducer || {},

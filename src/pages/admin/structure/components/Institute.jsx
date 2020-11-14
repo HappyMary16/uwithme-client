@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import DepartmentsList from './DepartmentsList';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { ChevronDown, ChevronUp, FolderFill } from 'react-bootstrap-icons';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { ListItem } from './ListItem';
 
 export default class Institute extends Component {

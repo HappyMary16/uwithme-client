@@ -7,7 +7,6 @@ const AUTH = 'auth/';
 
 export const SIGN_IN = AUTH + 'signIn';
 export const SIGN_UP = AUTH + 'signUp';
-export const REFRESH_TOKEN = AUTH + 'refreshToken';
 
 export const GET_BUILDINGS = 'buildings/';
 

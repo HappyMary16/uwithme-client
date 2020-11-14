@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '../../../locales/i18n';
 import Button from 'react-bootstrap/Button';
-import {
-  loadDepartments,
-  loadGroups,
-  loadInstitutes,
-  loadUniversities
-} from '../../admin/structure/actions';
-import { signUpRequest } from '../signUp/actions';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { MortarBoardIcon } from '@primer/octicons-react';
@@ -16,6 +9,14 @@ import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
 import { UserRoles } from '../../../constants/userRoles';
 import { connect } from 'react-redux';
+import {
+  loadDepartments,
+  loadGroups,
+  loadInstitutes,
+  loadUniversities,
+  signUpRequest
+} from '../actions';
+import { setMessage } from '../../common/action';
 
 class ChooseRole extends Component {
   constructor(props) {
@@ -23,35 +24,119 @@ class ChooseRole extends Component {
     this.state = {};
 
     this.submit = this.submit.bind(this);
+    this.setRole = this.setRole.bind(this);
+    this.setUniversity = this.setUniversity.bind(this);
+    this.setInstitute = this.setInstitute.bind(this);
+    this.setDepartment = this.setDepartment.bind(this);
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { universities, dispatch } = this.props;
     dispatch(loadUniversities());
-    dispatch(loadInstitutes());
-    dispatch(loadDepartments());
-    dispatch(loadGroups());
+    if (universities && universities.length === 1) {
+      dispatch(loadInstitutes(universities[0].value));
+    }
+  }
+
+  setRole(e) {
+    super.setState({
+      userRole: e.value,
+      university: null,
+      institute: null,
+      department: null,
+      group: null,
+      universityName: null
+    });
+  }
+
+  setUniversity(e) {
+    const { dispatch } = this.props;
+    this.setState({
+      university: e,
+      institute: null,
+      department: null,
+      group: null
+    });
+    dispatch(loadInstitutes(e.value));
+  }
+
+  setInstitute(e) {
+    const { dispatch } = this.props;
+    this.setState({
+      institute: e,
+      department: null,
+      group: null
+    });
+    dispatch(loadDepartments(e.value));
+  }
+
+  setDepartment(e) {
+    const { dispatch } = this.props;
+    this.setState({
+      department: e,
+      group: null
+    });
+    dispatch(loadGroups(e.value));
   }
 
   submit(e) {
     e.preventDefault();
     const { dispatch } = this.props;
+    const {
+      userRole,
+      university,
+      institute,
+      department,
+      group,
+      universityName
+    } = this.state;
 
-    dispatch(
-      signUpRequest(
-        this.state.userRole,
-        this.state.institute,
-        this.state.department,
-        this.state.group,
-        this.state.universityId,
-        this.state.universityName
-      )
-    );
+    if (!userRole) {
+      dispatch(setMessage(i18n.t('please_choose_your_user_type')));
+    }
+
+    if (userRole && userRole !== 3) {
+      if (!university) {
+        dispatch(setMessage(i18n.t('please_choose_university')));
+      }
+
+      if (university && !institute) {
+        dispatch(setMessage(i18n.t('please_choose_institute')));
+      }
+
+      if (institute && !department) {
+        dispatch(setMessage(i18n.t('please_choose_department')));
+      }
+    }
+
+    if (
+      this.validateAdmin(userRole, universityName) ||
+      this.validateUser(userRole, university, institute, department)
+    ) {
+      dispatch(
+        signUpRequest(
+          userRole,
+          institute ? institute.value : null,
+          department ? department.value : null,
+          group ? group.value : null,
+          university ? university.value : null,
+          universityName
+        )
+      );
+    }
+  }
+
+  validateAdmin(userRole, universityName) {
+    return userRole === 3 && universityName;
+  }
+
+  validateUser(userRole, university, institute, department) {
+    return userRole !== 3 && university && institute && department;
   }
 
   render() {
     const { groups, departments, institutes, universities } = this.props;
-    const { userRole } = this.state;
+    const { userRole, university, institute, department, group } = this.state;
 
     return (
       <Row className="justify-content-center">
@@ -68,7 +153,7 @@ class ChooseRole extends Component {
               theme={selectorColors}
               placeholder={i18n.t('user_type') + ' *'}
               options={UserRoles}
-              onChange={e => this.setState({ userRole: e.value })}
+              onChange={this.setRole}
             />
             {userRole === 3 && (
               <Form.Control
@@ -86,21 +171,24 @@ class ChooseRole extends Component {
                   theme={selectorColors}
                   placeholder={i18n.t('university') + ' *'}
                   options={universities}
-                  onChange={e => this.setState({ universityId: e.value })}
+                  value={university}
+                  onChange={this.setUniversity}
                 />
                 <Select
                   className={'selector'}
                   theme={selectorColors}
                   placeholder={i18n.t('institute') + ' *'}
                   options={institutes}
-                  onChange={e => this.setState({ institute: e.value })}
+                  value={institute}
+                  onChange={this.setInstitute}
                 />
                 <Select
                   className={'selector'}
                   theme={selectorColors}
                   placeholder={i18n.t('department') + ' *'}
                   options={departments}
-                  onChange={e => this.setState({ department: e.value })}
+                  value={department}
+                  onChange={this.setDepartment}
                 />
               </div>
             )}
@@ -108,9 +196,10 @@ class ChooseRole extends Component {
               <Select
                 className={'selector'}
                 theme={selectorColors}
-                placeholder={i18n.t('group') + ' *'}
+                placeholder={i18n.t('group')}
                 options={groups}
-                onChange={e => this.setState({ group: e.value })}
+                value={group}
+                onChange={e => this.setState({ group: e })}
               />
             )}
             <Button block variant={'purple'} type={'submit'}>
@@ -125,11 +214,10 @@ class ChooseRole extends Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.adminReducers.institutes,
-    departments: state.adminReducers.departments,
-    groups: state.adminReducers.groups,
-    scienceDegrees: state.adminReducers.scienceDegrees,
-    universities: state.adminReducers.universities
+    institutes: state.authReducers.institutes,
+    departments: state.authReducers.departments,
+    groups: state.authReducers.groups,
+    universities: state.authReducers.universities
   };
 };
 

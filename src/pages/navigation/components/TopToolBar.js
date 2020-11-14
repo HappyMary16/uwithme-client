@@ -1,8 +1,8 @@
 import React from 'react';
-import i18n from '../../locales/i18n';
+import i18n from '../../../locales/i18n';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import './navigation.css';
+import '../../../styles/navigation.css';
 import { MortarBoardIcon, ThreeBarsIcon } from '@primer/octicons-react';
 import Col from 'react-bootstrap/Col';
 

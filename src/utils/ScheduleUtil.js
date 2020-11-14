@@ -6,23 +6,21 @@ export const getLessonTime = lessonNumber => {
   return lessonTime && lessonTime.label;
 };
 
-export const filterAndSortLessons = (lessons, day, weekNumber) => {
+export const getTodayLessons = (lessons, weekNumber) => {
+  let today = new Date().getDay();
+
   return (
     lessons &&
     lessons
-      .filter(lesson => lesson.weekDay === day)
+      .filter(lesson => lesson.weekDay === today)
       .filter(lesson => lesson.weekNumber === weekNumber)
       .sort((lesson1, lesson2) => lesson1.lessonTime - lesson2.lessonTime)
   );
 };
 
-export const areLessonsToday = (lessons, day, weekNumber) => {
-  return (
-    lessons &&
-    lessons
-      .filter(lesson => lesson.weekDay === day)
-      .filter(lesson => lesson.weekNumber === weekNumber).length !== 0
-  );
+export const areLessonsToday = (lessons, weekNumber) => {
+  let lessonsToday = getTodayLessons(lessons, weekNumber);
+  return lessonsToday && lessonsToday.length !== 0;
 };
 
 export const getCurrentWeek = () => {

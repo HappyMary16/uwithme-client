@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 export const Message = ({ open = false, message, handleClose }) => {
   return (
     <Modal show={open} onHide={handleClose} centered>
-      <Modal.Header>
+      <Modal.Header className="justify-content-center">
         <Modal.Title>{message}</Modal.Title>
       </Modal.Header>
 
