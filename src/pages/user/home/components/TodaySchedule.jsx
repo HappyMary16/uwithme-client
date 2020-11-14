@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   areLessonsToday,
-  filterAndSortLessons,
+  getTodayLessons,
   getCurrentWeek,
   getGroupList,
   getLessonTime
@@ -16,7 +16,7 @@ import { USER_SCHEDULE } from '../../../../constants/links';
 import Row from 'react-bootstrap/Row';
 import { SwitchWeek } from '../../../common/components/SwitchWeek';
 
-export const TodaySchedule = ({ isMine, lessons, day, user }) => {
+export const TodaySchedule = ({ isMine, lessons, user }) => {
   const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
@@ -41,10 +41,10 @@ export const TodaySchedule = ({ isMine, lessons, day, user }) => {
           <SwitchWeek weekNumber={weekNumber} setWeekNumber={setWeekNumber} />
         </Col>
       </Row>
-      {!areLessonsToday(lessons, day, weekNumber ? 1 : 2) && (
+      {!areLessonsToday(lessons, weekNumber ? 1 : 2) && (
         <h5>{i18n.t('no_lessons_today')}</h5>
       )}
-      {areLessonsToday(lessons, day, weekNumber ? 1 : 2) && (
+      {areLessonsToday(lessons, weekNumber ? 1 : 2) && (
         <Table responsive size="sm">
           <tbody>
             <tr>
@@ -55,17 +55,15 @@ export const TodaySchedule = ({ isMine, lessons, day, user }) => {
               {isTeacher(user) && <th>{i18n.t('group')}</th>}
             </tr>
             {lessons &&
-              filterAndSortLessons(lessons, day, weekNumber ? 1 : 2).map(
-                lesson => (
-                  <tr key={lesson.name}>
-                    <td>{getLessonTime(lesson.lessonTime)}</td>
-                    <td>{lesson.subjectName}</td>
-                    <td>{lesson.lectureHall}</td>
-                    {isStudent(user) && <td>{lesson.teacherName}</td>}
-                    {isTeacher(user) && <td>{getGroupList(lesson.groups)}</td>}
-                  </tr>
-                )
-              )}
+              getTodayLessons(lessons, weekNumber ? 1 : 2).map(lesson => (
+                <tr key={lesson.name}>
+                  <td>{getLessonTime(lesson.lessonTime)}</td>
+                  <td>{lesson.subjectName}</td>
+                  <td>{lesson.lectureHall}</td>
+                  {isStudent(user) && <td>{lesson.teacherName}</td>}
+                  {isTeacher(user) && <td>{getGroupList(lesson.groups)}</td>}
+                </tr>
+              ))}
           </tbody>
         </Table>
       )}

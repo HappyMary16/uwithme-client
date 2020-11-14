@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ChooseRole from './components/ChooseRole';
 import { history } from '../../store/Store';
-import { signInRequest } from './signIn/actions';
+import { signInRequest } from './actions';
 import { USER_DOES_NOT_HAVE_ACCOUNT } from '../../constants/errors';
 import { USER_HOME } from '../../constants/links';
 
 class PreHome extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { user, dispatch } = this.props;
     dispatch(signInRequest());
@@ -31,7 +27,7 @@ const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
     isAuthenticated: state.authReducers.isAuthenticated,
-    errors: state.loadingProcess.errors
+    errors: state.messageReducers.errors
   };
 };
 

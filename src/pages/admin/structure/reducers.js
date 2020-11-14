@@ -8,7 +8,7 @@ import {
   RENDER_INSTITUTES,
   RENDER_UNIVERSITIES
 } from './actions';
-import { SIGN_OUT } from '../../authorization/signIn/actions';
+import { SIGN_OUT } from '../../authorization/actions';
 
 export default function adminReducers(
   state = new StateLoader().loadState().adminReducers || { groups: [] },

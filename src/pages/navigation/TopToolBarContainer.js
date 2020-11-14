@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { TopToolBar } from './TopToolBar';
-import { signOut } from '../authorization/signIn/actions';
+import { TopToolBar } from './components/TopToolBar';
+import { signOut } from '../authorization/actions';
 import { changeIsMenuOpen } from './actions';
 import { AuthService } from '../../services/AuthService';
 
@@ -26,9 +26,9 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const NavigationContainer = connect(
+const TopToolBarContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TopToolBar);
 
-export default NavigationContainer;
+export default TopToolBarContainer;

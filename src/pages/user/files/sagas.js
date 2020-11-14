@@ -9,6 +9,7 @@ import {
 import http from '../../../services/http';
 import { FILES, SUBJECTS } from '../../../constants/serverApi';
 import { endFetching, startFetching } from '../../navigation/actions';
+import { addError } from '../../common/action';
 
 export function* fileOperationWatcher() {
   yield takeEvery(LOAD_SUBJECTS_AND_FILES, () => loadSubjectsWithFiles());
@@ -53,7 +54,7 @@ function* loadSubjects() {
       yield put(renderSubjects(response));
     }
   } catch (e) {
-    alert(e + ' loadSubjects');
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

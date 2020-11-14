@@ -6,13 +6,10 @@ import {
   loadInstitutesByUniversityId,
   RENDER_DEPARTMENTS
 } from '../actions';
-import {
-  addError,
-  endFetching,
-  startFetching
-} from '../../../navigation/actions';
+import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { DEPARTMENTS } from '../../../../constants/serverApi';
+import { addError } from '../../../common/action';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
@@ -41,7 +38,7 @@ function* createDepartment(action) {
       yield put(departmentCreated(response.data));
       yield put(loadInstitutesByUniversityId());
     } else {
-      alert(response);
+      yield put(addError(response));
     }
   } catch (e) {
     yield put(addError(e));

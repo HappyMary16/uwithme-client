@@ -6,7 +6,7 @@ import {
   LOAD_STUDENTS_WITHOUT_GROUP,
   REMOVE_STUDENT_FROM_GROUP
 } from './actions';
-import { addError, endFetching, startFetching } from '../../navigation/actions';
+import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import {
   GROUP_STUDENT_ID,
@@ -17,6 +17,7 @@ import {
 } from '../../../constants/serverApi';
 import { renderUser, renderUsers } from '../../user/actions';
 import { renderGroup } from '../structure/actions';
+import { addError } from '../../common/action';
 
 export function* groupsWatcher() {
   yield takeEvery(LOAD_STUDENTS_BY_GROUP_ID, action =>

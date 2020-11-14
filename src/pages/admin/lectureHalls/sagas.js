@@ -7,9 +7,10 @@ import {
   renderBuildings,
   renderLectureHalls
 } from './actions';
-import { addError, endFetching, startFetching } from '../../navigation/actions';
+import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';
+import { addError } from '../../common/action';
 
 export function* lectureHallWatcher() {
   yield takeEvery(LOAD_LECTURE_HALLS, () => loadLectureHalls());
@@ -80,10 +81,10 @@ function* createLectureHall(action) {
     if (response && response.status === 200) {
       yield put(lectureHallCreated(response.data));
     } else {
-      alert(response);
+      yield put(addError(response));
     }
-  } catch (error) {
-    alert(error);
+  } catch (e) {
+    yield put(addError(e));
   } finally {
     yield put(endFetching());
   }

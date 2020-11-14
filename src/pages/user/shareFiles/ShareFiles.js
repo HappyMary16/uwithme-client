@@ -11,7 +11,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { SubjectFiles } from './components/SubjectFiles';
 import { EmptyPage } from '../../common/components/EmptyPage';
-import ListGroup from 'react-bootstrap/ListGroup';
 import { ADD_FILE } from '../../../constants/links';
 
 let selectedGroups = [];

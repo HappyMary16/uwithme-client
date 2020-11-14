@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { addError, endFetching, startFetching } from '../navigation/actions';
+import { endFetching, startFetching } from '../navigation/actions';
 import http from '../../services/http';
 import {
   AVATAR,
@@ -18,6 +18,7 @@ import {
   renderUsers
 } from './actions';
 import { arrayBufferToDataUrl } from '../../utils/FileUtil';
+import { addError } from '../common/action';
 
 export function* teachersWatcher() {
   yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, () =>

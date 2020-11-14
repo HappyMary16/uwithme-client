@@ -7,7 +7,7 @@ import {
   UPLOAD_REQUEST,
   UPLOAD_SUCCESS
 } from '../addFiles/actions';
-import { SIGN_OUT } from '../../authorization/signIn/actions';
+import { SIGN_OUT } from '../../authorization/actions';
 
 export default function filesReducers(
   state = new StateLoader().loadState().filesReducers || { uploadProgress: [] },
