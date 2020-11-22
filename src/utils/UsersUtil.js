@@ -11,7 +11,7 @@ export const getName = user => {
     return '';
   }
 
-  const surname = typeof user.surname === 'string' ? user.username : '';
+  const surname = !!user.surname ? user.surname : '';
   const firstName = typeof user.firstName === 'string' ? user.firstName : '';
   const lastName = typeof user.lastName === 'string' ? user.lastName : '';
   return surname + ' ' + firstName + ' ' + lastName;
