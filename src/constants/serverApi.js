@@ -1,6 +1,6 @@
 import config from '../config';
 
-export const apiRoot = `http://${config.host}:${config.port}/api/`;
+export const apiRoot = `${config.url}/api/`;
 
 const INFO = 'info/';
 const AUTH = 'auth/';

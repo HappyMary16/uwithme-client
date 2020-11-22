@@ -1,6 +1,5 @@
 {
-  "host": "https://jessy.tcomad.tk",
-  "port": "80",
+  "url": "https://jessy.tcomad.tk",
 
   "LOGGING_IN": "logging_in",
   "LOGIN_STATE": "login_state",
