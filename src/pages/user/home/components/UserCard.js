@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export const UserCard = ({ user, avatar, onSaveAvatar }) => {
+export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
   const [open, setOpen] = React.useState(false);
 
   let handleClickAvatar = () => {
@@ -20,11 +20,13 @@ export const UserCard = ({ user, avatar, onSaveAvatar }) => {
 
   return (
     <div>
-      <LoadPhoto
-        onSave={handleSave}
-        open={open}
-        onClose={() => setOpen(false)}
-      />
+      {isMine && (
+        <LoadPhoto
+          onSave={handleSave}
+          open={open}
+          onClose={() => setOpen(false)}
+        />
+      )}
 
       <Row>
         <Col xs={12} md={5} lg={4} xl={3}>
@@ -59,16 +61,13 @@ export const UserCard = ({ user, avatar, onSaveAvatar }) => {
                   i18n.t('group') + ': ' + user.studyGroupName}
               </Card.Subtitle>
               <Card.Text>
-                {i18n.t('phone')}: {user.phone}
+                {user.phone && i18n.t('phone') + ': ' + user.phone}
                 <br />
                 {i18n.t('email')}: {user.email}
                 <br />
                 {i18n.t('institute')}: {user.instituteName}
                 <br />
                 {i18n.t('department')}: {user.departmentName}
-                <br />
-                {user.role === 2 &&
-                  i18n.t('science_degree') + ': ' + user.scienceDegreeName}
               </Card.Text>
             </Card.Body>
           </Card>
