@@ -38,9 +38,6 @@ class LectureHalls extends Component {
         placeNumber
       )
     );
-    if (buildingName === buildingId) {
-      dispatch(loadBuildings());
-    }
   }
 
   render() {

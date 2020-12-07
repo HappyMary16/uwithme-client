@@ -44,7 +44,7 @@ class PageWithFiles extends React.Component {
         <ListGroup variant={'flush'}>
           <EmptyPage list={subjects} isFetching={isFetching} />
 
-          {subjects &&
+          {Array.isArray(subjects) &&
             subjects.map((subject, i) => (
               <SubjectFiles
                 key={i}

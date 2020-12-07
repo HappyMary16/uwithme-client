@@ -1,7 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   CREATE_LECTURE_HALL,
-  lectureHallCreated,
   LOAD_BUILDINGS,
   LOAD_LECTURE_HALLS,
   renderBuildings,
@@ -79,7 +78,8 @@ function* createLectureHall(action) {
     });
 
     if (response && response.status === 200) {
-      yield put(lectureHallCreated(response.data));
+      yield call(loadBuildings);
+      yield call(loadLectureHalls);
     } else {
       yield put(addError(response));
     }

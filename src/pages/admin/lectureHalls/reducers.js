@@ -1,8 +1,4 @@
-import {
-  LECTURE_HALL_CREATED,
-  RENDER_BUILDINGS,
-  RENDER_LECTURE_HALLS
-} from './actions';
+import { RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './actions';
 import StateLoader from '../../../store/StateLoader';
 import { SIGN_OUT } from '../../authorization/actions';
 
@@ -35,19 +31,6 @@ export default function lectureHallReducer(
               universityId: building.universityId
             };
           })
-      };
-    case LECTURE_HALL_CREATED:
-      return {
-        ...state,
-        lectureHalls: [
-          ...state.lectureHalls,
-          {
-            value: action.payload.lectureHall.id,
-            label: action.payload.lectureHall.name,
-            buildingId: action.payload.lectureHall.buildingId,
-            placeNumber: action.payload.lectureHall.placeNumber
-          }
-        ]
       };
     case SIGN_OUT:
       return {};

@@ -40,13 +40,15 @@ function* getStudentsByGroupId(action) {
     const { groupId } = action.payload;
 
     if (groupId) {
-      const users = yield call(http, {
+      const response = yield call(http, {
         url: STUDENTS_BY_GROUP_ID + groupId,
         method: 'get'
       });
 
-      if (users) {
-        yield put(renderUsers(users.data));
+      if (response && response.status === 200) {
+        yield put(renderUsers(response.data));
+      } else {
+        yield put(addError(response.data));
       }
     }
   } catch (e) {
@@ -61,13 +63,15 @@ function* removeStudentFromGroup(action) {
     yield put(startFetching());
     const { studentId } = action.payload;
 
-    const user = yield call(http, {
+    const response = yield call(http, {
       url: GROUP_STUDENT_ID + studentId,
       method: 'delete'
     });
 
-    if (user) {
-      yield put(renderUser(user.data));
+    if (response && response.status === 200) {
+      yield put(renderUser(response.data));
+    } else {
+      yield put(addError(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -80,13 +84,15 @@ function* getStudentsWithoutGroupByUniversityId() {
   try {
     yield put(startFetching());
 
-    const users = yield call(http, {
+    const response = yield call(http, {
       url: STUDENTS_WITHOUT_GROUP,
       method: 'get'
     });
 
-    if (users) {
-      yield put(renderUsers(users.data));
+    if (response && response.status === 200) {
+      yield put(renderUsers(response.data));
+    } else {
+      yield put(addError(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -101,7 +107,7 @@ function* addStudentToGroup(action) {
     const { studentIds, groupId } = action.payload;
 
     if (studentIds && groupId) {
-      const users = yield call(http, {
+      const response = yield call(http, {
         url: STUDENT_GROUP,
         method: 'put',
         data: {
@@ -110,8 +116,10 @@ function* addStudentToGroup(action) {
         }
       });
 
-      if (users) {
-        yield put(renderUsers(users.data));
+      if (response && response.status === 200) {
+        yield put(renderUsers(response.data));
+      } else {
+        yield put(addError(response.data));
       }
     }
   } catch (e) {
@@ -126,13 +134,15 @@ function* loadGroupById(action) {
     yield put(startFetching());
     const { id } = action.payload;
 
-    const group = yield call(http, {
+    const response = yield call(http, {
       url: GROUPS + id,
       method: 'get'
     });
 
-    if (group) {
-      yield put(renderGroup(group.data));
+    if (response && response.status === 200) {
+      yield put(renderGroup(response.data));
+    } else {
+      yield put(addError(response.data));
     }
   } catch (e) {
     yield put(addError(e));

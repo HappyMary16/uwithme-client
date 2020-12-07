@@ -22,6 +22,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { getName, getTeachers } from '../../../utils/UsersUtil';
 
 class AddLesson extends Component {
   constructor(props) {
@@ -119,11 +120,47 @@ class AddLesson extends Component {
             teachers.map(s => {
               return {
                 value: s.id,
-                label: s.surname + ' ' + s.firstName + ' ' + s.lastName
+                label: getName(s)
               };
             })
           }
           onChange={opinion => this.setState({ teacher: opinion })}
+          className={'selector'}
+        />
+
+        <Select
+          placeholder={i18n.t('groups')}
+          theme={selectorColors}
+          isMulti
+          onChange={opinion => this.setState({ selectedGroups: opinion })}
+          options={groups}
+          className={'selector'}
+        />
+
+        <Select
+          theme={selectorColors}
+          onChange={opinion => this.setState({ weekDays: opinion })}
+          options={WEEK_DAYS}
+          placeholder={i18n.t('week_day')}
+          isMulti
+          className={'selector'}
+        />
+
+        <Select
+          theme={selectorColors}
+          onChange={opinion => this.setState({ lessonTimes: opinion })}
+          options={LESSONS_TIME}
+          placeholder={i18n.t('lesson_time')}
+          isMulti
+          className={'selector'}
+        />
+
+        <Select
+          placeholder={i18n.t('week_number')}
+          theme={selectorColors}
+          isMulti
+          onChange={opinion => this.setState({ weekNumbers: opinion })}
+          options={WEEK_NUMBER}
           className={'selector'}
         />
 
@@ -172,42 +209,6 @@ class AddLesson extends Component {
           </Col>
         </Row>
 
-        <Select
-          placeholder={i18n.t('groups')}
-          theme={selectorColors}
-          isMulti
-          onChange={opinion => this.setState({ selectedGroups: opinion })}
-          options={groups}
-          className={'selector'}
-        />
-
-        <Select
-          theme={selectorColors}
-          onChange={opinion => this.setState({ weekDays: opinion })}
-          options={WEEK_DAYS}
-          placeholder={i18n.t('week_day')}
-          isMulti
-          className={'selector'}
-        />
-
-        <Select
-          theme={selectorColors}
-          onChange={opinion => this.setState({ lessonTimes: opinion })}
-          options={LESSONS_TIME}
-          placeholder={i18n.t('lesson_time')}
-          isMulti
-          className={'selector'}
-        />
-
-        <Select
-          placeholder={i18n.t('week_number')}
-          theme={selectorColors}
-          isMulti
-          onChange={opinion => this.setState({ weekNumbers: opinion })}
-          options={WEEK_NUMBER}
-          className={'selector'}
-        />
-
         <Col xs={12} md={{ offset: 9, span: 3 }}>
           <Button
             block
@@ -227,7 +228,7 @@ const mapStateToProps = state => {
   return {
     groups: state.adminReducers.groups,
     universityId: state.authReducers.user.universityId,
-    teachers: state.usersReducer.users,
+    teachers: getTeachers(state.usersReducer.users),
     subjects: state.filesReducers.subjects,
     lectureHalls: state.lectureHallReducer.lectureHalls,
     buildings: state.lectureHallReducer.buildings

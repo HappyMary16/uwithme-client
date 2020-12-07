@@ -37,13 +37,15 @@ function* getTeachersByUniversityId() {
   try {
     yield put(startFetching());
 
-    const users = yield call(http, {
+    const response = yield call(http, {
       url: TEACHERS,
       method: 'get'
     });
 
-    if (users) {
-      yield put(renderUsers(users.data));
+    if (response && response.status === 200) {
+      yield put(renderUsers(response.data));
+    } else {
+      yield put(addError(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -56,13 +58,15 @@ function* getStudentsFriends() {
   try {
     yield put(startFetching());
 
-    const users = yield call(http, {
+    const response = yield call(http, {
       url: USERS,
       method: 'get'
     });
 
-    if (users) {
-      yield put(renderUsers(users.data));
+    if (response && response.status === 200) {
+      yield put(renderUsers(response.data));
+    } else {
+      yield put(addError(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -98,13 +102,15 @@ function* getTeachersFriends() {
   try {
     yield put(startFetching());
 
-    const users = yield call(http, {
+    const response = yield call(http, {
       url: USERS,
       method: 'get'
     });
 
-    if (users) {
-      yield put(renderUsers(users.data));
+    if (response && response.status === 200) {
+      yield put(renderUsers(response.data));
+    } else {
+      yield put(addError(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -127,7 +133,7 @@ function* downloadAvatarForUser(userId) {
     loadFile: true
   });
 
-  if (response) {
+  if (response && response.status === 200) {
     yield put(renderAvatar(userId, arrayBufferToDataUrl(response.data)));
   } else {
     return { userId };
