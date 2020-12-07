@@ -62,7 +62,7 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
               </Card.Subtitle>
               <Card.Text>
                 {user.phone && i18n.t('phone') + ': ' + user.phone}
-                <br />
+                {user.phone && <br />}
                 {i18n.t('email')}: {user.email}
                 <br />
                 {i18n.t('institute')}: {user.instituteName}
