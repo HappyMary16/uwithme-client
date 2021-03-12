@@ -1,19 +1,19 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  CREATE_GROUP,
-  LOAD_GROUPS_BY_UNIVERSITY_ID,
-  loadDepartmentsByUniversityId,
-  loadInstitutesByUniversityId,
-  renderGroup
-} from '../actions';
 import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import {
   GROUPS,
   GROUPS_BY_UNIVERSITY_ID
 } from '../../../../constants/serverApi';
-import { renderGroups } from '../../groupPage/actions';
 import { addError } from '../../../common/action';
+import { loadInstitutesByUniversityId } from '../../../../actions/instituteActions';
+import { loadDepartmentsByUniversityId } from '../../../../actions/departmentActions';
+import {
+  CREATE_GROUP,
+  LOAD_GROUPS_BY_UNIVERSITY_ID,
+  renderGroup,
+  renderGroups
+} from '../../../../actions/groupActions';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, action => createGroup(action));

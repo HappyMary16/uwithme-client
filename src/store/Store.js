@@ -12,6 +12,10 @@ import usersReducer from '../pages/user/reducer';
 import scheduleReducers from '../pages/user/schedule/reducers';
 import lectureHallReducer from '../pages/admin/lectureHalls/reducers';
 import messageReducers from '../pages/common/reduce';
+import instituteReducers from '../reducers/instituteReducers';
+import groupReducers from '../reducers/groupReducers';
+import departmentReducers from '../reducers/departmentReducers';
+import universityReducers from '../reducers/universityReducers';
 
 export const history = createBrowserHistory();
 
@@ -28,7 +32,11 @@ export default function createAppStore() {
     loadingProcess,
     adminReducers,
     lectureHallReducer,
-    messageReducers
+    messageReducers,
+    instituteReducers,
+    groupReducers,
+    universityReducers,
+    departmentReducers
   });
 
   const store = createStore(

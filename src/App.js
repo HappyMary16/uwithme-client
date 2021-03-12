@@ -75,6 +75,11 @@ class App extends Component {
 
     return (
       <Container fluid className={'main-container'}>
+        {user && !isAdmin(user) && (
+          <UserToolBar user={user} isOpen={isMenuOpen} />
+        )}
+        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
+
         <TopToolBarContainer />
         <CustomSpinner isFetching={isFetching} />
 
@@ -83,11 +88,6 @@ class App extends Component {
           message={message}
           handleClose={this.closeMessage}
         />
-
-        {user && !isAdmin(user) && (
-          <UserToolBar user={user} isOpen={isMenuOpen} />
-        )}
-        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
 
         <PageRouter user={user} />
       </Container>

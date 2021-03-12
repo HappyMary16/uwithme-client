@@ -1,17 +1,8 @@
-import { RENDER_GROUPS } from '../structure/actions';
-
 export const LOAD_GROUP_BY_ID = 'LOAD_GROUPS_BY_ID';
 export const LOAD_STUDENTS_BY_GROUP_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
 export const LOAD_STUDENTS_WITHOUT_GROUP = 'LOAD_STUDENTS_WITHOUT_GROUP';
 export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
 export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
-
-export const renderGroups = groups => ({
-  type: RENDER_GROUPS,
-  payload: {
-    groups
-  }
-});
 
 export const loadGroupById = groupId => ({
   type: LOAD_GROUP_BY_ID,

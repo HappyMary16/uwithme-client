@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Institute from './components/Institute';
 import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
-import {
-  createDepartment,
-  createGroup,
-  createInstitute,
-  loadDepartmentsByUniversityId,
-  loadGroupsByUniversityId,
-  loadInstitutesByUniversityId
-} from './actions';
 import { CreateStructurePanel } from './components/CreatingStructurePanel';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { EmptyPage } from '../../common/components/EmptyPage';
+import {
+  createInstitute,
+  loadInstitutesByUniversityId
+} from '../../../actions/instituteActions';
+import {
+  createDepartment,
+  loadDepartmentsByUniversityId
+} from '../../../actions/departmentActions';
+import {
+  createGroup,
+  loadGroupsByUniversityId
+} from '../../../actions/groupActions';
 
 class UniversityStructure extends Component {
   constructor(props) {
@@ -101,9 +105,9 @@ class UniversityStructure extends Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.adminReducers.institutes,
-    departments: state.adminReducers.departments,
-    groups: state.adminReducers.groups,
+    institutes: state.instituteReducers.institutes,
+    departments: state.departmentReducers.departments,
+    groups: state.groupReducers.groups,
     universityId: state.authReducers.user.universityId,
     isFetching: state.loadingProcess.isFetching
   };

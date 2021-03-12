@@ -1,15 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  CREATE_DEPARTMENT,
-  departmentCreated,
-  LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
-  loadInstitutesByUniversityId,
-  RENDER_DEPARTMENTS
-} from '../actions';
 import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { DEPARTMENTS } from '../../../../constants/serverApi';
 import { addError } from '../../../common/action';
+import { loadInstitutesByUniversityId } from '../../../../actions/instituteActions';
+import {
+  CREATE_DEPARTMENT,
+  departmentCreated,
+  LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
+  RENDER_DEPARTMENTS
+} from '../../../../actions/departmentActions';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));

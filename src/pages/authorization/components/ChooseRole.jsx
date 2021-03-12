@@ -9,14 +9,12 @@ import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
 import { UserRoles } from '../../../constants/userRoles';
 import { connect } from 'react-redux';
-import {
-  loadDepartments,
-  loadGroups,
-  loadInstitutes,
-  loadUniversities,
-  signUpRequest
-} from '../actions';
+import { signUpRequest } from '../actions';
 import { setMessage } from '../../common/action';
+import { loadInstitutes } from '../../../actions/instituteActions';
+import { loadUniversities } from '../../../actions/universityActions';
+import { loadDepartments } from '../../../actions/departmentActions';
+import { loadGroups } from '../../../actions/groupActions';
 
 class ChooseRole extends Component {
   constructor(props) {
@@ -214,10 +212,10 @@ class ChooseRole extends Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.authReducers.institutes,
-    departments: state.authReducers.departments,
-    groups: state.authReducers.groups,
-    universities: state.authReducers.universities
+    institutes: state.instituteReducers.institutes,
+    departments: state.departmentReducers.departments,
+    groups: state.groupReducers.groups,
+    universities: state.universityReducers.universities
   };
 };
 

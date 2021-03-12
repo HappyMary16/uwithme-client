@@ -15,15 +15,7 @@ import { UPLOAD_AVATAR } from '../user/actions';
 import {
   DOWNLOAD_MY_AVATAR,
   downloadMyAvatar,
-  LOAD_DEPARTMENTS,
-  LOAD_GROUPS,
-  LOAD_INSTITUTES,
-  LOAD_UNIVERSITIES,
-  renderDepartmentForRegistration,
-  renderGroupsForRegistration,
-  renderInstitutesForRegistration,
   renderMyAvatar,
-  renderUniversitiesForRegistration,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_UP_REQUEST,
@@ -34,6 +26,22 @@ import { history } from '../../store/Store';
 import { USER_HOME } from '../../constants/links';
 import { arrayBufferToDataUrl } from '../../utils/FileUtil';
 import { addError, removeError } from '../common/action';
+import {
+  LOAD_INSTITUTES,
+  renderInstitutesForRegistration
+} from '../../actions/instituteActions';
+import {
+  LOAD_UNIVERSITIES,
+  renderUniversitiesForRegistration
+} from '../../actions/universityActions';
+import {
+  LOAD_DEPARTMENTS,
+  renderDepartmentForRegistration
+} from '../../actions/departmentActions';
+import {
+  LOAD_GROUPS,
+  renderGroupsForRegistration
+} from '../../actions/groupActions';
 
 export function* authorizationWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, action => signUp(action));

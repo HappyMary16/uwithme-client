@@ -9,6 +9,7 @@ import {
   LECTURE_HALLS,
   PRE_HOME,
   SCHEDULE,
+  SETTING,
   SHARE_FILES,
   STUDENTS,
   TEACHERS,
@@ -33,6 +34,7 @@ import Container from 'react-bootstrap/Container';
 import GroupPage from '../admin/groupPage/GroupPage';
 import UserPage from '../user/home/containers/UserPage';
 import UserSchedule from '../user/schedule/containers/UserSchedule';
+import Setting from '../user/settings/Setting';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -103,6 +105,9 @@ export const PageRouter = ({ user }) => {
             </Route>
             <Route path={USER_SCHEDULE_ROUTER}>
               <OpenUserSchedule />
+            </Route>
+            <Route path={SETTING}>
+              <Setting />
             </Route>
           </div>
           <div />

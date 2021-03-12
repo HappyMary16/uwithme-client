@@ -7,12 +7,12 @@ import Col from 'react-bootstrap/Col';
 import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
 import { selectorColors } from '../../../../styles/styles';
-import { loadGroupsByUniversityId } from '../../../admin/structure/actions';
 import { getGroupById } from '../../../../utils/StructureUtils';
 import { DeleteLessonDialog } from '../../../admin/deleteLesson/DeleteLessonDialog';
 import Button from 'react-bootstrap/Button';
 import { deleteLesson } from '../../../admin/deleteLesson/actions';
 import { getLessonsByGroup } from '../../../../utils/ScheduleUtil';
+import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
 
 class GroupSchedule extends Component {
   constructor(props) {
@@ -133,7 +133,7 @@ const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
     universityId: state.authReducers.user.universityId,
-    groups: state.adminReducers.groups,
+    groups: state.groupReducers.groups,
     lessons: state.scheduleReducers.lessons
   };
 };

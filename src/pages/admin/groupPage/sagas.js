@@ -16,8 +16,8 @@ import {
   STUDENTS_WITHOUT_GROUP
 } from '../../../constants/serverApi';
 import { renderUser, renderUsers } from '../../user/actions';
-import { renderGroup } from '../structure/actions';
 import { addError } from '../../common/action';
+import { renderGroup } from '../../../actions/groupActions';
 
 export function* groupsWatcher() {
   yield takeEvery(LOAD_STUDENTS_BY_GROUP_ID, action =>

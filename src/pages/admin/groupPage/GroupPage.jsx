@@ -121,7 +121,7 @@ const mapStateToProps = state => {
   return {
     users: state.usersReducer.users,
     lessons: state.usersReducer.lessons,
-    groups: state.adminReducers.groups,
+    groups: state.groupReducers.groups,
 
     universityId: state.authReducers.user.universityId
   };

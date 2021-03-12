@@ -1,14 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  CREATE_INSTITUTE,
-  instituteCreated,
-  LOAD_INSTITUTES_BY_UNIVERSITY_ID,
-  RENDER_INSTITUTES
-} from '../actions';
+
 import { endFetching, startFetching } from '../../../navigation/actions';
 import http from '../../../../services/http';
 import { INSTITUTES } from '../../../../constants/serverApi';
 import { addError } from '../../../common/action';
+import {
+  CREATE_INSTITUTE,
+  instituteCreated,
+  LOAD_INSTITUTES_BY_UNIVERSITY_ID,
+  renderInstitutes
+} from '../../../../actions/instituteActions';
 
 export function* instituteWatcher() {
   yield takeEvery(CREATE_INSTITUTE, action => createInstitute(action));
@@ -53,7 +54,7 @@ function* loadInstitutesByUniversityId() {
     });
 
     if (institutes) {
-      yield put({ type: RENDER_INSTITUTES, institutes });
+      yield put(renderInstitutes(institutes));
     }
   } catch (e) {
     yield put(addError(e));
