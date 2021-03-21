@@ -6,9 +6,6 @@ export const KEYCLOAK_SIGN_IN_SUCCESS = 'KEYCLOAK_SIGN_IN_SUCCESS';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 
-export const DOWNLOAD_MY_AVATAR = 'DOWNLOAD_MY_AVATAR';
-export const RENDER_MY_AVATAR = 'RENDER_MY_AVATAR';
-
 export function signUpRequest(
   role,
   instituteId,
@@ -47,17 +44,6 @@ export const signInSuccess = user => ({
 
 export const signInError = () => ({
   type: SIGN_IN_ERROR
-});
-
-export const downloadMyAvatar = () => ({
-  type: DOWNLOAD_MY_AVATAR
-});
-
-export const renderMyAvatar = avatar => ({
-  type: RENDER_MY_AVATAR,
-  payload: {
-    avatar
-  }
 });
 
 export const keycloakSignInSuccess = () => ({

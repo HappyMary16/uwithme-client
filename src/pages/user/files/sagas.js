@@ -9,7 +9,7 @@ import {
 import http from '../../../services/http';
 import { FILES, SUBJECTS } from '../../../constants/serverApi';
 import { endFetching, startFetching } from '../../navigation/actions';
-import { addError } from '../../common/action';
+import { addError } from '../../../actions/messageAction';
 
 export function* fileOperationWatcher() {
   yield takeEvery(LOAD_SUBJECTS_AND_FILES, () => loadSubjectsWithFiles());

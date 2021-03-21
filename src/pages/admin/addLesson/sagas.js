@@ -3,7 +3,7 @@ import { ADD_LESSON_TO_SCHEDULE } from './actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
 import { endFetching, startFetching } from '../../navigation/actions';
-import { addError } from '../../common/action';
+import { addError } from '../../../actions/messageAction';
 
 export function* addLessonWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action =>

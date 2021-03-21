@@ -1,14 +1,11 @@
-import {
-  RENDER_AVATAR,
-  RENDER_LESSONS_FOR_CURRENT_USER_PAGE,
-  RENDER_USER,
-  RENDER_USERS
-} from './actions';
-import StateLoader from '../../store/StateLoader';
-import { SIGN_OUT } from '../authorization/actions';
+import { RENDER_AVATAR, RENDER_USER, RENDER_USERS } from '../actions/userActions';
+import { RENDER_LESSONS_FOR_CURRENT_USER_PAGE } from '../actions/scheduleActions';
+import { SIGN_OUT } from '../pages/authorization/actions';
+import StateLoader from '../store/StateLoader';
 
-export default function usersReducer(
-  state = new StateLoader().loadState().usersReducer || {
+
+export default function userReducers(
+  state = new StateLoader().loadState().userReducers || {
     users: [],
     avatars: []
   },
@@ -31,11 +28,6 @@ export default function usersReducer(
           ...state.users.filter(user => user.id !== action.payload.user.id),
           action.payload.user
         ]
-      };
-    case RENDER_LESSONS_FOR_CURRENT_USER_PAGE:
-      return {
-        ...state,
-        lessons: action.payload.lessons
       };
     case RENDER_AVATAR:
       let userWithAvatar = state.users.filter(

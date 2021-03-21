@@ -1,18 +1,19 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { endFetching, startFetching } from '../../../navigation/actions';
-import http from '../../../../services/http';
-import { DEPARTMENTS } from '../../../../constants/serverApi';
-import { addError } from '../../../common/action';
-import { loadInstitutesByUniversityId } from '../../../../actions/instituteActions';
+import { endFetching, startFetching } from '../pages/navigation/actions';
+import http from '../services/http';
+import { DEPARTMENTS, INFO_DEPARTMENTS } from '../constants/serverApi';
+import { addError } from '../actions/messageAction';
+import { loadInstitutesByUniversityId } from '../actions/instituteActions';
 import {
   CREATE_DEPARTMENT,
-  departmentCreated,
+  departmentCreated, LOAD_DEPARTMENTS,
   LOAD_DEPARTMENTS_BY_UNIVERSITY_ID,
-  RENDER_DEPARTMENTS
-} from '../../../../actions/departmentActions';
+  RENDER_DEPARTMENTS, renderDepartmentForRegistration
+} from '../actions/departmentActions';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, action => createDepartment(action));
+  yield takeEvery(LOAD_DEPARTMENTS, action => loadDepartments(action));
   yield takeEvery(LOAD_DEPARTMENTS_BY_UNIVERSITY_ID, () =>
     loadDepartmentsByUniversityId()
   );
@@ -39,6 +40,26 @@ function* createDepartment(action) {
       yield put(loadInstitutesByUniversityId());
     } else {
       yield put(addError(response));
+    }
+  } catch (e) {
+    yield put(addError(e));
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* loadDepartments(action) {
+  try {
+    yield put(startFetching());
+    let { instituteId } = action.payload;
+
+    const departments = yield call(http, {
+      url: INFO_DEPARTMENTS + instituteId,
+      method: 'get'
+    });
+
+    if (departments) {
+      yield put(renderDepartmentForRegistration(departments.data));
     }
   } catch (e) {
     yield put(addError(e));

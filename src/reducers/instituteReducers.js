@@ -28,7 +28,7 @@ export default function instituteReducers(
     case RENDER_INSTITUTES:
       return {
         ...state,
-        institutes: action.institutes.data.map(obj => {
+        institutes: action.payload.institutes.map(obj => {
           let institute = {};
           institute.value = obj.id;
           institute.label = obj.name;

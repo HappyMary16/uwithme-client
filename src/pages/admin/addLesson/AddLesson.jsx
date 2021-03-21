@@ -9,7 +9,6 @@ import {
   WEEK_DAYS,
   WEEK_NUMBER
 } from '../../../constants/userRoles';
-import { loadTeachersByUniversityId } from '../../user/actions';
 import { loadSubjects } from '../../user/files/actions';
 import { loadBuildings, loadLectureHalls } from '../lectureHalls/actions';
 import {
@@ -23,6 +22,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { getName, getTeachers } from '../../../utils/UsersUtil';
 import { loadGroupsByUniversityId } from '../../../actions/groupActions';
+import { loadTeachersByUniversityId } from '../../../actions/userActions';
 
 class AddLesson extends Component {
   constructor(props) {
@@ -228,7 +228,7 @@ const mapStateToProps = state => {
   return {
     groups: state.groupReducers.groups,
     universityId: state.authReducers.user.universityId,
-    teachers: getTeachers(state.usersReducer.users),
+    teachers: getTeachers(state.userReducers.users),
     subjects: state.filesReducers.subjects,
     lectureHalls: state.lectureHallReducer.lectureHalls,
     buildings: state.lectureHallReducer.buildings

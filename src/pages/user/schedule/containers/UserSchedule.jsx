@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScheduleTable } from '../components/ScheduleTable';
 import { findUserById } from '../../../../utils/UsersUtil';
-import { findLessonsForUser } from '../../actions';
+import { findLessonsForUser } from '../../../../actions/scheduleActions';
 
 class UserSchedule extends Component {
   componentDidMount() {
@@ -25,8 +25,8 @@ class UserSchedule extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.usersReducer.users,
-    lessons: state.usersReducer.lessons
+    users: state.userReducers.users,
+    lessons: state.userReducers.lessons
   };
 };
 

@@ -12,7 +12,10 @@ export default function universityReducers(
     case RENDER_USER_UNIVERSITY:
       return {
         ...state,
-        userUniversity: action.payload.university
+        userUniversity: {
+          value: action.payload.university.id,
+          label: action.payload.university.name
+        }
       };
 
     case RENDER_UNIVERSITIES_FOR_REGISTRATION:
@@ -23,10 +26,7 @@ export default function universityReducers(
             value: obj.id,
             label: obj.name
           };
-        }),
-        institutes: [],
-        departments: [],
-        groups: []
+        })
       };
 
     default:

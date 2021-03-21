@@ -3,15 +3,15 @@ import { authorizationWatcher } from '../pages/authorization/sagas';
 import { fileOperationWatcher } from '../pages/user/files/sagas';
 import { addFilesAndSubjectsWatcher } from '../pages/user/addFiles/sagas';
 import { addAccessToFilesWatcher } from '../pages/user/shareFiles/sagas';
-import { scheduleOperationWatcher } from '../pages/user/schedule/sagas';
-import { teachersWatcher } from '../pages/user/sagas';
 import { lectureHallWatcher } from '../pages/admin/lectureHalls/sagas';
-import { groupWatcher } from '../pages/admin/structure/sagas/groups';
-import { departmentWatcher } from '../pages/admin/structure/sagas/departments';
-import { instituteWatcher } from '../pages/admin/structure/sagas/institutes';
+import { groupWatcher } from '../sagas/groupSagas';
+import { departmentWatcher } from '../sagas/departmentSagas';
+import { instituteWatcher } from '../sagas/instituteSagas';
 import { addLessonWatcher } from '../pages/admin/addLesson/sagas';
 import { deleteLessonWatcher } from '../pages/admin/deleteLesson/sagas';
-import { groupsWatcher } from '../pages/admin/groupPage/sagas';
+import { universityWatcher } from '../sagas/universitySagas';
+import { scheduleWatcher } from '../sagas/scheduleSagas';
+import { usersWatcher } from '../sagas/userSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -19,14 +19,14 @@ export default function* rootSaga() {
     fileOperationWatcher(),
     addFilesAndSubjectsWatcher(),
     addAccessToFilesWatcher(),
-    scheduleOperationWatcher(),
+    scheduleWatcher(),
     addLessonWatcher(),
     deleteLessonWatcher(),
-    teachersWatcher(),
-    groupsWatcher(),
+    usersWatcher(),
     lectureHallWatcher(),
     groupWatcher(),
     departmentWatcher(),
-    instituteWatcher()
+    instituteWatcher(),
+    universityWatcher()
   ]);
 }

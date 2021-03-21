@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { loadTeachersByGroupId } from '../actions';
 import { TeacherListItem } from './TeacherListItem';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { EmptyPage } from '../../common/components/EmptyPage';
+import { loadTeachersByGroupId } from '../../../actions/userActions';
 
 class TeachersList extends Component {
   componentDidMount() {
@@ -29,7 +29,7 @@ class TeachersList extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    teachers: state.usersReducer.users,
+    teachers: state.userReducers.users,
     isFetching: state.loadingProcess.isFetching
   };
 };

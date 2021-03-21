@@ -26,7 +26,7 @@ import { keycloakSignInSuccess } from './pages/authorization/actions';
 import { CustomSpinner } from './pages/navigation/components/CustomSpinner';
 import { PageRouter } from './pages/navigation/PageRouter';
 import { Message } from './pages/common/components/Message';
-import { removeMessage } from './pages/common/action';
+import { removeMessage } from './actions/messageAction';
 
 class App extends Component {
   constructor(props) {

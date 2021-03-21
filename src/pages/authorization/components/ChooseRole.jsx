@@ -10,7 +10,7 @@ import { selectorColors } from '../../../styles/styles';
 import { UserRoles } from '../../../constants/userRoles';
 import { connect } from 'react-redux';
 import { signUpRequest } from '../actions';
-import { setMessage } from '../../common/action';
+import { setMessage } from '../../../actions/messageAction';
 import { loadInstitutes } from '../../../actions/instituteActions';
 import { loadUniversities } from '../../../actions/universityActions';
 import { loadDepartments } from '../../../actions/departmentActions';

@@ -10,13 +10,13 @@ import { StudentsList } from './components/StudentList';
 import AddStudentToGroup from './components/AddStudentToGroup';
 import { RemoveStudentFromGroup } from './components/RemoveStudentFromGroup';
 import Container from 'react-bootstrap/Container';
+import { loadGroupById } from '../../../actions/groupActions';
 import {
   addStudentToGroup,
-  loadGroupById,
   loadStudentsByGroupId,
   loadStudentsWithoutGroup,
   removeStudentFromGroup
-} from './actions';
+} from '../../../actions/userActions';
 
 class GroupPage extends Component {
   constructor(props) {
@@ -119,8 +119,8 @@ class GroupPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.usersReducer.users,
-    lessons: state.usersReducer.lessons,
+    users: state.userReducers.users,
+    lessons: state.userReducers.lessons,
     groups: state.groupReducers.groups,
 
     universityId: state.authReducers.user.universityId

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findLessonsByGroupId } from '../actions';
+import { findLessonsByGroupId } from '../../../../actions/scheduleActions';
 import { ScheduleTable } from '../components/ScheduleTable';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

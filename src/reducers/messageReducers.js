@@ -1,5 +1,5 @@
-import StateLoader from '../../store/StateLoader';
-import { ADD_ERROR, REMOVE_ERROR, REMOVE_MESSAGE, SET_MESSAGE } from './action';
+import StateLoader from '../store/StateLoader';
+import { ADD_ERROR, REMOVE_ERROR, REMOVE_MESSAGE, SET_MESSAGE } from '../actions/messageAction';
 
 export default function messageReducers(
   state = new StateLoader().loadState().messageReducers || { errors: [] },

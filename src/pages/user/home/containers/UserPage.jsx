@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { User } from '../components/User';
 import React, { Component } from 'react';
 import { findUserById } from '../../../../utils/UsersUtil';
-import { findLessonsForUser } from '../../actions';
+import { findLessonsForUser } from '../../../../actions/scheduleActions';
 
 class UserPage extends Component {
   componentDidMount() {
@@ -34,8 +34,8 @@ class UserPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    teachers: state.usersReducer.users,
-    lessons: state.usersReducer.lessons
+    teachers: state.userReducers.users,
+    lessons: state.userReducers.lessons
   };
 };
 

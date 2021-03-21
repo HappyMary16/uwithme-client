@@ -1,10 +1,10 @@
 import StateLoader from '../../store/StateLoader';
 import {
   KEYCLOAK_SIGN_IN_SUCCESS,
-  RENDER_MY_AVATAR,
   SIGN_IN_SUCCESS,
   SIGN_OUT
 } from './actions';
+import { RENDER_MY_AVATAR } from '../../actions/userActions';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {},
