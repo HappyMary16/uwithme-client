@@ -25,6 +25,13 @@ export const renderUserDepartment = department => ({
   }
 });
 
+export const renderDepartments = departments => ({
+  type: RENDER_DEPARTMENTS,
+  payload: {
+    departments
+  }
+});
+
 export const renderDepartmentForRegistration = departments => ({
   type: RENDER_DEPARTMENTS_FOR_REGISTRATION,
   payload: {

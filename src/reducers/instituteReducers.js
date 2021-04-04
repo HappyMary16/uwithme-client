@@ -5,56 +5,67 @@ import {
   RENDER_INSTITUTES_FOR_REGISTRATION,
   RENDER_USER_INSTITUTE
 } from '../actions/instituteActions';
+import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function instituteReducers(
   state = new StateLoader().loadState().instituteReducers || {},
   action
 ) {
   switch (action.type) {
+
     case RENDER_INSTITUTES_FOR_REGISTRATION:
       return {
         ...state,
-        institutes: action.payload.institutes.map(obj => {
-          let institute = {};
-          institute.value = obj.id;
-          institute.label = obj.name;
-          institute.universityId = obj.universityId;
-          return institute;
-        }),
-        departments: [],
-        groups: []
+        institutes: action.payload.institutes.map(institute => {
+          return {
+            value: institute.id,
+            label: institute.name,
+            universityId: institute.universityId
+          };
+        })
       };
 
     case RENDER_INSTITUTES:
       return {
         ...state,
-        institutes: action.payload.institutes.map(obj => {
-          let institute = {};
-          institute.value = obj.id;
-          institute.label = obj.name;
-          institute.universityId = obj.universityId;
-          return institute;
+        institutes: action.payload.institutes.map(institute => {
+          return {
+            value: institute.id,
+            label: institute.name,
+            universityId: institute.universityId
+          };
         })
       };
 
-    case RENDER_USER_INSTITUTE:
+    case RENDER_USER_INSTITUTE: {
+      let institute = action.payload.institute;
       return {
         ...state,
-        userInstitute: action.payload.institute
+        userInstitute: {
+          value: institute.id,
+          label: institute.name,
+          universityId: institute.universityId
+        }
       };
+    }
 
-    case INSTITUTE_CREATED:
+    case INSTITUTE_CREATED: {
+      let institute = action.payload.institute;
       return {
         ...state,
         institutes: [
           ...state.institutes,
           {
-            value: action.payload.institute.id,
-            label: action.payload.institute.name,
-            universityId: action.payload.institute.universityId
+            value: institute.id,
+            label: institute.name,
+            universityId: institute.universityId
           }
         ]
       };
+    }
+
+    case SIGN_OUT:
+      return {};
 
     default:
       return state;

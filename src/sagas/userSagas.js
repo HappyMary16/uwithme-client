@@ -17,8 +17,12 @@ import {
   LOAD_TEACHERS_BY_UNIVERSITY_ID, REMOVE_STUDENT_FROM_GROUP, RENDER_USERS, renderAvatar, renderMyAvatar, renderUser,
   renderUsers, UPDATE_USER, UPLOAD_AVATAR
 } from '../actions/userActions';
-import { signOut } from '../pages/authorization/actions';
+import { signInSuccess, signOut } from '../pages/authorization/actions';
 import { AuthService } from '../services/AuthService';
+import { loadUniversity } from '../actions/universityActions';
+import { loadInstitute } from '../actions/instituteActions';
+import { loadDepartment } from '../actions/departmentActions';
+import { loadGroup } from '../actions/groupActions';
 
 export function* usersWatcher() {
   yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, () =>
@@ -124,7 +128,6 @@ function* downloadAvatarForUser(userId) {
     return { userId };
   }
 }
-
 
 function* downloadAvatars(action) {
   for (let i = 0; i < action.payload.users.length; i++) {
@@ -295,7 +298,6 @@ function* updateUser(action) {
   try {
     yield put(startFetching());
 
-    console.log("dgsgfd")
     const { university,
       institute,
       department,
@@ -304,7 +306,7 @@ function* updateUser(action) {
       lastname,
       surname,
       email } = action.payload;
-    console.log(action.payload)
+
     const response = yield call(http, {
       url: USERS,
       method: 'put',
@@ -319,9 +321,13 @@ function* updateUser(action) {
         groupId: group && group.value
       }
     });
-    console.log("dgsgfd")
-    if (response && response.status === 204) {
-      yield put(signOut());
+
+    if (response && response.status === 200) {
+      yield put(signInSuccess(response.data));
+      yield put(loadUniversity());
+      yield put(loadInstitute());
+      yield put(loadDepartment());
+      yield put(loadGroup());
     } else {
       yield put(addError(response.data));
     }

@@ -1,8 +1,6 @@
 import { RENDER_AVATAR, RENDER_USER, RENDER_USERS } from '../actions/userActions';
-import { RENDER_LESSONS_FOR_CURRENT_USER_PAGE } from '../actions/scheduleActions';
 import { SIGN_OUT } from '../pages/authorization/actions';
 import StateLoader from '../store/StateLoader';
-
 
 export default function userReducers(
   state = new StateLoader().loadState().userReducers || {
@@ -12,6 +10,7 @@ export default function userReducers(
   action
 ) {
   switch (action.type) {
+
     case RENDER_USERS:
       return {
         ...state,
@@ -21,6 +20,7 @@ export default function userReducers(
           )
           .concat(action.payload.users)
       };
+
     case RENDER_USER:
       return {
         ...state,
@@ -29,6 +29,7 @@ export default function userReducers(
           action.payload.user
         ]
       };
+
     case RENDER_AVATAR:
       let userWithAvatar = state.users.filter(
         user => user.id === action.payload.userId
@@ -41,11 +42,10 @@ export default function userReducers(
           userWithAvatar
         ]
       };
+
     case SIGN_OUT:
-      return {
-        users: [],
-        avatars: []
-      };
+      return {};
+
     default:
       return state;
   }

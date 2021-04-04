@@ -3,12 +3,14 @@ import {
   RENDER_UNIVERSITIES_FOR_REGISTRATION,
   RENDER_USER_UNIVERSITY
 } from '../actions/universityActions';
+import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function universityReducers(
   state = new StateLoader().loadState().universityReducers || {},
   action
 ) {
   switch (action.type) {
+
     case RENDER_USER_UNIVERSITY:
       return {
         ...state,
@@ -28,6 +30,9 @@ export default function universityReducers(
           };
         })
       };
+
+    case SIGN_OUT:
+      return {};
 
     default:
       return state;

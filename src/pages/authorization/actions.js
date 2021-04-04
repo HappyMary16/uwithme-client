@@ -6,6 +6,8 @@ export const KEYCLOAK_SIGN_IN_SUCCESS = 'KEYCLOAK_SIGN_IN_SUCCESS';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 
+export const REGISTRATION_COMPLETE = 'REGISTRATION_COMPLETE'
+
 export function signUpRequest(
   role,
   instituteId,
@@ -49,3 +51,10 @@ export const signInError = () => ({
 export const keycloakSignInSuccess = () => ({
   type: KEYCLOAK_SIGN_IN_SUCCESS
 });
+
+export const setRegistrationComplete = (isRegistrationComplete) => ({
+  type: REGISTRATION_COMPLETE,
+  payload: {
+    isRegistrationComplete
+  }
+})

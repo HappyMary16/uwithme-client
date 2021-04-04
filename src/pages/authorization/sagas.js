@@ -7,15 +7,15 @@ import {
 } from '../../constants/serverApi';
 import { endFetching, startFetching } from '../navigation/actions';
 import {
+  setRegistrationComplete,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_UP_REQUEST,
   signInSuccess
 } from './actions';
-import { USER_DOES_NOT_HAVE_ACCOUNT } from '../../constants/errors';
 import { history } from '../../store/Store';
-import { USER_HOME } from '../../constants/links';
-import { addError, removeError } from '../../actions/messageAction';
+import { PRE_HOME, USER_HOME } from '../../constants/links';
+import { addError } from '../../actions/messageAction';
 import { downloadMyAvatar } from '../../actions/userActions';
 
 export function* authorizationWatcher() {
@@ -39,7 +39,7 @@ function* signUp(action) {
 
     if (response && response.status === 200) {
       yield put(signInSuccess(response.data));
-      yield put(removeError(USER_DOES_NOT_HAVE_ACCOUNT.code));
+      yield put(setRegistrationComplete(true));
     } else {
       yield put(addError(response));
     }
@@ -62,7 +62,7 @@ function* processSignIn() {
     if (response && response.status === 200) {
       yield put(signInSuccess(response.data));
     } else if (response && response.status === 404) {
-      yield put(addError(USER_DOES_NOT_HAVE_ACCOUNT));
+      yield put(setRegistrationComplete(false));
     } else {
       yield put(addError(response));
     }
@@ -74,6 +74,8 @@ function* processSignIn() {
 }
 
 function* processSignInSuccess() {
-  history.push(USER_HOME);
-  yield put(downloadMyAvatar());
+  if (history.location.pathname.includes(PRE_HOME)) {
+    history.push(USER_HOME);
+    yield put(downloadMyAvatar());
+  }
 }

@@ -27,6 +27,7 @@ import { CustomSpinner } from './pages/navigation/components/CustomSpinner';
 import { PageRouter } from './pages/navigation/PageRouter';
 import { Message } from './pages/common/components/Message';
 import { removeMessage } from './actions/messageAction';
+import ErrorContainer from './pages/common/containers/ErrorContainer';
 
 class App extends Component {
   constructor(props) {
@@ -88,6 +89,8 @@ class App extends Component {
           message={message}
           handleClose={this.closeMessage}
         />
+
+        <ErrorContainer/>
 
         <PageRouter user={user} />
       </Container>

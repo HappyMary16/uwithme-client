@@ -5,27 +5,36 @@ import {
   RENDER_DEPARTMENTS_FOR_REGISTRATION,
   RENDER_USER_DEPARTMENT
 } from '../actions/departmentActions';
+import { RENDER_INSTITUTES_FOR_REGISTRATION } from '../actions/instituteActions';
+import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function departmentReducers(
   state = new StateLoader().loadState().departmentReducers || {},
   action
 ) {
   switch (action.type) {
+
     case RENDER_USER_DEPARTMENT:
+      let department = action.payload.department;
+
       return {
         ...state,
-        userDepartment: action.payload.department
+        userDepartment: {
+          value: department.id,
+          label: department.name,
+          instituteId: department.institute.id
+        }
       };
 
     case RENDER_DEPARTMENTS:
       return {
         ...state,
-        departments: action.departments.data.map(obj => {
-          let department = {};
-          department.value = obj.id;
-          department.label = obj.name;
-          department.instituteId = obj.institute.id;
-          return department;
+        departments: action.payload.departments.map(department => {
+          return {
+            value: department.id,
+            label: department.name,
+            instituteId: department.institute.id
+          };
         })
       };
 
@@ -45,15 +54,23 @@ export default function departmentReducers(
     case RENDER_DEPARTMENTS_FOR_REGISTRATION:
       return {
         ...state,
-        departments: action.payload.departments.map(obj => {
-          let department = {};
-          department.value = obj.id;
-          department.label = obj.name;
-          department.instituteId = obj.institute.id;
-          return department;
-        }),
-        groups: []
+        departments: action.payload.departments.map(department => {
+          return {
+            value: department.id,
+            label: department.name,
+            instituteId: department.institute.id
+          };
+        })
       };
+
+    case RENDER_INSTITUTES_FOR_REGISTRATION:
+      return {
+        ...state,
+        departments: []
+      };
+
+    case SIGN_OUT:
+      return {};
 
     default:
       return state;

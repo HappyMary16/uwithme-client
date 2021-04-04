@@ -5,33 +5,49 @@ import {
   RENDER_GROUPS_FOR_REGISTRATION,
   RENDER_USER_GROUP
 } from '../actions/groupActions';
+import { RENDER_INSTITUTES_FOR_REGISTRATION } from '../actions/instituteActions';
+import { RENDER_DEPARTMENTS_FOR_REGISTRATION } from '../actions/departmentActions';
+import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function groupReducers(
   state = new StateLoader().loadState().groupReducers || {},
   action
 ) {
   switch (action.type) {
-    case RENDER_USER_GROUP:
+
+    case RENDER_USER_GROUP: {
+      let group = action.payload.group;
       return {
         ...state,
-        userGroup: action.payload.group
+        userGroup: {
+          value: group.id,
+          label: group.name,
+          departmentId: group.department.id,
+          course: group.course,
+          departmentName: group.department.name,
+          instituteId: group.department.institute.id,
+          instituteName: group.department.institute.name,
+          universityId: group.department.institute.universityId,
+          teacherId: group.teacherId,
+          isShowingInRegistration: group.isShowingInRegistration
+        }
       };
-
+    }
     case RENDER_GROUPS_FOR_REGISTRATION:
       return {
         ...state,
-        groups: action.payload.groups.map(obj => {
+        groups: action.payload.groups.map(group => {
           return {
-            value: obj.id,
-            label: obj.name,
-            departmentId: obj.department.id,
-            course: obj.course,
-            departmentName: obj.department.name,
-            instituteId: obj.department.institute.id,
-            instituteName: obj.department.institute.name,
-            universityId: obj.department.institute.universityId,
-            teacherId: obj.teacherId,
-            isShowingInRegistration: obj.isShowingInRegistration
+            value: group.id,
+            label: group.name,
+            departmentId: group.department.id,
+            course: group.course,
+            departmentName: group.department.name,
+            instituteId: group.department.institute.id,
+            instituteName: group.department.institute.name,
+            universityId: group.department.institute.universityId,
+            teacherId: group.teacherId,
+            isShowingInRegistration: group.isShowingInRegistration
           };
         })
       };
@@ -55,7 +71,8 @@ export default function groupReducers(
         })
       };
 
-    case RENDER_GROUP:
+    case RENDER_GROUP: {
+      let group = action.payload.group;
       return {
         ...state,
         groups: [
@@ -63,21 +80,35 @@ export default function groupReducers(
             group => group.value !== action.payload.group.id
           ),
           {
-            value: action.payload.group.id,
-            label: action.payload.group.name,
-            departmentId: action.payload.group.department.id,
-            course: action.payload.group.course,
-            departmentName: action.payload.group.department.name,
-            instituteId: action.payload.group.department.institute.id,
-            instituteName: action.payload.group.department.institute.name,
-            universityId:
-              action.payload.group.department.institute.universityId,
-            teacherId: action.payload.group.teacherId,
-            isShowingInRegistration:
-              action.payload.group.isShowingInRegistration
+            value: group.id,
+            label: group.name,
+            departmentId: group.department.id,
+            course: group.course,
+            departmentName: group.department.name,
+            instituteId: group.department.institute.id,
+            instituteName: group.department.institute.name,
+            universityId: group.department.institute.universityId,
+            teacherId: group.teacherId,
+            isShowingInRegistration: group.isShowingInRegistration
           }
         ]
       };
+    }
+
+    case RENDER_INSTITUTES_FOR_REGISTRATION:
+      return {
+        ...state,
+        groups: []
+      };
+
+    case RENDER_DEPARTMENTS_FOR_REGISTRATION:
+      return {
+        ...state,
+        groups: []
+      };
+
+    case SIGN_OUT:
+      return {};
 
     default:
       return state;

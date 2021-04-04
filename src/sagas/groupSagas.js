@@ -3,16 +3,16 @@ import { endFetching, startFetching } from '../pages/navigation/actions';
 import http from '../services/http';
 import {
   GROUPS,
-  GROUPS_BY_UNIVERSITY_ID, INFO_GROUPS
+  GROUPS_BY_UNIVERSITY_ID, INFO_GROUPS, USER_GROUP
 } from '../constants/serverApi';
 import { addError } from '../actions/messageAction';
 import { loadInstitutesByUniversityId } from '../actions/instituteActions';
 import { loadDepartmentsByUniversityId } from '../actions/departmentActions';
 import {
-  CREATE_GROUP, LOAD_GROUP_BY_ID, LOAD_GROUPS,
+  CREATE_GROUP, LOAD_GROUP, LOAD_GROUP_BY_ID, LOAD_GROUPS,
   LOAD_GROUPS_BY_UNIVERSITY_ID,
   renderGroup,
-  renderGroups, renderGroupsForRegistration
+  renderGroups, renderGroupsForRegistration, renderUserGroup
 } from '../actions/groupActions';
 
 export function* groupWatcher() {
@@ -22,6 +22,7 @@ export function* groupWatcher() {
     loadGroupsByUniversityId(action)
   );
   yield takeEvery(LOAD_GROUP_BY_ID, action => loadGroupById(action));
+  yield takeEvery(LOAD_GROUP, loadGroup);
 }
 
 function* createGroup(action) {
@@ -69,13 +70,13 @@ function* loadGroups(action) {
     yield put(startFetching());
     let { departmentId } = action.payload;
 
-    const groups = yield call(http, {
+    const response = yield call(http, {
       url: INFO_GROUPS + departmentId,
       method: 'get'
     });
 
-    if (groups) {
-      yield put(renderGroupsForRegistration(groups.data));
+    if (response) {
+      yield put(renderGroupsForRegistration(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -89,13 +90,13 @@ function* loadGroupsByUniversityId(action) {
     yield put(startFetching());
     const { payload } = action;
 
-    const groups = yield call(http, {
+    const response = yield call(http, {
       url: GROUPS_BY_UNIVERSITY_ID + payload,
       method: 'get'
     });
 
-    if (groups) {
-      yield put(renderGroups(groups.data));
+    if (response) {
+      yield put(renderGroups(response.data));
     }
   } catch (e) {
     yield put(addError(e));
@@ -125,3 +126,25 @@ function* loadGroupById(action) {
     yield put(endFetching());
   }
 }
+
+function* loadGroup() {
+  try {
+    yield put(startFetching());
+
+    const response = yield call(http, {
+      url: USER_GROUP,
+      method: 'get'
+    });
+
+    if (response && response.status === 200) {
+      yield put(renderUserGroup(response.data));
+    } else {
+      yield put(addError(response));
+    }
+  } catch (e) {
+    yield put(addError(e));
+  } finally {
+    yield put(endFetching());
+  }
+}
+

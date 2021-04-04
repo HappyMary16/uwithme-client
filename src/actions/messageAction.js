@@ -22,9 +22,9 @@ export const addError = error => ({
   }
 });
 
-export const removeError = code => ({
+export const removeError = id => ({
   type: REMOVE_ERROR,
   payload: {
-    code
+    id
   }
 });

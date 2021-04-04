@@ -1,6 +1,6 @@
 import StateLoader from '../../store/StateLoader';
 import {
-  KEYCLOAK_SIGN_IN_SUCCESS,
+  KEYCLOAK_SIGN_IN_SUCCESS, REGISTRATION_COMPLETE,
   SIGN_IN_SUCCESS,
   SIGN_OUT
 } from './actions';
@@ -35,6 +35,12 @@ export default function authReducers(
       return {
         ...state,
         isAuthenticated: true
+      };
+
+    case REGISTRATION_COMPLETE:
+      return {
+        ...state,
+        isRegistrationComplete: action.payload.isRegistrationComplete
       };
 
     default:
