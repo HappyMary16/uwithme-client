@@ -102,7 +102,10 @@ class EditSetting extends Component {
   }
 
   render() {
-    const { isEditMode, groups, departments, institutes, universities, user } = this.props;
+    const { isEditMode, groups, departments, institutes, universities, user, userUniversity,
+      userInstitute,
+      userDepartment,
+      userGroup } = this.props;
     const { university, institute, department, group, firstName, lastname, surname, email } = this.state;
     const { role } = user;
 
@@ -141,7 +144,7 @@ class EditSetting extends Component {
         <CustomSelector
           isEditMode={isEditMode}
           options={universities}
-          value={university}
+          value={university !== undefined ? university : userUniversity}
           onChange={this.setUniversity}
         />
         {role && role !== 3 && (
@@ -150,14 +153,14 @@ class EditSetting extends Component {
             <CustomSelector
               isEditMode={isEditMode}
               options={institutes}
-              value={institute}
+              value={institute !== undefined ? institute : userInstitute}
               onChange={this.setInstitute}
             />
             <Form.Label>{i18n.t('department')}</Form.Label>
             <CustomSelector
               isEditMode={isEditMode}
               options={departments}
-              value={department}
+              value={department !== undefined ? department : userDepartment}
               onChange={this.setDepartment}
             />
           </div>
@@ -168,7 +171,7 @@ class EditSetting extends Component {
             <CustomSelector
               isEditMode={isEditMode}
               options={groups}
-              value={group}
+              value={group !== undefined ? group : userGroup}
               onChange={value => this.setState({ group: value })}
             />
           </div>

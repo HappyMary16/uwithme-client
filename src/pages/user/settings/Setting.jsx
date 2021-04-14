@@ -9,6 +9,7 @@ import { loadInstitute, loadInstitutes } from '../../../actions/instituteActions
 import { loadDepartment, loadDepartments } from '../../../actions/departmentActions';
 import { loadGroup, loadGroups } from '../../../actions/groupActions';
 import { connect } from 'react-redux';
+import { loadUserUniversityInfo } from '../../../actions/structureActions';
 
 class Setting extends Component {
   constructor(props) {
@@ -33,8 +34,6 @@ class Setting extends Component {
     dispatch(loadInstitute());
     dispatch(loadDepartment());
     dispatch(loadGroup());
-
-    dispatch(loadUniversities());
   }
 
   setEditMode(isEditMode) {
@@ -47,14 +46,14 @@ class Setting extends Component {
         dispatch
       } = this.props;
 
-      //TODO fix it
-      if (user.role && user.role !== 3) {
-        dispatch(loadInstitutes(userUniversity.value));
-        dispatch(loadDepartments(userInstitute.value));
+      dispatch(loadUniversities());
+
+      if (user.role && user.role === 2) {
+        dispatch(loadUserUniversityInfo(userUniversity.value, userInstitute.value))
       }
 
       if (user.role === 1) {
-        dispatch(loadGroups(userDepartment.value));
+        dispatch(loadUserUniversityInfo(userUniversity.value, userInstitute.value, userDepartment.value))
       }
     }
 

@@ -12,6 +12,7 @@ import { deleteLessonWatcher } from '../pages/admin/deleteLesson/sagas';
 import { universityWatcher } from '../sagas/universitySagas';
 import { scheduleWatcher } from '../sagas/scheduleSagas';
 import { usersWatcher } from '../sagas/userSagas';
+import { structureWatcher } from '../sagas/structureSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     groupWatcher(),
     departmentWatcher(),
     instituteWatcher(),
-    universityWatcher()
+    universityWatcher(),
+    structureWatcher()
   ]);
 }
