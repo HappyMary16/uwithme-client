@@ -3,7 +3,9 @@ import StateLoader from '../store/StateLoader';
 import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function scheduleReducers(
-  state = new StateLoader().loadState().scheduleReducers || {},
+  state = new StateLoader().loadState().scheduleReducers || {
+    lessons: []
+  },
   action
 ) {
   switch (action.type) {
@@ -33,7 +35,9 @@ export default function scheduleReducers(
       };
 
     case SIGN_OUT:
-      return {};
+      return {
+        lessons: []
+      };
 
     default:
       return state;

@@ -9,7 +9,10 @@ import { RENDER_INSTITUTES_FOR_REGISTRATION } from '../actions/instituteActions'
 import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function departmentReducers(
-  state = new StateLoader().loadState().departmentReducers || {},
+  state = new StateLoader().loadState().departmentReducers || {
+    userDepartment: undefined,
+    departments: []
+  },
   action
 ) {
   switch (action.type) {
@@ -70,7 +73,10 @@ export default function departmentReducers(
       };
 
     case SIGN_OUT:
-      return {};
+      return {
+        userDepartment: undefined,
+        departments: []
+      };
 
     default:
       return state;

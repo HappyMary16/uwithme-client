@@ -8,7 +8,10 @@ import {
 import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function instituteReducers(
-  state = new StateLoader().loadState().instituteReducers || {},
+  state = new StateLoader().loadState().instituteReducers || {
+    userInstitute: undefined,
+    institutes: []
+  },
   action
 ) {
   switch (action.type) {
@@ -65,7 +68,10 @@ export default function instituteReducers(
     }
 
     case SIGN_OUT:
-      return {};
+      return {
+        userInstitute: undefined,
+        institutes: []
+      };
 
     default:
       return state;

@@ -22,7 +22,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { getName, getTeachers } from '../../../utils/UsersUtil';
 import { loadGroupsByUniversityId } from '../../../actions/groupActions';
-import { loadTeachersByUniversityId } from '../../../actions/userActions';
+import { loadTeachers } from '../../../actions/userActions';
 
 class AddLesson extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class AddLesson extends Component {
     const { dispatch, universityId } = this.props;
     if (universityId) {
       dispatch(loadGroupsByUniversityId(universityId));
-      dispatch(loadTeachersByUniversityId());
+      dispatch(loadTeachers());
       dispatch(loadSubjects());
       dispatch(loadBuildings());
       dispatch(loadLectureHalls());

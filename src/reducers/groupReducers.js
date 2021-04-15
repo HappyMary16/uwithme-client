@@ -10,7 +10,10 @@ import { RENDER_DEPARTMENTS_FOR_REGISTRATION } from '../actions/departmentAction
 import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function groupReducers(
-  state = new StateLoader().loadState().groupReducers || {},
+  state = new StateLoader().loadState().groupReducers || {
+    userGroup: undefined,
+    groups: []
+  },
   action
 ) {
   switch (action.type) {
@@ -108,7 +111,10 @@ export default function groupReducers(
       };
 
     case SIGN_OUT:
-      return {};
+      return {
+        userGroup: undefined,
+        groups: []
+      };
 
     default:
       return state;

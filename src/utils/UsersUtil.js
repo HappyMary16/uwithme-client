@@ -37,3 +37,6 @@ export const findAllStudentsWithoutGroup = users =>
 
 export const getTeachers = users =>
   users && users.filter(user => isTeacher(user));
+
+export const getStudents = users =>
+  users && users.filter(user => isStudent(user));

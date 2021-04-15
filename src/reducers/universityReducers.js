@@ -6,7 +6,10 @@ import {
 import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function universityReducers(
-  state = new StateLoader().loadState().universityReducers || {},
+  state = new StateLoader().loadState().universityReducers || {
+    userUniversity: undefined,
+    universities: []
+  },
   action
 ) {
   switch (action.type) {
@@ -32,7 +35,10 @@ export default function universityReducers(
       };
 
     case SIGN_OUT:
-      return {};
+      return {
+        userUniversity: undefined,
+        universities: []
+      };
 
     default:
       return state;

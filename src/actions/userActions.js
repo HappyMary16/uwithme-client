@@ -1,9 +1,8 @@
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 
-export const LOAD_TEACHERS_BY_UNIVERSITY_ID = 'LOAD_TEACHERS_BY_UNIVERSITY_ID';
-export const GET_STUDENTS_FRIENDS = 'GET_STUDENTS_FRIENDS';
-export const GET_TEACHERS_FRIENDS = 'GET_TEACHERS_FRIENDS';
+export const GET_TEACHERS = 'GET_TEACHERS';
+export const GET_STUDENTS = 'GET_STUDENTS';
 
 export const RENDER_USERS = 'RENDER_USERS';
 export const RENDER_USER = 'RENDER_USER';
@@ -54,15 +53,9 @@ export function addStudentToGroup(studentIds, groupId) {
   };
 }
 
-export function loadTeachersByUniversityId() {
+export function loadTeachers() {
   return {
-    type: LOAD_TEACHERS_BY_UNIVERSITY_ID
-  };
-}
-
-export function loadTeachersByGroupId() {
-  return {
-    type: GET_STUDENTS_FRIENDS
+    type: GET_TEACHERS
   };
 }
 
@@ -84,9 +77,9 @@ export function renderUser(user) {
   };
 }
 
-export function loadStudentsByTeacherId() {
+export function loadStudents() {
   return {
-    type: GET_TEACHERS_FRIENDS
+    type: GET_STUDENTS
   };
 }
 

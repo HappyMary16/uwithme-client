@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../pages/navigation/actions';
 import http from '../services/http';
 import {
-  AVATAR, GROUP_STUDENT_ID, STUDENT_GROUP, STUDENTS_BY_GROUP_ID, STUDENTS_WITHOUT_GROUP,
+  AVATAR, GROUP_STUDENT_ID, STUDENT_GROUP, STUDENTS, STUDENTS_BY_GROUP_ID, STUDENTS_WITHOUT_GROUP,
   TEACHERS,
   USERS
 } from '../constants/serverApi';
@@ -12,9 +12,8 @@ import { addError } from '../actions/messageAction';
 import {
   ADD_STUDENT_TO_GROUP, DELETE_USER,
   DOWNLOAD_MY_AVATAR, downloadMyAvatar,
-  GET_STUDENTS_FRIENDS,
-  GET_TEACHERS_FRIENDS, LOAD_STUDENTS_BY_GROUP_ID, LOAD_STUDENTS_WITHOUT_GROUP,
-  LOAD_TEACHERS_BY_UNIVERSITY_ID, REMOVE_STUDENT_FROM_GROUP, RENDER_USERS, renderAvatar, renderMyAvatar, renderUser,
+  GET_STUDENTS, LOAD_STUDENTS_BY_GROUP_ID, LOAD_STUDENTS_WITHOUT_GROUP,
+  GET_TEACHERS, REMOVE_STUDENT_FROM_GROUP, RENDER_USERS, renderAvatar, renderMyAvatar, renderUser,
   renderUsers, UPDATE_USER, UPLOAD_AVATAR
 } from '../actions/userActions';
 import { signInSuccess, signOut } from '../pages/authorization/actions';
@@ -25,11 +24,8 @@ import { loadDepartment } from '../actions/departmentActions';
 import { loadGroup } from '../actions/groupActions';
 
 export function* usersWatcher() {
-  yield takeEvery(LOAD_TEACHERS_BY_UNIVERSITY_ID, () =>
-    getTeachersByUniversityId()
-  );
-  yield takeEvery(GET_STUDENTS_FRIENDS, getStudentsFriends);
-  yield takeEvery(GET_TEACHERS_FRIENDS, getTeachersFriends);
+  yield takeEvery(GET_TEACHERS, getTeachers);
+  yield takeEvery(GET_STUDENTS, getStudents);
   yield takeEvery(RENDER_USERS, action => downloadAvatars(action));
 
   yield takeEvery(DOWNLOAD_MY_AVATAR, processDownloadMyAvatar);
@@ -48,10 +44,10 @@ export function* usersWatcher() {
   yield takeEvery(ADD_STUDENT_TO_GROUP, action => addStudentToGroup(action));
 
   yield takeEvery(DELETE_USER, deleteUser);
-  yield takeEvery(UPDATE_USER, updateUser)
+  yield takeEvery(UPDATE_USER, updateUser);
 }
 
-function* getTeachersByUniversityId() {
+function* getTeachers() {
   try {
     yield put(startFetching());
 
@@ -72,34 +68,12 @@ function* getTeachersByUniversityId() {
   }
 }
 
-function* getStudentsFriends() {
+function* getStudents() {
   try {
     yield put(startFetching());
 
     const response = yield call(http, {
-      url: USERS,
-      method: 'get'
-    });
-
-    if (response && response.status === 200) {
-      yield put(renderUsers(response.data));
-    } else {
-      yield put(addError(response.data));
-    }
-  } catch (e) {
-    yield put(addError(e));
-  } finally {
-    yield put(endFetching());
-  }
-}
-
-
-function* getTeachersFriends() {
-  try {
-    yield put(startFetching());
-
-    const response = yield call(http, {
-      url: USERS,
+      url: STUDENTS,
       method: 'get'
     });
 

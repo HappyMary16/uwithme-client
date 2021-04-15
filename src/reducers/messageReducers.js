@@ -4,7 +4,10 @@ import { getMessage } from '../utils/MessageUtil';
 import { SIGN_OUT } from '../pages/authorization/actions';
 
 export default function messageReducers(
-  state = new StateLoader().loadState().messageReducers || { errors: [] },
+  state = new StateLoader().loadState().messageReducers || {
+    message: undefined,
+    errors: []
+  },
   action
 ) {
   switch (action.type) {
@@ -23,7 +26,8 @@ export default function messageReducers(
     case ADD_ERROR:
       let error = action.payload.error;
 
-      if (error.status === 404 && error.data === "") {
+      if ((error.status === 404 && error.data === "")
+        || (error && error.data && error.data.status === 403)) {
         return state;
       }
 
@@ -32,7 +36,8 @@ export default function messageReducers(
         errors: [...state.errors,
           {
             id: new Date().getTime(),
-            message: getMessage(error)
+            message: getMessage(error),
+            error: error
           }]
       };
 
@@ -43,7 +48,10 @@ export default function messageReducers(
       };
 
     case SIGN_OUT:
-      return {};
+      return {
+        message: undefined,
+        errors: []
+      };
 
     default:
       return state;

@@ -18,7 +18,7 @@ import {
   USER_SCHEDULE_ROUTER
 } from '../../constants/links';
 import PreHome from '../authorization/PreHome';
-import { isAdmin, isStudent, isTeacher } from '../../utils/UsersUtil';
+import { isAdmin, isTeacher } from '../../utils/UsersUtil';
 import UserHome from '../user/home/containers/UserHome';
 import PageWithFiles from '../user/files/PageWithFiles';
 import MySchedule from '../user/schedule/containers/MySchedule';
@@ -71,17 +71,10 @@ export const PageRouter = ({ user }) => {
             </div>
           )}
 
-          {isStudent(user) && (
-            <div>
-              <Route exact path={TEACHERS} component={TeachersList} />
-            </div>
-          )}
-
           {isTeacher(user) && (
             <div>
               <Route exact path={ADD_FILE} component={AddFile} />
               <Route exact path={SHARE_FILES} component={ShareFiles} />
-              <Route exact path={STUDENTS} component={StudentsList} />
             </div>
           )}
 
@@ -106,9 +99,9 @@ export const PageRouter = ({ user }) => {
             <Route path={USER_SCHEDULE_ROUTER}>
               <OpenUserSchedule />
             </Route>
-            <Route path={SETTING}>
-              <Setting />
-            </Route>
+            <Route exact path={SETTING} component={Setting} />
+            <Route exact path={STUDENTS} component={StudentsList} />
+            <Route exact path={TEACHERS} component={TeachersList} />
           </div>
           <div />
         </div>

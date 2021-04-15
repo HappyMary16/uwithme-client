@@ -44,7 +44,10 @@ export default function userReducers(
       };
 
     case SIGN_OUT:
-      return {};
+      return {
+        users: [],
+        avatars: []
+      };
 
     default:
       return state;

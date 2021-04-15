@@ -7,6 +7,10 @@ export const getMessage = error => {
     return error.message
   }
 
+  if (error.error) {
+    return error.error
+  }
+
   if (error.data) {
     return "message: " + error.data.message
       + " error: " + error.data.error
