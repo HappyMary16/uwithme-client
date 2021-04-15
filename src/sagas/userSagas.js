@@ -106,7 +106,7 @@ function* downloadAvatarForUser(userId) {
 function* downloadAvatars(action) {
   for (let i = 0; i < action.payload.users.length; i++) {
     const user = action.payload.users[i];
-    downloadAvatarForUser(user.id);
+    yield call(downloadAvatarForUser, user.id);
   }
 }
 
@@ -272,14 +272,16 @@ function* updateUser(action) {
   try {
     yield put(startFetching());
 
-    const { university,
+    const {
+      university,
       institute,
       department,
       group,
       firstName,
       lastname,
       surname,
-      email } = action.payload;
+      email
+    } = action.payload;
 
     const response = yield call(http, {
       url: USERS,
