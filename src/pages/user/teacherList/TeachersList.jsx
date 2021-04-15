@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { loadTeachersByGroupId } from '../actions';
 import { TeacherListItem } from './TeacherListItem';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { EmptyPage } from '../../common/components/EmptyPage';
+import { loadTeachers } from '../../../actions/userActions';
+import { getTeachers } from '../../../utils/UsersUtil';
 
 class TeachersList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(loadTeachersByGroupId());
+    dispatch(loadTeachers());
   }
 
   render() {
@@ -29,7 +30,7 @@ class TeachersList extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    teachers: state.usersReducer.users,
+    teachers: getTeachers(state.userReducers.users),
     isFetching: state.loadingProcess.isFetching
   };
 };

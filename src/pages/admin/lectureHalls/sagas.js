@@ -9,7 +9,7 @@ import {
 import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { GET_BUILDINGS, LECTURE_HALLS } from '../../../constants/serverApi';
-import { addError } from '../../common/action';
+import { addError } from '../../../actions/messageAction';
 
 export function* lectureHallWatcher() {
   yield takeEvery(LOAD_LECTURE_HALLS, () => loadLectureHalls());

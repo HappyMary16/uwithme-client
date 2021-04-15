@@ -3,7 +3,7 @@ import { ADD_LESSON_TO_SCHEDULE } from './actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
 import { endFetching, startFetching } from '../../navigation/actions';
-import { addError } from '../../common/action';
+import { addError, setMessage } from '../../../actions/messageAction';
 
 export function* addLessonWatcher() {
   yield takeEvery(ADD_LESSON_TO_SCHEDULE, action =>
@@ -46,7 +46,7 @@ function* addLessonToSchedule(action) {
     });
 
     if (response && response.status === 201) {
-      alert('Пари додані в розклад');
+      yield put(setMessage('Пари додані в розклад'));
     }
   } catch (e) {
     yield put(addError(e));

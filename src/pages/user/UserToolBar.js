@@ -2,6 +2,7 @@ import React from 'react';
 import {
   FILES,
   SCHEDULE,
+  SETTING,
   STUDENTS,
   TEACHERS,
   USER_HOME
@@ -18,6 +19,7 @@ export const UserToolBar = ({ user, isOpen = false }) => {
       <a href={FILES}>{i18n.t('page_with_files')}</a>
       {isStudent(user) && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
       {isTeacher(user) && <a href={STUDENTS}>{i18n.t('students')}</a>}
+      <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import { getName } from '../../../../utils/UsersUtil';
+import { getName, getUserGroup } from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -58,7 +58,7 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
             <Card.Body>
               <Card.Subtitle>
                 {user.role === 1 &&
-                  i18n.t('group') + ': ' + user.studyGroupName}
+                  i18n.t('group') + ': ' + getUserGroup(user)}
               </Card.Subtitle>
               <Card.Text>
                 {user.phone && i18n.t('phone') + ': ' + user.phone}

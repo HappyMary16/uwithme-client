@@ -18,3 +18,24 @@
     color: #5c71c5;
     box-shadow: 0 0 2px 2px #5c71c5 !important;
 }
+
+.btn-red {
+    margin-bottom: 0.5em;
+    background-color: #eeeeee;
+    border-color: red;
+    color: red;
+    box-shadow: 0 0 0 0 red !important;
+}
+
+.btn-red:hover {
+    background-color: #FFC0CB;
+    border-color: red;
+    color: red;
+}
+
+.btn-red:active {
+    background-color: #FFC0CB;
+    border-color: red;
+    color: red;
+    box-shadow: 0 0 2px 2px red !important;
+}

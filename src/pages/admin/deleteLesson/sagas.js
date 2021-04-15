@@ -3,8 +3,8 @@ import { DELETE_LESSON } from './actions';
 import { endFetching, startFetching } from '../../navigation/actions';
 import http from '../../../services/http';
 import { LESSONS } from '../../../constants/serverApi';
-import { renderLesson } from '../../user/schedule/actions';
-import { addError } from '../../common/action';
+import { renderLesson } from '../../../actions/scheduleActions';
+import { addError } from '../../../actions/messageAction';
 
 export function* deleteLessonWatcher() {
   yield takeEvery(DELETE_LESSON, action => deleteLesson(action));

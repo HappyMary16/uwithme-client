@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScheduleTable } from '../components/ScheduleTable';
-import { findLessons } from '../actions';
+import { findLessons } from '../../../../actions/scheduleActions';
 
 class MySchedule extends Component {
   componentDidMount() {

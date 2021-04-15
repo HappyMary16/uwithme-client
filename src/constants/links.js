@@ -7,6 +7,7 @@ export const USER_SCHEDULE_ROUTER = '/user/schedule/:userId';
 export const USER_SCHEDULE = userId => `/user/schedule/${userId}`;
 export const USER_HOME_PAGE_ROUTER = '/user/:userId';
 export const USER_HOME_PAGE = teacherId => `/user/${teacherId}`;
+export const SETTING = '/setting';
 
 //student
 export const TEACHERS = '/teachers/list';

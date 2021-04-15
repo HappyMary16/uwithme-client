@@ -2,6 +2,7 @@ import config from '../config';
 
 export const apiRoot = `${config.url}/api/`;
 
+const USER = 'user/';
 const INFO = 'info/';
 const AUTH = 'auth/';
 
@@ -12,6 +13,7 @@ export const GET_BUILDINGS = 'buildings/';
 
 export const DEPARTMENTS = 'departments/';
 export const INFO_DEPARTMENTS = INFO + DEPARTMENTS;
+export const USER_DEPARTMENT = DEPARTMENTS + USER;
 
 export const FILES = 'files/';
 export const FILES_ACCESS = FILES + 'access/';
@@ -20,9 +22,11 @@ export const AVATAR = FILES + 'avatar/';
 export const GROUPS = 'groups/';
 export const GROUPS_BY_UNIVERSITY_ID = GROUPS + 'universityId/';
 export const INFO_GROUPS = INFO + GROUPS;
+export const USER_GROUP = GROUPS + USER;
 
 export const INSTITUTES = 'institutes/';
 export const INFO_INSTITUTES = INFO + INSTITUTES;
+export const USER_INSTITUTE = INSTITUTES + USER;
 
 export const LECTURE_HALLS = 'lectureHalls/';
 

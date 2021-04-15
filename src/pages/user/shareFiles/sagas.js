@@ -4,9 +4,9 @@ import { FILES_ACCESS, GROUPS } from '../../../constants/serverApi';
 import { ADD_ACCESS_TO_FILES, LOAD_GROUPS_BY_TEACHER } from './actions';
 import { FILES } from '../../../constants/links';
 import { history } from '../../../store/Store';
-import { renderGroups } from '../../admin/groupPage/actions';
 import { endFetching, startFetching } from '../../navigation/actions';
-import { addError } from '../../common/action';
+import { addError } from '../../../actions/messageAction';
+import { renderGroups } from '../../../actions/groupActions';
 
 export function* addAccessToFilesWatcher() {
   yield takeEvery(ADD_ACCESS_TO_FILES, action => addAccessToFiles(action));

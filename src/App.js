@@ -26,7 +26,8 @@ import { keycloakSignInSuccess } from './pages/authorization/actions';
 import { CustomSpinner } from './pages/navigation/components/CustomSpinner';
 import { PageRouter } from './pages/navigation/PageRouter';
 import { Message } from './pages/common/components/Message';
-import { removeMessage } from './pages/common/action';
+import { removeMessage } from './actions/messageAction';
+import ErrorContainer from './pages/common/containers/ErrorContainer';
 
 class App extends Component {
   constructor(props) {
@@ -75,6 +76,11 @@ class App extends Component {
 
     return (
       <Container fluid className={'main-container'}>
+        {user && !isAdmin(user) && (
+          <UserToolBar user={user} isOpen={isMenuOpen} />
+        )}
+        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
+
         <TopToolBarContainer />
         <CustomSpinner isFetching={isFetching} />
 
@@ -84,10 +90,7 @@ class App extends Component {
           handleClose={this.closeMessage}
         />
 
-        {user && !isAdmin(user) && (
-          <UserToolBar user={user} isOpen={isMenuOpen} />
-        )}
-        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
+        <ErrorContainer/>
 
         <PageRouter user={user} />
       </Container>

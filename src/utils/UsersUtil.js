@@ -17,6 +17,14 @@ export const getName = user => {
   return surname + ' ' + firstName + ' ' + lastName;
 };
 
+export const getUserGroup = user => {
+  if (!user) {
+    return '';
+  }
+
+  return typeof user.studyGroupName === 'string' ? user.studyGroupName : '';
+};
+
 export const findUserById = (users, id) =>
   users && users.filter(user => user.id === id)[0];
 
@@ -29,3 +37,6 @@ export const findAllStudentsWithoutGroup = users =>
 
 export const getTeachers = users =>
   users && users.filter(user => isTeacher(user));
+
+export const getStudents = users =>
+  users && users.filter(user => isStudent(user));
