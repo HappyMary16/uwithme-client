@@ -5,6 +5,7 @@ import {
   SIGN_OUT
 } from './actions';
 import { RENDER_MY_AVATAR } from '../../actions/userActions';
+import * as Config from '../../config.json';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {},
@@ -27,14 +28,15 @@ export default function authReducers(
     case SIGN_OUT:
       return {
         isAuthenticated: false,
-        user: null,
-        avatar: null
+        user: undefined,
+        avatar: undefined
       };
 
     case KEYCLOAK_SIGN_IN_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true
+        isAuthenticated: true,
+        clientVersion: Config.client_version
       };
 
     case REGISTRATION_COMPLETE:

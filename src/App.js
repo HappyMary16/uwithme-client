@@ -22,12 +22,13 @@ import './styles/avatar.css';
 import Container from 'react-bootstrap/Container';
 import { AuthService } from './services/AuthService';
 import { history } from './store/Store';
-import { keycloakSignInSuccess } from './pages/authorization/actions';
+import { keycloakSignInSuccess, signOut } from './pages/authorization/actions';
 import { CustomSpinner } from './pages/navigation/components/CustomSpinner';
 import { PageRouter } from './pages/navigation/PageRouter';
 import { Message } from './pages/common/components/Message';
 import { removeMessage } from './actions/messageAction';
 import ErrorContainer from './pages/common/containers/ErrorContainer';
+import * as Config from './config.json';
 
 class App extends Component {
   constructor(props) {
@@ -38,10 +39,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const { clientVersion, dispatch } = this.props;
+    if (Config.client_version !== clientVersion) {
+      dispatch(signOut);
+    }
+
     this.authService.loadUser().then(() => {
       if (this.authService.isLoggingIn) {
         this.authService.completeLogin().then(() => {
-          history.push(PRE_HOME);
           this.checkLogin();
         });
       } else if (this.authService.isLoggingOut) {
@@ -55,13 +60,15 @@ class App extends Component {
   }
 
   checkLogin() {
+    const { user, dispatch } = this.props;
+
     if (this.authService.isLoggedIn) {
-      const { user, dispatch } = this.props;
       dispatch(keycloakSignInSuccess());
       if (!user) {
         history.push(PRE_HOME);
       }
     } else {
+      dispatch(signOut())
       this.authService.login();
     }
   }
@@ -101,6 +108,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
+    clientVersion: state.authReducers.clientVersion,
     isFetching: state.loadingProcess.isFetching,
     isMenuOpen: state.loadingProcess.isMenuOpen,
     message: state.messageReducers.message
