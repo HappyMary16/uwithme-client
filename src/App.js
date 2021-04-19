@@ -41,7 +41,7 @@ class App extends Component {
   componentDidMount() {
     const { clientVersion, dispatch } = this.props;
     if (Config.client_version !== clientVersion) {
-      dispatch(signOut);
+      dispatch(signOut());
     }
 
     this.authService.loadUser().then(() => {
