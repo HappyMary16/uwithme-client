@@ -35,15 +35,15 @@ class App extends Component {
     super(props);
     this.authService = new AuthService();
 
-    this.closeMessage = this.closeMessage.bind(this);
-  }
-
-  componentDidMount() {
     const { clientVersion, dispatch } = this.props;
     if (Config.client_version !== clientVersion) {
       dispatch(signOut());
     }
 
+    this.closeMessage = this.closeMessage.bind(this);
+  }
+
+  componentDidMount() {
     this.authService.loadUser().then(() => {
       if (this.authService.isLoggingIn) {
         this.authService.completeLogin().then(() => {

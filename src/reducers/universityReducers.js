@@ -15,6 +15,10 @@ export default function universityReducers(
   switch (action.type) {
 
     case RENDER_USER_UNIVERSITY:
+      if (!action.payload.university) {
+        return state
+      }
+
       return {
         ...state,
         userUniversity: {
@@ -24,6 +28,10 @@ export default function universityReducers(
       };
 
     case RENDER_UNIVERSITIES_FOR_REGISTRATION:
+      if (!action.payload.universities) {
+        return state
+      }
+
       return {
         ...state,
         universities: action.payload.universities.map(obj => {
