@@ -3,7 +3,12 @@ import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
 import Form from 'react-bootstrap/Form';
 
-export const CustomSelector = ({ isEditMode = true, options, value, onChange }) => {
+export const CustomSelector = ({
+  isEditMode = true,
+  options,
+  value,
+  onChange
+}) => {
   return (
     <div>
       {isEditMode && (
@@ -16,10 +21,7 @@ export const CustomSelector = ({ isEditMode = true, options, value, onChange }) 
         />
       )}
       {!isEditMode && (
-        <Form.Control
-          value={value && value.label}
-          readOnly={true}
-        />
+        <Form.Control value={value && value.label} readOnly={true} />
       )}
     </div>
   );

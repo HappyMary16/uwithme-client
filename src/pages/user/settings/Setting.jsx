@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import Col from 'react-bootstrap/Col';
 import i18n from '../../../locales/i18n';
 import Button from 'react-bootstrap/Button';
-import { loadUniversities, loadUniversity } from '../../../actions/universityActions';
+import {
+  loadUniversities,
+  loadUniversity
+} from '../../../actions/universityActions';
 import { deleteUser, updateUser } from '../../../actions/userActions';
-import EditSetting from './EditSetting';
-import { loadInstitute, loadInstitutes } from '../../../actions/instituteActions';
-import { loadDepartment, loadDepartments } from '../../../actions/departmentActions';
+import EditSetting from './components/EditSetting';
+import {
+  loadInstitute,
+  loadInstitutes
+} from '../../../actions/instituteActions';
+import {
+  loadDepartment,
+  loadDepartments
+} from '../../../actions/departmentActions';
 import { loadGroup, loadGroups } from '../../../actions/groupActions';
 import { connect } from 'react-redux';
 import { loadUserUniversityInfo } from '../../../actions/structureActions';
@@ -37,23 +46,32 @@ class Setting extends Component {
   }
 
   setEditMode(isEditMode) {
-    if (isEditMode) {
+    const { role } = this.props.user;
+
+    if (role !== 3 && isEditMode) {
       const {
         userUniversity,
         userInstitute,
         userDepartment,
-        user,
         dispatch
       } = this.props;
 
       dispatch(loadUniversities());
 
-      if (user.role && user.role === 2) {
-        dispatch(loadUserUniversityInfo(userUniversity.value, userInstitute.value))
+      if (role && role === 2) {
+        dispatch(
+          loadUserUniversityInfo(userUniversity.value, userInstitute.value)
+        );
       }
 
-      if (user.role === 1) {
-        dispatch(loadUserUniversityInfo(userUniversity.value, userInstitute.value, userDepartment.value))
+      if (role === 1) {
+        dispatch(
+          loadUserUniversityInfo(
+            userUniversity.value,
+            userInstitute.value,
+            userDepartment.value
+          )
+        );
       }
     }
 
@@ -72,18 +90,40 @@ class Setting extends Component {
       dispatch
     } = this.props;
 
-    const { university, institute, department, group, firstName, lastname, surname, email } = userToUpdate;
+    const {
+      university,
+      institute,
+      department,
+      group,
+      firstName,
+      lastname,
+      surname,
+      email
+    } = userToUpdate;
 
-    if (user && (university !== userUniversity
-      || institute !== userInstitute
-      || department !== userDepartment
-      || group !== userGroup
-      || user.firstName !== firstName
-      || user.lastname !== lastname
-      || user.surname !== surname
-      || user.email !== email)) {
-
-      dispatch(updateUser(university, institute, department, group, firstName, lastname, surname, email));
+    if (
+      user &&
+      (university !== userUniversity ||
+        institute !== userInstitute ||
+        department !== userDepartment ||
+        group !== userGroup ||
+        user.firstName !== firstName ||
+        user.lastname !== lastname ||
+        user.surname !== surname ||
+        user.email !== email)
+    ) {
+      dispatch(
+        updateUser(
+          university,
+          institute,
+          department,
+          group,
+          firstName,
+          lastname,
+          surname,
+          email
+        )
+      );
     }
 
     this.setState({
@@ -127,21 +167,22 @@ class Setting extends Component {
 
     return (
       <div>
-        <EditSetting user={user}
-                     userUniversity={userUniversity}
-                     userInstitute={userInstitute}
-                     userDepartment={userDepartment}
-                     userGroup={userGroup}
-                     isEditMode={isEditMode}
-                     onSave={this.submit}
-                     setEditMode={this.setEditMode}
-                     setUniversity={this.setUniversity}
-                     setInstitute={this.setInstitute}
-                     setDepartment={this.setDepartment}
-                     universities={universities}
-                     institutes={institutes}
-                     departments={departments}
-                     groups={groups}
+        <EditSetting
+          user={user}
+          userUniversity={userUniversity}
+          userInstitute={userInstitute}
+          userDepartment={userDepartment}
+          userGroup={userGroup}
+          isEditMode={isEditMode}
+          onSave={this.submit}
+          setEditMode={this.setEditMode}
+          setUniversity={this.setUniversity}
+          setInstitute={this.setInstitute}
+          setDepartment={this.setDepartment}
+          universities={universities}
+          institutes={institutes}
+          departments={departments}
+          groups={groups}
         />
         {!isEditMode && (
           <div>

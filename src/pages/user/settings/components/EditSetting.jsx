@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../../locales/i18n';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { CustomSelector } from '../../common/components/CustomSelector';
+import { CustomSelector } from '../../../common/components/CustomSelector';
 
 class EditSetting extends Component {
   constructor(props) {
     super(props);
 
-    const { userUniversity, userInstitute, userDepartment, userGroup, user } = this.props;
+    const {
+      userUniversity,
+      userInstitute,
+      userDepartment,
+      userGroup,
+      user
+    } = this.props;
     const { firstName, lastname, surname, email } = user;
 
     this.state = {
@@ -57,12 +63,30 @@ class EditSetting extends Component {
   }
 
   submit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     const { onSave } = this.props;
-    const { university, institute, department, group, firstName, lastname, surname, email } = this.state;
+    const {
+      university,
+      institute,
+      department,
+      group,
+      firstName,
+      lastname,
+      surname,
+      email
+    } = this.state;
 
-    onSave({ firstName, lastname, surname, email, university, institute, department, group });
+    onSave({
+      firstName,
+      lastname,
+      surname,
+      email,
+      university,
+      institute,
+      department,
+      group
+    });
   }
 
   setUniversity(e) {
@@ -102,11 +126,28 @@ class EditSetting extends Component {
   }
 
   render() {
-    const { isEditMode, groups, departments, institutes, universities, user, userUniversity,
+    const {
+      isEditMode,
+      groups,
+      departments,
+      institutes,
+      universities,
+      user,
+      userUniversity,
       userInstitute,
       userDepartment,
-      userGroup } = this.props;
-    const { university, institute, department, group, firstName, lastname, surname, email } = this.state;
+      userGroup
+    } = this.props;
+    const {
+      university,
+      institute,
+      department,
+      group,
+      firstName,
+      lastname,
+      surname,
+      email
+    } = this.state;
     const { role } = user;
 
     return (
@@ -134,7 +175,7 @@ class EditSetting extends Component {
         />
         <Form.Label>{i18n.t('email')}</Form.Label>
         <Form.Control
-          type='email'
+          type="email"
           onChange={e => this.setState({ email: e.target.value })}
           value={email}
           required
@@ -177,15 +218,14 @@ class EditSetting extends Component {
           </div>
         )}
         {isEditMode && (
-          <Row className='justify-content-around'>
+          <Row className="justify-content-around">
             <Col
               xs={12}
               md={{ offset: 4, span: 4 }}
               lg={{ offset: 6, span: 3 }}
-              xl={{ offset: 6, span: 3 }}>
-              <Button block
-                      variant={'purple'}
-                      onClick={() => this.cancel()}>
+              xl={{ offset: 6, span: 3 }}
+            >
+              <Button block variant={'purple'} onClick={() => this.cancel()}>
                 {i18n.t('cancel')}
               </Button>
             </Col>
