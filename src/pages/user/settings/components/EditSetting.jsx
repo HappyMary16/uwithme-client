@@ -14,20 +14,14 @@ class EditSetting extends Component {
       userUniversity,
       userInstitute,
       userDepartment,
-      userGroup,
-      user
+      userGroup
     } = this.props;
-    const { firstName, lastname, surname, email } = user;
 
     this.state = {
       university: userUniversity,
       institute: userInstitute,
       department: userDepartment,
-      group: userGroup,
-      firstName: firstName,
-      lastname: lastname,
-      surname: surname,
-      email: email
+      group: userGroup
     };
 
     this.cancel = this.cancel.bind(this);
@@ -43,20 +37,14 @@ class EditSetting extends Component {
       userInstitute,
       userDepartment,
       userGroup,
-      user,
       setEditMode
     } = this.props;
-    const { firstName, lastname, surname, email } = user;
 
     this.setState({
       university: userUniversity,
       institute: userInstitute,
       department: userDepartment,
-      group: userGroup,
-      firstName: firstName,
-      lastname: lastname,
-      surname: surname,
-      email: email
+      group: userGroup
     });
 
     setEditMode(false);
@@ -66,22 +54,9 @@ class EditSetting extends Component {
     e.preventDefault();
 
     const { onSave } = this.props;
-    const {
-      university,
-      institute,
-      department,
-      group,
-      firstName,
-      lastname,
-      surname,
-      email
-    } = this.state;
+    const { university, institute, department, group } = this.state;
 
     onSave({
-      firstName,
-      lastname,
-      surname,
-      email,
       university,
       institute,
       department,
@@ -132,58 +107,19 @@ class EditSetting extends Component {
       departments,
       institutes,
       universities,
-      user,
+      role,
       userUniversity,
       userInstitute,
       userDepartment,
       userGroup
     } = this.props;
-    const {
-      university,
-      institute,
-      department,
-      group,
-      firstName,
-      lastname,
-      surname,
-      email
-    } = this.state;
-    const { role } = user;
+    const { university, institute, department, group } = this.state;
 
     return (
       <Form onSubmit={this.submit}>
-        <Form.Label>{i18n.t('first_name')}</Form.Label>
-        <Form.Control
-          onChange={e => this.setState({ firstName: e.target.value })}
-          value={firstName}
-          required
-          readOnly={!isEditMode}
-        />
-        <Form.Label>{i18n.t('last_name')}</Form.Label>
-        <Form.Control
-          onChange={e => this.setState({ lastname: e.target.value })}
-          value={lastname}
-          required
-          readOnly={!isEditMode}
-        />
-        <Form.Label>{i18n.t('surname')}</Form.Label>
-        <Form.Control
-          onChange={e => this.setState({ surname: e.target.value })}
-          value={surname}
-          required
-          readOnly={!isEditMode}
-        />
-        <Form.Label>{i18n.t('email')}</Form.Label>
-        <Form.Control
-          type="email"
-          onChange={e => this.setState({ email: e.target.value })}
-          value={email}
-          required
-          readOnly={!isEditMode}
-        />
         <Form.Label>{i18n.t('university')}</Form.Label>
         <CustomSelector
-          isEditMode={isEditMode}
+          isEditMode={role !== 3 && isEditMode}
           options={universities}
           value={university !== undefined ? university : userUniversity}
           onChange={this.setUniversity}

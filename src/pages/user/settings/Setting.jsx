@@ -19,6 +19,9 @@ import {
 import { loadGroup, loadGroups } from '../../../actions/groupActions';
 import { connect } from 'react-redux';
 import { loadUserUniversityInfo } from '../../../actions/structureActions';
+import { KeycloakSetting } from './components/KeycloakSetting';
+import Row from 'react-bootstrap/Row';
+import { isAdmin } from '../../../utils/UsersUtil';
 
 class Setting extends Component {
   constructor(props) {
@@ -90,40 +93,16 @@ class Setting extends Component {
       dispatch
     } = this.props;
 
-    const {
-      university,
-      institute,
-      department,
-      group,
-      firstName,
-      lastname,
-      surname,
-      email
-    } = userToUpdate;
+    const { university, institute, department, group } = userToUpdate;
 
     if (
       user &&
       (university !== userUniversity ||
         institute !== userInstitute ||
         department !== userDepartment ||
-        group !== userGroup ||
-        user.firstName !== firstName ||
-        user.lastname !== lastname ||
-        user.surname !== surname ||
-        user.email !== email)
+        group !== userGroup)
     ) {
-      dispatch(
-        updateUser(
-          university,
-          institute,
-          department,
-          group,
-          firstName,
-          lastname,
-          surname,
-          email
-        )
-      );
+      dispatch(updateUser(university, institute, department, group));
     }
 
     this.setState({
@@ -167,8 +146,10 @@ class Setting extends Component {
 
     return (
       <div>
+        <KeycloakSetting user={user} />
+        <hr />
         <EditSetting
-          user={user}
+          role={user.role}
           userUniversity={userUniversity}
           userInstitute={userInstitute}
           userDepartment={userDepartment}
@@ -185,32 +166,28 @@ class Setting extends Component {
           groups={groups}
         />
         {!isEditMode && (
-          <div>
+          <Row className="justify-content-around">
             <Col
               xs={12}
-              md={{ offset: 9, span: 3 }}
-              lg={{ offset: 9, span: 3 }}
-              xl={{ offset: 10, span: 2 }}
-            >
-              <Button
-                block
-                variant={'purple'}
-                onClick={() => this.setEditMode(true)}
-              >
-                {i18n.t('edit')}
-              </Button>
-            </Col>
-            <Col
-              xs={12}
-              md={{ offset: 9, span: 3 }}
-              lg={{ offset: 9, span: 3 }}
-              xl={{ offset: 10, span: 2 }}
+              md={{ offset: isAdmin(user) ? 8 : 4, span: 4 }}
+              lg={{ offset: isAdmin(user) ? 9 : 6, span: 3 }}
             >
               <Button block variant={'red'} onClick={() => this.delete()}>
                 {i18n.t('delete')}
               </Button>
             </Col>
-          </div>
+            {!isAdmin(user) && (
+              <Col xs={12} md={4} lg={3}>
+                <Button
+                  block
+                  variant={'purple'}
+                  onClick={() => this.setEditMode(true)}
+                >
+                  {i18n.t('edit')}
+                </Button>
+              </Col>
+            )}
+          </Row>
         )}
       </div>
     );
