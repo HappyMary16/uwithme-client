@@ -95,14 +95,15 @@ class Setting extends Component {
 
     const { university, institute, department, group } = userToUpdate;
 
-    if (
-      user &&
-      (university !== userUniversity ||
-        institute !== userInstitute ||
-        department !== userDepartment ||
-        group !== userGroup)
-    ) {
-      dispatch(updateUser(university, institute, department, group));
+    if (user && (university || institute || department || group)) {
+      dispatch(
+        updateUser(
+          university ? university : userUniversity,
+          institute ? institute : userInstitute,
+          department ? department : userDepartment,
+          group || department ? group : userGroup
+        )
+      );
     }
 
     this.setState({

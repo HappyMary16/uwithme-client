@@ -17,9 +17,16 @@ export default function groupReducers(
   action
 ) {
   switch (action.type) {
-
     case RENDER_USER_GROUP: {
       let group = action.payload.group;
+
+      if (!group) {
+        return {
+          ...state,
+          userGroup: undefined
+        };
+      }
+
       return {
         ...state,
         userGroup: {

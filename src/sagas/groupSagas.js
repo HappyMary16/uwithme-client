@@ -3,16 +3,23 @@ import { endFetching, startFetching } from '../pages/navigation/actions';
 import http from '../services/http';
 import {
   GROUPS,
-  GROUPS_BY_UNIVERSITY_ID, INFO_GROUPS, USER_GROUP
+  GROUPS_BY_UNIVERSITY_ID,
+  INFO_GROUPS,
+  USER_GROUP
 } from '../constants/serverApi';
 import { addError } from '../actions/messageAction';
 import { loadInstitutesByUniversityId } from '../actions/instituteActions';
 import { loadDepartmentsByUniversityId } from '../actions/departmentActions';
 import {
-  CREATE_GROUP, LOAD_GROUP, LOAD_GROUP_BY_ID, LOAD_GROUPS,
+  CREATE_GROUP,
+  LOAD_GROUP,
+  LOAD_GROUP_BY_ID,
+  LOAD_GROUPS,
   LOAD_GROUPS_BY_UNIVERSITY_ID,
   renderGroup,
-  renderGroups, renderGroupsForRegistration, renderUserGroup
+  renderGroups,
+  renderGroupsForRegistration,
+  renderUserGroup
 } from '../actions/groupActions';
 
 export function* groupWatcher() {
@@ -138,6 +145,8 @@ function* loadGroup() {
 
     if (response && response.status === 200) {
       yield put(renderUserGroup(response.data));
+    } else if (response && response.status === 404) {
+      yield put(renderUserGroup());
     } else {
       yield put(addError(response));
     }
@@ -147,4 +156,3 @@ function* loadGroup() {
     yield put(endFetching());
   }
 }
-

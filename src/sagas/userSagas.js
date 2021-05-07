@@ -2,7 +2,12 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../pages/navigation/actions';
 import http from '../services/http';
 import {
-  AVATAR, GROUP_STUDENT_ID, STUDENT_GROUP, STUDENTS, STUDENTS_BY_GROUP_ID, STUDENTS_WITHOUT_GROUP,
+  AVATAR,
+  GROUP_STUDENT_ID,
+  STUDENT_GROUP,
+  STUDENTS,
+  STUDENTS_BY_GROUP_ID,
+  STUDENTS_WITHOUT_GROUP,
   TEACHERS,
   USERS
 } from '../constants/serverApi';
@@ -10,11 +15,22 @@ import {
 import { arrayBufferToDataUrl } from '../utils/FileUtil';
 import { addError } from '../actions/messageAction';
 import {
-  ADD_STUDENT_TO_GROUP, DELETE_USER,
-  DOWNLOAD_MY_AVATAR, downloadMyAvatar,
-  GET_STUDENTS, LOAD_STUDENTS_BY_GROUP_ID, LOAD_STUDENTS_WITHOUT_GROUP,
-  GET_TEACHERS, REMOVE_STUDENT_FROM_GROUP, RENDER_USERS, renderAvatar, renderMyAvatar, renderUser,
-  renderUsers, UPDATE_USER, UPLOAD_AVATAR
+  ADD_STUDENT_TO_GROUP,
+  DELETE_USER,
+  DOWNLOAD_MY_AVATAR,
+  downloadMyAvatar,
+  GET_STUDENTS,
+  LOAD_STUDENTS_BY_GROUP_ID,
+  LOAD_STUDENTS_WITHOUT_GROUP,
+  GET_TEACHERS,
+  REMOVE_STUDENT_FROM_GROUP,
+  RENDER_USERS,
+  renderAvatar,
+  renderMyAvatar,
+  renderUser,
+  renderUsers,
+  UPDATE_USER,
+  UPLOAD_AVATAR
 } from '../actions/userActions';
 import { signInSuccess, signOut } from '../pages/authorization/actions';
 import { AuthService } from '../services/AuthService';
@@ -260,7 +276,6 @@ function* deleteUser() {
     } else {
       yield put(addError(response.data));
     }
-
   } catch (e) {
     yield put(addError(e));
   } finally {
@@ -272,25 +287,12 @@ function* updateUser(action) {
   try {
     yield put(startFetching());
 
-    const {
-      university,
-      institute,
-      department,
-      group,
-      firstName,
-      lastname,
-      surname,
-      email
-    } = action.payload;
+    const { university, institute, department, group } = action.payload;
 
     const response = yield call(http, {
       url: USERS,
       method: 'put',
       data: {
-        firstName: firstName,
-        lastname: lastname,
-        surname: surname,
-        email: email,
         universityId: university && university.value,
         instituteId: institute && institute.value,
         departmentId: department && department.value,
@@ -307,7 +309,6 @@ function* updateUser(action) {
     } else {
       yield put(addError(response.data));
     }
-
   } catch (e) {
     yield put(addError(e));
   } finally {
