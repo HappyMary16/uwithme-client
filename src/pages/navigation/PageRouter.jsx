@@ -27,7 +27,7 @@ import AddFile from '../user/addFiles/AddFile';
 import ShareFiles from '../user/shareFiles/ShareFiles';
 import StudentsList from '../user/studentList/StudentsList';
 import UniversityStructure from '../admin/structure/UniversityStructure';
-import AddLesson from '../admin/addLesson/AddLesson';
+import AddLesson from '../admin/addLesson/components/AddLesson';
 import GroupSchedule from '../user/schedule/containers/GroupSchedule';
 import LectureHalls from '../admin/lectureHalls/LectureHalls';
 import Container from 'react-bootstrap/Container';
@@ -35,6 +35,8 @@ import GroupPage from '../admin/groupPage/GroupPage';
 import UserPage from '../user/home/containers/UserPage';
 import UserSchedule from '../user/schedule/containers/UserSchedule';
 import Setting from '../user/settings/Setting';
+import AdminAddLesson from '../admin/addLesson/containers/AdminAddLesson';
+import TeacherAddLesson from '../admin/addLesson/containers/TeacherAddLesson';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -75,13 +77,14 @@ export const PageRouter = ({ user }) => {
             <div>
               <Route exact path={ADD_FILE} component={AddFile} />
               <Route exact path={SHARE_FILES} component={ShareFiles} />
+              <Route exact path={ADD_LESSON} component={TeacherAddLesson} />
             </div>
           )}
 
           {isAdmin(user) && (
             <div>
               <Route exact path={USER_HOME} component={UniversityStructure} />
-              <Route exact path={ADD_LESSON} component={AddLesson} />
+              <Route exact path={ADD_LESSON} component={AdminAddLesson} />
               <Route exact path={SCHEDULE} component={GroupSchedule} />
               <Route exact path={LECTURE_HALLS} component={LectureHalls} />
               <Route exact path={GROUP_PAGE_ROUTER}>

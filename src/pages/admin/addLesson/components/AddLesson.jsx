@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
-import { selectorColors } from '../../../styles/styles';
+import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
 import {
   LESSONS_TIME,
   WEEK_DAYS,
   WEEK_NUMBER
-} from '../../../constants/userRoles';
-import { loadSubjects } from '../../user/files/actions';
-import { loadBuildings, loadLectureHalls } from '../lectureHalls/actions';
+} from '../../../../constants/userRoles';
 import {
   getBuildingByLectureHall,
   getLectureHallsByBuilding
-} from '../../../utils/StructureUtils';
-import { addLessonToSchedule } from './actions';
+} from '../../../../utils/StructureUtils';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getName, getTeachers } from '../../../utils/UsersUtil';
-import { loadGroupsByUniversityId } from '../../../actions/groupActions';
-import { loadTeachers } from '../../../actions/userActions';
+import { getName } from '../../../../utils/UsersUtil';
 
 class AddLesson extends Component {
   constructor(props) {
@@ -40,62 +34,33 @@ class AddLesson extends Component {
       filteredLectureHalls: []
     };
 
-    this.submit = this.submit.bind(this);
+    this.addLessons = this.addLessons.bind(this);
   }
 
-  componentDidMount() {
-    const { dispatch, universityId } = this.props;
-    if (universityId) {
-      dispatch(loadGroupsByUniversityId(universityId));
-      dispatch(loadTeachers());
-      dispatch(loadSubjects());
-      dispatch(loadBuildings());
-      dispatch(loadLectureHalls());
-
-      //TODO
-      // load lessons time (feature)
-    }
-  }
-
-  submit(e) {
+  addLessons(e) {
     e.preventDefault();
 
-    const { dispatch } = this.props;
-    const {
-      subject,
-      teacher,
-      lectureHall,
-      selectedGroups,
-      weekDays,
-      lessonTimes,
-      weekNumbers
-    } = this.state;
-
-    dispatch(
-      addLessonToSchedule(
-        subject.value,
-        subject.label,
-        teacher.value,
-        teacher.label,
-        lectureHall.value,
-        selectedGroups,
-        weekDays,
-        lessonTimes,
-        weekNumbers
-      )
-    );
+    const { submit } = this.props;
+    submit(this.state);
   }
 
   render() {
     let { filteredLectureHalls, lectureHall, building } = this.state;
-    const { teachers, lectureHalls, buildings, groups, subjects } = this.props;
+    const {
+      teachers,
+      lectureHalls,
+      buildings,
+      groups,
+      subjects,
+      isTeacher
+    } = this.props;
 
     if (!filteredLectureHalls || filteredLectureHalls.length === 0) {
       filteredLectureHalls = lectureHalls;
     }
 
     return (
-      <Form onSubmit={e => this.submit(e)}>
+      <Form onSubmit={this.addLessons}>
         <CreatableSelect
           theme={selectorColors}
           placeholder={i18n.t('subject')}
@@ -111,22 +76,23 @@ class AddLesson extends Component {
           onChange={opinion => this.setState({ subject: opinion })}
           className={'selector'}
         />
-
-        <CreatableSelect
-          theme={selectorColors}
-          placeholder={i18n.t('teacher')}
-          options={
-            teachers &&
-            teachers.map(s => {
-              return {
-                value: s.id,
-                label: getName(s)
-              };
-            })
-          }
-          onChange={opinion => this.setState({ teacher: opinion })}
-          className={'selector'}
-        />
+        {!isTeacher && (
+          <CreatableSelect
+            theme={selectorColors}
+            placeholder={i18n.t('teacher')}
+            options={
+              teachers &&
+              teachers.map(s => {
+                return {
+                  value: s.id,
+                  label: getName(s)
+                };
+              })
+            }
+            onChange={opinion => this.setState({ teacher: opinion })}
+            className={'selector'}
+          />
+        )}
 
         <Select
           placeholder={i18n.t('groups')}
@@ -224,15 +190,4 @@ class AddLesson extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    groups: state.groupReducers.groups,
-    universityId: state.authReducers.user.universityId,
-    teachers: getTeachers(state.userReducers.users),
-    subjects: state.filesReducers.subjects,
-    lectureHalls: state.lectureHallReducer.lectureHalls,
-    buildings: state.lectureHallReducer.buildings
-  };
-};
-
-export default connect(mapStateToProps)(AddLesson);
+export default AddLesson;

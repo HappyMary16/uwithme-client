@@ -45,7 +45,7 @@ function* addLessonToSchedule(action) {
       data
     });
 
-    if (response && response.status === 201) {
+    if (response && response.status === 200) {
       yield put(setMessage('Пари додані в розклад'));
     }
   } catch (e) {
