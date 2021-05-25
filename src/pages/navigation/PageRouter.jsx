@@ -27,7 +27,6 @@ import AddFile from '../user/addFiles/AddFile';
 import ShareFiles from '../user/shareFiles/ShareFiles';
 import StudentsList from '../user/studentList/StudentsList';
 import UniversityStructure from '../admin/structure/UniversityStructure';
-import AddLesson from '../admin/addLesson/components/AddLesson';
 import GroupSchedule from '../user/schedule/containers/GroupSchedule';
 import LectureHalls from '../admin/lectureHalls/LectureHalls';
 import Container from 'react-bootstrap/Container';
