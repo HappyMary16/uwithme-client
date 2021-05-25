@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
-import { loadTeachers } from '../../../../actions/userActions';
 import { loadSubjects } from '../../../user/files/actions';
 import { loadBuildings, loadLectureHalls } from '../../lectureHalls/actions';
 import { addLessonToSchedule } from '../actions';
