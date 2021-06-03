@@ -21,6 +21,7 @@ jobs:
         with:
           name: EducationApp-UI
           path: build
+          retention-days: 1
   image-build:
     needs: build-archive
     runs-on: ubuntu-latest
