@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { LogInStudCabinet } from './components/LogInStudCabinet';
 import { EmptyPage } from '../common/components/EmptyPage';
+import i18n from '../../locales/i18n';
+import { selectorColors } from '../../styles/styles';
+import { getSemesterById } from '../../utils/StructureUtils';
+import Select from 'react-select';
+import { SEMESTER_NUMBER } from '../../constants/userRoles';
 
 class StudentRating extends Component {
   constructor(props) {
@@ -15,6 +20,7 @@ class StudentRating extends Component {
 
     this.setLogInDialog = this.setLogInDialog.bind(this);
     this.logIn = this.logIn.bind(this);
+    this.setSemester = this.setSemester.bind(this);
   }
 
   componentDidMount() {
@@ -45,9 +51,26 @@ class StudentRating extends Component {
     this.setLogInDialog(false);
   }
 
+  setSemester(e) {
+    const { dispatch, studentInfo } = this.props;
+    const { email, password } = studentInfo;
+    const semester = e.value;
+
+    dispatch(loadStudentsRating(email, password, semester));
+
+    this.setState({
+      ...this.state,
+      semester
+    });
+  }
+
   render() {
     const { studentInfo, studentsScores } = this.props;
-    const { logIdDialog } = this.state;
+    let { logIdDialog, semester } = this.state;
+
+    if (!semester && studentInfo) {
+      semester = studentInfo.semester;
+    }
 
     return (
       <div>
@@ -57,48 +80,50 @@ class StudentRating extends Component {
           handleClose={() => this.setLogInDialog(false)}
         />
 
-        {!!studentsScores &&
-          !!studentInfo.semester &&
-          !!studentsScores[studentInfo.semester] && (
-            <div>
-              {studentsScores[studentInfo.semester].length === 0 && (
-                <EmptyPage />
-              )}
-              {studentsScores[studentInfo.semester].length !== 0 && (
-                <BootstrapTable
-                  keyField={'place'}
-                  data={studentsScores[studentInfo.semester]}
-                  columns={[
-                    {
-                      dataField: 'place',
-                      text: 'N',
-                      sort: true
-                    },
-                    {
-                      dataField: 'fullName',
-                      text: 'ПІБ',
-                      sort: true
-                    },
-                    {
-                      dataField: 'group',
-                      text: 'Група',
-                      sort: true
-                    },
-                    {
-                      dataField: 'scoreNationalShort',
-                      text: 'Нац',
-                      sort: true
-                    },
-                    {
-                      dataField: 'scoreBologna',
-                      text: 'Рейтинг',
-                      sort: true
-                    }
-                  ]}
-                />
-              )}
-            </div>
-          )}
+        <Select
+          className={'selector'}
+          placeholder={i18n.t('semester')}
+          theme={selectorColors}
+          onChange={this.setSemester}
+          options={SEMESTER_NUMBER}
+          defaultValue={getSemesterById(semester)}
+        />
+
+        {(!studentsScores || !semester || !studentsScores[semester] || studentsScores[semester].length === 0) &&
+        <EmptyPage/>}
+
+        {!!studentsScores && !!semester && !!studentsScores[semester] && studentsScores[semester].length !== 0 && (
+          <BootstrapTable
+            keyField={'place'}
+            data={studentsScores[semester]}
+            columns={[
+              {
+                dataField: 'place',
+                text: 'N',
+                sort: true
+              },
+              {
+                dataField: 'fullName',
+                text: 'ПІБ',
+                sort: true
+              },
+              {
+                dataField: 'group',
+                text: 'Група',
+                sort: true
+              },
+              {
+                dataField: 'scoreNationalShort',
+                text: 'Нац',
+                sort: true
+              },
+              {
+                dataField: 'scoreBologna',
+                text: 'Рейтинг',
+                sort: true
+              }
+            ]}
+          />)}
       </div>
     );
   }

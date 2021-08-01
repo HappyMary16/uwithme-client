@@ -1,3 +1,5 @@
+import { SEMESTER_NUMBER } from '../constants/userRoles';
+
 export const getGroupsByDepartment = (groups, department) => {
   return (
     groups && groups.filter(group => group.departmentId === department.value)
@@ -40,4 +42,10 @@ export const getGroupById = (groups, groupId) => {
     groupId &&
     groups.filter(group => Number(group.value) === Number(groupId))[0]
   );
+};
+
+export const getSemesterById = semesterId => {
+  return SEMESTER_NUMBER.filter(
+    semester => Number(semester.value) === Number(semesterId)
+  )[0];
 };

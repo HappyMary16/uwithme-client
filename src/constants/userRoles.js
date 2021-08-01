@@ -126,3 +126,54 @@ export const COURSE_NUMBER = [
     label: '6 (2)'
   }
 ];
+
+export const SEMESTER_NUMBER = [
+  {
+    value: 1,
+    label: '1 семестр'
+  },
+  {
+    value: 2,
+    label: '2 семестр'
+  },
+  {
+    value: 3,
+    label: '3 семестр'
+  },
+  {
+    value: 4,
+    label: '4 семестр'
+  },
+  {
+    value: 5,
+    label: '5 семестр'
+  },
+  {
+    value: 6,
+    label: '6 семестр'
+  },
+  {
+    value: 7,
+    label: '7 семестр'
+  },
+  {
+    value: 8,
+    label: '8 семестр'
+  },
+  {
+    value: 9,
+    label: '9 семестр'
+  },
+  {
+    value: 10,
+    label: '10 семестр'
+  },
+  {
+    value: 11,
+    label: '11 семестр'
+  },
+  {
+    value: 12,
+    label: '12 семестр'
+  }
+];
