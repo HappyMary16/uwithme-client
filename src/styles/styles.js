@@ -9,3 +9,8 @@ export const selectorColors = theme => ({
     primary25: '#F5F5F5'
   }
 });
+
+export const selectedItemColor = {
+  'background-color': '#5c71c5',
+  color: '#F5F5F5'
+};

@@ -5,7 +5,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { LogInStudCabinet } from './components/LogInStudCabinet';
 import { EmptyPage } from '../common/components/EmptyPage';
 import i18n from '../../locales/i18n';
-import { selectorColors } from '../../styles/styles';
+import { selectedItemColor, selectorColors } from '../../styles/styles';
 import { getSemesterById } from '../../utils/StructureUtils';
 import Select from 'react-select';
 import { SEMESTER_NUMBER } from '../../constants/userRoles';
@@ -72,6 +72,10 @@ class StudentRating extends Component {
       semester = studentInfo.semester;
     }
 
+    const sortingHeaderStyle = {
+      backgroundColor: 'red'
+    };
+
     return (
       <div>
         <LogInStudCabinet
@@ -89,41 +93,52 @@ class StudentRating extends Component {
           defaultValue={getSemesterById(semester)}
         />
 
-        {(!studentsScores || !semester || !studentsScores[semester] || studentsScores[semester].length === 0) &&
-        <EmptyPage/>}
+        {(!studentsScores ||
+          !semester ||
+          !studentsScores[semester] ||
+          studentsScores[semester].length === 0) && <EmptyPage />}
 
-        {!!studentsScores && !!semester && !!studentsScores[semester] && studentsScores[semester].length !== 0 && (
-          <BootstrapTable
-            keyField={'place'}
-            data={studentsScores[semester]}
-            columns={[
-              {
-                dataField: 'place',
-                text: 'N',
-                sort: true
-              },
-              {
-                dataField: 'fullName',
-                text: 'ПІБ',
-                sort: true
-              },
-              {
-                dataField: 'group',
-                text: 'Група',
-                sort: true
-              },
-              {
-                dataField: 'scoreNationalShort',
-                text: 'Нац',
-                sort: true
-              },
-              {
-                dataField: 'scoreBologna',
-                text: 'Рейтинг',
-                sort: true
-              }
-            ]}
-          />)}
+        {!!studentsScores &&
+          !!semester &&
+          !!studentsScores[semester] &&
+          studentsScores[semester].length !== 0 && (
+            <BootstrapTable
+              rowStyle={(row, rowIndex) => {
+                if (row.studentId === studentInfo.studentId) {
+                  return selectedItemColor;
+                }
+              }}
+              keyField={'place'}
+              data={studentsScores[semester]}
+              columns={[
+                {
+                  dataField: 'place',
+                  text: 'N',
+                  sort: true
+                },
+                {
+                  dataField: 'fullName',
+                  text: 'ПІБ',
+                  sort: true
+                },
+                {
+                  dataField: 'group',
+                  text: 'Група',
+                  sort: true
+                },
+                {
+                  dataField: 'scoreNationalShort',
+                  text: 'Середній бал',
+                  sort: true
+                },
+                {
+                  dataField: 'scoreBologna',
+                  text: 'Рейтинг',
+                  sort: true
+                }
+              ]}
+            />
+          )}
       </div>
     );
   }

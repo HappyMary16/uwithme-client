@@ -43,19 +43,21 @@ export const ScheduleTable = ({
         </Col>
       </Row>
 
-      <Table bordered responsive size="sm">
+      <Table bordered responsive size="sm" className={'schedule-table'}>
         <thead>
           <tr>
-            <th></th>
+            <th className={'schedule-th'}></th>
             {WEEK_DAYS.map(weekDay => (
-              <th key={weekDay.value}>{weekDay.label}</th>
+              <th className={'schedule-th'} key={weekDay.value}>
+                {weekDay.label}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {LESSONS_TIME.map(lessonTime => (
             <tr key={lessonTime.value}>
-              <th>
+              <th className={'schedule-th'}>
                 {lessonTime.start}
                 <br />
                 {lessonTime.end}
@@ -68,7 +70,7 @@ export const ScheduleTable = ({
                   weekNumber ? 1 : 2
                 );
                 return (
-                  <td key={weekDay.value}>
+                  <td key={weekDay.value} className={'schedule-td'}>
                     {lesson && (
                       <Lesson
                         lesson={lesson}

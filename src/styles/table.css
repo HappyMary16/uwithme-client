@@ -1,0 +1,14 @@
+th {
+    text-align: center;
+    background-color: #eeeeee;
+    padding: 0.5em !important;
+}
+
+td {
+    text-align: center;
+    padding: 0.5em !important;
+}
+
+.table {
+    margin-top: 0.5em;
+}

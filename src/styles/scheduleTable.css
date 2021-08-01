@@ -1,12 +1,13 @@
-th {
+.schedule-th {
+    text-align: center;
+    background-color: white;
+}
+
+.schedule-td {
     text-align: center;
 }
 
-td {
-    text-align: center;
-}
-
-.table {
+.schedule-table {
     margin-top: 0.5em;
 }
 

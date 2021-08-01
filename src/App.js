@@ -19,6 +19,7 @@ import './styles/link.css';
 import './styles/scheduleTable.css';
 import './styles/text.css';
 import './styles/avatar.css';
+import './styles/table.css';
 import Container from 'react-bootstrap/Container';
 import { AuthService } from './services/AuthService';
 import { history } from './store/Store';
@@ -68,7 +69,7 @@ class App extends Component {
         history.push(PRE_HOME);
       }
     } else {
-      dispatch(signOut())
+      dispatch(signOut());
       this.authService.login();
     }
   }
@@ -97,7 +98,7 @@ class App extends Component {
           handleClose={this.closeMessage}
         />
 
-        <ErrorContainer/>
+        <ErrorContainer />
 
         <PageRouter user={user} />
       </Container>
