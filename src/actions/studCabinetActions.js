@@ -20,11 +20,22 @@ export const renderStudentsRating = (semester, studentsScores) => ({
   }
 });
 
-export const renderStudentInfo = (email, password, semester) => ({
-  type: RENDER_STUDENT_INFO,
-  payload: {
-    email,
-    password,
-    semester
+export const renderStudentInfo = (studentInfo, email, password) => {
+  let semester = studentInfo.course * 2;
+  if (new Date().getMonth() < 12) {
+    semester--;
   }
-});
+  if (new Date().getMonth() < 10) {
+    semester--;
+  }
+
+  return {
+    type: RENDER_STUDENT_INFO,
+    payload: {
+      ...studentInfo,
+      email,
+      password,
+      semester
+    }
+  };
+};

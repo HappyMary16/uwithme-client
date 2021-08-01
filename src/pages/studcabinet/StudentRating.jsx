@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {
-  loadStudentsRating,
-  renderStudentInfo
-} from '../../actions/studCabinetActions';
+import { loadStudentsRating } from '../../actions/studCabinetActions';
 import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { LogInStudCabinet } from './components/LogInStudCabinet';
+import { EmptyPage } from '../common/components/EmptyPage';
 
 class StudentRating extends Component {
   constructor(props) {
@@ -21,15 +19,15 @@ class StudentRating extends Component {
 
   componentDidMount() {
     const { dispatch, studentInfo } = this.props;
-    const { email, password, semester } = studentInfo;
+    const { email, password } = studentInfo;
 
-    if (!email || !password || !semester) {
+    if (!email || !password) {
       this.setState({
         ...this.state,
         logIdDialog: true
       });
     } else {
-      dispatch(loadStudentsRating(email, password, semester));
+      dispatch(loadStudentsRating(email, password));
     }
   }
 
@@ -43,8 +41,8 @@ class StudentRating extends Component {
   logIn(email, password) {
     const { dispatch } = this.props;
 
-    dispatch(renderStudentInfo(email, password, 10));
-    dispatch(loadStudentsRating(email, password, 10));
+    dispatch(loadStudentsRating(email, password));
+    this.setLogInDialog(false);
   }
 
   render() {
@@ -62,37 +60,44 @@ class StudentRating extends Component {
         {!!studentsScores &&
           !!studentInfo.semester &&
           !!studentsScores[studentInfo.semester] && (
-            <BootstrapTable
-              keyField={'place'}
-              data={studentsScores[studentInfo.semester]}
-              columns={[
-                {
-                  dataField: 'place',
-                  text: 'N',
-                  sort: true
-                },
-                {
-                  dataField: 'fullName',
-                  text: 'ПІБ',
-                  sort: true
-                },
-                {
-                  dataField: 'group',
-                  text: 'Група',
-                  sort: true
-                },
-                {
-                  dataField: 'scoreNationalShort',
-                  text: 'Нац',
-                  sort: true
-                },
-                {
-                  dataField: 'scoreBologna',
-                  text: 'Рейтинг',
-                  sort: true
-                }
-              ]}
-            />
+            <div>
+              {studentsScores[studentInfo.semester].length === 0 && (
+                <EmptyPage />
+              )}
+              {studentsScores[studentInfo.semester].length !== 0 && (
+                <BootstrapTable
+                  keyField={'place'}
+                  data={studentsScores[studentInfo.semester]}
+                  columns={[
+                    {
+                      dataField: 'place',
+                      text: 'N',
+                      sort: true
+                    },
+                    {
+                      dataField: 'fullName',
+                      text: 'ПІБ',
+                      sort: true
+                    },
+                    {
+                      dataField: 'group',
+                      text: 'Група',
+                      sort: true
+                    },
+                    {
+                      dataField: 'scoreNationalShort',
+                      text: 'Нац',
+                      sort: true
+                    },
+                    {
+                      dataField: 'scoreBologna',
+                      text: 'Рейтинг',
+                      sort: true
+                    }
+                  ]}
+                />
+              )}
+            </div>
           )}
       </div>
     );

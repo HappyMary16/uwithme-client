@@ -5,6 +5,7 @@ export const apiRoot = `${config.url}/api/`;
 const USER = 'user/';
 const INFO = 'info/';
 const AUTH = 'auth/';
+const STUD_CABINET = 'studcab/';
 
 export const SIGN_IN = AUTH + 'signIn';
 export const SIGN_UP = AUTH + 'signUp';
@@ -48,4 +49,5 @@ export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/group/';
 export const STUDENT_GROUP = USERS + 'group';
 
 //Stud Cabinet
-export const STUDENTS_RATING = 'studcab/students/rating/';
+export const STUD_CAB_STUDENTS = STUD_CABINET + 'students/';
+export const STUDENTS_RATING = STUD_CAB_STUDENTS + 'rating/';
