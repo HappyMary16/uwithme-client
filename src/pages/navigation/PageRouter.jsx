@@ -12,13 +12,14 @@ import {
   SETTING,
   SHARE_FILES,
   STUDENTS,
+  STUDENTS_RATING,
   TEACHERS,
   USER_HOME,
   USER_HOME_PAGE_ROUTER,
   USER_SCHEDULE_ROUTER
 } from '../../constants/links';
 import PreHome from '../authorization/PreHome';
-import { isAdmin, isTeacher } from '../../utils/UsersUtil';
+import { isAdmin, isStudent, isTeacher } from '../../utils/UsersUtil';
 import UserHome from '../user/home/containers/UserHome';
 import PageWithFiles from '../user/files/PageWithFiles';
 import MySchedule from '../user/schedule/containers/MySchedule';
@@ -36,6 +37,7 @@ import UserSchedule from '../user/schedule/containers/UserSchedule';
 import Setting from '../user/settings/Setting';
 import AdminAddLesson from '../admin/addLesson/containers/AdminAddLesson';
 import TeacherAddLesson from '../admin/addLesson/containers/TeacherAddLesson';
+import StudentRating from '../studcabinet/StudentRating';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -80,6 +82,11 @@ export const PageRouter = ({ user }) => {
             </div>
           )}
 
+          {isStudent(user) && (
+            <div>
+              <Route exact path={STUDENTS_RATING} component={StudentRating} />
+            </div>
+          )}
           {isAdmin(user) && (
             <div>
               <Route exact path={USER_HOME} component={UniversityStructure} />

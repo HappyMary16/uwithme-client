@@ -5,6 +5,7 @@ import {
   SCHEDULE,
   SETTING,
   STUDENTS,
+  STUDENTS_RATING,
   TEACHERS,
   USER_HOME
 } from '../../constants/links';
@@ -22,6 +23,9 @@ export const UserToolBar = ({ user, isOpen = false }) => {
       {isStudent(user) && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
       {isTeacher(user) && <a href={STUDENTS}>{i18n.t('students')}</a>}
       <a href={SETTING}>{i18n.t('setting')}</a>
+      {isStudent(user) && (
+        <a href={STUDENTS_RATING}>{i18n.t('students rating')}</a>
+      )}
     </Menu>
   );
 };

@@ -15,6 +15,7 @@ import groupReducers from '../reducers/groupReducers';
 import departmentReducers from '../reducers/departmentReducers';
 import universityReducers from '../reducers/universityReducers';
 import userReducers from '../reducers/userReducers';
+import studCabinetReducers from '../reducers/studCabinetReducers';
 
 export const history = createBrowserHistory();
 
@@ -34,7 +35,8 @@ export default function createAppStore() {
     instituteReducers,
     groupReducers,
     universityReducers,
-    departmentReducers
+    departmentReducers,
+    studCabinetReducers
   });
 
   const store = createStore(

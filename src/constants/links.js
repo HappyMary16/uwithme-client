@@ -27,3 +27,6 @@ export const STUDENTS = '/students/list';
 export const ADD_UNIVERSITY_PATH = '/university/add';
 export const ADD_LESSON = '/lesson/add';
 export const LECTURE_HALLS = '/lecture/halls';
+
+//stud cabinet
+export const STUDENTS_RATING = '/students/rating';

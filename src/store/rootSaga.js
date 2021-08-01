@@ -13,6 +13,7 @@ import { universityWatcher } from '../sagas/universitySagas';
 import { scheduleWatcher } from '../sagas/scheduleSagas';
 import { usersWatcher } from '../sagas/userSagas';
 import { structureWatcher } from '../sagas/structureSagas';
+import { studCabinetWatcher } from '../sagas/studCabinetSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -29,6 +30,7 @@ export default function* rootSaga() {
     departmentWatcher(),
     instituteWatcher(),
     universityWatcher(),
-    structureWatcher()
+    structureWatcher(),
+    studCabinetWatcher()
   ]);
 }

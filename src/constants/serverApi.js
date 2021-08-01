@@ -46,3 +46,6 @@ export const STUDENTS_BY_GROUP_ID = STUDENTS + 'groupId/';
 export const GROUP_STUDENT_ID = USERS + 'group/studentId/';
 export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/group/';
 export const STUDENT_GROUP = USERS + 'group';
+
+//Stud Cabinet
+export const STUDENTS_RATING = 'studcab/students/rating/';
