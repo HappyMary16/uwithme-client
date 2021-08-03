@@ -24,7 +24,7 @@ export const UserToolBar = ({ user, isOpen = false }) => {
       {isTeacher(user) && <a href={STUDENTS}>{i18n.t('students')}</a>}
       <a href={SETTING}>{i18n.t('setting')}</a>
       {isStudent(user) && (
-        <a href={STUDENTS_RATING}>{i18n.t('students rating')}</a>
+        <a href={STUDENTS_RATING}>{i18n.t('students-rating')}</a>
       )}
     </Menu>
   );

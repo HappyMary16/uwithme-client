@@ -49,5 +49,5 @@ export const STUDENTS_WITHOUT_GROUP = STUDENTS + 'without/group/';
 export const STUDENT_GROUP = USERS + 'group';
 
 //Stud Cabinet
-export const STUD_CAB_STUDENTS = STUD_CABINET + 'students/';
-export const STUDENTS_RATING = STUD_CAB_STUDENTS + 'rating/';
+export const STUD_CAB_STUDENTS = STUD_CABINET + 'students';
+export const STUDENTS_RATING = STUD_CAB_STUDENTS + '/rating/';

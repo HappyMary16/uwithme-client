@@ -6,7 +6,7 @@ export const CustomSpinner = ({ isFetching }) => {
   return (
     <div>
       {isFetching !== 0 && (
-        <div className="modal-backdrop">
+        <div className='modal-backdrop custom-spinner-modal'>
           <Row className={'justify-content-center'}>
             <Spinner animation="border" variant="light" className={'spinner'} />
           </Row>

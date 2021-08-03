@@ -7,4 +7,9 @@
     position: relative;
     text-align: center;
     margin-top: 45vh;
+    z-index: 2001 !important;
+}
+
+.custom-spinner-modal {
+    z-index: 2000 !important;
 }

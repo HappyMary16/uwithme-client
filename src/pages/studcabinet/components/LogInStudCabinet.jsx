@@ -7,7 +7,7 @@ import { history } from '../../../store/Store';
 import { USER_HOME } from '../../../constants/links';
 import { Message } from '../../common/components/Message';
 
-export const LogInStudCabinet = ({ open, handleClose, handleCreate }) => {
+export const LogInStudCabinet = ({ open, handleCreate }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [showMessage, setShowMessage] = React.useState(false);
@@ -18,7 +18,6 @@ export const LogInStudCabinet = ({ open, handleClose, handleCreate }) => {
   };
 
   let onClose = () => {
-    handleClose();
     setShowMessage(true);
   };
 
@@ -26,15 +25,14 @@ export const LogInStudCabinet = ({ open, handleClose, handleCreate }) => {
     <div>
       <Message
         open={showMessage}
-        message={
-          'Ми не можемо відобразити інформацію з кабінету студентів без вашого паролю :('
-        }
+        message={i18n.t('can-not-show-stud-cab-info')}
+        description={i18n.t('can-not-show-stud-cab-info-description')}
         handleClose={() => history.push(USER_HOME)}
       />
 
       <Modal show={open} centered>
         <Modal.Header>
-          <Modal.Title>{i18n.t('lod-in')}</Modal.Title>
+          <Modal.Title>{i18n.t('log-in-stud-cab')}</Modal.Title>
         </Modal.Header>
 
         <Form onSubmit={submit}>
@@ -51,6 +49,14 @@ export const LogInStudCabinet = ({ open, handleClose, handleCreate }) => {
               type={'password'}
               required
             />
+            <p>
+              Якщо ви не хочете вводити свої дані, ви можете переглянути
+              інформацію з кабінету студента в ньому ж.
+              <br />
+              <a href={'https://studcabinet.kpi.kharkov.ua/'}>
+                studcabinet.kpi.kharkov.ua
+              </a>
+            </p>
           </Modal.Body>
 
           <Modal.Footer>
@@ -58,7 +64,7 @@ export const LogInStudCabinet = ({ open, handleClose, handleCreate }) => {
               {i18n.t('cancel')}
             </Button>
             <Button type={'submit'} variant={'purple'}>
-              {i18n.t('log-in')}
+              {i18n.t('sign_in')}
             </Button>
           </Modal.Footer>
         </Form>

@@ -29,6 +29,10 @@ function* loadStudentsRating(action) {
       semester = (yield select(getStudentInfo)).semester;
     }
 
+    if (!semester) {
+      return;
+    }
+
     const response = yield call(http, {
       url: STUDENTS_RATING + semester,
       method: 'get',

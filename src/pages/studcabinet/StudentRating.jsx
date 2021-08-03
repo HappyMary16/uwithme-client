@@ -18,37 +18,24 @@ class StudentRating extends Component {
       logIdDialog: false
     };
 
-    this.setLogInDialog = this.setLogInDialog.bind(this);
     this.logIn = this.logIn.bind(this);
     this.setSemester = this.setSemester.bind(this);
+    this.isAuthorizeInStudCab = this.isAuthorizeInStudCab.bind(this);
   }
 
   componentDidMount() {
     const { dispatch, studentInfo } = this.props;
-    const { email, password } = studentInfo;
 
-    if (!email || !password) {
-      this.setState({
-        ...this.state,
-        logIdDialog: true
-      });
-    } else {
-      dispatch(loadStudentsRating(email, password));
+    if (this.isAuthorizeInStudCab(studentInfo)) {
+      const { email, password, semester } = studentInfo;
+      dispatch(loadStudentsRating(email, password, semester));
     }
-  }
-
-  setLogInDialog(logIdDialogValue) {
-    this.setState({
-      ...this.state,
-      logIdDialog: logIdDialogValue
-    });
   }
 
   logIn(email, password) {
     const { dispatch } = this.props;
 
     dispatch(loadStudentsRating(email, password));
-    this.setLogInDialog(false);
   }
 
   setSemester(e) {
@@ -64,34 +51,42 @@ class StudentRating extends Component {
     });
   }
 
+  isAuthorizeInStudCab() {
+    const { studentInfo } = this.props;
+
+    return (
+      !!studentInfo &&
+      !!studentInfo.email &&
+      !!studentInfo.password &&
+      !!studentInfo.semester
+    );
+  }
+
   render() {
     const { studentInfo, studentsScores } = this.props;
-    let { logIdDialog, semester } = this.state;
+    let { semester } = this.state;
 
     if (!semester && studentInfo) {
       semester = studentInfo.semester;
     }
 
-    const sortingHeaderStyle = {
-      backgroundColor: 'red'
-    };
-
     return (
       <div>
         <LogInStudCabinet
-          open={logIdDialog}
+          open={!this.isAuthorizeInStudCab(studentInfo)}
           handleCreate={this.logIn}
-          handleClose={() => this.setLogInDialog(false)}
         />
 
-        <Select
-          className={'selector'}
-          placeholder={i18n.t('semester')}
-          theme={selectorColors}
-          onChange={this.setSemester}
-          options={SEMESTER_NUMBER}
-          defaultValue={getSemesterById(semester)}
-        />
+        {!!semester && (
+          <Select
+            className={'selector'}
+            placeholder={i18n.t('semester')}
+            theme={selectorColors}
+            onChange={this.setSemester}
+            options={SEMESTER_NUMBER}
+            defaultValue={getSemesterById(semester)}
+          />
+        )}
 
         {(!studentsScores ||
           !semester ||
