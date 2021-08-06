@@ -53,3 +53,4 @@ export const STUD_CAB_STUDENTS = STUD_CABINET + 'students';
 export const STUD_CAB_SUBJECTS = STUD_CABINET + 'subjects';
 export const STUDENTS_RATING = STUD_CAB_STUDENTS + '/rating/';
 export const SUBJECTS_SCORES = STUD_CAB_SUBJECTS + '/scores/';
+export const DEBTS = STUD_CAB_STUDENTS + '/debts';

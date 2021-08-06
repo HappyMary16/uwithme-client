@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { loadStudentsRating } from '../../actions/studCabinetActions';
 import { connect } from 'react-redux';
 import { selectedItemColor } from '../../styles/styles';
-import StudCabinetPage from './StudCabinetPage';
+import StudCabinetPage from './components/StudCabinetPage';
 
 class StudentRating extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      logIdDialog: false
-    };
 
     this.logIn = this.logIn.bind(this);
     this.loadData = this.loadData.bind(this);
@@ -32,7 +28,7 @@ class StudentRating extends Component {
 
     return (
       <StudCabinetPage
-        isSemesterRequired={true}
+        isSemesterRequired
         studentInfo={studentInfo}
         data={studentsScores}
         columns={[

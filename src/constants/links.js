@@ -29,5 +29,6 @@ export const ADD_LESSON = '/lesson/add';
 export const LECTURE_HALLS = '/lecture/halls';
 
 //stud cabinet
-export const STUDENTS_RATING = '/students/rating';
-export const SUBJECT_SCORES = '/subjects/scores';
+export const STUDENTS_RATING = '/studcab/students/rating';
+export const SUBJECT_SCORES = '/studcab/subjects/scores';
+export const DEBTS = '/studcab/students/debts';

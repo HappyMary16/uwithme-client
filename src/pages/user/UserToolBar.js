@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ADD_LESSON,
+  DEBTS,
   FILES,
   SCHEDULE,
   SETTING,
@@ -30,6 +31,7 @@ export const UserToolBar = ({ user, isOpen = false }) => {
       {isStudent(user) && (
         <a href={SUBJECT_SCORES}>{i18n.t('subjects-scores')}</a>
       )}
+      {isStudent(user) && <a href={DEBTS}>{i18n.t('debts')}</a>}
     </Menu>
   );
 };

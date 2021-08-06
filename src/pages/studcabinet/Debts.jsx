@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
-import { loadSubjectsScores } from '../../actions/studCabinetActions';
+import { loadDebts } from '../../actions/studCabinetActions';
 import { connect } from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
 
-class SubjectsScores extends Component {
+class Debts extends Component {
   constructor(props) {
     super(props);
 
-    this.logIn = this.logIn.bind(this);
     this.loadData = this.loadData.bind(this);
   }
 
-  loadData(email, password, semester) {
+  loadData(email, password) {
     const { dispatch } = this.props;
-    dispatch(loadSubjectsScores(email, password, semester));
-  }
-
-  logIn(email, password) {
-    const { dispatch } = this.props;
-
-    dispatch(loadSubjectsScores(email, password));
+    console.log();
+    dispatch(loadDebts(email, password));
   }
 
   render() {
-    const { studentInfo, subjectsScores } = this.props;
+    const { studentInfo, debts } = this.props;
 
     return (
       <StudCabinetPage
-        isSemesterRequired
         studentInfo={studentInfo}
-        data={subjectsScores}
+        data={debts}
         columns={[
           {
             dataField: 'subject',
@@ -47,22 +40,22 @@ class SubjectsScores extends Component {
             sort: true
           },
           {
-            dataField: 'scoreNationalShort',
-            text: 'Нац',
+            dataField: 'course',
+            text: 'Курс',
             sort: true
           },
           {
-            dataField: 'scoreBologna',
-            text: 'Бал',
+            dataField: 'semester',
+            text: 'Семестр',
             sort: true
           },
           {
-            dataField: 'scoreECTS',
-            text: 'ECTS',
+            dataField: 'individualTask',
+            text: 'І/З',
             sort: true
           }
         ]}
-        logInFunc={this.logIn}
+        logInFunc={this.loadData}
         loadDataFunc={this.loadData}
       />
     );
@@ -72,8 +65,8 @@ class SubjectsScores extends Component {
 const mapStateToProps = state => {
   return {
     studentInfo: state.studCabinetReducers.studentInfo,
-    subjectsScores: state.studCabinetReducers.subjectsScores
+    debts: state.studCabinetReducers.debts
   };
 };
 
-export default connect(mapStateToProps)(SubjectsScores);
+export default connect(mapStateToProps)(Debts);

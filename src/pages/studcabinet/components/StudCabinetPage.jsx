@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { LogInStudCabinet } from './components/LogInStudCabinet';
-import { EmptyPage } from '../common/components/EmptyPage';
-import i18n from '../../locales/i18n';
-import { selectorColors } from '../../styles/styles';
-import { getSemesterById } from '../../utils/StructureUtils';
+import { LogInStudCabinet } from './LogInStudCabinet';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import i18n from '../../../locales/i18n';
+import { selectorColors } from '../../../styles/styles';
+import { getSemesterById } from '../../../utils/StructureUtils';
 import Select from 'react-select';
-import { SEMESTER_NUMBER } from '../../constants/userRoles';
+import { SEMESTER_NUMBER } from '../../../constants/userRoles';
 
 // Props:
 // isSemesterRequired
@@ -69,7 +69,7 @@ class StudCabinetPage extends Component {
         !!data && !!semester && !!data[semester] && data[semester].length !== 0
       );
     } else {
-      return data.length !== 0;
+      return !!data && data.length !== 0;
     }
   }
 

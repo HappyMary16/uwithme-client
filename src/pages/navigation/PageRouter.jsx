@@ -3,6 +3,7 @@ import { Route, useParams } from 'react-router-dom';
 import {
   ADD_FILE,
   ADD_LESSON,
+  DEBTS,
   FILES,
   GROUP_PAGE_ROUTER,
   GROUP_SCHEDULE_ROUTER,
@@ -40,6 +41,7 @@ import AdminAddLesson from '../admin/addLesson/containers/AdminAddLesson';
 import TeacherAddLesson from '../admin/addLesson/containers/TeacherAddLesson';
 import StudentRating from '../studcabinet/StudentRating';
 import SubjectsScores from '../studcabinet/SubjectsScores';
+import Debts from '../studcabinet/Debts';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -88,6 +90,7 @@ export const PageRouter = ({ user }) => {
             <div>
               <Route exact path={STUDENTS_RATING} component={StudentRating} />
               <Route exact path={SUBJECT_SCORES} component={SubjectsScores} />
+              <Route exact path={DEBTS} component={Debts} />
             </div>
           )}
           {isAdmin(user) && (
