@@ -1,15 +1,15 @@
 {
   "client_version": "1.0",
-  "url": "https://jesse.tcomad.tk",
+  "url": "https://jesse.u-with-me.education",
   "url_": "http://localhost:8081",
 
   "LOGGING_IN": "logging_in",
   "LOGIN_STATE": "login_state",
   "LOGGING_OUT": "logging_out",
 
-  "AUTHORITY": "https://auth.tcomad.tk/auth/realms/tCoMaD",
-  "AUTHORITY_": "https://auth.tcomad.tk/auth/realms/test",
+  "AUTHORITY": "https://sso.u-with-me.education/auth/realms/tCoMaD",
+  "AUTHORITY_": "https://sso.u-with-me.education/auth/realms/test",
   "CLIENT_ID": "EducationApp-UI",
-  "REDIRECT_URI": "https://tcomad.tk",
+  "REDIRECT_URI": "https://u-with-me.education",
   "REDIRECT_URI_": "http://localhost:3000"
 }
