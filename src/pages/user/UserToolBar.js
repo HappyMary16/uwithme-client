@@ -6,6 +6,7 @@ import {
   SETTING,
   STUDENTS,
   STUDENTS_RATING,
+  SUBJECT_SCORES,
   TEACHERS,
   USER_HOME
 } from '../../constants/links';
@@ -25,6 +26,9 @@ export const UserToolBar = ({ user, isOpen = false }) => {
       <a href={SETTING}>{i18n.t('setting')}</a>
       {isStudent(user) && (
         <a href={STUDENTS_RATING}>{i18n.t('students-rating')}</a>
+      )}
+      {isStudent(user) && (
+        <a href={SUBJECT_SCORES}>{i18n.t('subjects-scores')}</a>
       )}
     </Menu>
   );

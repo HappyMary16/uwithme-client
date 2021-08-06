@@ -13,6 +13,7 @@ import {
   SHARE_FILES,
   STUDENTS,
   STUDENTS_RATING,
+  SUBJECT_SCORES,
   TEACHERS,
   USER_HOME,
   USER_HOME_PAGE_ROUTER,
@@ -38,6 +39,7 @@ import Setting from '../user/settings/Setting';
 import AdminAddLesson from '../admin/addLesson/containers/AdminAddLesson';
 import TeacherAddLesson from '../admin/addLesson/containers/TeacherAddLesson';
 import StudentRating from '../studcabinet/StudentRating';
+import SubjectsScores from '../studcabinet/SubjectsScores';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -85,6 +87,7 @@ export const PageRouter = ({ user }) => {
           {isStudent(user) && (
             <div>
               <Route exact path={STUDENTS_RATING} component={StudentRating} />
+              <Route exact path={SUBJECT_SCORES} component={SubjectsScores} />
             </div>
           )}
           {isAdmin(user) && (

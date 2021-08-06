@@ -1,16 +1,23 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import http from '../services/http';
-import { STUD_CAB_STUDENTS, STUDENTS_RATING } from '../constants/serverApi';
+import {
+  STUD_CAB_STUDENTS,
+  STUDENTS_RATING,
+  SUBJECTS_SCORES
+} from '../constants/serverApi';
 import {
   LOAD_STUDENTS_RATING,
+  LOAD_SUBJECTS_SCORES,
   renderStudentInfo,
-  renderStudentsRating
+  renderStudentsRating,
+  renderSubjectsScores
 } from '../actions/studCabinetActions';
 import { endFetching, startFetching } from '../pages/navigation/actions';
 import { addError } from '../actions/messageAction';
 
 export function* studCabinetWatcher() {
   yield takeEvery(LOAD_STUDENTS_RATING, action => loadStudentsRating(action));
+  yield takeEvery(LOAD_SUBJECTS_SCORES, action => loadSubjectsScores(action));
 }
 
 export const getStudentInfo = state => state.studCabinetReducers.studentInfo;
@@ -44,6 +51,45 @@ function* loadStudentsRating(action) {
 
     if (response && response.status === 200) {
       yield put(renderStudentsRating(semester, response.data));
+    } else {
+      yield put(addError(response.data));
+    }
+  } catch (e) {
+    yield put(addError(e));
+  } finally {
+    yield put(endFetching());
+  }
+}
+
+function* loadSubjectsScores(action) {
+  try {
+    yield put(startFetching());
+    let { email, password, semester } = action.payload;
+    let studentInfo = yield select(getStudentInfo);
+
+    if (!studentInfo || !studentInfo.email || !studentInfo.password) {
+      yield call(loadStudentInfo, email, password);
+    }
+
+    if (!semester) {
+      semester = (yield select(getStudentInfo)).semester;
+    }
+
+    if (!semester) {
+      return;
+    }
+
+    const response = yield call(http, {
+      url: SUBJECTS_SCORES + semester,
+      method: 'get',
+      params: {
+        email,
+        password
+      }
+    });
+
+    if (response && response.status === 200) {
+      yield put(renderSubjectsScores(semester, response.data));
     } else {
       yield put(addError(response.data));
     }

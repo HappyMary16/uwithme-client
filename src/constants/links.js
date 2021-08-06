@@ -30,3 +30,4 @@ export const LECTURE_HALLS = '/lecture/halls';
 
 //stud cabinet
 export const STUDENTS_RATING = '/students/rating';
+export const SUBJECT_SCORES = '/subjects/scores';
