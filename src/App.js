@@ -29,7 +29,7 @@ import { PageRouter } from './pages/navigation/PageRouter';
 import { Message } from './pages/common/components/Message';
 import { removeMessage } from './actions/messageAction';
 import ErrorContainer from './pages/common/containers/ErrorContainer';
-import * as Config from './config.json';
+import * as config from './config';
 
 class App extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class App extends Component {
     this.authService = new AuthService();
 
     const { clientVersion, dispatch } = this.props;
-    if (Config.client_version !== clientVersion) {
+    if (config.CLIENT_VERSION !== clientVersion) {
       dispatch(signOut());
     }
 

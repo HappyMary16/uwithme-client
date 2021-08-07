@@ -1,6 +1,6 @@
-import config from '../config';
+import * as config from '../config';
 
-export const apiRoot = `${config.url}/api/`;
+export const apiRoot = `${config.URL}/api/`;
 
 const USER = 'user/';
 const INFO = 'info/';

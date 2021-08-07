@@ -1,18 +1,18 @@
 import { UserManager } from 'oidc-client';
-import * as Config from '../config.json';
+import * as config from '../config';
 
 const manager = new UserManager({
-  authority: Config.AUTHORITY,
+  authority: config.AUTHORITY,
   metadata: {
-    issuer: Config.AUTHORITY,
-    authorization_endpoint: Config.AUTHORITY + '/protocol/openid-connect/auth',
-    token_endpoint: Config.AUTHORITY + '/protocol/openid-connect/token',
-    userinfo_endpoint: Config.AUTHORITY + '/protocol/openid-connect/userinfo',
-    end_session_endpoint: Config.AUTHORITY + '/protocol/openid-connect/logout'
+    issuer: config.AUTHORITY,
+    authorization_endpoint: config.AUTHORITY + '/protocol/openid-connect/auth',
+    token_endpoint: config.AUTHORITY + '/protocol/openid-connect/token',
+    userinfo_endpoint: config.AUTHORITY + '/protocol/openid-connect/userinfo',
+    end_session_endpoint: config.AUTHORITY + '/protocol/openid-connect/logout'
   },
-  client_id: Config.CLIENT_ID,
-  redirect_uri: Config.REDIRECT_URI,
-  post_logout_redirect_uri: Config.REDIRECT_URI,
+  client_id: config.CLIENT_ID,
+  redirect_uri: config.REDIRECT_URI,
+  post_logout_redirect_uri: config.REDIRECT_URI,
   response_type: 'code'
 });
 
@@ -24,11 +24,11 @@ export class AuthService {
   }
 
   get isLoggingIn() {
-    return localStorage.getItem(Config.LOGIN_STATE) === Config.LOGGING_IN;
+    return localStorage.getItem(config.LOGIN_STATE) === config.LOGGING_IN;
   }
 
   get isLoggingOut() {
-    return localStorage.getItem(Config.LOGIN_STATE) === Config.LOGGING_OUT;
+    return localStorage.getItem(config.LOGIN_STATE) === config.LOGGING_OUT;
   }
 
   async getToken() {
@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   login() {
-    localStorage.setItem(Config.LOGIN_STATE, Config.LOGGING_IN);
+    localStorage.setItem(config.LOGIN_STATE, config.LOGGING_IN);
     manager.signinRedirect().catch(error => this.handleError(error));
   }
 
@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   async completeLogin() {
-    localStorage.removeItem(Config.LOGIN_STATE);
+    localStorage.removeItem(config.LOGIN_STATE);
     await manager
       .signinRedirectCallback()
       .then(user => (this.currentUser = user))
@@ -66,12 +66,12 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.setItem(Config.LOGIN_STATE, Config.LOGGING_OUT);
+    localStorage.setItem(config.LOGIN_STATE, config.LOGGING_OUT);
     manager.signoutRedirect().catch(error => this.handleError(error));
   }
 
   async completeLogout() {
-    localStorage.removeItem(Config.LOGIN_STATE);
+    localStorage.removeItem(config.LOGIN_STATE);
     await manager
       .signoutRedirectCallback()
       .then(() => {

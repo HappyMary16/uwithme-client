@@ -1,11 +1,12 @@
 import StateLoader from '../../store/StateLoader';
 import {
-  KEYCLOAK_SIGN_IN_SUCCESS, REGISTRATION_COMPLETE,
+  KEYCLOAK_SIGN_IN_SUCCESS,
+  REGISTRATION_COMPLETE,
   SIGN_IN_SUCCESS,
   SIGN_OUT
 } from './actions';
 import { RENDER_MY_AVATAR } from '../../actions/userActions';
-import * as Config from '../../config.json';
+import * as config from '../../config';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {},
@@ -36,7 +37,7 @@ export default function authReducers(
       return {
         ...state,
         isAuthenticated: true,
-        clientVersion: Config.client_version
+        clientVersion: config.CLIENT_VERSION
       };
 
     case REGISTRATION_COMPLETE:

@@ -3,7 +3,6 @@ import i18n from '../../../locales/i18n';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { MortarBoardIcon } from '@primer/octicons-react';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
