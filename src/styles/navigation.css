@@ -11,6 +11,11 @@
     margin-bottom: 0.2em !important;
 }
 
+.menu-icon {
+    padding-top: 0.3em;
+}
+
 .app-icon {
     padding-top: 0.3em;
+    padding-bottom: 0.3em;
 }

@@ -53,6 +53,10 @@ function* loadStudentsRating(action) {
       }
     });
 
+    if (!response) {
+      return;
+    }
+
     if (response && response.status === 200) {
       yield put(renderStudentsRating(semester, response.data));
     } else {
@@ -92,6 +96,10 @@ function* loadSubjectsScores(action) {
       }
     });
 
+    if (!response) {
+      return;
+    }
+
     if (response && response.status === 200) {
       yield put(renderSubjectsScores(semester, response.data));
     } else {
@@ -123,6 +131,10 @@ function* loadDebts(action) {
       }
     });
 
+    if (!response) {
+      return;
+    }
+
     if (response && response.status === 200) {
       yield put(renderDebts(response.data));
     } else {
@@ -147,6 +159,10 @@ function* loadStudentInfo(email, password) {
         password
       }
     });
+
+    if (!response) {
+      return;
+    }
 
     if (response && response.status === 200) {
       yield put(renderStudentInfo(response.data, email, password));

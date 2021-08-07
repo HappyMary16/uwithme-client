@@ -140,7 +140,12 @@ class ChooseRole extends Component {
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6} xl={5}>
           <Row className="justify-content-center">
-            <MortarBoardIcon className={'avatar-icon'} size={35} />
+            <img
+              src="/logo32.png"
+              alt=""
+              title="icon"
+              className={'avatar-icon'}
+            />
           </Row>
           <Row className="justify-content-center margin-bottom">
             <h5>{i18n.t('continue_sign_up')}</h5>
