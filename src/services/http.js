@@ -1,7 +1,14 @@
 import axios from 'axios';
 import qs from 'qs';
 import { apiRoot } from '../constants/serverApi';
-import { AuthService } from './AuthService';
+import { AuthService } from 'tcomad-oidc';
+import * as config from '../config';
+
+export const authService = new AuthService(
+  config.AUTHORITY,
+  config.CLIENT_ID,
+  config.REDIRECT_URI
+);
 
 export default async function http({
   method,
@@ -12,9 +19,6 @@ export default async function http({
   loadFile,
   onUploadProgress
 }) {
-  const authService = new AuthService();
-  await authService.loadUser();
-
   const config = {
     method: method.toLowerCase(),
     url: apiRoot + url,

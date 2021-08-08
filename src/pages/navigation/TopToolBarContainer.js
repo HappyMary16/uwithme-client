@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { TopToolBar } from './components/TopToolBar';
 import { signOut } from '../authorization/actions';
 import { changeIsMenuOpen } from './actions';
-import { AuthService } from '../../services/AuthService';
+import { authService } from '../../services/http';
 
 const mapStateToProps = state => {
   return {
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   signOutFunc() {
     return () => {
-      new AuthService().logout();
+      authService.logout();
       dispatch(signOut());
     };
   },

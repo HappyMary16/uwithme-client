@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { endFetching, startFetching } from '../pages/navigation/actions';
-import http from '../services/http';
+import http, { authService } from '../services/http';
 import {
   AVATAR,
   GROUP_STUDENT_ID,
@@ -33,7 +33,6 @@ import {
   UPLOAD_AVATAR
 } from '../actions/userActions';
 import { signInSuccess, signOut } from '../pages/authorization/actions';
-import { AuthService } from '../services/AuthService';
 import { loadUniversity } from '../actions/universityActions';
 import { loadInstitute } from '../actions/instituteActions';
 import { loadDepartment } from '../actions/departmentActions';
@@ -271,7 +270,7 @@ function* deleteUser() {
     });
 
     if (response && response.status === 204) {
-      new AuthService().logout();
+      authService.logout();
       yield put(signOut());
     } else {
       yield put(addError(response.data));

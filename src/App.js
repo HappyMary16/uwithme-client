@@ -21,7 +21,7 @@ import './styles/text.css';
 import './styles/avatar.css';
 import './styles/table.css';
 import Container from 'react-bootstrap/Container';
-import { AuthService } from './services/AuthService';
+import { authService } from './services/http.js';
 import { history } from './store/Store';
 import { keycloakSignInSuccess, signOut } from './pages/authorization/actions';
 import { CustomSpinner } from './pages/navigation/components/CustomSpinner';
@@ -34,7 +34,6 @@ import * as config from './config';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.authService = new AuthService();
 
     const { clientVersion, dispatch } = this.props;
     if (config.CLIENT_VERSION !== clientVersion) {
@@ -45,32 +44,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.authService.loadUser().then(() => {
-      if (this.authService.isLoggingIn) {
-        this.authService.completeLogin().then(() => {
-          this.checkLogin();
-        });
-      } else if (this.authService.isLoggingOut) {
-        this.authService.completeLogout().then(() => {
-          this.checkLogin();
-        });
-      } else {
-        this.checkLogin();
-      }
-    });
-  }
-
-  checkLogin() {
     const { user, dispatch } = this.props;
 
-    if (this.authService.isLoggedIn) {
+    if (authService.isLoggedIn) {
       dispatch(keycloakSignInSuccess());
       if (!user) {
         history.push(PRE_HOME);
       }
     } else {
       dispatch(signOut());
-      this.authService.login();
+      authService.login();
     }
   }
 
