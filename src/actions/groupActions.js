@@ -1,14 +1,14 @@
-export const CREATE_GROUP = 'CREATE_GROUP';
+export const CREATE_GROUP = "CREATE_GROUP";
 
-export const LOAD_GROUP_BY_ID = 'LOAD_GROUPS_BY_ID';
-export const LOAD_GROUP = 'LOAD_GROUP';
-export const LOAD_GROUPS = 'LOAD_GROUPS';
-export const LOAD_GROUPS_BY_UNIVERSITY_ID = 'LOAD_GROUPS_BY_UNIVERSITY_ID';
+export const LOAD_GROUP_BY_ID = "LOAD_GROUPS_BY_ID";
+export const LOAD_GROUP = "LOAD_GROUP";
+export const LOAD_GROUPS = "LOAD_GROUPS";
+export const LOAD_GROUPS_BY_UNIVERSITY_ID = "LOAD_GROUPS_BY_UNIVERSITY_ID";
 
-export const RENDER_GROUP = 'RENDER_GROUP';
-export const RENDER_USER_GROUP = 'RENDER_USER_GROUP';
-export const RENDER_GROUPS = 'RENDER_GROUPS';
-export const RENDER_GROUPS_FOR_REGISTRATION = 'RENDER_GROUPS_FOR_REGISTRATION';
+export const RENDER_GROUP = "RENDER_GROUP";
+export const RENDER_USER_GROUP = "RENDER_USER_GROUP";
+export const RENDER_GROUPS = "RENDER_GROUPS";
+export const RENDER_GROUPS_FOR_REGISTRATION = "RENDER_GROUPS_FOR_REGISTRATION";
 
 export const loadGroupById = groupId => ({
   type: LOAD_GROUP_BY_ID,
@@ -77,5 +77,7 @@ export const loadGroup = () => ({
 
 export const loadGroupsByUniversityId = universityId => ({
   type: LOAD_GROUPS_BY_UNIVERSITY_ID,
-  payload: universityId
+  payload: {
+    universityId
+  }
 });

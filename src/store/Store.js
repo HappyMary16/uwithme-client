@@ -6,7 +6,7 @@ import { createBrowserHistory } from 'history';
 import authReducers from '../pages/authorization/reducers';
 import filesReducers from '../pages/user/files/reducers';
 import loadingProcess from '../pages/navigation/loadingReducer';
-import rootSaga from './rootSaga';
+import rootSaga from '../sagas/rootSaga';
 import scheduleReducers from '../reducers/scheduleReducers';
 import lectureHallReducer from '../pages/admin/lectureHalls/reducers';
 import messageReducers from '../reducers/messageReducers';

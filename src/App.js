@@ -53,7 +53,6 @@ class App extends Component {
       }
     } else {
       dispatch(signOut());
-      authService.login();
     }
   }
 

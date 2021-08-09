@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import Col from 'react-bootstrap/Col';
-import i18n from '../../../locales/i18n';
-import Button from 'react-bootstrap/Button';
+import React, { Component } from "react";
+import Col from "react-bootstrap/Col";
+import i18n from "../../../locales/i18n";
+import Button from "react-bootstrap/Button";
 import {
   loadUniversities,
   loadUniversity
-} from '../../../actions/universityActions';
-import { deleteUser, updateUser } from '../../../actions/userActions';
-import EditSetting from './components/EditSetting';
+} from "../../../actions/universityActions";
+import { deleteUser, updateUser } from "../../../actions/userActions";
+import EditSetting from "./components/EditSetting";
 import {
   loadInstitute,
   loadInstitutes
-} from '../../../actions/instituteActions';
+} from "../../../actions/instituteActions";
 import {
   loadDepartment,
   loadDepartments
-} from '../../../actions/departmentActions';
-import { loadGroup, loadGroups } from '../../../actions/groupActions';
-import { connect } from 'react-redux';
-import { loadUserUniversityInfo } from '../../../actions/structureActions';
-import { KeycloakSetting } from './components/KeycloakSetting';
-import Row from 'react-bootstrap/Row';
-import { isAdmin } from '../../../utils/UsersUtil';
+} from "../../../actions/departmentActions";
+import { loadGroup, loadGroups } from "../../../actions/groupActions";
+import { connect } from "react-redux";
+import { loadUserUniversityInfo } from "../../../actions/structureActions";
+import { KeycloakSetting } from "./components/KeycloakSetting";
+import Row from "react-bootstrap/Row";
+import { isAdmin, isStudent } from "../../../utils/UsersUtil";
 
 class Setting extends Component {
   constructor(props) {
@@ -40,12 +40,14 @@ class Setting extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, user } = this.props;
 
     dispatch(loadUniversity());
     dispatch(loadInstitute());
     dispatch(loadDepartment());
-    dispatch(loadGroup());
+    if (isStudent(user)) {
+      dispatch(loadGroup());
+    }
   }
 
   setEditMode(isEditMode) {
@@ -173,18 +175,18 @@ class Setting extends Component {
               md={{ offset: isAdmin(user) ? 8 : 4, span: 4 }}
               lg={{ offset: isAdmin(user) ? 9 : 6, span: 3 }}
             >
-              <Button block variant={'red'} onClick={() => this.delete()}>
-                {i18n.t('delete')}
+              <Button block variant={"red"} onClick={() => this.delete()}>
+                {i18n.t("delete")}
               </Button>
             </Col>
             {!isAdmin(user) && (
               <Col xs={12} md={4} lg={3}>
                 <Button
                   block
-                  variant={'purple'}
+                  variant={"purple"}
                   onClick={() => this.setEditMode(true)}
                 >
-                  {i18n.t('edit')}
+                  {i18n.t("edit")}
                 </Button>
               </Col>
             )}

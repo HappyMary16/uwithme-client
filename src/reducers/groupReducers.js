@@ -1,13 +1,13 @@
-import StateLoader from '../store/StateLoader';
+import StateLoader from "../store/StateLoader";
 import {
   RENDER_GROUP,
   RENDER_GROUPS,
   RENDER_GROUPS_FOR_REGISTRATION,
   RENDER_USER_GROUP
-} from '../actions/groupActions';
-import { RENDER_INSTITUTES_FOR_REGISTRATION } from '../actions/instituteActions';
-import { RENDER_DEPARTMENTS_FOR_REGISTRATION } from '../actions/departmentActions';
-import { SIGN_OUT } from '../pages/authorization/actions';
+} from "../actions/groupActions";
+import { RENDER_INSTITUTES_FOR_REGISTRATION } from "../actions/instituteActions";
+import { RENDER_DEPARTMENTS_FOR_REGISTRATION } from "../actions/departmentActions";
+import { SIGN_OUT } from "../pages/authorization/actions";
 
 export default function groupReducers(
   state = new StateLoader().loadState().groupReducers || {
@@ -19,13 +19,6 @@ export default function groupReducers(
   switch (action.type) {
     case RENDER_USER_GROUP: {
       let group = action.payload.group;
-
-      if (!group) {
-        return {
-          ...state,
-          userGroup: undefined
-        };
-      }
 
       return {
         ...state,
