@@ -1,5 +1,4 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import http from "../services/http";
 import {
   GET_LESSONS_BY_GROUP_ID,
   LESSONS,

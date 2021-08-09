@@ -1,5 +1,4 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { startFetching } from "../pages/navigation/actions";
 import {
   GROUPS,
   GROUPS_BY_UNIVERSITY_ID,
