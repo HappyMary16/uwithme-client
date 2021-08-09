@@ -1,17 +1,17 @@
-import StateLoader from '../store/StateLoader';
+import StateLoader from "../store/StateLoader";
 
-import { SIGN_OUT } from '../pages/authorization/actions';
+import { SIGN_OUT } from "../pages/authorization/actions";
 import {
   RENDER_DEBTS,
   RENDER_STUDENT_INFO,
   RENDER_STUDENTS_RATING,
   RENDER_SUBJECTS_SCORES
-} from '../actions/studCabinetActions';
+} from "../actions/studCabinetActions";
 
 export default function studCabinetReducers(
   state = new StateLoader().loadState().studCabinetReducers || {
-    studentsScores: {},
-    subjectsScores: {},
+    studentsScores: [],
+    subjectsScores: [],
     studentInfo: {},
     debts: []
   },
@@ -20,14 +20,38 @@ export default function studCabinetReducers(
   switch (action.type) {
     case RENDER_STUDENTS_RATING: {
       const { semester, studentsScores } = action.payload;
-      state.studentsScores[semester] = studentsScores;
-      return state;
+
+      const newScores = studentsScores.map(studentScore => {
+        return {
+          ...studentScore,
+          semester: semester
+        };
+      });
+
+      return {
+        ...state,
+        studentsScores: state.studentsScores
+          .filter(studentScore => studentScore.semester !== semester)
+          .concat(newScores)
+      };
     }
 
     case RENDER_SUBJECTS_SCORES: {
       const { semester, subjectsScores } = action.payload;
-      state.subjectsScores[semester] = subjectsScores;
-      return state;
+
+      const newScores = subjectsScores.map(subjectScore => {
+        return {
+          ...subjectScore,
+          semester: semester
+        };
+      });
+
+      return {
+        ...state,
+        subjectsScores: state.subjectsScores
+          .filter(subjectScore => subjectScore.semester !== semester)
+          .concat(newScores)
+      };
     }
 
     case RENDER_DEBTS: {
@@ -45,9 +69,10 @@ export default function studCabinetReducers(
 
     case SIGN_OUT:
       return {
-        studentsScores: {},
+        studentsScores: [],
         studentInfo: {},
-        subjectsScores: {}
+        subjectsScores: [],
+        debts: []
       };
 
     default:

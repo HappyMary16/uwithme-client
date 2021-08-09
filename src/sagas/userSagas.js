@@ -82,7 +82,8 @@ function* downloadAvatarForUser(userId) {
   const response = yield call(processHttpCall, {
     url: AVATAR + userId,
     method: "get",
-    loadFile: true
+    loadFile: true,
+    ignoreNotFound: true
   });
 
   if (response) {
@@ -102,7 +103,7 @@ function* processDownloadMyAvatar() {
     url: AVATAR,
     method: "get",
     loadFile: true,
-    skipNotFound: true
+    ignoreNotFound: true
   });
 
   if (response) {

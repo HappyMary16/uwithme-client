@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { loadSubjectsScores } from '../../actions/studCabinetActions';
-import { connect } from 'react-redux';
-import StudCabinetPage from './components/StudCabinetPage';
+import React, { Component } from "react";
+import { loadSubjectsScores } from "../../actions/studCabinetActions";
+import { connect } from "react-redux";
+import StudCabinetPage from "./components/StudCabinetPage";
 
 class SubjectsScores extends Component {
   constructor(props) {
@@ -32,33 +32,33 @@ class SubjectsScores extends Component {
         data={subjectsScores}
         columns={[
           {
-            dataField: 'subject',
-            text: 'Дисципліна',
+            dataField: "subject",
+            text: "Дисципліна",
             sort: true
           },
           {
-            dataField: 'teacher',
-            text: 'Викладач',
+            dataField: "teacher",
+            text: "Викладач",
             sort: true
           },
           {
-            dataField: 'control',
-            text: 'Е/З',
+            dataField: "control",
+            text: "Е/З",
             sort: true
           },
           {
-            dataField: 'scoreNationalShort',
-            text: 'Нац',
+            dataField: "scoreNationalShort",
+            text: "Нац",
             sort: true
           },
           {
-            dataField: 'scoreBologna',
-            text: 'Бал',
+            dataField: "scoreBologna",
+            text: "Бал",
             sort: true
           },
           {
-            dataField: 'scoreECTS',
-            text: 'ECTS',
+            dataField: "scoreECTS",
+            text: "ECTS",
             sort: true
           }
         ]}

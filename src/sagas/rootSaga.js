@@ -46,7 +46,7 @@ export function* processHttpCall({
   isFile,
   loadFile,
   onUploadProgress,
-  skipNotFound
+  ignoreNotFound
 }) {
   try {
     yield put(startFetching());
@@ -65,7 +65,7 @@ export function* processHttpCall({
       return;
     }
 
-    if (skipNotFound && response.status === 404) {
+    if (ignoreNotFound && response.status === 404) {
       return;
     }
 
