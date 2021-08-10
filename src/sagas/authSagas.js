@@ -3,7 +3,7 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import http from "../services/http";
 import { SIGN_IN, SIGN_UP } from "../constants/serverApi";
 import {
-  setRegistrationComplete,
+  updateRegistrationComplete,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_UP_REQUEST,
@@ -34,7 +34,6 @@ function* signUp(action) {
 
   if (response) {
     yield put(signInSuccess(response));
-    yield put(setRegistrationComplete(true));
   }
 }
 
@@ -51,7 +50,8 @@ function* processSignIn() {
     if (response && response.status === 200) {
       yield put(signInSuccess(response.data));
     } else if (response && response.status === 404) {
-      yield put(setRegistrationComplete(false));
+      yield put(updateRegistrationComplete());
+      history.push(PRE_HOME);
     } else {
       yield put(addError(response));
     }
@@ -65,6 +65,7 @@ function* processSignIn() {
 function* processSignInSuccess() {
   if (history.location.pathname.includes(PRE_HOME)) {
     history.push(USER_HOME);
-    yield put(downloadMyAvatar());
   }
+
+  yield put(downloadMyAvatar());
 }

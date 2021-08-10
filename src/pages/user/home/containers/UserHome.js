@@ -3,7 +3,6 @@ import { User } from "../components/User";
 import { findLessons } from "../../../../actions/scheduleActions";
 import React, { Component } from "react";
 import { uploadAvatar } from "../../../../actions/userActions";
-import { signInRequest } from "../../../../actions/authActions";
 
 class UserHome extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class UserHome extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(signInRequest());
+
     dispatch(findLessons());
   }
 
@@ -27,13 +26,15 @@ class UserHome extends Component {
     const { user, avatar, lessons } = this.props;
 
     return (
-      <User
-        user={user}
-        avatar={avatar}
-        lessons={lessons}
-        isMine={true}
-        onSaveAvatar={this.onSaveAvatar}
-      />
+      user && (
+        <User
+          user={user}
+          avatar={avatar}
+          lessons={lessons}
+          isMine={true}
+          onSaveAvatar={this.onSaveAvatar}
+        />
+      )
     );
   }
 }

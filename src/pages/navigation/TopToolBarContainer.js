@@ -6,8 +6,7 @@ import { signOut } from "../../actions/authActions";
 
 const mapStateToProps = state => {
   return {
-    user: state.authReducers.user,
-    isAuthenticated: state.authReducers.isAuthenticated
+    user: state.authReducers.user
   };
 };
 

@@ -1,7 +1,7 @@
-import React from 'react';
-import { LectureHallsList } from './LectureHallsList';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { ListItem } from '../../structure/components/ListItem';
+import React from "react";
+import { LectureHallsList } from "./LectureHallsList";
+import ListGroup from "react-bootstrap/ListGroup";
+import { ListItem } from "../../structure/components/ListItem";
 
 export const Building = ({ building, lectureHalls }) => {
   const [open, setOpen] = React.useState(false);
@@ -14,10 +14,10 @@ export const Building = ({ building, lectureHalls }) => {
           text={building.label}
           icon={
             <img
-              src="/department-icon.jpg"
+              src="/DepartmentIcon.png"
               alt=""
-              width="20"
-              height="20"
+              width="25"
+              height="25"
               title="building"
             />
           }

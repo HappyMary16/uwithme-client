@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { GroupList } from './GroupList';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { ListItem } from './ListItem';
+import React, { Component } from "react";
+import { GroupList } from "./GroupList";
+import ListGroup from "react-bootstrap/ListGroup";
+import { ListItem } from "./ListItem";
 
 export default class Department extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class Department extends Component {
   }
 
   someAction() {
-    console.log('action');
+    console.log("action");
   }
 
   render() {
@@ -30,7 +30,7 @@ export default class Department extends Component {
     return (
       <div>
         <ListGroup.Item
-          className={'padding-left'}
+          className={"padding-left"}
           action
           onClick={this.instituteHandleClick}
         >
@@ -39,7 +39,7 @@ export default class Department extends Component {
             text={department.label}
             icon={
               <img
-                src="/department-icon.jpg"
+                src="/DepartmentIcon.png"
                 alt=""
                 width="20"
                 height="20"

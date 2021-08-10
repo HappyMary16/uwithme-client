@@ -23,7 +23,6 @@ class PreHome extends Component {
 const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
-    isAuthenticated: state.authReducers.isAuthenticated,
     isRegistrationComplete: state.authReducers.isRegistrationComplete
   };
 };

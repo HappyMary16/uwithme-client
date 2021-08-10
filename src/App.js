@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import TopToolBarContainer from "./pages/navigation/TopToolBarContainer";
-import { PRE_HOME } from "./constants/links";
 import { UserToolBar } from "./pages/user/UserToolBar";
 
 import { connect } from "react-redux";
@@ -22,14 +21,13 @@ import "./styles/avatar.css";
 import "./styles/table.css";
 import Container from "react-bootstrap/Container";
 import { authService } from "./services/http.js";
-import { history } from "./store/Store";
 import { CustomSpinner } from "./pages/navigation/components/CustomSpinner";
 import { PageRouter } from "./pages/navigation/PageRouter";
 import { Message } from "./pages/common/components/Message";
 import { removeMessage } from "./actions/messageAction";
 import ErrorContainer from "./pages/common/containers/ErrorContainer";
 import * as config from "./config";
-import { keycloakSignInSuccess, signOut } from "./actions/authActions";
+import { signInRequest, signOut } from "./actions/authActions";
 
 class App extends Component {
   constructor(props) {
@@ -44,13 +42,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { user, dispatch } = this.props;
+    const { dispatch } = this.props;
 
     if (authService.isLoggedIn) {
-      dispatch(keycloakSignInSuccess());
-      if (!user) {
-        history.push(PRE_HOME);
-      }
+      dispatch(signInRequest());
     } else {
       dispatch(signOut());
     }
@@ -66,9 +61,7 @@ class App extends Component {
 
     return (
       <Container fluid className={"main-container"}>
-        {user && !isAdmin(user) && (
-          <UserToolBar user={user} isOpen={isMenuOpen} />
-        )}
+        {!isAdmin(user) && <UserToolBar user={user} isOpen={isMenuOpen} />}
         {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
 
         <TopToolBarContainer />

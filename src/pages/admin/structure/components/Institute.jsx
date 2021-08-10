@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import DepartmentsList from './DepartmentsList';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { ListItem } from './ListItem';
+import React, { Component } from "react";
+import DepartmentsList from "./DepartmentsList";
+import ListGroup from "react-bootstrap/ListGroup";
+import { ListItem } from "./ListItem";
 
 export default class Institute extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class Institute extends Component {
   }
 
   someAction() {
-    console.log('action');
+    console.log("action");
   }
 
   render() {
@@ -36,10 +36,10 @@ export default class Institute extends Component {
             text={institute.label}
             icon={
               <img
-                src="/institute-icon.png"
+                src="/InstituteIcon.png"
                 alt=""
-                width="20"
-                height="20"
+                width="25"
+                height="25"
                 title="institute"
               />
             }

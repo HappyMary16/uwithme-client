@@ -10,9 +10,10 @@ import { usersWatcher } from "./userSagas";
 import { structureWatcher } from "./structureSagas";
 import { studCabinetWatcher } from "./studCabinetSagas";
 import { endFetching, startFetching } from "../actions/navigationActions";
-import http from "../services/http";
+import http, { authService } from "../services/http";
 import { addError } from "../actions/messageAction";
 import { fileOperationWatcher } from "./fileSagas";
+import { signOut } from "../actions/authActions";
 
 export default function* rootSaga() {
   yield all([
@@ -58,6 +59,12 @@ export function* processHttpCall({
     }
 
     if (ignoreNotFound && response.status === 404) {
+      return;
+    }
+
+    if (response.status === 401) {
+      yield put(signOut());
+      authService.logout();
       return;
     }
 
