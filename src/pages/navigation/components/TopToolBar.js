@@ -38,18 +38,13 @@ export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
           />
         </Col>
       )}
-      <Col xs={2} sm={1}>
-        {user && (
+      {user && (
+        <Col xs={2} sm={1}>
           <Row className="justify-content-end">
-            <div
-              onClick={signOutFunc()}
-              className={"menu-icon icon log-out-icon"}
-            >
-              <LogOutIcon />
-            </div>
+            <LogOutIcon onClick={signOutFunc()} />
           </Row>
-        )}
-      </Col>
+        </Col>
+      )}
     </Nav>
   );
 };
