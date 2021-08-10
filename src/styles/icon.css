@@ -21,3 +21,11 @@
     color: #5c71c5;
     cursor: pointer;
 }
+
+svg {
+    fill: #707070;
+}
+
+svg:hover {
+    fill: #5c71c5;
+}

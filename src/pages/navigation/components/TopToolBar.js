@@ -4,6 +4,7 @@ import "../../../styles/navigation.css";
 import { ThreeBarsIcon } from "@primer/octicons-react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { LogOutIcon } from "./LogOutIcon";
 
 export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
   return (
@@ -39,15 +40,14 @@ export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
       )}
       <Col xs={2} sm={1}>
         {user && (
-          <div onClick={signOutFunc()}>
-            <img
-              src="/logOut.svg"
-              alt=""
-              height={35}
-              title="logOut"
-              className={"menu-icon icon"}
-            />
-          </div>
+          <Row className="justify-content-end">
+            <div
+              onClick={signOutFunc()}
+              className={"menu-icon icon log-out-icon"}
+            >
+              <LogOutIcon />
+            </div>
+          </Row>
         )}
       </Col>
     </Nav>

@@ -11,6 +11,10 @@
     position: absolute;
 }
 
+.log-out-icon {
+    padding-right: 0.7em;
+}
+
 .app-icon {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
