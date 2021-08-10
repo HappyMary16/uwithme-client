@@ -1,12 +1,12 @@
 import StateLoader from "../store/StateLoader";
 
-import { SIGN_OUT } from "../pages/authorization/actions";
 import {
   RENDER_DEBTS,
   RENDER_STUDENT_INFO,
   RENDER_STUDENTS_RATING,
   RENDER_SUBJECTS_SCORES
 } from "../actions/studCabinetActions";
+import { SIGN_OUT } from "../actions/authActions";
 
 export default function studCabinetReducers(
   state = new StateLoader().loadState().studCabinetReducers || {

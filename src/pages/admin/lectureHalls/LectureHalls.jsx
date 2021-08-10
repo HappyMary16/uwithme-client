@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import i18n from '../../../locales/i18n';
-import { AddLectureHall } from './components/AddLectureHall';
-import { createLectureHall, loadBuildings, loadLectureHalls } from './actions';
-import { BuildingsList } from './components/BuildingsList';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import { EmptyPage } from '../../common/components/EmptyPage';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import i18n from "../../../locales/i18n";
+import { AddLectureHall } from "./components/AddLectureHall";
+import {
+  createLectureHall,
+  loadBuildings,
+  loadLectureHalls
+} from "../../../actions/lectureHallActions";
+import { BuildingsList } from "./components/BuildingsList";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import { EmptyPage } from "../../common/components/EmptyPage";
 
 class LectureHalls extends Component {
   constructor(props) {
@@ -50,10 +54,10 @@ class LectureHalls extends Component {
           <Col sm={12} md={{ offset: 8, span: 4 }} lg={{ offset: 9, span: 3 }}>
             <Button
               block
-              variant={'purple'}
+              variant={"purple"}
               onClick={() => this.setState({ openCreateDialog: true })}
             >
-              {i18n.t('create_lecture_hall')}
+              {i18n.t("create_lecture_hall")}
             </Button>
             <AddLectureHall
               open={openCreateDialog}
@@ -74,10 +78,10 @@ class LectureHalls extends Component {
 
 const mapStateToProps = state => {
   return {
-    lectureHalls: state.lectureHallReducer.lectureHalls,
-    buildings: state.lectureHallReducer.buildings,
+    lectureHalls: state.lectureHallReducers.lectureHalls,
+    buildings: state.lectureHallReducers.buildings,
     universityId: state.authReducers.user.universityId,
-    isFetching: state.loadingProcess.isFetching
+    isFetching: state.navigationReducers.isFetching
   };
 };
 

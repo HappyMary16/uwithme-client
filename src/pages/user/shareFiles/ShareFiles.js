@@ -1,17 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import i18n from '../../../locales/i18n';
-import { getLectures, getTasks } from '../../../utils/FileUtil';
-import { compose } from 'redux';
-import { addAccessToFiles, loadGroupsByTeacher } from './actions';
-import { loadSubjectsAndFiles } from '../files/actions';
-import Select from 'react-select';
-import { selectorColors } from '../../../styles/styles';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import { SubjectFiles } from './components/SubjectFiles';
-import { EmptyPage } from '../../common/components/EmptyPage';
-import { ADD_FILE } from '../../../constants/links';
+import React from "react";
+import { connect } from "react-redux";
+import i18n from "../../../locales/i18n";
+import { getLectures, getTasks } from "../../../utils/FileUtil";
+import { compose } from "redux";
+import Select from "react-select";
+import { selectorColors } from "../../../styles/styles";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import { SubjectFiles } from "./components/SubjectFiles";
+import { EmptyPage } from "../../common/components/EmptyPage";
+import { ADD_FILE } from "../../../constants/links";
+import { loadGroupsByTeacher } from "../../../actions/groupActions";
+import {
+  addAccessToFiles,
+  loadSubjectsAndFiles
+} from "../../../actions/fileActions";
 
 let selectedGroups = [];
 let files = [];
@@ -21,7 +24,7 @@ class ShareFiles extends React.Component {
     super(props);
 
     this.state = {
-      subject: ''
+      subject: ""
     };
 
     this.submit = this.submit.bind(this);
@@ -66,9 +69,9 @@ class ShareFiles extends React.Component {
     return (
       <div>
         <EmptyPage
-          message={i18n.t('you_do_not_have_any_file')}
+          message={i18n.t("you_do_not_have_any_file")}
           href={ADD_FILE}
-          linkText={'add_files_page'}
+          linkText={"add_files_page"}
           list={subjects}
           isFetching={isFetching}
         />
@@ -76,7 +79,7 @@ class ShareFiles extends React.Component {
         {subjects && subjects.length > 0 && (
           <div>
             <Select
-              className={'selector'}
+              className={"selector"}
               theme={selectorColors}
               onChange={opinion => this.setState({ subjectId: opinion.value })}
               options={subjects.map(s => {
@@ -85,7 +88,7 @@ class ShareFiles extends React.Component {
                   label: s.name
                 };
               })}
-              placeholder={i18n.t('subject')}
+              placeholder={i18n.t("subject")}
             />
             <SubjectFiles
               lectures={lectures}
@@ -94,8 +97,8 @@ class ShareFiles extends React.Component {
               handleChoose={this.handleChange}
             />
             <Select
-              className={'selector'}
-              placeholder={i18n.t('groups')}
+              className={"selector"}
+              placeholder={i18n.t("groups")}
               theme={selectorColors}
               isMulti
               onChange={this.handleGroupChange}
@@ -110,11 +113,11 @@ class ShareFiles extends React.Component {
             >
               <Button
                 block
-                type={'submit'}
-                variant={'purple'}
+                type={"submit"}
+                variant={"purple"}
                 onClick={this.submit}
               >
-                {i18n.t('upload')}
+                {i18n.t("upload")}
               </Button>
             </Col>
           </div>
@@ -131,7 +134,7 @@ const mapStateToProps = state => {
     lectures: getLectures(state.filesReducers.files),
     tasks: getTasks(state.filesReducers.files),
     groups: state.groupReducers.groups,
-    isFetching: state.loadingProcess.isFetching
+    isFetching: state.navigationReducers.isFetching
   };
 };
 

@@ -1,21 +1,26 @@
-import StateLoader from '../../../store/StateLoader';
-import { RENDER_FILES, RENDER_SUBJECTS } from './actions';
+import StateLoader from "../store/StateLoader";
 import {
   CLEAR_UPLOAD_PROGRESS,
   CLEAR_UPLOAD_SUCCESS,
+  RENDER_FILES,
+  RENDER_SUBJECTS,
   UPLOAD_PROGRESS,
   UPLOAD_REQUEST,
   UPLOAD_SUCCESS
-} from '../addFiles/actions';
-import { SIGN_OUT } from '../../authorization/actions';
+} from "../actions/fileActions";
+import { SIGN_OUT } from "../actions/authActions";
 
 export default function filesReducers(
-  state = new StateLoader().loadState().filesReducers || { uploadProgress: [] },
+  state = new StateLoader().loadState().filesReducers || {
+    uploadProgress: [],
+    files: [],
+    subjects: []
+  },
   action
 ) {
   switch (action.type) {
     case RENDER_FILES:
-      const newFiles = action.response.data.map(obj => {
+      const newFiles = action.response.map(obj => {
         let file = {};
         file.id = obj.fileId;
         file.name = obj.fileName;
@@ -29,34 +34,30 @@ export default function filesReducers(
         files: newFiles
       };
 
-    case RENDER_SUBJECTS: {
-      return {
-        ...state,
-        subjects: action.payload.subjects.data
-      };
-    }
-    case SIGN_OUT:
-      return { uploadProgress: [] };
     case UPLOAD_REQUEST:
       return {
         ...state,
         filesNumber: action.files && action.files.length
       };
+
     case UPLOAD_SUCCESS:
       return {
         ...state,
         uploadSuccess: state.uploadProgress.length === state.filesNumber
       };
+
     case CLEAR_UPLOAD_PROGRESS:
       return {
         ...state,
         uploadProgress: []
       };
+
     case CLEAR_UPLOAD_SUCCESS:
       return {
         ...state,
         uploadSuccess: false
       };
+
     case UPLOAD_PROGRESS:
       return {
         ...state,
@@ -68,6 +69,22 @@ export default function filesReducers(
           }
         ]
       };
+
+    //TODO: create reducer for subject
+    case RENDER_SUBJECTS: {
+      return {
+        ...state,
+        subjects: action.payload.subjects
+      };
+    }
+
+    case SIGN_OUT:
+      return {
+        uploadProgress: [],
+        files: [],
+        subjects: []
+      };
+
     default:
       return state;
   }

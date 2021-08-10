@@ -1,32 +1,24 @@
 import { all, call, put } from "redux-saga/effects";
-import { authorizationWatcher } from "../pages/authorization/sagas";
-import { fileOperationWatcher } from "../pages/user/files/sagas";
-import { addFilesAndSubjectsWatcher } from "../pages/user/addFiles/sagas";
-import { addAccessToFilesWatcher } from "../pages/user/shareFiles/sagas";
-import { lectureHallWatcher } from "../pages/admin/lectureHalls/sagas";
+import { authorizationWatcher } from "./authSagas";
+import { lectureHallWatcher } from "./lectureHallSagas";
 import { groupWatcher } from "./groupSagas";
 import { departmentWatcher } from "./departmentSagas";
 import { instituteWatcher } from "./instituteSagas";
-import { addLessonWatcher } from "../pages/admin/addLesson/sagas";
-import { deleteLessonWatcher } from "../pages/admin/deleteLesson/sagas";
 import { universityWatcher } from "./universitySagas";
 import { scheduleWatcher } from "./scheduleSagas";
 import { usersWatcher } from "./userSagas";
 import { structureWatcher } from "./structureSagas";
 import { studCabinetWatcher } from "./studCabinetSagas";
-import { endFetching, startFetching } from "../pages/navigation/actions";
+import { endFetching, startFetching } from "../actions/navigationActions";
 import http from "../services/http";
 import { addError } from "../actions/messageAction";
+import { fileOperationWatcher } from "./fileSagas";
 
 export default function* rootSaga() {
   yield all([
     authorizationWatcher(),
     fileOperationWatcher(),
-    addFilesAndSubjectsWatcher(),
-    addAccessToFilesWatcher(),
     scheduleWatcher(),
-    addLessonWatcher(),
-    deleteLessonWatcher(),
     usersWatcher(),
     lectureHallWatcher(),
     groupWatcher(),

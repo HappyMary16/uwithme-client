@@ -1,21 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { FileTypes, LECTURE } from '../../../constants/userRoles';
-import { Upload } from './components/Upload';
-import { loadSubjectsAndFiles } from '../files/actions';
-import i18n from '../../../locales/i18n';
-import { compose } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { FileTypes, LECTURE } from "../../../constants/userRoles";
+import { Upload } from "./components/Upload";
+import i18n from "../../../locales/i18n";
+import { compose } from "redux";
+import CreatableSelect from "react-select/creatable";
+import Select from "react-select";
+import { selectorColors } from "../../../styles/styles";
+import { Message } from "../../common/components/Message";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import {
   clearUploadProgress,
   clearUploadSuccess,
+  loadSubjectsAndFiles,
   uploadRequest
-} from './actions';
-import CreatableSelect from 'react-select/creatable';
-import Select from 'react-select';
-import { selectorColors } from '../../../styles/styles';
-import { Message } from '../../common/components/Message';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+} from "../../../actions/fileActions";
 
 class AddFile extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class AddFile extends React.Component {
 
     this.state = {
       files: [],
-      subject: '',
+      subject: "",
       fileType: LECTURE,
       uploading: false,
       successfulUploaded: false
@@ -82,12 +82,12 @@ class AddFile extends React.Component {
         <Message
           open={uploadSuccess}
           handleClose={this.uploadingEnded}
-          message={i18n.t('files_is_uploaded')}
+          message={i18n.t("files_is_uploaded")}
         />
         <CreatableSelect
-          className={'selector'}
+          className={"selector"}
           theme={selectorColors}
-          placeholder={i18n.t('subject')}
+          placeholder={i18n.t("subject")}
           options={
             subjects &&
             subjects.map(subject => {
@@ -102,11 +102,11 @@ class AddFile extends React.Component {
           value={subject}
         />
         <Select
-          className={'selector'}
+          className={"selector"}
           theme={selectorColors}
           onChange={opinion => this.setState({ fileType: opinion.value })}
           options={FileTypes}
-          placeholder={i18n.t('file_type')}
+          placeholder={i18n.t("file_type")}
         />
         <Upload
           uploadProgress={uploadProgress}
@@ -123,11 +123,11 @@ class AddFile extends React.Component {
         >
           <Button
             block
-            type={'submit'}
-            variant={'purple'}
+            type={"submit"}
+            variant={"purple"}
             onClick={this.submit}
           >
-            {i18n.t('upload')}
+            {i18n.t("upload")}
           </Button>
         </Col>
       </div>

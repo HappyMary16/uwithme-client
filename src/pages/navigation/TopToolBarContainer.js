@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
-import { TopToolBar } from './components/TopToolBar';
-import { signOut } from '../authorization/actions';
-import { changeIsMenuOpen } from './actions';
-import { authService } from '../../services/http';
+import { connect } from "react-redux";
+import { TopToolBar } from "./components/TopToolBar";
+import { changeIsMenuOpen } from "../../actions/navigationActions";
+import { authService } from "../../services/http";
+import { signOut } from "../../actions/authActions";
 
 const mapStateToProps = state => {
   return {

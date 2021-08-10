@@ -1,16 +1,18 @@
-import { RENDER_AVATAR, RENDER_USER, RENDER_USERS } from '../actions/userActions';
-import { SIGN_OUT } from '../pages/authorization/actions';
-import StateLoader from '../store/StateLoader';
+import {
+  RENDER_AVATAR,
+  RENDER_USER,
+  RENDER_USERS
+} from "../actions/userActions";
+import StateLoader from "../store/StateLoader";
+import { SIGN_OUT } from "../actions/authActions";
 
 export default function userReducers(
   state = new StateLoader().loadState().userReducers || {
-    users: [],
-    avatars: []
+    users: []
   },
   action
 ) {
   switch (action.type) {
-
     case RENDER_USERS:
       return {
         ...state,
@@ -45,8 +47,7 @@ export default function userReducers(
 
     case SIGN_OUT:
       return {
-        users: [],
-        avatars: []
+        users: []
       };
 
     default:

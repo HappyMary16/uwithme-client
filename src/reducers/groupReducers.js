@@ -7,7 +7,7 @@ import {
 } from "../actions/groupActions";
 import { RENDER_INSTITUTES_FOR_REGISTRATION } from "../actions/instituteActions";
 import { RENDER_DEPARTMENTS_FOR_REGISTRATION } from "../actions/departmentActions";
-import { SIGN_OUT } from "../pages/authorization/actions";
+import { SIGN_OUT } from "../actions/authActions";
 
 export default function groupReducers(
   state = new StateLoader().loadState().groupReducers || {

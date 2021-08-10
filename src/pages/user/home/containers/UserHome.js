@@ -1,9 +1,9 @@
-import { connect } from 'react-redux';
-import { User } from '../components/User';
-import { findLessons } from '../../../../actions/scheduleActions';
-import React, { Component } from 'react';
-import { signInRequest } from '../../../authorization/actions';
-import { uploadAvatar } from '../../../../actions/userActions';
+import { connect } from "react-redux";
+import { User } from "../components/User";
+import { findLessons } from "../../../../actions/scheduleActions";
+import React, { Component } from "react";
+import { uploadAvatar } from "../../../../actions/userActions";
+import { signInRequest } from "../../../../actions/authActions";
 
 class UserHome extends Component {
   constructor(props) {

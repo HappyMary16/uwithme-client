@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
-import { loadTeachers } from '../../../../actions/userActions';
-import { loadSubjects } from '../../../user/files/actions';
-import { loadBuildings, loadLectureHalls } from '../../lectureHalls/actions';
-import { addLessonToSchedule } from '../actions';
-import AddLesson from '../components/AddLesson';
-import { getTeachers } from '../../../../utils/UsersUtil';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { loadGroupsByUniversityId } from "../../../../actions/groupActions";
+import { loadTeachers } from "../../../../actions/userActions";
+import {
+  loadBuildings,
+  loadLectureHalls
+} from "../../../../actions/lectureHallActions";
+import AddLesson from "../components/AddLesson";
+import { getTeachers } from "../../../../utils/UsersUtil";
+import { addLessonToSchedule } from "../../../../actions/scheduleActions";
+import { loadSubjects } from "../../../../actions/fileActions";
 
 class AdminAddLesson extends Component {
   constructor(props) {
@@ -79,8 +82,8 @@ const mapStateToProps = state => {
     universityId: state.authReducers.user.universityId,
     teachers: getTeachers(state.userReducers.users),
     subjects: state.filesReducers.subjects,
-    lectureHalls: state.lectureHallReducer.lectureHalls,
-    buildings: state.lectureHallReducer.buildings
+    lectureHalls: state.lectureHallReducers.lectureHalls,
+    buildings: state.lectureHallReducers.buildings
   };
 };
 

@@ -1,15 +1,20 @@
-import StateLoader from '../../store/StateLoader';
+import StateLoader from "../store/StateLoader";
+import { RENDER_MY_AVATAR } from "../actions/userActions";
+import * as config from "../config";
 import {
   KEYCLOAK_SIGN_IN_SUCCESS,
   REGISTRATION_COMPLETE,
   SIGN_IN_SUCCESS,
   SIGN_OUT
-} from './actions';
-import { RENDER_MY_AVATAR } from '../../actions/userActions';
-import * as config from '../../config';
+} from "../actions/authActions";
 
 export default function authReducers(
-  state = new StateLoader().loadState().authReducers || {},
+  state = new StateLoader().loadState().authReducers || {
+    isAuthenticated: false,
+    isRegistrationComplete: false,
+    user: undefined,
+    avatar: undefined
+  },
   action
 ) {
   switch (action.type) {
@@ -26,13 +31,6 @@ export default function authReducers(
       };
     }
 
-    case SIGN_OUT:
-      return {
-        isAuthenticated: false,
-        user: undefined,
-        avatar: undefined
-      };
-
     case KEYCLOAK_SIGN_IN_SUCCESS:
       return {
         ...state,
@@ -44,6 +42,14 @@ export default function authReducers(
       return {
         ...state,
         isRegistrationComplete: action.payload.isRegistrationComplete
+      };
+
+    case SIGN_OUT:
+      return {
+        isAuthenticated: false,
+        isRegistrationComplete: false,
+        user: undefined,
+        avatar: undefined
       };
 
     default:

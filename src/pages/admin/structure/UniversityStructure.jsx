@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Institute from './components/Institute';
-import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
-import { CreateStructurePanel } from './components/CreatingStructurePanel';
-import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { EmptyPage } from '../../common/components/EmptyPage';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Institute from "./components/Institute";
+import { getDepartmentsByInstitute } from "../../../utils/StructureUtils";
+import { CreateStructurePanel } from "./components/CreatingStructurePanel";
+import Container from "react-bootstrap/Container";
+import ListGroup from "react-bootstrap/ListGroup";
+import { EmptyPage } from "../../common/components/EmptyPage";
 import {
   createInstitute,
   loadInstitutesByUniversityId
-} from '../../../actions/instituteActions';
+} from "../../../actions/instituteActions";
 import {
   createDepartment,
   loadDepartmentsByUniversityId
-} from '../../../actions/departmentActions';
+} from "../../../actions/departmentActions";
 import {
   createGroup,
   loadGroupsByUniversityId
-} from '../../../actions/groupActions';
+} from "../../../actions/groupActions";
 
 class UniversityStructure extends Component {
   constructor(props) {
@@ -109,7 +109,7 @@ const mapStateToProps = state => {
     departments: state.departmentReducers.departments,
     groups: state.groupReducers.groups,
     universityId: state.authReducers.user.universityId,
-    isFetching: state.loadingProcess.isFetching
+    isFetching: state.navigationReducers.isFetching
   };
 };
 

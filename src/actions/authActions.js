@@ -1,12 +1,11 @@
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
+export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 
-export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
-export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
-export const KEYCLOAK_SIGN_IN_SUCCESS = 'KEYCLOAK_SIGN_IN_SUCCESS';
-export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
-export const SIGN_OUT = 'SIGN_OUT';
+export const SIGN_IN_REQUEST = "SIGN_IN_REQUEST";
+export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
+export const KEYCLOAK_SIGN_IN_SUCCESS = "KEYCLOAK_SIGN_IN_SUCCESS";
+export const SIGN_OUT = "SIGN_OUT";
 
-export const REGISTRATION_COMPLETE = 'REGISTRATION_COMPLETE'
+export const REGISTRATION_COMPLETE = "REGISTRATION_COMPLETE";
 
 export function signUpRequest(
   role,
@@ -44,17 +43,13 @@ export const signInSuccess = user => ({
   }
 });
 
-export const signInError = () => ({
-  type: SIGN_IN_ERROR
-});
-
 export const keycloakSignInSuccess = () => ({
   type: KEYCLOAK_SIGN_IN_SUCCESS
 });
 
-export const setRegistrationComplete = (isRegistrationComplete) => ({
+export const setRegistrationComplete = isRegistrationComplete => ({
   type: REGISTRATION_COMPLETE,
   payload: {
     isRegistrationComplete
   }
-})
+});

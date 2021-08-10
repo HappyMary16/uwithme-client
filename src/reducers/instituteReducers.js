@@ -1,11 +1,11 @@
-import StateLoader from '../store/StateLoader';
+import StateLoader from "../store/StateLoader";
 import {
   INSTITUTE_CREATED,
   RENDER_INSTITUTES,
   RENDER_INSTITUTES_FOR_REGISTRATION,
   RENDER_USER_INSTITUTE
-} from '../actions/instituteActions';
-import { SIGN_OUT } from '../pages/authorization/actions';
+} from "../actions/instituteActions";
+import { SIGN_OUT } from "../actions/authActions";
 
 export default function instituteReducers(
   state = new StateLoader().loadState().instituteReducers || {
@@ -15,7 +15,6 @@ export default function instituteReducers(
   action
 ) {
   switch (action.type) {
-
     case RENDER_INSTITUTES_FOR_REGISTRATION:
       return {
         ...state,

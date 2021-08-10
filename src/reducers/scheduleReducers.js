@@ -1,6 +1,10 @@
-import { RENDER_LESSON, RENDER_LESSONS, RENDER_LESSONS_FOR_CURRENT_USER_PAGE } from '../actions/scheduleActions';
-import StateLoader from '../store/StateLoader';
-import { SIGN_OUT } from '../pages/authorization/actions';
+import {
+  RENDER_LESSON,
+  RENDER_LESSONS,
+  RENDER_LESSONS_FOR_CURRENT_USER_PAGE
+} from "../actions/scheduleActions";
+import StateLoader from "../store/StateLoader";
+import { SIGN_OUT } from "../actions/authActions";
 
 export default function scheduleReducers(
   state = new StateLoader().loadState().scheduleReducers || {
@@ -9,7 +13,6 @@ export default function scheduleReducers(
   action
 ) {
   switch (action.type) {
-
     case RENDER_LESSONS:
       return {
         ...state,
@@ -31,12 +34,13 @@ export default function scheduleReducers(
     case RENDER_LESSONS_FOR_CURRENT_USER_PAGE:
       return {
         ...state,
-        lessons: action.payload.lessons
+        otherUsersLessons: action.payload.lessons
       };
 
     case SIGN_OUT:
       return {
-        lessons: []
+        lessons: [],
+        otherUsersLessons: []
       };
 
     default:

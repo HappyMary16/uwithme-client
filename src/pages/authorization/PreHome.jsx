@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ChooseRole from './components/ChooseRole';
-import { history } from '../../store/Store';
-import { signInRequest } from './actions';
-import { USER_HOME } from '../../constants/links';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import ChooseRole from "./components/ChooseRole";
+import { history } from "../../store/Store";
+import { USER_HOME } from "../../constants/links";
+import { signInRequest } from "../../actions/authActions";
 
 class PreHome extends Component {
   componentDidMount() {
@@ -16,9 +16,7 @@ class PreHome extends Component {
 
   render() {
     const { isRegistrationComplete } = this.props;
-    return (
-      <div>{!isRegistrationComplete && <ChooseRole />}</div>
-    );
+    return <div>{!isRegistrationComplete && <ChooseRole />}</div>;
   }
 }
 

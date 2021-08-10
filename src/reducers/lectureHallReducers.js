@@ -1,9 +1,15 @@
-import { RENDER_BUILDINGS, RENDER_LECTURE_HALLS } from './actions';
-import StateLoader from '../../../store/StateLoader';
-import { SIGN_OUT } from '../../authorization/actions';
+import StateLoader from "../store/StateLoader";
+import {
+  RENDER_BUILDINGS,
+  RENDER_LECTURE_HALLS
+} from "../actions/lectureHallActions";
+import { SIGN_OUT } from "../actions/authActions";
 
-export default function lectureHallReducer(
-  state = new StateLoader().loadState().lectureHallReducer || {},
+export default function lectureHallReducers(
+  state = new StateLoader().loadState().lectureHallReducers || {
+    lectureHalls: [],
+    buildings: []
+  },
   action
 ) {
   switch (action.type) {
@@ -19,6 +25,7 @@ export default function lectureHallReducer(
           };
         })
       };
+
     case RENDER_BUILDINGS:
       return {
         ...state,
@@ -32,8 +39,13 @@ export default function lectureHallReducer(
             };
           })
       };
+
     case SIGN_OUT:
-      return {};
+      return {
+        lectureHalls: [],
+        buildings: []
+      };
+
     default:
       return state;
   }

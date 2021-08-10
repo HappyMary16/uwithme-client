@@ -23,13 +23,13 @@ import "./styles/table.css";
 import Container from "react-bootstrap/Container";
 import { authService } from "./services/http.js";
 import { history } from "./store/Store";
-import { keycloakSignInSuccess, signOut } from "./pages/authorization/actions";
 import { CustomSpinner } from "./pages/navigation/components/CustomSpinner";
 import { PageRouter } from "./pages/navigation/PageRouter";
 import { Message } from "./pages/common/components/Message";
 import { removeMessage } from "./actions/messageAction";
 import ErrorContainer from "./pages/common/containers/ErrorContainer";
 import * as config from "./config";
+import { keycloakSignInSuccess, signOut } from "./actions/authActions";
 
 class App extends Component {
   constructor(props) {
@@ -92,8 +92,8 @@ const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
     clientVersion: state.authReducers.clientVersion,
-    isFetching: state.loadingProcess.isFetching,
-    isMenuOpen: state.loadingProcess.isMenuOpen,
+    isFetching: state.navigationReducers.isFetching,
+    isMenuOpen: state.navigationReducers.isMenuOpen,
     message: state.messageReducers.message
   };
 };

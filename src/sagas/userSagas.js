@@ -29,12 +29,12 @@ import {
   UPDATE_USER,
   UPLOAD_AVATAR
 } from "../actions/userActions";
-import { signInSuccess, signOut } from "../pages/authorization/actions";
 import { loadUniversity } from "../actions/universityActions";
 import { loadInstitute } from "../actions/instituteActions";
 import { loadDepartment } from "../actions/departmentActions";
 import { loadGroup } from "../actions/groupActions";
 import { processHttpCall } from "./rootSaga";
+import { signInSuccess, signOut } from "../actions/authActions";
 
 export function* usersWatcher() {
   yield takeEvery(GET_TEACHERS, getTeachers);
@@ -194,6 +194,7 @@ function* deleteUser() {
   });
 
   if (response) {
+    //TODO: tru without logout
     authService.logout();
     yield put(signOut());
   }

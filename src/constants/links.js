@@ -24,7 +24,6 @@ export const SHARE_FILES = "/files/share";
 export const STUDENTS = "/students/list";
 
 //admin
-export const ADD_UNIVERSITY_PATH = "/university/add";
 export const ADD_LESSON = "/lesson/add";
 export const LECTURE_HALLS = "/lecture/halls";
 

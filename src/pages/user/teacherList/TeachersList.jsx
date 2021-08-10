@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { TeacherListItem } from './TeacherListItem';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { EmptyPage } from '../../common/components/EmptyPage';
-import { loadTeachers } from '../../../actions/userActions';
-import { getTeachers } from '../../../utils/UsersUtil';
+import { connect } from "react-redux";
+import React, { Component } from "react";
+import { TeacherListItem } from "./TeacherListItem";
+import ListGroup from "react-bootstrap/ListGroup";
+import { EmptyPage } from "../../common/components/EmptyPage";
+import { loadTeachers } from "../../../actions/userActions";
+import { getTeachers } from "../../../utils/UsersUtil";
 
 class TeachersList extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class TeachersList extends Component {
     const { teachers, isFetching } = this.props;
 
     return (
-      <ListGroup variant={'flush'}>
+      <ListGroup variant={"flush"}>
         <EmptyPage list={teachers} isFetching={isFetching} />
         {teachers &&
           teachers.map(teacher => (
@@ -31,7 +31,7 @@ const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
     teachers: getTeachers(state.userReducers.users),
-    isFetching: state.loadingProcess.isFetching
+    isFetching: state.navigationReducers.isFetching
   };
 };
 

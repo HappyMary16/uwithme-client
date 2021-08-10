@@ -12,6 +12,7 @@ import {
   LOAD_GROUP,
   LOAD_GROUP_BY_ID,
   LOAD_GROUPS,
+  LOAD_GROUPS_BY_TEACHER,
   LOAD_GROUPS_BY_UNIVERSITY_ID,
   renderGroup,
   renderGroups,
@@ -26,6 +27,7 @@ export function* groupWatcher() {
   yield takeEvery(LOAD_GROUPS_BY_UNIVERSITY_ID, loadGroupsByUniversityId);
   yield takeEvery(LOAD_GROUP_BY_ID, loadGroupById);
   yield takeEvery(LOAD_GROUP, loadGroup);
+  yield takeEvery(LOAD_GROUPS_BY_TEACHER, loadGroupByTeacher);
 }
 
 function* createGroup(action) {
@@ -89,5 +91,16 @@ function* loadGroup() {
 
   if (response) {
     yield put(renderUserGroup(response));
+  }
+}
+
+function* loadGroupByTeacher() {
+  const response = yield call(processHttpCall, {
+    url: GROUPS,
+    method: "get"
+  });
+
+  if (response) {
+    yield put(renderGroups(response));
   }
 }
