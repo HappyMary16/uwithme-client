@@ -36,8 +36,9 @@
     "workbox-sw": "^6.2.2"
   },
   "scripts": {
+    "install": "npm install workbox-cli -g",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && workbox generateSW workbox-config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
