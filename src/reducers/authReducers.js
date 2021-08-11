@@ -41,7 +41,8 @@ export default function authReducers(
       return {
         isRegistrationComplete: true,
         user: undefined,
-        avatar: undefined
+        avatar: undefined,
+        clientVersion: config.CLIENT_VERSION
       };
 
     default:
