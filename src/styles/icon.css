@@ -1,9 +1,9 @@
 .delete-icon {
-    color: red;
+    color: #666666;
 }
 
 .delete-icon:hover {
-    color: #666666;
+    color: darkred !important;
     cursor: pointer;
 }
 
@@ -20,14 +20,6 @@
 .icon:hover {
     color: #5c71c5;
     cursor: pointer;
-}
-
-svg {
-    fill: #666666;
-}
-
-svg:hover {
-    fill: #5c71c5;
 }
 
 .st0 {
@@ -55,4 +47,8 @@ svg:hover {
     stroke: #666666;
     stroke-linecap: round;
     stroke-miterlimit: 10;
+}
+
+.react-switch {
+    margin-right: 2em;
 }

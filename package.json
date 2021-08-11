@@ -32,15 +32,12 @@
     "redux": "^4.0.4",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",
-    "tcomad-oidc": "^1.0.16",
+    "tcomad-oidc": "^1.0.17",
     "workbox-sw": "^6.2.2"
   },
   "scripts": {
-    "install": "npm install workbox-cli -g",
     "start": "react-scripts start",
-    "build": "react-scripts build && workbox generateSW workbox-config.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"

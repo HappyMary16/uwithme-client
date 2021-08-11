@@ -1,10 +1,14 @@
-import React from 'react';
-import i18n from '../../../../locales/i18n';
-import { getName, getUserGroup } from '../../../../utils/UsersUtil';
-import LoadPhoto from './LoadPhoto';
-import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React from "react";
+import i18n from "../../../../locales/i18n";
+import { getName, getUserGroup } from "../../../../utils/UsersUtil";
+import LoadPhoto from "./LoadPhoto";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { CalendarWeekFill } from "react-bootstrap-icons";
+import Button from "react-bootstrap/Button";
+import { history } from "../../../../store/Store";
+import { SCHEDULE, USER_SCHEDULE } from "../../../../constants/links";
 
 export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
   const [open, setOpen] = React.useState(false);
@@ -32,9 +36,9 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
         <Col xs={12} md={5} lg={4} xl={3}>
           <Row className="justify-content-center">
             <img
-              className={'avatar'}
+              className={"avatar"}
               alt="Avatar"
-              src={!avatar ? '/empty-avatar.jpg' : avatar}
+              src={!avatar ? "/empty-avatar.jpg" : avatar}
               onClick={handleClickAvatar}
             />
           </Row>
@@ -44,30 +48,35 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
           <Card border="light">
             <Card.Header as="h5">
               <Row>
-                <Col xs={10} md={11}>
+                <Col xs={9} md={10}>
                   {getName(user)}
                 </Col>
-                {/*<Col xs={2} md={1}>*/}
-                {/*  <CalendarWeekFill*/}
-                {/*    className={'icon'}*/}
-                {/*    // onClick={() => history.push(GROUP_SCHEDULE(group.value))}*/}
-                {/*  />*/}
-                {/*</Col>*/}
+
+                <Col xs={3} md={2}>
+                  <Row className="justify-content-end">
+                    <CalendarWeekFill
+                      className={"icon"}
+                      size={"1.3em"}
+                      onClick={() =>
+                        history.push(isMine ? SCHEDULE : USER_SCHEDULE(user.id))
+                      }
+                    />
+                  </Row>
+                </Col>
               </Row>
             </Card.Header>
             <Card.Body>
               <Card.Subtitle>
-                {user.role === 1 &&
-                  i18n.t('group') + ': ' + getUserGroup(user)}
+                {user.role === 1 && i18n.t("group") + ": " + getUserGroup(user)}
               </Card.Subtitle>
               <Card.Text>
-                {user.phone && i18n.t('phone') + ': ' + user.phone}
+                {user.phone && i18n.t("phone") + ": " + user.phone}
                 {user.phone && <br />}
-                {i18n.t('email')}: {user.email}
+                {i18n.t("email")}: {user.email}
                 <br />
-                {i18n.t('institute')}: {user.instituteName}
+                {i18n.t("institute")}: {user.instituteName}
                 <br />
-                {i18n.t('department')}: {user.departmentName}
+                {i18n.t("department")}: {user.departmentName}
               </Card.Text>
             </Card.Body>
           </Card>

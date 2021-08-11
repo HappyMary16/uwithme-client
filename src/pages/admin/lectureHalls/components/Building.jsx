@@ -10,7 +10,11 @@ export const Building = ({ building, lectureHalls }) => {
   return (
     <div>
       <ListGroup.Item action onClick={() => setOpen(!open)}>
-        <ListItem open={open} text={building.label} icon={<DepartmentIcon />} />
+        <ListItem
+          open={open}
+          text={building.label}
+          icon={<DepartmentIcon size={"1.9em"} />}
+        />
       </ListGroup.Item>
       <LectureHallsList lectureHalls={lectureHalls} open={open} />
     </div>

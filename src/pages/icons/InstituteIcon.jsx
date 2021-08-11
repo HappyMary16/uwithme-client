@@ -1,11 +1,11 @@
 import React from "react";
 
-export const InstituteIcon = () => {
+export const InstituteIcon = ({ size = "1.9em" }) => {
   return (
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
-      height="2em"
+      height={size}
       viewBox="0 0 228 228"
       preserveAspectRatio="xMidYMid meet"
     >

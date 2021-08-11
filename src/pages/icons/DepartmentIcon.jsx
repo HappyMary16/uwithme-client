@@ -1,12 +1,12 @@
 import React from "react";
 
-export const DepartmentIcon = () => {
+export const DepartmentIcon = ({ size = "1.7em" }) => {
   return (
     <div>
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
-        height="1.7em"
+        height={size}
         viewBox="0 0 159.1 159.1"
         preserveAspectRatio="xMidYMid meet"
       >

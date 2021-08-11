@@ -9,6 +9,7 @@ export const LogOutIcon = ({ onClick }) => {
         height="2em"
         viewBox="0 0 128.000000 128.000000"
         preserveAspectRatio="xMidYMid meet"
+        className="st1"
       >
         <g
           transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
