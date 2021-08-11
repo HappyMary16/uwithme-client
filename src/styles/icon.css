@@ -45,11 +45,14 @@ svg:hover {
     stroke-miterlimit: 10;
 }
 
-.st0:hover {
-    stroke: #5c71c5;
-}
-
 .st1:hover {
     fill: #5c71c5;
     stroke: #5c71c5;
+}
+
+.st2 {
+    fill: #666666;
+    stroke: #666666;
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
 }
