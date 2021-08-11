@@ -34,7 +34,7 @@ export default function authReducers(
     case REGISTRATION_COMPLETE:
       return {
         ...state,
-        isRegistrationComplete: !state.isRegistrationComplete
+        isRegistrationComplete: false
       };
 
     case SIGN_OUT:
