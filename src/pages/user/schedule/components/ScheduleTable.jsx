@@ -8,7 +8,6 @@ import { getName } from "../../../../utils/UsersUtil";
 import Col from "react-bootstrap/Col";
 import { Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 import { SwitchWeek } from "../../../common/components/SwitchWeek";
 import { PersonFill } from "react-bootstrap-icons";
 

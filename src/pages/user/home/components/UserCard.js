@@ -6,7 +6,6 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { CalendarWeekFill } from "react-bootstrap-icons";
-import Button from "react-bootstrap/Button";
 import { history } from "../../../../store/Store";
 import { SCHEDULE, USER_SCHEDULE } from "../../../../constants/links";
 

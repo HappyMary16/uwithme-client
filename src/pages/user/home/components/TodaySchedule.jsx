@@ -9,10 +9,6 @@ import {
 import i18n from "../../../../locales/i18n";
 import { isStudent, isTeacher } from "../../../../utils/UsersUtil";
 import Table from "react-bootstrap/Table";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import { history } from "../../../../store/Store";
-import { USER_SCHEDULE } from "../../../../constants/links";
 import Row from "react-bootstrap/Row";
 import { SwitchWeek } from "../../../common/components/SwitchWeek";
 

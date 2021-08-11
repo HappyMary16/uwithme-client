@@ -1,5 +1,4 @@
 import React from "react";
-import i18n from "../../../locales/i18n";
 import Switch from "react-switch";
 import { lightGreyColor } from "../../../styles/styles";
 import { Row } from "react-bootstrap";
