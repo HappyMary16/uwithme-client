@@ -2,6 +2,7 @@ import React from "react";
 import { LectureHallsList } from "./LectureHallsList";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListItem } from "../../structure/components/ListItem";
+import { DepartmentIcon } from "../../../icons/DepartmentIcon";
 
 export const Building = ({ building, lectureHalls }) => {
   const [open, setOpen] = React.useState(false);
@@ -9,19 +10,7 @@ export const Building = ({ building, lectureHalls }) => {
   return (
     <div>
       <ListGroup.Item action onClick={() => setOpen(!open)}>
-        <ListItem
-          open={open}
-          text={building.label}
-          icon={
-            <img
-              src="/DepartmentIcon.png"
-              alt=""
-              width="25"
-              height="25"
-              title="building"
-            />
-          }
-        />
+        <ListItem open={open} text={building.label} icon={<DepartmentIcon />} />
       </ListGroup.Item>
       <LectureHallsList lectureHalls={lectureHalls} open={open} />
     </div>

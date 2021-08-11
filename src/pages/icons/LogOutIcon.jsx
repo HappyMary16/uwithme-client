@@ -6,7 +6,7 @@ export const LogOutIcon = ({ onClick }) => {
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
-        height={35}
+        height="2em"
         viewBox="0 0 128.000000 128.000000"
         preserveAspectRatio="xMidYMid meet"
       >

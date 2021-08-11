@@ -4,7 +4,7 @@ import "../../../styles/navigation.css";
 import { ThreeBarsIcon } from "@primer/octicons-react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { LogOutIcon } from "./LogOutIcon";
+import { LogOutIcon } from "../../icons/LogOutIcon";
 
 export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
   return (

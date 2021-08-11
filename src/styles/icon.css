@@ -3,16 +3,16 @@
 }
 
 .delete-icon:hover {
-    color: #707070;
+    color: #666666;
     cursor: pointer;
 }
 
 .icon-color {
-    color: #707070;
+    color: #666666;
 }
 
 .icon {
-    color: #707070;
+    color: #666666;
     margin-left: 0.5em;
     margin-right: 0.5em;
 }
@@ -23,9 +23,33 @@
 }
 
 svg {
-    fill: #707070;
+    fill: #666666;
 }
 
 svg:hover {
     fill: #5c71c5;
+}
+
+.st0 {
+    fill: none;
+    stroke: #666666;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
+}
+
+.st1 {
+    fill: #666666;
+    stroke: #666666;
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
+}
+
+.st0:hover {
+    stroke: #5c71c5;
+}
+
+.st1:hover {
+    fill: #5c71c5;
+    stroke: #5c71c5;
 }

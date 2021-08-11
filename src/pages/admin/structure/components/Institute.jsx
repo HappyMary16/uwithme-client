@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DepartmentsList from "./DepartmentsList";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListItem } from "./ListItem";
+import { InstituteIcon } from "../../../icons/InstituteIcon";
 
 export default class Institute extends Component {
   constructor(props) {
@@ -34,15 +35,7 @@ export default class Institute extends Component {
           <ListItem
             open={open}
             text={institute.label}
-            icon={
-              <img
-                src="/InstituteIcon.png"
-                alt=""
-                width="25"
-                height="25"
-                title="institute"
-              />
-            }
+            icon={<InstituteIcon />}
           />
         </ListGroup.Item>
 

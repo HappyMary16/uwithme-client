@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GroupList } from "./GroupList";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListItem } from "./ListItem";
+import { DepartmentIcon } from "../../../icons/DepartmentIcon";
 
 export default class Department extends Component {
   constructor(props) {
@@ -37,15 +38,7 @@ export default class Department extends Component {
           <ListItem
             open={open}
             text={department.label}
-            icon={
-              <img
-                src="/DepartmentIcon.png"
-                alt=""
-                width="20"
-                height="20"
-                title="department"
-              />
-            }
+            icon={<DepartmentIcon />}
           />
         </ListGroup.Item>
 
