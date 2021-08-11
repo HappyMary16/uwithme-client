@@ -35,7 +35,10 @@ class App extends Component {
 
     const { clientVersion, dispatch } = this.props;
     if (config.CLIENT_VERSION !== clientVersion) {
+      console.log("Client version is updated")
       dispatch(signOut());
+    } else {
+      console.log("Client version is not changed")
     }
 
     this.closeMessage = this.closeMessage.bind(this);

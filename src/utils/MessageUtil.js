@@ -28,5 +28,5 @@ export const getMessage = error => {
     return "Error status: " + error.status;
   }
 
-  return "Unknown Error" + error;
+  return "Unknown Error";
 };
