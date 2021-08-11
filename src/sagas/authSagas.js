@@ -47,9 +47,9 @@ function* processSignIn() {
       method: "get"
     });
 
-    if (response && response.status === 200) {
+    if (!!response && response.status === 200) {
       yield put(signInSuccess(response.data));
-    } else if (response && response.status === 404) {
+    } else if (!!response && response.status === 404) {
       yield put(updateRegistrationComplete());
       history.push(PRE_HOME);
     } else {

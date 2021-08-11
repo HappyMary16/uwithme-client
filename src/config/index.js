@@ -1,4 +1,4 @@
-export const CLIENT_VERSION = 2.0;
+export const CLIENT_VERSION = 2.1;
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 

@@ -3,15 +3,15 @@ export const getMessage = error => {
     return error;
   }
 
-  if (error.message) {
+  if (!!error && !!error.message) {
     return error.message;
   }
 
-  if (error.error) {
+  if (!!error && !!error.error) {
     return error.error;
   }
 
-  if (error.data) {
+  if (!!error && !!error.data) {
     return (
       "message: " +
       error.data.message +
@@ -24,7 +24,7 @@ export const getMessage = error => {
     );
   }
 
-  if (error && error.status) {
+  if (!!error && error.status) {
     return "Error status: " + error.status;
   }
 

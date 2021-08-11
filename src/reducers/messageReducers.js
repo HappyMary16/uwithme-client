@@ -32,8 +32,8 @@ export default function messageReducers(
       let error = action.payload.error;
 
       if (
-        (error && error.status === 404 && error.data === "") ||
-        (error && error.data && error.data.status === 403)
+        (!!error && error.status === 404 && error.data === "") ||
+        (!!error && !!error.data && error.data.status === 403)
       ) {
         return state;
       }

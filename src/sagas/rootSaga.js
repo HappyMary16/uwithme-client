@@ -54,7 +54,7 @@ export function* processHttpCall({
       onUploadProgress
     });
 
-    if (response) {
+    if (!!response) {
       if (ignoreNotFound && response.status === 404) {
         return;
       }

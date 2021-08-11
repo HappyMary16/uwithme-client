@@ -7,7 +7,7 @@ export const ErrorMessage = ({ error, handleClose }) => {
   return (
     <Modal show={true} onHide={() => handleClose(error.id)} centered>
       <Modal.Header className="justify-content-center">
-        <Modal.Title>{error.message}</Modal.Title>
+        <Modal.Title>{!!error && error.message}</Modal.Title>
       </Modal.Header>
 
       <Modal.Footer>
