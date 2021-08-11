@@ -35,7 +35,7 @@ class UserPage extends Component {
 const mapStateToProps = state => {
   return {
     teachers: state.userReducers.users,
-    lessons: state.userReducers.lessons
+    lessons: state.scheduleReducers.otherUsersLessons
   };
 };
 
