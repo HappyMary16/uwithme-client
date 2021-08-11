@@ -54,23 +54,21 @@ export function* processHttpCall({
       onUploadProgress
     });
 
-    if (!response) {
-      return;
-    }
+    if (response) {
+      if (ignoreNotFound && response.status === 404) {
+        return;
+      }
 
-    if (ignoreNotFound && response.status === 404) {
-      return;
-    }
+      if (response.status === 401) {
+        yield put(signOut());
+        authService.logout();
+        return;
+      }
 
-    if (response.status === 401) {
-      yield put(signOut());
-      authService.logout();
-      return;
-    }
+      if (response.status >= 200 && response.status < 300) {
+        return response.data || true;
+      }
 
-    if (response.status >= 200 && response.status < 300) {
-      return response.data || true;
-    } else {
       yield put(addError(response));
     }
   } catch (e) {
