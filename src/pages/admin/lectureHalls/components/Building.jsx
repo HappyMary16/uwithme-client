@@ -9,7 +9,7 @@ export const Building = ({ building, lectureHalls }) => {
 
   return (
     <div>
-      <ListGroup.Item action onClick={() => setOpen(!open)}>
+      <ListGroup.Item key={building.id} action onClick={() => setOpen(!open)}>
         <ListItem
           open={open}
           text={building.label}

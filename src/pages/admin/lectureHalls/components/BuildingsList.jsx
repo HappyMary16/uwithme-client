@@ -6,10 +6,11 @@ import ListGroup from 'react-bootstrap/ListGroup';
 export const BuildingsList = ({ buildings, lectureHalls, classes }) => {
   return (
     <ListGroup variant='flush'>
-      {buildings && buildings.map(building => (
+      {buildings && buildings.map((building, i) => (
         <Building building={building}
                   lectureHalls={getLectureHallsByBuilding(lectureHalls, building)}
-                  classes={classes}/>
+                  classes={classes}
+                  key={i}/>
       ))}
     </ListGroup>
   );
