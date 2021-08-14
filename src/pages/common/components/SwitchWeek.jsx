@@ -5,7 +5,7 @@ import { Row } from "react-bootstrap";
 
 export const SwitchWeek = ({ weekNumber, setWeekNumber }) => {
   return (
-    <Row className="align-items-center flex-column">
+    <Row className="align-items-center flex-column switch-week-margin">
       <Switch
         offColor={lightGreyColor}
         onColor={lightGreyColor}

@@ -29,7 +29,7 @@ class Debts extends Component {
           {
             dataField: 'subject',
             formatter: (value, row) => {
-              if(isPageSmall()) {
+              if (isPageSmall()) {
                 return value + ' (' + row.teacher + ')';
               }
               return value;

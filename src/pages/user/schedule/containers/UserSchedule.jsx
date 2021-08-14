@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { ScheduleTable } from "../components/ScheduleTable";
-import { findUserById } from "../../../../utils/UsersUtil";
-import { findLessonsForUser } from "../../../../actions/scheduleActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { findUserById } from '../../../../utils/UsersUtil';
+import { findLessonsForUser } from '../../../../actions/scheduleActions';
+import { Schedule } from '../components/Schedule';
 
 class UserSchedule extends Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class UserSchedule extends Component {
     const user = findUserById(users, userId);
 
     return (
-      user && <ScheduleTable user={user} lessons={lessons} isMine={false} />
+      user && <Schedule user={user} lessons={lessons}/>
     );
   }
 }

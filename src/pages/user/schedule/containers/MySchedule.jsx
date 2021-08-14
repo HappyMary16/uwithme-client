@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScheduleTable } from '../components/ScheduleTable';
 import { findLessons } from '../../../../actions/scheduleActions';
+import { Schedule } from '../components/Schedule';
 
 class MySchedule extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class MySchedule extends Component {
   render() {
     const { lessons, user } = this.props;
 
-    return <ScheduleTable lessons={lessons} user={user} isMine={true} />;
+    return <Schedule lessons={lessons} user={user} isMine/>;
   }
 }
 

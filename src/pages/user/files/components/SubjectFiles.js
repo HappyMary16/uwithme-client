@@ -4,7 +4,7 @@ import { getLectures, getTasks } from '../../../../utils/FileUtil';
 import ListFiles from './ListFiles';
 import { ListGroup } from 'react-bootstrap';
 import Collapse from 'react-bootstrap/Collapse';
-import { ListItem } from '../../../admin/structure/components/ListItem';
+import { ListItem } from '../../../common/components/ListItem';
 import { FolderFill } from 'react-bootstrap-icons';
 
 export const SubjectFiles = ({ name, files }) => {

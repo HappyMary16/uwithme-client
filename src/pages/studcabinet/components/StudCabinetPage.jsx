@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import { LogInStudCabinet } from "./LogInStudCabinet";
-import { EmptyPage } from "../../common/components/EmptyPage";
-import i18n from "../../../locales/i18n";
-import { selectorColors } from "../../../styles/styles";
-import { getSemesterById } from "../../../utils/StructureUtils";
-import Select from "react-select";
-import { SEMESTER_NUMBER } from "../../../constants/userRoles";
+import React, { Component } from 'react';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { LogInStudCabinet } from './LogInStudCabinet';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import i18n from '../../../locales/i18n';
+import { selectorColors } from '../../../styles/styles';
+import { getSemesterById } from '../../../utils/StructureUtils';
+import Select from 'react-select';
+import { SEMESTER_NUMBER } from '../../../constants/userRoles';
 import { isPageSmall, isPageTiny } from '../../../utils/PageSizeUtil';
 
 // Props:
@@ -50,7 +50,7 @@ class StudCabinetPage extends Component {
 
     columnsToShow.forEach(column => column.sort = true);
 
-    return columnsToShow
+    return columnsToShow;
   }
 
   componentDidMount() {
@@ -93,7 +93,7 @@ class StudCabinetPage extends Component {
       return (
         !!semester &&
         data.filter(studentScore => studentScore.semester === semester).length >
-          0
+        0
       );
     } else {
       return !!data && data.length > 0;
@@ -135,8 +135,8 @@ class StudCabinetPage extends Component {
 
         {isSemesterRequired && !!semester && (
           <Select
-            className={"selector"}
-            placeholder={i18n.t("semester")}
+            className={'selector'}
+            placeholder={i18n.t('semester')}
             theme={selectorColors}
             onChange={this.setSemester}
             options={SEMESTER_NUMBER}
@@ -144,12 +144,12 @@ class StudCabinetPage extends Component {
           />
         )}
 
-        {!this.ifDataPresent(semester) && <EmptyPage />}
+        {!this.ifDataPresent(semester) && <EmptyPage/>}
 
         {this.ifDataPresent(semester) && (
           <BootstrapTable
             rowStyle={rowStyleFunc}
-            keyField={"place"}
+            keyField={'place'}
             data={this.getData(semester)}
             columns={columns}
           />

@@ -45,80 +45,80 @@ import Debts from '../studcabinet/Debts';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
-  return <GroupPage groupId={groupId} />;
+  return <GroupPage groupId={groupId}/>;
 }
 
 function OpenUserPage() {
   const { userId } = useParams();
-  return <UserPage teacherId={userId} />;
+  return <UserPage teacherId={userId}/>;
 }
 
 function OpenUserSchedule() {
   const { userId } = useParams();
-  return <UserSchedule userId={userId} />;
+  return <UserSchedule userId={userId}/>;
 }
 
 function OpenGroupSchedule() {
   const { groupId } = useParams();
-  return <GroupSchedule groupId={groupId} />;
+  return <GroupSchedule groupId={groupId}/>;
 }
 
 export const PageRouter = ({ user }) => {
   return (
     <Container className={'main-page-container'}>
-      <Route exact path={PRE_HOME} component={PreHome} />
+      <Route exact path={PRE_HOME} component={PreHome}/>
 
       {user && (
         <div>
           {!isAdmin(user) && (
             <div>
-              <Route exact path={USER_HOME} component={UserHome} />
-              <Route exact path={FILES} component={PageWithFiles} />
-              <Route exact path={SCHEDULE} component={MySchedule} />
+              <Route exact path={USER_HOME} component={UserHome}/>
+              <Route exact path={FILES} component={PageWithFiles}/>
+              <Route exact path={SCHEDULE} component={MySchedule}/>
             </div>
           )}
 
           {isTeacher(user) && (
             <div>
-              <Route exact path={ADD_FILE} component={AddFile} />
-              <Route exact path={SHARE_FILES} component={ShareFiles} />
-              <Route exact path={ADD_LESSON} component={TeacherAddLesson} />
+              <Route exact path={ADD_FILE} component={AddFile}/>
+              <Route exact path={SHARE_FILES} component={ShareFiles}/>
+              <Route exact path={ADD_LESSON} component={TeacherAddLesson}/>
             </div>
           )}
 
           {isStudent(user) && (
             <div>
-              <Route exact path={STUDENTS_RATING} component={StudentRating} />
-              <Route exact path={SUBJECT_SCORES} component={SubjectsScores} />
-              <Route exact path={DEBTS} component={Debts} />
+              <Route exact path={STUDENTS_RATING} component={StudentRating}/>
+              <Route exact path={SUBJECT_SCORES} component={SubjectsScores}/>
+              <Route exact path={DEBTS} component={Debts}/>
             </div>
           )}
           {isAdmin(user) && (
             <div>
-              <Route exact path={USER_HOME} component={UniversityStructure} />
-              <Route exact path={ADD_LESSON} component={AdminAddLesson} />
-              <Route exact path={SCHEDULE} component={GroupSchedule} />
-              <Route exact path={LECTURE_HALLS} component={LectureHalls} />
+              <Route exact path={USER_HOME} component={UniversityStructure}/>
+              <Route exact path={ADD_LESSON} component={AdminAddLesson}/>
+              <Route exact path={SCHEDULE} component={GroupSchedule}/>
+              <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
               <Route exact path={GROUP_PAGE_ROUTER}>
-                <OpenGroupPage />
+                <OpenGroupPage/>
               </Route>
               <Route exact path={GROUP_SCHEDULE_ROUTER}>
-                <OpenGroupSchedule />
+                <OpenGroupSchedule/>
               </Route>
             </div>
           )}
           <div>
             <Route path={USER_HOME_PAGE_ROUTER}>
-              <OpenUserPage />
+              <OpenUserPage/>
             </Route>
             <Route path={USER_SCHEDULE_ROUTER}>
-              <OpenUserSchedule />
+              <OpenUserSchedule/>
             </Route>
-            <Route exact path={SETTING} component={Setting} />
-            <Route exact path={STUDENTS} component={StudentsList} />
-            <Route exact path={TEACHERS} component={TeachersList} />
+            <Route exact path={SETTING} component={Setting}/>
+            <Route exact path={STUDENTS} component={StudentsList}/>
+            <Route exact path={TEACHERS} component={TeachersList}/>
           </div>
-          <div />
+          <div/>
         </div>
       )}
     </Container>

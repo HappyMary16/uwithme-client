@@ -1,7 +1,7 @@
 import React from "react";
 import { LectureHallsList } from "./LectureHallsList";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListItem } from "../../structure/components/ListItem";
+import { ListItem } from "../../../common/components/ListItem";
 import { DepartmentIcon } from "../../../icons/DepartmentIcon";
 
 export const Building = ({ building, lectureHalls }) => {

@@ -1,8 +1,9 @@
 .text {
     color: #555;
+    font-size: 1.2em;
     margin: 0;
 }
 .secondary-text {
-    font-size: 13px;
+    font-size: 0.9em;
     color: #707070;
 }

@@ -1,20 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {
-  deleteLesson,
-  findLessonsByGroupId
-} from "../../../../actions/scheduleActions";
-import { ScheduleTable } from "../components/ScheduleTable";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import i18n from "../../../../locales/i18n";
-import Select from "react-select";
-import { selectorColors } from "../../../../styles/styles";
-import { getGroupById } from "../../../../utils/StructureUtils";
-import { DeleteLessonDialog } from "../../../admin/deleteLesson/DeleteLessonDialog";
-import Button from "react-bootstrap/Button";
-import { getLessonsByGroup } from "../../../../utils/ScheduleUtil";
-import { loadGroupsByUniversityId } from "../../../../actions/groupActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { deleteLesson, findLessonsByGroupId } from '../../../../actions/scheduleActions';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import i18n from '../../../../locales/i18n';
+import Select from 'react-select';
+import { selectorColors } from '../../../../styles/styles';
+import { getGroupById } from '../../../../utils/StructureUtils';
+import { DeleteLessonDialog } from '../../../admin/deleteLesson/DeleteLessonDialog';
+import Button from 'react-bootstrap/Button';
+import { getLessonsByGroup } from '../../../../utils/ScheduleUtil';
+import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
+import { Schedule } from '../components/Schedule';
 
 class GroupSchedule extends Component {
   constructor(props) {
@@ -45,9 +42,9 @@ class GroupSchedule extends Component {
   handleGroupChange(groupId) {
     const { dispatch } = this.props;
     groupId &&
-      this.setState({
-        groupId: groupId
-      });
+    this.setState({
+      groupId: groupId
+    });
     groupId && dispatch(findLessonsByGroupId(groupId));
   }
 
@@ -96,7 +93,7 @@ class GroupSchedule extends Component {
         <Row spacing={2}>
           <Col sm={12} md={9}>
             <Select
-              placeholder={i18n.t("select_group")}
+              placeholder={i18n.t('select_group')}
               theme={selectorColors}
               // isMulti
               onChange={e => this.handleGroupChange(e.value)}
@@ -108,20 +105,20 @@ class GroupSchedule extends Component {
           <Col sm={12} md={3}>
             <Button
               block
-              variant={"purple"}
+              variant={'purple'}
               onClick={
                 isEditMode ? () => this.endEditing() : () => this.startEdit()
               }
             >
-              {i18n.t(isEditMode ? "save" : "edit")}
+              {i18n.t(isEditMode ? 'save' : 'edit')}
             </Button>
           </Col>
         </Row>
         {groupId && lessons && (
-          <ScheduleTable
+          <Schedule
             lessons={getLessonsByGroup(lessons, groups, groupId)}
             user={user}
-            isMine={true}
+            isMine
             isEditMode={isEditMode}
             deleteLesson={this.openDeleteLessonDialog}
           />

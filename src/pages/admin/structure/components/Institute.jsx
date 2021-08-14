@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DepartmentsList from "./DepartmentsList";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListItem } from "./ListItem";
+import { ListItem } from "../../../common/components/ListItem";
 import { InstituteIcon } from "../../../icons/InstituteIcon";
 
 export default class Institute extends Component {

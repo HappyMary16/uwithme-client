@@ -1,10 +1,10 @@
-import { connect } from "react-redux";
-import React, { Component } from "react";
-import { StudentListItem } from "./StudentListItem";
-import ListGroup from "react-bootstrap/ListGroup";
-import { EmptyPage } from "../../common/components/EmptyPage";
-import { loadStudents } from "../../../actions/userActions";
-import { getStudents } from "../../../utils/UsersUtil";
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { StudentListItem } from './StudentListItem';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import { loadStudents } from '../../../actions/userActions';
+import { getStudents } from '../../../utils/UsersUtil';
 
 class StudentsList extends Component {
   componentDidMount() {
@@ -16,12 +16,12 @@ class StudentsList extends Component {
     const { students, isFetching } = this.props;
 
     return (
-      <ListGroup variant={"flush"}>
-        <EmptyPage list={students} isFetching={isFetching} />
+      <ListGroup variant={'flush'}>
+        <EmptyPage list={students} isFetching={isFetching}/>
         {students &&
-          students.map(student => (
-            <StudentListItem key={student.id} student={student} />
-          ))}
+        students.map(student => (
+          <StudentListItem key={student.id} student={student}/>
+        ))}
       </ListGroup>
     );
   }

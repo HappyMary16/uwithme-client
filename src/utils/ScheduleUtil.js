@@ -48,12 +48,26 @@ export const getLesson = (lessons, weekDay, lessonTime, weekNumber) => {
   }
 };
 
+export const getLessons = (lessons, weekDay, weekNumber) => {
+  return Array.isArray(lessons) &&
+    lessons.filter(lesson =>
+      lessonFilter(lesson, weekDay, null, weekNumber)
+    );
+};
+
 let lessonFilter = (lesson, weekDay, lessonTime, weekNumber) => {
-  return (
-    lesson.weekDay === weekDay &&
-    lesson.lessonTime === lessonTime &&
-    lesson.weekNumber === weekNumber
-  );
+  if (!!lessonTime) {
+    return (
+      lesson.weekDay === weekDay &&
+      lesson.lessonTime === lessonTime &&
+      lesson.weekNumber === weekNumber
+    );
+  } else {
+    return (
+      lesson.weekDay === weekDay &&
+      lesson.weekNumber === weekNumber
+    );
+  }
 };
 
 export const getGroupList = groups => {
@@ -73,6 +87,6 @@ export const getLessonsByGroup = (lessons, groups, groupId) => {
   return (
     lessons &&
     groupId &&
-    lessons.filter(lesson => lesson.groups.includes(groupName))
+    lessons.filter(lesson => lesson.groups && lesson.groups.includes(groupName))
   );
 };
