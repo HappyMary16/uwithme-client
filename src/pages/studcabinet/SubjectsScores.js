@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { loadSubjectsScores } from "../../actions/studCabinetActions";
 import { connect } from "react-redux";
 import StudCabinetPage from "./components/StudCabinetPage";
+import { isPageSmall, isPageTiny } from '../../utils/PageSizeUtil';
 
 class SubjectsScores extends Component {
   constructor(props) {
@@ -34,32 +35,38 @@ class SubjectsScores extends Component {
           {
             dataField: "subject",
             text: "Дисципліна",
-            sort: true
+            isAlwaysRequired: true,
+            formatter: (value, row) => {
+              if(isPageSmall()) {
+                return value + ' (' + row.teacher + ')';
+              }
+              return value;
+            }
           },
           {
             dataField: "teacher",
             text: "Викладач",
-            sort: true
+            formatter: (value, row) => {
+              return value + ' (' + row.departmentShort + ')';
+            }
           },
           {
             dataField: "control",
             text: "Е/З",
-            sort: true
+            isRequired: true
           },
           {
             dataField: "scoreNationalShort",
-            text: "Нац",
-            sort: true
+            text: "Нац"
           },
           {
             dataField: "scoreBologna",
             text: "Бал",
-            sort: true
+            isAlwaysRequired: true
           },
           {
             dataField: "scoreECTS",
-            text: "ECTS",
-            sort: true
+            text: "ECTS"
           }
         ]}
         logInFunc={this.logIn}

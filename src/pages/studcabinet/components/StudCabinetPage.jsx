@@ -7,6 +7,7 @@ import { selectorColors } from "../../../styles/styles";
 import { getSemesterById } from "../../../utils/StructureUtils";
 import Select from "react-select";
 import { SEMESTER_NUMBER } from "../../../constants/userRoles";
+import { isPageSmall, isPageTiny } from '../../../utils/PageSizeUtil';
 
 // Props:
 // isSemesterRequired
@@ -20,12 +21,36 @@ class StudCabinetPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      logIdDialog: false
-    };
-
     this.setSemester = this.setSemester.bind(this);
     this.isAuthorizeInStudCab = this.isAuthorizeInStudCab.bind(this);
+    this.getColumns = this.getColumns.bind(this);
+
+    this.state = {
+      logIdDialog: false,
+      columns: this.getColumns()
+    };
+
+    window.addEventListener('resize', () => {
+      this.setState({ columns: this.getColumns() });
+    }, true);
+  }
+
+  getColumns() {
+    const { columns } = this.props;
+
+    let columnsToShow = columns;
+
+    if (isPageSmall()) {
+      columnsToShow = columns && columns.filter(column => column.isRequired || column.isAlwaysRequired);
+    }
+
+    if (isPageTiny()) {
+      columnsToShow = columns && columns.filter(column => column.isAlwaysRequired);
+    }
+
+    columnsToShow.forEach(column => column.sort = true);
+
+    return columnsToShow
   }
 
   componentDidMount() {
@@ -93,10 +118,9 @@ class StudCabinetPage extends Component {
       studentInfo,
       logInFunc,
       rowStyleFunc,
-      columns,
       isSemesterRequired
     } = this.props;
-    let { semester } = this.state;
+    let { semester, columns } = this.state;
 
     if (!semester && studentInfo) {
       semester = studentInfo.semester;

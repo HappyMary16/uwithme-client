@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { loadDebts } from '../../actions/studCabinetActions';
 import { connect } from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
+import { isPageSmall } from '../../utils/PageSizeUtil';
 
 class Debts extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class Debts extends Component {
 
   loadData(email, password) {
     const { dispatch } = this.props;
-    console.log();
     dispatch(loadDebts(email, password));
   }
 
@@ -23,40 +23,44 @@ class Debts extends Component {
       <StudCabinetPage
         studentInfo={studentInfo}
         data={debts}
+        logInFunc={this.loadData}
+        loadDataFunc={this.loadData}
         columns={[
           {
             dataField: 'subject',
+            formatter: (value, row) => {
+              if(isPageSmall()) {
+                return value + ' (' + row.teacher + ')';
+              }
+              return value;
+            },
             text: 'Дисципліна',
-            sort: true
+            isAlwaysRequired: true
           },
           {
             dataField: 'teacher',
-            text: 'Викладач',
-            sort: true
+            text: 'Викладач'
           },
           {
             dataField: 'control',
             text: 'Е/З',
-            sort: true
+            isRequired: true
           },
           {
             dataField: 'course',
             text: 'Курс',
-            sort: true
+            isAlwaysRequired: true
           },
           {
             dataField: 'semester',
-            text: 'Семестр',
-            sort: true
+            text: 'Сем.',
+            isAlwaysRequired: true
           },
           {
             dataField: 'individualTask',
-            text: 'І/З',
-            sort: true
+            text: 'І/З'
           }
         ]}
-        logInFunc={this.loadData}
-        loadDataFunc={this.loadData}
       />
     );
   }
