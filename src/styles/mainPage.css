@@ -5,4 +5,7 @@
 
 .main-container {
     padding: 0;
+    overflow-x: hidden;
+    overflow-scrolling: touch;
+    overflow-y: scroll;
 }
