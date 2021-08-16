@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { loadDebts } from '../../actions/studCabinetActions';
 import { connect } from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
-import { isPageSmall } from '../../utils/PageSizeUtil';
 
 class Debts extends Component {
   constructor(props) {
