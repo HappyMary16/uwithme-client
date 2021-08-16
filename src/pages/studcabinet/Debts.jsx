@@ -25,40 +25,34 @@ class Debts extends Component {
         data={debts}
         logInFunc={this.loadData}
         loadDataFunc={this.loadData}
+
         columns={[
           {
             dataField: 'subject',
-            formatter: (value, row) => {
-              if (isPageSmall()) {
-                return value + ' (' + row.teacher + ')';
-              }
-              return value;
-            },
-            text: 'Дисципліна',
-            isAlwaysRequired: true
+            text: 'Дисципліна'
           },
           {
             dataField: 'teacher',
-            text: 'Викладач'
+            text: 'Викладач',
+            isNotInSmall: true
           },
           {
             dataField: 'control',
             text: 'Е/З',
-            isRequired: true
+            isNotInTiny: true
           },
           {
             dataField: 'course',
-            text: 'Курс',
-            isAlwaysRequired: true
+            text: 'Курс'
           },
           {
             dataField: 'semester',
-            text: 'Сем.',
-            isAlwaysRequired: true
+            text: 'Сем.'
           },
           {
             dataField: 'individualTask',
-            text: 'І/З'
+            text: 'І/З',
+            isNotInSmall: true
           }
         ]}
       />

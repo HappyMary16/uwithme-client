@@ -28,6 +28,7 @@ import { removeMessage } from "./actions/messageAction";
 import ErrorContainer from "./pages/common/containers/ErrorContainer";
 import * as config from "./config";
 import { signInRequest, signOut } from "./actions/authActions";
+import { changeIsMenuOpen } from './actions/navigationActions';
 
 class App extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class App extends Component {
     }
 
     this.closeMessage = this.closeMessage.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   componentDidMount() {
@@ -59,13 +61,18 @@ class App extends Component {
     dispatch(removeMessage());
   }
 
+  closeMenu() {
+    const { dispatch } = this.props;
+    dispatch(changeIsMenuOpen());
+  }
+
   render() {
     const { user, isFetching, isMenuOpen, message } = this.props;
 
     return (
       <Container fluid className={"main-container"}>
-        {!isAdmin(user) && <UserToolBar user={user} isOpen={isMenuOpen} />}
-        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} />}
+        {!isAdmin(user) && <UserToolBar user={user} isOpen={isMenuOpen} onClose={this.closeMenu}/>}
+        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} onClose={this.closeMenu}/>}
 
         <TopToolBarContainer />
         <CustomSpinner isFetching={isFetching} />

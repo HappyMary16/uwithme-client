@@ -37,19 +37,17 @@ class StudCabinetPage extends Component {
 
   getColumns() {
     const { columns } = this.props;
-
     let columnsToShow = columns;
 
     if (isPageSmall()) {
-      columnsToShow = columns && columns.filter(column => column.isRequired || column.isAlwaysRequired);
+      columnsToShow = columnsToShow && columnsToShow.filter(column => !column.isNotInSmall);
     }
 
     if (isPageTiny()) {
-      columnsToShow = columns && columns.filter(column => column.isAlwaysRequired);
+      columnsToShow = columnsToShow && columnsToShow.filter(column => !column.isNotInTiny);
     }
 
-    columnsToShow.forEach(column => column.sort = true);
-
+    columnsToShow.forEach(columnsToShow => columnsToShow.sort = true);
     return columnsToShow;
   }
 

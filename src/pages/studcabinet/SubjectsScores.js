@@ -34,39 +34,34 @@ class SubjectsScores extends Component {
         columns={[
           {
             dataField: 'subject',
-            text: 'Дисципліна',
-            isAlwaysRequired: true,
-            formatter: (value, row) => {
-              if (isPageSmall()) {
-                return value + ' (' + row.teacher + ')';
-              }
-              return value;
-            }
+            text: 'Дисципліна'
           },
           {
             dataField: 'teacher',
             text: 'Викладач',
             formatter: (value, row) => {
               return value + ' (' + row.departmentShort + ')';
-            }
+            },
+            isNotInSmall: true
           },
           {
             dataField: 'control',
             text: 'Е/З',
-            isRequired: true
+            isNotInTiny: true
           },
           {
             dataField: 'scoreNationalShort',
-            text: 'Нац'
+            text: 'Нац',
+            isNotInSmall: true
           },
           {
             dataField: 'scoreBologna',
-            text: 'Бал',
-            isAlwaysRequired: true
+            text: 'Бал'
           },
           {
             dataField: 'scoreECTS',
-            text: 'ECTS'
+            text: 'ECTS',
+            isNotInSmall: true
           }
         ]}
         logInFunc={this.logIn}

@@ -34,27 +34,25 @@ class StudentRating extends Component {
         columns={[
           {
             dataField: 'place',
-            text: 'N',
-            isAlwaysRequired: true
+            text: 'N'
           },
           {
             dataField: 'fullName',
-            text: 'ПІБ',
-            isAlwaysRequired: true
+            text: 'ПІБ'
           },
           {
             dataField: 'group',
             text: 'Група',
-            isRequired: true
+            isNotInTiny: true
           },
           {
             dataField: 'scoreNationalShort',
-            text: 'Середній бал'
+            text: 'Середній бал',
+            isNotInSmall: true
           },
           {
             dataField: 'scoreBologna',
-            text: 'Рейтинг',
-            isAlwaysRequired: true
+            text: 'Рейтинг'
           }
         ]}
         rowStyleFunc={(row, rowIndex) => {
