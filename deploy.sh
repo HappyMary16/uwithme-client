@@ -1,1 +1,1 @@
-rsync -crlOt ./build/ ubuntu@ec2-18-189-141-10.us-east-2.compute.amazonaws.com:/var/www/educationapp
+rsync -crlOt ./build/ root@109.87.198.211:/var/www/educationapp
