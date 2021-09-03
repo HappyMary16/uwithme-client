@@ -43,7 +43,7 @@ export const Schedule = ({
         <Col
           xs={{ offset: isMine ? 9 : 3, span: 3 }}
           md={{ offset: isMine ? 10 : 4, span: 2 }}
-          lg={{ offset: isMine ? 11 : 5, span: 1 }}
+          lg={{ offset: isMine ? 10 : 4, span: 2 }}
         >
           <SwitchWeek weekNumber={weekNumber} setWeekNumber={setWeekNumber}/>
         </Col>

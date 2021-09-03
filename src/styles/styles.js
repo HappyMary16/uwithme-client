@@ -1,4 +1,4 @@
-export const lightGreyColor = '#D3D3D3';
+export const lightGreyColor = '#eeeeee';
 
 export const selectorColors = theme => ({
   ...theme,
