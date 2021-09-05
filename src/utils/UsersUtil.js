@@ -1,10 +1,39 @@
+import { authService } from '../services/http';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
-export const isStudent = user => user && user.role === STUDENT && !user.isAdmin;
+export const isStudent = user => user && user.activeRole === STUDENT;
 
-export const isTeacher = user => user && user.role === TEACHER && !user.isAdmin;
+export const isTeacher = user => user && user.activeRole === TEACHER;
 
-export const isAdmin = user => user && (user.role === ADMIN || user.isAdmin);
+export const isAdmin = user => user && user.activeRole === ADMIN;
+
+export const getUserRoles = () => {
+  let roles = [];
+
+  if (authService.hasRole(STUDENT)) {
+    roles.push(STUDENT);
+  }
+  if (authService.hasRole(TEACHER)) {
+    roles.push(TEACHER);
+  }
+  if (authService.hasRole(ADMIN)) {
+    roles.push(ADMIN);
+  }
+
+  return roles;
+}
+
+export const getDefaultActiveRole = () => {
+  if (authService.hasRole(STUDENT)) {
+    return STUDENT;
+  }
+  if (authService.hasRole(TEACHER)) {
+    return TEACHER;
+  }
+  if (authService.hasRole(ADMIN)) {
+    return ADMIN;
+  }
+}
 
 export const getName = user => {
   if (!user) {

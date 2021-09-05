@@ -24,12 +24,12 @@ export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
       )}
       <Row>
         <Col xs={8}>
-          <p className={'text'}>{lesson.subjectName}</p>
+          <p>{lesson.subjectName}</p>
           <p className={'secondary-text text'}>{isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName}</p>
         </Col>
         <Col xs={4}>
-          <p className={'text'}>{lesson.lectureHall}</p>
-          <p className={'text'}>{lesson.building}</p>
+          <p>{lesson.lectureHall}</p>
+          <p>{lesson.building}</p>
         </Col>
       </Row>
     </div>

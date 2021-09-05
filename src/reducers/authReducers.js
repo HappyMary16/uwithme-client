@@ -6,6 +6,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT
 } from "../actions/authActions";
+import { getDefaultActiveRole, getUserRoles } from '../utils/UsersUtil';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {
@@ -19,7 +20,11 @@ export default function authReducers(
     case SIGN_IN_SUCCESS:
       return {
         ...state,
-        user: action.payload.user,
+        user: {
+          ...action.payload.user,
+          roles: getUserRoles(),
+          activeRole: getDefaultActiveRole(),
+        },
         isRegistrationComplete: true,
         clientVersion: config.CLIENT_VERSION
       };

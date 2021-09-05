@@ -20,7 +20,7 @@ export const TeacherListItem = ({ teacher }) => {
           <SmallAvatar avatar={teacher.avatar} />
         </Col>
         <Col xs={8} sm={10}>
-          <p className={'text'}>{getName(teacher)}</p>
+          <p>{getName(teacher)}</p>
           <p className={'secondary-text text'}>{teacher.scienceDegree}</p>
         </Col>
         <Col xs={2} sm={1}>

@@ -9,10 +9,13 @@
 .menu-icon {
     top: 15%;
     position: absolute;
+    margin-left: 0 !important;
 }
 
 .log-out-icon {
-    padding-right: 0.7em;
+    top: 15%;
+    margin-right: 0.8em !important;
+    position: absolute;
 }
 
 .app-icon {
@@ -20,4 +23,9 @@
     padding-bottom: 0.3em;
     max-width: 100%;
     max-height: 3em;
+}
+
+.overlay {
+    min-width: 15em;
+    margin-right: 1em;
 }
