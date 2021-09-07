@@ -24,12 +24,10 @@ export function* authorizationWatcher() {
 }
 
 function* signUp(action) {
-  let data = JSON.stringify(action.payload);
-
   const response = yield call(processHttpCall, {
     url: SIGN_UP,
     method: "post",
-    data: data
+    data: action.payload
   });
 
   if (response) {
