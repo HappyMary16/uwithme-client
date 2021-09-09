@@ -35,6 +35,7 @@ import { loadDepartment } from "../actions/departmentActions";
 import { loadGroup } from "../actions/groupActions";
 import { processHttpCall } from "./rootSaga";
 import { signInSuccess, signOut } from "../actions/authActions";
+import { ADMIN } from '../constants/userRoles';
 
 export function* usersWatcher() {
   yield takeEvery(GET_TEACHERS, getTeachers);
@@ -99,6 +100,10 @@ function* downloadAvatars(action) {
 }
 
 function* processDownloadMyAvatar() {
+  if (authService.hasRole(ADMIN)) {
+    return;
+  }
+
   const response = yield call(processHttpCall, {
     url: AVATAR,
     method: "get",

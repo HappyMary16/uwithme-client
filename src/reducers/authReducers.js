@@ -1,5 +1,5 @@
 import StateLoader from "../store/StateLoader";
-import { RENDER_MY_AVATAR } from "../actions/userActions";
+import { RENDER_MY_AVATAR, UPDATE_ACTIVE_ROLE } from '../actions/userActions';
 import * as config from "../config";
 import {
   REGISTRATION_COMPLETE,
@@ -28,6 +28,15 @@ export default function authReducers(
         isRegistrationComplete: true,
         clientVersion: config.CLIENT_VERSION
       };
+
+    case UPDATE_ACTIVE_ROLE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          activeRole: action.payload.role,
+        },
+      }
 
     case RENDER_MY_AVATAR: {
       return {

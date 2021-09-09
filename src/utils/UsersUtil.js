@@ -23,6 +23,23 @@ export const getUserRoles = () => {
   return roles;
 }
 
+export const getInactiveRoles = (user) => {
+  let roles = [];
+
+  if (authService.hasRole(STUDENT) && user.activeRole !== STUDENT) {
+    roles.push(STUDENT);
+  }
+  if (authService.hasRole(TEACHER) && user.activeRole !== TEACHER) {
+    roles.push(TEACHER);
+  }
+  if (authService.hasRole(ADMIN) && user.activeRole !== ADMIN) {
+    roles.push(ADMIN);
+  }
+
+  return roles;
+}
+
+
 export const getDefaultActiveRole = () => {
   if (authService.hasRole(STUDENT)) {
     return STUDENT;
@@ -62,10 +79,10 @@ export const findUsersByGroupId = (users, groupId) =>
 
 export const findAllStudentsWithoutGroup = users =>
   users &&
-  users.filter(user => isStudent(user)).filter(user => !user.studyGroupId);
+  users.filter(user => user.role === STUDENT).filter(user => !user.studyGroupId);
 
 export const getTeachers = users =>
-  users && users.filter(user => isTeacher(user));
+  users && users.filter(user => user.role === TEACHER);
 
 export const getStudents = users =>
-  users && users.filter(user => isStudent(user));
+  users && users.filter(user => user.role === STUDENT);

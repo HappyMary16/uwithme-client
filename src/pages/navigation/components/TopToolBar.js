@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import { MenuIcon } from "../../icons/MenuIcon";
 import { SwitchAccountPanel } from './SwitchAccoutPanel';
 
-export const TopToolBar = ({ user, avatar, signOutFunc, openMenu }) => {
+export const TopToolBar = ({ user, avatar, signOutFunc, openMenu, updateUserRoleFunc }) => {
   return (
     <Nav className={"app-bar"}>
       {user && (
@@ -38,7 +38,7 @@ export const TopToolBar = ({ user, avatar, signOutFunc, openMenu }) => {
       )}
       {user && (
         <Col xs={2}>
-          <SwitchAccountPanel avatar={avatar} user={user} signOutFunc={signOutFunc}/>
+          <SwitchAccountPanel avatar={avatar} user={user} signOutFunc={signOutFunc} updateUserRoleFunc={updateUserRoleFunc}/>
         </Col>
       )}
     </Nav>
