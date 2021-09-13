@@ -1,12 +1,12 @@
 import React from "react";
 
-export const LogOutIcon = ({ onClick }) => {
+export const LogOutIcon = ({ onClick, size='2em' }) => {
   return (
-    <div onClick={onClick} className={"icon menu-icon log-out-icon"}>
+    <div onClick={onClick} className={"icon"}>
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
-        height="2em"
+        height={size}
         viewBox="0 0 128.000000 128.000000"
         preserveAspectRatio="xMidYMid meet"
         className="st1"

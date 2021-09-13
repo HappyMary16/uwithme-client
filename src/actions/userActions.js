@@ -1,8 +1,10 @@
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const UPDATE_ACTIVE_ROLE = 'UPDATE_ACTIVE_ROLE';
 
 export const GET_TEACHERS = 'GET_TEACHERS';
 export const GET_STUDENTS = 'GET_STUDENTS';
+export const GET_ADMINS = 'GET_ADMINS';
 
 export const RENDER_USERS = 'RENDER_USERS';
 export const RENDER_USER = 'RENDER_USER';
@@ -17,6 +19,15 @@ export const LOAD_STUDENTS_BY_GROUP_ID = 'LOAD_STUDENTS_BY_GROUP_ID';
 export const LOAD_STUDENTS_WITHOUT_GROUP = 'LOAD_STUDENTS_WITHOUT_GROUP';
 export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
 export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
+
+export function updateActiveRole(role) {
+  return {
+    type: UPDATE_ACTIVE_ROLE,
+    payload: {
+      role
+    }
+  };
+}
 
 export function loadStudentsByGroupId(groupId) {
   return {
@@ -55,6 +66,12 @@ export function addStudentToGroup(studentIds, groupId) {
 export function loadTeachers() {
   return {
     type: GET_TEACHERS
+  };
+}
+
+export function loadAdmins() {
+  return {
+    type: GET_ADMINS
   };
 }
 

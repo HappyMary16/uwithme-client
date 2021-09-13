@@ -42,6 +42,7 @@ export const INFO_UNIVERSITIES = INFO + UNIVERSITIES;
 
 export const USERS = 'users/';
 export const TEACHERS = USERS + 'teachers/';
+export const ADMINS = USERS + 'admins/';
 export const STUDENTS = USERS + 'students/';
 export const STUDENTS_BY_GROUP_ID = STUDENTS + 'groupId/';
 export const GROUP_STUDENT_ID = USERS + 'group/studentId/';

@@ -24,7 +24,6 @@ export const UserToolBar = ({ user, isOpen = false, onClose}) => {
       <a href={FILES}>{i18n.t('page_with_files')}</a>
       {isStudent(user) && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
       {isTeacher(user) && <a href={STUDENTS}>{i18n.t('students')}</a>}
-      <a href={SETTING}>{i18n.t('setting')}</a>
       {isStudent(user) && (
         <a href={STUDENTS_RATING}>{i18n.t('students-rating')}</a>
       )}
@@ -32,6 +31,7 @@ export const UserToolBar = ({ user, isOpen = false, onClose}) => {
         <a href={SUBJECT_SCORES}>{i18n.t('subjects-scores')}</a>
       )}
       {isStudent(user) && <a href={DEBTS}>{i18n.t('debts')}</a>}
+      <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>
   );
 };

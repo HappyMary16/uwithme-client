@@ -8,11 +8,11 @@ export const UserRoles = [
   {
     value: 2,
     label: i18n.t('continue_like_teacher')
-  },
-  {
-    value: 3,
-    label: i18n.t('add_university')
   }
+  // {
+  //   value: 3,
+  //   label: i18n.t('add_university')
+  // }
 ];
 
 export const FileTypes = [
@@ -29,9 +29,9 @@ export const FileTypes = [
 export const LECTURE = 1;
 export const TASK = 2;
 
-export const STUDENT = 1;
-export const TEACHER = 2;
-export const ADMIN = 3;
+export const STUDENT = 'ROLE_STUDENT';
+export const TEACHER = 'ROLE_TEACHER';
+export const ADMIN = 'ROLE_ADMIN';
 
 export const WEEK_DAYS = [
   {

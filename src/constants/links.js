@@ -26,6 +26,7 @@ export const STUDENTS = "/students/list";
 //admin
 export const ADD_LESSON = "/lesson/add";
 export const LECTURE_HALLS = "/lecture/halls";
+export const ADMINS = "/admins";
 
 //stud cabinet
 export const STUDENTS_RATING = "/studcab/students/rating";

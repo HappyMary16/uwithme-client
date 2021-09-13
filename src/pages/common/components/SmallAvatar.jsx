@@ -1,7 +1,7 @@
 import Image from 'react-bootstrap/Image';
 import React from 'react';
 
-export const SmallAvatar = ({ avatar }) => {
+export const SmallAvatar = ({ size = "30px", avatar }) => {
   return (
     <Image
       roundedCircle
@@ -9,7 +9,8 @@ export const SmallAvatar = ({ avatar }) => {
       src={
         avatar === undefined || avatar === null ? '/empty-avatar.jpg' : avatar
       }
-      className={'small-avatar'}
+      width={size}
+      height={size}
     />
   );
 };

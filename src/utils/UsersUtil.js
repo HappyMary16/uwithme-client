@@ -1,10 +1,56 @@
+import { authService } from '../services/http';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
-export const isStudent = user => user && user.role === STUDENT && !user.isAdmin;
+export const isStudent = user => user && user.activeRole === STUDENT;
 
-export const isTeacher = user => user && user.role === TEACHER && !user.isAdmin;
+export const isTeacher = user => user && user.activeRole === TEACHER;
 
-export const isAdmin = user => user && (user.role === ADMIN || user.isAdmin);
+export const isAdmin = user => user && user.activeRole === ADMIN;
+
+export const getUserRoles = () => {
+  let roles = [];
+
+  if (authService.hasRole(STUDENT)) {
+    roles.push(STUDENT);
+  }
+  if (authService.hasRole(TEACHER)) {
+    roles.push(TEACHER);
+  }
+  if (authService.hasRole(ADMIN)) {
+    roles.push(ADMIN);
+  }
+
+  return roles;
+}
+
+export const getInactiveRoles = (user) => {
+  let roles = [];
+
+  if (authService.hasRole(STUDENT) && user.activeRole !== STUDENT) {
+    roles.push(STUDENT);
+  }
+  if (authService.hasRole(TEACHER) && user.activeRole !== TEACHER) {
+    roles.push(TEACHER);
+  }
+  if (authService.hasRole(ADMIN) && user.activeRole !== ADMIN) {
+    roles.push(ADMIN);
+  }
+
+  return roles;
+}
+
+
+export const getDefaultActiveRole = () => {
+  if (authService.hasRole(STUDENT)) {
+    return STUDENT;
+  }
+  if (authService.hasRole(TEACHER)) {
+    return TEACHER;
+  }
+  if (authService.hasRole(ADMIN)) {
+    return ADMIN;
+  }
+}
 
 export const getName = user => {
   if (!user) {
@@ -33,10 +79,13 @@ export const findUsersByGroupId = (users, groupId) =>
 
 export const findAllStudentsWithoutGroup = users =>
   users &&
-  users.filter(user => isStudent(user)).filter(user => !user.studyGroupId);
+  users.filter(user => user.role === STUDENT).filter(user => !user.studyGroupId);
 
 export const getTeachers = users =>
-  users && users.filter(user => isTeacher(user));
+  users && users.filter(user => user && user.role === TEACHER);
+
+export const getAdmins = users =>
+  users && users.filter(user => user && user.isAdmin);
 
 export const getStudents = users =>
-  users && users.filter(user => isStudent(user));
+  users && users.filter(user => user && user.role === STUDENT);

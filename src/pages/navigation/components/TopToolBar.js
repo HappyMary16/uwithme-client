@@ -3,10 +3,10 @@ import Nav from "react-bootstrap/Nav";
 import "../../../styles/navigation.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { LogOutIcon } from "../../icons/LogOutIcon";
 import { MenuIcon } from "../../icons/MenuIcon";
+import { SwitchAccountPanel } from './SwitchAccoutPanel';
 
-export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
+export const TopToolBar = ({ user, avatar, signOutFunc, openMenu, updateUserRoleFunc }) => {
   return (
     <Nav className={"app-bar"}>
       {user && (
@@ -15,7 +15,7 @@ export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
         </Col>
       )}
       {user && (
-        <Col xs={8} sm={10}>
+        <Col>
           <Row className="justify-content-center">
             <img
               src="/UniversityWithMeLongLogo.png"
@@ -27,7 +27,7 @@ export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
         </Col>
       )}
       {!user && (
-        <Col xs={10} sm={11}>
+        <Col>
           <img
             src="/UniversityWithMeLongLogo.png"
             alt=""
@@ -37,10 +37,8 @@ export const TopToolBar = ({ user, signOutFunc, openMenu }) => {
         </Col>
       )}
       {user && (
-        <Col xs={2} sm={1}>
-          <Row className="justify-content-end">
-            <LogOutIcon onClick={signOutFunc()} />
-          </Row>
+        <Col xs={2}>
+          <SwitchAccountPanel avatar={avatar} user={user} signOutFunc={signOutFunc} updateUserRoleFunc={updateUserRoleFunc}/>
         </Col>
       )}
     </Nav>

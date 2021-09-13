@@ -3,7 +3,15 @@ import { ChevronDown, ChevronUp, TrashFill } from 'react-bootstrap-icons';
 import Row from 'react-bootstrap/Row';
 import React from 'react';
 
-export const ListItem = ({ text, secondaryText, open, icon, iconText, openEnabled = true, isDeletePresent, deleteFunc, deleteFuncParam }) => {
+export const ListItem = ({ text,
+                           secondaryText,
+                           openEnabled = true,
+                           open,
+                           icon,
+                           iconText,
+                           isDeletePresent,
+                           deleteFunc,
+                           deleteFuncParam }) => {
   return (
     <Row>
       {(!!icon || !!iconText) && <Col xs={2} sm={1}>
@@ -11,7 +19,7 @@ export const ListItem = ({ text, secondaryText, open, icon, iconText, openEnable
         {!!iconText && <Row className="justify-content-center">{iconText}</Row>}
       </Col>}
       <Col>
-        <p className={'text'}>{text}</p>
+        <p className={'list-item-text'}>{text}</p>
         {secondaryText && <p className={'secondary-text text'}>{secondaryText}</p>}
       </Col>
       {isDeletePresent && <Col xs={2} sm={1}> <TrashFill

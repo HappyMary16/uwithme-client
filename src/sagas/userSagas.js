@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { authService } from "../services/http";
 import {
+  ADMINS,
   AVATAR,
   GROUP_STUDENT_ID,
   STUDENT_GROUP,
@@ -9,13 +10,13 @@ import {
   STUDENTS_WITHOUT_GROUP,
   TEACHERS,
   USERS
-} from "../constants/serverApi";
+} from '../constants/serverApi';
 import { arrayBufferToDataUrl } from "../utils/FileUtil";
 import {
   ADD_STUDENT_TO_GROUP,
   DELETE_USER,
   DOWNLOAD_MY_AVATAR,
-  downloadMyAvatar,
+  downloadMyAvatar, GET_ADMINS,
   GET_STUDENTS,
   GET_TEACHERS,
   LOAD_STUDENTS_BY_GROUP_ID,
@@ -28,15 +29,17 @@ import {
   renderUsers,
   UPDATE_USER,
   UPLOAD_AVATAR
-} from "../actions/userActions";
+} from '../actions/userActions';
 import { loadUniversity } from "../actions/universityActions";
 import { loadInstitute } from "../actions/instituteActions";
 import { loadDepartment } from "../actions/departmentActions";
 import { loadGroup } from "../actions/groupActions";
 import { processHttpCall } from "./rootSaga";
 import { signInSuccess, signOut } from "../actions/authActions";
+import { ADMIN } from '../constants/userRoles';
 
 export function* usersWatcher() {
+  yield takeEvery(GET_ADMINS, getAdmins);
   yield takeEvery(GET_TEACHERS, getTeachers);
   yield takeEvery(GET_STUDENTS, getStudents);
   yield takeEvery(RENDER_USERS, downloadAvatars);
@@ -54,6 +57,17 @@ export function* usersWatcher() {
 
   yield takeEvery(DELETE_USER, deleteUser);
   yield takeEvery(UPDATE_USER, updateUser);
+}
+
+function* getAdmins() {
+  const response = yield call(processHttpCall, {
+    url: ADMINS,
+    method: "get"
+  });
+
+  if (response) {
+    yield put(renderUsers(response));
+  }
 }
 
 function* getTeachers() {
@@ -99,6 +113,10 @@ function* downloadAvatars(action) {
 }
 
 function* processDownloadMyAvatar() {
+  if (authService.hasRole(ADMIN)) {
+    return;
+  }
+
   const response = yield call(processHttpCall, {
     url: AVATAR,
     method: "get",

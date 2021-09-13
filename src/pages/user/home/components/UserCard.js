@@ -66,9 +66,10 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
             </Card.Header>
             <Card.Body>
               <Card.Subtitle>
-                {user.role === 1 && i18n.t("group") + ": " + getUserGroup(user)}
+                <p>{user.role === 1 && i18n.t("group") + ": " + getUserGroup(user)}</p>
               </Card.Subtitle>
               <Card.Text>
+                <p>
                 {user.phone && i18n.t("phone") + ": " + user.phone}
                 {user.phone && <br />}
                 {i18n.t("email")}: {user.email}
@@ -76,6 +77,7 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
                 {i18n.t("institute")}: {user.instituteName}
                 <br />
                 {i18n.t("department")}: {user.departmentName}
+                </p>
               </Card.Text>
             </Card.Body>
           </Card>

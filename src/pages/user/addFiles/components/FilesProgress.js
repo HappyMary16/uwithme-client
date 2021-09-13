@@ -10,7 +10,7 @@ export const FilesProgress = ({ files, uploadProgress }) => {
         const now = getUploadProgressByFileName(uploadProgress, file.name);
         return (
           <div className={'margin-bottom'}>
-            <p className={'text'}>{file.name}</p>
+            <p>{file.name}</p>
             <ProgressBar now={now} label={`${now}%`} />
           </div>
         );
