@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, useParams } from 'react-router-dom';
 import {
   ADD_FILE,
-  ADD_LESSON,
+  ADD_LESSON, ADMINS,
   DEBTS,
   FILES,
   GROUP_PAGE_ROUTER,
@@ -25,10 +25,10 @@ import { isAdmin, isStudent, isTeacher } from '../../utils/UsersUtil';
 import UserHome from '../user/home/containers/UserHome';
 import PageWithFiles from '../user/files/PageWithFiles';
 import MySchedule from '../user/schedule/containers/MySchedule';
-import TeachersList from '../user/teacherList/TeachersList';
+import TeachersList from '../user/userList/containers/TeachersList';
 import AddFile from '../user/addFiles/AddFile';
 import ShareFiles from '../user/shareFiles/ShareFiles';
-import StudentsList from '../user/studentList/StudentsList';
+import StudentsList from '../user/userList/containers/StudentsList';
 import UniversityStructure from '../admin/structure/UniversityStructure';
 import GroupSchedule from '../user/schedule/containers/GroupSchedule';
 import LectureHalls from '../admin/lectureHalls/LectureHalls';
@@ -42,6 +42,7 @@ import TeacherAddLesson from '../admin/addLesson/containers/TeacherAddLesson';
 import StudentRating from '../studcabinet/StudentRating';
 import SubjectsScores from '../studcabinet/SubjectsScores';
 import Debts from '../studcabinet/Debts';
+import AdminList from '../user/userList/containers/AdminList';
 
 function OpenGroupPage() {
   const { groupId } = useParams();
@@ -105,6 +106,7 @@ export const PageRouter = ({ user }) => {
               <Route exact path={GROUP_SCHEDULE_ROUTER}>
                 <OpenGroupSchedule/>
               </Route>
+              <Route exact path={ADMINS} component={AdminList}/>
             </div>
           )}
           <div>

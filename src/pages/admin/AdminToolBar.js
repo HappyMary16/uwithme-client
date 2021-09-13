@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ADD_LESSON,
+  ADD_LESSON, ADMINS,
   LECTURE_HALLS,
   SCHEDULE, SETTING, STUDENTS, TEACHERS,
   USER_HOME
@@ -17,6 +17,7 @@ export const AdminToolBar = ({ isOpen = false, onClose }) => {
       <a href={SCHEDULE}>{i18n.t('schedule')}</a>
       <a href={TEACHERS}>{i18n.t('teachers')}</a>
       <a href={STUDENTS}>{i18n.t('students')}</a>
+      <a href={ADMINS}>{i18n.t('admins')}</a>
       <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>
   );

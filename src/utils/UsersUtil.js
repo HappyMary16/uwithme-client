@@ -82,7 +82,10 @@ export const findAllStudentsWithoutGroup = users =>
   users.filter(user => user.role === STUDENT).filter(user => !user.studyGroupId);
 
 export const getTeachers = users =>
-  users && users.filter(user => user.role === TEACHER);
+  users && users.filter(user => user && user.role === TEACHER);
+
+export const getAdmins = users =>
+  users && users.filter(user => user && user.isAdmin);
 
 export const getStudents = users =>
-  users && users.filter(user => user.role === STUDENT);
+  users && users.filter(user => user && user.role === STUDENT);

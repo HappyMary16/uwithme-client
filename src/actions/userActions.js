@@ -4,6 +4,7 @@ export const UPDATE_ACTIVE_ROLE = 'UPDATE_ACTIVE_ROLE';
 
 export const GET_TEACHERS = 'GET_TEACHERS';
 export const GET_STUDENTS = 'GET_STUDENTS';
+export const GET_ADMINS = 'GET_ADMINS';
 
 export const RENDER_USERS = 'RENDER_USERS';
 export const RENDER_USER = 'RENDER_USER';
@@ -65,6 +66,12 @@ export function addStudentToGroup(studentIds, groupId) {
 export function loadTeachers() {
   return {
     type: GET_TEACHERS
+  };
+}
+
+export function loadAdmins() {
+  return {
+    type: GET_ADMINS
   };
 }
 
