@@ -106,13 +106,20 @@ class ChooseRole extends Component {
       }
     }
 
+    let roleToSet = "ROLE_STUDENT";
+    if (userRole === 2) {
+      roleToSet = "ROLE_TEACHER";
+    }
+    if (userRole === 3) {
+      roleToSet = "ROLE_ADMIN";
+    }
     if (
       this.validateAdmin(userRole, universityName) ||
       this.validateUser(userRole, university, institute, department)
     ) {
       dispatch(
         signUpRequest(
-          userRole,
+          roleToSet,
           institute ? institute.value : null,
           department ? department.value : null,
           group ? group.value : null,
