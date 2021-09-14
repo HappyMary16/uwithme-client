@@ -7,16 +7,16 @@ export const isTeacher = user => user && user.activeRole === TEACHER;
 
 export const isAdmin = user => user && user.activeRole === ADMIN;
 
-export const getUserRoles = () => {
+export const getUserRoles = (user) => {
   let roles = [];
 
-  if (authService.hasRole(STUDENT)) {
+  if (authService.hasRole(STUDENT) || user.role === STUDENT) {
     roles.push(STUDENT);
   }
-  if (authService.hasRole(TEACHER)) {
+  if (authService.hasRole(TEACHER) || user.role === TEACHER) {
     roles.push(TEACHER);
   }
-  if (authService.hasRole(ADMIN)) {
+  if (authService.hasRole(ADMIN) || user.isAdmin) {
     roles.push(ADMIN);
   }
 
@@ -26,13 +26,16 @@ export const getUserRoles = () => {
 export const getInactiveRoles = (user) => {
   let roles = [];
 
-  if (authService.hasRole(STUDENT) && user.activeRole !== STUDENT) {
+  if ((authService.hasRole(STUDENT) || user.role === STUDENT)
+    && user.activeRole !== STUDENT) {
     roles.push(STUDENT);
   }
-  if (authService.hasRole(TEACHER) && user.activeRole !== TEACHER) {
+  if ((authService.hasRole(TEACHER) || user.role === TEACHER)
+    && user.activeRole !== TEACHER) {
     roles.push(TEACHER);
   }
-  if (authService.hasRole(ADMIN) && user.activeRole !== ADMIN) {
+  if ((authService.hasRole(ADMIN) || user.isAdmin)
+    && user.activeRole !== ADMIN) {
     roles.push(ADMIN);
   }
 

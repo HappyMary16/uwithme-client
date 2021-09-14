@@ -22,7 +22,7 @@ export default function authReducers(
         ...state,
         user: {
           ...action.payload.user,
-          roles: getUserRoles(),
+          roles: getUserRoles(action.payload.user),
           activeRole: getDefaultActiveRole(),
         },
         isRegistrationComplete: true,
