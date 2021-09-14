@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Select from "react-select";
 import { selectorColors } from "../../../styles/styles";
-import { UserRoles } from "../../../constants/userRoles";
+import { ADMIN, STUDENT, TEACHER, UserRoles } from '../../../constants/userRoles';
 import { connect } from "react-redux";
 import { setMessage } from "../../../actions/messageAction";
 import { loadInstitutes } from "../../../actions/instituteActions";
@@ -106,13 +106,15 @@ class ChooseRole extends Component {
       }
     }
 
-    let roleToSet = "ROLE_STUDENT";
-    if (userRole === 2) {
-      roleToSet = "ROLE_TEACHER";
+    let roleToSet;
+    if (userRole === 1) {
+      roleToSet = STUDENT;
+    } else if (userRole === 2) {
+      roleToSet = TEACHER;
+    } else if (userRole === 3) {
+      roleToSet = ADMIN;
     }
-    if (userRole === 3) {
-      roleToSet = "ROLE_ADMIN";
-    }
+
     if (
       this.validateAdmin(userRole, universityName) ||
       this.validateUser(userRole, university, institute, department)
