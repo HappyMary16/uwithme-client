@@ -43,14 +43,14 @@ export const getInactiveRoles = (user) => {
 }
 
 
-export const getDefaultActiveRole = () => {
-  if (authService.hasRole(STUDENT)) {
+export const getDefaultActiveRole = (user) => {
+  if (authService.hasRole(STUDENT) || user.role === STUDENT) {
     return STUDENT;
   }
-  if (authService.hasRole(TEACHER)) {
+  if (authService.hasRole(TEACHER) || user.role === TEACHER) {
     return TEACHER;
   }
-  if (authService.hasRole(ADMIN)) {
+  if (authService.hasRole(ADMIN) || user.isAdmin) {
     return ADMIN;
   }
 }
