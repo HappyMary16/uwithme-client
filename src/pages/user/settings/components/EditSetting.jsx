@@ -5,6 +5,8 @@ import i18n from '../../../../locales/i18n';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { CustomSelector } from '../../../common/components/CustomSelector';
+import { hasRole } from '../../../../utils/UsersUtil';
+import { ADMIN, STUDENT } from '../../../../constants/userRoles';
 
 class EditSetting extends Component {
   constructor(props) {
@@ -107,7 +109,7 @@ class EditSetting extends Component {
       departments,
       institutes,
       universities,
-      role,
+      user,
       userUniversity,
       userInstitute,
       userDepartment,
@@ -119,30 +121,28 @@ class EditSetting extends Component {
       <Form onSubmit={this.submit}>
         <Form.Label>{i18n.t('university')}</Form.Label>
         <CustomSelector
-          isEditMode={role !== 3 && isEditMode}
+          isEditMode={!hasRole(user, ADMIN) && isEditMode}
           options={universities}
           value={university !== undefined ? university : userUniversity}
           onChange={this.setUniversity}
         />
-        {role && role !== 3 && (
-          <div>
-            <Form.Label>{i18n.t('institute')}</Form.Label>
-            <CustomSelector
-              isEditMode={isEditMode}
-              options={institutes}
-              value={institute !== undefined ? institute : userInstitute}
-              onChange={this.setInstitute}
-            />
-            <Form.Label>{i18n.t('department')}</Form.Label>
-            <CustomSelector
-              isEditMode={isEditMode}
-              options={departments}
-              value={department !== undefined ? department : userDepartment}
-              onChange={this.setDepartment}
-            />
-          </div>
-        )}
-        {role === 1 && (
+        <div>
+          <Form.Label>{i18n.t('institute')}</Form.Label>
+          <CustomSelector
+            isEditMode={isEditMode}
+            options={institutes}
+            value={institute !== undefined ? institute : userInstitute}
+            onChange={this.setInstitute}
+          />
+          <Form.Label>{i18n.t('department')}</Form.Label>
+          <CustomSelector
+            isEditMode={isEditMode}
+            options={departments}
+            value={department !== undefined ? department : userDepartment}
+            onChange={this.setDepartment}
+          />
+        </div>
+        {hasRole(user, STUDENT) && (
           <div>
             <Form.Label>{i18n.t('group')}</Form.Label>
             <CustomSelector
@@ -154,7 +154,7 @@ class EditSetting extends Component {
           </div>
         )}
         {isEditMode && (
-          <Row className="justify-content-around">
+          <Row className='justify-content-around'>
             <Col
               xs={12}
               md={{ offset: 4, span: 4 }}

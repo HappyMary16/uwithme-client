@@ -144,7 +144,7 @@ class Setting extends Component {
         <KeycloakSetting user={user} />
         <hr />
         <EditSetting
-          role={user.role}
+          user={user}
           userUniversity={userUniversity}
           userInstitute={userInstitute}
           userDepartment={userDepartment}
