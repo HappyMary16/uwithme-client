@@ -39,7 +39,7 @@ import { loadDepartment } from '../actions/departmentActions';
 import { loadGroup } from '../actions/groupActions';
 import { processHttpCall } from './rootSaga';
 import { signInSuccess, signOut } from '../actions/authActions';
-import { ADMIN } from '../constants/userRoles';
+import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
 export function* usersWatcher() {
   yield takeEvery(GET_ADMINS, getAdmins);
@@ -130,7 +130,7 @@ function* downloadAvatars(action) {
 }
 
 function* processDownloadMyAvatar() {
-  if (authService.hasRole(ADMIN)) {
+  if (!authService.hasRole(STUDENT) && !authService.hasRole(TEACHER)) {
     return;
   }
 
