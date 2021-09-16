@@ -1,10 +1,11 @@
 import {
   RENDER_AVATAR,
   RENDER_USER,
-  RENDER_USERS
-} from "../actions/userActions";
-import StateLoader from "../store/StateLoader";
-import { SIGN_OUT } from "../actions/authActions";
+  RENDER_USERS, UN_ASSIGN_ROLE
+} from '../actions/userActions';
+import StateLoader from '../store/StateLoader';
+import { SIGN_OUT } from '../actions/authActions';
+import { ADMIN } from '../constants/userRoles';
 
 export default function userReducers(
   state = new StateLoader().loadState().userReducers || {
@@ -44,6 +45,24 @@ export default function userReducers(
           userWithAvatar
         ]
       };
+
+    case UN_ASSIGN_ROLE: {
+      const { userId, role } = action.payload;
+      let user = state.users.filter(user => user.id === userId)[0];
+      if (role === ADMIN) {
+        user.isAdmin = false;
+      } else {
+        user.role = null;
+      }
+
+      return {
+        ...state,
+        users: [
+          ...state.users.filter(user => user.id !== userId),
+          user
+        ]
+      };
+    }
 
     case SIGN_OUT:
       return {

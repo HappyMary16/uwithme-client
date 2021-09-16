@@ -3,7 +3,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import React from 'react';
 import { getGroupList, getLessonTime } from '../../../../utils/ScheduleUtil';
 import { ListItem } from '../../../common/components/ListItem';
-import { isTeacher } from '../../../../utils/UsersUtil';
+import { hasRole } from '../../../../utils/UsersUtil';
+import { TEACHER } from '../../../../constants/userRoles';
 
 export const LessonList = ({ lessons, open, user, isEditMode, deleteLesson }) => {
   return (
@@ -16,7 +17,7 @@ export const LessonList = ({ lessons, open, user, isEditMode, deleteLesson }) =>
           >
             <ListItem openEnabled={false}
                       iconText={getLessonTime(lesson.lessonTime)}
-                      text={lesson.subjectName + ' (' + (isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName) + ')'}
+                      text={lesson.subjectName + ' (' + (hasRole(user, TEACHER) ? getGroupList(lesson.groups) : lesson.teacherName) + ')'}
                       secondaryText={lesson.lectureHall + ' ' + lesson.building}
                       isDeletePresent={isEditMode}
                       deleteFunc={deleteLesson}

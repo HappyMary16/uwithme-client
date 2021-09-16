@@ -29,7 +29,7 @@ export const Schedule = ({
     <div>
       <Row>
         {!isMine && (
-          <Col xs={6} className="justify-content-center">
+          <Col xs={6} className='justify-content-center'>
             <Row>
               <PersonFill
                 size={'1.7em'}
@@ -45,7 +45,7 @@ export const Schedule = ({
           md={{ offset: isMine ? 10 : 4, span: 2 }}
           lg={{ offset: isMine ? 10 : 4, span: 2 }}
         >
-          <SwitchWeek weekNumber={weekNumber} setWeekNumber={setWeekNumber}/>
+          <SwitchWeek weekNumber={weekNumber} setWeekNumber={setWeekNumber} />
         </Col>
       </Row>
 
@@ -53,13 +53,13 @@ export const Schedule = ({
                                        user={user}
                                        isEditMode={isEditMode}
                                        deleteLesson={deleteLesson}
-                                       weekNumber={weekNumber}/>}
+                                       weekNumber={weekNumber} />}
 
       {!isSmall && <ScheduleTable lessons={lessons}
                                   user={user}
                                   isEditMode={isEditMode}
                                   deleteLesson={deleteLesson}
-                                  weekNumber={weekNumber}/>}
+                                  weekNumber={weekNumber} />}
     </div>
   );
 };

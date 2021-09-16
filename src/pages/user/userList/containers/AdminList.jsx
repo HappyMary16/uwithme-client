@@ -1,28 +1,52 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { ADMIN } from '../../../../constants/userRoles';
 import { getAdmins } from '../../../../utils/UsersUtil';
-import { loadAdmins } from '../../../../actions/userActions';
-import { UsersList } from '../components/UsersList';
+import { loadAdmins, unAssignRole } from '../../../../actions/userActions';
+import { EmptyPage } from '../../../common/components/EmptyPage';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { AdminListItem } from '../components/AdminListItem';
+import { ADMIN } from '../../../../constants/userRoles';
 
 class AdminsList extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.deleteAdminFunc = this.deleteAdminFunc.bind(this);
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(loadAdmins());
   }
 
+  deleteAdminFunc(userId) {
+    const { dispatch } = this.props;
+    dispatch(unAssignRole(userId, ADMIN));
+  }
+
   render() {
-    const { admins, isFetching } = this.props;
+    const { users, isFetching, userId } = this.props;
 
     return (
-      <UsersList users={admins} role={ADMIN} isFetching={isFetching} />
+      <ListGroup variant={'flush'}>
+        <EmptyPage list={users} isFetching={isFetching} />
+        {users &&
+        users.map(user => (
+          <AdminListItem key={user.id}
+                         user={user}
+                         deleteAdminFunc={this.deleteAdminFunc}
+                         isDeletePresent={user.id !== userId}/>
+        ))}
+      </ListGroup>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    admins: getAdmins(state.userReducers.users),
+    userId: state.authReducers.user.id,
+    users: getAdmins(state.userReducers.users),
     isFetching: state.navigationReducers.isFetching
   };
 };

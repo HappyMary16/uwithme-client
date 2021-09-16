@@ -1,9 +1,10 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import { authService } from "../services/http";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { authService } from '../services/http';
 import {
   ADMINS,
   AVATAR,
   GROUP_STUDENT_ID,
+  ROLES,
   STUDENT_GROUP,
   STUDENTS,
   STUDENTS_BY_GROUP_ID,
@@ -11,12 +12,13 @@ import {
   TEACHERS,
   USERS
 } from '../constants/serverApi';
-import { arrayBufferToDataUrl } from "../utils/FileUtil";
+import { arrayBufferToDataUrl } from '../utils/FileUtil';
 import {
   ADD_STUDENT_TO_GROUP,
   DELETE_USER,
   DOWNLOAD_MY_AVATAR,
-  downloadMyAvatar, GET_ADMINS,
+  downloadMyAvatar,
+  GET_ADMINS,
   GET_STUDENTS,
   GET_TEACHERS,
   LOAD_STUDENTS_BY_GROUP_ID,
@@ -27,19 +29,21 @@ import {
   renderMyAvatar,
   renderUser,
   renderUsers,
+  UN_ASSIGN_ROLE,
   UPDATE_USER,
   UPLOAD_AVATAR
 } from '../actions/userActions';
-import { loadUniversity } from "../actions/universityActions";
-import { loadInstitute } from "../actions/instituteActions";
-import { loadDepartment } from "../actions/departmentActions";
-import { loadGroup } from "../actions/groupActions";
-import { processHttpCall } from "./rootSaga";
-import { signInSuccess, signOut } from "../actions/authActions";
+import { loadUniversity } from '../actions/universityActions';
+import { loadInstitute } from '../actions/instituteActions';
+import { loadDepartment } from '../actions/departmentActions';
+import { loadGroup } from '../actions/groupActions';
+import { processHttpCall } from './rootSaga';
+import { signInSuccess, signOut } from '../actions/authActions';
 import { ADMIN } from '../constants/userRoles';
 
 export function* usersWatcher() {
   yield takeEvery(GET_ADMINS, getAdmins);
+  yield takeEvery(UN_ASSIGN_ROLE, unAssignRole);
   yield takeEvery(GET_TEACHERS, getTeachers);
   yield takeEvery(GET_STUDENTS, getStudents);
   yield takeEvery(RENDER_USERS, downloadAvatars);
@@ -63,6 +67,19 @@ function* getAdmins() {
   const response = yield call(processHttpCall, {
     url: ADMINS,
     method: "get"
+  });
+
+  if (response) {
+    yield put(renderUsers(response));
+  }
+}
+
+function* unAssignRole(action) {
+  const { userId, role } = action.payload;
+
+  const response = yield call(processHttpCall, {
+    url: USERS + userId + ROLES + role,
+    method: "delete"
   });
 
   if (response) {

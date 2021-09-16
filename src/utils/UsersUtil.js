@@ -1,6 +1,8 @@
 import { authService } from '../services/http';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
+export const hasRole = (user, role) => user && user.role === role;
+
 export const isStudent = user => user && user.activeRole === STUDENT;
 
 export const isTeacher = user => user && user.activeRole === TEACHER;

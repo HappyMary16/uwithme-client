@@ -1,9 +1,10 @@
 import React from 'react';
-import { isTeacher } from '../../../../utils/UsersUtil';
+import { hasRole } from '../../../../utils/UsersUtil';
 import { getGroupList } from '../../../../utils/ScheduleUtil';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { TrashFill } from 'react-bootstrap-icons';
+import { TEACHER } from '../../../../constants/userRoles';
 
 export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
   return (
@@ -25,7 +26,8 @@ export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
       <Row>
         <Col xs={8}>
           <p>{lesson.subjectName}</p>
-          <p className={'secondary-text text'}>{isTeacher(user) ? getGroupList(lesson.groups) : lesson.teacherName}</p>
+          <p
+            className={'secondary-text text'}>{hasRole(user, TEACHER) ? getGroupList(lesson.groups) : lesson.teacherName}</p>
         </Col>
         <Col xs={4}>
           <p>{lesson.lectureHall}</p>

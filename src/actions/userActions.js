@@ -20,6 +20,8 @@ export const LOAD_STUDENTS_WITHOUT_GROUP = 'LOAD_STUDENTS_WITHOUT_GROUP';
 export const REMOVE_STUDENT_FROM_GROUP = 'REMOVE_STUDENT_FROM_GROUP';
 export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
 
+export const UN_ASSIGN_ROLE = 'UN_ASSIGN_ROLE';
+
 export function updateActiveRole(role) {
   return {
     type: UPDATE_ACTIVE_ROLE,
@@ -74,6 +76,17 @@ export function loadAdmins() {
     type: GET_ADMINS
   };
 }
+
+export function unAssignRole(userId, role) {
+  return {
+    type: UN_ASSIGN_ROLE,
+    payload: {
+      userId,
+      role
+    }
+  };
+}
+
 
 export function renderUsers(users) {
   return {

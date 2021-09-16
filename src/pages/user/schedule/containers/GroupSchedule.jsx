@@ -12,6 +12,8 @@ import Button from 'react-bootstrap/Button';
 import { getLessonsByGroup } from '../../../../utils/ScheduleUtil';
 import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
 import { Schedule } from '../components/Schedule';
+import { ADD_LESSON } from '../../../../constants/links';
+import { history } from '../../../../store/Store';
 
 class GroupSchedule extends Component {
   constructor(props) {
@@ -91,7 +93,7 @@ class GroupSchedule extends Component {
           />
         )}
         <Row spacing={2}>
-          <Col sm={12} md={9}>
+          <Col sm={12} md={6}>
             <Select
               placeholder={i18n.t('select_group')}
               theme={selectorColors}
@@ -99,7 +101,7 @@ class GroupSchedule extends Component {
               onChange={e => this.handleGroupChange(e.value)}
               options={groups}
               defaultValue={getGroupById(groups, groupId)}
-              className="selector"
+              className='selector'
             />
           </Col>
           <Col sm={12} md={3}>
@@ -111,6 +113,15 @@ class GroupSchedule extends Component {
               }
             >
               {i18n.t(isEditMode ? 'save' : 'edit')}
+            </Button>
+          </Col>
+          <Col sm={12} md={3}>
+            <Button
+              block
+              variant={'purple'}
+              onClick={() => history.push(ADD_LESSON)}
+            >
+              {i18n.t('add_lesson')}
             </Button>
           </Col>
         </Row>

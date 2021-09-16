@@ -7,9 +7,10 @@ import {
   getTodayLessons
 } from '../../../../utils/ScheduleUtil';
 import i18n from '../../../../locales/i18n';
-import { isStudent, isTeacher } from '../../../../utils/UsersUtil';
+import { hasRole } from '../../../../utils/UsersUtil';
 import Table from 'react-bootstrap/Table';
 import { SwitchWeek } from '../../../common/components/SwitchWeek';
+import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 
 export const TodaySchedule = ({ isMine, lessons, user }) => {
   const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
@@ -27,8 +28,8 @@ export const TodaySchedule = ({ isMine, lessons, user }) => {
             <th>{i18n.t('lesson_time')}</th>
             <th>{i18n.t('subject')}</th>
             <th>{i18n.t('lecture_hall')}</th>
-            {isStudent(user) && <th>{i18n.t('teacher')}</th>}
-            {isTeacher(user) && <th>{i18n.t('group')}</th>}
+            {hasRole(user, STUDENT) && <th>{i18n.t('teacher')}</th>}
+            {hasRole(user, TEACHER) && <th>{i18n.t('group')}</th>}
           </tr>
           {lessons &&
           getTodayLessons(lessons, weekNumber ? 1 : 2).map(lesson => (
@@ -36,8 +37,8 @@ export const TodaySchedule = ({ isMine, lessons, user }) => {
               <td>{getLessonTime(lesson.lessonTime)}</td>
               <td>{lesson.subjectName}</td>
               <td>{lesson.lectureHall}</td>
-              {isStudent(user) && <td>{lesson.teacherName}</td>}
-              {isTeacher(user) && <td>{getGroupList(lesson.groups)}</td>}
+              {hasRole(user, STUDENT) && <td>{lesson.teacherName}</td>}
+              {hasRole(user, TEACHER) && <td>{getGroupList(lesson.groups)}</td>}
             </tr>
           ))}
           </tbody>

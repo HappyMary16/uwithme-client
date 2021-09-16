@@ -1,5 +1,5 @@
 import React from 'react';
-import { getName } from '../../../../utils/UsersUtil';
+import { getName, hasRole } from '../../../../utils/UsersUtil';
 import { USER_HOME_PAGE, USER_SCHEDULE } from '../../../../constants/links';
 import { history } from '../../../../store/Store';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -9,7 +9,7 @@ import { CalendarWeekFill } from 'react-bootstrap-icons';
 import Row from 'react-bootstrap/Row';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 
-export const UserListItem = ({ user, role }) => {
+export const UserListItem = ({ user }) => {
   let handleClick = () => {
     history.push(USER_HOME_PAGE(user.id));
   };
@@ -22,8 +22,8 @@ export const UserListItem = ({ user, role }) => {
         </Col>
         <Col xs={8} sm={10}>
           <p>{getName(user)}</p>
-          {role === STUDENT && <p className={'secondary-text text'}>{user.studyGroupName}</p>}
-          {role === TEACHER && <p className={'secondary-text text'}>{user.scienceDegree}</p>}
+          {hasRole(user, STUDENT) && <p className={'secondary-text text'}>{user.studyGroupName}</p>}
+          {hasRole(user, TEACHER) && <p className={'secondary-text text'}>{user.departmentName}</p>}
         </Col>
         <Col xs={2} sm={1}>
           <CalendarWeekFill

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { loadStudents } from '../../../../actions/userActions';
 import { getStudents } from '../../../../utils/UsersUtil';
 import { UsersList } from '../components/UsersList';
-import { STUDENT } from '../../../../constants/userRoles';
 
 class StudentsList extends Component {
   componentDidMount() {
@@ -15,7 +14,7 @@ class StudentsList extends Component {
     const { students, isFetching } = this.props;
 
     return (
-      <UsersList users={students} role={STUDENT} isFetching={isFetching} />
+      <UsersList users={students} isFetching={isFetching} />
     );
   }
 }
