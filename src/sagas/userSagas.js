@@ -39,7 +39,7 @@ import { loadDepartment } from '../actions/departmentActions';
 import { loadGroup } from '../actions/groupActions';
 import { processHttpCall } from './rootSaga';
 import { signInSuccess, signOut } from '../actions/authActions';
-import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
+import { STUDENT, TEACHER } from '../constants/userRoles';
 
 export function* usersWatcher() {
   yield takeEvery(GET_ADMINS, getAdmins);
