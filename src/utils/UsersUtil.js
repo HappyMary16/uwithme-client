@@ -1,7 +1,7 @@
 import { authService } from '../services/http';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
-export const hasRole = (user, role) => user && (user.role === role || user.isAdmin && role === ADMIN);
+export const hasRole = (user, role) => user && (user.role === role || (user.isAdmin && role === ADMIN));
 
 export const isStudent = user => user && user.activeRole === STUDENT;
 
