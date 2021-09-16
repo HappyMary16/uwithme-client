@@ -47,12 +47,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, user } = this.props;
 
-    if (authService.isLoggedIn) {
-      dispatch(signInRequest());
-    } else {
+    if (!authService.isLoggedIn) {
       dispatch(signOut());
+    } else if (!user) {
+      dispatch(signInRequest());
     }
   }
 
