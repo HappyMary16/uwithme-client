@@ -20,7 +20,7 @@ import {
   downloadMyAvatar,
   GET_ADMINS,
   GET_STUDENTS,
-  GET_TEACHERS,
+  GET_TEACHERS, GET_USERS_BY_PARAMS,
   LOAD_STUDENTS_BY_GROUP_ID,
   LOAD_STUDENTS_WITHOUT_GROUP,
   REMOVE_STUDENT_FROM_GROUP,
@@ -46,6 +46,8 @@ export function* usersWatcher() {
   yield takeEvery(UN_ASSIGN_ROLE, unAssignRole);
   yield takeEvery(GET_TEACHERS, getTeachers);
   yield takeEvery(GET_STUDENTS, getStudents);
+  yield takeEvery(GET_USERS_BY_PARAMS, getUsersByParams)
+
   yield takeEvery(RENDER_USERS, downloadAvatars);
 
   yield takeEvery(DOWNLOAD_MY_AVATAR, processDownloadMyAvatar);
@@ -91,6 +93,18 @@ function* getTeachers() {
   const response = yield call(processHttpCall, {
     url: TEACHERS,
     method: "get"
+  });
+
+  if (response) {
+    yield put(renderUsers(response));
+  }
+}
+
+function* getUsersByParams(action) {
+  const response = yield call(processHttpCall, {
+    url: USERS,
+    method: "get",
+    params: action.payload
   });
 
   if (response) {

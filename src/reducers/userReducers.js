@@ -1,7 +1,7 @@
 import {
   RENDER_AVATAR,
   RENDER_USER,
-  RENDER_USERS, UN_ASSIGN_ROLE
+  RENDER_USERS, UN_ASSIGN_ROLE, UPDATE_ACTIVE_ROLE
 } from '../actions/userActions';
 import StateLoader from '../store/StateLoader';
 import { SIGN_OUT } from '../actions/authActions';
@@ -63,6 +63,12 @@ export default function userReducers(
         ]
       };
     }
+
+    case UPDATE_ACTIVE_ROLE:
+      return {
+        ...state,
+        users: [],
+      }
 
     case SIGN_OUT:
       return {

@@ -1,13 +1,18 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { loadStudents } from '../../../../actions/userActions';
+import { loadStudents, loadUsersByRole } from '../../../../actions/userActions';
 import { getStudents } from '../../../../utils/UsersUtil';
 import { UsersList } from '../components/UsersList';
+import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 
 class StudentsList extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(loadStudents());
+    const { dispatch, activeRole } = this.props;
+    if (activeRole === TEACHER) {
+      dispatch(loadStudents());
+    } else {
+      dispatch(loadUsersByRole(STUDENT));
+    }
   }
 
   render() {
@@ -21,6 +26,7 @@ class StudentsList extends Component {
 
 const mapStateToProps = state => {
   return {
+    activeRole: state.authReducers.user.activeRole,
     students: getStudents(state.userReducers.users),
     isFetching: state.navigationReducers.isFetching
   };

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { getAdmins } from '../../../../utils/UsersUtil';
-import { loadAdmins, unAssignRole } from '../../../../actions/userActions';
+import { loadUsersByRole, unAssignRole } from '../../../../actions/userActions';
 import { EmptyPage } from '../../../common/components/EmptyPage';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { AdminListItem } from '../components/AdminListItem';
@@ -17,7 +17,7 @@ class AdminsList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(loadAdmins());
+    dispatch(loadUsersByRole(ADMIN));
   }
 
   deleteAdminFunc(userId) {

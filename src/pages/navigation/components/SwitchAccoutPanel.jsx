@@ -28,12 +28,12 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
   };
 
   const handleBlur = () => {
-    setShow(!show);
+    setShow(false);
   };
 
   return (
     <Row ref={ref} className={'justify-content-end'}>
-      <Button onClick={handleClick} onBlur={handleBlur} variant={'link'}>
+      <Button onClick={handleClick} onBlur={handleBlur} onFocusOut={handleBlur} variant={'link'}>
         <SmallAvatar size={35} avatar={avatar} />
       </Button>
 
@@ -50,12 +50,12 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
             <ListGroup variant='flush'>
               {getInactiveRoles(user).map(role => <ListGroup.Item
                 action
-                onClick={updateUserRoleFunc(role)}>
+                onMouseDown={updateUserRoleFunc(role)}>
                 <ListItem icon={<SwitchAccountIcon />} text={textByRole[role]} openEnabled={false} />
               </ListGroup.Item>)}
               <ListGroup.Item
                 action
-                onClick={signOutFunc()}
+                onMouseDown={signOutFunc()}
               >
                 <ListItem icon={<LogOutIcon size={'1.5em'} />} text={i18n.t('sign_out')} openEnabled={false} />
               </ListGroup.Item>
