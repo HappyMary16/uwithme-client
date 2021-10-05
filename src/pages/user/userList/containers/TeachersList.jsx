@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { loadStudents, loadTeachers, loadUsersByRole } from '../../../../actions/userActions';
+import { loadTeachers, loadUsersByRole } from '../../../../actions/userActions';
 import { getTeachers } from '../../../../utils/UsersUtil';
 import { UsersList } from '../components/UsersList';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
@@ -19,7 +19,7 @@ class TeachersList extends Component {
     const { teachers, isFetching } = this.props;
 
     return (
-      <UsersList users={teachers} isFetching={isFetching} />
+      <UsersList users={teachers} isFetching={isFetching}/>
     );
   }
 }
