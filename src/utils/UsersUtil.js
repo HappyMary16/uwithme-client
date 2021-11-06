@@ -63,8 +63,8 @@ export const getName = user => {
 
   const surname = !!user.surname ? user.surname : '';
   const firstName = typeof user.firstName === 'string' ? user.firstName : '';
-  const lastName = typeof user.lastName === 'string' ? user.lastName : '';
-  return surname + ' ' + firstName + ' ' + lastName;
+  const middleName = typeof user.middleName === 'string' ? user.middleName : '';
+  return surname + ' ' + firstName + ' ' + middleName;
 };
 
 export const getUserGroup = user => {

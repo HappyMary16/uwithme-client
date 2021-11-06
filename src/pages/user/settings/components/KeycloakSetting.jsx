@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import { KEYCLOAK_USER_SETTINGS } from '../../../../constants/keycloakApi';
 
 export const KeycloakSetting = ({ user }) => {
-  const { firstName, lastName, surname, email } = user;
+  const { firstName, middleName, surname, email } = user;
 
   return (
     <div>
@@ -20,8 +20,8 @@ export const KeycloakSetting = ({ user }) => {
       />
       <Form.Label>{i18n.t('last_name')}</Form.Label>
       <Form.Control
-        onChange={e => this.setState({ lastname: e.target.value })}
-        value={lastName}
+        onChange={e => this.setState({ middleName: e.target.value })}
+        value={middleName}
         required
         readOnly
       />
