@@ -33,9 +33,9 @@ class ShareFiles extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, userId } = this.props;
     dispatch(loadGroupsByTeacher());
-    dispatch(loadSubjectsAndFiles());
+    dispatch(loadSubjectsAndFiles(userId));
   }
 
   submit() {
@@ -129,6 +129,7 @@ class ShareFiles extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    userId: state.authReducers.user.id,
     username: state.authReducers.user.username,
     subjects: state.filesReducers.subjects,
     lectures: getLectures(state.filesReducers.files),

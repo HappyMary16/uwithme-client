@@ -44,7 +44,6 @@ export const getInactiveRoles = (user) => {
   return roles;
 }
 
-
 export const getDefaultActiveRole = (user) => {
   if (authService.hasRole(STUDENT) || user.role === STUDENT) {
     return STUDENT;

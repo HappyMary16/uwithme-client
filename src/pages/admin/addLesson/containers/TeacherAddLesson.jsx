@@ -18,10 +18,10 @@ class TeacherAddLesson extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, universityId } = this.props;
+    const { dispatch, userId, universityId } = this.props;
     if (universityId) {
       dispatch(loadGroupsByUniversityId(universityId));
-      dispatch(loadSubjects());
+      dispatch(loadSubjects(userId));
       dispatch(loadBuildings());
       dispatch(loadLectureHalls());
 
@@ -75,6 +75,7 @@ class TeacherAddLesson extends Component {
 
 const mapStateToProps = state => {
   return {
+    userId: state.authReducers.user.id,
     groups: state.groupReducers.groups,
     universityId: state.authReducers.user.universityId,
     teachers: getTeachers(state.userReducers.users),

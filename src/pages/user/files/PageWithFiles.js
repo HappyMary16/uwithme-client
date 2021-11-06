@@ -13,8 +13,8 @@ import { loadSubjectsAndFiles } from "../../../actions/fileActions";
 
 class PageWithFiles extends React.Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(loadSubjectsAndFiles());
+    const { dispatch, userId } = this.props;
+    dispatch(loadSubjectsAndFiles(userId));
   }
 
   render() {
@@ -62,6 +62,7 @@ class PageWithFiles extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    userId: state.authReducers.user.id,
     userRole: state.authReducers.user.role,
     subjects: state.filesReducers.subjects,
     files: state.filesReducers.files,

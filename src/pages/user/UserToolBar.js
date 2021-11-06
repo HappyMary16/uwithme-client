@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   DEBTS,
-  FILES,
+  FILES_PAGE,
   SCHEDULE,
   SETTING,
   STUDENTS,
@@ -19,7 +19,7 @@ export const UserToolBar = ({ user, isOpen = false, onClose }) => {
     <Menu isOpen={isOpen} onClose={() => onClose()}>
       <a href={USER_HOME}>{i18n.t('home_page')}</a>
       <a href={SCHEDULE}>{i18n.t('schedule')}</a>
-      <a href={FILES}>{i18n.t('page_with_files')}</a>
+      <a href={FILES_PAGE}>{i18n.t('page_with_files')}</a>
       {isStudent(user) && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
       {isTeacher(user) && <a href={STUDENTS}>{i18n.t('students')}</a>}
       {isStudent(user) && (

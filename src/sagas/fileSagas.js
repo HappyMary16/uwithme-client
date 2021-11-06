@@ -16,9 +16,10 @@ import {
 import { history } from "../store/Store";
 import { END, eventChannel } from "redux-saga";
 import { processHttpCall } from "./rootSaga";
+import { FILES_PAGE } from '../constants/links';
 
 export function* fileOperationWatcher() {
-  yield takeEvery(LOAD_SUBJECTS_AND_FILES, () => loadSubjectsWithFiles());
+  yield takeEvery(LOAD_SUBJECTS_AND_FILES, action => loadSubjectsWithFiles(action));
   yield takeEvery(LOAD_SUBJECTS, action => loadSubjects(action));
   yield takeEvery(DOWNLOAD_FILES, action => downloadFile(action));
 
@@ -39,14 +40,16 @@ function* downloadFiles() {
   }
 }
 
-function* loadSubjectsWithFiles() {
-  yield call(loadSubjects);
+function* loadSubjectsWithFiles(action) {
+  yield call(loadSubjects, action);
   yield call(downloadFiles);
 }
 
-function* loadSubjects() {
+function* loadSubjects(action) {
+  let { userId } = action.payload;
+
   const response = yield call(processHttpCall, {
-    url: SUBJECTS,
+    url: !userId ? SUBJECTS : SUBJECTS + userId,
     method: "get"
   });
 
@@ -105,7 +108,7 @@ function* addAccessToFiles(action) {
   if (response) {
     yield put(setMessage("Доступ надано"));
   }
-  history.push(FILES);
+  history.push(FILES_PAGE);
 }
 
 function* uploadFiles(action) {

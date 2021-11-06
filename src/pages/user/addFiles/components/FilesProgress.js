@@ -11,7 +11,7 @@ export const FilesProgress = ({ files, uploadProgress }) => {
         return (
           <div className={'margin-bottom'}>
             <p>{file.name}</p>
-            <ProgressBar now={now} label={`${now}%`} />
+            {!!now && <ProgressBar now={now} label={`${now}%`} />}
           </div>
         );
       })}

@@ -42,15 +42,21 @@ export function loadFile(fileId, fileName, loading) {
   };
 }
 
-export function loadSubjectsAndFiles() {
+export function loadSubjectsAndFiles(userId) {
   return {
-    type: LOAD_SUBJECTS_AND_FILES
+    type: LOAD_SUBJECTS_AND_FILES,
+    payload: {
+      userId
+    }
   };
 }
 
-export function loadSubjects() {
+export function loadSubjects(userId) {
   return {
-    type: LOAD_SUBJECTS
+    type: LOAD_SUBJECTS,
+    payload: {
+      userId
+    }
   };
 }
 

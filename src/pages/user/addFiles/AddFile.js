@@ -36,8 +36,8 @@ class AddFile extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(loadSubjectsAndFiles());
+    const { dispatch, userId } = this.props;
+    dispatch(loadSubjectsAndFiles(userId));
   }
 
   submit() {
@@ -137,6 +137,7 @@ class AddFile extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    userId: state.authReducers.user.id,
     username: state.authReducers.user.username,
     subjects: state.filesReducers.subjects,
     uploadProgress: state.filesReducers.uploadProgress,

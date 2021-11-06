@@ -4,7 +4,7 @@ import {
   ADD_FILE,
   ADD_LESSON, ADMINS,
   DEBTS,
-  FILES,
+  FILES_PAGE,
   GROUP_PAGE_ROUTER,
   GROUP_SCHEDULE_ROUTER,
   LECTURE_HALLS,
@@ -74,7 +74,7 @@ export const PageRouter = ({ user }) => {
           {!isAdmin(user) && (
             <div>
               <Route exact path={USER_HOME} component={UserHome}/>
-              <Route exact path={FILES} component={PageWithFiles}/>
+              <Route exact path={FILES_PAGE} component={PageWithFiles}/>
               <Route exact path={SCHEDULE} component={MySchedule}/>
             </div>
           )}
