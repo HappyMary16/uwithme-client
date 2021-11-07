@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ua">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <title>University With Me</title>
     <meta
             name="Description"
             content="University With Me - додаток для надання інформації (навчальних матеріалів, розкладу, оцінок) студентам під час навчального процесу."
     />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#343A40" />
-    <link rel="apple-touch-icon" href="appleLogo.png" />
+    <link rel="manifest" href="manifest.json"/>
+    <meta name="theme-color" content="#343A40"/>
+    <link rel="apple-touch-icon" href="appleLogo.png"/>
     <meta
             name="apple-mobile-web-app-status-bar-style"
             content="black"
@@ -19,36 +19,35 @@
             content="width=device-width, minimum-scale=1, maximum-scale=1, height=device-height, user-scalable=no, initial-scale=1, viewport-fit=cover"
     />
     <style>
-      body {
-        height: auto;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        background-color: #eeeeee !important;
-      }
+        body {
+            height: auto;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            background-color: #eeeeee !important;
+        }
 
-      #root {
-        background-color: white !important;
-        min-height: 100vh !important;
-      }
+        #root {
+            background-color: white !important;
+            min-height: 100vh !important;
+        }
     </style>
 
-    <link
-            rel="stylesheet"
-            href="/bootstrap.min.css"
-            crossorigin="anonymous"
+    <link rel="stylesheet"
+          href="/bootstrap.min.css"
+          crossorigin="anonymous"
     />
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
 
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/service-worker.js');
-        });
-      }
-    </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/service-worker.js');
+    });
+  }
+</script>
 
-  </body>
+</body>
 </html>

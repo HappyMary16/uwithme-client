@@ -1,12 +1,12 @@
-import StateLoader from "../store/StateLoader";
+import StateLoader from '../store/StateLoader';
 import {
-  ADD_ERROR,
+  ADD_ERROR, CLOSE_BOT_NOTIFICATION,
   REMOVE_ERROR,
   REMOVE_MESSAGE,
   SET_MESSAGE
-} from "../actions/messageAction";
-import { getMessage } from "../utils/MessageUtil";
-import { SIGN_OUT } from "../actions/authActions";
+} from '../actions/messageAction';
+import { getMessage } from '../utils/MessageUtil';
+import { SIGN_OUT } from '../actions/authActions';
 
 export default function messageReducers(
   state = new StateLoader().loadState().messageReducers || {
@@ -32,7 +32,7 @@ export default function messageReducers(
       let error = action.payload.error;
 
       if (
-        (!!error && error.status === 404 && error.data === "") ||
+        (!!error && error.status === 404 && error.data === '') ||
         (!!error && !!error.data && error.data.status === 403)
       ) {
         return state;
@@ -56,8 +56,15 @@ export default function messageReducers(
         errors: state.errors.filter(error => action.payload.id !== error.id)
       };
 
+    case CLOSE_BOT_NOTIFICATION:
+      return {
+        ...state,
+        wasBotNotificationShowed: true
+      };
+
     case SIGN_OUT:
       return {
+        ...state,
         message: undefined,
         errors: []
       };

@@ -1,0 +1,19 @@
+.toast-header {
+    background-color: #f7f8fc !important;
+}
+
+div.toast-header button:hover {
+    color: #5c71c5;
+}
+
+div.toast-header button:active {
+    color: #5c71c5;
+    border-color: #f7f8fc;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.notification-container {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}

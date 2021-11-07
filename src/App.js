@@ -4,7 +4,7 @@ import TopToolBarContainer from "./pages/navigation/TopToolBarContainer";
 import { UserToolBar } from "./pages/user/UserToolBar";
 
 import { connect } from "react-redux";
-import { isAdmin } from "./utils/UsersUtil";
+import { hasRole, isAdmin } from './utils/UsersUtil';
 import { AdminToolBar } from "./pages/admin/AdminToolBar";
 import "./styles/button.css";
 import "./styles/listItem.css";
@@ -19,6 +19,7 @@ import "./styles/scheduleTable.css";
 import "./styles/text.css";
 import "./styles/avatar.css";
 import "./styles/table.css";
+import "./styles/notification.css";
 import Container from "react-bootstrap/Container";
 import { authService } from "./services/http.js";
 import { CustomSpinner } from "./pages/navigation/components/CustomSpinner";
@@ -29,6 +30,8 @@ import ErrorContainer from "./pages/common/containers/ErrorContainer";
 import * as config from "./config";
 import { signInRequest, signOut } from "./actions/authActions";
 import { changeIsMenuOpen } from './actions/navigationActions';
+import { STUDENT } from './constants/userRoles';
+import BotNotification from './pages/common/containers/BotNotification';
 
 class App extends Component {
   constructor(props) {
@@ -86,6 +89,7 @@ class App extends Component {
         <ErrorContainer />
 
         <PageRouter user={user} />
+        {hasRole(user, STUDENT) && <BotNotification/>}
       </Container>
     );
   }

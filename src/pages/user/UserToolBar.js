@@ -13,13 +13,16 @@ import {
 import i18n from '../../locales/i18n';
 import { isStudent, isTeacher } from '../../utils/UsersUtil';
 import { slide as Menu } from 'react-burger-menu';
+import { TEST_SYSTEM_URI } from '../../config';
 
 export const UserToolBar = ({ user, isOpen = false, onClose }) => {
+
   return (
     <Menu isOpen={isOpen} onClose={() => onClose()}>
       <a href={USER_HOME}>{i18n.t('home_page')}</a>
       <a href={SCHEDULE}>{i18n.t('schedule')}</a>
       <a href={FILES_PAGE}>{i18n.t('page_with_files')}</a>
+      {isTeacher(user) && <a href={TEST_SYSTEM_URI} target = "_blank" rel = "noopener noreferrer">{i18n.t('tests')}</a>}
       {isStudent(user) && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
       {isTeacher(user) && <a href={STUDENTS}>{i18n.t('students')}</a>}
       {isStudent(user) && (
