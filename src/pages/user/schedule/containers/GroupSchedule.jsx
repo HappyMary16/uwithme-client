@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteLesson, findLessonsByGroupId } from '../../../../actions/scheduleActions';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Button, Col, Row } from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
 import { selectorColors } from '../../../../styles/styles';
 import { getGroupById } from '../../../../utils/StructureUtils';
 import { DeleteLessonDialog } from '../../../admin/deleteLesson/DeleteLessonDialog';
-import Button from 'react-bootstrap/Button';
 import { getLessonsByGroup } from '../../../../utils/ScheduleUtil';
 import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
 import { Schedule } from '../components/Schedule';
 import { ADD_LESSON } from '../../../../constants/links';
 import { history } from '../../../../store/Store';
+import { withGroupId } from '../../../../utils/RouterUtils';
 
 class GroupSchedule extends Component {
   constructor(props) {
@@ -148,4 +147,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(GroupSchedule);
+export default withGroupId(connect(mapStateToProps)(GroupSchedule));

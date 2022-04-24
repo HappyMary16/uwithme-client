@@ -1,15 +1,12 @@
-import React from "react";
-import { SubjectFiles } from "./components/SubjectFiles";
-import { ADD_FILE, SHARE_FILES } from "../../../constants/links";
-import i18n from "../../../locales/i18n";
-import { TEACHER } from "../../../constants/userRoles";
-import { connect } from "react-redux";
-import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { EmptyPage } from "../../common/components/EmptyPage";
-import { loadSubjectsAndFiles } from "../../../actions/fileActions";
+import React from 'react';
+import { SubjectFiles } from './components/SubjectFiles';
+import { ADD_FILE, SHARE_FILES } from '../../../constants/links';
+import i18n from '../../../locales/i18n';
+import { TEACHER } from '../../../constants/userRoles';
+import { connect } from 'react-redux';
+import { Button, Col, ListGroup, Row } from 'react-bootstrap';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import { loadSubjectsAndFiles } from '../../../actions/fileActions';
 
 class PageWithFiles extends React.Component {
   componentDidMount() {

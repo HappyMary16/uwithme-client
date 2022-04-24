@@ -1,4 +1,4 @@
-import Image from 'react-bootstrap/Image';
+import { Image } from 'react-bootstrap';
 import React from 'react';
 
 export const SmallAvatar = ({ size = "30px", avatar }) => {

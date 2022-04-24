@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { CustomSelector } from '../../../common/components/CustomSelector';
 import { hasRole } from '../../../../utils/UsersUtil';
 import { ADMIN, STUDENT } from '../../../../constants/userRoles';

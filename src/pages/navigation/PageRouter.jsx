@@ -1,8 +1,8 @@
-import React from 'react';
-import { Route, useParams } from 'react-router-dom';
+import React, { Fragment } from 'react';
 import {
   ADD_FILE,
-  ADD_LESSON, ADMINS,
+  ADD_LESSON,
+  ADMINS,
   DEBTS,
   FILES_PAGE,
   GROUP_PAGE_ROUTER,
@@ -32,7 +32,7 @@ import StudentsList from '../user/userList/containers/StudentsList';
 import UniversityStructure from '../admin/structure/UniversityStructure';
 import GroupSchedule from '../user/schedule/containers/GroupSchedule';
 import LectureHalls from '../admin/lectureHalls/LectureHalls';
-import Container from 'react-bootstrap/Container';
+import { Container } from 'react-bootstrap';
 import GroupPage from '../admin/groupPage/GroupPage';
 import UserPage from '../user/home/containers/UserPage';
 import UserSchedule from '../user/schedule/containers/UserSchedule';
@@ -43,86 +43,65 @@ import StudentRating from '../studcabinet/StudentRating';
 import SubjectsScores from '../studcabinet/SubjectsScores';
 import Debts from '../studcabinet/Debts';
 import AdminList from '../user/userList/containers/AdminList';
-
-function OpenGroupPage() {
-  const { groupId } = useParams();
-  return <GroupPage groupId={groupId}/>;
-}
-
-function OpenUserPage() {
-  const { userId } = useParams();
-  return <UserPage teacherId={userId}/>;
-}
-
-function OpenUserSchedule() {
-  const { userId } = useParams();
-  return <UserSchedule userId={userId}/>;
-}
-
-function OpenGroupSchedule() {
-  const { groupId } = useParams();
-  return <GroupSchedule groupId={groupId}/>;
-}
+import { Route, Routes } from 'react-router';
 
 export const PageRouter = ({ user }) => {
   return (
     <Container className={'main-page-container'}>
-      <Route exact path={PRE_HOME} component={PreHome}/>
+      <Routes>
+      <Route exact path={PRE_HOME} element={<PreHome/>}/>
 
       {user && (
-        <div>
+        <Fragment>
           {!isAdmin(user) && (
-            <div>
-              <Route exact path={USER_HOME} component={UserHome}/>
-              <Route exact path={FILES_PAGE} component={PageWithFiles}/>
-              <Route exact path={SCHEDULE} component={MySchedule}/>
-            </div>
+            <Fragment>
+              <Route exact path={USER_HOME} element={<UserHome/>}/>
+              <Route exact path={FILES_PAGE} element={<PageWithFiles/>}/>
+              <Route exact path={SCHEDULE} element={<MySchedule/>}/>
+            </Fragment>
           )}
 
           {isTeacher(user) && (
-            <div>
-              <Route exact path={ADD_FILE} component={AddFile}/>
-              <Route exact path={SHARE_FILES} component={ShareFiles}/>
-              <Route exact path={ADD_LESSON} component={TeacherAddLesson}/>
-            </div>
+            <Fragment>
+              <Route exact path={ADD_FILE} element={<AddFile/>}/>
+              <Route exact path={SHARE_FILES} element={<ShareFiles/>}/>
+              <Route exact path={ADD_LESSON} element={<TeacherAddLesson/>}/>
+            </Fragment>
           )}
 
           {isStudent(user) && (
-            <div>
-              <Route exact path={STUDENTS_RATING} component={StudentRating}/>
-              <Route exact path={SUBJECT_SCORES} component={SubjectsScores}/>
-              <Route exact path={DEBTS} component={Debts}/>
-            </div>
+            <Fragment>
+              <Route exact path={STUDENTS_RATING} element={<StudentRating/>}/>
+              <Route exact path={SUBJECT_SCORES} element={<SubjectsScores/>}/>
+              <Route exact path={DEBTS} element={<Debts/>}/>
+            </Fragment>
           )}
           {isAdmin(user) && (
-            <div>
-              <Route exact path={USER_HOME} component={UniversityStructure}/>
-              <Route exact path={ADD_LESSON} component={AdminAddLesson}/>
-              <Route exact path={SCHEDULE} component={GroupSchedule}/>
-              <Route exact path={LECTURE_HALLS} component={LectureHalls}/>
-              <Route exact path={GROUP_PAGE_ROUTER}>
-                <OpenGroupPage/>
-              </Route>
-              <Route exact path={GROUP_SCHEDULE_ROUTER}>
-                <OpenGroupSchedule/>
-              </Route>
-              <Route exact path={ADMINS} component={AdminList}/>
-            </div>
+            <Fragment>
+              <Route exact path={USER_HOME} element={<UniversityStructure/>}/>
+              <Route exact path={ADD_LESSON} element={<AdminAddLesson/>}/>
+              <Route exact path={SCHEDULE} element={<GroupSchedule/>}/>
+              <Route exact path={LECTURE_HALLS} element={<LectureHalls/>}/>
+              <Route exact path={GROUP_PAGE_ROUTER} element={<GroupPage/>}
+              />
+              <Route exact path={GROUP_SCHEDULE_ROUTER} element={<GroupSchedule/>}
+              />
+              <Route exact path={ADMINS} element={<AdminList/>}/>
+            </Fragment>
           )}
-          <div>
-            <Route path={USER_HOME_PAGE_ROUTER}>
-              <OpenUserPage/>
-            </Route>
-            <Route path={USER_SCHEDULE_ROUTER}>
-              <OpenUserSchedule/>
-            </Route>
-            <Route exact path={SETTING} component={Setting}/>
-            <Route exact path={STUDENTS} component={StudentsList}/>
-            <Route exact path={TEACHERS} component={TeachersList}/>
-          </div>
-          <div/>
-        </div>
+          <Fragment>
+            <Route path={USER_HOME_PAGE_ROUTER} element={<UserPage/>}
+            />
+            <Route path={USER_SCHEDULE_ROUTER} element={<UserSchedule/>}
+            />
+            <Route exact path={SETTING} element={<Setting/>}/>
+            <Route exact path={STUDENTS} element={<StudentsList/>}/>
+            <Route exact path={TEACHERS} element={<TeachersList/>}/>
+          </Fragment>
+
+        </Fragment>
       )}
+      </Routes>
     </Container>
   );
 };

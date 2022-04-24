@@ -11,8 +11,8 @@ export const SwitchWeek = ({ weekNumber, setWeekNumber }) => {
         onColor={lightGreyColor}
         checked={weekNumber}
         onChange={() => setWeekNumber(!weekNumber)}
-        uncheckedIcon={'Тиждень 2'}
-        checkedIcon={'Тиждень 1'}
+        uncheckedIcon={<div>Тиждень 2</div>}
+        checkedIcon={<div>Тиждень 1</div>}
         width={120}
         activeBoxShadow={'0 0 2px 3px #5c71c5'}
         className="react-switch"

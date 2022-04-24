@@ -1,5 +1,4 @@
-import Collapse from 'react-bootstrap/Collapse';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Collapse, ListGroup } from 'react-bootstrap';
 import React from 'react';
 import { getGroupList, getLessonTime } from '../../../../utils/ScheduleUtil';
 import { ListItem } from '../../../common/components/ListItem';

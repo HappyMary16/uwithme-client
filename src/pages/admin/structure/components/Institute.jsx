@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import DepartmentsList from "./DepartmentsList";
-import ListGroup from "react-bootstrap/ListGroup";
-import { ListItem } from "../../../common/components/ListItem";
-import { InstituteIcon } from "../../../icons/InstituteIcon";
+import React, { Component } from 'react';
+import DepartmentsList from './DepartmentsList';
+import { ListGroup } from 'react-bootstrap';
+import { ListItem } from '../../../common/components/ListItem';
+import { InstituteIcon } from '../../../icons/InstituteIcon';
 
 export default class Institute extends Component {
   constructor(props) {

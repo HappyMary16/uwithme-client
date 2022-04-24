@@ -1,21 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import { FileTypes, LECTURE } from "../../../constants/userRoles";
-import { Upload } from "./components/Upload";
-import i18n from "../../../locales/i18n";
-import { compose } from "redux";
-import CreatableSelect from "react-select/creatable";
-import Select from "react-select";
-import { selectorColors } from "../../../styles/styles";
-import { Message } from "../../common/components/Message";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import React from 'react';
+import { connect } from 'react-redux';
+import { FileTypes, LECTURE } from '../../../constants/userRoles';
+import { Upload } from './components/Upload';
+import i18n from '../../../locales/i18n';
+import { compose } from 'redux';
+import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
+import { selectorColors } from '../../../styles/styles';
+import { Message } from '../../common/components/Message';
+import { Button, Col } from 'react-bootstrap';
 import {
   clearUploadProgress,
   clearUploadSuccess,
   loadSubjectsAndFiles,
   uploadRequest
-} from "../../../actions/fileActions";
+} from '../../../actions/fileActions';
 
 class AddFile extends React.Component {
   constructor(props) {

@@ -1,10 +1,5 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import {
-  DEPARTMENTS,
-  INFO_DEPARTMENTS,
-  USER_DEPARTMENT
-} from "../constants/serverApi";
-import { loadInstitutesByUniversityId } from "../actions/instituteActions";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { DEPARTMENTS, INFO_DEPARTMENTS, USER_DEPARTMENT } from '../constants/serverApi';
 import {
   CREATE_DEPARTMENT,
   departmentCreated,
@@ -14,8 +9,9 @@ import {
   renderDepartmentForRegistration,
   renderDepartments,
   renderUserDepartment
-} from "../actions/departmentActions";
-import { processHttpCall } from "./rootSaga";
+} from '../actions/departmentActions';
+import { processHttpCall } from './rootSaga';
+import { createInstitute } from './instituteSagas';
 
 export function* departmentWatcher() {
   yield takeEvery(CREATE_DEPARTMENT, createDepartment);
@@ -27,16 +23,23 @@ export function* departmentWatcher() {
   yield takeEvery(LOAD_DEPARTMENT, loadDepartment);
 }
 
-function* createDepartment(action) {
+export function* createDepartment(action) {
+  const { instituteId } = action.payload;
+
+  if (!instituteId) {
+    const institute = yield call(createInstitute, action);
+    action.payload.instituteId = institute.id;
+  }
+
   const response = yield call(processHttpCall, {
     url: DEPARTMENTS,
-    method: "post",
+    method: 'post',
     data: action.payload
   });
 
   if (response) {
     yield put(departmentCreated(response));
-    yield put(loadInstitutesByUniversityId());
+    return response;
   }
 }
 
@@ -45,7 +48,7 @@ function* loadDepartments(action) {
 
   const response = yield call(processHttpCall, {
     url: INFO_DEPARTMENTS + instituteId,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -56,7 +59,7 @@ function* loadDepartments(action) {
 function* loadDepartmentsByUniversityId() {
   const response = yield call(processHttpCall, {
     url: DEPARTMENTS,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -67,7 +70,7 @@ function* loadDepartmentsByUniversityId() {
 function* loadDepartment() {
   const response = yield call(processHttpCall, {
     url: USER_DEPARTMENT,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {

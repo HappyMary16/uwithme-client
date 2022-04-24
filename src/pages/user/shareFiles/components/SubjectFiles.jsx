@@ -1,9 +1,7 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Col, Container, Row } from 'react-bootstrap';
 import FilesToChoose from './FilesToChoose';
 import i18n from '../../../../locales/i18n';
-import Container from 'react-bootstrap/Container';
 
 export const SubjectFiles = ({ lectures, tasks, subjectId, handleChoose }) => {
   return (

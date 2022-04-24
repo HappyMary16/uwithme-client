@@ -2,11 +2,9 @@ import React from 'react';
 import { getName, hasRole } from '../../../../utils/UsersUtil';
 import { USER_HOME_PAGE, USER_SCHEDULE } from '../../../../constants/links';
 import { history } from '../../../../store/Store';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Col from 'react-bootstrap/Col';
+import { Col, ListGroup, Row } from 'react-bootstrap';
 import { SmallAvatar } from '../../../common/components/SmallAvatar';
 import { CalendarWeekFill } from 'react-bootstrap-icons';
-import Row from 'react-bootstrap/Row';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 
 export const UserListItem = ({ user }) => {

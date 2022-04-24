@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
-import Form from 'react-bootstrap/Form';
+import { Form } from 'react-bootstrap';
 
 export const CustomSelector = ({
   isEditMode = true,

@@ -3,19 +3,9 @@ import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
 import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
-import {
-  LESSONS_TIME,
-  WEEK_DAYS,
-  WEEK_NUMBER
-} from '../../../../constants/userRoles';
-import {
-  getBuildingByLectureHall,
-  getLectureHallsByBuilding
-} from '../../../../utils/StructureUtils';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../../constants/userRoles';
+import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../../utils/StructureUtils';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { getName } from '../../../../utils/UsersUtil';
 
 class AddLesson extends Component {

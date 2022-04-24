@@ -3,8 +3,7 @@ import { DropZone } from './DropZone';
 import { FilesProgress } from './FilesProgress';
 import '../../../../styles/fileUpload.css';
 import i18n from '../../../../locales/i18n';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import { Container, Row } from 'react-bootstrap';
 
 export const Upload = ({
   addFiles,

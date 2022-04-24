@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import i18n from '../../../../locales/i18n';
 import '../../../../styles/fileUpload.css';
-import AvatarEditor from 'react-avatar-editor-scale';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { Form, Row } from 'react-bootstrap';
+import AvatarEditor from 'react-avatar-editor';
+import { Button, Form, Modal, Row } from 'react-bootstrap';
 
 class LoadPhoto extends Component {
   constructor(props) {

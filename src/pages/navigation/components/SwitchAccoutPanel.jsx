@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { LogOutIcon } from '../../icons/LogOutIcon';
-import Row from 'react-bootstrap/Row';
-import Popover from 'react-bootstrap/Popover';
-import Overlay from 'react-bootstrap/Overlay';
+import { Button, ListGroup, Overlay, Popover, Row } from 'react-bootstrap';
 import { SmallAvatar } from '../../common/components/SmallAvatar';
-import ListGroup from 'react-bootstrap/ListGroup';
 import { ListItem } from '../../common/components/ListItem';
 import { SwitchAccountIcon } from '../../icons/SwitchAccountIcon';
 import i18n from '../../../locales/i18n';
 import { getInactiveRoles } from '../../../utils/UsersUtil';
-import Button from 'react-bootstrap/Button';
 
 export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFunc }) => {
   const [show, setShow] = useState(false);

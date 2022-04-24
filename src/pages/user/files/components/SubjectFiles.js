@@ -2,8 +2,7 @@ import React from 'react';
 import i18n from '../../../../locales/i18n';
 import { getLectures, getTasks } from '../../../../utils/FileUtil';
 import ListFiles from './ListFiles';
-import { ListGroup } from 'react-bootstrap';
-import Collapse from 'react-bootstrap/Collapse';
+import { Collapse, ListGroup } from 'react-bootstrap';
 import { ListItem } from '../../../common/components/ListItem';
 import { FolderFill } from 'react-bootstrap-icons';
 

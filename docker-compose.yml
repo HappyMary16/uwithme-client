@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  keycloak:
+    image: jboss/keycloak:4.0.0.Final
+    volumes:
+      - ./keycloak-config:/opt/jboss/keycloak/imports
+    command:
+      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: education_app
+    ports:
+      - "5444:5432"

@@ -1,7 +1,6 @@
 import React from 'react';
 import i18n from '../../../locales/i18n';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import { Button, Modal } from 'react-bootstrap';
 
 export const ErrorMessage = ({ error, handleClose }) => {
   return (

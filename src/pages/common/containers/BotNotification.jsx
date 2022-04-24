@@ -4,8 +4,7 @@ import { closeBotNotification } from '../../../actions/messageAction';
 import { Notification } from '../components/Notification';
 import i18n from '../../../locales/i18n';
 import { SmallAvatar } from '../components/SmallAvatar';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Col, Row } from 'react-bootstrap';
 import { TELEGRAM_BOT_URI } from '../../../config';
 
 class BotNotification extends Component {

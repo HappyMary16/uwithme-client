@@ -1,6 +1,5 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
+import { Row, Spinner } from 'react-bootstrap';
 
 export const CustomSpinner = ({ isFetching }) => {
   return (

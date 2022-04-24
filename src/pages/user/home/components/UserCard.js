@@ -1,13 +1,11 @@
-import React from "react";
-import i18n from "../../../../locales/i18n";
-import { getName, getUserGroup } from "../../../../utils/UsersUtil";
-import LoadPhoto from "./LoadPhoto";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { CalendarWeekFill } from "react-bootstrap-icons";
-import { history } from "../../../../store/Store";
-import { SCHEDULE, USER_SCHEDULE } from "../../../../constants/links";
+import React from 'react';
+import i18n from '../../../../locales/i18n';
+import { getName, getUserGroup } from '../../../../utils/UsersUtil';
+import LoadPhoto from './LoadPhoto';
+import { Card, Col, Row } from 'react-bootstrap';
+import { CalendarWeekFill } from 'react-bootstrap-icons';
+import { history } from '../../../../store/Store';
+import { SCHEDULE, USER_SCHEDULE } from '../../../../constants/links';
 
 export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
   const [open, setOpen] = React.useState(false);

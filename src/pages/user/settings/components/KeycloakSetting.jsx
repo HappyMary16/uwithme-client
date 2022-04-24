@@ -1,9 +1,6 @@
 import React from 'react';
-import Col from 'react-bootstrap/Col';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import { KEYCLOAK_USER_SETTINGS } from '../../../../constants/keycloakApi';
 
 export const KeycloakSetting = ({ user }) => {

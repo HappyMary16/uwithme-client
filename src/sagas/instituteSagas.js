@@ -1,9 +1,5 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import {
-  INFO_INSTITUTES,
-  INSTITUTES,
-  USER_INSTITUTE
-} from "../constants/serverApi";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { INFO_INSTITUTES, INSTITUTES, USER_INSTITUTE } from '../constants/serverApi';
 import {
   CREATE_INSTITUTE,
   instituteCreated,
@@ -13,8 +9,8 @@ import {
   renderInstitutes,
   renderInstitutesForRegistration,
   renderUserInstitute
-} from "../actions/instituteActions";
-import { processHttpCall } from "./rootSaga";
+} from '../actions/instituteActions';
+import { processHttpCall } from './rootSaga';
 
 export function* instituteWatcher() {
   yield takeEvery(CREATE_INSTITUTE, createInstitute);
@@ -26,7 +22,7 @@ export function* instituteWatcher() {
   yield takeEvery(LOAD_INSTITUTE, loadInstitute);
 }
 
-function* createInstitute(action) {
+export function* createInstitute(action) {
   const response = yield call(processHttpCall, {
     url: INSTITUTES,
     method: "post",
@@ -35,6 +31,7 @@ function* createInstitute(action) {
 
   if (response) {
     yield put(instituteCreated(response));
+    return response;
   }
 }
 

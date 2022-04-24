@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { findUserById } from '../../../../utils/UsersUtil';
 import { findLessonsForUser } from '../../../../actions/scheduleActions';
 import { Schedule } from '../components/Schedule';
+import { withUserId } from '../../../../utils/RouterUtils';
 
 class UserSchedule extends Component {
   componentDidMount() {
@@ -30,4 +31,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UserSchedule);
+export default withUserId(connect(mapStateToProps)(UserSchedule));

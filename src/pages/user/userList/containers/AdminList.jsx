@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { getAdmins } from '../../../../utils/UsersUtil';
 import { loadUsersByRole, unAssignRole } from '../../../../actions/userActions';
 import { EmptyPage } from '../../../common/components/EmptyPage';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { ListGroup } from 'react-bootstrap';
 import { AdminListItem } from '../components/AdminListItem';
 import { ADMIN } from '../../../../constants/userRoles';
 

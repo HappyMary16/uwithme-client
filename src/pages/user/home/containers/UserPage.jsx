@@ -3,19 +3,20 @@ import { User } from '../components/User';
 import React, { Component } from 'react';
 import { findUserById } from '../../../../utils/UsersUtil';
 import { findLessonsForUser } from '../../../../actions/scheduleActions';
+import { withUserId } from '../../../../utils/RouterUtils';
 
 class UserPage extends Component {
   componentDidMount() {
-    const { dispatch, teachers, teacherId } = this.props;
-    const teacher = findUserById(teachers, teacherId);
+    const { dispatch, teachers, userId } = this.props;
+    const teacher = findUserById(teachers, userId);
     if (teacher) {
       dispatch(findLessonsForUser(teacher.id));
     }
   }
 
   render() {
-    const { teachers, teacherId, lessons } = this.props;
-    const teacher = findUserById(teachers, teacherId);
+    const { teachers, userId, lessons } = this.props;
+    const teacher = findUserById(teachers, userId);
 
     return (
       <div>
@@ -39,4 +40,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UserPage);
+export default withUserId(connect(mapStateToProps)(UserPage));

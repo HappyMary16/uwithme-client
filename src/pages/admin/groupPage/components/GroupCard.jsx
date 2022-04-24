@@ -1,14 +1,11 @@
-import React from "react";
-import i18n from "../../../../locales/i18n";
-import { history } from "../../../../store/Store";
-import { GROUP_SCHEDULE, USER_HOME_PAGE } from "../../../../constants/links";
-import Card from "react-bootstrap/Card";
-import { CalendarWeekFill } from "react-bootstrap-icons";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
+import React from 'react';
+import i18n from '../../../../locales/i18n';
+import { history } from '../../../../store/Store';
+import { GROUP_SCHEDULE, USER_HOME_PAGE } from '../../../../constants/links';
+import { Card, Col, Form, Row } from 'react-bootstrap';
+import { CalendarWeekFill } from 'react-bootstrap-icons';
 
-export const GroupCard = ({ group, groupTeacher }) => {
+export const GroupCard = ({ group, department, institute, groupTeacher }) => {
   return (
     <Card className={"margin-bottom"}>
       <Card.Header as="h5">
@@ -39,9 +36,9 @@ export const GroupCard = ({ group, groupTeacher }) => {
           {!groupTeacher && i18n.t("group_does_not_have_teacher")}
         </Card.Subtitle>
         <Card.Text>
-          {i18n.t("institute")}: {group.instituteName}
+          {i18n.t("institute")}: {institute.label}
           <br />
-          {i18n.t("department")}: {group.departmentName}
+          {i18n.t("department")}: {department.label}
           <br />
           {i18n.t("course")}: {group.course}
         </Card.Text>

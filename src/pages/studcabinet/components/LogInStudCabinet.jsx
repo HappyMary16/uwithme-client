@@ -1,8 +1,6 @@
 import React from 'react';
 import i18n from '../../../locales/i18n';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { history } from '../../../store/Store';
 import { USER_HOME } from '../../../constants/links';
 import { Message } from '../../common/components/Message';

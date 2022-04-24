@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Col from 'react-bootstrap/Col';
+import { Button, Col, Row } from 'react-bootstrap';
 import i18n from '../../../locales/i18n';
-import Button from 'react-bootstrap/Button';
 import { loadUniversities, loadUniversity } from '../../../actions/universityActions';
 import { deleteUser, updateUser } from '../../../actions/userActions';
 import EditSetting from './components/EditSetting';
@@ -11,7 +10,6 @@ import { loadGroup, loadGroups } from '../../../actions/groupActions';
 import { connect } from 'react-redux';
 import { loadUserUniversityInfo } from '../../../actions/structureActions';
 import { KeycloakSetting } from './components/KeycloakSetting';
-import Row from 'react-bootstrap/Row';
 import { hasRole, isAdmin } from '../../../utils/UsersUtil';
 import { STUDENT } from '../../../constants/userRoles';
 

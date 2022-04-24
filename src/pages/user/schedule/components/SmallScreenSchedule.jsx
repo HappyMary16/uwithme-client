@@ -1,6 +1,6 @@
 import React from 'react';
 import { WEEK_DAYS } from '../../../../constants/userRoles';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { ListGroup } from 'react-bootstrap';
 import { SmallScreenDay } from './SmallScreenDay';
 import { EmptyPage } from '../../../common/components/EmptyPage';
 

@@ -1,19 +1,16 @@
-import React, { Component } from "react";
-import i18n from "../../../locales/i18n";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Select from "react-select";
-import { selectorColors } from "../../../styles/styles";
+import React, { Component } from 'react';
+import i18n from '../../../locales/i18n';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import Select from 'react-select';
+import { selectorColors } from '../../../styles/styles';
 import { ADMIN, STUDENT, TEACHER, UserRoles } from '../../../constants/userRoles';
-import { connect } from "react-redux";
-import { setMessage } from "../../../actions/messageAction";
-import { loadInstitutes } from "../../../actions/instituteActions";
-import { loadUniversities } from "../../../actions/universityActions";
-import { loadDepartments } from "../../../actions/departmentActions";
-import { loadGroups } from "../../../actions/groupActions";
-import { signUpRequest } from "../../../actions/authActions";
+import { connect } from 'react-redux';
+import { setMessage } from '../../../actions/messageAction';
+import { loadInstitutes } from '../../../actions/instituteActions';
+import { loadUniversities } from '../../../actions/universityActions';
+import { loadDepartments } from '../../../actions/departmentActions';
+import { loadGroups } from '../../../actions/groupActions';
+import { signUpRequest } from '../../../actions/authActions';
 
 class ChooseRole extends Component {
   constructor(props) {

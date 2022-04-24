@@ -1,23 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Institute from "./components/Institute";
-import { getDepartmentsByInstitute } from "../../../utils/StructureUtils";
-import { CreateStructurePanel } from "./components/CreatingStructurePanel";
-import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
-import { EmptyPage } from "../../common/components/EmptyPage";
-import {
-  createInstitute,
-  loadInstitutesByUniversityId
-} from "../../../actions/instituteActions";
-import {
-  createDepartment,
-  loadDepartmentsByUniversityId
-} from "../../../actions/departmentActions";
-import {
-  createGroup,
-  loadGroupsByUniversityId
-} from "../../../actions/groupActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Institute from './components/Institute';
+import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
+import { CreateStructurePanel } from './components/CreatingStructurePanel';
+import { Container, ListGroup } from 'react-bootstrap';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import { createInstitute, loadInstitutesByUniversityId } from '../../../actions/instituteActions';
+import { createDepartment, loadDepartmentsByUniversityId } from '../../../actions/departmentActions';
+import { createGroup, loadGroupsByUniversityId } from '../../../actions/groupActions';
 
 class UniversityStructure extends Component {
   constructor(props) {
@@ -46,7 +36,7 @@ class UniversityStructure extends Component {
   createDepartment(instituteName, instituteId, departmentName) {
     const { dispatch, universityId } = this.props;
 
-    dispatch(createDepartment(universityId, instituteName, departmentName));
+    dispatch(createDepartment(universityId, instituteName, instituteId, departmentName));
   }
 
   createGroup(
@@ -63,7 +53,9 @@ class UniversityStructure extends Component {
     dispatch(
       createGroup(
         universityId,
+        instituteId,
         instituteName,
+        departmentId,
         departmentName,
         course,
         groupName,

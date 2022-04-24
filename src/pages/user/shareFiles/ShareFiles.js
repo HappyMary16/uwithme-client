@@ -1,20 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
-import i18n from "../../../locales/i18n";
-import { getLectures, getTasks } from "../../../utils/FileUtil";
-import { compose } from "redux";
-import Select from "react-select";
-import { selectorColors } from "../../../styles/styles";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import { SubjectFiles } from "./components/SubjectFiles";
-import { EmptyPage } from "../../common/components/EmptyPage";
-import { ADD_FILE } from "../../../constants/links";
-import { loadGroupsByTeacher } from "../../../actions/groupActions";
-import {
-  addAccessToFiles,
-  loadSubjectsAndFiles
-} from "../../../actions/fileActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import i18n from '../../../locales/i18n';
+import { getLectures, getTasks } from '../../../utils/FileUtil';
+import { compose } from 'redux';
+import Select from 'react-select';
+import { selectorColors } from '../../../styles/styles';
+import { Button, Col } from 'react-bootstrap';
+import { SubjectFiles } from './components/SubjectFiles';
+import { EmptyPage } from '../../common/components/EmptyPage';
+import { ADD_FILE } from '../../../constants/links';
+import { loadGroupsByTeacher } from '../../../actions/groupActions';
+import { addAccessToFiles, loadSubjectsAndFiles } from '../../../actions/fileActions';
 
 let selectedGroups = [];
 let files = [];

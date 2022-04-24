@@ -1,5 +1,5 @@
 import i18n from '../../../locales/i18n';
-import Row from 'react-bootstrap/Row';
+import { Row } from 'react-bootstrap';
 import React from 'react';
 
 export const EmptyPage = ({

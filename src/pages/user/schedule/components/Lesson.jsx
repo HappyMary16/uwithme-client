@@ -1,8 +1,7 @@
 import React from 'react';
 import { hasRole } from '../../../../utils/UsersUtil';
 import { getGroupList } from '../../../../utils/ScheduleUtil';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { Col, Row } from 'react-bootstrap';
 import { TrashFill } from 'react-bootstrap-icons';
 import { TEACHER } from '../../../../constants/userRoles';
 

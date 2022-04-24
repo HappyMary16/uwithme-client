@@ -1,12 +1,5 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import {
-  GROUPS,
-  GROUPS_BY_UNIVERSITY_ID,
-  INFO_GROUPS,
-  USER_GROUP
-} from "../constants/serverApi";
-import { loadInstitutesByUniversityId } from "../actions/instituteActions";
-import { loadDepartmentsByUniversityId } from "../actions/departmentActions";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { GROUPS, GROUPS_BY_UNIVERSITY_ID, INFO_GROUPS, USER_GROUP } from '../constants/serverApi';
 import {
   CREATE_GROUP,
   LOAD_GROUP,
@@ -18,8 +11,9 @@ import {
   renderGroups,
   renderGroupsForRegistration,
   renderUserGroup
-} from "../actions/groupActions";
-import { processHttpCall } from "./rootSaga";
+} from '../actions/groupActions';
+import { processHttpCall } from './rootSaga';
+import { createDepartment } from './departmentSagas';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, createGroup);
@@ -31,15 +25,20 @@ export function* groupWatcher() {
 }
 
 function* createGroup(action) {
+  const { departmentId } = action.payload;
+
+  if (!departmentId) {
+    const department = yield call(createDepartment, action);
+    action.payload.departmentId = department.id;
+  }
+
   const response = yield call(processHttpCall, {
     url: GROUPS,
-    method: "post",
+    method: 'post',
     data: action.payload
   });
 
   if (response) {
-    yield put(loadInstitutesByUniversityId());
-    yield put(loadDepartmentsByUniversityId());
     yield put(renderGroup(response));
   }
 }
@@ -49,7 +48,7 @@ function* loadGroups(action) {
 
   const response = yield call(processHttpCall, {
     url: INFO_GROUPS + departmentId,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -62,7 +61,7 @@ function* loadGroupsByUniversityId(action) {
 
   const response = yield call(processHttpCall, {
     url: GROUPS_BY_UNIVERSITY_ID + universityId,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -75,7 +74,7 @@ function* loadGroupById(action) {
 
   const response = yield call(processHttpCall, {
     url: GROUPS + id,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -86,7 +85,7 @@ function* loadGroupById(action) {
 function* loadGroup() {
   const response = yield call(processHttpCall, {
     url: USER_GROUP,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -97,7 +96,7 @@ function* loadGroup() {
 function* loadGroupByTeacher() {
   const response = yield call(processHttpCall, {
     url: GROUPS,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {

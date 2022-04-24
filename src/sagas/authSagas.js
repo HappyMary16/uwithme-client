@@ -1,20 +1,20 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import http from "../services/http";
-import { SIGN_IN, SIGN_UP } from "../constants/serverApi";
+import http, { authService } from '../services/http';
+import { SIGN_IN, SIGN_UP } from '../constants/serverApi';
 import {
-  updateRegistrationComplete,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_UP_REQUEST,
-  signInSuccess
-} from "../actions/authActions";
-import { history } from "../store/Store";
-import { PRE_HOME, USER_HOME } from "../constants/links";
-import { addError } from "../actions/messageAction";
-import { downloadMyAvatar } from "../actions/userActions";
-import { processHttpCall } from "./rootSaga";
-import { endFetching, startFetching } from "../actions/navigationActions";
+  signInSuccess,
+  updateRegistrationComplete
+} from '../actions/authActions';
+import { history } from '../store/Store';
+import { PRE_HOME, USER_HOME } from '../constants/links';
+import { addError } from '../actions/messageAction';
+import { downloadMyAvatar } from '../actions/userActions';
+import { processHttpCall } from './rootSaga';
+import { endFetching, startFetching } from '../actions/navigationActions';
 
 export function* authorizationWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, signUp);
@@ -31,6 +31,7 @@ function* signUp(action) {
   });
 
   if (response) {
+    authService.login()
     yield put(signInSuccess(response));
   }
 }

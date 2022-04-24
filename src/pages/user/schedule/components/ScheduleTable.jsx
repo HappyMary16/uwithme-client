@@ -2,7 +2,7 @@ import React from 'react';
 import { Lesson } from './Lesson';
 import { LESSONS_TIME, WEEK_DAYS } from '../../../../constants/userRoles';
 import { getLesson } from '../../../../utils/ScheduleUtil';
-import Table from 'react-bootstrap/Table';
+import { Table } from 'react-bootstrap';
 
 export const ScheduleTable = ({
                                 lessons,

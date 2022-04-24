@@ -38,7 +38,9 @@ export const renderGroupsForRegistration = groups => ({
 
 export const createGroup = (
   universityId,
+  instituteId,
   instituteName,
+  departmentId,
   departmentName,
   course,
   groupName,
@@ -47,7 +49,9 @@ export const createGroup = (
   type: CREATE_GROUP,
   payload: {
     universityId,
+    instituteId,
     instituteName,
+    departmentId,
     departmentName,
     course,
     groupName,

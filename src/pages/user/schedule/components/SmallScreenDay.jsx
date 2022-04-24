@@ -1,5 +1,5 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { ListGroup } from 'react-bootstrap';
 import { ListItem } from '../../../common/components/ListItem';
 import { LessonList } from './LessonList';
 import { Calendar2CheckFill } from 'react-bootstrap-icons';

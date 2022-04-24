@@ -1,9 +1,7 @@
 import React from 'react';
 
 import i18n from '../../../../locales/i18n';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 export const AddInstitute = ({ open, handleClose, handleCreate }) => {
   const [instituteName, setInstituteName] = React.useState('');

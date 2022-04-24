@@ -42,13 +42,15 @@ export const renderDepartmentForRegistration = departments => ({
 export const createDepartment = (
   universityId,
   instituteName,
+  instituteId,
   departmentName
 ) => ({
   type: CREATE_DEPARTMENT,
   payload: {
     universityId,
     instituteName,
-    departmentName
+    instituteId,
+    name: departmentName
   }
 });
 

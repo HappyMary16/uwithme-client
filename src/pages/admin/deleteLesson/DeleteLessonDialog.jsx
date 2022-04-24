@@ -2,8 +2,7 @@ import React from 'react';
 import i18n from '../../../locales/i18n';
 import { selectorColors } from '../../../styles/styles';
 import Select from 'react-select';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import { Button, Modal } from 'react-bootstrap';
 
 export const DeleteLessonDialog = ({
   open,

@@ -2,15 +2,10 @@ import React from 'react';
 import i18n from '../../../../locales/i18n';
 import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
-import {
-  getDepartmentsByInstitute,
-  getInstituteById
-} from '../../../../utils/StructureUtils';
+import { getDepartmentsByInstitute, getInstituteById } from '../../../../utils/StructureUtils';
 import { COURSE_NUMBER } from '../../../../constants/userRoles';
 import Select from 'react-select';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 export const AddGroup = ({
   institutes,
@@ -82,10 +77,20 @@ export const AddGroup = ({
   };
 
   let onCreate = () => {
+    let instituteId = institute.value;
+    if (instituteId === institute.label) {
+      instituteId = null;
+    }
+
+    let departmentId = department.value;
+    if (departmentId === department.label) {
+      departmentId = null;
+    }
+
     handleCreate(
-      institute.value,
+      instituteId,
       institute.label,
-      department.value,
+      departmentId,
       department.label,
       course.value,
       groupName,

@@ -7,7 +7,6 @@ import * as config from '../config';
 export const authService = new AuthService(
   config.AUTHORITY,
   config.CLIENT_ID,
-  config.REDIRECT_URI,
   true
 );
 

@@ -1,15 +1,11 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import {
-  findAllStudentsWithoutGroup,
-  findUserById,
-  findUsersByGroupId
-} from '../../../utils/UsersUtil';
+import { findAllStudentsWithoutGroup, findUserById, findUsersByGroupId } from '../../../utils/UsersUtil';
 import { GroupCard } from './components/GroupCard';
 import { StudentsList } from './components/StudentList';
 import AddStudentToGroup from './components/AddStudentToGroup';
 import { RemoveStudentFromGroup } from './components/RemoveStudentFromGroup';
-import Container from 'react-bootstrap/Container';
+import { Container } from 'react-bootstrap';
 import { loadGroupById } from '../../../actions/groupActions';
 import {
   addStudentToGroup,
@@ -17,6 +13,7 @@ import {
   loadStudentsWithoutGroup,
   removeStudentFromGroup
 } from '../../../actions/userActions';
+import { withGroupId } from '../../../utils/RouterUtils';
 
 class GroupPage extends Component {
   constructor(props) {
@@ -121,10 +118,13 @@ const mapStateToProps = state => {
   return {
     users: state.userReducers.users,
     lessons: state.userReducers.lessons,
+
     groups: state.groupReducers.groups,
+    departments: state.departmentReducers.departments,
+    institutes: state.instituteReducers.institutes,
 
     universityId: state.authReducers.user.universityId
   };
 };
 
-export default connect(mapStateToProps)(GroupPage);
+export default withGroupId(connect(mapStateToProps)(GroupPage));

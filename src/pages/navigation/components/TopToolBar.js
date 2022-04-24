@@ -1,9 +1,7 @@
-import React from "react";
-import Nav from "react-bootstrap/Nav";
-import "../../../styles/navigation.css";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import { MenuIcon } from "../../icons/MenuIcon";
+import React from 'react';
+import '../../../styles/navigation.css';
+import { Col, Nav, Row } from 'react-bootstrap';
+import { MenuIcon } from '../../icons/MenuIcon';
 import { SwitchAccountPanel } from './SwitchAccoutPanel';
 
 export const TopToolBar = ({ user, avatar, signOutFunc, openMenu, updateUserRoleFunc }) => {

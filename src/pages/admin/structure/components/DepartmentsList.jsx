@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Department from './Department';
 import { getGroupsByDepartment } from '../../../../utils/StructureUtils';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Collapse from 'react-bootstrap/Collapse';
+import { Collapse, ListGroup } from 'react-bootstrap';
 
 export default class DepartmentsList extends Component {
   constructor(props) {

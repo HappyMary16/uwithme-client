@@ -1,16 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { isPossibleToOpen } from "../../../../utils/FileUtil";
-import Collapse from "react-bootstrap/Collapse";
-import ListGroup from "react-bootstrap/ListGroup";
-import {
-  ArrowDownCircleFill,
-  BookHalf,
-  FileEarmarkRichtextFill
-} from "react-bootstrap-icons";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import { loadFile } from "../../../../actions/fileActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import { isPossibleToOpen } from '../../../../utils/FileUtil';
+import { Col, Collapse, ListGroup, Row } from 'react-bootstrap';
+import { ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill } from 'react-bootstrap-icons';
+import { loadFile } from '../../../../actions/fileActions';
 
 let ListFiles = ({ open, files, dispatch }) => {
   return (

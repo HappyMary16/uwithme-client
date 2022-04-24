@@ -3,7 +3,7 @@ import { getName, hasRole } from '../../../../utils/UsersUtil';
 import { SmallAvatar } from '../../../common/components/SmallAvatar';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 import { ListItem } from '../../../common/components/ListItem';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { ListGroup } from 'react-bootstrap';
 import { history } from '../../../../store/Store';
 import { USER_HOME_PAGE } from '../../../../constants/links';
 

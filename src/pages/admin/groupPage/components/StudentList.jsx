@@ -1,10 +1,7 @@
 import React from 'react';
 import { Student } from './Student';
 import i18n from '../../../../locales/i18n';
-import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Button, Col, Container, ListGroup, Row } from 'react-bootstrap';
 
 export const StudentsList = ({ students, addStudent, removeStudent }) => {
   return (

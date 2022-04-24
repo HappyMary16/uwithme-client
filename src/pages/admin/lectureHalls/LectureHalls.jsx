@@ -1,18 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import i18n from "../../../locales/i18n";
-import { AddLectureHall } from "./components/AddLectureHall";
-import {
-  createLectureHall,
-  loadBuildings,
-  loadLectureHalls
-} from "../../../actions/lectureHallActions";
-import { BuildingsList } from "./components/BuildingsList";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import { EmptyPage } from "../../common/components/EmptyPage";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import i18n from '../../../locales/i18n';
+import { AddLectureHall } from './components/AddLectureHall';
+import { createLectureHall, loadBuildings, loadLectureHalls } from '../../../actions/lectureHallActions';
+import { BuildingsList } from './components/BuildingsList';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { EmptyPage } from '../../common/components/EmptyPage';
 
 class LectureHalls extends Component {
   constructor(props) {
