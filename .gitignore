@@ -26,3 +26,8 @@ yarn-error.log*
 /.idea/*
 /.idea/workspace.xml
 /education-app-client.iml
+
+# Deployment
+/release/
+/android/
+/ios/

@@ -16,7 +16,7 @@ export const TopToolBar = ({ user, avatar, signOutFunc, openMenu, updateUserRole
         <Col>
           <Row className="justify-content-center">
             <img
-              src="/UniversityWithMeLongLogo.png"
+              src="./UniversityWithMeLongLogo.png"
               alt=""
               title="institute"
               className={"app-icon"}
@@ -27,7 +27,7 @@ export const TopToolBar = ({ user, avatar, signOutFunc, openMenu, updateUserRole
       {!user && (
         <Col>
           <img
-            src="/UniversityWithMeLongLogo.png"
+            src="./UniversityWithMeLongLogo.png"
             alt=""
             title="institute"
             className={"app-icon"}

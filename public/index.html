@@ -33,21 +33,13 @@
     </style>
 
     <link rel="stylesheet"
-          href="/bootstrap.min.css"
+          href="./bootstrap.min.css"
           crossorigin="anonymous"
     />
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/service-worker.js');
-    });
-  }
-</script>
 
 </body>
 </html>
