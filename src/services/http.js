@@ -7,6 +7,7 @@ import * as config from '../config';
 export const authService = new AuthService(
     config.AUTHORITY,
     config.CLIENT_ID,
+    true,
     "com.uwm.uwm",
     "com.uwm.uwm"
 );
