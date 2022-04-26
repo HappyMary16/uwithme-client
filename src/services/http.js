@@ -8,8 +8,8 @@ export const authService = new AuthService(
     config.AUTHORITY,
     config.CLIENT_ID,
     true,
-    "com.uwm.uwm",
-    "com.uwm.uwm"
+    "uwm://localhost/",
+    "uwm://localhost/"
 );
 
 export default async function http({

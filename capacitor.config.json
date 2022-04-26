@@ -10,8 +10,11 @@
     }
   },
   "server": {
+    "androidScheme": "uwm",
+    "iosScheme": "uwm",
     "allowNavigation": [
-      "*"
+      "accounts.u-with-me.education",
+      "uwm://localhost"
     ]
   },
   "cordova": {}
