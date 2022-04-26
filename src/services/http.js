@@ -5,9 +5,11 @@ import { AuthService } from 'tcomad-oidc';
 import * as config from '../config';
 
 export const authService = new AuthService(
-  config.AUTHORITY,
-  config.CLIENT_ID,
-  true
+    config.AUTHORITY,
+    config.CLIENT_ID,
+    true,
+    "uwm://localhost/",
+    "uwm://localhost/"
 );
 
 export default async function http({

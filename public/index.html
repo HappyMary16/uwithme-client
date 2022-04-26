@@ -33,7 +33,7 @@
     </style>
 
     <link rel="stylesheet"
-          href="/bootstrap.min.css"
+          href="./bootstrap.min.css"
           crossorigin="anonymous"
     />
 </head>
@@ -42,11 +42,11 @@
 <div id="root"></div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/service-worker.js');
-    });
-  }
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js');
+        });
+    }
 </script>
 
 </body>
