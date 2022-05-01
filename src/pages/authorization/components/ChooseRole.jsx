@@ -222,9 +222,9 @@ class ChooseRole extends Component {
 
 const mapStateToProps = state => {
   return {
-    institutes: state.instituteReducers.institutes,
-    departments: state.departmentReducers.departments,
-    groups: state.groupReducers.groups,
+    institutes: Object.values(state.instituteReducers.institutes),
+    departments: Object.values(state.departmentReducers.departments),
+    groups: Object.values(state.groupReducers.groups),
     universities: state.universityReducers.universities
   };
 };

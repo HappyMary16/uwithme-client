@@ -31,6 +31,7 @@ class LectureHalls extends Component {
       createLectureHall(
         universityId,
         buildingName,
+        buildingId,
         lectureHallName,
         placeNumber
       )
@@ -71,8 +72,8 @@ class LectureHalls extends Component {
 
 const mapStateToProps = state => {
   return {
-    lectureHalls: state.lectureHallReducers.lectureHalls,
-    buildings: state.lectureHallReducers.buildings,
+    lectureHalls: Object.values(state.lectureHallReducers.lectureHalls),
+    buildings: Object.values(state.lectureHallReducers.buildings),
     universityId: state.authReducers.user.universityId,
     isFetching: state.navigationReducers.isFetching
   };

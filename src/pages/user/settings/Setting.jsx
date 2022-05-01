@@ -196,9 +196,9 @@ const mapStateToProps = state => {
     userGroup: state.groupReducers.userGroup,
     userUniversity: state.universityReducers.userUniversity,
 
-    institutes: state.instituteReducers.institutes,
-    departments: state.departmentReducers.departments,
-    groups: state.groupReducers.groups,
+    institutes: Object.values(state.instituteReducers.institutes),
+    departments: Object.values(state.departmentReducers.departments),
+    groups: Object.values(state.groupReducers.groups),
     universities: state.universityReducers.universities
   };
 };

@@ -11,7 +11,7 @@ import { SIGN_OUT } from '../actions/authActions';
 export default function departmentReducers(
   state = new StateLoader().loadState().departmentReducers || {
     userDepartment: undefined,
-    departments: []
+    departments: {}
   },
   action
 ) {
@@ -29,55 +29,48 @@ export default function departmentReducers(
       };
 
     case RENDER_DEPARTMENTS:
+    case RENDER_DEPARTMENTS_FOR_REGISTRATION: {
+      let departments = {};
+      action.payload.departments.forEach(department => {
+        departments[department.id] = toClientDepartmentRepresentation(department)
+      });
+
       return {
         ...state,
-        departments: action.payload.departments.map(department => {
-          return {
-            value: department.id,
-            label: department.name,
-            instituteId: department.instituteId
-          };
-        })
+        departments: departments
       };
+    }
 
     case DEPARTMENT_CREATED:
       return {
         ...state,
-        departments: [
+        departments: {
           ...state.departments,
-          {
-            value: action.payload.department.id,
-            label: action.payload.department.name,
-            instituteId: action.payload.department.instituteId
-          }
-        ]
-      };
-
-    case RENDER_DEPARTMENTS_FOR_REGISTRATION:
-      return {
-        ...state,
-        departments: action.payload.departments.map(department => {
-          return {
-            value: department.id,
-            label: department.name,
-            instituteId: department.instituteId
-          };
-        })
+          [action.payload.department.id]: toClientDepartmentRepresentation(action.payload.department)
+        }
       };
 
     case RENDER_INSTITUTES_FOR_REGISTRATION:
       return {
         ...state,
-        departments: []
+        departments: {}
       };
 
     case SIGN_OUT:
       return {
         userDepartment: undefined,
-        departments: []
+        departments: {}
       };
 
     default:
       return state;
   }
+}
+
+function toClientDepartmentRepresentation(department) {
+  return {
+    value: department.id,
+    label: department.name,
+    instituteId: department.instituteId
+  };
 }

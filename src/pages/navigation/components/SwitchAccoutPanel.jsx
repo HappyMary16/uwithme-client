@@ -29,7 +29,7 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
 
   return (
     <Row ref={ref} className={'justify-content-end'}>
-      <Button onClick={handleClick} onBlur={handleBlur} onFocusOut={handleBlur} variant={'link'}>
+      <Button onClick={handleClick} onBlur={handleBlur} variant={'link'}>
         <SmallAvatar size={35} avatar={avatar} />
       </Button>
 
@@ -45,6 +45,7 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
           <Popover.Content>
             <ListGroup variant='flush'>
               {getInactiveRoles(user).map(role => <ListGroup.Item
+                key={role}
                 action
                 onMouseDown={updateUserRoleFunc(role)}>
                 <ListItem icon={<SwitchAccountIcon />} text={textByRole[role]} openEnabled={false} />

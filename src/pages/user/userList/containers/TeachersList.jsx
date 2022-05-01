@@ -27,7 +27,7 @@ class TeachersList extends Component {
 const mapStateToProps = state => {
   return {
     activeRole: state.authReducers.user.activeRole,
-    teachers: getTeachers(state.userReducers.users),
+    teachers: getTeachers(Object.values(state.userReducers.users)),
     isFetching: state.navigationReducers.isFetching
   };
 };

@@ -26,24 +26,23 @@ export function* authorizationWatcher() {
 function* signUp(action) {
   const response = yield call(processHttpCall, {
     url: SIGN_UP,
-    method: "post",
+    method: 'post',
     data: action.payload
   });
 
   if (response) {
-    authService.login()
+    yield authService.tryToRefresh();
     yield put(signInSuccess(response));
   }
 }
 
-//TODO: update
 function* processSignIn() {
   try {
     yield put(startFetching());
 
     const response = yield call(http, {
       url: SIGN_IN,
-      method: "get"
+      method: 'get'
     });
 
     if (!!response && response.status === 200) {

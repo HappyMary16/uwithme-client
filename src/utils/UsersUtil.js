@@ -1,7 +1,7 @@
 import { authService } from '../services/http';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
-export const hasRole = (user, role) => user && (user.role === role || (user.isAdmin && role === ADMIN));
+export const hasRole = (user, role) => user && user.roles && user.roles.filter(userRole => userRole === role)[0];
 
 export const isStudent = user => user && user.activeRole === STUDENT;
 
@@ -9,34 +9,18 @@ export const isTeacher = user => user && user.activeRole === TEACHER;
 
 export const isAdmin = user => user && user.activeRole === ADMIN;
 
-export const getUserRoles = (user) => {
-  let roles = [];
-
-  if (authService.hasRole(STUDENT) || user.role === STUDENT) {
-    roles.push(STUDENT);
-  }
-  if (authService.hasRole(TEACHER) || user.role === TEACHER) {
-    roles.push(TEACHER);
-  }
-  if (authService.hasRole(ADMIN) || user.isAdmin) {
-    roles.push(ADMIN);
-  }
-
-  return roles;
-}
-
 export const getInactiveRoles = (user) => {
   let roles = [];
 
-  if ((authService.hasRole(STUDENT) || user.role === STUDENT)
+  if (authService.hasRole(STUDENT)
     && user.activeRole !== STUDENT) {
     roles.push(STUDENT);
   }
-  if ((authService.hasRole(TEACHER) || user.role === TEACHER)
+  if (authService.hasRole(TEACHER)
     && user.activeRole !== TEACHER) {
     roles.push(TEACHER);
   }
-  if ((authService.hasRole(ADMIN) || user.isAdmin)
+  if (authService.hasRole(ADMIN)
     && user.activeRole !== ADMIN) {
     roles.push(ADMIN);
   }
@@ -44,14 +28,14 @@ export const getInactiveRoles = (user) => {
   return roles;
 }
 
-export const getDefaultActiveRole = (user) => {
-  if (authService.hasRole(STUDENT) || user.role === STUDENT) {
+export const getDefaultActiveRole = () => {
+  if (authService.hasRole(STUDENT)) {
     return STUDENT;
   }
-  if (authService.hasRole(TEACHER) || user.role === TEACHER) {
+  if (authService.hasRole(TEACHER)) {
     return TEACHER;
   }
-  if (authService.hasRole(ADMIN) || user.isAdmin) {
+  if (authService.hasRole(ADMIN)) {
     return ADMIN;
   }
 }
@@ -83,13 +67,13 @@ export const findUsersByGroupId = (users, groupId) =>
 
 export const findAllStudentsWithoutGroup = users =>
   users &&
-  users.filter(user => user.role === STUDENT).filter(user => !user.studyGroupId);
+  users.filter(user => hasRole(user, STUDENT)).filter(user => !user.studyGroupId);
 
 export const getTeachers = users =>
-  users && users.filter(user => user && user.role === TEACHER);
+  users && users.filter(user => hasRole(user, TEACHER));
 
 export const getAdmins = users =>
-  users && users.filter(user => user && user.isAdmin);
+  users && users.filter(user => hasRole(user, ADMIN));
 
 export const getStudents = users =>
-  users && users.filter(user => user && user.role === STUDENT);
+  users && users.filter(user => hasRole(user, STUDENT));

@@ -1,13 +1,15 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import { GET_BUILDINGS, LECTURE_HALLS } from "../constants/serverApi";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { BUILDINGS, LECTURE_HALLS } from '../constants/serverApi';
 import {
   CREATE_LECTURE_HALL,
   LOAD_BUILDINGS,
   LOAD_LECTURE_HALLS,
+  renderBuilding,
   renderBuildings,
+  renderLectureHall,
   renderLectureHalls
-} from "../actions/lectureHallActions";
-import { processHttpCall } from "./rootSaga";
+} from '../actions/lectureHallActions';
+import { processHttpCall } from './rootSaga';
 
 export function* lectureHallWatcher() {
   yield takeEvery(LOAD_LECTURE_HALLS, () => loadLectureHalls());
@@ -18,7 +20,7 @@ export function* lectureHallWatcher() {
 function* loadLectureHalls() {
   const response = yield call(processHttpCall, {
     url: LECTURE_HALLS,
-    method: "get"
+    method: 'get'
   });
 
   if (response) {
@@ -28,8 +30,8 @@ function* loadLectureHalls() {
 
 function* loadBuildings() {
   const buildings = yield call(processHttpCall, {
-    url: GET_BUILDINGS,
-    method: "get"
+    url: BUILDINGS,
+    method: 'get'
   });
 
   if (buildings) {
@@ -37,27 +39,34 @@ function* loadBuildings() {
   }
 }
 
-function* createLectureHall(action) {
-  const {
-    universityId,
-    buildingName,
-    lectureHallName,
-    placeNumber
-  } = action.payload;
-
+function* createBuilding(action) {
   const response = yield call(processHttpCall, {
-    url: LECTURE_HALLS,
-    method: "post",
-    data: {
-      universityId: universityId,
-      buildingName: buildingName,
-      lectureHallName: lectureHallName,
-      placeNumber: placeNumber
-    }
+    url: BUILDINGS,
+    method: 'post',
+    data: action.payload
   });
 
   if (response) {
-    yield call(loadBuildings);
-    yield call(loadLectureHalls);
+    yield put(renderBuilding(response));
+    return response;
+  }
+}
+
+function* createLectureHall(action) {
+  const { buildingId } = action.payload;
+
+  if (!buildingId) {
+    const building = yield call(createBuilding, action);
+    action.payload.buildingId = building.id;
+  }
+
+  const response = yield call(processHttpCall, {
+    url: LECTURE_HALLS,
+    method: 'post',
+    data: action.payload
+  });
+
+  if (response) {
+    yield put(renderLectureHall(response));
   }
 }

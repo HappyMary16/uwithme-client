@@ -46,7 +46,7 @@ class AdminsList extends Component {
 const mapStateToProps = state => {
   return {
     userId: state.authReducers.user.id,
-    users: getAdmins(state.userReducers.users),
+    users: getAdmins(Object.values(state.userReducers.users)),
     isFetching: state.navigationReducers.isFetching
   };
 };

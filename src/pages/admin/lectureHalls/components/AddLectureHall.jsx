@@ -37,7 +37,7 @@ export const AddLectureHall = ({
             onChange={setBuilding}
             onCreateOption={e =>
               setBuilding({
-                value: e,
+                value: undefined,
                 label: e
               })
             }

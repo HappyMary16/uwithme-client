@@ -66,15 +66,12 @@ class GroupPage extends Component {
   }
 
   render() {
-    const { users, groups, groupId } = this.props;
+    const { users, group, department, institute, groupId } = this.props;
     const {
       openAddStudentDialog,
       openRemoveStudentDialog,
       studentToRemove
     } = this.state;
-
-    const group =
-      groups && groups.filter(group => group.value === Number(groupId))[0];
 
     return (
       <div>
@@ -82,6 +79,8 @@ class GroupPage extends Component {
           {group && (
             <GroupCard
               group={group}
+              department={department}
+              institute={institute}
               groupTeacher={findUserById(users, group.teacherId)}
             />
           )}
@@ -115,13 +114,17 @@ class GroupPage extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    users: state.userReducers.users,
-    lessons: state.userReducers.lessons,
+  let groupId = state.router.location.pathname.split('/').pop();
+  let group = state.groupReducers.groups[groupId];
+  let department = state.departmentReducers.departments[group.departmentId];
 
-    groups: state.groupReducers.groups,
-    departments: state.departmentReducers.departments,
-    institutes: state.instituteReducers.institutes,
+  return {
+    users: Object.values(state.userReducers.users),
+
+    groupId,
+    group,
+    department,
+    institute: state.instituteReducers.institutes[department.instituteId],
 
     universityId: state.authReducers.user.universityId
   };

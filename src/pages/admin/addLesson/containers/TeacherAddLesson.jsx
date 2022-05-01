@@ -1,14 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { loadGroupsByUniversityId } from "../../../../actions/groupActions";
-import {
-  loadBuildings,
-  loadLectureHalls
-} from "../../../../actions/lectureHallActions";
-import AddLesson from "../components/AddLesson";
-import { getTeachers } from "../../../../utils/UsersUtil";
-import { addLessonToSchedule } from "../../../../actions/scheduleActions";
-import { loadSubjects } from "../../../../actions/fileActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loadGroupsByUniversityId } from '../../../../actions/groupActions';
+import { loadBuildings, loadLectureHalls } from '../../../../actions/lectureHallActions';
+import AddLesson from '../components/AddLesson';
+import { getTeachers } from '../../../../utils/UsersUtil';
+import { addLessonToSchedule } from '../../../../actions/scheduleActions';
+import { loadSubjects } from '../../../../actions/fileActions';
 
 class TeacherAddLesson extends Component {
   constructor(props) {
@@ -76,12 +73,12 @@ class TeacherAddLesson extends Component {
 const mapStateToProps = state => {
   return {
     userId: state.authReducers.user.id,
-    groups: state.groupReducers.groups,
+    groups: Object.values(state.groupReducers.groups),
     universityId: state.authReducers.user.universityId,
-    teachers: getTeachers(state.userReducers.users),
+    teachers: getTeachers(Object.values(state.userReducers.users)),
     subjects: state.filesReducers.subjects,
-    lectureHalls: state.lectureHallReducers.lectureHalls,
-    buildings: state.lectureHallReducers.buildings
+    lectureHalls: Object.values(state.lectureHallReducers.lectureHalls),
+    buildings: Object.values(state.lectureHallReducers.buildings)
   };
 };
 

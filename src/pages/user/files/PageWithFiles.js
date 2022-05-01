@@ -60,7 +60,7 @@ class PageWithFiles extends React.Component {
 const mapStateToProps = state => {
   return {
     userId: state.authReducers.user.id,
-    userRole: state.authReducers.user.role,
+    userRole: state.authReducers.user.activeRole,
     subjects: state.filesReducers.subjects,
     files: state.filesReducers.files,
     username: state.authReducers.user.username,

@@ -31,8 +31,8 @@ export const ListItem = ({ text,
       />
       </Col>}
       {openEnabled && <Col xs={2} sm={1}>
-        {open ? <ChevronUp class={'left-button'}/>
-          : <ChevronDown class={'left-button'}/>}
+        {open ? <ChevronUp className={'left-button'}/>
+          : <ChevronDown className={'left-button'}/>}
       </Col>}
     </Row>
   );

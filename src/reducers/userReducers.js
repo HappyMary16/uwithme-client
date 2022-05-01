@@ -1,78 +1,80 @@
-import {
-  RENDER_AVATAR,
-  RENDER_USER,
-  RENDER_USERS, UN_ASSIGN_ROLE, UPDATE_ACTIVE_ROLE
-} from '../actions/userActions';
+import { RENDER_AVATAR, RENDER_USER, RENDER_USERS, UN_ASSIGN_ROLE, UPDATE_ACTIVE_ROLE } from '../actions/userActions';
 import StateLoader from '../store/StateLoader';
 import { SIGN_OUT } from '../actions/authActions';
-import { ADMIN } from '../constants/userRoles';
 
 export default function userReducers(
   state = new StateLoader().loadState().userReducers || {
-    users: []
+    users: {}
   },
   action
 ) {
   switch (action.type) {
-    case RENDER_USERS:
+
+    case RENDER_USERS: {
+      let users = {};
+      action.payload.users.forEach(user => {
+        users[user.id] = user;
+      });
+
       return {
         ...state,
-        users: state.users
-          .filter(
-            user => !action.payload.users.map(u => u.id).includes(user.id)
-          )
-          .concat(action.payload.users)
+        users: users
       };
+    }
 
     case RENDER_USER:
       return {
         ...state,
-        users: [
-          ...state.users.filter(user => user.id !== action.payload.user.id),
-          action.payload.user
-        ]
+        users: {
+          ...state.users,
+          [action.payload.user.id]: action.payload.user
+        }
       };
 
     case RENDER_AVATAR:
-      let userWithAvatar = state.users.filter(
-        user => user.id === action.payload.userId
-      )[0];
-      userWithAvatar.avatar = action.payload.avatar;
-      return {
-        ...state,
-        users: [
-          ...state.users.filter(user => user.id !== action.payload.userId),
-          userWithAvatar
-        ]
-      };
+      let userId = action.payload.userId;
 
-    case UN_ASSIGN_ROLE: {
-      const { userId, role } = action.payload;
-      let user = state.users.filter(user => user.id === userId)[0];
-      if (role === ADMIN) {
-        user.isAdmin = false;
-      } else {
-        user.role = null;
+      if (!state.users[userId]) {
+        console.warn('Cannot render avatar for user with id ' + userId);
+        return state;
       }
 
       return {
         ...state,
-        users: [
-          ...state.users.filter(user => user.id !== userId),
-          user
-        ]
+        users: {
+          ...state.users,
+          [userId]: {
+            ...state.users[userId],
+            avatar: action.payload.avatar
+          }
+        }
+      };
+
+    case UN_ASSIGN_ROLE: {
+      const { userId, role } = action.payload;
+      let user = state.users[userId];
+
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [userId]: {
+            ...user,
+            roles: user.roles.filter(userRole => userRole !== role)
+          }
+        }
       };
     }
 
     case UPDATE_ACTIVE_ROLE:
       return {
         ...state,
-        users: [],
-      }
+        users: {}
+      };
 
     case SIGN_OUT:
       return {
-        users: []
+        users: {}
       };
 
     default:

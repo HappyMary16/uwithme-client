@@ -15,7 +15,7 @@ export const LectureHallsList = ({ lectureHalls, open }) => {
                   <Row className="justify-content-center">
                     <DoorOpenFill
                       size={"1.5em"}
-                      class={"icon-color margin-top"}
+                      className={"icon-color margin-top"}
                     />
                   </Row>
                 </Col>

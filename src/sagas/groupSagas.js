@@ -9,7 +9,6 @@ import {
   LOAD_GROUPS_BY_UNIVERSITY_ID,
   renderGroup,
   renderGroups,
-  renderGroupsForRegistration,
   renderUserGroup
 } from '../actions/groupActions';
 import { processHttpCall } from './rootSaga';
@@ -52,7 +51,7 @@ function* loadGroups(action) {
   });
 
   if (response) {
-    yield put(renderGroupsForRegistration(response));
+    yield put(renderGroups(response));
   }
 }
 

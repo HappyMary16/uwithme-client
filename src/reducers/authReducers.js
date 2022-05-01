@@ -1,12 +1,8 @@
-import StateLoader from "../store/StateLoader";
+import StateLoader from '../store/StateLoader';
 import { RENDER_MY_AVATAR, UPDATE_ACTIVE_ROLE } from '../actions/userActions';
-import * as config from "../config";
-import {
-  REGISTRATION_COMPLETE,
-  SIGN_IN_SUCCESS,
-  SIGN_OUT
-} from "../actions/authActions";
-import { getDefaultActiveRole, getUserRoles } from '../utils/UsersUtil';
+import * as config from '../config';
+import { REGISTRATION_COMPLETE, SIGN_IN_SUCCESS, SIGN_OUT } from '../actions/authActions';
+import { getDefaultActiveRole } from '../utils/UsersUtil';
 
 export default function authReducers(
   state = new StateLoader().loadState().authReducers || {
@@ -17,17 +13,18 @@ export default function authReducers(
   action
 ) {
   switch (action.type) {
-    case SIGN_IN_SUCCESS:
+    case SIGN_IN_SUCCESS: {
+      console.log("Update user")
       return {
         ...state,
         user: {
           ...action.payload.user,
-          roles: getUserRoles(action.payload.user),
-          activeRole: getDefaultActiveRole(action.payload.user),
+          activeRole: getDefaultActiveRole(),
         },
         isRegistrationComplete: true,
         clientVersion: config.CLIENT_VERSION
       };
+    }
 
     case UPDATE_ACTIVE_ROLE:
       return {

@@ -142,7 +142,7 @@ const mapStateToProps = state => {
   return {
     user: state.authReducers.user,
     universityId: state.authReducers.user.universityId,
-    groups: state.groupReducers.groups,
+    groups: Object.values(state.groupReducers.groups),
     lessons: state.scheduleReducers.lessons
   };
 };

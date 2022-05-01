@@ -9,7 +9,6 @@ export const LOAD_GROUPS_BY_TEACHER = "LOAD_GROUPS_BY_TEACHER";
 export const RENDER_GROUP = "RENDER_GROUP";
 export const RENDER_USER_GROUP = "RENDER_USER_GROUP";
 export const RENDER_GROUPS = "RENDER_GROUPS";
-export const RENDER_GROUPS_FOR_REGISTRATION = "RENDER_GROUPS_FOR_REGISTRATION";
 
 export const loadGroupById = groupId => ({
   type: LOAD_GROUP_BY_ID,
@@ -27,13 +26,6 @@ export const loadGroups = departmentId => ({
 
 export const loadGroupsByTeacher = () => ({
   type: LOAD_GROUPS_BY_TEACHER
-});
-
-export const renderGroupsForRegistration = groups => ({
-  type: RENDER_GROUPS_FOR_REGISTRATION,
-  payload: {
-    groups
-  }
 });
 
 export const createGroup = (

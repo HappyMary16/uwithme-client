@@ -19,7 +19,7 @@ export const GroupList = ({ groups, open }) => {
             <Row>
               <Col xs={2} sm={1}>
                 <Row className="justify-content-center">
-                  <PeopleFill class={"icon-color"} size={"1.4em"} />
+                  <PeopleFill className={"icon-color"} size={"1.4em"} />
                 </Row>
               </Col>
               <Col>{group.label}</Col>

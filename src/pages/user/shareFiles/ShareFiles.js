@@ -130,7 +130,7 @@ const mapStateToProps = state => {
     subjects: state.filesReducers.subjects,
     lectures: getLectures(state.filesReducers.files),
     tasks: getTasks(state.filesReducers.files),
-    groups: state.groupReducers.groups,
+    groups: Object.values(state.groupReducers.groups),
     isFetching: state.navigationReducers.isFetching
   };
 };

@@ -10,7 +10,7 @@ const STUD_CABINET = 'studcab/';
 export const SIGN_IN = AUTH + 'signIn';
 export const SIGN_UP = AUTH + 'signUp';
 
-export const GET_BUILDINGS = 'buildings/';
+export const BUILDINGS = 'buildings/';
 
 export const DEPARTMENTS = 'departments/';
 export const INFO_DEPARTMENTS = INFO + DEPARTMENTS;
