@@ -25,7 +25,7 @@ yarn-error.log*
 /.idea
 /.idea/*
 /.idea/workspace.xml
-/education-app-client.iml
+/uwithme-client.iml
 
 # Deployment
 /release/
