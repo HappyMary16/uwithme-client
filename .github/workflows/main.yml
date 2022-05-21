@@ -54,7 +54,5 @@ jobs:
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
-      - name: Grant execute permission for deploy script
-        run: chmod +x ./deploy.sh
       - name: Deploy
-        run: ./deploy.sh
+        run: rsync -crlOt ./build/ root@109.87.198.211:/var/www/educationapp
