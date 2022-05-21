@@ -1,1 +1,0 @@
-rsync -crlOt ./build/ root@109.87.198.211:/var/www/educationapp
