@@ -70,7 +70,8 @@ function* loadDepartmentsByUniversityId() {
 function* loadDepartment() {
   const response = yield call(processHttpCall, {
     url: USER_DEPARTMENT,
-    method: 'get'
+    method: 'get',
+    ignoreNotFound: true
   });
 
   if (response) {

@@ -62,7 +62,8 @@ function* loadInstitutesByUniversityId() {
 function* loadInstitute() {
   const response = yield call(processHttpCall, {
     url: USER_INSTITUTE,
-    method: "get"
+    method: "get",
+    ignoreNotFound: true
   });
 
   if (response) {
