@@ -1,6 +1,6 @@
 window["env"] = window["env"] || {};
 
-window["env"]["REACT_APP_SERVER_URL"] = "${UWITHME_BACKEND}";
-window["env"]["REACT_APP_AUTHORITY"] = "${UWITHME_KEYCLOAK_URL}";
+window["env"]["REACT_APP_SERVER_URL"] = "https://${UWITHME_BACKEND_HOST}";
+window["env"]["REACT_APP_AUTHORITY"] = "https://${UWITHME_KEYCLOAK_HOST}/realms/${UWITHME_KEYCLOAK_REALM}";
 window["env"]["REACT_APP_TEST_SYSTEM"] = "${UWITHME_TESTSYSTEM_URL}";
-window["env"]["REACT_APP_TELEGRAM_BOT"] = "${UWITHME_BOT_URL}";
+window["env"]["REACT_APP_TELEGRAM_BOT"] = "https://t.me/${UWITHME_BOT_NAME}";
