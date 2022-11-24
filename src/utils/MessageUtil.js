@@ -1,5 +1,3 @@
-import { DEV_MODE } from '../config';
-
 export const getMessage = error => {
   if (error instanceof String) {
     return error;
@@ -14,7 +12,7 @@ export const getMessage = error => {
   }
 
   if (!!error && !!error.data) {
-    if (!!error.data.message && !DEV_MODE) {
+    if (!!error.data.message && !window["env"]["REACT_APP_DEV_MODE"]) {
       return error.data.message;
     } else {
       return (
