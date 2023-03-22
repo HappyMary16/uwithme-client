@@ -69,8 +69,9 @@ function toClientGroupRepresentation(group) {
     label: group.name,
     departmentId: group.departmentId,
     course: group.course,
+    startYear: group.startYear,
     universityId: group.universityId,
     teacherId: group.teacherId,
-    isShowingInRegistration: group.isVisible
+    isShowingInRegistration: group.visible
   };
 }
