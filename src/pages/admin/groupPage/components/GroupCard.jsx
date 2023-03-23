@@ -3,15 +3,23 @@ import i18n from '../../../../locales/i18n';
 import { history } from '../../../../store/Store';
 import { GROUP_SCHEDULE, USER_HOME_PAGE } from '../../../../constants/links';
 import { Card, Col, Form, Row } from 'react-bootstrap';
-import { CalendarWeekFill } from 'react-bootstrap-icons';
+import {CalendarWeekFill, PencilFill} from 'react-bootstrap-icons';
 
-export const GroupCard = ({ group, department, institute, groupTeacher }) => {
+export const GroupCard = ({ group, department, institute, groupTeacher, openGroupDialog }) => {
   return (
     <Card className={"margin-bottom"}>
       <Card.Header as="h5">
         <Row>
-          <Col xs={10} md={11}>
+          <Col xs={8} md={10}>
             {group.label}
+          </Col>
+          <Col xs={2} sm={1}>
+            <Row className="justify-content-center">
+              <PencilFill className={"icon-color"}
+                          size={"1.4em"}
+                          onClick={openGroupDialog}
+              />
+            </Row>
           </Col>
           <Col xs={2} md={1}>
             <CalendarWeekFill
@@ -40,7 +48,7 @@ export const GroupCard = ({ group, department, institute, groupTeacher }) => {
           <br />
           {i18n.t("department")}: {department.label}
           <br />
-          {i18n.t("course")}: {group.course}
+          {i18n.t("start_year")}: {group.startYear}
         </Card.Text>
         <Form.Check
           type={"checkbox"}

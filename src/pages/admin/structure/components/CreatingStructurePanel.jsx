@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import {Button, Col, Container, Row} from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
-import { AddDepartment } from './AddDepartment';
-import { AddInstitute } from './AddInstitute';
-import { AddGroup } from './AddGroup';
+import {AddDepartment} from './AddDepartment';
+import {AddInstitute} from './AddInstitute';
+import {AddGroup} from './AddGroup';
 
 export const CreateStructurePanel = ({
   institutes,
@@ -30,15 +30,15 @@ export const CreateStructurePanel = ({
         institutes={institutes}
         handleCreate={createDepartment}
       />
-      <AddGroup
-        open={openGroupDialog}
+      {openGroupDialog && <AddGroup
         handleClose={() => setOpenGroupDialog(false)}
         institutes={institutes}
         departments={departments}
         handleCreate={createGroup}
-      />
+      />}
+
       <Row sm={12}>
-        <Col sm={12} md={4} lg={{ offset: 3, span: 3 }}>
+        <Col sm={12} md={4} lg={{offset: 3, span: 3}}>
           <Button
             block
             variant={'purple'}

@@ -44,7 +44,7 @@ class UniversityStructure extends Component {
     instituteName,
     departmentId,
     departmentName,
-    course,
+    startYear,
     groupName,
     isShowingInRegistration
   ) {
@@ -57,7 +57,7 @@ class UniversityStructure extends Component {
         instituteName,
         departmentId,
         departmentName,
-        course,
+        startYear,
         groupName,
         isShowingInRegistration
       )

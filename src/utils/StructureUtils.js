@@ -2,21 +2,14 @@ import { SEMESTER_NUMBER } from '../constants/userRoles';
 
 export const getGroupsByDepartment = (groups, department) => {
   return (
-    groups && groups.filter(group => group.departmentId === department.value)
+    groups && Object.values(groups).filter(group => group.departmentId === department.value)
   );
 };
 
 export const getDepartmentsByInstitute = (departments, institute) => {
   return (
     departments &&
-    departments.filter(department => department.instituteId === institute.value)
-  );
-};
-
-export const getInstituteById = (institutes, instituteId) => {
-  return (
-    institutes &&
-    institutes.filter(institute => institute.value === instituteId)[0]
+    Object.values(departments).filter(department => department.instituteId === institute?.value)
   );
 };
 
@@ -40,7 +33,7 @@ export const getGroupById = (groups, groupId) => {
   return (
     groups &&
     groupId &&
-    groups.filter(group => Number(group.value) === Number(groupId))[0]
+    Object.values(groups).filter(group => Number(group.value) === Number(groupId))[0]
   );
 };
 
