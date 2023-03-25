@@ -1,6 +1,5 @@
 import React from 'react';
 import { getCurrentWeek } from '../../../../utils/ScheduleUtil';
-import { history } from '../../../../store/Store';
 import { USER_HOME_PAGE } from '../../../../constants/links';
 import { getName } from '../../../../utils/UsersUtil';
 import { Col, Row } from 'react-bootstrap';
@@ -9,6 +8,7 @@ import { PersonFill } from 'react-bootstrap-icons';
 import { isPageSmallForSchedule } from '../../../../utils/PageSizeUtil';
 import { ScheduleTable } from './ScheduleTable';
 import { SmallScreenSchedule } from './SmallScreenSchedule';
+import {useNavigate} from "react-router-dom";
 
 export const Schedule = ({
                            lessons,
@@ -19,6 +19,7 @@ export const Schedule = ({
                          }) => {
   let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
   let [isSmall, setSmall] = React.useState(isPageSmallForSchedule());
+  const navigate = useNavigate();
 
   window.addEventListener('resize', () => {
     setSmall(isPageSmallForSchedule());
@@ -32,7 +33,7 @@ export const Schedule = ({
             <Row>
               <PersonFill
                 size={'1.7em'}
-                onClick={() => history.push(USER_HOME_PAGE(user.id))}
+                onClick={() => navigate(USER_HOME_PAGE(user.id))}
                 className={'icon'}
               />
               <h5>{getName(user)}</h5>

@@ -1,6 +1,7 @@
 //user
 export const PRE_HOME = "/pre-home";
 export const USER_HOME = "/";
+export const ADMIN_HOME = "/admin";
 export const SCHEDULE = "/schedule";
 export const FILES_PAGE = "/files";
 export const USER_SCHEDULE_ROUTER = "/user/schedule/:userId";

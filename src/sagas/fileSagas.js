@@ -1,7 +1,7 @@
-import { call, fork, put, takeEvery } from "redux-saga/effects";
+import {call, fork, put, takeEvery} from "redux-saga/effects";
 import http from "../services/http";
-import { FILES, FILES_ACCESS, SUBJECTS } from "../constants/serverApi";
-import { setMessage } from "../actions/messageAction";
+import {FILES, FILES_ACCESS, SUBJECTS} from "../constants/serverApi";
+import {setMessage} from "../actions/messageAction";
 import {
   ADD_ACCESS_TO_FILES,
   DOWNLOAD_FILES,
@@ -13,10 +13,8 @@ import {
   uploadProgress,
   uploadSuccess
 } from "../actions/fileActions";
-import { history } from "../store/Store";
-import { END, eventChannel } from "redux-saga";
-import { processHttpCall } from "./rootSaga";
-import { FILES_PAGE } from '../constants/links';
+import {END, eventChannel} from "redux-saga";
+import {processHttpCall} from "./rootSaga";
 
 export function* fileOperationWatcher() {
   yield takeEvery(LOAD_SUBJECTS_AND_FILES, action => loadSubjectsWithFiles(action));
@@ -108,7 +106,6 @@ function* addAccessToFiles(action) {
   if (response) {
     yield put(setMessage("Доступ надано"));
   }
-  history.push(FILES_PAGE);
 }
 
 function* uploadFiles(action) {

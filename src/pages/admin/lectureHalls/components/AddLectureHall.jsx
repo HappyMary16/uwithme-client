@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
 import { selectorColors } from '../../../../styles/styles';
-import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
+import CreatableSelect from 'react-select/creatable';
 import { Button, Form, Modal } from 'react-bootstrap';
 
 export const AddLectureHall = ({

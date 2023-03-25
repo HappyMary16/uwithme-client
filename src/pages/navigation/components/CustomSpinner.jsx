@@ -4,7 +4,7 @@ import { Row, Spinner } from 'react-bootstrap';
 export const CustomSpinner = ({ isFetching }) => {
   return (
     <div>
-      {isFetching !== 0 && (
+      {!!isFetching && (
         <div className="modal-backdrop custom-spinner-modal">
           <Row className={'justify-content-center'}>
             <Spinner animation="border" variant="light" className={'spinner'} />

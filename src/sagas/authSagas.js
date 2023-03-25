@@ -1,7 +1,8 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 
-import http, { authService } from '../services/http';
-import { SIGN_IN, SIGN_UP } from '../constants/serverApi';
+import {authService} from '../services/authService';
+import http from '../services/http';
+import {SIGN_IN, SIGN_UP} from '../constants/serverApi';
 import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
@@ -9,12 +10,10 @@ import {
   signInSuccess,
   updateRegistrationComplete
 } from '../actions/authActions';
-import { history } from '../store/Store';
-import { PRE_HOME, USER_HOME } from '../constants/links';
-import { addError } from '../actions/messageAction';
-import { downloadMyAvatar } from '../actions/userActions';
-import { processHttpCall } from './rootSaga';
-import { endFetching, startFetching } from '../actions/navigationActions';
+import {addError} from '../actions/messageAction';
+import {downloadMyAvatar} from '../actions/userActions';
+import {processHttpCall} from './rootSaga';
+import {endFetching, startFetching} from '../actions/navigationActions';
 
 export function* authorizationWatcher() {
   yield takeEvery(SIGN_UP_REQUEST, signUp);
@@ -49,7 +48,6 @@ function* processSignIn() {
       yield put(signInSuccess(response.data));
     } else if (!!response && response.status === 404) {
       yield put(updateRegistrationComplete());
-      history.push(PRE_HOME);
     } else {
       yield put(addError(response));
     }
@@ -61,9 +59,5 @@ function* processSignIn() {
 }
 
 function* processSignInSuccess() {
-  if (history.location.pathname.includes(PRE_HOME)) {
-    history.push(USER_HOME);
-  }
-
   yield put(downloadMyAvatar());
 }

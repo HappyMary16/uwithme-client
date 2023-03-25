@@ -1,15 +1,18 @@
 import React from 'react';
 import { getName, hasRole } from '../../../../utils/UsersUtil';
 import { USER_HOME_PAGE, USER_SCHEDULE } from '../../../../constants/links';
-import { history } from '../../../../store/Store';
 import { Col, ListGroup, Row } from 'react-bootstrap';
 import { SmallAvatar } from '../../../common/components/SmallAvatar';
 import { CalendarWeekFill } from 'react-bootstrap-icons';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
+import {useNavigate} from "react-router-dom";
 
 export const UserListItem = ({ user }) => {
+
+  const navigate = useNavigate();
+
   let handleClick = () => {
-    history.push(USER_HOME_PAGE(user.id));
+    navigate(USER_HOME_PAGE(user.id));
   };
 
   return (
@@ -27,7 +30,7 @@ export const UserListItem = ({ user }) => {
           <CalendarWeekFill
             onClick={e => {
               e.stopPropagation();
-              history.push(USER_SCHEDULE(user.id));
+              navigate(USER_SCHEDULE(user.id));
             }}
             className={'icon'}
             size={22}

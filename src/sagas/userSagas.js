@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { authService } from '../services/http';
+import { authService } from '../services/authService';
 import {
   ADMINS,
   AVATAR,

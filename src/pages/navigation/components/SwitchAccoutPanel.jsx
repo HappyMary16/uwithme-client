@@ -52,7 +52,7 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
               </ListGroup.Item>)}
               <ListGroup.Item
                 action
-                onMouseDown={signOutFunc()}
+                onMouseDown={signOutFunc}
               >
                 <ListItem icon={<LogOutIcon size={'1.5em'} />} text={i18n.t('sign_out')} openEnabled={false} />
               </ListGroup.Item>

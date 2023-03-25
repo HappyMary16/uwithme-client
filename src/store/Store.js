@@ -1,8 +1,5 @@
 import StateLoader from './StateLoader';
 import createSagaMiddleware from 'redux-saga';
-import { createRouterMiddleware, createRouterReducer } from '@lagunovsky/redux-react-router';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { createBrowserHistory } from 'history';
 import filesReducers from '../reducers/fileReducers';
 import rootSaga from '../sagas/rootSaga';
 import scheduleReducers from '../reducers/scheduleReducers';
@@ -16,17 +13,13 @@ import userReducers from '../reducers/userReducers';
 import studCabinetReducers from '../reducers/studCabinetReducers';
 import authReducers from '../reducers/authReducers';
 import navigationReducers from '../reducers/navigationReducers';
+import {configureStore} from '@reduxjs/toolkit'
 
-export const history = createBrowserHistory();
+const stateLoader = new StateLoader();
+const sagaMiddleware = createSagaMiddleware();
 
-const routerMiddleware = createRouterMiddleware(history)
-
-export default function createAppStore() {
-  const stateLoader = new StateLoader();
-  const sagaMiddleware = createSagaMiddleware();
-
-  const rootReducer = combineReducers({
-    router: createRouterReducer(history),
+export const store = configureStore({
+  reducer: {
     scheduleReducers,
     userReducers,
     authReducers,
@@ -39,21 +32,12 @@ export default function createAppStore() {
     universityReducers,
     departmentReducers,
     studCabinetReducers
-  });
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
+});
 
-  const store = createStore(
-    rootReducer,
-    compose(
-      applyMiddleware(routerMiddleware, sagaMiddleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__  ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
-    )
-  );
+store.subscribe(() => {
+  stateLoader.saveState(store.getState());
+});
 
-  store.subscribe(() => {
-    stateLoader.saveState(store.getState());
-  });
-
-  sagaMiddleware.run(rootSaga);
-
-  return store;
-}
+sagaMiddleware.run(rootSaga);

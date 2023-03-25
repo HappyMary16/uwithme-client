@@ -1,16 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import { apiRoot } from '../constants/serverApi';
-import { AuthService } from 'tcomad-oidc';
-import * as config from '../config';
-
-export const authService = new AuthService(
-    config.AUTHORITY,
-    config.CLIENT_ID,
-    true,
-    "uwm://localhost/",
-    "uwm://localhost/"
-);
+import {authService} from "./authService";
 
 export default async function http({
   method,
@@ -25,8 +16,10 @@ export default async function http({
     method: method.toLowerCase(),
     url: apiRoot + url,
     params,
-    paramsSerializer: function(p) {
-      return qs.stringify(p, { arrayFormat: 'repeat' });
+    paramsSerializer: {
+      encode: function(p) {
+        return qs.stringify(p, { arrayFormat: 'repeat' });
+      }
     }
   };
   if (onUploadProgress) config['onUploadProgress'] = e => onUploadProgress(e);

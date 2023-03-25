@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, {useEffect} from 'react';
 
-import TopToolBarContainer from './pages/navigation/TopToolBarContainer';
-import { UserToolBar } from './pages/user/UserToolBar';
+import {UserToolBar} from './pages/user/UserToolBar';
 
-import { connect } from 'react-redux';
-import { hasRole, isAdmin } from './utils/UsersUtil';
-import { AdminToolBar } from './pages/admin/AdminToolBar';
+import {useDispatch, useSelector} from 'react-redux';
+import {hasRole, isAdmin} from './utils/UsersUtil';
+import {AdminToolBar} from './pages/admin/AdminToolBar';
 import './styles/button.css';
 import './styles/listItem.css';
 import './styles/spases.css';
@@ -20,89 +19,74 @@ import './styles/text.css';
 import './styles/avatar.css';
 import './styles/table.css';
 import './styles/notification.css';
-import { Container } from 'react-bootstrap';
-import { authService } from './services/http.js';
-import { CustomSpinner } from './pages/navigation/components/CustomSpinner';
-import { PageRouter } from './pages/navigation/PageRouter';
-import { Message } from './pages/common/components/Message';
-import { removeMessage } from './actions/messageAction';
+import {Container} from 'react-bootstrap';
+import {authService} from './services/authService';
+import {CustomSpinner} from './pages/navigation/components/CustomSpinner';
+import {Message} from './pages/common/components/Message';
+import {removeMessage} from './actions/messageAction';
 import ErrorContainer from './pages/common/containers/ErrorContainer';
 import * as config from './config';
-import { signInRequest, signOut } from './actions/authActions';
-import { changeIsMenuOpen } from './actions/navigationActions';
-import { STUDENT } from './constants/userRoles';
+import {signInRequest, signOut} from './actions/authActions';
+import {changeIsMenuOpen} from './actions/navigationActions';
+import {STUDENT} from './constants/userRoles';
 import BotNotification from './pages/common/containers/BotNotification';
+import {Outlet, useNavigate} from "react-router-dom";
+import {TopToolBar} from "./pages/navigation/TopToolBar";
+import {PRE_HOME} from "./constants/links";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+export default function App() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const { clientVersion, dispatch } = this.props;
+  const user = useSelector(state => state.authReducers.user);
+  const clientVersion = useSelector(state => state.authReducers.clientVersion);
+  const isFetching = useSelector(state => state.navigationReducers.isFetching);
+  const isMenuOpen = useSelector(state => state.navigationReducers.isMenuOpen);
+  const message = useSelector(state => state.messageReducers.message);
+
+  const isLoggedIn = authService.isLoggedIn();
+
+  useEffect(() => {
     if (config.CLIENT_VERSION !== clientVersion) {
       console.log("Client version is updated")
       dispatch(signOut());
     } else {
       console.log("Client version is not changed")
     }
+  }, [clientVersion, dispatch])
 
-    this.closeMessage = this.closeMessage.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-  }
-
-  componentDidMount() {
-    const { dispatch, user } = this.props;
-
-    if (!authService.isLoggedIn()) {
+  useEffect(() => {
+    if (!isLoggedIn) {
       dispatch(signOut());
     } else if (!user) {
       dispatch(signInRequest());
+      navigate(PRE_HOME);
     }
-  }
+  }, [user, isLoggedIn, dispatch, navigate])
 
-  closeMessage() {
-    const { dispatch } = this.props;
-    dispatch(removeMessage());
-  }
+  return (
+    <Container fluid className={"main-container"}>
+      {!isAdmin(user) && <UserToolBar user={user}
+                                      isOpen={isMenuOpen}
+                                      onClose={() => dispatch(changeIsMenuOpen())}/>}
+      {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen}
+                                      onClose={() => dispatch(changeIsMenuOpen())}/>}
 
-  closeMenu() {
-    const { dispatch } = this.props;
-    dispatch(changeIsMenuOpen());
-  }
+      <TopToolBar/>
+      <CustomSpinner isFetching={isFetching}/>
 
-  render() {
-    const { user, isFetching, isMenuOpen, message } = this.props;
+      <Message
+        open={!!message}
+        message={message}
+        handleClose={() => dispatch(removeMessage())}
+      />
 
-    return (
-      <Container fluid className={"main-container"}>
-        {!isAdmin(user) && <UserToolBar user={user} isOpen={isMenuOpen} onClose={this.closeMenu}/>}
-        {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen} onClose={this.closeMenu}/>}
+      <ErrorContainer/>
 
-        <TopToolBarContainer />
-        <CustomSpinner isFetching={isFetching} />
-
-        <Message
-          open={!!message}
-          message={message}
-          handleClose={this.closeMessage}
-        />
-
-        <ErrorContainer />
-
-        <PageRouter user={user} />
-        {hasRole(user, STUDENT) && <BotNotification/>}
+      <Container className={'main-page-container'}>
+        <Outlet/>
       </Container>
-    );
-  }
+      {hasRole(user, STUDENT) && <BotNotification/>}
+    </Container>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    user: state.authReducers.user,
-    clientVersion: state.authReducers.clientVersion,
-    isFetching: state.navigationReducers.isFetching,
-    isMenuOpen: state.navigationReducers.isMenuOpen,
-    message: state.messageReducers.message
-  };
-};
-
-export default connect(mapStateToProps)(App);

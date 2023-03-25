@@ -38,7 +38,7 @@ export const ScheduleTable = ({
               weekDay.value,
               lessonTime.value,
               weekNumber ? 1 : 2
-            );
+            )
             return (
               <td key={weekDay.value} className={'schedule-td'}>
                 {lesson && (
@@ -50,7 +50,7 @@ export const ScheduleTable = ({
                   />
                 )}
               </td>
-            );
+            )
           })}
         </tr>
       ))}

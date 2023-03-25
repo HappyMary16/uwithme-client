@@ -1,5 +1,13 @@
 import React from 'react';
-import { ADMINS, LECTURE_HALLS, SCHEDULE, SETTING, STUDENTS, TEACHERS, USER_HOME } from '../../constants/links';
+import {
+  USER_HOME,
+  ADMINS,
+  LECTURE_HALLS,
+  SCHEDULE,
+  SETTING,
+  STUDENTS,
+  TEACHERS
+} from '../../constants/links';
 import i18n from '../../locales/i18n';
 import { slide as Menu } from 'react-burger-menu';
 

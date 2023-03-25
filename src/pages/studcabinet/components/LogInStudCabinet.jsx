@@ -1,14 +1,15 @@
 import React from 'react';
 import i18n from '../../../locales/i18n';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { history } from '../../../store/Store';
 import { USER_HOME } from '../../../constants/links';
 import { Message } from '../../common/components/Message';
+import {useNavigate} from "react-router-dom";
 
 export const LogInStudCabinet = ({ open, handleCreate }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [showMessage, setShowMessage] = React.useState(false);
+  const navigate = useNavigate();
 
   let submit = e => {
     e.preventDefault();
@@ -25,7 +26,7 @@ export const LogInStudCabinet = ({ open, handleCreate }) => {
         open={showMessage}
         message={i18n.t('can-not-show-stud-cab-info')}
         description={i18n.t('can-not-show-stud-cab-info-description')}
-        handleClose={() => history.push(USER_HOME)}
+        handleClose={() => navigate(USER_HOME)}
       />
 
       <Modal show={open} centered>

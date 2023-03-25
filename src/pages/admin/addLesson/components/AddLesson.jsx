@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
 import { selectorColors } from '../../../../styles/styles';
-import CreatableSelect from 'react-select/creatable/dist/react-select.esm';
+import CreatableSelect from 'react-select/creatable';
 import { LESSONS_TIME, WEEK_DAYS, WEEK_NUMBER } from '../../../../constants/userRoles';
 import { getBuildingByLectureHall, getLectureHallsByBuilding } from '../../../../utils/StructureUtils';
 import { Button, Col, Form, Row } from 'react-bootstrap';

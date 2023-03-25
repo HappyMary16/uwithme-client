@@ -4,7 +4,7 @@ import i18n from '../../../../locales/i18n';
 import { KEYCLOAK_USER_SETTINGS } from '../../../../constants/keycloakApi';
 
 export const KeycloakSetting = ({ user }) => {
-  const { firstName, middleName, surname, email } = user;
+  const { firstName, middleName, surname, email } = user??{};
 
   return (
     <div>

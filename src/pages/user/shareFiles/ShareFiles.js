@@ -1,41 +1,40 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import i18n from '../../../locales/i18n';
-import { getLectures, getTasks } from '../../../utils/FileUtil';
-import { compose } from 'redux';
+import {getLectures, getTasks} from '../../../utils/FileUtil';
 import Select from 'react-select';
-import { selectorColors } from '../../../styles/styles';
-import { Button, Col } from 'react-bootstrap';
-import { SubjectFiles } from './components/SubjectFiles';
-import { EmptyPage } from '../../common/components/EmptyPage';
-import { ADD_FILE } from '../../../constants/links';
-import { loadGroupsByTeacher } from '../../../actions/groupActions';
-import { addAccessToFiles, loadSubjectsAndFiles } from '../../../actions/fileActions';
+import {selectorColors} from '../../../styles/styles';
+import {Button, Col} from 'react-bootstrap';
+import {SubjectFiles} from './components/SubjectFiles';
+import {EmptyPage} from '../../common/components/EmptyPage';
+import {ADD_FILE, FILES_PAGE} from '../../../constants/links';
+import {loadGroupsByTeacher} from '../../../actions/groupActions';
+import {addAccessToFiles, loadSubjectsAndFiles} from '../../../actions/fileActions';
+import {useNavigate} from "react-router-dom";
 
 let selectedGroups = [];
 let files = [];
 
-class ShareFiles extends React.Component {
-  constructor(props) {
-    super(props);
+export default function ShareFiles() {
 
-    this.state = {
-      subject: ""
-    };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    this.submit = this.submit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleGroupChange = this.handleGroupChange.bind(this);
-  }
+  const userId = useSelector(state => state.authReducers.user.id);
+  const subjects = useSelector(state => state.filesReducers.subjects);
+  const lectures = useSelector(state => getLectures(state.filesReducers.files));
+  const tasks = useSelector(state => getTasks(state.filesReducers.files));
+  const groups = useSelector(state => Object.values(state.groupReducers.groups));
+  const isFetching = useSelector(state => state.navigationReducers.isFetching);
 
-  componentDidMount() {
-    const { dispatch, userId } = this.props;
+  const [subjectId, setSubjectId] = useState();
+
+  useEffect(() => {
     dispatch(loadGroupsByTeacher());
     dispatch(loadSubjectsAndFiles(userId));
-  }
+  }, [userId, dispatch]);
 
-  submit() {
-    const { dispatch } = this.props;
+  function submit() {
     dispatch(
       addAccessToFiles(
         files,
@@ -44,9 +43,10 @@ class ShareFiles extends React.Component {
     );
     files = [];
     selectedGroups = [];
+    navigate(FILES_PAGE);
   }
 
-  handleChange(value, file) {
+  function handleChange(value, file) {
     if (files.includes(file)) {
       files.filter(f => f !== file);
     } else {
@@ -54,85 +54,66 @@ class ShareFiles extends React.Component {
     }
   }
 
-  handleGroupChange(value) {
+  function handleGroupChange(value) {
     selectedGroups = value;
   }
 
-  render() {
-    const { lectures, tasks, groups, subjects, isFetching } = this.props;
-    const { subjectId } = this.state;
+  return (
+    <div>
+      <EmptyPage
+        message={i18n.t("you_do_not_have_any_file")}
+        href={ADD_FILE}
+        linkText={"add_files_page"}
+        list={subjects}
+        isFetching={isFetching}
+      />
 
-    return (
-      <div>
-        <EmptyPage
-          message={i18n.t("you_do_not_have_any_file")}
-          href={ADD_FILE}
-          linkText={"add_files_page"}
-          list={subjects}
-          isFetching={isFetching}
-        />
+      {subjects && subjects.length > 0 && (
+        <div>
+          <Select
+            className={"selector"}
+            theme={selectorColors}
+            onChange={opinion => setSubjectId(opinion.value)}
+            options={subjects.map(s => {
+              return {
+                value: s.id,
+                label: s.name
+              };
+            })}
+            placeholder={i18n.t("subject")}
+          />
+          <SubjectFiles
+            lectures={lectures}
+            tasks={tasks}
+            subjectId={subjectId}
+            handleChoose={handleChange}
+          />
+          <Select
+            className={"selector"}
+            placeholder={i18n.t("groups")}
+            theme={selectorColors}
+            isMulti
+            onChange={handleGroupChange}
+            options={groups}
+          />
 
-        {subjects && subjects.length > 0 && (
-          <div>
-            <Select
-              className={"selector"}
-              theme={selectorColors}
-              onChange={opinion => this.setState({ subjectId: opinion.value })}
-              options={subjects.map(s => {
-                return {
-                  value: s.id,
-                  label: s.name
-                };
-              })}
-              placeholder={i18n.t("subject")}
-            />
-            <SubjectFiles
-              lectures={lectures}
-              tasks={tasks}
-              subjectId={subjectId}
-              handleChoose={this.handleChange}
-            />
-            <Select
-              className={"selector"}
-              placeholder={i18n.t("groups")}
-              theme={selectorColors}
-              isMulti
-              onChange={this.handleGroupChange}
-              options={groups}
-            />
-
-            <Col
-              xs={12}
-              md={{ offset: 9, span: 3 }}
-              lg={{ offset: 9, span: 3 }}
-              xl={{ offset: 10, span: 2 }}
+          <Col
+            xs={12}
+            md={{offset: 9, span: 3}}
+            lg={{offset: 9, span: 3}}
+            xl={{offset: 10, span: 2}}
+          >
+            <Button
+              block
+              type={"submit"}
+              variant={"purple"}
+              onClick={submit}
             >
-              <Button
-                block
-                type={"submit"}
-                variant={"purple"}
-                onClick={this.submit}
-              >
-                {i18n.t("upload")}
-              </Button>
-            </Col>
-          </div>
-        )}
-      </div>
-    );
-  }
+              {i18n.t("upload")}
+            </Button>
+          </Col>
+        </div>
+      )}
+    </div>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    userId: state.authReducers.user.id,
-    username: state.authReducers.user.username,
-    subjects: state.filesReducers.subjects,
-    lectures: getLectures(state.filesReducers.files),
-    tasks: getTasks(state.filesReducers.files),
-    groups: Object.values(state.groupReducers.groups),
-    isFetching: state.navigationReducers.isFetching
-  };
-};
-
-export default compose(connect(mapStateToProps))(ShareFiles);

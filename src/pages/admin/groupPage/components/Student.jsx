@@ -1,14 +1,17 @@
 import React from 'react';
 import { getName } from '../../../../utils/UsersUtil';
 import { USER_HOME_PAGE } from '../../../../constants/links';
-import { history } from '../../../../store/Store';
 import { Col, ListGroup, Row } from 'react-bootstrap';
 import { TrashFill } from 'react-bootstrap-icons';
 import { SmallAvatar } from '../../../common/components/SmallAvatar';
+import {useNavigate} from "react-router-dom";
 
 export const Student = ({ student, removeStudent }) => {
+
+  const navigate = useNavigate();
+
   let handleClick = () => {
-    history.push(USER_HOME_PAGE(student.id));
+    navigate(USER_HOME_PAGE(student.id));
   };
 
   return (

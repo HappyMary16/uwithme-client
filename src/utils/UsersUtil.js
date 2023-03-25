@@ -1,4 +1,4 @@
-import { authService } from '../services/http';
+import { hasRole as hasOidcRole } from '../services/authService';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
 export const hasRole = (user, role) => user && user.roles && user.roles.filter(userRole => userRole === role)[0];
@@ -12,15 +12,15 @@ export const isAdmin = user => user && user.activeRole === ADMIN;
 export const getInactiveRoles = (user) => {
   let roles = [];
 
-  if (authService.hasRole(STUDENT)
+  if (hasOidcRole(STUDENT)
     && user.activeRole !== STUDENT) {
     roles.push(STUDENT);
   }
-  if (authService.hasRole(TEACHER)
+  if (hasOidcRole(TEACHER)
     && user.activeRole !== TEACHER) {
     roles.push(TEACHER);
   }
-  if (authService.hasRole(ADMIN)
+  if (hasOidcRole(ADMIN)
     && user.activeRole !== ADMIN) {
     roles.push(ADMIN);
   }
@@ -29,13 +29,13 @@ export const getInactiveRoles = (user) => {
 }
 
 export const getDefaultActiveRole = () => {
-  if (authService.hasRole(STUDENT)) {
+  if (hasOidcRole(STUDENT)) {
     return STUDENT;
   }
-  if (authService.hasRole(TEACHER)) {
+  if (hasOidcRole(TEACHER)) {
     return TEACHER;
   }
-  if (authService.hasRole(ADMIN)) {
+  if (hasOidcRole(ADMIN)) {
     return ADMIN;
   }
 }

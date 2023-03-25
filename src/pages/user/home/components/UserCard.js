@@ -4,11 +4,12 @@ import { getName, getUserGroup } from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
 import { Card, Col, Row } from 'react-bootstrap';
 import { CalendarWeekFill } from 'react-bootstrap-icons';
-import { history } from '../../../../store/Store';
 import { SCHEDULE, USER_SCHEDULE } from '../../../../constants/links';
+import {useNavigate} from "react-router-dom";
 
 export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   let handleClickAvatar = () => {
     setOpen(true);
@@ -55,7 +56,7 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
                       className={"icon"}
                       size={"1.3em"}
                       onClick={() =>
-                        history.push(isMine ? SCHEDULE : USER_SCHEDULE(user.id))
+                        navigate(isMine ? SCHEDULE : USER_SCHEDULE(user.id))
                       }
                     />
                   </Row>

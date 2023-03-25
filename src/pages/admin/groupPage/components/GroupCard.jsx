@@ -1,11 +1,13 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import { history } from '../../../../store/Store';
 import { GROUP_SCHEDULE, USER_HOME_PAGE } from '../../../../constants/links';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import {CalendarWeekFill, PencilFill} from 'react-bootstrap-icons';
+import {useNavigate} from "react-router-dom";
 
 export const GroupCard = ({ group, department, institute, groupTeacher, openGroupDialog }) => {
+  const navigate = useNavigate();
+
   return (
     <Card className={"margin-bottom"}>
       <Card.Header as="h5">
@@ -25,7 +27,7 @@ export const GroupCard = ({ group, department, institute, groupTeacher, openGrou
             <CalendarWeekFill
               className={"icon"}
               size={"1.3em"}
-              onClick={() => history.push(GROUP_SCHEDULE(group.value))}
+              onClick={() => navigate(GROUP_SCHEDULE(group.value))}
             />
           </Col>
         </Row>
@@ -35,9 +37,7 @@ export const GroupCard = ({ group, department, institute, groupTeacher, openGrou
           {i18n.t("teacher") + ": "}
           {groupTeacher && (
             //TODO verify it with teacher
-            <Card.Link
-              onClick={() => history.push(USER_HOME_PAGE(groupTeacher.id))}
-            >
+            <Card.Link onClick={() => navigate(USER_HOME_PAGE(groupTeacher.id))}>
               getName(groupTeacher)
             </Card.Link>
           )}

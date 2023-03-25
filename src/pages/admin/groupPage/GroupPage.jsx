@@ -1,5 +1,5 @@
-import {connect} from 'react-redux';
-import React, {Component} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
 import {findAllStudentsWithoutGroup, findUserById, findUsersByGroupId} from '../../../utils/UsersUtil';
 import {GroupCard} from './components/GroupCard';
 import {StudentsList} from './components/StudentList';
@@ -13,67 +13,52 @@ import {
   loadStudentsWithoutGroup,
   removeStudentFromGroup
 } from '../../../actions/userActions';
-import {withGroupId} from '../../../utils/RouterUtils';
 import {AddGroup} from "../structure/components/AddGroup";
+import {useParams} from "react-router-dom";
 
-class GroupPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openAddStudentDialog: false,
-      openRemoveStudentDialog: false,
-      studentToRemove: undefined,
-      openGroupDialog: false
-    };
+export default function GroupPage() {
 
-    this.removeStudent = this.removeStudent.bind(this);
-    this.loadStudentsAndOpenAddDialog = this.loadStudentsAndOpenAddDialog.bind(this);
-    this.addStudentToGroup = this.addStudentToGroup.bind(this);
-    this.openRemoveStudentDialog = this.openRemoveStudentDialog.bind(this);
-    this.setOpenGroupDialog = this.setOpenGroupDialog.bind(this);
-    this.updateGroup = this.updateGroup.bind(this);
-  }
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    const {dispatch, groupId} = this.props;
+  const { groupId } = useParams();
+
+  const group = useSelector(state => state.groupReducers.groups[groupId])
+  const department = useSelector(state => state.departmentReducers.departments[group.departmentId])
+  const users = useSelector(state => Object.values(state.userReducers.users))
+  const institute = useSelector(state => state.instituteReducers.institutes[department.instituteId])
+  const universityId = useSelector(state => state.authReducers.user.universityId)
+  const departments = useSelector(state =>  state.departmentReducers.departments)
+  const institutes = useSelector(state => state.instituteReducers.institutes)
+
+  const [openAddStudentDialog, setOpenAddStudentDialog] = useState(false);
+  const [openedRemoveStudentDialog, setOpenedRemoveStudentDialog] = useState(false);
+  const [studentToRemove, setStudentToRemove] = useState();
+  const [openGroupDialog, setOpenGroupDialog] = useState(false);
+
+  useEffect(() => {
     if (groupId) {
       dispatch(loadGroupById(groupId));
       dispatch(loadStudentsByGroupId(groupId));
     }
+  }, [groupId, dispatch])
+
+  function openRemoveStudentDialog(student) {
+    setOpenedRemoveStudentDialog(true);
+    setStudentToRemove(student);
   }
 
-  openRemoveStudentDialog(student) {
-    this.setState({
-      openRemoveStudentDialog: true,
-      studentToRemove: student
-    });
-  }
-
-  setOpenGroupDialog(isOpened) {
-    this.setState({
-      openGroupDialog: isOpened
-    });
-  }
-
-  removeStudent(studentId) {
-    const {dispatch} = this.props;
+  function removeStudent(studentId) {
     dispatch(removeStudentFromGroup(studentId));
   }
 
-  loadStudentsAndOpenAddDialog() {
-    const {dispatch, universityId} = this.props;
+  function loadStudentsAndOpenAddDialog() {
     if (universityId) {
       dispatch(loadStudentsWithoutGroup());
     }
-    this.setState({openAddStudentDialog: true});
+    setOpenAddStudentDialog(true);
   }
 
-  addStudentToGroup(studentIds) {
-    const {dispatch, groupId} = this.props;
-    dispatch(addStudentToGroup(studentIds, groupId));
-  }
-
-  updateGroup(
+  function updateGroup(
     instituteId,
     instituteName,
     departmentId,
@@ -82,8 +67,6 @@ class GroupPage extends Component {
     groupName,
     isShowingInRegistration
   ) {
-    const {dispatch, groupId, universityId} = this.props;
-
     dispatch(
       createGroup(
         universityId,
@@ -99,16 +82,7 @@ class GroupPage extends Component {
     );
   }
 
-  render() {
-    const {users, group, department, institute, groupId, departments, institutes} = this.props;
-    const {
-      openAddStudentDialog,
-      openRemoveStudentDialog,
-      openGroupDialog,
-      studentToRemove
-    } = this.state;
-
-    return (
+ return (
       <div>
         <Container>
           {group && (
@@ -117,64 +91,39 @@ class GroupPage extends Component {
               department={department}
               institute={institute}
               groupTeacher={findUserById(users, group.teacherId)}
-              openGroupDialog={() => this.setOpenGroupDialog(true)}
+              openGroupDialog={() => setOpenGroupDialog(true)}
             />
           )}
 
           {openGroupDialog && <AddGroup
-            handleClose={() => this.setOpenGroupDialog(false)}
+            handleClose={() => setOpenGroupDialog(false)}
             institutes={institutes}
             departments={departments}
-            handleCreate={this.updateGroup}
+            handleCreate={updateGroup}
             group={group}
           />}
 
           <StudentsList
             students={findUsersByGroupId(users, groupId)}
-            addStudent={this.loadStudentsAndOpenAddDialog}
-            removeStudent={this.openRemoveStudentDialog}
+            addStudent={loadStudentsAndOpenAddDialog}
+            removeStudent={openRemoveStudentDialog}
           />
         </Container>
         <AddStudentToGroup
           open={openAddStudentDialog}
           students={findAllStudentsWithoutGroup(users)}
-          handleClose={() => this.setState({openAddStudentDialog: false})}
-          handleAdd={this.addStudentToGroup}
+          handleClose={() => setOpenAddStudentDialog(false)}
+          handleAdd={(studentIds) => dispatch(addStudentToGroup(studentIds, groupId))}
         />
         <RemoveStudentFromGroup
-          open={openRemoveStudentDialog}
+          open={openedRemoveStudentDialog}
           student={studentToRemove}
           handleNo={() => {
-            this.setState({
-              openRemoveStudentDialog: false,
-              studentToRemove: undefined
-            });
+            setOpenedRemoveStudentDialog(false);
+            setStudentToRemove(undefined);
           }}
-          handleYes={this.removeStudent}
+          handleYes={removeStudent}
         />
       </div>
     );
-  }
 }
-
-const mapStateToProps = state => {
-  let groupId = state.router.location.pathname.split('/').pop();
-  let group = state.groupReducers.groups[groupId];
-  let department = state.departmentReducers.departments[group.departmentId];
-
-  return {
-    users: Object.values(state.userReducers.users),
-
-    groupId,
-    group,
-    department,
-    institute: state.instituteReducers.institutes[department.instituteId],
-
-    universityId: state.authReducers.user.universityId,
-
-    departments: state.departmentReducers.departments,
-    institutes: state.instituteReducers.institutes
-  };
-};
-
-export default withGroupId(connect(mapStateToProps)(GroupPage));

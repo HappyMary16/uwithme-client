@@ -4,13 +4,16 @@ import { SmallAvatar } from '../../../common/components/SmallAvatar';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 import { ListItem } from '../../../common/components/ListItem';
 import { ListGroup } from 'react-bootstrap';
-import { history } from '../../../../store/Store';
 import { USER_HOME_PAGE } from '../../../../constants/links';
+import {useNavigate} from "react-router-dom";
 
 export const AdminListItem = ({ user, deleteAdminFunc, isDeletePresent }) => {
+
+  const navigate = useNavigate();
+
   let handleClick = () => {
     if (hasRole(user, TEACHER) || hasRole(user, STUDENT)) {
-      history.push(USER_HOME_PAGE(user.id));
+      navigate(USER_HOME_PAGE(user.id));
     }
   };
 

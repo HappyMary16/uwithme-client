@@ -1,11 +1,14 @@
 import React from 'react';
 
 import { Col, Collapse, ListGroup, Row } from 'react-bootstrap';
-import { history } from '../../../../store/Store';
 import { GROUP_PAGE } from '../../../../constants/links';
 import { PeopleFill } from 'react-bootstrap-icons';
+import {useNavigate} from "react-router-dom";
 
 export const GroupList = ({ groups, open }) => {
+
+  const navigate = useNavigate();
+
   return (
     <Collapse in={open}>
       <ListGroup>
@@ -14,7 +17,7 @@ export const GroupList = ({ groups, open }) => {
             className={"padding-left-x2"}
             key={i}
             action
-            onClick={() => history.push(GROUP_PAGE(group.value))}
+            onClick={() => navigate(GROUP_PAGE(group.value))}
           >
             <Row>
               <Col xs={2} sm={1}>
