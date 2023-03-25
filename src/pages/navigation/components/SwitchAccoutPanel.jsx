@@ -41,8 +41,8 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
       >
         <Popover id='popover-basic'
                  className='overlay'>
-          <Popover.Title as='h1'><p>{user.surname + ' ' + user.firstName}</p></Popover.Title>
-          <Popover.Content>
+          <Popover.Header as='h1'><p>{user.surname + ' ' + user.firstName}</p></Popover.Header>
+          <Popover.Body>
             <ListGroup variant='flush'>
               {getInactiveRoles(user).map(role => <ListGroup.Item
                 key={role}
@@ -57,7 +57,7 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
                 <ListItem icon={<LogOutIcon size={'1.5em'} />} text={i18n.t('sign_out')} openEnabled={false} />
               </ListGroup.Item>
             </ListGroup>
-          </Popover.Content>
+          </Popover.Body>
         </Popover>
       </Overlay>
     </Row>
