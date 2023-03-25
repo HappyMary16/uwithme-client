@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { authService } from '../services/authService';
+import { authService, hasRole } from '../services/authService';
 import {
   ADMINS,
   AVATAR,
@@ -144,7 +144,7 @@ function* downloadAvatars(action) {
 }
 
 function* processDownloadMyAvatar() {
-  if (!authService.hasRole(STUDENT) && !authService.hasRole(TEACHER)) {
+  if (!hasRole(STUDENT) && !hasRole(TEACHER)) {
     return;
   }
 

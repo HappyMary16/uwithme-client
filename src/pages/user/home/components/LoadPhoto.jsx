@@ -55,8 +55,8 @@ class LoadPhoto extends Component {
       <Modal show={open} onHide={this.handleClose} centered>
         <Row className="align-items-center flex-column">
           <Form>
-            <Form.File
-              custom
+            <Form.Control
+              type="file"
               label="Custom file input"
               onChange={this.onFileAdded}
             />

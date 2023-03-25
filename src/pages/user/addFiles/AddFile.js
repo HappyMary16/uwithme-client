@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { FileTypes, LECTURE } from '../../../constants/userRoles';
 import { Upload } from './components/Upload';
 import i18n from '../../../locales/i18n';
-import { compose } from 'redux';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
 import { selectorColors } from '../../../styles/styles';
@@ -144,4 +143,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(connect(mapStateToProps))(AddFile);
+export default connect(mapStateToProps)(AddFile);
