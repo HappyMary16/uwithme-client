@@ -12,7 +12,7 @@ export function AddGroup({institutes, departments, handleClose, group}) {
 
   const dispatch = useDispatch();
 
-  const universityId = useFetchUserQuery().data.universityId;
+  const universityId = useFetchUserQuery().data?.universityId;
 
   const [department, setDepartment] = React.useState(!!group && departments[group.departmentId]);
   const [institute, setInstitute] = React.useState(!!group && institutes[department?.instituteId]);

@@ -11,7 +11,7 @@ export function AddDepartment({institutes, handleClose}) {
 
   const dispatch = useDispatch();
 
-  const universityId = useFetchUserQuery().data.universityId;
+  const universityId = useFetchUserQuery().data?.universityId;
 
   const [institute, setInstitute] = React.useState();
   const [departmentName, setDepartmentName] = React.useState();

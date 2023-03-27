@@ -10,13 +10,14 @@ import {loadInstitutes} from '../../../actions/instituteActions';
 import {loadUniversities} from '../../../actions/universityActions';
 import {loadDepartments} from '../../../actions/departmentActions';
 import {loadGroups} from '../../../actions/groupActions';
-import {signUpRequest} from '../../../actions/authActions';
+import {useSaveUserMutation} from "../../../store/slices/authApiSlice";
 
 export default function ChooseRole() {
 
   const dispatch = useDispatch();
 
-  const institutes = useSelector(state => state.instituteReducers.institutes);
+  const [saveUser] = useSaveUserMutation();
+  const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
   const departments = useSelector(state => Object.values(state.departmentReducers.departments));
   const groups = useSelector(state => state.groupReducers.groups);
   const universities = useSelector(state => state.universityReducers.universities);
@@ -61,14 +62,14 @@ export default function ChooseRole() {
 
     if (validateAdmin(userRole, universityName)
       || validateUser(userRole, university, institute, department)) {
-      dispatch(signUpRequest(userRole,
-          institute ? institute.value : null,
-          department ? department.value : null,
-          group ? group.value : null,
-          university ? university.value : null,
-          universityName
-        )
-      );
+      saveUser({
+        role: userRole,
+        instituteId: institute?.value,
+        departmentId: department?.value,
+        groupId: group?.value,
+        universityId: university?.value,
+        universityName
+      });
     }
   }
 

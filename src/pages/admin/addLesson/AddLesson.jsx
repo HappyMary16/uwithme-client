@@ -20,7 +20,7 @@ export default function AddLesson() {
 
   const dispatch = useDispatch();
 
-  const {data: user} = useFetchUserQuery();
+  const user = useFetchUserQuery().data;
   const universityId = user.universityId;
 
   const role = useSelector(selectActiveRole);

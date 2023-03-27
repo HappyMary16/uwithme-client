@@ -23,15 +23,6 @@ export const ADD_STUDENT_TO_GROUP = 'ADD_STUDENT_TO_GROUP';
 
 export const UN_ASSIGN_ROLE = 'UN_ASSIGN_ROLE';
 
-export function updateActiveRole(role) {
-  return {
-    type: UPDATE_ACTIVE_ROLE,
-    payload: {
-      role
-    }
-  };
-}
-
 export function loadStudentsByGroupId(groupId) {
   return {
     type: LOAD_STUDENTS_BY_GROUP_ID,

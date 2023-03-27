@@ -20,9 +20,9 @@ export default function AddFile() {
 
   const dispatch = useDispatch();
 
-  const {data: {user}} = useFetchUserQuery();
-  const userId = user.id;
-  const username = user.username;
+  const user = useFetchUserQuery().data;
+  const userId = user?.id;
+  const username = user?.username;
 
   const subjects = useSelector(state => state.filesReducers.subjects);
   const uploadProgress = useSelector(state => state.filesReducers.uploadProgress);

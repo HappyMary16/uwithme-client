@@ -26,7 +26,7 @@ import {Message} from './pages/common/components/Message';
 import {removeMessage} from './actions/messageAction';
 import ErrorContainer from './pages/common/containers/ErrorContainer';
 import * as config from './config';
-import {signInRequest, signOut} from './actions/authActions';
+import {signOut} from './actions/authActions';
 import {changeIsMenuOpen} from './actions/navigationActions';
 import {STUDENT} from './constants/userRoles';
 import BotNotification from './pages/common/containers/BotNotification';
@@ -34,6 +34,7 @@ import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
 import {useFetchUserQuery} from "./store/slices/authApiSlice";
+import {selectClientVersion} from "./store/slices/authSlice";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)
@@ -46,8 +47,8 @@ export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {data: user} = useFetchUserQuery();
-  const clientVersion = useSelector(state => state.authReducers.clientVersion);
+  const user = useFetchUserQuery().data;
+  const clientVersion = useSelector(selectClientVersion);
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
   const isMenuOpen = useSelector(state => state.navigationReducers.isMenuOpen);
   const message = useSelector(state => state.messageReducers.message);
@@ -55,6 +56,10 @@ export default function App() {
   const isNewFetching = useSelector(selectApiLoading);
 
   const isLoggedIn = authService.isLoggedIn();
+
+  useEffect(() => {
+    authService.tryToRefresh()
+  }, [user])
 
   useEffect(() => {
     if (config.CLIENT_VERSION !== clientVersion) {
@@ -69,7 +74,6 @@ export default function App() {
     if (!isLoggedIn) {
       dispatch(signOut());
     } else if (!user) {
-      dispatch(signInRequest());
       navigate(PRE_HOME);
     }
   }, [user, isLoggedIn, dispatch, navigate])

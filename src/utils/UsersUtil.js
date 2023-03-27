@@ -1,7 +1,7 @@
 import { hasRole as hasOidcRole } from '../services/authService';
 import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
 
-export const hasRole = (user, role) => user && user.roles && user.roles.filter(userRole => userRole === role)[0];
+export const hasRole = (user, role) => user && user.roles && user.roles.includes(role);
 
 export const isStudent = user => user && user.activeRole === STUDENT;
 

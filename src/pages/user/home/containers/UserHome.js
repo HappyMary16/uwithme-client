@@ -9,7 +9,7 @@ export default function UserHome() {
 
   const dispatch = useDispatch();
 
-  const {data: {user}} = useFetchUserQuery();
+  const user = useFetchUserQuery().data;
   const avatar = useSelector(state => state.authReducers.avatar);
   const lessons = useSelector(state => state.scheduleReducers.lessons);
 

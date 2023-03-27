@@ -15,7 +15,7 @@ import {activeRoleChanged} from "../../store/slices/authSlice";
 export function TopToolBar() {
 
   const dispatch = useDispatch();
-  const {data: user} = useFetchUserQuery();
+  const user = useFetchUserQuery().data;
   const avatar = useSelector(state => state.authReducers.avatar);
   const navigate = useNavigate();
 

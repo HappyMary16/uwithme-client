@@ -13,7 +13,7 @@ export default function LectureHalls() {
 
   const dispatch = useDispatch();
 
-  const universityId = useFetchUserQuery().data.universityId;
+  const universityId = useFetchUserQuery().data?.universityId;
   const lectureHalls = useSelector(state => Object.values(state.lectureHallReducers.lectureHalls));
   const buildings = useSelector(state => Object.values(state.lectureHallReducers.buildings));
 

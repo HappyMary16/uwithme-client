@@ -15,7 +15,7 @@ export default function Setting() {
 
   const dispatch = useDispatch();
 
-  const {data: {user}} = useFetchUserQuery();
+  const user = useFetchUserQuery().data;
 
   const [isEditMode, setEditMode] = useState(false);
 

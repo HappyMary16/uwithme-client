@@ -22,7 +22,21 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   preloadedState: {
-    ...stateLoader.loadState()
+    state: {
+      auth: stateLoader.loadState("auth"),
+      scheduleReducers: stateLoader.loadState("scheduleReducers"),
+      userReducers: stateLoader.loadState("userReducers"),
+      authReducers: stateLoader.loadState("authReducers"),
+      filesReducers: stateLoader.loadState("filesReducers"),
+      navigationReducers: stateLoader.loadState("navigationReducers"),
+      lectureHallReducers: stateLoader.loadState("lectureHallReducers"),
+      messageReducers: stateLoader.loadState("messageReducers"),
+      instituteReducers: stateLoader.loadState("instituteReducers"),
+      groupReducers: stateLoader.loadState("groupReducers"),
+      universityReducers: stateLoader.loadState("universityReducers"),
+      departmentReducers: stateLoader.loadState("departmentReducers"),
+      studCabinetReducers: stateLoader.loadState("studCabinetReducers")
+    }
   },
   reducer: {
     scheduleReducers,
@@ -48,7 +62,19 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  stateLoader.saveState(store.getState());
+  stateLoader.saveState("auth", store.getState().auth);
+  stateLoader.saveState("scheduleReducers", store.getState().scheduleReducers);
+  stateLoader.saveState("userReducers", store.getState().userReducers);
+  stateLoader.saveState("authReducers", store.getState().authReducers);
+  stateLoader.saveState("filesReducers", store.getState().filesReducers);
+  stateLoader.saveState("navigationReducers", store.getState().navigationReducers);
+  stateLoader.saveState("lectureHallReducers", store.getState().lectureHallReducers);
+  stateLoader.saveState("messageReducers", store.getState().messageReducers);
+  stateLoader.saveState("instituteReducers", store.getState().instituteReducers);
+  stateLoader.saveState("groupReducers", store.getState().groupReducers);
+  stateLoader.saveState("universityReducers", store.getState().universityReducers);
+  stateLoader.saveState("departmentReducers", store.getState().departmentReducers);
+  stateLoader.saveState("studCabinetReducers", store.getState().studCabinetReducers);
 });
 
 sagaMiddleware.run(rootSaga);

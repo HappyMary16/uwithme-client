@@ -1,7 +1,7 @@
 export default class StateLoader {
-  loadState() {
+  loadState(name) {
     try {
-      let serializedState = localStorage.getItem('http://education-app.com:state');
+      let serializedState = localStorage.getItem('http://education-app.com:state.' + name);
 
       return JSON.parse(serializedState ? serializedState : {});
     } catch (err) {
@@ -9,10 +9,11 @@ export default class StateLoader {
     }
   }
 
-  saveState(state) {
+  saveState(name, state) {
     try {
       let serializedState = JSON.stringify(state);
-      localStorage.setItem('http://education-app.com:state', serializedState);
-    } catch (err) {}
+      localStorage.setItem('http://education-app.com:state.' + name, serializedState);
+    } catch (err) {
+    }
   }
 }

@@ -16,7 +16,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
 
   const dispatch = useDispatch();
 
-  const {data: {user}} = useFetchUserQuery();
+  const user = useFetchUserQuery().data;
 
   const userInstitute = useSelector(state => state.instituteReducers.userInstitute);
   const userDepartment = useSelector(state => state.departmentReducers.userDepartment);

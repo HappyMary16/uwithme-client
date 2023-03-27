@@ -14,7 +14,7 @@ export default function PageWithFiles() {
 
   const dispatch = useDispatch();
 
-  const userId = useFetchUserQuery().data.user.id;
+  const userId = useFetchUserQuery().data?.id;
 
   const subjects = useSelector(state => state.filesReducers.subjects);
   const userRole = useSelector(selectActiveRole);

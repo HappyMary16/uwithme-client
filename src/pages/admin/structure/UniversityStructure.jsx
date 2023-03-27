@@ -15,7 +15,7 @@ export default function UniversityStructure() {
 
   const dispatch = useDispatch();
 
-  const universityId = useFetchUserQuery().data.universityId;
+  const universityId = useFetchUserQuery().data?.universityId;
   const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
   const departments = useSelector(state => Object.values(state.departmentReducers.departments));
   const groups = useSelector(state => Object.values(state.groupReducers.groups));

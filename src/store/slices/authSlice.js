@@ -5,8 +5,7 @@ import * as config from "../../config";
 import {SIGN_OUT} from "../../actions/authActions";
 
 const initialState = {
-  activeRole: null,
-  registrationCompleted: true
+  activeRole: null
 };
 
 const authSlice = createSlice({
@@ -15,35 +14,25 @@ const authSlice = createSlice({
   reducers: {
     activeRoleChanged: (state, {payload}) => {
       state.activeRole = payload;
-    },
-    registrationCompleted: (state, {payload}) => {
-      state.registrationCompleted = payload;
     }
   },
   extraReducers: (builder) => {
     builder
       .addMatcher(authApiSlice.endpoints.fetchUser.matchFulfilled, (state) => {
         state.activeRole = state.activeRole ?? getDefaultActiveRole();
-        state.registrationCompleted = true;
         state.clientVersion = config.CLIENT_VERSION;
-      })
-      .addMatcher(authApiSlice.endpoints.fetchUser.matchRejected, (state, {payload}) => {
-        if (payload.status === 404) {
-          state.registrationCompleted = false;
-        }
       })
       .addMatcher((action) => action.type === SIGN_OUT,
         (state) => {
           state.activeRole = null;
-          state.registrationCompleted = true;
           state.clientVersion = config.CLIENT_VERSION;
         })
   }
 });
 
-export const {activeRoleChanged, registrationCompleted} = authSlice.actions;
+export const {activeRoleChanged} = authSlice.actions;
 
-export const selectActiveRole = (state) => state.activeRole;
-export const selectRegistrationCompleted = (state) => state.registrationCompleted;
+export const selectActiveRole = (state) => state.auth.activeRole;
+export const selectClientVersion = (state) => state.auth.clientVersion;
 
 export default authSlice.reducer;

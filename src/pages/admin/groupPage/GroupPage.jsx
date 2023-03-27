@@ -27,7 +27,7 @@ export default function GroupPage() {
   const department = useSelector(state => state.departmentReducers.departments[group.departmentId])
   const users = useSelector(state => Object.values(state.userReducers.users))
   const institute = useSelector(state => state.instituteReducers.institutes[department.instituteId])
-  const universityId = useFetchUserQuery().data.universityId;
+  const universityId = useFetchUserQuery().data?.universityId;
   const departments = useSelector(state =>  state.departmentReducers.departments)
   const institutes = useSelector(state => state.instituteReducers.institutes)
 

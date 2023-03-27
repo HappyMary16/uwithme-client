@@ -12,7 +12,7 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  const {data: user} = useFetchUserQuery();
+  const user = useFetchUserQuery().data;
   const role = useSelector(selectActiveRole);
 
   useEffect(() => {

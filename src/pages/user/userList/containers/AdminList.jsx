@@ -13,7 +13,7 @@ export default function AdminsList() {
 
   const dispatch = useDispatch();
 
-  const userId = useFetchUserQuery().data.user.id;
+  const userId = useFetchUserQuery().data?.id;
   const users = useSelector(state => getAdmins(Object.values(state.userReducers.users)));
 
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
