@@ -3,90 +3,103 @@ import {Button, Col, Form, Row} from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import {CustomSelector} from '../../../common/components/CustomSelector';
 import {hasRole} from '../../../../utils/UsersUtil';
-import {ADMIN, STUDENT} from '../../../../constants/userRoles';
+import {ADMIN, STUDENT, TEACHER} from '../../../../constants/userRoles';
 import {useDispatch, useSelector} from "react-redux";
-import {loadInstitute, loadInstitutes} from "../../../../actions/instituteActions";
-import {loadDepartment, loadDepartments} from "../../../../actions/departmentActions";
-import {loadGroup, loadGroups} from "../../../../actions/groupActions";
-import {updateUser} from "../../../../actions/userActions";
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
-import {loadUniversity} from "../../../../actions/universityActions";
+import {loadInstitutes} from "../../../../actions/instituteActions";
+import {loadDepartments} from "../../../../actions/departmentActions";
+import {loadGroups} from "../../../../actions/groupActions";
+import {useFetchUserQuery, useSaveUserMutation} from "../../../../store/slices/authApiSlice";
+import {loadUniversities} from "../../../../actions/universityActions";
+import {setMessage} from "../../../../actions/messageAction";
+import {loadUserUniversityInfo} from "../../../../actions/structureActions";
 
 export default function EditSetting({isEditMode, setEditMode}) {
 
   const dispatch = useDispatch();
 
   const user = useFetchUserQuery().data;
-
-  const userInstitute = useSelector(state => state.instituteReducers.userInstitute);
-  const userDepartment = useSelector(state => state.departmentReducers.userDepartment);
-  const userGroup = useSelector(state => state.groupReducers.userGroup);
-  const userUniversity = useSelector(state => state.universityReducers.userUniversity);
+  const universityId = user?.universityId;
+  const [saveUser] = useSaveUserMutation();
 
   const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
   const departments = useSelector(state => Object.values(state.departmentReducers.departments));
   const groups = useSelector(state => Object.values(state.groupReducers.groups));
   const universities = useSelector(state => state.universityReducers.universities);
 
-  const [university, setUniversity] = useState(userUniversity);
-  const [institute, setInstitute] = useState(userInstitute);
-  const [department, setDepartment] = useState(userDepartment);
-  const [group, setGroup] = useState(userGroup);
+  const [university, setUniversity] = useState({});
+  const [institute, setInstitute] = useState({});
+  const [department, setDepartment] = useState({});
+  const [group, setGroup] = useState({});
 
   useEffect(() => {
-    dispatch(loadUniversity());
-    dispatch(loadInstitute());
-    dispatch(loadDepartment());
-    if (hasRole(user, STUDENT)) {
-      dispatch(loadGroup());
+    dispatch(loadUniversities());
+  }, [dispatch])
+
+  useEffect(() => {
+    if (user) {
+      setUniversity(universities.filter(u => u.value === universityId)[0]);
+      setInstitute({value: user?.institute?.id, label: user?.institute?.name});
+      setDepartment({value: user?.department?.id, label: user?.department?.name});
+      setGroup({value: user?.group?.id, label: user?.group?.name});
     }
-  }, [user, dispatch])
+  }, [user, universities, universityId]);
+
+  useEffect(() => {
+    if (isEditMode && user?.roles?.includes(TEACHER)) {
+      dispatch(loadUserUniversityInfo(university?.value, institute?.value));
+    }
+
+    if (isEditMode && user?.roles?.includes(STUDENT)) {
+      dispatch(loadUserUniversityInfo(university?.value, institute?.value, department?.value));
+    }
+  }, [user, isEditMode, university, institute, department, dispatch]);
 
   function selectUniversity(e) {
     setUniversity(e);
-    setInstitute(null);
-    setDepartment(null);
-    setGroup(null);
+    setInstitute({});
+    setDepartment({});
+    setGroup({});
     dispatch(loadInstitutes(e.value));
   }
 
   function selectInstitute(e) {
     setInstitute(e);
-    setDepartment(null);
-    setGroup(null);
+    setDepartment({});
+    setGroup({});
     dispatch(loadDepartments(e.value));
   }
 
   function selectDepartment(e) {
     setDepartment(e);
-    setGroup(null);
+    setGroup({});
     dispatch(loadGroups(e.value));
-  }
-
-  function cancel() {
-    setUniversity(userUniversity);
-    setInstitute(userInstitute);
-    setDepartment(userDepartment);
-    setGroup(userGroup);
-
-    setEditMode(false);
   }
 
   function submit(e) {
     e.preventDefault();
 
-    if (user && (university || institute || department || group)) {
-      dispatch(
-        updateUser(
-          university ? university : userUniversity,
-          institute ? institute : userInstitute,
-          department ? department : userDepartment,
-          group || department ? group : userGroup
-        )
-      );
+    if (!university) {
+      dispatch(setMessage(i18n.t("please_choose_university")));
     }
 
-    setEditMode(false);
+    if (university && !institute) {
+      dispatch(setMessage(i18n.t("please_choose_institute")));
+    }
+
+    if (institute && !department) {
+      dispatch(setMessage(i18n.t("please_choose_department")));
+    }
+
+    if (user && university && institute && department) {
+      saveUser({
+        universityId: university.value,
+        instituteId: institute.value,
+        departmentId: department.value,
+        groupId: group?.value
+      });
+
+      setEditMode(false);
+    }
   }
 
   return (
@@ -133,7 +146,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
             lg={{offset: 6, span: 3}}
             xl={{offset: 6, span: 3}}
           >
-            <Button block variant={'purple'} onClick={cancel}>
+            <Button block variant={'purple'} onClick={() => setEditMode(false)}>
               {i18n.t('cancel')}
             </Button>
           </Col>

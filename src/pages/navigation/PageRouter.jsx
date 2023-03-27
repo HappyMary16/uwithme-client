@@ -1,10 +1,14 @@
 import React, {Fragment} from 'react';
-import {hasAnyRole} from "../../services/authService";
+import {useSelector} from "react-redux";
+import {selectActiveRole} from "../../store/slices/authSlice";
 
-export function PageRouter({ roles, children }) {
+export function PageRouter({roles, children}) {
+
+  const activeRole = useSelector(selectActiveRole);
+
   return (
     <Fragment>
-      {hasAnyRole(roles) && children}
+      {roles.includes(activeRole) && children}
     </Fragment>
   );
 }

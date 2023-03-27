@@ -67,7 +67,7 @@ export default function GroupPage() {
               group={group}
               department={department}
               institute={institute}
-              groupTeacher={findUserById(users, group.teacherId)}
+              groupTeacher={users[group.teacherId]}
               openGroupDialog={() => setOpenGroupDialog(true)}
             />
           )}

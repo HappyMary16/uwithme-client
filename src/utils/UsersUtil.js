@@ -1,44 +1,6 @@
-import { hasRole as hasOidcRole } from '../services/authService';
-import { ADMIN, STUDENT, TEACHER } from '../constants/userRoles';
+import {ADMIN, STUDENT, TEACHER} from '../constants/userRoles';
 
-export const hasRole = (user, role) => user && user.roles && user.roles.includes(role);
-
-export const isStudent = user => user && user.activeRole === STUDENT;
-
-export const isTeacher = user => user && user.activeRole === TEACHER;
-
-export const isAdmin = user => user && user.activeRole === ADMIN;
-
-export const getInactiveRoles = (user) => {
-  let roles = [];
-
-  if (hasOidcRole(STUDENT)
-    && user.activeRole !== STUDENT) {
-    roles.push(STUDENT);
-  }
-  if (hasOidcRole(TEACHER)
-    && user.activeRole !== TEACHER) {
-    roles.push(TEACHER);
-  }
-  if (hasOidcRole(ADMIN)
-    && user.activeRole !== ADMIN) {
-    roles.push(ADMIN);
-  }
-
-  return roles;
-}
-
-export const getDefaultActiveRole = () => {
-  if (hasOidcRole(STUDENT)) {
-    return STUDENT;
-  }
-  if (hasOidcRole(TEACHER)) {
-    return TEACHER;
-  }
-  if (hasOidcRole(ADMIN)) {
-    return ADMIN;
-  }
-}
+export const hasRole = (user, role) => user?.roles?.includes(role);
 
 export const getName = user => {
   if (!user) {
@@ -51,23 +13,15 @@ export const getName = user => {
   return surname + ' ' + firstName + ' ' + middleName;
 };
 
-export const getUserGroup = user => {
-  if (!user) {
-    return '';
-  }
-
-  return typeof user.studyGroupName === 'string' ? user.studyGroupName : '';
-};
-
 export const findUserById = (users, id) =>
-  users && users.filter(user => user.id === id)[0];
+  users && users[id];
 
 export const findUsersByGroupId = (users, groupId) =>
-  users && users.filter(user => user.studyGroupId === Number(groupId));
+  users && users.filter(user => user.group?.id === Number(groupId));
 
 export const findAllStudentsWithoutGroup = users =>
   users &&
-  users.filter(user => hasRole(user, STUDENT)).filter(user => !user.studyGroupId);
+  users.filter(user => hasRole(user, STUDENT)).filter(user => !user.group);
 
 export const getTeachers = users =>
   users && users.filter(user => hasRole(user, TEACHER));

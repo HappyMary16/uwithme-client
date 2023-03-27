@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 import {UserToolBar} from './pages/user/UserToolBar';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {hasRole, isAdmin} from './utils/UsersUtil';
 import {AdminToolBar} from './pages/admin/AdminToolBar';
 import './styles/button.css';
 import './styles/listItem.css';
@@ -28,13 +27,13 @@ import ErrorContainer from './pages/common/containers/ErrorContainer';
 import * as config from './config';
 import {signOut} from './actions/authActions';
 import {changeIsMenuOpen} from './actions/navigationActions';
-import {STUDENT} from './constants/userRoles';
+import {ADMIN, STUDENT} from './constants/userRoles';
 import BotNotification from './pages/common/containers/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
 import {useFetchUserQuery} from "./store/slices/authApiSlice";
-import {selectClientVersion} from "./store/slices/authSlice";
+import {selectActiveRole, selectClientVersion} from "./store/slices/authSlice";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)
@@ -47,7 +46,8 @@ export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useFetchUserQuery().data;
+  const {data, error} = useFetchUserQuery();
+  const activeRole = useSelector(selectActiveRole);
   const clientVersion = useSelector(selectClientVersion);
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
   const isMenuOpen = useSelector(state => state.navigationReducers.isMenuOpen);
@@ -58,8 +58,8 @@ export default function App() {
   const isLoggedIn = authService.isLoggedIn();
 
   useEffect(() => {
-    authService.tryToRefresh()
-  }, [user])
+    data && authService.tryToRefresh()
+  }, [data])
 
   useEffect(() => {
     if (config.CLIENT_VERSION !== clientVersion) {
@@ -73,18 +73,16 @@ export default function App() {
   useEffect(() => {
     if (!isLoggedIn) {
       dispatch(signOut());
-    } else if (!user) {
+    } else if (error?.status === 404) {
       navigate(PRE_HOME);
     }
-  }, [user, isLoggedIn, dispatch, navigate])
+  }, [error, isLoggedIn, dispatch, navigate])
 
   return (
     <Container fluid className={"main-container"}>
-      {!isAdmin(user) && <UserToolBar user={user}
-                                      isOpen={isMenuOpen}
-                                      onClose={() => dispatch(changeIsMenuOpen())}/>}
-      {isAdmin(user) && <AdminToolBar isOpen={isMenuOpen}
-                                      onClose={() => dispatch(changeIsMenuOpen())}/>}
+      {activeRole === ADMIN
+        ? <AdminToolBar isOpen={isMenuOpen} onClose={() => dispatch(changeIsMenuOpen())}/>
+        : <UserToolBar isOpen={isMenuOpen} onClose={() => dispatch(changeIsMenuOpen())}/>}
 
       <TopToolBar/>
       <CustomSpinner isFetching={isFetching || isNewFetching}/>
@@ -100,7 +98,7 @@ export default function App() {
       <Container className={'main-page-container'}>
         <Outlet/>
       </Container>
-      {hasRole(user, STUDENT) && <BotNotification/>}
+      {activeRole === STUDENT && <BotNotification/>}
     </Container>
   );
 }

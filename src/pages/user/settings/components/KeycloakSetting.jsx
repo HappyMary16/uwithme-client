@@ -10,21 +10,18 @@ export function KeycloakSetting({ user }) {
     <div>
       <Form.Label>{i18n.t('first_name')}</Form.Label>
       <Form.Control
-        onChange={e => this.setState({ firstName: e.target.value })}
         value={firstName}
         required
         readOnly
       />
       <Form.Label>{i18n.t('last_name')}</Form.Label>
       <Form.Control
-        onChange={e => this.setState({ middleName: e.target.value })}
         value={middleName}
         required
         readOnly
       />
       <Form.Label>{i18n.t('surname')}</Form.Label>
       <Form.Control
-        onChange={e => this.setState({ surname: e.target.value })}
         value={surname}
         required
         readOnly
@@ -32,7 +29,6 @@ export function KeycloakSetting({ user }) {
       <Form.Label>{i18n.t('email')}</Form.Label>
       <Form.Control
         type="email"
-        onChange={e => this.setState({ email: e.target.value })}
         value={email}
         required
         readOnly

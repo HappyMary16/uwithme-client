@@ -1,4 +1,3 @@
-export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_ACTIVE_ROLE = 'UPDATE_ACTIVE_ROLE';
 
@@ -112,16 +111,6 @@ export function loadStudents() {
     type: GET_STUDENTS
   };
 }
-
-export const updateUser = (university, institute, department, group) => ({
-  type: UPDATE_USER,
-  payload: {
-    university,
-    institute,
-    department,
-    group
-  }
-});
 
 export const deleteUser = () => ({
   type: DELETE_USER

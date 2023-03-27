@@ -5,8 +5,10 @@ import {Schedule} from '../components/Schedule';
 import {Button, Col, Row} from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import {ADD_LESSON} from '../../../../constants/links';
-import {isTeacher} from '../../../../utils/UsersUtil';
 import {useNavigate} from "react-router-dom";
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {selectActiveRole} from "../../../../store/slices/authSlice";
+import {TEACHER} from "../../../../constants/userRoles";
 
 export default function MySchedule() {
 
@@ -14,7 +16,8 @@ export default function MySchedule() {
   const navigate = useNavigate();
 
   const lessons = useSelector(state => state.scheduleReducers.lessons);
-  const user = useSelector(state => state.authReducers.user);
+  const user = useFetchUserQuery().data;
+  const activeRole = useSelector(selectActiveRole);
 
   useEffect(() => {
     dispatch(findLessons())
@@ -22,7 +25,7 @@ export default function MySchedule() {
 
   return (
     <div>
-      {isTeacher(user) && <Row spacing={2}>
+      {activeRole === TEACHER && <Row spacing={2}>
         <Col sm={12} md={{offset: 9, span: 3}}>
           <Button
             block

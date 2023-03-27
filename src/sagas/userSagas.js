@@ -1,5 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { authService, hasRole } from '../services/authService';
+import {call, put, takeEvery} from 'redux-saga/effects';
+import {authService, hasRole} from '../services/authService';
 import {
   ADMINS,
   AVATAR,
@@ -12,7 +12,7 @@ import {
   TEACHERS,
   USERS
 } from '../constants/serverApi';
-import { arrayBufferToDataUrl } from '../utils/FileUtil';
+import {arrayBufferToDataUrl} from '../utils/FileUtil';
 import {
   ADD_STUDENT_TO_GROUP,
   DELETE_USER,
@@ -20,7 +20,8 @@ import {
   downloadMyAvatar,
   GET_ADMINS,
   GET_STUDENTS,
-  GET_TEACHERS, GET_USERS_BY_PARAMS,
+  GET_TEACHERS,
+  GET_USERS_BY_PARAMS,
   LOAD_STUDENTS_BY_GROUP_ID,
   LOAD_STUDENTS_WITHOUT_GROUP,
   REMOVE_STUDENT_FROM_GROUP,
@@ -30,16 +31,11 @@ import {
   renderUser,
   renderUsers,
   UN_ASSIGN_ROLE,
-  UPDATE_USER,
   UPLOAD_AVATAR
 } from '../actions/userActions';
-import { loadUniversity } from '../actions/universityActions';
-import { loadInstitute } from '../actions/instituteActions';
-import { loadDepartment } from '../actions/departmentActions';
-import { loadGroup } from '../actions/groupActions';
-import { processHttpCall } from './rootSaga';
-import { signInSuccess, signOut } from '../actions/authActions';
-import { STUDENT, TEACHER } from '../constants/userRoles';
+import {processHttpCall} from './rootSaga';
+import {signOut} from '../actions/authActions';
+import {STUDENT, TEACHER} from '../constants/userRoles';
 
 export function* usersWatcher() {
   yield takeEvery(GET_ADMINS, getAdmins);
@@ -62,7 +58,6 @@ export function* usersWatcher() {
   yield takeEvery(ADD_STUDENT_TO_GROUP, addStudentToGroup);
 
   yield takeEvery(DELETE_USER, deleteUser);
-  yield takeEvery(UPDATE_USER, updateUser);
 }
 
 function* getAdmins() {
@@ -77,7 +72,7 @@ function* getAdmins() {
 }
 
 function* unAssignRole(action) {
-  const { userId, role } = action.payload;
+  const {userId, role} = action.payload;
 
   const response = yield call(processHttpCall, {
     url: USERS + userId + ROLES + role,
@@ -161,7 +156,7 @@ function* processDownloadMyAvatar() {
 }
 
 function* uploadAvatar(action) {
-  const { avatar } = action.payload;
+  const {avatar} = action.payload;
   const formData = new FormData();
 
   formData.append("file", avatar, "avatar.png");
@@ -179,7 +174,7 @@ function* uploadAvatar(action) {
 }
 
 function* getStudentsByGroupId(action) {
-  const { groupId } = action.payload;
+  const {groupId} = action.payload;
 
   if (groupId) {
     const response = yield call(processHttpCall, {
@@ -194,7 +189,7 @@ function* getStudentsByGroupId(action) {
 }
 
 function* removeStudentFromGroup(action) {
-  const { studentId } = action.payload;
+  const {studentId} = action.payload;
 
   const response = yield call(processHttpCall, {
     url: GROUP_STUDENT_ID + studentId,
@@ -218,7 +213,7 @@ function* getStudentsWithoutGroupByUniversityId() {
 }
 
 function* addStudentToGroup(action) {
-  const { studentIds, groupId } = action.payload;
+  const {studentIds, groupId} = action.payload;
 
   if (studentIds && groupId) {
     const response = yield call(processHttpCall, {
@@ -246,28 +241,5 @@ function* deleteUser() {
     //TODO: tru without logout
     authService.logout();
     yield put(signOut());
-  }
-}
-
-function* updateUser(action) {
-  const { university, institute, department, group } = action.payload;
-
-  const response = yield call(processHttpCall, {
-    url: USERS,
-    method: "put",
-    data: {
-      universityId: university && university.value,
-      instituteId: institute && institute.value,
-      departmentId: department && department.value,
-      groupId: group && group.value
-    }
-  });
-
-  if (response) {
-    yield put(signInSuccess(response));
-    yield put(loadUniversity());
-    yield put(loadInstitute());
-    yield put(loadDepartment());
-    yield put(loadGroup());
   }
 }

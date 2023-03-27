@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import { getName, getUserGroup } from '../../../../utils/UsersUtil';
+import { getName } from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
 import { Card, Col, Row } from 'react-bootstrap';
 import { CalendarWeekFill } from 'react-bootstrap-icons';
@@ -66,16 +66,14 @@ export function UserCard({ user, avatar, onSaveAvatar, isMine }) {
             </Card.Header>
             <Card.Body>
               <Card.Subtitle>
-                <p>{user.role === 1 && i18n.t("group") + ": " + getUserGroup(user)}</p>
+                <p>{user.role === 1 && i18n.t("group") + ": " + user?.group?.name}</p>
               </Card.Subtitle>
               <Card.Text>
-                {user.phone && i18n.t("phone") + ": " + user.phone}
-                {user.phone && <br />}
-                {i18n.t("email")}: {user.email}
+                {i18n.t("email")}: {user?.email}
                 <br />
-                {i18n.t("institute")}: {user.instituteName}
+                {i18n.t("institute")}: {user?.institute?.name}
                 <br />
-                {i18n.t("department")}: {user.departmentName}
+                {i18n.t("department")}: {user?.department?.name}
               </Card.Text>
             </Card.Body>
           </Card>

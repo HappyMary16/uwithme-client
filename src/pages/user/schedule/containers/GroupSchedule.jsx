@@ -12,11 +12,12 @@ import {loadGroupsByUniversityId} from '../../../../actions/groupActions';
 import {Schedule} from '../components/Schedule';
 import {ADD_LESSON} from '../../../../constants/links';
 import {useNavigate, useParams} from "react-router-dom";
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
 
 export default function GroupSchedule() {
 
-  const user = useSelector(state => state.authReducers.user);
-  const universityId = useSelector(state => state.authReducers.user.universityId);
+  const user = useFetchUserQuery().data;
+  const universityId = user?.universityId;
   const groups = useSelector(state => Object.values(state.groupReducers.groups));
   const lessons = useSelector(state => state.scheduleReducers.lessons);
 

@@ -1,60 +1,71 @@
-import React, { useRef, useState } from 'react';
-import { LogOutIcon } from '../../icons/LogOutIcon';
-import { Button, ListGroup, Overlay, Popover, Row } from 'react-bootstrap';
-import { SmallAvatar } from '../../common/components/SmallAvatar';
-import { ListItem } from '../../common/components/ListItem';
-import { SwitchAccountIcon } from '../../icons/SwitchAccountIcon';
+import React, {useRef, useState} from 'react';
+import {LogOutIcon} from '../../icons/LogOutIcon';
+import {Button, ListGroup, Overlay, Popover, Row} from 'react-bootstrap';
+import {SmallAvatar} from '../../common/components/SmallAvatar';
+import {ListItem} from '../../common/components/ListItem';
+import {SwitchAccountIcon} from '../../icons/SwitchAccountIcon';
 import i18n from '../../../locales/i18n';
-import { getInactiveRoles } from '../../../utils/UsersUtil';
+import {useDispatch, useSelector} from "react-redux";
+import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {roleActivated, selectActiveRole} from "../../../store/slices/authSlice";
+import {useNavigate} from "react-router-dom";
+import {signOut} from "../../../actions/authActions";
+import {authService} from "../../../services/authService";
+import {USER_HOME} from "../../../constants/links";
 
-export function SwitchAccountPanel({ user, avatar, signOutFunc, updateUserRoleFunc }) {
+const textByRole = {
+  ROLE_STUDENT: i18n.t('to_student'),
+  ROLE_TEACHER: i18n.t('to_teacher'),
+  ROLE_ADMIN: i18n.t('to_admin')
+};
+
+export function SwitchAccountPanel() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useFetchUserQuery().data;
+  const avatar = useSelector(state => state.authReducers.avatar);
+  const activeRole = useSelector(selectActiveRole);
+
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
-  const textByRole = {
-    ROLE_STUDENT: i18n.t('to_student'),
-    ROLE_TEACHER: i18n.t('to_teacher'),
-    ROLE_ADMIN: i18n.t('to_admin')
-  };
+  function signOutFunc() {
+    dispatch(signOut());
+    authService.logout();
+  }
 
-  const handleClick = (event) => {
+  function updateUserRoleFunc(role) {
+    dispatch(roleActivated(role));
+    navigate(USER_HOME);
+  }
+
+  function handleClick(event) {
     setShow(!show);
     setTarget(event.target);
-  };
-
-  const handleBlur = () => {
-    setShow(false);
-  };
+  }
 
   return (
     <Row ref={ref} className={'justify-content-end'}>
-      <Button onClick={handleClick} onBlur={handleBlur} variant={'link'}>
-        <SmallAvatar size={35} avatar={avatar} />
+      <Button onClick={handleClick} onBlur={() => setShow(false)} variant={'link'}>
+        <SmallAvatar size={35} avatar={avatar}/>
       </Button>
 
-      <Overlay
-        show={show}
-        target={target}
-        placement='bottom'
-        container={ref.current}
-      >
-        <Popover id='popover-basic'
-                 className='overlay'>
-          <Popover.Header as='h1'><p>{user.surname + ' ' + user.firstName}</p></Popover.Header>
+      <Overlay show={show} target={target} placement='bottom' container={ref.current}>
+        <Popover id='popover-basic' className='overlay'>
+          <Popover.Header as='h1'><p>{user?.surname + ' ' + user?.firstName}</p></Popover.Header>
           <Popover.Body>
             <ListGroup variant='flush'>
-              {getInactiveRoles(user).map(role => <ListGroup.Item
-                key={role}
-                action
-                onMouseDown={() => updateUserRoleFunc(role)}>
-                <ListItem icon={<SwitchAccountIcon />} text={textByRole[role]} openEnabled={false} />
-              </ListGroup.Item>)}
-              <ListGroup.Item
-                action
-                onMouseDown={signOutFunc}
-              >
-                <ListItem icon={<LogOutIcon size={'1.5em'} />} text={i18n.t('sign_out')} openEnabled={false} />
+              {user?.roles.filter(role => role !== activeRole).map(role =>
+                <ListGroup.Item
+                  key={role}
+                  action
+                  onMouseDown={() => updateUserRoleFunc(role)}>
+                  <ListItem icon={<SwitchAccountIcon/>} text={textByRole[role]} openEnabled={false}/>
+                </ListGroup.Item>)}
+              <ListGroup.Item action onMouseDown={signOutFunc}>
+                <ListItem icon={<LogOutIcon size={'1.5em'}/>} text={i18n.t('sign_out')} openEnabled={false}/>
               </ListGroup.Item>
             </ListGroup>
           </Popover.Body>
