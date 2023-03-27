@@ -3,13 +3,16 @@ import i18n from '../../../../locales/i18n';
 import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import { Button, Form, Modal } from 'react-bootstrap';
+import {useDispatch} from "react-redux";
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {createDepartment} from "../../../../actions/departmentActions";
 
-export const AddDepartment = ({
-  institutes,
-  open,
-  handleClose,
-  handleCreate
-}) => {
+export function AddDepartment({institutes, handleClose}) {
+
+  const dispatch = useDispatch();
+
+  const universityId = useFetchUserQuery().data.universityId;
+
   const [institute, setInstitute] = React.useState();
   const [departmentName, setDepartmentName] = React.useState();
 
@@ -19,14 +22,12 @@ export const AddDepartment = ({
       instituteId = null;
     }
 
-    handleCreate(institute.label, instituteId, departmentName);
+    dispatch(createDepartment(universityId, institute.label, instituteId, departmentName));
     handleClose();
-    setInstitute(null);
-    setDepartmentName(null);
   };
 
   return (
-    <Modal show={open} onHide={handleClose} centered>
+    <Modal show onHide={handleClose} centered>
       <Modal.Header>
         <Modal.Title>{i18n.t('create_department')}</Modal.Title>
       </Modal.Header>
@@ -64,4 +65,4 @@ export const AddDepartment = ({
       </Modal.Footer>
     </Modal>
   );
-};
+}

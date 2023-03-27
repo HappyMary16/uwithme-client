@@ -33,16 +33,26 @@ import BotNotification from './pages/common/containers/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
+import {useFetchUserQuery} from "./store/slices/authApiSlice";
+
+export const selectApiLoading = (state) => {
+  return Object.values(state)
+    .filter(api => api.queries)
+    .flatMap(api => Object.values(api.queries))
+    .some(query => query.status === 'pending');
+};
 
 export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector(state => state.authReducers.user);
+  const {data: user} = useFetchUserQuery();
   const clientVersion = useSelector(state => state.authReducers.clientVersion);
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
   const isMenuOpen = useSelector(state => state.navigationReducers.isMenuOpen);
   const message = useSelector(state => state.messageReducers.message);
+
+  const isNewFetching = useSelector(selectApiLoading);
 
   const isLoggedIn = authService.isLoggedIn();
 
@@ -73,7 +83,7 @@ export default function App() {
                                       onClose={() => dispatch(changeIsMenuOpen())}/>}
 
       <TopToolBar/>
-      <CustomSpinner isFetching={isFetching}/>
+      <CustomSpinner isFetching={isFetching || isNewFetching}/>
 
       <Message
         open={!!message}

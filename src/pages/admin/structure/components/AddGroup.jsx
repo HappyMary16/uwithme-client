@@ -4,14 +4,16 @@ import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {getDepartmentsByInstitute} from '../../../../utils/StructureUtils';
 import {Button, Form, Modal} from 'react-bootstrap';
+import {useDispatch} from "react-redux";
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {createGroup} from "../../../../actions/groupActions";
 
-export const AddGroup = ({
-  institutes,
-  departments,
-  handleClose,
-  handleCreate,
-  group
-}) => {
+export function AddGroup({institutes, departments, handleClose, group}) {
+
+  const dispatch = useDispatch();
+
+  const universityId = useFetchUserQuery().data.universityId;
+
   const [department, setDepartment] = React.useState(!!group && departments[group.departmentId]);
   const [institute, setInstitute] = React.useState(!!group && institutes[department?.instituteId]);
   const [groupName, setGroupName] = React.useState(group?.label);
@@ -58,15 +60,8 @@ export const AddGroup = ({
       departmentId = null;
     }
 
-    handleCreate(
-      instituteId,
-      institute.label,
-      departmentId,
-      department.label,
-      startYear,
-      groupName,
-      isShowingInRegistration
-    );
+    dispatch(createGroup(universityId, instituteId, institute.label, departmentId,
+      department.label, startYear, groupName, isShowingInRegistration));
 
     handleClose();
   };
@@ -130,4 +125,4 @@ export const AddGroup = ({
       </Modal.Footer>
     </Modal>
   );
-};
+}

@@ -4,12 +4,7 @@ import { selectorColors } from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import { Button, Form, Modal } from 'react-bootstrap';
 
-export const AddLectureHall = ({
-  buildings,
-  open,
-  handleClose,
-  handleCreate
-}) => {
+export function AddLectureHall({buildings, open, handleClose, handleCreate}) {
   const [building, setBuilding] = React.useState();
   const [lectureHallName, setLectureHall] = React.useState();
   const [placeNumber, setPlaceNumber] = React.useState();
@@ -65,4 +60,4 @@ export const AddLectureHall = ({
       </Modal.Footer>
     </Modal>
   );
-};
+}

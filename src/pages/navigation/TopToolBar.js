@@ -6,15 +6,16 @@ import {SwitchAccountPanel} from './components/SwitchAccoutPanel';
 import {authService} from "../../services/authService";
 import {signOut} from "../../actions/authActions";
 import {changeIsMenuOpen} from "../../actions/navigationActions";
-import {updateActiveRole} from "../../actions/userActions";
 import {USER_HOME} from "../../constants/links";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {useFetchUserQuery} from "../../store/slices/authApiSlice";
+import {activeRoleChanged} from "../../store/slices/authSlice";
 
 export function TopToolBar() {
 
   const dispatch = useDispatch();
-  const user = useSelector(state => state.authReducers.user);
+  const {data: user} = useFetchUserQuery();
   const avatar = useSelector(state => state.authReducers.avatar);
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ export function TopToolBar() {
   }
 
   function updateUserRoleFunc(role) {
-    dispatch(updateActiveRole(role));
+    dispatch(activeRoleChanged(role));
     navigate(USER_HOME);
   }
 

@@ -3,7 +3,7 @@ import i18n from '../../../../locales/i18n';
 import { Col, Collapse, ListGroup, Row } from 'react-bootstrap';
 import { DoorOpenFill } from 'react-bootstrap-icons';
 
-export const LectureHallsList = ({ lectureHalls, open }) => {
+export function LectureHallsList({ lectureHalls, open }) {
   return (
     <Collapse in={open}>
       <ListGroup>
@@ -31,4 +31,4 @@ export const LectureHallsList = ({ lectureHalls, open }) => {
       </ListGroup>
     </Collapse>
   );
-};
+}

@@ -7,12 +7,12 @@ import {
   getTodayLessons
 } from '../../../../utils/ScheduleUtil';
 import i18n from '../../../../locales/i18n';
-import { hasRole } from '../../../../utils/UsersUtil';
-import { Table } from 'react-bootstrap';
-import { SwitchWeek } from '../../../common/components/SwitchWeek';
-import { STUDENT, TEACHER } from '../../../../constants/userRoles';
+import {hasRole} from '../../../../utils/UsersUtil';
+import {Table} from 'react-bootstrap';
+import {SwitchWeek} from '../../../common/components/SwitchWeek';
+import {STUDENT, TEACHER} from '../../../../constants/userRoles';
 
-export const TodaySchedule = ({ isMine, lessons, user }) => {
+export function TodaySchedule({lessons, user}) {
   const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
 
   return (
@@ -32,18 +32,18 @@ export const TodaySchedule = ({ isMine, lessons, user }) => {
             {hasRole(user, TEACHER) && <th>{i18n.t('group')}</th>}
           </tr>
           {lessons &&
-          getTodayLessons(lessons, weekNumber ? 1 : 2).map(lesson => (
-            <tr key={lesson.name}>
-              <td>{getLessonTime(lesson.lessonTime)}</td>
-              <td>{lesson.subjectName}</td>
-              <td>{lesson.lectureHall}</td>
-              {hasRole(user, STUDENT) && <td>{lesson.teacherName}</td>}
-              {hasRole(user, TEACHER) && <td>{getGroupList(lesson.groups)}</td>}
-            </tr>
-          ))}
+            getTodayLessons(lessons, weekNumber ? 1 : 2).map(lesson => (
+              <tr key={lesson.name}>
+                <td>{getLessonTime(lesson.lessonTime)}</td>
+                <td>{lesson.subjectName}</td>
+                <td>{lesson.lectureHall}</td>
+                {hasRole(user, STUDENT) && <td>{lesson.teacherName}</td>}
+                {hasRole(user, TEACHER) && <td>{getGroupList(lesson.groups)}</td>}
+              </tr>
+            ))}
           </tbody>
         </Table>
       )}
     </div>
   );
-};
+}

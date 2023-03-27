@@ -11,7 +11,7 @@ import {
 import i18n from '../../locales/i18n';
 import { slide as Menu } from 'react-burger-menu';
 
-export const AdminToolBar = ({ isOpen = false, onClose }) => {
+export function AdminToolBar({ isOpen = false, onClose }) {
   return (
     <Menu isOpen={isOpen} onClose={() => onClose()}>
       <a href={USER_HOME}>{i18n.t('university_structure')}</a>
@@ -23,4 +23,4 @@ export const AdminToolBar = ({ isOpen = false, onClose }) => {
       <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>
   );
-};
+}

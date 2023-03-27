@@ -6,7 +6,7 @@ import { selectorColors } from '../../../../styles/styles';
 import { getName } from '../../../../utils/UsersUtil';
 import { Button, Modal } from 'react-bootstrap';
 
-const AddStudentToGroup = ({ open, students, handleClose, handleAdd }) => {
+export default function AddStudentToGroup({ open, students, handleClose, handleAdd }) {
   const [selectedStudents, setStudents] = React.useState('');
 
   return (
@@ -51,6 +51,4 @@ const AddStudentToGroup = ({ open, students, handleClose, handleAdd }) => {
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default AddStudentToGroup;
+}

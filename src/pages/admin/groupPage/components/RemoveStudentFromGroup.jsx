@@ -4,12 +4,7 @@ import i18n from '../../../../locales/i18n';
 import { getName } from '../../../../utils/UsersUtil';
 import { Button, Modal } from 'react-bootstrap';
 
-export const RemoveStudentFromGroup = ({
-  open,
-  student,
-  handleNo,
-  handleYes
-}) => {
+export function RemoveStudentFromGroup({open, student, handleNo, handleYes}) {
   return (
     <Modal show={open} onHide={handleNo} centered>
       <Modal.Header>
@@ -34,4 +29,4 @@ export const RemoveStudentFromGroup = ({
       </Modal.Footer>
     </Modal>
   );
-};
+}

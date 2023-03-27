@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { getCurrentWeek } from '../../../../utils/ScheduleUtil';
 import { USER_HOME_PAGE } from '../../../../constants/links';
 import { getName } from '../../../../utils/UsersUtil';
@@ -10,20 +10,18 @@ import { ScheduleTable } from './ScheduleTable';
 import { SmallScreenSchedule } from './SmallScreenSchedule';
 import {useNavigate} from "react-router-dom";
 
-export const Schedule = ({
-                           lessons,
-                           user,
-                           isMine = false,
-                           isEditMode = false,
-                           deleteLesson
-                         }) => {
-  let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
-  let [isSmall, setSmall] = React.useState(isPageSmallForSchedule());
+export function Schedule({lessons, user, isMine, isEditMode, deleteLesson}) {
+
   const navigate = useNavigate();
 
-  window.addEventListener('resize', () => {
-    setSmall(isPageSmallForSchedule());
-  }, true);
+  let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
+  let [isSmall, setSmall] = React.useState(isPageSmallForSchedule());
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setSmall(isPageSmallForSchedule());
+    }, true);
+  }, [user])
 
   return (
     <div>
@@ -62,4 +60,4 @@ export const Schedule = ({
                                   weekNumber={weekNumber} />}
     </div>
   );
-};
+}

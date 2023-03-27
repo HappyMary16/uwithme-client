@@ -1,82 +1,58 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import i18n from '../../../locales/i18n';
-import { AddLectureHall } from './components/AddLectureHall';
-import { createLectureHall, loadBuildings, loadLectureHalls } from '../../../actions/lectureHallActions';
-import { BuildingsList } from './components/BuildingsList';
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import { EmptyPage } from '../../common/components/EmptyPage';
+import {AddLectureHall} from './components/AddLectureHall';
+import {createLectureHall, loadBuildings, loadLectureHalls} from '../../../actions/lectureHallActions';
+import {BuildingsList} from './components/BuildingsList';
+import {Button, Col, Container, Row} from 'react-bootstrap';
+import {EmptyPage} from '../../common/components/EmptyPage';
+import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {selectApiLoading} from "../../../App";
 
-class LectureHalls extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openCreateDialog: false
-    };
-    this.createLectureHall = this.createLectureHall.bind(this);
-  }
+export default function LectureHalls() {
 
-  componentDidMount() {
-    const { dispatch, universityId } = this.props;
+  const dispatch = useDispatch();
+
+  const universityId = useFetchUserQuery().data.universityId;
+  const lectureHalls = useSelector(state => Object.values(state.lectureHallReducers.lectureHalls));
+  const buildings = useSelector(state => Object.values(state.lectureHallReducers.buildings));
+
+  const isFetching = useSelector(state => state.navigationReducers.isFetching);
+  const isNewFetching = useSelector(selectApiLoading);
+
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+
+  useEffect(() => {
     if (universityId) {
       dispatch(loadBuildings());
       dispatch(loadLectureHalls());
     }
-  }
+  }, [universityId, dispatch])
 
-  createLectureHall(buildingName, buildingId, lectureHallName, placeNumber) {
-    const { dispatch, universityId } = this.props;
+  return (
+    <Container>
+      <Row>
+        <Col sm={12} md={{offset: 8, span: 4}} lg={{offset: 9, span: 3}}>
+          <Button
+            block
+            variant={"purple"}
+            onClick={() => setOpenCreateDialog(true)}
+          >
+            {i18n.t("create_lecture_hall")}
+          </Button>
+          <AddLectureHall
+            open={openCreateDialog}
+            handleClose={() => setOpenCreateDialog(false)}
+            buildings={buildings}
+            handleCreate={(buildingName, buildingId, lectureHallName, placeNumber) =>
+              dispatch(createLectureHall(universityId, buildingName, buildingId, lectureHallName, placeNumber))}
+          />
+        </Col>
+      </Row>
 
-    dispatch(
-      createLectureHall(
-        universityId,
-        buildingName,
-        buildingId,
-        lectureHallName,
-        placeNumber
-      )
-    );
-  }
+      <EmptyPage list={buildings} isFetching={isFetching || isNewFetching}/>
 
-  render() {
-    const { buildings, lectureHalls, isFetching } = this.props;
-    const { openCreateDialog } = this.state;
-
-    return (
-      <Container>
-        <Row>
-          <Col sm={12} md={{ offset: 8, span: 4 }} lg={{ offset: 9, span: 3 }}>
-            <Button
-              block
-              variant={"purple"}
-              onClick={() => this.setState({ openCreateDialog: true })}
-            >
-              {i18n.t("create_lecture_hall")}
-            </Button>
-            <AddLectureHall
-              open={openCreateDialog}
-              handleClose={() => this.setState({ openCreateDialog: false })}
-              buildings={buildings}
-              handleCreate={this.createLectureHall}
-            />
-          </Col>
-        </Row>
-
-        <EmptyPage list={buildings} isFetching={isFetching} />
-
-        <BuildingsList buildings={buildings} lectureHalls={lectureHalls} />
-      </Container>
-    );
-  }
+      <BuildingsList buildings={buildings} lectureHalls={lectureHalls}/>
+    </Container>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    lectureHalls: Object.values(state.lectureHallReducers.lectureHalls),
-    buildings: Object.values(state.lectureHallReducers.buildings),
-    universityId: state.authReducers.user.universityId,
-    isFetching: state.navigationReducers.isFetching
-  };
-};
-
-export default connect(mapStateToProps)(LectureHalls);

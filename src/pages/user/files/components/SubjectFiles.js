@@ -6,7 +6,7 @@ import { Collapse, ListGroup } from 'react-bootstrap';
 import { ListItem } from '../../../common/components/ListItem';
 import { FolderFill } from 'react-bootstrap-icons';
 
-export const SubjectFiles = ({ name, files }) => {
+export function SubjectFiles({ name, files }) {
   const [open, setOpen] = React.useState(false);
   const [lectureOpen, setLectureOpen] = React.useState(false);
   const [taskOpen, setTaskOpen] = React.useState(false);
@@ -66,4 +66,4 @@ export const SubjectFiles = ({ name, files }) => {
       </Collapse>
     </div>
   );
-};
+}

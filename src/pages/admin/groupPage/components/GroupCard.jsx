@@ -5,7 +5,7 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import {CalendarWeekFill, PencilFill} from 'react-bootstrap-icons';
 import {useNavigate} from "react-router-dom";
 
-export const GroupCard = ({ group, department, institute, groupTeacher, openGroupDialog }) => {
+export function GroupCard({ group, department, institute, groupTeacher, openGroupDialog }) {
   const navigate = useNavigate();
 
   return (
@@ -59,4 +59,4 @@ export const GroupCard = ({ group, department, institute, groupTeacher, openGrou
       </Card.Body>
     </Card>
   );
-};
+}

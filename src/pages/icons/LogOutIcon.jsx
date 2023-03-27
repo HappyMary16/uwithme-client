@@ -1,6 +1,6 @@
 import React from "react";
 
-export const LogOutIcon = ({ onClick, size='2em' }) => {
+export function LogOutIcon({ onClick, size='2em' }) {
   return (
     <div onClick={onClick} className={"icon"}>
       <svg
@@ -34,4 +34,4 @@ l0 38 109 4 c121 3 144 13 189 78 20 30 22 44 22 176 0 142 0 144 -25 160 -23
       </svg>
     </div>
   );
-};
+}

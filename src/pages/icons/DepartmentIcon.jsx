@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DepartmentIcon = ({ size = "1.7em" }) => {
+export function DepartmentIcon({ size = "1.7em" }) {
   return (
     <div>
       <svg
@@ -23,4 +23,4 @@ export const DepartmentIcon = ({ size = "1.7em" }) => {
       </svg>
     </div>
   );
-};
+}

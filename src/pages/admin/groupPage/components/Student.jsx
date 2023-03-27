@@ -6,7 +6,7 @@ import { TrashFill } from 'react-bootstrap-icons';
 import { SmallAvatar } from '../../../common/components/SmallAvatar';
 import {useNavigate} from "react-router-dom";
 
-export const Student = ({ student, removeStudent }) => {
+export function Student({ student, removeStudent }) {
 
   const navigate = useNavigate();
 
@@ -36,4 +36,4 @@ export const Student = ({ student, removeStudent }) => {
       </Row>
     </ListGroup.Item>
   );
-};
+}

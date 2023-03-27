@@ -3,7 +3,7 @@ import { ListGroup } from 'react-bootstrap';
 import { EmptyPage } from '../../../common/components/EmptyPage';
 import { UserListItem } from './UserListItem';
 
-export const UsersList = ({ users, isFetching }) => {
+export function UsersList({ users, isFetching }) {
 
   return (
     <ListGroup variant={'flush'}>
@@ -14,4 +14,4 @@ export const UsersList = ({ users, isFetching }) => {
       ))}
     </ListGroup>
   );
-};
+}

@@ -5,7 +5,7 @@ import { GROUP_PAGE } from '../../../../constants/links';
 import { PeopleFill } from 'react-bootstrap-icons';
 import {useNavigate} from "react-router-dom";
 
-export const GroupList = ({ groups, open }) => {
+export function GroupList({ groups, open }) {
 
   const navigate = useNavigate();
 
@@ -32,4 +32,4 @@ export const GroupList = ({ groups, open }) => {
       </ListGroup>
     </Collapse>
   );
-};
+}

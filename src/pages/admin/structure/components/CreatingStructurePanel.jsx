@@ -6,35 +6,23 @@ import {AddDepartment} from './AddDepartment';
 import {AddInstitute} from './AddInstitute';
 import {AddGroup} from './AddGroup';
 
-export const CreateStructurePanel = ({
-  institutes,
-  departments,
-  createInstitute,
-  createDepartment,
-  createGroup
-}) => {
+export function CreateStructurePanel({institutes, departments}) {
   const [openInstituteDialog, setOpenInstituteDialog] = React.useState(false);
   const [openDepartmentDialog, setOpenDepartmentDialog] = React.useState(false);
   const [openGroupDialog, setOpenGroupDialog] = React.useState(false);
 
   return (
     <Container>
-      <AddInstitute
-        open={openInstituteDialog}
-        handleClose={() => setOpenInstituteDialog(false)}
-        handleCreate={createInstitute}
-      />
-      <AddDepartment
-        open={openDepartmentDialog}
+      {openInstituteDialog && <AddInstitute
+        handleClose={() => setOpenInstituteDialog(false)}/>}
+      {openDepartmentDialog && <AddDepartment
         handleClose={() => setOpenDepartmentDialog(false)}
         institutes={institutes}
-        handleCreate={createDepartment}
-      />
+      />}
       {openGroupDialog && <AddGroup
         handleClose={() => setOpenGroupDialog(false)}
         institutes={institutes}
         departments={departments}
-        handleCreate={createGroup}
       />}
 
       <Row sm={12}>
@@ -68,4 +56,4 @@ export const CreateStructurePanel = ({
       </Row>
     </Container>
   );
-};
+}

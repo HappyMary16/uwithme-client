@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { TrashFill } from 'react-bootstrap-icons';
 import { TEACHER } from '../../../../constants/userRoles';
 
-export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
+export function Lesson({ lesson, user, isEditMode = false, deleteLesson }) {
   return (
     <div className={'lesson'}>
       {isEditMode && (
@@ -35,4 +35,4 @@ export const Lesson = ({ lesson, user, isEditMode = false, deleteLesson }) => {
       </Row>
     </div>
   );
-};
+}

@@ -3,7 +3,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import { KEYCLOAK_USER_SETTINGS } from '../../../../constants/keycloakApi';
 
-export const KeycloakSetting = ({ user }) => {
+export function KeycloakSetting({ user }) {
   const { firstName, middleName, surname, email } = user??{};
 
   return (
@@ -52,4 +52,4 @@ export const KeycloakSetting = ({ user }) => {
       </Row>
     </div>
   );
-};
+}

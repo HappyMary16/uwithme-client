@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const SwitchAccountIcon = ({ onClick }) => {
+export function SwitchAccountIcon({ onClick }) {
   return (
     <div onClick={onClick} className={'icon'}>
       <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" className="st1"
@@ -11,4 +11,4 @@ export const SwitchAccountIcon = ({ onClick }) => {
       </svg>
     </div>
   );
-};
+}

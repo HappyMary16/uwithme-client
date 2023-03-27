@@ -1,43 +1,32 @@
-import { connect } from 'react-redux';
-import { User } from '../components/User';
-import React, { Component } from 'react';
-import { findUserById } from '../../../../utils/UsersUtil';
-import { findLessonsForUser } from '../../../../actions/scheduleActions';
-import { withUserId } from '../../../../utils/RouterUtils';
+import {useDispatch, useSelector} from 'react-redux';
+import {User} from '../components/User';
+import React, {useEffect} from 'react';
+import {findLessonsForUser} from '../../../../actions/scheduleActions';
+import {useParams} from "react-router-dom";
 
-class UserPage extends Component {
-  componentDidMount() {
-    const { dispatch, teachers, userId } = this.props;
-    const teacher = findUserById(teachers, userId);
-    if (teacher) {
-      dispatch(findLessonsForUser(teacher.id));
-    }
-  }
+export default function UserPage() {
 
-  render() {
-    const { teachers, userId, lessons } = this.props;
-    const teacher = findUserById(teachers, userId);
+  const dispatch = useDispatch();
 
-    return (
-      <div>
-        {teacher && (
-          <User
-            user={teacher}
-            avatar={teacher.avatar}
-            lessons={lessons}
-            isMine={false}
-          />
-        )}
-      </div>
-    );
-  }
+  const {userId} = useParams();
+
+  const user = useSelector(state => state.userReducers.users[userId]);
+  const lessons = useSelector(state => state.scheduleReducers.otherUsersLessons);
+
+  useEffect(() => {
+    dispatch(findLessonsForUser(userId));
+  }, [userId, dispatch])
+
+  return (
+    <div>
+      {user && (
+        <User
+          user={user}
+          avatar={user.avatar}
+          lessons={lessons}
+          isMine={false}
+        />
+      )}
+    </div>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    teachers: Object.values(state.userReducers.users),
-    lessons: state.scheduleReducers.otherUsersLessons
-  };
-};
-
-export default withUserId(connect(mapStateToProps)(UserPage));

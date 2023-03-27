@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '../../../../locales/i18n';
 import { CloudArrowUpFill } from 'react-bootstrap-icons';
 
-export const DropZone = ({ disabled, onFilesAddedFunk }) => {
+export default function DropZone({ disabled, onFilesAddedFunk }) {
   let fileInputRef = React.createRef();
   const [highLight, setHighLight] = React.useState(false);
 
@@ -65,4 +65,4 @@ export const DropZone = ({ disabled, onFilesAddedFunk }) => {
       <span>{i18n.t('upload_files')}</span>
     </div>
   );
-};
+}

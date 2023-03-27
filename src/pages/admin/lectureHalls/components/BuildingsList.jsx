@@ -3,7 +3,7 @@ import { getLectureHallsByBuilding } from '../../../../utils/StructureUtils';
 import { Building } from './Building';
 import { ListGroup } from 'react-bootstrap';
 
-export const BuildingsList = ({ buildings, lectureHalls, classes }) => {
+export function BuildingsList({ buildings, lectureHalls, classes }) {
   return (
     <ListGroup variant='flush'>
       {buildings && buildings.map((building, i) => (
@@ -14,4 +14,4 @@ export const BuildingsList = ({ buildings, lectureHalls, classes }) => {
       ))}
     </ListGroup>
   );
-};
+}

@@ -40,15 +40,14 @@ import GroupSchedule from "./pages/user/schedule/containers/GroupSchedule";
 import AdminList from "./pages/user/userList/containers/AdminList";
 import GroupPage from "./pages/admin/groupPage/GroupPage";
 import LectureHalls from "./pages/admin/lectureHalls/LectureHalls";
-import AdminAddLesson from "./pages/admin/addLesson/containers/AdminAddLesson";
 import Debts from "./pages/studcabinet/Debts";
 import SubjectsScores from "./pages/studcabinet/SubjectsScores";
 import StudentRating from "./pages/studcabinet/StudentRating";
-import TeacherAddLesson from "./pages/admin/addLesson/containers/TeacherAddLesson";
 import ShareFiles from "./pages/user/shareFiles/ShareFiles";
 import AddFile from "./pages/user/addFiles/AddFile";
 import MySchedule from "./pages/user/schedule/containers/MySchedule";
 import {authService, hasAnyRole} from "./services/authService";
+import AddLesson from "./pages/admin/addLesson/AddLesson";
 
 // const Begin = lazy(() => import("./components/session/Begin"));
 // const Test = lazy(() => import("./components/test/Test"));
@@ -121,7 +120,7 @@ const router = createBrowserRouter([
         path: ADD_LESSON,
         element:
           <PageRouter roles={[TEACHER, ADMIN]}>
-            {hasAnyRole([TEACHER]) ? <TeacherAddLesson/> : <AdminAddLesson/>}
+            <AddLesson/>
           </PageRouter>
       },
       {

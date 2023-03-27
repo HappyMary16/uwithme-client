@@ -7,7 +7,8 @@ import { CalendarWeekFill } from 'react-bootstrap-icons';
 import { SCHEDULE, USER_SCHEDULE } from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
 
-export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
+export function UserCard({ user, avatar, onSaveAvatar, isMine }) {
+
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -82,4 +83,4 @@ export const UserCard = ({ user, avatar, onSaveAvatar, isMine }) => {
       </Row>
     </div>
   );
-};
+}

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MenuIcon = ({ size = "2em", onClick }) => {
+export function MenuIcon({ size = "2em", onClick }) {
   return (
     <div onClick={onClick} className={"icon menu-icon"}>
       <svg
@@ -26,4 +26,4 @@ export const MenuIcon = ({ size = "2em", onClick }) => {
       </svg>
     </div>
   );
-};
+}

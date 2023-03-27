@@ -7,7 +7,7 @@ import { SwitchAccountIcon } from '../../icons/SwitchAccountIcon';
 import i18n from '../../../locales/i18n';
 import { getInactiveRoles } from '../../../utils/UsersUtil';
 
-export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFunc }) => {
+export function SwitchAccountPanel({ user, avatar, signOutFunc, updateUserRoleFunc }) {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
@@ -47,7 +47,7 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
               {getInactiveRoles(user).map(role => <ListGroup.Item
                 key={role}
                 action
-                onMouseDown={updateUserRoleFunc(role)}>
+                onMouseDown={() => updateUserRoleFunc(role)}>
                 <ListItem icon={<SwitchAccountIcon />} text={textByRole[role]} openEnabled={false} />
               </ListGroup.Item>)}
               <ListGroup.Item
@@ -62,4 +62,4 @@ export const SwitchAccountPanel = ({ user, avatar, signOutFunc, updateUserRoleFu
       </Overlay>
     </Row>
   );
-};
+}

@@ -1,35 +1,25 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { loadTeachers, loadUsersByRole } from '../../../../actions/userActions';
-import { getTeachers } from '../../../../utils/UsersUtil';
-import { UsersList } from '../components/UsersList';
-import { STUDENT, TEACHER } from '../../../../constants/userRoles';
+import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {loadUsersByRole} from '../../../../actions/userActions';
+import {getTeachers} from '../../../../utils/UsersUtil';
+import {UsersList} from '../components/UsersList';
+import {TEACHER} from '../../../../constants/userRoles';
+import {selectApiLoading} from "../../../../App";
 
-class TeachersList extends Component {
-  componentDidMount() {
-    const { dispatch, activeRole } = this.props;
-    if (activeRole === STUDENT) {
-      dispatch(loadTeachers());
-    } else {
-      dispatch(loadUsersByRole(TEACHER));
-    }
-  }
+export default function TeachersList() {
 
-  render() {
-    const { teachers, isFetching } = this.props;
+  const dispatch = useDispatch();
 
-    return (
-      <UsersList users={teachers} isFetching={isFetching}/>
-    );
-  }
+  const users = useSelector(state => getTeachers(Object.values(state.userReducers.users)));
+
+  const isFetching = useSelector(state => state.navigationReducers.isFetching);
+  const isNewFetching = useSelector(selectApiLoading);
+
+  useEffect(() => {
+    dispatch(loadUsersByRole(TEACHER));
+  }, [dispatch])
+
+  return (
+    <UsersList users={users} isFetching={isFetching || isNewFetching}/>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    activeRole: state.authReducers.user.activeRole,
-    teachers: getTeachers(Object.values(state.userReducers.users)),
-    isFetching: state.navigationReducers.isFetching
-  };
-};
-
-export default connect(mapStateToProps)(TeachersList);

@@ -7,7 +7,7 @@ import { ListGroup } from 'react-bootstrap';
 import { USER_HOME_PAGE } from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
 
-export const AdminListItem = ({ user, deleteAdminFunc, isDeletePresent }) => {
+export function AdminListItem({ user, deleteAdminFunc, isDeletePresent }) {
 
   const navigate = useNavigate();
 
@@ -28,4 +28,4 @@ export const AdminListItem = ({ user, deleteAdminFunc, isDeletePresent }) => {
                 deleteFuncParam={user.id} />
     </ListGroup.Item>
   );
-};
+}

@@ -5,7 +5,7 @@ import { USER_HOME } from '../../../constants/links';
 import { Message } from '../../common/components/Message';
 import {useNavigate} from "react-router-dom";
 
-export const LogInStudCabinet = ({ open, handleCreate }) => {
+export function LogInStudCabinet({ open, handleCreate }) {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [showMessage, setShowMessage] = React.useState(false);
@@ -70,4 +70,4 @@ export const LogInStudCabinet = ({ open, handleCreate }) => {
       </Modal>
     </div>
   );
-};
+}

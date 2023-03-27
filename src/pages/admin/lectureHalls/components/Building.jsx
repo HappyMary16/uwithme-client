@@ -4,7 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 import { ListItem } from '../../../common/components/ListItem';
 import { DepartmentIcon } from '../../../icons/DepartmentIcon';
 
-export const Building = ({ building, lectureHalls }) => {
+export function Building({ building, lectureHalls }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -19,4 +19,4 @@ export const Building = ({ building, lectureHalls }) => {
       <LectureHallsList lectureHalls={lectureHalls} open={open} />
     </div>
   );
-};
+}

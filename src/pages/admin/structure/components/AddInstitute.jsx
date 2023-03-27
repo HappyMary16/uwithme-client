@@ -2,17 +2,21 @@ import React from 'react';
 
 import i18n from '../../../../locales/i18n';
 import { Button, Form, Modal } from 'react-bootstrap';
+import {useDispatch} from "react-redux";
+import {createInstitute} from "../../../../actions/instituteActions";
 
-export const AddInstitute = ({ open, handleClose, handleCreate }) => {
+export function AddInstitute({ handleClose }) {
+
+  const dispatch = useDispatch();
   const [instituteName, setInstituteName] = React.useState('');
 
   let onCreate = () => {
-    handleCreate(instituteName);
+    dispatch(createInstitute(instituteName));
     handleClose();
   };
 
   return (
-    <Modal show={open} onHide={handleClose} centered>
+    <Modal show={true} centered>
       <Modal.Header>
         <Modal.Title>{i18n.t('create_institute')}</Modal.Title>
       </Modal.Header>
@@ -36,4 +40,4 @@ export const AddInstitute = ({ open, handleClose, handleCreate }) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}

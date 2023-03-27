@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { isPossibleToOpen } from '../../../../utils/FileUtil';
 import { Col, Collapse, ListGroup, Row } from 'react-bootstrap';
 import { ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill } from 'react-bootstrap-icons';
 import { loadFile } from '../../../../actions/fileActions';
 
-let ListFiles = ({ open, files, dispatch }) => {
+export default function ListFiles({ open, files, dispatch }) {
   return (
     <Collapse in={open}>
       <ListGroup>
@@ -44,7 +43,4 @@ let ListFiles = ({ open, files, dispatch }) => {
       </ListGroup>
     </Collapse>
   );
-};
-
-ListFiles = connect()(ListFiles);
-export default ListFiles;
+}

@@ -10,13 +10,3 @@ export const withUserId = (Component) => {
     );
   };
 };
-
-export const withGroupId = (Component) => {
-  return (props) => {
-    const {groupId} = useParams();
-
-    return (
-      <Component groupId={groupId} {...props} />
-    );
-  };
-};

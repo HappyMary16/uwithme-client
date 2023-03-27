@@ -1,108 +1,53 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Institute from './components/Institute';
-import { getDepartmentsByInstitute } from '../../../utils/StructureUtils';
-import { CreateStructurePanel } from './components/CreatingStructurePanel';
-import { Container, ListGroup } from 'react-bootstrap';
-import { EmptyPage } from '../../common/components/EmptyPage';
-import { createInstitute, loadInstitutesByUniversityId } from '../../../actions/instituteActions';
-import { createDepartment, loadDepartmentsByUniversityId } from '../../../actions/departmentActions';
-import { createGroup, loadGroupsByUniversityId } from '../../../actions/groupActions';
+import {getDepartmentsByInstitute} from '../../../utils/StructureUtils';
+import {CreateStructurePanel} from './components/CreatingStructurePanel';
+import {Container, ListGroup} from 'react-bootstrap';
+import {EmptyPage} from '../../common/components/EmptyPage';
+import {loadInstitutesByUniversityId} from '../../../actions/instituteActions';
+import {loadDepartmentsByUniversityId} from '../../../actions/departmentActions';
+import {loadGroupsByUniversityId} from '../../../actions/groupActions';
+import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {selectApiLoading} from "../../../App";
 
-class UniversityStructure extends Component {
-  constructor(props) {
-    super(props);
+export default function UniversityStructure() {
 
-    this.createInstitute = this.createInstitute.bind(this);
-    this.createDepartment = this.createDepartment.bind(this);
-    this.createGroup = this.createGroup.bind(this);
-  }
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    const { dispatch, universityId } = this.props;
+  const universityId = useFetchUserQuery().data.universityId;
+  const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
+  const departments = useSelector(state => Object.values(state.departmentReducers.departments));
+  const groups = useSelector(state => Object.values(state.groupReducers.groups));
+
+  const isFetching = useSelector(state => state.navigationReducers.isFetching);
+  const isNewFetching = useSelector(selectApiLoading);
+
+  useEffect(() => {
     if (universityId) {
       dispatch(loadInstitutesByUniversityId());
       dispatch(loadDepartmentsByUniversityId());
       dispatch(loadGroupsByUniversityId(universityId));
     }
-  }
+  }, [universityId, dispatch]);
 
-  createInstitute(instituteName) {
-    const { dispatch } = this.props;
+  return (
+    <Container>
+      <CreateStructurePanel institutes={institutes} departments={departments}/>
 
-    dispatch(createInstitute(instituteName));
-  }
+      <EmptyPage list={institutes} isFetching={isFetching || isNewFetching}/>
 
-  createDepartment(instituteName, instituteId, departmentName) {
-    const { dispatch, universityId } = this.props;
-
-    dispatch(createDepartment(universityId, instituteName, instituteId, departmentName));
-  }
-
-  createGroup(
-    instituteId,
-    instituteName,
-    departmentId,
-    departmentName,
-    startYear,
-    groupName,
-    isShowingInRegistration
-  ) {
-    const { dispatch, universityId } = this.props;
-
-    dispatch(
-      createGroup(
-        universityId,
-        instituteId,
-        instituteName,
-        departmentId,
-        departmentName,
-        startYear,
-        groupName,
-        isShowingInRegistration
-      )
-    );
-  }
-
-  render() {
-    const { institutes, departments, groups, isFetching } = this.props;
-
-    return (
-      <Container>
-        <CreateStructurePanel
-          institutes={institutes}
-          departments={departments}
-          createInstitute={this.createInstitute}
-          createDepartment={this.createDepartment}
-          createGroup={this.createGroup}
-        />
-
-        <EmptyPage list={institutes} isFetching={isFetching} />
-
-        <ListGroup variant="flush">
-          {institutes &&
-            institutes.map((institute, i) => (
-              <Institute
-                key={i}
-                institute={institute}
-                departments={getDepartmentsByInstitute(departments, institute)}
-                groups={groups}
-              />
-            ))}
-        </ListGroup>
-      </Container>
-    );
-  }
+      <ListGroup variant="flush">
+        {institutes &&
+          institutes.map((institute, i) => (
+            <Institute
+              key={i}
+              institute={institute}
+              departments={getDepartmentsByInstitute(departments, institute)}
+              groups={groups}
+            />
+          ))}
+      </ListGroup>
+    </Container>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    institutes: Object.values(state.instituteReducers.institutes),
-    departments: Object.values(state.departmentReducers.departments),
-    groups: Object.values(state.groupReducers.groups),
-    universityId: state.authReducers.user.universityId,
-    isFetching: state.navigationReducers.isFetching
-  };
-};
-
-export default connect(mapStateToProps)(UniversityStructure);

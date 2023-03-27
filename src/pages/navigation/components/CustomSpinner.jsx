@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Spinner } from 'react-bootstrap';
 
-export const CustomSpinner = ({ isFetching }) => {
+export function CustomSpinner({ isFetching }) {
   return (
     <div>
       {!!isFetching && (
@@ -13,4 +13,4 @@ export const CustomSpinner = ({ isFetching }) => {
       )}
     </div>
   );
-};
+}

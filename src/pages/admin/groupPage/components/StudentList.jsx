@@ -3,7 +3,7 @@ import { Student } from './Student';
 import i18n from '../../../../locales/i18n';
 import { Button, Col, Container, ListGroup, Row } from 'react-bootstrap';
 
-export const StudentsList = ({ students, addStudent, removeStudent }) => {
+export function StudentsList({ students, addStudent, removeStudent }) {
   return (
     <Container>
       <Row>
@@ -29,4 +29,4 @@ export const StudentsList = ({ students, addStudent, removeStudent }) => {
       </ListGroup>
     </Container>
   );
-};
+}

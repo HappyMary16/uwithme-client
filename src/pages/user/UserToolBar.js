@@ -15,7 +15,7 @@ import { isStudent, isTeacher } from '../../utils/UsersUtil';
 import { slide as Menu } from 'react-burger-menu';
 import { TEST_SYSTEM_URI } from '../../config';
 
-export const UserToolBar = ({ user, isOpen = false, onClose }) => {
+export function UserToolBar({ user, isOpen = false, onClose }) {
 
   return (
     <Menu isOpen={isOpen} onClose={() => onClose()}>
@@ -35,4 +35,4 @@ export const UserToolBar = ({ user, isOpen = false, onClose }) => {
       <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>
   );
-};
+}

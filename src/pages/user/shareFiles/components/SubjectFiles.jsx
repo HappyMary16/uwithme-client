@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import FilesToChoose from './FilesToChoose';
 import i18n from '../../../../locales/i18n';
 
-export const SubjectFiles = ({ lectures, tasks, subjectId, handleChoose }) => {
+export function SubjectFiles({ lectures, tasks, subjectId, handleChoose }) {
   return (
     <Container>
       <Row>
@@ -24,4 +24,4 @@ export const SubjectFiles = ({ lectures, tasks, subjectId, handleChoose }) => {
       </Row>
     </Container>
   );
-};
+}

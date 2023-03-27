@@ -4,13 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 import { SmallScreenDay } from './SmallScreenDay';
 import { EmptyPage } from '../../../common/components/EmptyPage';
 
-export const SmallScreenSchedule = ({
-                                      lessons,
-                                      user,
-                                      isEditMode = false,
-                                      deleteLesson,
-                                      weekNumber
-                                    }) => {
+export function SmallScreenSchedule({lessons, user, isEditMode, deleteLesson, weekNumber}) {
 
   return (
     <div>
@@ -29,4 +23,4 @@ export const SmallScreenSchedule = ({
       </ListGroup>}
     </div>
   )
-};
+}

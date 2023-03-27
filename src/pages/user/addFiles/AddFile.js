@@ -1,146 +1,115 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { FileTypes, LECTURE } from '../../../constants/userRoles';
-import { Upload } from './components/Upload';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {FileTypes, LECTURE} from '../../../constants/userRoles';
+import {Upload} from './components/Upload';
 import i18n from '../../../locales/i18n';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
-import { selectorColors } from '../../../styles/styles';
-import { Message } from '../../common/components/Message';
-import { Button, Col } from 'react-bootstrap';
+import {selectorColors} from '../../../styles/styles';
+import {Message} from '../../common/components/Message';
+import {Button, Col} from 'react-bootstrap';
 import {
   clearUploadProgress,
   clearUploadSuccess,
   loadSubjectsAndFiles,
   uploadRequest
 } from '../../../actions/fileActions';
+import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
 
-class AddFile extends React.Component {
-  constructor(props) {
-    super(props);
+export default function AddFile() {
 
-    this.state = {
-      files: [],
-      subject: "",
-      fileType: LECTURE,
-      uploading: false,
-      successfulUploaded: false
-    };
+  const dispatch = useDispatch();
 
-    this.submit = this.submit.bind(this);
-    this.addFiles = this.addFiles.bind(this);
-    this.createSubject = this.createSubject.bind(this);
-    this.uploadingEnded = this.uploadingEnded.bind(this);
-  }
+  const {data: {user}} = useFetchUserQuery();
+  const userId = user.id;
+  const username = user.username;
 
-  componentDidMount() {
-    const { dispatch, userId } = this.props;
+  const subjects = useSelector(state => state.filesReducers.subjects);
+  const uploadProgress = useSelector(state => state.filesReducers.uploadProgress);
+  const uploadSuccess = useSelector(state => state.filesReducers.uploadSuccess);
+
+  const [files, setFiles] = useState([]);
+  const [subject, setSubject] = useState();
+  const [fileType, setFileType] = useState(LECTURE);
+  const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
     dispatch(loadSubjectsAndFiles(userId));
-  }
+  }, [userId, dispatch])
 
-  submit() {
-    const { dispatch, username } = this.props;
-    const { subject, files, fileType } = this.state;
-
-    this.setState({ uploading: true });
-
+  function submit() {
+    setUploading(true);
     dispatch(uploadRequest(files, username, subject.label, fileType));
   }
 
-  createSubject(subjectName) {
-    this.setState({
-      subject: {
-        value: subjectName,
-        label: subjectName
-      }
+  function createSubject(subjectName) {
+    setSubject({
+      value: subjectName,
+      label: subjectName
     });
   }
 
-  addFiles(addedFiles) {
-    this.setState({ files: addedFiles });
-  }
+  function uploadingEnded() {
+    setUploading(false);
+    setFiles([]);
 
-  uploadingEnded() {
-    this.setState({
-      uploading: false,
-      files: []
-    });
-
-    const { dispatch } = this.props;
     dispatch(clearUploadSuccess());
     dispatch(clearUploadProgress());
   }
 
-  render() {
-    const { subjects, uploadProgress, uploadSuccess } = this.props;
-    const { uploading, subject, files } = this.state;
-
-    return (
-      <div>
-        <Message
-          open={uploadSuccess}
-          handleClose={this.uploadingEnded}
-          message={i18n.t("files_is_uploaded")}
-        />
-        <CreatableSelect
-          className={"selector"}
-          theme={selectorColors}
-          placeholder={i18n.t("subject")}
-          options={
-            subjects &&
-            subjects.map(subject => {
-              return {
-                label: subject.name,
-                value: subject.id
-              };
-            })
-          }
-          onChange={subject => this.setState({ subject: subject })}
-          onCreateOption={this.createSubject}
-          value={subject}
-        />
-        <Select
-          className={"selector"}
-          theme={selectorColors}
-          onChange={opinion => this.setState({ fileType: opinion.value })}
-          options={FileTypes}
-          placeholder={i18n.t("file_type")}
-        />
-        <Upload
-          uploadProgress={uploadProgress}
-          addFiles={this.addFiles}
-          files={files}
-          uploading={uploading}
-          successfulUploaded={uploadSuccess}
-        />
-        <Col
-          xs={12}
-          md={{ offset: 9, span: 3 }}
-          lg={{ offset: 9, span: 3 }}
-          xl={{ offset: 10, span: 2 }}
+  return (
+    <div>
+      <Message
+        open={uploadSuccess}
+        handleClose={uploadingEnded}
+        message={i18n.t("files_is_uploaded")}
+      />
+      <CreatableSelect
+        className={"selector"}
+        theme={selectorColors}
+        placeholder={i18n.t("subject")}
+        options={
+          subjects &&
+          subjects.map(subject => {
+            return {
+              label: subject.name,
+              value: subject.id
+            };
+          })
+        }
+        onChange={setSubject}
+        onCreateOption={createSubject}
+        value={subject}
+      />
+      <Select
+        className={"selector"}
+        theme={selectorColors}
+        onChange={opinion => setFileType(opinion.value)}
+        options={FileTypes}
+        placeholder={i18n.t("file_type")}
+      />
+      <Upload
+        uploadProgress={uploadProgress}
+        addFiles={setFiles}
+        files={files}
+        uploading={uploading}
+        successfulUploaded={uploadSuccess}
+      />
+      <Col
+        xs={12}
+        md={{offset: 9, span: 3}}
+        lg={{offset: 9, span: 3}}
+        xl={{offset: 10, span: 2}}
+      >
+        <Button
+          block
+          type={"submit"}
+          variant={"purple"}
+          onClick={submit}
         >
-          <Button
-            block
-            type={"submit"}
-            variant={"purple"}
-            onClick={this.submit}
-          >
-            {i18n.t("upload")}
-          </Button>
-        </Col>
-      </div>
-    );
-  }
+          {i18n.t("upload")}
+        </Button>
+      </Col>
+    </div>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    userId: state.authReducers.user.id,
-    username: state.authReducers.user.username,
-    subjects: state.filesReducers.subjects,
-    uploadProgress: state.filesReducers.uploadProgress,
-    uploadSuccess: state.filesReducers.uploadSuccess
-  };
-};
-
-export default connect(mapStateToProps)(AddFile);

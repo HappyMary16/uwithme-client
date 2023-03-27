@@ -4,13 +4,7 @@ import { LESSONS_TIME, WEEK_DAYS } from '../../../../constants/userRoles';
 import { getLesson } from '../../../../utils/ScheduleUtil';
 import { Table } from 'react-bootstrap';
 
-export const ScheduleTable = ({
-                                lessons,
-                                user,
-                                isEditMode = false,
-                                deleteLesson,
-                                weekNumber
-                              }) => {
+export function ScheduleTable({lessons, user, isEditMode, deleteLesson, weekNumber}) {
 
   return (
     <Table bordered size="sm">
@@ -57,4 +51,4 @@ export const ScheduleTable = ({
       </tbody>
     </Table>
   );
-};
+}

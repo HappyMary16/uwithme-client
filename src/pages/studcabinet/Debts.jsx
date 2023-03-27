@@ -1,69 +1,53 @@
-import React, { Component } from 'react';
-import { loadDebts } from '../../actions/studCabinetActions';
-import { connect } from 'react-redux';
+import React from 'react';
+import {loadDebts, loadStudentsRating} from '../../actions/studCabinetActions';
+import {useDispatch, useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
 
-class Debts extends Component {
-  constructor(props) {
-    super(props);
+export default function Debts() {
 
-    this.loadData = this.loadData.bind(this);
-  }
+  const dispatch = useDispatch();
 
-  loadData(email, password) {
-    const { dispatch } = this.props;
+  const studentInfo = useSelector(state => state.studCabinetReducers.studentInfo);
+  const debts = useSelector(state => state.studCabinetReducers.debts);
+
+  function loadData(email, password) {
     dispatch(loadDebts(email, password));
   }
 
-  render() {
-    const { studentInfo, debts } = this.props;
-
-    return (
-      <StudCabinetPage
-        studentInfo={studentInfo}
-        data={debts}
-        logInFunc={this.loadData}
-        loadDataFunc={this.loadData}
-
-        columns={[
-          {
-            dataField: 'subject',
-            text: 'Дисципліна'
-          },
-          {
-            dataField: 'teacher',
-            text: 'Викладач',
-            isNotInSmall: true
-          },
-          {
-            dataField: 'control',
-            text: 'Е/З',
-            isNotInTiny: true
-          },
-          {
-            dataField: 'course',
-            text: 'Курс'
-          },
-          {
-            dataField: 'semester',
-            text: 'Сем.'
-          },
-          {
-            dataField: 'individualTask',
-            text: 'І/З',
-            isNotInSmall: true
-          }
-        ]}
-      />
-    );
-  }
+  return (
+    <StudCabinetPage
+      studentInfo={studentInfo}
+      data={debts}
+      loadDataFunc={loadData}
+      columns={[
+        {
+          dataField: 'subject',
+          text: 'Дисципліна'
+        },
+        {
+          dataField: 'teacher',
+          text: 'Викладач',
+          isNotInSmall: true
+        },
+        {
+          dataField: 'control',
+          text: 'Е/З',
+          isNotInTiny: true
+        },
+        {
+          dataField: 'course',
+          text: 'Курс'
+        },
+        {
+          dataField: 'semester',
+          text: 'Сем.'
+        },
+        {
+          dataField: 'individualTask',
+          text: 'І/З',
+          isNotInSmall: true
+        }
+      ]}
+    />
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    studentInfo: state.studCabinetReducers.studentInfo,
-    debts: state.studCabinetReducers.debts
-  };
-};
-
-export default connect(mapStateToProps)(Debts);

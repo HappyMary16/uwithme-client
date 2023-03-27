@@ -1,16 +1,10 @@
-import { Col, Row } from 'react-bootstrap';
-import { ChevronDown, ChevronUp, TrashFill } from 'react-bootstrap-icons';
+import {Col, Row} from 'react-bootstrap';
+import {ChevronDown, ChevronUp, TrashFill} from 'react-bootstrap-icons';
 import React from 'react';
 
-export const ListItem = ({ text,
-                           secondaryText,
-                           openEnabled = true,
-                           open,
-                           icon,
-                           iconText,
-                           isDeletePresent,
-                           deleteFunc,
-                           deleteFuncParam }) => {
+export function ListItem({
+  text, secondaryText, openEnabled = true, open, icon,
+  iconText, isDeletePresent, deleteFunc, deleteFuncParam}) {
   return (
     <Row>
       {(!!icon || !!iconText) && <Col xs={2} sm={1}>
@@ -36,4 +30,4 @@ export const ListItem = ({ text,
       </Col>}
     </Row>
   );
-};
+}

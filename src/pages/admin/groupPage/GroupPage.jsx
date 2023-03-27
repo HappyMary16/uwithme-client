@@ -15,6 +15,7 @@ import {
 } from '../../../actions/userActions';
 import {AddGroup} from "../structure/components/AddGroup";
 import {useParams} from "react-router-dom";
+import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
 
 export default function GroupPage() {
 
@@ -26,7 +27,7 @@ export default function GroupPage() {
   const department = useSelector(state => state.departmentReducers.departments[group.departmentId])
   const users = useSelector(state => Object.values(state.userReducers.users))
   const institute = useSelector(state => state.instituteReducers.institutes[department.instituteId])
-  const universityId = useSelector(state => state.authReducers.user.universityId)
+  const universityId = useFetchUserQuery().data.universityId;
   const departments = useSelector(state =>  state.departmentReducers.departments)
   const institutes = useSelector(state => state.instituteReducers.institutes)
 
@@ -58,30 +59,6 @@ export default function GroupPage() {
     setOpenAddStudentDialog(true);
   }
 
-  function updateGroup(
-    instituteId,
-    instituteName,
-    departmentId,
-    departmentName,
-    startYear,
-    groupName,
-    isShowingInRegistration
-  ) {
-    dispatch(
-      createGroup(
-        universityId,
-        instituteId,
-        instituteName,
-        departmentId,
-        departmentName,
-        startYear,
-        groupName,
-        isShowingInRegistration,
-        groupId
-      )
-    );
-  }
-
  return (
       <div>
         <Container>
@@ -99,7 +76,6 @@ export default function GroupPage() {
             handleClose={() => setOpenGroupDialog(false)}
             institutes={institutes}
             departments={departments}
-            handleCreate={updateGroup}
             group={group}
           />}
 

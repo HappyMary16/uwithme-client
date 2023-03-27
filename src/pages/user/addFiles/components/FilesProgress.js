@@ -2,7 +2,7 @@ import React from 'react';
 import { getUploadProgressByFileName } from '../../../../utils/FileUtil';
 import { Container, ProgressBar } from 'react-bootstrap';
 
-export const FilesProgress = ({ files, uploadProgress }) => {
+export function FilesProgress({ files, uploadProgress }) {
   return (
     <Container>
       {files.map(file => {
@@ -16,4 +16,4 @@ export const FilesProgress = ({ files, uploadProgress }) => {
       })}
     </Container>
   );
-};
+}

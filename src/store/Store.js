@@ -14,11 +14,16 @@ import studCabinetReducers from '../reducers/studCabinetReducers';
 import authReducers from '../reducers/authReducers';
 import navigationReducers from '../reducers/navigationReducers';
 import {configureStore} from '@reduxjs/toolkit'
+import {authApiSlice} from "./slices/authApiSlice";
+import authSlice from "./slices/authSlice";
 
 const stateLoader = new StateLoader();
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
+  preloadedState: {
+    ...stateLoader.loadState()
+  },
   reducer: {
     scheduleReducers,
     userReducers,
@@ -31,9 +36,15 @@ export const store = configureStore({
     groupReducers,
     universityReducers,
     departmentReducers,
-    studCabinetReducers
+    studCabinetReducers,
+    auth: authSlice,
+    [authApiSlice.reducerPath]: authApiSlice.reducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    .concat(sagaMiddleware)
+    .concat(
+      authApiSlice.middleware
+    )
 });
 
 store.subscribe(() => {

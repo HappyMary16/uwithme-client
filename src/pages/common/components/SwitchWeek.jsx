@@ -3,7 +3,7 @@ import Switch from 'react-switch';
 import { lightGreyColor } from '../../../styles/styles';
 import { Row } from 'react-bootstrap';
 
-export const SwitchWeek = ({ weekNumber, setWeekNumber }) => {
+export function SwitchWeek({ weekNumber, setWeekNumber }) {
   return (
     <Row className="justify-content-end switch-week-margin">
       <Switch
@@ -20,4 +20,4 @@ export const SwitchWeek = ({ weekNumber, setWeekNumber }) => {
       />
     </Row>
   );
-};
+}

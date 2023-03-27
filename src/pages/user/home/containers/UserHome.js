@@ -1,50 +1,36 @@
-import { connect } from "react-redux";
-import { User } from "../components/User";
-import { findLessons } from "../../../../actions/scheduleActions";
-import React, { Component } from "react";
-import { uploadAvatar } from "../../../../actions/userActions";
+import {useDispatch, useSelector} from "react-redux";
+import {User} from "../components/User";
+import {findLessons} from "../../../../actions/scheduleActions";
+import React, {useEffect} from "react";
+import {uploadAvatar} from "../../../../actions/userActions";
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
 
-class UserHome extends Component {
-  constructor(props) {
-    super(props);
+export default function UserHome() {
 
-    this.onSaveAvatar = this.onSaveAvatar.bind(this);
-  }
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    const { dispatch } = this.props;
+  const {data: {user}} = useFetchUserQuery();
+  const avatar = useSelector(state => state.authReducers.avatar);
+  const lessons = useSelector(state => state.scheduleReducers.lessons);
 
+  useEffect(() => {
     dispatch(findLessons());
-  }
+  }, [dispatch])
 
-  onSaveAvatar(avatar) {
-    const { dispatch } = this.props;
+  function onSaveAvatar(avatar) {
+    const {dispatch} = this.props;
     dispatch(uploadAvatar(avatar));
   }
 
-  render() {
-    const { user, avatar, lessons } = this.props;
-
-    return (
-      user && (
-        <User
-          user={user}
-          avatar={avatar}
-          lessons={lessons}
-          isMine={true}
-          onSaveAvatar={this.onSaveAvatar}
-        />
-      )
-    );
-  }
+  return (
+    user && (
+      <User
+        user={user}
+        avatar={avatar}
+        lessons={lessons}
+        isMine={true}
+        onSaveAvatar={onSaveAvatar}
+      />
+    )
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    user: state.authReducers.user,
-    avatar: state.authReducers.avatar,
-    lessons: state.scheduleReducers.lessons
-  };
-};
-
-export default connect(mapStateToProps)(UserHome);

@@ -5,7 +5,8 @@ import { LessonList } from './LessonList';
 import { Calendar2CheckFill } from 'react-bootstrap-icons';
 import { getLessons } from '../../../../utils/ScheduleUtil';
 
-export const SmallScreenDay = ({ day, lessons, weekNumber, user, isEditMode, deleteLesson }) => {
+export function SmallScreenDay({ day, lessons, weekNumber, user, isEditMode, deleteLesson }) {
+
   let [open, setOpen] = React.useState(false);
 
   return (
@@ -29,4 +30,4 @@ export const SmallScreenDay = ({ day, lessons, weekNumber, user, isEditMode, del
                   deleteLesson={deleteLesson}/>
     </div>
   );
-};
+}

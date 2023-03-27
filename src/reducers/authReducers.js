@@ -13,27 +13,6 @@ export default function authReducers(
   action
 ) {
   switch (action.type) {
-    case SIGN_IN_SUCCESS: {
-      console.log("Update user")
-      return {
-        ...state,
-        user: {
-          ...action.payload.user,
-          activeRole: getDefaultActiveRole(),
-        },
-        isRegistrationComplete: true,
-        clientVersion: config.CLIENT_VERSION
-      };
-    }
-
-    case UPDATE_ACTIVE_ROLE:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          activeRole: action.payload.role,
-        },
-      }
 
     case RENDER_MY_AVATAR: {
       return {

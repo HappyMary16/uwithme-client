@@ -2,15 +2,18 @@ import React, {useEffect} from 'react';
 import {ADMIN} from "../../../constants/userRoles";
 import UniversityStructure from "../../admin/structure/UniversityStructure";
 import UserHome from "../../user/home/containers/UserHome";
-import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {PRE_HOME} from "../../../constants/links";
+import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useSelector} from "react-redux";
+import {selectActiveRole} from "../../../store/slices/authSlice";
 
 export default function Home() {
 
   const navigate = useNavigate();
 
-  const user = useSelector(state => state.authReducers.user);
+  const {data: user} = useFetchUserQuery();
+  const role = useSelector(selectActiveRole);
 
   useEffect(() => {
     !user && navigate(PRE_HOME);
@@ -19,8 +22,8 @@ export default function Home() {
 
   return (
     <div>
-      {user?.activeRole === ADMIN && <UniversityStructure/>}
-      {user && user.activeRole !== ADMIN && <UserHome/>}
+      {role === ADMIN && <UniversityStructure/>}
+      {user && role !== ADMIN && <UserHome/>}
     </div>
   );
 };

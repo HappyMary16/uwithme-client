@@ -3,14 +3,7 @@ import { TodaySchedule } from './TodaySchedule';
 import { UserCard } from './UserCard';
 import { Container } from 'react-bootstrap';
 
-export const User = ({
-  user,
-  avatar,
-  lessons,
-  isMine,
-  onSaveAvatar,
-  toScheduleFunc
-}) => {
+export function User({user, avatar, lessons, isMine, onSaveAvatar, toScheduleFunc}) {
   return (
     <div>
       <Container>
@@ -23,8 +16,8 @@ export const User = ({
         />
       </Container>
       <Container>
-        <TodaySchedule isMine={isMine} lessons={lessons} user={user} />
+        <TodaySchedule lessons={lessons} user={user} />
       </Container>
     </div>
   );
-};
+}

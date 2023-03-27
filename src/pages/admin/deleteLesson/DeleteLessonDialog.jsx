@@ -4,12 +4,7 @@ import { selectorColors } from '../../../styles/styles';
 import Select from 'react-select';
 import { Button, Modal } from 'react-bootstrap';
 
-export const DeleteLessonDialog = ({
-  open,
-  lesson,
-  handleClose,
-  handleDelete
-}) => {
+export function DeleteLessonDialog({open, lesson, handleClose, handleDelete}) {
   const [choseGroups, setChoseGroups] = React.useState(lesson.groups);
   const groups = lesson.groups.map(group => {
     return {
@@ -58,4 +53,4 @@ export const DeleteLessonDialog = ({
       </Modal.Footer>
     </Modal>
   );
-};
+}

@@ -1,54 +1,42 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { getAdmins } from '../../../../utils/UsersUtil';
-import { loadUsersByRole, unAssignRole } from '../../../../actions/userActions';
-import { EmptyPage } from '../../../common/components/EmptyPage';
-import { ListGroup } from 'react-bootstrap';
-import { AdminListItem } from '../components/AdminListItem';
-import { ADMIN } from '../../../../constants/userRoles';
+import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {getAdmins} from '../../../../utils/UsersUtil';
+import {loadUsersByRole, unAssignRole} from '../../../../actions/userActions';
+import {EmptyPage} from '../../../common/components/EmptyPage';
+import {ListGroup} from 'react-bootstrap';
+import {AdminListItem} from '../components/AdminListItem';
+import {ADMIN} from '../../../../constants/userRoles';
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {selectApiLoading} from "../../../../App";
 
-class AdminsList extends Component {
+export default function AdminsList() {
 
-  constructor(props) {
-    super(props);
+  const dispatch = useDispatch();
 
-    this.deleteAdminFunc = this.deleteAdminFunc.bind(this);
-  }
+  const userId = useFetchUserQuery().data.user.id;
+  const users = useSelector(state => getAdmins(Object.values(state.userReducers.users)));
 
-  componentDidMount() {
-    const { dispatch } = this.props;
+  const isFetching = useSelector(state => state.navigationReducers.isFetching);
+  const isNewFetching = useSelector(selectApiLoading);
+
+  useEffect(() => {
     dispatch(loadUsersByRole(ADMIN));
-  }
+  }, [dispatch])
 
-  deleteAdminFunc(userId) {
-    const { dispatch } = this.props;
+  function deleteAdminFunc(userId) {
     dispatch(unAssignRole(userId, ADMIN));
   }
 
-  render() {
-    const { users, isFetching, userId } = this.props;
-
-    return (
-      <ListGroup variant={'flush'}>
-        <EmptyPage list={users} isFetching={isFetching} />
-        {users &&
+  return (
+    <ListGroup variant={'flush'}>
+      <EmptyPage list={users} isFetching={isFetching || isNewFetching}/>
+      {users &&
         users.map(user => (
           <AdminListItem key={user.id}
                          user={user}
-                         deleteAdminFunc={this.deleteAdminFunc}
+                         deleteAdminFunc={deleteAdminFunc}
                          isDeletePresent={user.id !== userId}/>
         ))}
-      </ListGroup>
-    );
-  }
+    </ListGroup>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    userId: state.authReducers.user.id,
-    users: getAdmins(Object.values(state.userReducers.users)),
-    isFetching: state.navigationReducers.isFetching
-  };
-};
-
-export default connect(mapStateToProps)(AdminsList);

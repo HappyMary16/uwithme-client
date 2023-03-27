@@ -1,34 +1,24 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { findUserById } from '../../../../utils/UsersUtil';
-import { findLessonsForUser } from '../../../../actions/scheduleActions';
-import { Schedule } from '../components/Schedule';
-import { withUserId } from '../../../../utils/RouterUtils';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {findLessonsForUser} from '../../../../actions/scheduleActions';
+import {Schedule} from '../components/Schedule';
+import {useParams} from "react-router-dom";
 
-class UserSchedule extends Component {
-  componentDidMount() {
-    const { dispatch, users, userId } = this.props;
-    const user = findUserById(users, userId);
-    if (user) {
-      dispatch(findLessonsForUser(user.id));
-    }
-  }
+export default function UserSchedule() {
 
-  render() {
-    const { users, userId, lessons } = this.props;
-    const user = findUserById(users, userId);
+  const dispatch = useDispatch();
 
-    return (
-      user && <Schedule user={user} lessons={lessons}/>
-    );
-  }
+  const {userId} = useParams();
+
+  const user = useSelector(state => state.userReducers.users[userId]);
+  const lessons = useSelector(state => state.scheduleReducers.otherUsersLessons);
+
+
+  useEffect(() => {
+    dispatch(findLessonsForUser(userId));
+  }, [userId, dispatch])
+
+  return (
+    user && <Schedule user={user} lessons={lessons}/>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    users: Object.values(state.userReducers.users),
-    lessons: state.scheduleReducers.otherUsersLessons
-  };
-};
-
-export default withUserId(connect(mapStateToProps)(UserSchedule));

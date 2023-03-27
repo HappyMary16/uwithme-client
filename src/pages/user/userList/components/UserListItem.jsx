@@ -7,7 +7,7 @@ import { CalendarWeekFill } from 'react-bootstrap-icons';
 import { STUDENT, TEACHER } from '../../../../constants/userRoles';
 import {useNavigate} from "react-router-dom";
 
-export const UserListItem = ({ user }) => {
+export function UserListItem({ user }) {
 
   const navigate = useNavigate();
 
@@ -39,4 +39,4 @@ export const UserListItem = ({ user }) => {
       </Row>
     </ListGroup.Item>
   );
-};
+}

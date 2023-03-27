@@ -5,7 +5,7 @@ import { ListItem } from '../../../common/components/ListItem';
 import { hasRole } from '../../../../utils/UsersUtil';
 import { TEACHER } from '../../../../constants/userRoles';
 
-export const LessonList = ({ lessons, open, user, isEditMode, deleteLesson }) => {
+export function LessonList({ lessons, open, user, isEditMode, deleteLesson }) {
   return (
     <Collapse in={open}>
       <ListGroup>
@@ -26,4 +26,4 @@ export const LessonList = ({ lessons, open, user, isEditMode, deleteLesson }) =>
       </ListGroup>
     </Collapse>
   );
-};
+}
