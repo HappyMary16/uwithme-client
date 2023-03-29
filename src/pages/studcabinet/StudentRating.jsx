@@ -1,24 +1,21 @@
 import React from 'react';
-import {loadStudentsRating} from '../../actions/studCabinetActions';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {selectedItemColor} from '../../styles/styles';
 import StudCabinetPage from './components/StudCabinetPage';
+import {selectCredentials} from "../../store/slices/studCabinetSlice";
+import {useFetchStudentInfoQuery, useFetchStudentsRatingQuery} from "../../store/slices/studCabinetApiSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function StudentRating() {
-  const dispatch = useDispatch();
 
-  const studentInfo = useSelector(state => state.studCabinetReducers.studentInfo);
-  const studentsScores = useSelector(state => state.studCabinetReducers.studentsScores);
-
-  function loadData(email, password, semester) {
-    dispatch(loadStudentsRating(email, password, semester));
-  }
+  const credentials = useSelector(selectCredentials);
+  const {data} = useFetchStudentsRatingQuery(credentials ? {credentials, semester: 1} : skipToken);
+  const {data: studentInfo} = useFetchStudentInfoQuery(credentials ?? skipToken);
 
   return (
     <StudCabinetPage
       isSemesterRequired
-      studentInfo={studentInfo}
-      data={studentsScores}
+      data={data}
       columns={[
         {
           dataField: 'place',
@@ -48,7 +45,6 @@ export default function StudentRating() {
           return selectedItemColor;
         }
       }}
-      loadDataFunc={loadData}
     />
   );
 }

@@ -5,7 +5,8 @@ import {SIGN_OUT} from "../../actions/authActions";
 import {ADMIN, STUDENT, TEACHER} from "../../constants/userRoles";
 
 const initialState = {
-  activeRole: null
+  activeRole: null,
+  clientVersion: config.CLIENT_VERSION
 };
 
 const authSlice = createSlice({

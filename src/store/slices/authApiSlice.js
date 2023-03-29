@@ -1,19 +1,10 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {URL} from "../../config";
-import {authService} from "../../services/authService";
+import {createApi} from '@reduxjs/toolkit/query/react';
+import baseUri from "../BaseUri";
 
 export const authApiSlice = createApi({
   reducerPath: 'authApi',
   tagTypes: ['AuthApi'],
-  baseQuery: fetchBaseQuery({
-    baseUrl: URL + "/api/auth",
-    prepareHeaders: async (headers) => {
-      const authResult = await authService.getToken();
-      headers.set('Authorization', 'Bearer ' + authResult);
-      headers.set('Content-Type', 'application/json');
-      return headers;
-    }
-  }),
+  baseQuery: baseUri("/auth"),
   endpoints: (builder) => ({
     fetchUser: builder.query({
       query: () => ({

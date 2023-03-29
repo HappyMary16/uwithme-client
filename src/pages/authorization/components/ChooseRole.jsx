@@ -19,7 +19,7 @@ export default function ChooseRole() {
   const [saveUser] = useSaveUserMutation();
   const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
   const departments = useSelector(state => Object.values(state.departmentReducers.departments));
-  const groups = useSelector(state => state.groupReducers.groups);
+  const groups = useSelector(state => Object.values(state.groupReducers.groups));
   const universities = useSelector(state => state.universityReducers.universities);
 
   const [userRole, setUserRole] = useState();

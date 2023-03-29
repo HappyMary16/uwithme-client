@@ -1,24 +1,19 @@
 import React from 'react';
-import {loadSubjectsScores} from '../../actions/studCabinetActions';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
+import {useFetchStudentScoresQuery} from "../../store/slices/studCabinetApiSlice";
+import {selectCredentials} from "../../store/slices/studCabinetSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function SubjectsScores() {
 
-  const dispatch = useDispatch();
-
-  const studentInfo = useSelector(state => state.studCabinetReducers.studentInfo);
-  const subjectsScores = useSelector(state => state.studCabinetReducers.subjectsScores);
-
-  function loadData(email, password, semester) {
-    dispatch(loadSubjectsScores(email, password, semester));
-  }
+  const credentials = useSelector(selectCredentials);
+  const {data} = useFetchStudentScoresQuery(credentials ? {credentials, semester: 1} : skipToken);
 
   return (
     <StudCabinetPage
       isSemesterRequired
-      studentInfo={studentInfo}
-      data={subjectsScores}
+      data={data}
       columns={[
         {
           dataField: 'subject',
@@ -52,7 +47,6 @@ export default function SubjectsScores() {
           isNotInSmall: true
         }
       ]}
-      loadDataFunc={loadData}
     />
   );
 }

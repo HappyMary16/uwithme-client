@@ -1,9 +1,9 @@
-import { RENDER_AVATAR, RENDER_USER, RENDER_USERS, UN_ASSIGN_ROLE, UPDATE_ACTIVE_ROLE } from '../actions/userActions';
-import StateLoader from '../store/StateLoader';
-import { SIGN_OUT } from '../actions/authActions';
+import {RENDER_AVATAR, RENDER_USER, RENDER_USERS, UN_ASSIGN_ROLE, UPDATE_ACTIVE_ROLE} from '../actions/userActions';
+import {loadState} from '../store/StateLoader';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function userReducers(
-  state = new StateLoader().loadState().userReducers || {
+  state = loadState().userReducers || {
     users: {}
   },
   action
@@ -51,7 +51,7 @@ export default function userReducers(
       };
 
     case UN_ASSIGN_ROLE: {
-      const { userId, role } = action.payload;
+      const {userId, role} = action.payload;
       let user = state.users[userId];
 
       return {

@@ -1,14 +1,14 @@
-import StateLoader from '../store/StateLoader';
+import {loadState} from '../store/StateLoader';
 import {
   INSTITUTE_CREATED,
   RENDER_INSTITUTES,
   RENDER_INSTITUTES_FOR_REGISTRATION,
   RENDER_USER_INSTITUTE
 } from '../actions/instituteActions';
-import { SIGN_OUT } from '../actions/authActions';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function instituteReducers(
-  state = new StateLoader().loadState().instituteReducers || {
+  state = loadState().instituteReducers || {
     userInstitute: undefined,
     institutes: {}
   },

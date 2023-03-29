@@ -1,15 +1,10 @@
-import StateLoader from '../store/StateLoader';
-import {
-  ADD_ERROR, CLOSE_BOT_NOTIFICATION,
-  REMOVE_ERROR,
-  REMOVE_MESSAGE,
-  SET_MESSAGE
-} from '../actions/messageAction';
-import { getMessage } from '../utils/MessageUtil';
-import { SIGN_OUT } from '../actions/authActions';
+import {loadState} from '../store/StateLoader';
+import {ADD_ERROR, CLOSE_BOT_NOTIFICATION, REMOVE_ERROR, REMOVE_MESSAGE, SET_MESSAGE} from '../actions/messageAction';
+import {getMessage} from '../utils/MessageUtil';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function messageReducers(
-  state = new StateLoader().loadState().messageReducers || {
+  state = loadState().messageReducers || {
     message: undefined,
     errors: []
   },

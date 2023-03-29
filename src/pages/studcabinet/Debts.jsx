@@ -1,24 +1,18 @@
 import React from 'react';
-import {loadDebts, loadStudentsRating} from '../../actions/studCabinetActions';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
+import {selectCredentials} from "../../store/slices/studCabinetSlice";
+import {useFetchStudentDebtsQuery} from "../../store/slices/studCabinetApiSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function Debts() {
 
-  const dispatch = useDispatch();
-
-  const studentInfo = useSelector(state => state.studCabinetReducers.studentInfo);
-  const debts = useSelector(state => state.studCabinetReducers.debts);
-
-  function loadData(email, password) {
-    dispatch(loadDebts(email, password));
-  }
+  const credentials = useSelector(selectCredentials);
+  const {data} = useFetchStudentDebtsQuery(credentials ?? skipToken);
 
   return (
     <StudCabinetPage
-      studentInfo={studentInfo}
-      data={debts}
-      loadDataFunc={loadData}
+      data={data}
       columns={[
         {
           dataField: 'subject',

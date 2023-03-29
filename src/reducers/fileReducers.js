@@ -1,4 +1,4 @@
-import StateLoader from "../store/StateLoader";
+import {loadState} from "../store/StateLoader";
 import {
   CLEAR_UPLOAD_PROGRESS,
   CLEAR_UPLOAD_SUCCESS,
@@ -8,10 +8,10 @@ import {
   UPLOAD_REQUEST,
   UPLOAD_SUCCESS
 } from "../actions/fileActions";
-import { SIGN_OUT } from "../actions/authActions";
+import {SIGN_OUT} from "../actions/authActions";
 
 export default function filesReducers(
-  state = new StateLoader().loadState().filesReducers || {
+  state = loadState().filesReducers || {
     uploadProgress: [],
     files: [],
     subjects: []

@@ -1,9 +1,9 @@
-import { RENDER_LESSON, RENDER_LESSONS, RENDER_LESSONS_FOR_CURRENT_USER_PAGE } from '../actions/scheduleActions';
-import StateLoader from '../store/StateLoader';
-import { SIGN_OUT } from '../actions/authActions';
+import {RENDER_LESSON, RENDER_LESSONS, RENDER_LESSONS_FOR_CURRENT_USER_PAGE} from '../actions/scheduleActions';
+import {loadState} from '../store/StateLoader';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function scheduleReducers(
-  state = new StateLoader().loadState().scheduleReducers || {
+  state = loadState().scheduleReducers || {
     lessons: [],
     otherUsersLessons: []
   },

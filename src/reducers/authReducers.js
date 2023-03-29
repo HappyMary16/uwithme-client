@@ -1,8 +1,8 @@
-import StateLoader from '../store/StateLoader';
+import {loadState} from '../store/StateLoader';
 import {RENDER_MY_AVATAR} from '../actions/userActions';
 
 export default function authReducers(
-  state = new StateLoader().loadState().authReducers || {
+  state = loadState().authReducers || {
     avatar: undefined
   },
   action

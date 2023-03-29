@@ -1,11 +1,11 @@
-import StateLoader from '../store/StateLoader';
-import { RENDER_GROUP, RENDER_GROUPS, RENDER_USER_GROUP } from '../actions/groupActions';
-import { RENDER_INSTITUTES_FOR_REGISTRATION } from '../actions/instituteActions';
-import { RENDER_DEPARTMENTS_FOR_REGISTRATION } from '../actions/departmentActions';
-import { SIGN_OUT } from '../actions/authActions';
+import {loadState} from '../store/StateLoader';
+import {RENDER_GROUP, RENDER_GROUPS, RENDER_USER_GROUP} from '../actions/groupActions';
+import {RENDER_INSTITUTES_FOR_REGISTRATION} from '../actions/instituteActions';
+import {RENDER_DEPARTMENTS_FOR_REGISTRATION} from '../actions/departmentActions';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function groupReducers(
-  state = new StateLoader().loadState().groupReducers || {
+  state = loadState().groupReducers || {
     userGroup: undefined,
     groups: {}
   },

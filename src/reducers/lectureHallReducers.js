@@ -1,14 +1,14 @@
-import StateLoader from '../store/StateLoader';
+import {loadState} from '../store/StateLoader';
 import {
   RENDER_BUILDING,
   RENDER_BUILDINGS,
   RENDER_LECTURE_HALL,
   RENDER_LECTURE_HALLS
 } from '../actions/lectureHallActions';
-import { SIGN_OUT } from '../actions/authActions';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function lectureHallReducers(
-  state = new StateLoader().loadState().lectureHallReducers || {
+  state = loadState().lectureHallReducers || {
     lectureHalls: {},
     buildings: {}
   },

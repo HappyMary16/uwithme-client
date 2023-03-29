@@ -8,7 +8,6 @@ import { universityWatcher } from './universitySagas';
 import { scheduleWatcher } from './scheduleSagas';
 import { usersWatcher } from './userSagas';
 import { structureWatcher } from './structureSagas';
-import { studCabinetWatcher } from './studCabinetSagas';
 import { endFetching, startFetching } from '../actions/navigationActions';
 import { authService } from '../services/authService';
 import http from '../services/http';
@@ -27,8 +26,7 @@ export default function* rootSaga() {
     departmentWatcher(),
     instituteWatcher(),
     universityWatcher(),
-    structureWatcher(),
-    studCabinetWatcher()
+    structureWatcher()
   ]);
 }
 

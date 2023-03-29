@@ -1,15 +1,15 @@
-import StateLoader from '../store/StateLoader';
+import {loadState} from '../store/StateLoader';
 import {
   DEPARTMENT_CREATED,
   RENDER_DEPARTMENTS,
   RENDER_DEPARTMENTS_FOR_REGISTRATION,
   RENDER_USER_DEPARTMENT
 } from '../actions/departmentActions';
-import { RENDER_INSTITUTES_FOR_REGISTRATION } from '../actions/instituteActions';
-import { SIGN_OUT } from '../actions/authActions';
+import {RENDER_INSTITUTES_FOR_REGISTRATION} from '../actions/instituteActions';
+import {SIGN_OUT} from '../actions/authActions';
 
 export default function departmentReducers(
-  state = new StateLoader().loadState().departmentReducers || {
+  state = loadState().departmentReducers || {
     userDepartment: undefined,
     departments: {}
   },

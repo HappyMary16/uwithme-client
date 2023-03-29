@@ -8,59 +8,48 @@ import {getSemesterById} from '../../../utils/StructureUtils';
 import Select from 'react-select';
 import {SEMESTER_NUMBER} from '../../../constants/userRoles';
 import {isPageSmall, isPageTiny} from '../../../utils/PageSizeUtil';
+import {useSelector} from "react-redux";
+import {selectCredentials} from "../../../store/slices/studCabinetSlice";
+import {useFetchStudentInfoQuery} from "../../../store/slices/studCabinetApiSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
+
+function getColumns(columns) {
+  let columnsToShow = columns;
+
+  if (isPageSmall()) {
+    columnsToShow = columnsToShow && columnsToShow.filter(column => !column.isNotInSmall);
+  }
+
+  if (isPageTiny()) {
+    columnsToShow = columnsToShow && columnsToShow.filter(column => !column.isNotInTiny);
+  }
+
+  columnsToShow.forEach(columnsToShow => columnsToShow.sort = true);
+  return columnsToShow;
+}
 
 export default function StudCabinetPage({
   isSemesterRequired,
   data,
   columns,
-  rowStyleFunc,
-  loadDataFunc,
-  studentInfo
+  rowStyleFunc
 }) {
 
-  const [shownColumns, setShownColumns] = useState(getColumns());
-  const [semester, setSemester] = useState(studentInfo?.semester);
+  const [shownColumns, setShownColumns] = useState(getColumns(columns));
+  const [semester, setSemester] = useState(1);
+
+  const [credentials, setCredentials] = useState(useSelector(selectCredentials));
+  useFetchStudentInfoQuery(credentials ?? skipToken);
 
   useEffect(() => {
     window.addEventListener('resize', () => {
-      setShownColumns(getColumns());
+      setShownColumns(getColumns(columns));
     }, true);
   }, [columns]);
 
-  useEffect(() => {
-    if (isAuthorizeInStudCab(studentInfo)) {
-      const {email, password} = studentInfo ?? {};
-      loadDataFunc(email, password, semester);
-    }
-  }, [studentInfo, semester, loadDataFunc]);
-
-  function getColumns() {
-    let columnsToShow = columns;
-
-    if (isPageSmall()) {
-      columnsToShow = columnsToShow && columnsToShow.filter(column => !column.isNotInSmall);
-    }
-
-    if (isPageTiny()) {
-      columnsToShow = columnsToShow && columnsToShow.filter(column => !column.isNotInTiny);
-    }
-
-    columnsToShow.forEach(columnsToShow => columnsToShow.sort = true);
-    return columnsToShow;
-  }
-
-  function isAuthorizeInStudCab() {
-    return (
-      !!studentInfo &&
-      !!studentInfo.email &&
-      !!studentInfo.password &&
-      !!studentInfo.semester
-    );
-  }
-
   function ifDataPresent(semester) {
     if (isSemesterRequired) {
-      return (!!semester
+      return (!!semester && data
         && data.filter(studentScore => studentScore.semester === semester).length > 0);
     } else {
       return !!data && data.length > 0;
@@ -79,8 +68,7 @@ export default function StudCabinetPage({
   return (
     <div>
       <LogInStudCabinet
-        open={!isAuthorizeInStudCab(studentInfo)}
-        handleCreate={loadDataFunc}
+        handleCreate={setCredentials}
       />
 
       {isSemesterRequired && !!semester && (

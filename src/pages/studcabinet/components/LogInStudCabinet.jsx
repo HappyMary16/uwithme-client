@@ -1,23 +1,24 @@
 import React from 'react';
 import i18n from '../../../locales/i18n';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { USER_HOME } from '../../../constants/links';
-import { Message } from '../../common/components/Message';
+import {Button, Form, Modal} from 'react-bootstrap';
+import {USER_HOME} from '../../../constants/links';
+import {Message} from '../../common/components/Message';
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectCredentials} from "../../../store/slices/studCabinetSlice";
 
-export function LogInStudCabinet({ open, handleCreate }) {
+export function LogInStudCabinet({handleCreate}) {
+
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [showMessage, setShowMessage] = React.useState(false);
   const navigate = useNavigate();
 
+  const credentials = useSelector(selectCredentials);
+
   let submit = e => {
     e.preventDefault();
-    handleCreate(email, password);
-  };
-
-  let onClose = () => {
-    setShowMessage(true);
+    handleCreate({email, password});
   };
 
   return (
@@ -29,7 +30,7 @@ export function LogInStudCabinet({ open, handleCreate }) {
         handleClose={() => navigate(USER_HOME)}
       />
 
-      <Modal show={open} centered>
+      <Modal show={!credentials} centered>
         <Modal.Header>
           <Modal.Title>{i18n.t('log-in-stud-cab')}</Modal.Title>
         </Modal.Header>
@@ -51,7 +52,7 @@ export function LogInStudCabinet({ open, handleCreate }) {
             <p>
               Якщо ви не хочете вводити свої дані, ви можете переглянути
               інформацію з кабінету студента в ньому ж.
-              <br />
+              <br/>
               <a href={'https://studcabinet.kpi.kharkov.ua/'}>
                 studcabinet.kpi.kharkov.ua
               </a>
@@ -59,7 +60,7 @@ export function LogInStudCabinet({ open, handleCreate }) {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button onClick={onClose} variant={'purple'}>
+            <Button onClick={() => setShowMessage(true)} variant={'purple'}>
               {i18n.t('cancel')}
             </Button>
             <Button type={'submit'} variant={'purple'}>

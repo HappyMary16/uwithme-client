@@ -1,12 +1,9 @@
-import StateLoader from "../store/StateLoader";
-import {
-  RENDER_UNIVERSITIES_FOR_REGISTRATION,
-  RENDER_USER_UNIVERSITY
-} from "../actions/universityActions";
-import { SIGN_OUT } from "../actions/authActions";
+import {loadState} from "../store/StateLoader";
+import {RENDER_UNIVERSITIES_FOR_REGISTRATION, RENDER_USER_UNIVERSITY} from "../actions/universityActions";
+import {SIGN_OUT} from "../actions/authActions";
 
 export default function universityReducers(
-  state = new StateLoader().loadState().universityReducers || {
+  state = loadState().universityReducers || {
     userUniversity: undefined,
     universities: []
   },
