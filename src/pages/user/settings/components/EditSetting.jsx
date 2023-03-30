@@ -9,9 +9,9 @@ import {loadInstitutes} from "../../../../actions/instituteActions";
 import {loadDepartments} from "../../../../actions/departmentActions";
 import {loadGroups} from "../../../../actions/groupActions";
 import {useFetchUserQuery, useSaveUserMutation} from "../../../../store/slices/authApiSlice";
-import {loadUniversities} from "../../../../actions/universityActions";
 import {setMessage} from "../../../../actions/messageAction";
 import {loadUserUniversityInfo} from "../../../../actions/structureActions";
+import {useFetchTenantsQuery} from "../../../../store/slices/tenantApiSlice";
 
 export default function EditSetting({isEditMode, setEditMode}) {
 
@@ -24,7 +24,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
   const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
   const departments = useSelector(state => Object.values(state.departmentReducers.departments));
   const groups = useSelector(state => Object.values(state.groupReducers.groups));
-  const universities = useSelector(state => state.universityReducers.universities);
+  const universities = useFetchTenantsQuery().data;
 
   const [university, setUniversity] = useState({});
   const [institute, setInstitute] = useState({});
@@ -32,12 +32,8 @@ export default function EditSetting({isEditMode, setEditMode}) {
   const [group, setGroup] = useState({});
 
   useEffect(() => {
-    dispatch(loadUniversities());
-  }, [dispatch])
-
-  useEffect(() => {
     if (user) {
-      setUniversity(universities.filter(u => u.value === universityId)[0]);
+      setUniversity(universities?.filter(u => u.value === universityId)[0]);
       setInstitute({value: user?.institute?.id, label: user?.institute?.name});
       setDepartment({value: user?.department?.id, label: user?.department?.name});
       setGroup({value: user?.group?.id, label: user?.group?.name});
@@ -146,12 +142,12 @@ export default function EditSetting({isEditMode, setEditMode}) {
             lg={{offset: 6, span: 3}}
             xl={{offset: 6, span: 3}}
           >
-            <Button block variant={'purple'} onClick={() => setEditMode(false)}>
+            <Button variant={'purple'} onClick={() => setEditMode(false)}>
               {i18n.t('cancel')}
             </Button>
           </Col>
           <Col xs={12} md={4} lg={3} xl={3}>
-            <Button block variant={'purple'} type={'submit'}>
+            <Button variant={'purple'} type={'submit'}>
               {i18n.t('save')}
             </Button>
           </Col>

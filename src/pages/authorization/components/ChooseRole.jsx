@@ -7,10 +7,10 @@ import {ADMIN, STUDENT, UserRoles} from '../../../constants/userRoles';
 import {useDispatch, useSelector} from 'react-redux';
 import {setMessage} from '../../../actions/messageAction';
 import {loadInstitutes} from '../../../actions/instituteActions';
-import {loadUniversities} from '../../../actions/universityActions';
 import {loadDepartments} from '../../../actions/departmentActions';
 import {loadGroups} from '../../../actions/groupActions';
 import {useSaveUserMutation} from "../../../store/slices/authApiSlice";
+import {useFetchTenantsQuery} from "../../../store/slices/tenantApiSlice";
 
 export default function ChooseRole() {
 
@@ -20,7 +20,7 @@ export default function ChooseRole() {
   const institutes = useSelector(state => Object.values(state.instituteReducers.institutes));
   const departments = useSelector(state => Object.values(state.departmentReducers.departments));
   const groups = useSelector(state => Object.values(state.groupReducers.groups));
-  const universities = useSelector(state => state.universityReducers.universities);
+  const universities = useFetchTenantsQuery();
 
   const [userRole, setUserRole] = useState();
   const [university, setUniversity] = useState();
@@ -28,10 +28,6 @@ export default function ChooseRole() {
   const [institute, setInstitute] = useState();
   const [department, setDepartment] = useState();
   const [group, setGroup] = useState();
-
-  useEffect(() => {
-    dispatch(loadUniversities());
-  }, [dispatch]);
 
   useEffect(() => {
     if (universities && universities.length === 1) {

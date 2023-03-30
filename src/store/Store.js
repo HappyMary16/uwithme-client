@@ -8,7 +8,6 @@ import messageReducers from '../reducers/messageReducers';
 import instituteReducers from '../reducers/instituteReducers';
 import groupReducers from '../reducers/groupReducers';
 import departmentReducers from '../reducers/departmentReducers';
-import universityReducers from '../reducers/universityReducers';
 import userReducers from '../reducers/userReducers';
 import authReducers from '../reducers/authReducers';
 import navigationReducers from '../reducers/navigationReducers';
@@ -17,6 +16,7 @@ import {authApiSlice} from "./slices/authApiSlice";
 import authSlice from "./slices/authSlice";
 import studCabinetSlice from "./slices/studCabinetSlice";
 import {studCabinetApiSlice} from "./slices/studCabinetApiSlice";
+import {tenantApiSlice} from "./slices/tenantApiSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -33,7 +33,6 @@ export const store = configureStore({
     messageReducers: loadState("messageReducers"),
     instituteReducers: loadState("instituteReducers"),
     groupReducers: loadState("groupReducers"),
-    universityReducers: loadState("universityReducers"),
     departmentReducers: loadState("departmentReducers")
   },
   reducer: {
@@ -46,18 +45,19 @@ export const store = configureStore({
     messageReducers,
     instituteReducers,
     groupReducers,
-    universityReducers,
     departmentReducers,
     auth: authSlice,
     [authApiSlice.reducerPath]: authApiSlice.reducer,
     studCabinet: studCabinetSlice,
-    [studCabinetApiSlice.reducerPath]: studCabinetApiSlice.reducer
+    [studCabinetApiSlice.reducerPath]: studCabinetApiSlice.reducer,
+    [tenantApiSlice.reducerPath]: tenantApiSlice.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(sagaMiddleware)
     .concat(
       authApiSlice.middleware,
-      studCabinetApiSlice.middleware
+      studCabinetApiSlice.middleware,
+      tenantApiSlice.middleware
     )
 });
 
@@ -73,7 +73,6 @@ store.subscribe(() => {
   saveState("messageReducers", store.getState().messageReducers);
   saveState("instituteReducers", store.getState().instituteReducers);
   saveState("groupReducers", store.getState().groupReducers);
-  saveState("universityReducers", store.getState().universityReducers);
   saveState("departmentReducers", store.getState().departmentReducers);
 });
 

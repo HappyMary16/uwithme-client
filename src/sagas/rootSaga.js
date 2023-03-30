@@ -4,7 +4,6 @@ import { lectureHallWatcher } from './lectureHallSagas';
 import { groupWatcher } from './groupSagas';
 import { departmentWatcher } from './departmentSagas';
 import { instituteWatcher } from './instituteSagas';
-import { universityWatcher } from './universitySagas';
 import { scheduleWatcher } from './scheduleSagas';
 import { usersWatcher } from './userSagas';
 import { structureWatcher } from './structureSagas';
@@ -25,7 +24,6 @@ export default function* rootSaga() {
     groupWatcher(),
     departmentWatcher(),
     instituteWatcher(),
-    universityWatcher(),
     structureWatcher()
   ]);
 }

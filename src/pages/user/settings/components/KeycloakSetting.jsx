@@ -10,26 +10,26 @@ export function KeycloakSetting({ user }) {
     <div>
       <Form.Label>{i18n.t('first_name')}</Form.Label>
       <Form.Control
-        value={firstName}
+        defaultValue={firstName}
         required
         readOnly
       />
       <Form.Label>{i18n.t('last_name')}</Form.Label>
       <Form.Control
-        value={middleName}
+        defaultValue={middleName}
         required
         readOnly
       />
       <Form.Label>{i18n.t('surname')}</Form.Label>
       <Form.Control
-        value={surname}
+        defaultValue={surname}
         required
         readOnly
       />
       <Form.Label>{i18n.t('email')}</Form.Label>
       <Form.Control
         type="email"
-        value={email}
+        defaultValue={email}
         required
         readOnly
       />
@@ -37,7 +37,6 @@ export function KeycloakSetting({ user }) {
       <Row className="justify-content-around">
         <Col xs={12} md={{ offset: 8, span: 4 }} lg={{ offset: 9, span: 3 }}>
           <Button
-            block
             type={'submit'}
             variant={'purple'}
             href={KEYCLOAK_USER_SETTINGS}
