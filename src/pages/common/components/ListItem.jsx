@@ -21,7 +21,7 @@ export function ListItem({
           deleteFunc(deleteFuncParam);
         }}
         className={'delete-icon icon'}
-        size={'1.6em'}
+        size={'1.4em'}
       />
       </Col>}
       {openEnabled && <Col xs={2} sm={1}>

@@ -6,7 +6,7 @@ import {AddDepartment} from './AddDepartment';
 import {AddInstitute} from './AddInstitute';
 import {AddGroup} from './AddGroup';
 
-export function CreateStructurePanel({institutes, departments}) {
+export function CreateStructurePanel() {
   const [openInstituteDialog, setOpenInstituteDialog] = React.useState(false);
   const [openDepartmentDialog, setOpenDepartmentDialog] = React.useState(false);
   const [openGroupDialog, setOpenGroupDialog] = React.useState(false);
@@ -17,18 +17,12 @@ export function CreateStructurePanel({institutes, departments}) {
         handleClose={() => setOpenInstituteDialog(false)}/>}
       {openDepartmentDialog && <AddDepartment
         handleClose={() => setOpenDepartmentDialog(false)}
-        institutes={institutes}
       />}
-      {openGroupDialog && <AddGroup
-        handleClose={() => setOpenGroupDialog(false)}
-        institutes={institutes}
-        departments={departments}
-      />}
+      {openGroupDialog && <AddGroup handleClose={() => setOpenGroupDialog(false)}/>}
 
       <Row sm={12}>
         <Col sm={12} md={4} lg={{offset: 3, span: 3}}>
           <Button
-            block
             variant={'purple'}
             onClick={() => setOpenInstituteDialog(true)}
           >
@@ -37,7 +31,6 @@ export function CreateStructurePanel({institutes, departments}) {
         </Col>
         <Col sm={12} md={4} lg={3}>
           <Button
-            block
             variant={'purple'}
             onClick={() => setOpenDepartmentDialog(true)}
           >
@@ -46,7 +39,6 @@ export function CreateStructurePanel({institutes, departments}) {
         </Col>
         <Col sm={12} md={4} lg={3}>
           <Button
-            block
             variant={'purple'}
             onClick={() => setOpenGroupDialog(true)}
           >

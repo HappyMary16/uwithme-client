@@ -31,9 +31,7 @@ export const loadGroupsByTeacher = () => ({
 export const createGroup = (
   universityId,
   instituteId,
-  instituteName,
   departmentId,
-  departmentName,
   startYear,
   groupName,
   isShowingInRegistration,
@@ -43,9 +41,7 @@ export const createGroup = (
   payload: {
     universityId,
     instituteId,
-    instituteName,
     departmentId,
-    departmentName,
     startYear,
     groupName,
     visible: isShowingInRegistration,

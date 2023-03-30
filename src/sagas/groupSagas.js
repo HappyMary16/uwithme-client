@@ -12,7 +12,6 @@ import {
   renderUserGroup
 } from '../actions/groupActions';
 import { processHttpCall } from './rootSaga';
-import { createDepartment } from './departmentSagas';
 
 export function* groupWatcher() {
   yield takeEvery(CREATE_GROUP, createGroup);
@@ -24,13 +23,6 @@ export function* groupWatcher() {
 }
 
 function* createGroup(action) {
-  const { departmentId } = action.payload;
-
-  if (!departmentId) {
-    const department = yield call(createDepartment, action);
-    action.payload.departmentId = department.id;
-  }
-
   const response = yield call(processHttpCall, {
     url: GROUPS,
     method: 'post',

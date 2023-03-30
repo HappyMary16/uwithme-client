@@ -1,17 +1,20 @@
 import React from 'react';
 
 import i18n from '../../../../locales/i18n';
-import { Button, Form, Modal } from 'react-bootstrap';
-import {useDispatch} from "react-redux";
-import {createInstitute} from "../../../../actions/instituteActions";
+import {Button, Form, Modal} from 'react-bootstrap';
+import {useSaveDepartmentMutation} from "../../../../store/slices/departmentApiSlice";
+import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
 
-export function AddInstitute({ handleClose }) {
+export function AddInstitute({handleClose}) {
 
-  const dispatch = useDispatch();
+  const [saveDepartment] = useSaveDepartmentMutation();
+
+  const universityId = useFetchUserQuery().data?.universityId;
+
   const [instituteName, setInstituteName] = React.useState('');
 
   let onCreate = () => {
-    dispatch(createInstitute(instituteName));
+    saveDepartment({universityId, instituteName});
     handleClose();
   };
 

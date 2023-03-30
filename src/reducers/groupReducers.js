@@ -1,7 +1,5 @@
 import {loadState} from '../store/StateLoader';
 import {RENDER_GROUP, RENDER_GROUPS, RENDER_USER_GROUP} from '../actions/groupActions';
-import {RENDER_INSTITUTES_FOR_REGISTRATION} from '../actions/instituteActions';
-import {RENDER_DEPARTMENTS_FOR_REGISTRATION} from '../actions/departmentActions';
 import {SIGN_OUT} from '../actions/authActions';
 
 export default function groupReducers(
@@ -38,18 +36,6 @@ export default function groupReducers(
           ...state.groups,
           [action.payload.group.id]: toClientGroupRepresentation(action.payload.group)
         }
-      };
-
-    case RENDER_INSTITUTES_FOR_REGISTRATION:
-      return {
-        ...state,
-        groups: {}
-      };
-
-    case RENDER_DEPARTMENTS_FOR_REGISTRATION:
-      return {
-        ...state,
-        groups: {}
       };
 
     case SIGN_OUT:

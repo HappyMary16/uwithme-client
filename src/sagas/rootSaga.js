@@ -2,11 +2,8 @@ import { all, call, put } from 'redux-saga/effects';
 import { authorizationWatcher } from './authSagas';
 import { lectureHallWatcher } from './lectureHallSagas';
 import { groupWatcher } from './groupSagas';
-import { departmentWatcher } from './departmentSagas';
-import { instituteWatcher } from './instituteSagas';
 import { scheduleWatcher } from './scheduleSagas';
 import { usersWatcher } from './userSagas';
-import { structureWatcher } from './structureSagas';
 import { endFetching, startFetching } from '../actions/navigationActions';
 import { authService } from '../services/authService';
 import http from '../services/http';
@@ -21,10 +18,7 @@ export default function* rootSaga() {
     scheduleWatcher(),
     usersWatcher(),
     lectureHallWatcher(),
-    groupWatcher(),
-    departmentWatcher(),
-    instituteWatcher(),
-    structureWatcher()
+    groupWatcher()
   ]);
 }
 

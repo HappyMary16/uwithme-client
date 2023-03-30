@@ -1,17 +1,21 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import { selectorColors } from '../../../../styles/styles';
+import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
-import { Button, Form, Modal } from 'react-bootstrap';
-import {useDispatch} from "react-redux";
+import {Button, Form, Modal} from 'react-bootstrap';
 import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
-import {createDepartment} from "../../../../actions/departmentActions";
+import {
+  useFetchDepartmentsByUniversityIdQuery,
+  useSaveDepartmentMutation
+} from "../../../../store/slices/departmentApiSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
 
-export function AddDepartment({institutes, handleClose}) {
+export function AddDepartment({handleClose}) {
 
-  const dispatch = useDispatch();
+  const [saveDepartment] = useSaveDepartmentMutation();
 
   const universityId = useFetchUserQuery().data?.universityId;
+  const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(universityId ?? skipToken);
 
   const [institute, setInstitute] = React.useState();
   const [departmentName, setDepartmentName] = React.useState();
@@ -19,10 +23,12 @@ export function AddDepartment({institutes, handleClose}) {
   let onCreate = () => {
     let instituteId = institute.value;
     if (instituteId === institute.label) {
-      instituteId = null;
+      saveDepartment({universityId, name: institute.label})
+        .then(response => saveDepartment({universityId, instituteId: response?.data?.id, name: departmentName}));
+    } else {
+      saveDepartment({universityId, instituteId, name: departmentName});
     }
 
-    dispatch(createDepartment(universityId, institute.label, instituteId, departmentName));
     handleClose();
   };
 

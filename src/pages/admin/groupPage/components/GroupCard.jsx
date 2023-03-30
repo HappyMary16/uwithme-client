@@ -44,11 +44,11 @@ export function GroupCard({ group, department, institute, groupTeacher, openGrou
           {!groupTeacher && i18n.t("group_does_not_have_teacher")}
         </Card.Subtitle>
         <Card.Text>
-          {i18n.t("institute")}: {institute.label}
+          {i18n.t("institute")}: {institute?.label}
           <br />
-          {i18n.t("department")}: {department.label}
+          {i18n.t("department")}: {department?.label}
           <br />
-          {i18n.t("start_year")}: {group.startYear}
+          {i18n.t("start_year")}: {group?.startYear}
         </Card.Text>
         <Form.Check
           type={"checkbox"}

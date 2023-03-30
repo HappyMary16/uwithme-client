@@ -8,6 +8,7 @@
     "@musicstory/react-bootstrap-table-next": "^1.0.5",
     "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.3.4",
+    "bootstrap": "^4.2.1",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "qs": "^6.11.1",

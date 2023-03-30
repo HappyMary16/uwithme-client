@@ -4,6 +4,7 @@ import {UserToolBar} from './pages/user/UserToolBar';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {AdminToolBar} from './pages/admin/AdminToolBar';
+import "bootstrap/dist/css/bootstrap.min.css"
 import './styles/button.css';
 import './styles/listItem.css';
 import './styles/spases.css';

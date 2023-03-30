@@ -5,9 +5,7 @@ import rootSaga from '../sagas/rootSaga';
 import scheduleReducers from '../reducers/scheduleReducers';
 import lectureHallReducers from '../reducers/lectureHallReducers';
 import messageReducers from '../reducers/messageReducers';
-import instituteReducers from '../reducers/instituteReducers';
 import groupReducers from '../reducers/groupReducers';
-import departmentReducers from '../reducers/departmentReducers';
 import userReducers from '../reducers/userReducers';
 import authReducers from '../reducers/authReducers';
 import navigationReducers from '../reducers/navigationReducers';
@@ -17,6 +15,7 @@ import authSlice from "./slices/authSlice";
 import studCabinetSlice from "./slices/studCabinetSlice";
 import {studCabinetApiSlice} from "./slices/studCabinetApiSlice";
 import {tenantApiSlice} from "./slices/tenantApiSlice";
+import {departmentApiSlice} from "./slices/departmentApiSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -31,9 +30,7 @@ export const store = configureStore({
     navigationReducers: loadState("navigationReducers"),
     lectureHallReducers: loadState("lectureHallReducers"),
     messageReducers: loadState("messageReducers"),
-    instituteReducers: loadState("instituteReducers"),
-    groupReducers: loadState("groupReducers"),
-    departmentReducers: loadState("departmentReducers")
+    groupReducers: loadState("groupReducers")
   },
   reducer: {
     scheduleReducers,
@@ -43,21 +40,21 @@ export const store = configureStore({
     navigationReducers,
     lectureHallReducers,
     messageReducers,
-    instituteReducers,
     groupReducers,
-    departmentReducers,
     auth: authSlice,
     [authApiSlice.reducerPath]: authApiSlice.reducer,
     studCabinet: studCabinetSlice,
     [studCabinetApiSlice.reducerPath]: studCabinetApiSlice.reducer,
-    [tenantApiSlice.reducerPath]: tenantApiSlice.reducer
+    [tenantApiSlice.reducerPath]: tenantApiSlice.reducer,
+    [departmentApiSlice.reducerPath]: departmentApiSlice.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(sagaMiddleware)
     .concat(
       authApiSlice.middleware,
       studCabinetApiSlice.middleware,
-      tenantApiSlice.middleware
+      tenantApiSlice.middleware,
+      departmentApiSlice.middleware
     )
 });
 
@@ -71,9 +68,7 @@ store.subscribe(() => {
   saveState("navigationReducers", store.getState().navigationReducers);
   saveState("lectureHallReducers", store.getState().lectureHallReducers);
   saveState("messageReducers", store.getState().messageReducers);
-  saveState("instituteReducers", store.getState().instituteReducers);
   saveState("groupReducers", store.getState().groupReducers);
-  saveState("departmentReducers", store.getState().departmentReducers);
 });
 
 sagaMiddleware.run(rootSaga);
