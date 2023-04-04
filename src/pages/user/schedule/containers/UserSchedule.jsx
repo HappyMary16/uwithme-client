@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {findLessonsForUser} from '../../../../actions/scheduleActions';
 import {Schedule} from '../components/Schedule';
 import {useParams} from "react-router-dom";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
 
 export default function UserSchedule() {
 
@@ -10,7 +11,7 @@ export default function UserSchedule() {
 
   const {userId} = useParams();
 
-  const user = useSelector(state => state.userReducers.users[userId]);
+  const {data: user} = useFetchUserQuery(userId);
   const lessons = useSelector(state => state.scheduleReducers.otherUsersLessons);
 
 

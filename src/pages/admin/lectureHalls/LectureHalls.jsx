@@ -6,7 +6,7 @@ import {createLectureHall, loadBuildings, loadLectureHalls} from '../../../actio
 import {BuildingsList} from './components/BuildingsList';
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import {EmptyPage} from '../../common/components/EmptyPage';
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 import {selectApiLoading} from "../../../App";
 
 export default function LectureHalls() {

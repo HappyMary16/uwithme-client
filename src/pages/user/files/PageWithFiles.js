@@ -7,8 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, Col, ListGroup, Row} from 'react-bootstrap';
 import {EmptyPage} from '../../common/components/EmptyPage';
 import {loadSubjectsAndFiles} from '../../../actions/fileActions';
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
-import {selectActiveRole} from "../../../store/slices/authSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
+import {selectActiveRole} from "../../../store/auth/authSlice";
 
 export default function PageWithFiles() {
 

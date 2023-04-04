@@ -6,16 +6,15 @@ import scheduleReducers from '../reducers/scheduleReducers';
 import lectureHallReducers from '../reducers/lectureHallReducers';
 import messageReducers from '../reducers/messageReducers';
 import groupReducers from '../reducers/groupReducers';
-import userReducers from '../reducers/userReducers';
-import authReducers from '../reducers/authReducers';
 import navigationReducers from '../reducers/navigationReducers';
 import {configureStore} from '@reduxjs/toolkit'
-import {authApiSlice} from "./slices/authApiSlice";
-import authSlice from "./slices/authSlice";
-import studCabinetSlice from "./slices/studCabinetSlice";
-import {studCabinetApiSlice} from "./slices/studCabinetApiSlice";
-import {tenantApiSlice} from "./slices/tenantApiSlice";
-import {departmentApiSlice} from "./slices/departmentApiSlice";
+import {authApiSlice} from "./auth/authApiSlice";
+import authSlice from "./auth/authSlice";
+import studCabinetSlice from "./studcabinet/studCabinetSlice";
+import {studCabinetApiSlice} from "./studcabinet/studCabinetApiSlice";
+import {tenantApiSlice} from "./tenant/tenantApiSlice";
+import {departmentApiSlice} from "./department/departmentApiSlice";
+import {userApiSlice} from "./user/userApiSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,8 +23,6 @@ export const store = configureStore({
     auth: loadState("auth"),
     studCabinet: loadState('studCabinet'),
     scheduleReducers: loadState("scheduleReducers"),
-    userReducers: loadState("userReducers"),
-    authReducers: loadState("authReducers"),
     filesReducers: loadState("filesReducers"),
     navigationReducers: loadState("navigationReducers"),
     lectureHallReducers: loadState("lectureHallReducers"),
@@ -34,8 +31,6 @@ export const store = configureStore({
   },
   reducer: {
     scheduleReducers,
-    userReducers,
-    authReducers,
     filesReducers,
     navigationReducers,
     lectureHallReducers,
@@ -46,7 +41,8 @@ export const store = configureStore({
     studCabinet: studCabinetSlice,
     [studCabinetApiSlice.reducerPath]: studCabinetApiSlice.reducer,
     [tenantApiSlice.reducerPath]: tenantApiSlice.reducer,
-    [departmentApiSlice.reducerPath]: departmentApiSlice.reducer
+    [departmentApiSlice.reducerPath]: departmentApiSlice.reducer,
+    [userApiSlice.reducerPath]: userApiSlice.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(sagaMiddleware)
@@ -54,7 +50,8 @@ export const store = configureStore({
       authApiSlice.middleware,
       studCabinetApiSlice.middleware,
       tenantApiSlice.middleware,
-      departmentApiSlice.middleware
+      departmentApiSlice.middleware,
+      userApiSlice.middleware
     )
 });
 
@@ -62,8 +59,6 @@ store.subscribe(() => {
   saveState("auth", store.getState().auth);
   saveState("studCabinet", store.getState().studCabinet)
   saveState("scheduleReducers", store.getState().scheduleReducers);
-  saveState("userReducers", store.getState().userReducers);
-  saveState("authReducers", store.getState().authReducers);
   saveState("filesReducers", store.getState().filesReducers);
   saveState("navigationReducers", store.getState().navigationReducers);
   saveState("lectureHallReducers", store.getState().lectureHallReducers);

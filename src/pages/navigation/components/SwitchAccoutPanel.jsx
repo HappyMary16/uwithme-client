@@ -6,8 +6,8 @@ import {ListItem} from '../../common/components/ListItem';
 import {SwitchAccountIcon} from '../../icons/SwitchAccountIcon';
 import i18n from '../../../locales/i18n';
 import {useDispatch, useSelector} from "react-redux";
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
-import {roleActivated, selectActiveRole} from "../../../store/slices/authSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
+import {roleActivated, selectActiveRole} from "../../../store/auth/authSlice";
 import {useNavigate} from "react-router-dom";
 import {signOut} from "../../../actions/authActions";
 import {authService} from "../../../services/authService";
@@ -24,7 +24,6 @@ export function SwitchAccountPanel() {
   const navigate = useNavigate();
 
   const user = useFetchUserQuery().data;
-  const avatar = useSelector(state => state.authReducers.avatar);
   const activeRole = useSelector(selectActiveRole);
 
   const [show, setShow] = useState(false);
@@ -49,7 +48,7 @@ export function SwitchAccountPanel() {
   return (
     <Row ref={ref} className={'justify-content-end'}>
       <Button onClick={handleClick} onBlur={() => setShow(false)} variant={'link'}>
-        <SmallAvatar size={35} avatar={avatar}/>
+        <SmallAvatar size={35} user={user}/>
       </Button>
 
       <Overlay show={show} target={target} placement='bottom' container={ref.current}>

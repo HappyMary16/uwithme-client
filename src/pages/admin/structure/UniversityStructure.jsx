@@ -5,9 +5,9 @@ import {CreateStructurePanel} from './components/CreatingStructurePanel';
 import {Container, ListGroup} from 'react-bootstrap';
 import {EmptyPage} from '../../common/components/EmptyPage';
 import {loadGroupsByUniversityId} from '../../../actions/groupActions';
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 import {selectApiLoading} from "../../../App";
-import {useFetchDepartmentsByUniversityIdQuery} from "../../../store/slices/departmentApiSlice";
+import {useFetchDepartmentsByUniversityIdQuery} from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function UniversityStructure() {

@@ -11,7 +11,7 @@ import {ADD_FILE, FILES_PAGE} from '../../../constants/links';
 import {loadGroupsByTeacher} from '../../../actions/groupActions';
 import {addAccessToFiles, loadSubjectsAndFiles} from '../../../actions/fileActions';
 import {useNavigate} from "react-router-dom";
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 
 let selectedGroups = [];
 let files = [];

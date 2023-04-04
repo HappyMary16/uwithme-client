@@ -7,12 +7,12 @@ import {ADMIN, STUDENT, UserRoles} from '../../../constants/userRoles';
 import {useDispatch, useSelector} from 'react-redux';
 import {setMessage} from '../../../actions/messageAction';
 import {loadGroups} from '../../../actions/groupActions';
-import {useSaveUserMutation} from "../../../store/slices/authApiSlice";
-import {useFetchTenantsQuery} from "../../../store/slices/tenantApiSlice";
+import {useSaveUserMutation} from "../../../store/auth/authApiSlice";
+import {useFetchTenantsQuery} from "../../../store/tenant/tenantApiSlice";
 import {
   useFetchDepartmentsByUniversityIdQuery,
   useFetchSubDepartmentsQuery
-} from "../../../store/slices/departmentApiSlice";
+} from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function ChooseRole() {

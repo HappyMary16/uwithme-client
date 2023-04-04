@@ -2,8 +2,8 @@ import React from 'react';
 
 import i18n from '../../../../locales/i18n';
 import {Button, Form, Modal} from 'react-bootstrap';
-import {useSaveDepartmentMutation} from "../../../../store/slices/departmentApiSlice";
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {useSaveDepartmentMutation} from "../../../../store/department/departmentApiSlice";
+import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
 
 export function AddInstitute({handleClose}) {
 

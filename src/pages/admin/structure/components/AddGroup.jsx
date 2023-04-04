@@ -4,13 +4,14 @@ import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {Button, Form, Modal} from 'react-bootstrap';
 import {useDispatch} from "react-redux";
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
 import {createGroup} from "../../../../actions/groupActions";
 import {
   useFetchDepartmentQuery,
-  useFetchSubDepartmentsQuery, useFetchDepartmentsByUniversityIdQuery,
+  useFetchDepartmentsByUniversityIdQuery,
+  useFetchSubDepartmentsQuery,
   useSaveDepartmentMutation
-} from "../../../../store/slices/departmentApiSlice";
+} from "../../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export function AddGroup({handleClose, group}) {

@@ -5,7 +5,7 @@ import {USER_HOME} from '../../../constants/links';
 import {Message} from '../../common/components/Message';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {selectCredentials} from "../../../store/slices/studCabinetSlice";
+import {selectCredentials} from "../../../store/studcabinet/studCabinetSlice";
 
 export function LogInStudCabinet({handleCreate}) {
 

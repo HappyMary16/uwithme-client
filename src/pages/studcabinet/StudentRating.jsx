@@ -2,8 +2,8 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {selectedItemColor} from '../../styles/styles';
 import StudCabinetPage from './components/StudCabinetPage';
-import {selectCredentials} from "../../store/slices/studCabinetSlice";
-import {useFetchStudentInfoQuery, useFetchStudentsRatingQuery} from "../../store/slices/studCabinetApiSlice";
+import {selectCredentials} from "../../store/studcabinet/studCabinetSlice";
+import {useFetchStudentInfoQuery, useFetchStudentsRatingQuery} from "../../store/studcabinet/studCabinetApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function StudentRating() {

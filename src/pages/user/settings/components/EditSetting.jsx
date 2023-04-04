@@ -6,13 +6,13 @@ import {hasRole} from '../../../../utils/UsersUtil';
 import {ADMIN, STUDENT} from '../../../../constants/userRoles';
 import {useDispatch, useSelector} from "react-redux";
 import {loadGroups} from "../../../../actions/groupActions";
-import {useFetchUserQuery, useSaveUserMutation} from "../../../../store/slices/authApiSlice";
+import {useFetchUserQuery, useSaveUserMutation} from "../../../../store/auth/authApiSlice";
 import {setMessage} from "../../../../actions/messageAction";
-import {useFetchTenantsQuery} from "../../../../store/slices/tenantApiSlice";
+import {useFetchTenantsQuery} from "../../../../store/tenant/tenantApiSlice";
 import {
-  useFetchSubDepartmentsQuery,
-  useFetchDepartmentsByUniversityIdQuery
-} from "../../../../store/slices/departmentApiSlice";
+  useFetchDepartmentsByUniversityIdQuery,
+  useFetchSubDepartmentsQuery
+} from "../../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function EditSetting({isEditMode, setEditMode}) {

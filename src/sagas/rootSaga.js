@@ -1,22 +1,18 @@
-import { all, call, put } from 'redux-saga/effects';
-import { authorizationWatcher } from './authSagas';
-import { lectureHallWatcher } from './lectureHallSagas';
-import { groupWatcher } from './groupSagas';
-import { scheduleWatcher } from './scheduleSagas';
-import { usersWatcher } from './userSagas';
-import { endFetching, startFetching } from '../actions/navigationActions';
-import { authService } from '../services/authService';
+import {all, call, put} from 'redux-saga/effects';
+import {lectureHallWatcher} from './lectureHallSagas';
+import {groupWatcher} from './groupSagas';
+import {scheduleWatcher} from './scheduleSagas';
+import {endFetching, startFetching} from '../actions/navigationActions';
+import {authService} from '../services/authService';
 import http from '../services/http';
-import { addError } from '../actions/messageAction';
-import { fileOperationWatcher } from './fileSagas';
-import { signOut } from '../actions/authActions';
+import {addError} from '../actions/messageAction';
+import {fileOperationWatcher} from './fileSagas';
+import {signOut} from '../actions/authActions';
 
 export default function* rootSaga() {
   yield all([
-    authorizationWatcher(),
     fileOperationWatcher(),
     scheduleWatcher(),
-    usersWatcher(),
     lectureHallWatcher(),
     groupWatcher()
   ]);

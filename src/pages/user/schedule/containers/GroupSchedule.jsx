@@ -12,7 +12,7 @@ import {loadGroupsByUniversityId} from '../../../../actions/groupActions';
 import {Schedule} from '../components/Schedule';
 import {ADD_LESSON} from '../../../../constants/links';
 import {useNavigate, useParams} from "react-router-dom";
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
 
 export default function GroupSchedule() {
 

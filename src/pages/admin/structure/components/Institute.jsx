@@ -6,7 +6,7 @@ import {InstituteIcon} from '../../../icons/InstituteIcon';
 import {
   useDeleteDepartmentMutation,
   useFetchSubDepartmentsQuery
-} from "../../../../store/slices/departmentApiSlice";
+} from "../../../../store/department/departmentApiSlice";
 import {RemoveDepartment} from "./RemoveDepartment";
 import {skipToken} from "@reduxjs/toolkit/query";
 

@@ -6,15 +6,15 @@ import CreatableSelect from 'react-select/creatable';
 import {LESSONS_TIME, TEACHER, WEEK_DAYS, WEEK_NUMBER} from '../../../constants/userRoles';
 import {getLectureHallsByBuilding} from '../../../utils/StructureUtils';
 import {Button, Col, Form, Row} from 'react-bootstrap';
-import {getName, getTeachers} from '../../../utils/UsersUtil';
+import {getName} from '../../../utils/UsersUtil';
 import {useDispatch, useSelector} from "react-redux";
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 import {loadGroupsByUniversityId} from "../../../actions/groupActions";
-import {loadTeachers} from "../../../actions/userActions";
 import {loadSubjects} from "../../../actions/fileActions";
 import {loadBuildings, loadLectureHalls} from "../../../actions/lectureHallActions";
 import {addLessonToSchedule} from "../../../actions/scheduleActions";
-import {selectActiveRole} from "../../../store/slices/authSlice";
+import {selectActiveRole} from "../../../store/auth/authSlice";
+import {useFetchUsersQuery} from "../../../store/user/userApiSlice";
 
 export default function AddLesson() {
 
@@ -24,7 +24,7 @@ export default function AddLesson() {
   const universityId = user.universityId;
 
   const role = useSelector(selectActiveRole);
-  const teachers = useSelector(state => getTeachers(Object.values(state.userReducers.users)));
+  const {data: teachers} = useFetchUsersQuery(TEACHER);
   const groups = useSelector(state => Object.values(state.groupReducers.groups));
   const subjects = useSelector(state => state.filesReducers.subjects)
   const lectureHalls = useSelector(state => Object.values(state.lectureHallReducers.lectureHalls))
@@ -44,7 +44,6 @@ export default function AddLesson() {
     if (role === TEACHER) {
       dispatch(loadSubjects(user.userId));
     } else {
-      dispatch(loadTeachers());
       dispatch(loadSubjects());
     }
 

@@ -11,10 +11,10 @@ import {
   USER_HOME
 } from '../../constants/links';
 import i18n from '../../locales/i18n';
-import { slide as Menu } from 'react-burger-menu';
-import { TEST_SYSTEM_URI } from '../../config';
+import {slide as Menu} from 'react-burger-menu';
+import {TEST_SYSTEM_URI} from '../../config';
 import {useSelector} from "react-redux";
-import {selectActiveRole} from "../../store/slices/authSlice";
+import {selectActiveRole} from "../../store/auth/authSlice";
 import {STUDENT, TEACHER} from "../../constants/userRoles";
 
 export function UserToolBar({ isOpen, onClose }) {

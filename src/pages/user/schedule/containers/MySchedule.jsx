@@ -6,8 +6,8 @@ import {Button, Col, Row} from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import {ADD_LESSON} from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
-import {selectActiveRole} from "../../../../store/slices/authSlice";
+import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
+import {selectActiveRole} from "../../../../store/auth/authSlice";
 import {TEACHER} from "../../../../constants/userRoles";
 
 export default function MySchedule() {

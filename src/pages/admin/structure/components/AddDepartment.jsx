@@ -3,11 +3,11 @@ import i18n from '../../../../locales/i18n';
 import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {Button, Form, Modal} from 'react-bootstrap';
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
 import {
   useFetchDepartmentsByUniversityIdQuery,
   useSaveDepartmentMutation
-} from "../../../../store/slices/departmentApiSlice";
+} from "../../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export function AddDepartment({handleClose}) {

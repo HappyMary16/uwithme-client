@@ -4,9 +4,9 @@ import UniversityStructure from "../../admin/structure/UniversityStructure";
 import UserHome from "../../user/home/containers/UserHome";
 import {useNavigate} from "react-router-dom";
 import {PRE_HOME} from "../../../constants/links";
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 import {useSelector} from "react-redux";
-import {selectActiveRole} from "../../../store/slices/authSlice";
+import {selectActiveRole} from "../../../store/auth/authSlice";
 
 export default function Home() {
 

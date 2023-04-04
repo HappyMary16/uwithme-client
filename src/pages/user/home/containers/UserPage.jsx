@@ -3,6 +3,7 @@ import {User} from '../components/User';
 import React, {useEffect} from 'react';
 import {findLessonsForUser} from '../../../../actions/scheduleActions';
 import {useParams} from "react-router-dom";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
 
 export default function UserPage() {
 
@@ -10,7 +11,7 @@ export default function UserPage() {
 
   const {userId} = useParams();
 
-  const user = useSelector(state => state.userReducers.users[userId]);
+  const {data: user} = useFetchUserQuery(userId);
   const lessons = useSelector(state => state.scheduleReducers.otherUsersLessons);
 
   useEffect(() => {
@@ -22,7 +23,6 @@ export default function UserPage() {
       {user && (
         <User
           user={user}
-          avatar={user.avatar}
           lessons={lessons}
           isMine={false}
         />

@@ -3,7 +3,7 @@ import {GroupList} from './GroupList';
 import {ListGroup} from 'react-bootstrap';
 import {ListItem} from '../../../common/components/ListItem';
 import {DepartmentIcon} from '../../../icons/DepartmentIcon';
-import {useDeleteDepartmentMutation} from "../../../../store/slices/departmentApiSlice";
+import {useDeleteDepartmentMutation} from "../../../../store/department/departmentApiSlice";
 import {RemoveDepartment} from "./RemoveDepartment";
 
 export default function Department({department, groups}) {

@@ -4,11 +4,11 @@ import baseUri from "../BaseUri";
 export const departmentApiSlice = createApi({
   reducerPath: 'departmentApi',
   tagTypes: ['DepartmentApi'],
-  baseQuery: baseUri(),
+  baseQuery: baseUri('/departments'),
   endpoints: (builder) => ({
     fetchDepartment: builder.query({
       query: (departmentId) => ({
-        url: `/departments/${departmentId}`,
+        url: `/${departmentId}`,
         method: 'GET'
       }),
       transformResponse: (response) => toClientDepartmentRepresentation(response),
@@ -16,7 +16,7 @@ export const departmentApiSlice = createApi({
     }),
     fetchSubDepartments: builder.query({
       query: (mainDepartmentId) => ({
-        url: `/departments/${mainDepartmentId}/sub-departments`,
+        url: `/${mainDepartmentId}/sub-departments`,
         method: 'GET'
       }),
       transformResponse: (response) => response.map(toClientDepartmentRepresentation),
@@ -24,7 +24,7 @@ export const departmentApiSlice = createApi({
     }),
     fetchDepartmentsByUniversityId: builder.query({
       query: (universityId) => ({
-        url: `/departments`,
+        url: ``,
         method: 'GET',
         params: {universityId}
       }),
@@ -33,7 +33,7 @@ export const departmentApiSlice = createApi({
     }),
     saveDepartment: builder.mutation({
       query: (department) => ({
-        url: `/departments`,
+        url: ``,
         method: 'POST',
         body: department,
       }),
@@ -41,7 +41,7 @@ export const departmentApiSlice = createApi({
     }),
     deleteDepartment: builder.mutation({
       query: (departmentId) => ({
-        url: `/departments/${departmentId}`,
+        url: `/${departmentId}`,
         method: 'DELETE'
       }),
       invalidatesTags: ['DepartmentApi'],

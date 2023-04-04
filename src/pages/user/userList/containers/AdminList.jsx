@@ -1,30 +1,25 @@
-import {useDispatch, useSelector} from 'react-redux';
-import React, {useEffect} from 'react';
-import {getAdmins} from '../../../../utils/UsersUtil';
-import {loadUsersByRole, unAssignRole} from '../../../../actions/userActions';
+import {useSelector} from 'react-redux';
+import React from 'react';
 import {EmptyPage} from '../../../common/components/EmptyPage';
 import {ListGroup} from 'react-bootstrap';
 import {AdminListItem} from '../components/AdminListItem';
 import {ADMIN} from '../../../../constants/userRoles';
-import {useFetchUserQuery} from "../../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
 import {selectApiLoading} from "../../../../App";
+import {useFetchUsersQuery, useUnAssignUserRoleMutation} from "../../../../store/user/userApiSlice";
 
 export default function AdminsList() {
 
-  const dispatch = useDispatch();
+  const [unAssignRole] = useUnAssignUserRoleMutation();
 
   const userId = useFetchUserQuery().data?.id;
-  const users = useSelector(state => getAdmins(Object.values(state.userReducers.users)));
+  const {data: users} = useFetchUsersQuery({role: ADMIN});
 
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
   const isNewFetching = useSelector(selectApiLoading);
 
-  useEffect(() => {
-    dispatch(loadUsersByRole(ADMIN));
-  }, [dispatch])
-
   function deleteAdminFunc(userId) {
-    dispatch(unAssignRole(userId, ADMIN));
+    unAssignRole({userId, role: ADMIN});
   }
 
   return (

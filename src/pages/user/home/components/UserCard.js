@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import i18n from '../../../../locales/i18n';
-import { getName } from '../../../../utils/UsersUtil';
+import {getName} from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
-import { Card, Col, Row } from 'react-bootstrap';
-import { CalendarWeekFill } from 'react-bootstrap-icons';
-import { SCHEDULE, USER_SCHEDULE } from '../../../../constants/links';
+import {Card, Col, Row} from 'react-bootstrap';
+import {CalendarWeekFill} from 'react-bootstrap-icons';
+import {SCHEDULE, USER_SCHEDULE} from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
+import {downloadAvatar} from "../../../../services/avatarService";
 
-export function UserCard({ user, avatar, onSaveAvatar, isMine }) {
+export function UserCard({ user, onSaveAvatar, isMine }) {
 
   const [open, setOpen] = React.useState(false);
+  const [avatar, setAvatar] = React.useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      downloadAvatar(user.id)
+        .then(response => setAvatar(response))
+    }
+  }, [user])
 
   let handleClickAvatar = () => {
     setOpen(true);

@@ -2,11 +2,14 @@ import React from 'react';
 
 import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
-import { selectorColors } from '../../../../styles/styles';
-import { getName } from '../../../../utils/UsersUtil';
-import { Button, Modal } from 'react-bootstrap';
+import {selectorColors} from '../../../../styles/styles';
+import {getName} from '../../../../utils/UsersUtil';
+import {Button, Modal} from 'react-bootstrap';
+import {useFetchUsersQuery} from "../../../../store/user/userApiSlice";
 
-export default function AddStudentToGroup({ open, students, handleClose, handleAdd }) {
+export default function AddStudentToGroup({ open, handleClose, handleAdd }) {
+
+  const {data: students} = useFetchUsersQuery({hasGroup: false})
   const [selectedStudents, setStudents] = React.useState('');
 
   return (

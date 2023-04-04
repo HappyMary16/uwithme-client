@@ -22,7 +22,7 @@ export default function BotNotification() {
       header={
         <Row className="justify-content-center">
           <Col xs={3} sm={3}>
-            <SmallAvatar avatar={'/logo192.png'}/>
+            <SmallAvatar image={'/logo192.png'}/>
           </Col>
           <Col className="d-flex align-items-center">
             <p>{i18n.t('bot_notification_header')}</p>

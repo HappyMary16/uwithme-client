@@ -14,7 +14,7 @@ import {
   loadSubjectsAndFiles,
   uploadRequest
 } from '../../../actions/fileActions';
-import {useFetchUserQuery} from "../../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 
 export default function AddFile() {
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import { GROUP_SCHEDULE, USER_HOME_PAGE } from '../../../../constants/links';
-import { Card, Col, Form, Row } from 'react-bootstrap';
+import {GROUP_SCHEDULE, USER_HOME_PAGE} from '../../../../constants/links';
+import {Card, Col, Form, Row} from 'react-bootstrap';
 import {CalendarWeekFill, PencilFill} from 'react-bootstrap-icons';
 import {useNavigate} from "react-router-dom";
+import {getName} from "../../../../utils/UsersUtil";
 
 export function GroupCard({ group, department, institute, groupTeacher, openGroupDialog }) {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export function GroupCard({ group, department, institute, groupTeacher, openGrou
           {groupTeacher && (
             //TODO verify it with teacher
             <Card.Link onClick={() => navigate(USER_HOME_PAGE(groupTeacher.id))}>
-              getName(groupTeacher)
+              {getName(groupTeacher)}
             </Card.Link>
           )}
           {!groupTeacher && i18n.t("group_does_not_have_teacher")}

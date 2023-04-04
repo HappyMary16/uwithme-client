@@ -33,8 +33,8 @@ import BotNotification from './pages/common/containers/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
-import {useFetchUserQuery} from "./store/slices/authApiSlice";
-import {selectActiveRole, selectClientVersion} from "./store/slices/authSlice";
+import {useFetchUserQuery} from "./store/auth/authApiSlice";
+import {selectActiveRole, selectClientVersion} from "./store/auth/authSlice";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)

@@ -5,7 +5,7 @@ import {MenuIcon} from '../icons/MenuIcon';
 import {SwitchAccountPanel} from './components/SwitchAccoutPanel';
 import {changeIsMenuOpen} from "../../actions/navigationActions";
 import {useDispatch} from "react-redux";
-import {useFetchUserQuery} from "../../store/slices/authApiSlice";
+import {useFetchUserQuery} from "../../store/auth/authApiSlice";
 
 export function TopToolBar() {
 

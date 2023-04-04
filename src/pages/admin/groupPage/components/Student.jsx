@@ -1,9 +1,9 @@
 import React from 'react';
-import { getName } from '../../../../utils/UsersUtil';
-import { USER_HOME_PAGE } from '../../../../constants/links';
-import { Col, ListGroup, Row } from 'react-bootstrap';
-import { TrashFill } from 'react-bootstrap-icons';
-import { SmallAvatar } from '../../../common/components/SmallAvatar';
+import {getName} from '../../../../utils/UsersUtil';
+import {USER_HOME_PAGE} from '../../../../constants/links';
+import {Col, ListGroup, Row} from 'react-bootstrap';
+import {TrashFill} from 'react-bootstrap-icons';
+import {SmallAvatar} from '../../../common/components/SmallAvatar';
 import {useNavigate} from "react-router-dom";
 
 export function Student({ student, removeStudent }) {
@@ -18,7 +18,7 @@ export function Student({ student, removeStudent }) {
     <ListGroup.Item action onClick={handleClick}>
       <Row>
         <Col xs={2} sm={1}>
-          <SmallAvatar avatar={student.avatar} />
+          <SmallAvatar user={student} />
         </Col>
         <Col xs={8} sm={10}>
           {getName(student)}

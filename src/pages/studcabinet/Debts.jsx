@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
-import {selectCredentials} from "../../store/slices/studCabinetSlice";
-import {useFetchStudentDebtsQuery} from "../../store/slices/studCabinetApiSlice";
+import {selectCredentials} from "../../store/studcabinet/studCabinetSlice";
+import {useFetchStudentDebtsQuery} from "../../store/studcabinet/studCabinetApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function Debts() {

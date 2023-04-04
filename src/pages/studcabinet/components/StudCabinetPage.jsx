@@ -9,8 +9,8 @@ import Select from 'react-select';
 import {SEMESTER_NUMBER} from '../../../constants/userRoles';
 import {isPageSmall, isPageTiny} from '../../../utils/PageSizeUtil';
 import {useSelector} from "react-redux";
-import {selectCredentials} from "../../../store/slices/studCabinetSlice";
-import {useFetchStudentInfoQuery} from "../../../store/slices/studCabinetApiSlice";
+import {selectCredentials} from "../../../store/studcabinet/studCabinetSlice";
+import {useFetchStudentInfoQuery} from "../../../store/studcabinet/studCabinetApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 function getColumns(columns) {
