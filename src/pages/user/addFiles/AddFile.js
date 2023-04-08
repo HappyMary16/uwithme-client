@@ -14,13 +14,15 @@ import {
   loadSubjectsAndFiles,
   uploadRequest
 } from '../../../actions/fileActions';
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
+import {useFetchUserQuery} from "../../../store/user/userApiSlice";
+import {getId} from "../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function AddFile() {
 
   const dispatch = useDispatch();
 
-  const user = useFetchUserQuery().data;
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
   const userId = user?.id;
   const username = user?.username;
 

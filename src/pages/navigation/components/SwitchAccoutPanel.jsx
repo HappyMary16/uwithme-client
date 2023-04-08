@@ -6,12 +6,13 @@ import {ListItem} from '../../common/components/ListItem';
 import {SwitchAccountIcon} from '../../icons/SwitchAccountIcon';
 import i18n from '../../../locales/i18n';
 import {useDispatch, useSelector} from "react-redux";
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
-import {roleActivated, selectActiveRole} from "../../../store/auth/authSlice";
+import {useFetchUserQuery} from "../../../store/user/userApiSlice";
+import {roleActivated, selectActiveRole} from "../../../store/user/authSlice";
 import {useNavigate} from "react-router-dom";
 import {signOut} from "../../../actions/authActions";
-import {authService} from "../../../services/authService";
+import {authService, getId} from "../../../services/authService";
 import {USER_HOME} from "../../../constants/links";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 const textByRole = {
   ROLE_STUDENT: i18n.t('to_student'),
@@ -23,7 +24,7 @@ export function SwitchAccountPanel() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useFetchUserQuery().data;
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
   const activeRole = useSelector(selectActiveRole);
 
   const [show, setShow] = useState(false);

@@ -4,20 +4,22 @@ import UniversityStructure from "../../admin/structure/UniversityStructure";
 import UserHome from "../../user/home/containers/UserHome";
 import {useNavigate} from "react-router-dom";
 import {PRE_HOME} from "../../../constants/links";
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
+import {useFetchUserQuery} from "../../../store/user/userApiSlice";
 import {useSelector} from "react-redux";
-import {selectActiveRole} from "../../../store/auth/authSlice";
+import {selectActiveRole} from "../../../store/user/authSlice";
+import {getId} from "../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function Home() {
 
   const navigate = useNavigate();
 
-  const user = useFetchUserQuery().data;
+  const {data: user, isFetching} = useFetchUserQuery(getId() ?? skipToken);
   const role = useSelector(selectActiveRole);
 
   useEffect(() => {
-    !user && navigate(PRE_HOME);
-  }, [user, navigate]);
+    !user && !isFetching && navigate(PRE_HOME);
+  }, [user, isFetching, navigate]);
 
 
   return (

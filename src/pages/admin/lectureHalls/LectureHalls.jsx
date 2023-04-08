@@ -1,33 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 import i18n from '../../../locales/i18n';
 import {AddLectureHall} from './components/AddLectureHall';
-import {createLectureHall, loadBuildings, loadLectureHalls} from '../../../actions/lectureHallActions';
 import {BuildingsList} from './components/BuildingsList';
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import {EmptyPage} from '../../common/components/EmptyPage';
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
 import {selectApiLoading} from "../../../App";
+import {useFetchLectureHallsQuery} from "../../../store/lecturehall/lectureHallApiSlice";
+import {useFetchBuildingsQuery} from "../../../store/lecturehall/buildingApiSlice";
 
 export default function LectureHalls() {
 
-  const dispatch = useDispatch();
-
-  const universityId = useFetchUserQuery().data?.universityId;
-  const lectureHalls = useSelector(state => Object.values(state.lectureHallReducers.lectureHalls));
-  const buildings = useSelector(state => Object.values(state.lectureHallReducers.buildings));
+  const {data: lectureHalls} = useFetchLectureHallsQuery();
+  const {data: buildings} = useFetchBuildingsQuery();
 
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
   const isNewFetching = useSelector(selectApiLoading);
 
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
-
-  useEffect(() => {
-    if (universityId) {
-      dispatch(loadBuildings());
-      dispatch(loadLectureHalls());
-    }
-  }, [universityId, dispatch])
 
   return (
     <Container>
@@ -40,13 +30,7 @@ export default function LectureHalls() {
           >
             {i18n.t("create_lecture_hall")}
           </Button>
-          <AddLectureHall
-            open={openCreateDialog}
-            handleClose={() => setOpenCreateDialog(false)}
-            buildings={buildings}
-            handleCreate={(buildingName, buildingId, lectureHallName, placeNumber) =>
-              dispatch(createLectureHall(universityId, buildingName, buildingId, lectureHallName, placeNumber))}
-          />
+          {openCreateDialog && <AddLectureHall handleClose={() => setOpenCreateDialog(false)}/>}
         </Col>
       </Row>
 

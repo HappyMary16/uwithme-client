@@ -10,7 +10,7 @@ import {
 import {RemoveDepartment} from "./RemoveDepartment";
 import {skipToken} from "@reduxjs/toolkit/query";
 
-export default function Institute({institute, groups}) {
+export default function Institute({institute}) {
 
   const [open, setOpen] = useState(false);
   const [deleteDepartment] = useDeleteDepartmentMutation();
@@ -35,7 +35,6 @@ export default function Institute({institute, groups}) {
 
       <DepartmentsList
         open={open}
-        groups={groups}
         departments={departments ?? []}
       />
     </div>

@@ -20,7 +20,7 @@ import './styles/avatar.css';
 import './styles/table.css';
 import './styles/notification.css';
 import {Container} from 'react-bootstrap';
-import {authService} from './services/authService';
+import {authService, getId} from './services/authService';
 import {CustomSpinner} from './pages/navigation/components/CustomSpinner';
 import {Message} from './pages/common/components/Message';
 import {removeMessage} from './actions/messageAction';
@@ -33,8 +33,9 @@ import BotNotification from './pages/common/containers/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
-import {useFetchUserQuery} from "./store/auth/authApiSlice";
-import {selectActiveRole, selectClientVersion} from "./store/auth/authSlice";
+import {useFetchUserQuery} from "./store/user/userApiSlice";
+import {selectActiveRole, selectClientVersion} from "./store/user/authSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)
@@ -47,7 +48,7 @@ export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {data, error} = useFetchUserQuery();
+  const {data, error} = useFetchUserQuery(getId() ?? skipToken);
   const activeRole = useSelector(selectActiveRole);
   const clientVersion = useSelector(selectClientVersion);
   const isFetching = useSelector(state => state.navigationReducers.isFetching);

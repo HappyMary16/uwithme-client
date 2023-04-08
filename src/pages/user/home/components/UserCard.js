@@ -6,9 +6,13 @@ import {Card, Col, Row} from 'react-bootstrap';
 import {CalendarWeekFill} from 'react-bootstrap-icons';
 import {SCHEDULE, USER_SCHEDULE} from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
-import {downloadAvatar} from "../../../../services/avatarService";
+import {downloadAvatar, uploadAvatar} from "../../../../services/avatarService";
+import {addError} from "../../../../actions/messageAction";
+import {useDispatch} from "react-redux";
 
-export function UserCard({ user, onSaveAvatar, isMine }) {
+export function UserCard({user, isMine}) {
+
+  const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
   const [avatar, setAvatar] = React.useState("");
@@ -27,7 +31,9 @@ export function UserCard({ user, onSaveAvatar, isMine }) {
 
   let handleSave = avatar => {
     setOpen(false);
-    onSaveAvatar(avatar);
+    uploadAvatar(avatar, (error) => dispatch(addError(error)))
+      .then(() => downloadAvatar(user.id))
+      .then(response => setAvatar(response))
   };
 
   return (
@@ -79,9 +85,9 @@ export function UserCard({ user, onSaveAvatar, isMine }) {
               </Card.Subtitle>
               <Card.Text>
                 {i18n.t("email")}: {user?.email}
-                <br />
+                <br/>
                 {i18n.t("institute")}: {user?.institute?.name}
-                <br />
+                <br/>
                 {i18n.t("department")}: {user?.department?.name}
               </Card.Text>
             </Card.Body>

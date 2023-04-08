@@ -1,23 +1,48 @@
 import React from 'react';
 import i18n from '../../../../locales/i18n';
-import { selectorColors } from '../../../../styles/styles';
+import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
-import { Button, Form, Modal } from 'react-bootstrap';
+import {Button, Form, Modal} from 'react-bootstrap';
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
+import {getId} from "../../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchBuildingsQuery, useSaveBuildingMutation} from "../../../../store/lecturehall/buildingApiSlice";
+import {useSaveLectureHallMutation} from "../../../../store/lecturehall/lectureHallApiSlice";
 
-export function AddLectureHall({buildings, open, handleClose, handleCreate}) {
-  const [building, setBuilding] = React.useState();
-  const [lectureHallName, setLectureHall] = React.useState();
-  const [placeNumber, setPlaceNumber] = React.useState();
+export function AddLectureHall({handleClose}) {
+
+  const [saveBuilding] = useSaveBuildingMutation();
+  const [saveLectureHall] = useSaveLectureHallMutation();
+
+  const {data: buildings} = useFetchBuildingsQuery();
+  const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
+
+  const [building, setBuilding] = React.useState({});
+  const [lectureHallName, setLectureHall] = React.useState({});
+  const [placeNumber, setPlaceNumber] = React.useState({});
 
   let onCreate = () => {
-    handleCreate(building.label, building.value, lectureHallName, placeNumber);
+    if (building.label === building.value) {
+      saveBuilding({universityId, name: building.label})
+        .then(response => saveLectureHall({
+          universityId,
+          buildingId: response?.data?.id,
+          name: lectureHallName,
+          placeNumber
+        }));
+    }
+    saveLectureHall({
+      universityId,
+      buildingId: building.value,
+      name: lectureHallName,
+      placeNumber
+    });
+
     handleClose();
-    setLectureHall(null);
-    setPlaceNumber(null);
   };
 
   return (
-    <Modal show={open} onHide={handleClose} centered>
+    <Modal show onHide={handleClose} centered>
       <Modal.Header>
         <Modal.Title>{i18n.t('create_lecture_hall')}</Modal.Title>
       </Modal.Header>

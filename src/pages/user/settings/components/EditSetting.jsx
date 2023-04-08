@@ -4,9 +4,8 @@ import i18n from '../../../../locales/i18n';
 import {CustomSelector} from '../../../common/components/CustomSelector';
 import {hasRole} from '../../../../utils/UsersUtil';
 import {ADMIN, STUDENT} from '../../../../constants/userRoles';
-import {useDispatch, useSelector} from "react-redux";
-import {loadGroups} from "../../../../actions/groupActions";
-import {useFetchUserQuery, useSaveUserMutation} from "../../../../store/auth/authApiSlice";
+import {useDispatch} from "react-redux";
+import {useFetchUserQuery, useUpdateUserMutation} from "../../../../store/user/userApiSlice";
 import {setMessage} from "../../../../actions/messageAction";
 import {useFetchTenantsQuery} from "../../../../store/tenant/tenantApiSlice";
 import {
@@ -14,14 +13,16 @@ import {
   useFetchSubDepartmentsQuery
 } from "../../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {getId} from "../../../../services/authService";
+import {useFetchGroupsQuery} from "../../../../store/group/groupApiSlice";
 
 export default function EditSetting({isEditMode, setEditMode}) {
 
   const dispatch = useDispatch();
 
-  const user = useFetchUserQuery().data;
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
   const universityId = user?.universityId;
-  const [saveUser] = useSaveUserMutation();
+  const [updateUser] = useUpdateUserMutation();
 
   const [university, setUniversity] = useState({});
   const [institute, setInstitute] = useState({});
@@ -30,7 +31,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
 
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(isEditMode ? university?.value ?? skipToken : skipToken);
   const {data: departments} = useFetchSubDepartmentsQuery(isEditMode ? institute?.value ?? skipToken : skipToken);
-  const groups = useSelector(state => Object.values(state.groupReducers.groups));
+  const {data: groups} = useFetchGroupsQuery(isEditMode && hasRole(STUDENT) ? department?.value ?? skipToken : skipToken);
   const universities = useFetchTenantsQuery().data
 
   useEffect(() => {
@@ -41,12 +42,6 @@ export default function EditSetting({isEditMode, setEditMode}) {
       setGroup({value: user?.group?.id, label: user?.group?.name});
     }
   }, [user, universities, universityId]);
-
-  useEffect(() => {
-    if (isEditMode && user?.roles?.includes(STUDENT)) {
-      dispatch(loadGroups(department?.value));
-    }
-  }, [user, isEditMode, department, dispatch]);
 
   function selectUniversity(e) {
     setUniversity(e);
@@ -64,7 +59,6 @@ export default function EditSetting({isEditMode, setEditMode}) {
   function selectDepartment(e) {
     setDepartment(e);
     setGroup({});
-    dispatch(loadGroups(e.value));
   }
 
   function submit(e) {
@@ -83,9 +77,9 @@ export default function EditSetting({isEditMode, setEditMode}) {
     }
 
     if (user && university && institute && department) {
-      saveUser({
+      updateUser({
+        userId: user.id,
         universityId: university.value,
-        instituteId: institute.value,
         departmentId: department.value,
         groupId: group?.value
       });

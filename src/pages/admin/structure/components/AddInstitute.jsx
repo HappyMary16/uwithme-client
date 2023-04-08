@@ -3,13 +3,15 @@ import React from 'react';
 import i18n from '../../../../locales/i18n';
 import {Button, Form, Modal} from 'react-bootstrap';
 import {useSaveDepartmentMutation} from "../../../../store/department/departmentApiSlice";
-import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
+import {getId} from "../../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export function AddInstitute({handleClose}) {
 
   const [saveDepartment] = useSaveDepartmentMutation();
 
-  const universityId = useFetchUserQuery().data?.universityId;
+  const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
 
   const [instituteName, setInstituteName] = React.useState('');
 

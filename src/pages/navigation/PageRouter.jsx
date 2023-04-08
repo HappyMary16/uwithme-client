@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {useSelector} from "react-redux";
-import {selectActiveRole} from "../../store/auth/authSlice";
+import {selectActiveRole} from "../../store/user/authSlice";
 
 export function PageRouter({roles, children}) {
 

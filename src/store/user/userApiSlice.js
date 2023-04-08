@@ -11,7 +11,6 @@ export const userApiSlice = createApi({
         url: `/${userId}`,
         method: 'GET'
       }),
-      transformResponse: (response) => toClientDepartmentRepresentation(response),
       providesTags: ['UserApi']
     }),
     fetchUsers: builder.query({
@@ -20,8 +19,15 @@ export const userApiSlice = createApi({
         method: 'GET',
         params: {role, groupId, hasGroup}
       }),
-      transformResponse: (response) => response.map(toClientDepartmentRepresentation),
       providesTags: ['UserApi']
+    }),
+    saveUser: builder.mutation({
+      query: (user) => ({
+        url: ``,
+        method: 'POST',
+        body: user,
+      }),
+      invalidatesTags: ['UserApi'],
     }),
     updateUser: builder.mutation({
       query: (user) => ({
@@ -55,17 +61,10 @@ export const userApiSlice = createApi({
   })
 });
 
-function toClientDepartmentRepresentation(department) {
-  return {
-    ...department,
-    value: department.id,
-    label: department.name
-  };
-}
-
 export const {
   useFetchUserQuery,
   useFetchUsersQuery,
+  useSaveUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
   useAssignUserRoleMutation,

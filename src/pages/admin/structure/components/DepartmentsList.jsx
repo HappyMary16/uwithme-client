@@ -1,9 +1,8 @@
 import React from 'react';
 import Department from './Department';
-import {getGroupsByDepartment} from '../../../../utils/StructureUtils';
 import {Collapse, ListGroup} from 'react-bootstrap';
 
-export default function DepartmentsList({departments, groups, open}) {
+export default function DepartmentsList({departments, open}) {
 
   return (
     <Collapse in={open}>
@@ -12,7 +11,6 @@ export default function DepartmentsList({departments, groups, open}) {
           <Department
             key={i}
             department={department}
-            groups={getGroupsByDepartment(groups, department)}
           />
         ))}
       </ListGroup>

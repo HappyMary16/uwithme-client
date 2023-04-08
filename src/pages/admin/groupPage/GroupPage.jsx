@@ -1,29 +1,27 @@
-import {useDispatch, useSelector} from 'react-redux';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {GroupCard} from './components/GroupCard';
 import {StudentsList} from './components/StudentList';
 import AddStudentToGroup from './components/AddStudentToGroup';
 import {RemoveStudentFromGroup} from './components/RemoveStudentFromGroup';
 import {Container} from 'react-bootstrap';
-import {loadGroupById} from '../../../actions/groupActions';
 import {AddGroup} from "../structure/components/AddGroup";
 import {useParams} from "react-router-dom";
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
+import {useFetchUserQuery, useFetchUsersQuery, useUpdateUserMutation} from "../../../store/user/userApiSlice";
 import {useFetchDepartmentQuery} from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
-import {useFetchUsersQuery, useUpdateUserMutation} from "../../../store/user/userApiSlice";
+import {getId} from "../../../services/authService";
+import {useFetchGroupByIdQuery} from "../../../store/group/groupApiSlice";
 
 export default function GroupPage() {
 
-  const dispatch = useDispatch();
   const [updateUser] = useUpdateUserMutation();
 
   const {groupId} = useParams();
-  const universityId = useFetchUserQuery().data?.universityId;
+  const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
 
   const {data: users} = useFetchUsersQuery(universityId ? {groupId} : skipToken);
-  const group = useSelector(state => state.groupReducers.groups[groupId]);
-  const {data: teacher} = useFetchUserQuery(group?.teacherId);
+  const {data: group} = useFetchGroupByIdQuery(groupId ?? skipToken);
+  const {data: teacher} = useFetchUserQuery(group?.teacherId ?? skipToken);
   const {data: department} = useFetchDepartmentQuery(group?.departmentId ?? skipToken);
   const {data: institute} = useFetchDepartmentQuery(department?.instituteId ?? skipToken);
 
@@ -31,12 +29,6 @@ export default function GroupPage() {
   const [openedRemoveStudentDialog, setOpenedRemoveStudentDialog] = useState(false);
   const [studentToRemove, setStudentToRemove] = useState();
   const [openGroupDialog, setOpenGroupDialog] = useState(false);
-
-  useEffect(() => {
-    if (groupId) {
-      dispatch(loadGroupById(groupId));
-    }
-  }, [groupId, dispatch])
 
   function openRemoveStudentDialog(student) {
     setOpenedRemoveStudentDialog(true);

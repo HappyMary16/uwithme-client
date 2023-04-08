@@ -3,18 +3,19 @@ import i18n from '../../../../locales/i18n';
 import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {Button, Form, Modal} from 'react-bootstrap';
-import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
 import {
   useFetchDepartmentsByUniversityIdQuery,
   useSaveDepartmentMutation
 } from "../../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {getId} from "../../../../services/authService";
 
 export function AddDepartment({handleClose}) {
 
   const [saveDepartment] = useSaveDepartmentMutation();
 
-  const universityId = useFetchUserQuery().data?.universityId;
+  const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(universityId ?? skipToken);
 
   const [institute, setInstitute] = React.useState();

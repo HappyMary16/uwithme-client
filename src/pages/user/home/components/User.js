@@ -3,15 +3,13 @@ import {TodaySchedule} from './TodaySchedule';
 import {UserCard} from './UserCard';
 import {Container} from 'react-bootstrap';
 
-export function User({user, lessons, isMine, onSaveAvatar, toScheduleFunc}) {
+export function User({user, lessons, isMine}) {
   return (
     <div>
       <Container>
         <UserCard
           user={user}
-          onSaveAvatar={onSaveAvatar}
           isMine={isMine}
-          toScheduleFunc={toScheduleFunc}
         />
       </Container>
       <Container>

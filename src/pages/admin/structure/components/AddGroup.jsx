@@ -3,9 +3,7 @@ import i18n from '../../../../locales/i18n';
 import {selectorColors} from '../../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {Button, Form, Modal} from 'react-bootstrap';
-import {useDispatch} from "react-redux";
-import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
-import {createGroup} from "../../../../actions/groupActions";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
 import {
   useFetchDepartmentQuery,
   useFetchDepartmentsByUniversityIdQuery,
@@ -13,13 +11,15 @@ import {
   useSaveDepartmentMutation
 } from "../../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {getId} from "../../../../services/authService";
+import {useSaveGroupMutation} from "../../../../store/group/groupApiSlice";
 
 export function AddGroup({handleClose, group}) {
 
-  const dispatch = useDispatch();
   const [saveDepartment] = useSaveDepartmentMutation();
+  const [saveGroup] = useSaveGroupMutation();
 
-  const universityId = useFetchUserQuery().data?.universityId;
+  const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
 
   const {data: groupDepartment} = useFetchDepartmentQuery(group?.departmentId ?? skipToken);
   const {data: groupInstitute} = useFetchDepartmentQuery(groupDepartment?.instituteId ?? skipToken);
@@ -28,7 +28,7 @@ export function AddGroup({handleClose, group}) {
   const [institute, setInstitute] = useState();
   const [groupName, setGroupName] = useState(group?.label);
   const [startYear, setStartYear] = useState(group ? group.startYear : new Date().getFullYear());
-  const [isShowingInRegistration, setShowingInRegistration] = useState(group ? group.isShowingInRegistration : true);
+  const [visible, setVisible] = useState(group ? group.visible : true);
 
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(universityId ?? skipToken);
   const {currentData: filteredDepartments} = useFetchSubDepartmentsQuery(institute?.value ?? skipToken);
@@ -38,6 +38,12 @@ export function AddGroup({handleClose, group}) {
       setInstitute(groupInstitute);
     }
   }, [groupInstitute, institute])
+
+  useEffect(() => {
+    if (groupDepartment && !department) {
+      setDepartment(groupDepartment);
+    }
+  }, [groupDepartment, department])
 
   let onChangeInstitute = e => {
     setInstitute(e);
@@ -67,17 +73,40 @@ export function AddGroup({handleClose, group}) {
   let onCreate = () => {
     let instituteId = institute.value;
     let departmentId = department.value;
+    let groupId = group?.id;
+
     if (instituteId === institute.label) {
       saveDepartment({universityId, name: institute.label})
         .then(response => saveDepartment({universityId, instituteId: response?.data?.id, name: department.label})
-          .then(response => dispatch(createGroup(universityId, response?.data?.instituteId, response?.data?.id,
-            startYear, groupName, isShowingInRegistration))));
+          .then(response => saveGroup({
+            groupId,
+            universityId,
+            departmentId: response?.data?.id,
+            startYear,
+            name: groupName,
+            visible
+          })));
+
     } else if (departmentId === department.label) {
       saveDepartment({universityId, instituteId, name: department.label})
-        .then(response => dispatch(createGroup(universityId, instituteId, response?.data?.id,
-          startYear, groupName, isShowingInRegistration)));
+        .then(response => saveGroup({
+          groupId,
+          universityId,
+          departmentId: response?.data?.id,
+          startYear,
+          name: groupName,
+          visible
+        }));
+
     } else {
-      dispatch(createGroup(universityId, instituteId, departmentId, startYear, groupName, isShowingInRegistration));
+      saveGroup({
+        groupId,
+        universityId,
+        departmentId,
+        startYear,
+        name: groupName,
+        visible
+      })
     }
 
     handleClose();
@@ -128,8 +157,8 @@ export function AddGroup({handleClose, group}) {
           <Form.Check
             type={'checkbox'}
             label={i18n.t('show_in_registration')}
-            onChange={() => setShowingInRegistration(!isShowingInRegistration)}
-            checked={isShowingInRegistration}
+            onChange={() => setVisible(!visible)}
+            checked={visible}
           />
         </Form.Group>
       </Modal.Body>

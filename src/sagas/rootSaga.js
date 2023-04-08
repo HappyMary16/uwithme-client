@@ -1,6 +1,4 @@
 import {all, call, put} from 'redux-saga/effects';
-import {lectureHallWatcher} from './lectureHallSagas';
-import {groupWatcher} from './groupSagas';
 import {scheduleWatcher} from './scheduleSagas';
 import {endFetching, startFetching} from '../actions/navigationActions';
 import {authService} from '../services/authService';
@@ -12,9 +10,7 @@ import {signOut} from '../actions/authActions';
 export default function* rootSaga() {
   yield all([
     fileOperationWatcher(),
-    scheduleWatcher(),
-    lectureHallWatcher(),
-    groupWatcher()
+    scheduleWatcher()
   ]);
 }
 

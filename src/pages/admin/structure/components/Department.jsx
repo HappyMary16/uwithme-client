@@ -5,8 +5,12 @@ import {ListItem} from '../../../common/components/ListItem';
 import {DepartmentIcon} from '../../../icons/DepartmentIcon';
 import {useDeleteDepartmentMutation} from "../../../../store/department/departmentApiSlice";
 import {RemoveDepartment} from "./RemoveDepartment";
+import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchGroupsQuery} from "../../../../store/group/groupApiSlice";
 
-export default function Department({department, groups}) {
+export default function Department({department}) {
+
+  const {data: groups} = useFetchGroupsQuery(department?.value ?? skipToken);
 
   const [open, setOpen] = useState(false);
   const [deleteDepartment] = useDeleteDepartmentMutation();
@@ -32,7 +36,7 @@ export default function Department({department, groups}) {
         />
       </ListGroup.Item>
 
-      <GroupList open={open} groups={groups}/>
+      <GroupList open={open} groups={groups ?? []}/>
     </div>
   );
 }

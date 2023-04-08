@@ -5,15 +5,16 @@ import EditSetting from './components/EditSetting';
 import {useSelector} from 'react-redux';
 import {KeycloakSetting} from './components/KeycloakSetting';
 import {ADMIN} from '../../../constants/userRoles';
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
-import {selectActiveRole} from "../../../store/auth/authSlice";
-import {useDeleteUserMutation} from "../../../store/user/userApiSlice";
+import {selectActiveRole} from "../../../store/user/authSlice";
+import {useDeleteUserMutation, useFetchUserQuery} from "../../../store/user/userApiSlice";
+import {getId} from "../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function Setting() {
 
   const [deleteUser] = useDeleteUserMutation();
 
-  const user = useFetchUserQuery().data;
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
   const activeRole = useSelector(selectActiveRole);
 
   const [isEditMode, setEditMode] = useState(false);

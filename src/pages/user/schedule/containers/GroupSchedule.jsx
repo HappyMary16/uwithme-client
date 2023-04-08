@@ -8,17 +8,18 @@ import {selectorColors} from '../../../../styles/styles';
 import {getGroupById} from '../../../../utils/StructureUtils';
 import {DeleteLessonDialog} from '../../../admin/deleteLesson/DeleteLessonDialog';
 import {getLessonsByGroup} from '../../../../utils/ScheduleUtil';
-import {loadGroupsByUniversityId} from '../../../../actions/groupActions';
 import {Schedule} from '../components/Schedule';
 import {ADD_LESSON} from '../../../../constants/links';
 import {useNavigate, useParams} from "react-router-dom";
-import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
+import {getId} from "../../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchGroupsQuery} from "../../../../store/group/groupApiSlice";
 
 export default function GroupSchedule() {
 
-  const user = useFetchUserQuery().data;
-  const universityId = user?.universityId;
-  const groups = useSelector(state => Object.values(state.groupReducers.groups));
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
+  const {data: groups} = useFetchGroupsQuery(getId() ? null : skipToken);
   const lessons = useSelector(state => state.scheduleReducers.lessons);
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -29,10 +30,6 @@ export default function GroupSchedule() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(loadGroupsByUniversityId(universityId));
-  }, [universityId, dispatch])
 
   useEffect(() => {
     groupId && dispatch(findLessonsByGroupId(groupId));

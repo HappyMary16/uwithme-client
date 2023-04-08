@@ -4,15 +4,14 @@ import {EmptyPage} from '../../../common/components/EmptyPage';
 import {ListGroup} from 'react-bootstrap';
 import {AdminListItem} from '../components/AdminListItem';
 import {ADMIN} from '../../../../constants/userRoles';
-import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
 import {selectApiLoading} from "../../../../App";
 import {useFetchUsersQuery, useUnAssignUserRoleMutation} from "../../../../store/user/userApiSlice";
+import {getId} from "../../../../services/authService";
 
 export default function AdminsList() {
 
   const [unAssignRole] = useUnAssignUserRoleMutation();
 
-  const userId = useFetchUserQuery().data?.id;
   const {data: users} = useFetchUsersQuery({role: ADMIN});
 
   const isFetching = useSelector(state => state.navigationReducers.isFetching);
@@ -30,7 +29,7 @@ export default function AdminsList() {
           <AdminListItem key={user.id}
                          user={user}
                          deleteAdminFunc={deleteAdminFunc}
-                         isDeletePresent={user.id !== userId}/>
+                         isDeletePresent={user.id !== getId()}/>
         ))}
     </ListGroup>
   );

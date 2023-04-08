@@ -7,6 +7,10 @@ export const authService = new AuthService(
   true
 );
 
+export function getId() {
+  return authService.isLoggedIn() ? authService.getUserInfo('sub') : null;
+}
+
 export function hasRole(role) {
   return authService.isLoggedIn() && authService.getRoles().includes(role);
 }

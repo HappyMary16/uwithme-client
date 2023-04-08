@@ -21,7 +21,7 @@ export function uploadAvatar(avatar, onError) {
 
   formData.append("file", avatar, "avatar.png");
 
-  http({
+  return http({
     url: AVATAR,
     method: "post",
     data: formData,

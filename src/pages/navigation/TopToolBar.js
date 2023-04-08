@@ -5,12 +5,14 @@ import {MenuIcon} from '../icons/MenuIcon';
 import {SwitchAccountPanel} from './components/SwitchAccoutPanel';
 import {changeIsMenuOpen} from "../../actions/navigationActions";
 import {useDispatch} from "react-redux";
-import {useFetchUserQuery} from "../../store/auth/authApiSlice";
+import {useFetchUserQuery} from "../../store/user/userApiSlice";
+import {getId} from "../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export function TopToolBar() {
 
   const dispatch = useDispatch();
-  const user = useFetchUserQuery().data;
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
 
   function openMenu() {
     dispatch(changeIsMenuOpen());

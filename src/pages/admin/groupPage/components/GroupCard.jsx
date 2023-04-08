@@ -54,7 +54,7 @@ export function GroupCard({ group, department, institute, groupTeacher, openGrou
         <Form.Check
           type={"checkbox"}
           label={i18n.t("show_in_registration")}
-          checked={group.isShowingInRegistration}
+          checked={group.visible}
           disabled
         />
       </Card.Body>

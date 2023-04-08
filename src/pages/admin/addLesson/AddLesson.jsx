@@ -8,27 +8,29 @@ import {getLectureHallsByBuilding} from '../../../utils/StructureUtils';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {getName} from '../../../utils/UsersUtil';
 import {useDispatch, useSelector} from "react-redux";
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
-import {loadGroupsByUniversityId} from "../../../actions/groupActions";
+import {useFetchUserQuery, useFetchUsersQuery} from "../../../store/user/userApiSlice";
 import {loadSubjects} from "../../../actions/fileActions";
-import {loadBuildings, loadLectureHalls} from "../../../actions/lectureHallActions";
 import {addLessonToSchedule} from "../../../actions/scheduleActions";
-import {selectActiveRole} from "../../../store/auth/authSlice";
-import {useFetchUsersQuery} from "../../../store/user/userApiSlice";
+import {selectActiveRole} from "../../../store/user/authSlice";
+import {getId} from "../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchLectureHallsQuery} from "../../../store/lecturehall/lectureHallApiSlice";
+import {useFetchBuildingsQuery} from "../../../store/lecturehall/buildingApiSlice";
+import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
 
 export default function AddLesson() {
 
   const dispatch = useDispatch();
 
-  const user = useFetchUserQuery().data;
+  const {data: user} = useFetchUserQuery(getId() ?? skipToken);
   const universityId = user.universityId;
 
   const role = useSelector(selectActiveRole);
   const {data: teachers} = useFetchUsersQuery(TEACHER);
-  const groups = useSelector(state => Object.values(state.groupReducers.groups));
+  const {data: groups} = useFetchGroupsQuery();
   const subjects = useSelector(state => state.filesReducers.subjects)
-  const lectureHalls = useSelector(state => Object.values(state.lectureHallReducers.lectureHalls))
-  const buildings = useSelector(state => Object.values(state.lectureHallReducers.buildings))
+  const {data: lectureHalls} = useFetchLectureHallsQuery();
+  const {data: buildings} = useFetchBuildingsQuery();
 
   const [subject, setSubject] = useState({});
   const [teacher, setTeacher] = useState(role === TEACHER ? user : {});
@@ -47,15 +49,9 @@ export default function AddLesson() {
       dispatch(loadSubjects());
     }
 
-    if (universityId) {
-      dispatch(loadGroupsByUniversityId(universityId));
-      dispatch(loadBuildings());
-      dispatch(loadLectureHalls());
-    }
-
     //TODO
     // load lessons time (feature)
-  }, [universityId, user, role, dispatch]);
+  }, [user, role, dispatch]);
 
   function addLessons(e) {
     e.preventDefault();

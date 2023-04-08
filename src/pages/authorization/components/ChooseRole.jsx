@@ -4,16 +4,16 @@ import {Button, Col, Form, Row} from 'react-bootstrap';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
 import {ADMIN, STUDENT, UserRoles} from '../../../constants/userRoles';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {setMessage} from '../../../actions/messageAction';
-import {loadGroups} from '../../../actions/groupActions';
-import {useSaveUserMutation} from "../../../store/auth/authApiSlice";
+import {useSaveUserMutation} from "../../../store/user/userApiSlice";
 import {useFetchTenantsQuery} from "../../../store/tenant/tenantApiSlice";
 import {
   useFetchDepartmentsByUniversityIdQuery,
   useFetchSubDepartmentsQuery
 } from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
 
 export default function ChooseRole() {
 
@@ -28,10 +28,10 @@ export default function ChooseRole() {
 
   const [saveUser] = useSaveUserMutation();
 
-  const universities = useFetchTenantsQuery();
+  const {data: universities} = useFetchTenantsQuery();
   const {currentData: institutes} = useFetchDepartmentsByUniversityIdQuery(university?.value ?? skipToken);
   const {currentData: departments} = useFetchSubDepartmentsQuery(institute?.value ?? skipToken);
-  const groups = useSelector(state => Object.values(state.groupReducers.groups));
+  const {currentData: groups} = useFetchGroupsQuery(department?.value ?? skipToken);
 
   function submit(e) {
     e.preventDefault();
@@ -58,7 +58,6 @@ export default function ChooseRole() {
       || validateUser(userRole, university, institute, department)) {
       saveUser({
         role: userRole,
-        instituteId: institute?.value,
         departmentId: department?.value,
         groupId: group?.value,
         universityId: university?.value,
@@ -128,10 +127,7 @@ export default function ChooseRole() {
                 placeholder={i18n.t("department") + " *"}
                 options={departments}
                 value={department}
-                onChange={(e) => {
-                  setDepartment(e);
-                  dispatch(loadGroups(e.value));
-                }}
+                onChange={setDepartment}
               />
             </div>
           )}
@@ -142,7 +138,7 @@ export default function ChooseRole() {
               placeholder={i18n.t("group")}
               options={groups}
               value={group}
-              onChange={e => setGroup(e)}
+              onChange={setGroup}
             />
           )}
           <Button block variant={"purple"} type={"submit"}>

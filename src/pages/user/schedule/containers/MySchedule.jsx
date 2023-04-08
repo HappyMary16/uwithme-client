@@ -6,9 +6,11 @@ import {Button, Col, Row} from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import {ADD_LESSON} from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
-import {useFetchUserQuery} from "../../../../store/auth/authApiSlice";
-import {selectActiveRole} from "../../../../store/auth/authSlice";
+import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
+import {selectActiveRole} from "../../../../store/user/authSlice";
 import {TEACHER} from "../../../../constants/userRoles";
+import {getId} from "../../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function MySchedule() {
 
@@ -16,7 +18,7 @@ export default function MySchedule() {
   const navigate = useNavigate();
 
   const lessons = useSelector(state => state.scheduleReducers.lessons);
-  const user = useFetchUserQuery().data;
+  const user = useFetchUserQuery(getId() ?? skipToken).data;
   const activeRole = useSelector(selectActiveRole);
 
   useEffect(() => {

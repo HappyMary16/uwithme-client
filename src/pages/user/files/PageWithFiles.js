@@ -7,14 +7,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, Col, ListGroup, Row} from 'react-bootstrap';
 import {EmptyPage} from '../../common/components/EmptyPage';
 import {loadSubjectsAndFiles} from '../../../actions/fileActions';
-import {useFetchUserQuery} from "../../../store/auth/authApiSlice";
-import {selectActiveRole} from "../../../store/auth/authSlice";
+import {useFetchUserQuery} from "../../../store/user/userApiSlice";
+import {selectActiveRole} from "../../../store/user/authSlice";
+import {getId} from "../../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function PageWithFiles() {
 
   const dispatch = useDispatch();
 
-  const userId = useFetchUserQuery().data?.id;
+  const userId = useFetchUserQuery(getId() ?? skipToken).data?.id;
 
   const subjects = useSelector(state => state.filesReducers.subjects);
   const userRole = useSelector(selectActiveRole);
