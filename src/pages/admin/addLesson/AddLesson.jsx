@@ -10,20 +10,20 @@ import {getName} from '../../../utils/UsersUtil';
 import {useDispatch, useSelector} from "react-redux";
 import {useFetchUserQuery, useFetchUsersQuery} from "../../../store/user/userApiSlice";
 import {loadSubjects} from "../../../actions/fileActions";
-import {addLessonToSchedule} from "../../../actions/scheduleActions";
 import {selectActiveRole} from "../../../store/user/authSlice";
 import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchLectureHallsQuery} from "../../../store/lecturehall/lectureHallApiSlice";
 import {useFetchBuildingsQuery} from "../../../store/lecturehall/buildingApiSlice";
 import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
+import {useSaveLessonsMutation} from "../../../store/lesson/lessonApiSlice";
 
 export default function AddLesson() {
 
   const dispatch = useDispatch();
+  const [saveLessons] = useSaveLessonsMutation();
 
   const {data: user} = useFetchUserQuery(getId() ?? skipToken);
-  const universityId = user.universityId;
 
   const role = useSelector(selectActiveRole);
   const {data: teachers} = useFetchUsersQuery(TEACHER);
@@ -43,7 +43,11 @@ export default function AddLesson() {
   const [weekNumbers, setWeekNumbers] = useState([]);
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     if (role === TEACHER) {
+      setTeacher({value: user.id})
       dispatch(loadSubjects(user.userId));
     } else {
       dispatch(loadSubjects());
@@ -56,19 +60,19 @@ export default function AddLesson() {
   function addLessons(e) {
     e.preventDefault();
 
-    dispatch(
-      addLessonToSchedule(
-        subject.value,
-        subject.label,
-        teacher.value,
-        teacher.label,
-        lectureHall.value,
-        selectedGroups,
-        weekDays,
-        lessonTimes,
-        weekNumbers
-      )
-    );
+    let lessons = {
+      subjectId: subject.value === subject.label ? null : subject.value,
+      subjectName: subject.label,
+      teacherId: teacher.value === teacher.label ? null : teacher.value,
+      teacherName: teacher.label,
+      lectureHall: lectureHall.value,
+      groups: selectedGroups.map(group => group.value),
+      weekDays: weekDays.map(weekDay => weekDay.value),
+      lessonTimes: lessonTimes.map(lessonTime => lessonTime.value),
+      weekNumbers: weekNumbers.map(weekNumber => weekNumber.value)
+    };
+
+    saveLessons(lessons);
   }
 
   return (

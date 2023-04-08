@@ -1,23 +1,16 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {findLessonsForUser} from '../../../../actions/scheduleActions';
+import React from 'react';
 import {Schedule} from '../components/Schedule';
 import {useParams} from "react-router-dom";
 import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
+import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchLessonsByQueryParamsQuery} from "../../../../store/lesson/lessonApiSlice";
 
 export default function UserSchedule() {
 
-  const dispatch = useDispatch();
-
   const {userId} = useParams();
 
-  const {data: user} = useFetchUserQuery(userId);
-  const lessons = useSelector(state => state.scheduleReducers.otherUsersLessons);
-
-
-  useEffect(() => {
-    dispatch(findLessonsForUser(userId));
-  }, [userId, dispatch])
+  const {data: user} = useFetchUserQuery(userId ?? skipToken);
+  const {data: lessons} = useFetchLessonsByQueryParamsQuery(userId ? {userId} : skipToken);
 
   return (
     user && <Schedule user={user} lessons={lessons}/>

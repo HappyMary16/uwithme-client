@@ -1,5 +1,4 @@
 import {all, call, put} from 'redux-saga/effects';
-import {scheduleWatcher} from './scheduleSagas';
 import {endFetching, startFetching} from '../actions/navigationActions';
 import {authService} from '../services/authService';
 import http from '../services/http';
@@ -9,8 +8,7 @@ import {signOut} from '../actions/authActions';
 
 export default function* rootSaga() {
   yield all([
-    fileOperationWatcher(),
-    scheduleWatcher()
+    fileOperationWatcher()
   ]);
 }
 

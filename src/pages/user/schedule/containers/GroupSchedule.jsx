@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {deleteLesson, findLessonsByGroupId} from '../../../../actions/scheduleActions';
+import React, {useState} from 'react';
 import {Button, Col, Row} from 'react-bootstrap';
 import i18n from '../../../../locales/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../../../styles/styles';
 import {getGroupById} from '../../../../utils/StructureUtils';
 import {DeleteLessonDialog} from '../../../admin/deleteLesson/DeleteLessonDialog';
-import {getLessonsByGroup} from '../../../../utils/ScheduleUtil';
 import {Schedule} from '../components/Schedule';
 import {ADD_LESSON} from '../../../../constants/links';
 import {useNavigate, useParams} from "react-router-dom";
@@ -15,25 +12,22 @@ import {useFetchUserQuery} from "../../../../store/user/userApiSlice";
 import {getId} from "../../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchGroupsQuery} from "../../../../store/group/groupApiSlice";
+import {useDeleteLessonsMutation, useFetchLessonsByQueryParamsQuery} from "../../../../store/lesson/lessonApiSlice";
 
 export default function GroupSchedule() {
 
+  const navigate = useNavigate();
+  const [deleteLessons] = useDeleteLessonsMutation();
+
+  const [groupId, setGroupId] = useState(useParams().groupId);
+
   const user = useFetchUserQuery(getId() ?? skipToken).data;
   const {data: groups} = useFetchGroupsQuery(getId() ? null : skipToken);
-  const lessons = useSelector(state => state.scheduleReducers.lessons);
+  const {currentData: lessons} = useFetchLessonsByQueryParamsQuery(groupId ? {groupId} : skipToken);
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [lessonToDelete, setLessonToDelete] = useState({});
-
-  const [groupId, setGroupId] = useState(useParams().groupId);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    groupId && dispatch(findLessonsByGroupId(groupId));
-  }, [groupId, dispatch])
 
   function handleGroupChange(groupId) {
     groupId && setGroupId(groupId)
@@ -51,7 +45,7 @@ export default function GroupSchedule() {
           open={deleteDialog}
           lesson={lessonToDelete}
           handleClose={() => setDeleteDialog(false)}
-          handleDelete={() => dispatch(deleteLesson(lessonToDelete, groups))}
+          handleDelete={(groups) => deleteLessons({lessonId: lessonToDelete?.id, groups})}
         />
       )}
       <Row spacing={2}>
@@ -87,9 +81,8 @@ export default function GroupSchedule() {
       </Row>
       {groupId && lessons && (
         <Schedule
-          lessons={getLessonsByGroup(lessons, groups, groupId)}
+          lessons={lessons}
           user={user}
-          isMine
           isEditMode={isEditMode}
           deleteLesson={openDeleteLessonDialog}
         />

@@ -6,15 +6,15 @@ export const buildingApiSlice = createApi({
   tagTypes: ['BuildingApi'],
   baseQuery: baseUri('/buildings'),
   endpoints: (builder) => ({
-    fetchLectureHalls: builder.query({
+    fetchBuildings: builder.query({
       query: () => ({
         url: ``,
         method: 'GET'
       }),
-      transformResponse: (response) => toClientDepartmentRepresentation(response),
+      transformResponse: (response) => response.map(toClientDepartmentRepresentation),
       providesTags: ['BuildingApi']
     }),
-    saveLectureHall: builder.mutation({
+    saveBuilding: builder.mutation({
       query: (building) => ({
         url: ``,
         method: 'POST',

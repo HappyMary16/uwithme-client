@@ -11,7 +11,7 @@ export const lectureHallApiSlice = createApi({
         url: ``,
         method: 'GET'
       }),
-      transformResponse: (response) => toClientDepartmentRepresentation(response),
+      transformResponse: (response) => response.map(toClientDepartmentRepresentation),
       providesTags: ['LectureHallApi']
     }),
     saveLectureHall: builder.mutation({
