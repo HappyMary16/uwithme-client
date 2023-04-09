@@ -1,31 +1,25 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SubjectFiles} from './components/SubjectFiles';
 import {ADD_FILE, SHARE_FILES} from '../../../constants/links';
 import i18n from '../../../locales/i18n';
 import {TEACHER} from '../../../constants/userRoles';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Button, Col, ListGroup, Row} from 'react-bootstrap';
 import {EmptyPage} from '../../common/components/EmptyPage';
-import {loadSubjectsAndFiles} from '../../../actions/fileActions';
-import {useFetchUserQuery} from "../../../store/user/userApiSlice";
 import {selectActiveRole} from "../../../store/user/authSlice";
 import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchSubjectsByUserIdQuery} from "../../../store/subject/subjectApiSlice";
+import {useFetchFilesQuery} from "../../../store/file/fileApiSlice";
+import {selectApiLoading} from "../../../App";
 
 export default function PageWithFiles() {
 
-  const dispatch = useDispatch();
-
-  const userId = useFetchUserQuery(getId() ?? skipToken).data?.id;
-
-  const subjects = useSelector(state => state.filesReducers.subjects);
   const userRole = useSelector(selectActiveRole);
-  const files = useSelector(state => state.filesReducers.files);
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
 
-  useEffect(() => {
-    dispatch(loadSubjectsAndFiles(userId));
-  }, [userId, dispatch])
+  const {data: subjects} = useFetchSubjectsByUserIdQuery(getId() ?? skipToken);
+  const {data: files} = useFetchFilesQuery(getId() ?? skipToken);
+  const isFetching = useSelector(selectApiLoading);
 
   return (
     <Col xs={12}>

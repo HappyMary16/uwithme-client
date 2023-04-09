@@ -1,19 +1,16 @@
-import http from "./http";
+import {http} from "./http";
 import {AVATAR} from "../constants/serverApi";
 import {arrayBufferToDataUrl} from "../utils/FileUtil";
 
 export function downloadAvatar(userId) {
-  return new Promise((resolve) => {
-    http({
-      url: AVATAR + userId,
-      method: "get",
-      loadFile: true
-    }).then(response => {
-      if (response.status === 200) {
-        resolve(arrayBufferToDataUrl(response.data));
-      }
-    })
-  });
+  return http({
+    url: AVATAR + userId,
+    method: "GET"
+  }).then(response => {
+    if (response.status === 200) {
+      return response.arrayBuffer();
+    }
+  }).then(buffer => arrayBufferToDataUrl(buffer))
 }
 
 export function uploadAvatar(avatar, onError) {
@@ -24,7 +21,6 @@ export function uploadAvatar(avatar, onError) {
   return http({
     url: AVATAR,
     method: "post",
-    data: formData,
-    isFile: true
+    body: formData
   }).catch(error => onError(error));
 }

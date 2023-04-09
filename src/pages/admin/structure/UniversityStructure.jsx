@@ -15,14 +15,13 @@ export default function UniversityStructure() {
   const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(universityId ?? skipToken);
 
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
-  const isNewFetching = useSelector(selectApiLoading);
+  const isFetching = useSelector(selectApiLoading);
 
   return (
     <Container>
       <CreateStructurePanel/>
 
-      <EmptyPage list={institutes} isFetching={isFetching || isNewFetching}/>
+      <EmptyPage list={institutes} isFetching={isFetching}/>
 
       <ListGroup variant="flush">
         {institutes &&

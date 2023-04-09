@@ -7,9 +7,8 @@ import {LESSONS_TIME, TEACHER, WEEK_DAYS, WEEK_NUMBER} from '../../../constants/
 import {getLectureHallsByBuilding} from '../../../utils/StructureUtils';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {getName} from '../../../utils/UsersUtil';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useFetchUserQuery, useFetchUsersQuery} from "../../../store/user/userApiSlice";
-import {loadSubjects} from "../../../actions/fileActions";
 import {selectActiveRole} from "../../../store/user/authSlice";
 import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
@@ -17,10 +16,10 @@ import {useFetchLectureHallsQuery} from "../../../store/lecturehall/lectureHallA
 import {useFetchBuildingsQuery} from "../../../store/lecturehall/buildingApiSlice";
 import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
 import {useSaveLessonsMutation} from "../../../store/lesson/lessonApiSlice";
+import {useFetchSubjectsByUserIdQuery, useFetchSubjectsQuery} from "../../../store/subject/subjectApiSlice";
 
 export default function AddLesson() {
 
-  const dispatch = useDispatch();
   const [saveLessons] = useSaveLessonsMutation();
 
   const {data: user} = useFetchUserQuery(getId() ?? skipToken);
@@ -28,7 +27,8 @@ export default function AddLesson() {
   const role = useSelector(selectActiveRole);
   const {data: teachers} = useFetchUsersQuery(TEACHER);
   const {data: groups} = useFetchGroupsQuery();
-  const subjects = useSelector(state => state.filesReducers.subjects)
+  const {data: teacherSubjects} = useFetchSubjectsByUserIdQuery(role === TEACHER ? getId() ?? skipToken : skipToken)
+  const {data: subjects} = useFetchSubjectsQuery(role === TEACHER && skipToken)
   const {data: lectureHalls} = useFetchLectureHallsQuery();
   const {data: buildings} = useFetchBuildingsQuery();
 
@@ -43,19 +43,10 @@ export default function AddLesson() {
   const [weekNumbers, setWeekNumbers] = useState([]);
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
-    if (role === TEACHER) {
+    if (user && role === TEACHER) {
       setTeacher({value: user.id})
-      dispatch(loadSubjects(user.userId));
-    } else {
-      dispatch(loadSubjects());
     }
-
-    //TODO
-    // load lessons time (feature)
-  }, [user, role, dispatch]);
+  }, [user, role]);
 
   function addLessons(e) {
     e.preventDefault();
@@ -75,14 +66,20 @@ export default function AddLesson() {
     saveLessons(lessons);
   }
 
+  function getSubjects() {
+    if (role === TEACHER) {
+      return teacherSubjects ?? [];
+    }
+    return subjects ?? [];
+  }
+
   return (
     <Form onSubmit={addLessons}>
       <CreatableSelect
         theme={selectorColors}
         placeholder={i18n.t('subject')}
         options={
-          subjects &&
-          subjects.map(subject => {
+          getSubjects().map(subject => {
             return {
               label: subject.name,
               value: subject.id

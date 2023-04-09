@@ -1,56 +1,52 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 import i18n from '../../../locales/i18n';
-import {getLectures, getTasks} from '../../../utils/FileUtil';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
 import {Button, Col} from 'react-bootstrap';
 import {SubjectFiles} from './components/SubjectFiles';
 import {EmptyPage} from '../../common/components/EmptyPage';
 import {ADD_FILE, FILES_PAGE} from '../../../constants/links';
-import {addAccessToFiles, loadSubjectsAndFiles} from '../../../actions/fileActions';
 import {useNavigate} from "react-router-dom";
 import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
+import {useFetchSubjectsByUserIdQuery} from "../../../store/subject/subjectApiSlice";
+import {useAddAccessToFilesMutation, useFetchFilesQuery} from "../../../store/file/fileApiSlice";
+import {selectApiLoading} from "../../../App";
 
 let selectedGroups = [];
-let files = [];
+let selectedFiles = [];
 
 export default function ShareFiles() {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [addAccessToFiles] = useAddAccessToFilesMutation();
 
-  const subjects = useSelector(state => state.filesReducers.subjects);
-  const lectures = useSelector(state => getLectures(state.filesReducers.files));
-  const tasks = useSelector(state => getTasks(state.filesReducers.files));
+  const {data: subjects} = useFetchSubjectsByUserIdQuery(getId() ?? skipToken);
+  const {data: files} = useFetchFilesQuery(getId() ?? skipToken);
   const {data: groups} = useFetchGroupsQuery();
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
+  const isFetching = useSelector(selectApiLoading);
 
   const [subjectId, setSubjectId] = useState();
 
-  useEffect(() => {
-    dispatch(loadSubjectsAndFiles(getId() ?? skipToken));
-  }, [dispatch]);
-
   function submit() {
-    dispatch(
-      addAccessToFiles(
-        files,
-        selectedGroups.map(group => group.value)
-      )
-    );
-    files = [];
+    addAccessToFiles({
+        fileIds: selectedFiles,
+        groupIds: selectedGroups.map(group => group.value)
+      }
+    )
+
+    selectedFiles = [];
     selectedGroups = [];
     navigate(FILES_PAGE);
   }
 
   function handleChange(value, file) {
-    if (files.includes(file)) {
-      files.filter(f => f !== file);
+    if (selectedFiles.includes(file)) {
+      selectedFiles.filter(f => f !== file);
     } else {
-      files.push(file);
+      selectedFiles.push(file);
     }
   }
 
@@ -83,8 +79,8 @@ export default function ShareFiles() {
             placeholder={i18n.t("subject")}
           />
           <SubjectFiles
-            lectures={lectures}
-            tasks={tasks}
+            lectures={files?.filter(file => file.fileType === 'LECTURE') ?? []}
+            tasks={files?.filter(file => file.fileType === 'TASK') ?? []}
             subjectId={subjectId}
             handleChoose={handleChange}
           />

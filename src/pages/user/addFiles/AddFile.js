@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {FileTypes, LECTURE} from '../../../constants/userRoles';
 import {Upload} from './components/Upload';
 import i18n from '../../../locales/i18n';
@@ -8,40 +7,28 @@ import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
 import {Message} from '../../common/components/Message';
 import {Button, Col} from 'react-bootstrap';
-import {
-  clearUploadProgress,
-  clearUploadSuccess,
-  loadSubjectsAndFiles,
-  uploadRequest
-} from '../../../actions/fileActions';
-import {useFetchUserQuery} from "../../../store/user/userApiSlice";
 import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {useFetchSubjectsByUserIdQuery} from "../../../store/subject/subjectApiSlice";
+import {useFileUploader} from "../../../hooks/useFileUploader";
 
 export default function AddFile() {
 
-  const dispatch = useDispatch();
+  const {data: subjects} = useFetchSubjectsByUserIdQuery(getId() ?? skipToken);
 
-  const user = useFetchUserQuery(getId() ?? skipToken).data;
-  const userId = user?.id;
-  const username = user?.username;
-
-  const subjects = useSelector(state => state.filesReducers.subjects);
-  const uploadProgress = useSelector(state => state.filesReducers.uploadProgress);
-  const uploadSuccess = useSelector(state => state.filesReducers.uploadSuccess);
+  const {completed, progress, upload} = useFileUploader();
 
   const [files, setFiles] = useState([]);
   const [subject, setSubject] = useState();
   const [fileType, setFileType] = useState(LECTURE);
-  const [uploading, setUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(completed);
 
   useEffect(() => {
-    dispatch(loadSubjectsAndFiles(userId));
-  }, [userId, dispatch])
+    setUploadSuccess(completed)
+  }, [completed])
 
   function submit() {
-    setUploading(true);
-    dispatch(uploadRequest(files, username, subject.label, fileType));
+    upload(files, subject.label, fileType);
   }
 
   function createSubject(subjectName) {
@@ -52,11 +39,8 @@ export default function AddFile() {
   }
 
   function uploadingEnded() {
-    setUploading(false);
+    setUploadSuccess(false);
     setFiles([]);
-
-    dispatch(clearUploadSuccess());
-    dispatch(clearUploadProgress());
   }
 
   return (
@@ -91,10 +75,9 @@ export default function AddFile() {
         placeholder={i18n.t("file_type")}
       />
       <Upload
-        uploadProgress={uploadProgress}
+        uploadProgress={progress}
         addFiles={setFiles}
         files={files}
-        uploading={uploading}
         successfulUploaded={uploadSuccess}
       />
       <Col

@@ -51,11 +51,10 @@ export default function App() {
   const {data, error} = useFetchUserQuery(getId() ?? skipToken);
   const activeRole = useSelector(selectActiveRole);
   const clientVersion = useSelector(selectClientVersion);
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
   const isMenuOpen = useSelector(state => state.navigationReducers.isMenuOpen);
   const message = useSelector(state => state.messageReducers.message);
 
-  const isNewFetching = useSelector(selectApiLoading);
+  const isFetching = useSelector(selectApiLoading);
 
   const isLoggedIn = authService.isLoggedIn();
 
@@ -87,7 +86,7 @@ export default function App() {
         : <UserToolBar isOpen={isMenuOpen} onClose={() => dispatch(changeIsMenuOpen())}/>}
 
       <TopToolBar/>
-      <CustomSpinner isFetching={isFetching || isNewFetching}/>
+      <CustomSpinner isFetching={isFetching}/>
 
       <Message
         open={!!message}

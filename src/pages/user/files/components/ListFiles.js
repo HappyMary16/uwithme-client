@@ -1,10 +1,10 @@
 import React from 'react';
-import { isPossibleToOpen } from '../../../../utils/FileUtil';
-import { Col, Collapse, ListGroup, Row } from 'react-bootstrap';
-import { ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill } from 'react-bootstrap-icons';
-import { loadFile } from '../../../../actions/fileActions';
+import {isPossibleToOpen} from '../../../../utils/FileUtil';
+import {Col, Collapse, ListGroup, Row} from 'react-bootstrap';
+import {ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill} from 'react-bootstrap-icons';
+import {downloadFile} from "../../../../services/fileService";
 
-export default function ListFiles({ open, files, dispatch }) {
+export default function ListFiles({open, files}) {
   return (
     <Collapse in={open}>
       <ListGroup>
@@ -13,7 +13,7 @@ export default function ListFiles({ open, files, dispatch }) {
             <Row className={"show-grid"}>
               <Col xs={2} sm={1}>
                 <Row className="justify-content-center">
-                  <FileEarmarkRichtextFill className={"icon-color"} size={22} />
+                  <FileEarmarkRichtextFill className={"icon-color"} size={22}/>
                 </Row>
               </Col>
               <Col xs={6} sm={8} md={9}>
@@ -25,15 +25,13 @@ export default function ListFiles({ open, files, dispatch }) {
                     <BookHalf
                       className={"icon"}
                       size={22}
-                      onClick={() =>
-                        dispatch(loadFile(file.id, file.name, false))
-                      }
+                      onClick={() => downloadFile(file.id, file.name, false)}
                     />
                   )}
                   <ArrowDownCircleFill
                     className={"icon"}
                     size={22}
-                    onClick={() => dispatch(loadFile(file.id, file.name, true))}
+                    onClick={() => downloadFile(file.id, file.name, true)}
                   />
                 </Row>
               </Col>

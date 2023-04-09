@@ -1,11 +1,11 @@
 import React from 'react';
-import { FilesProgress } from './FilesProgress';
+import {FilesProgress} from './FilesProgress';
 import '../../../../styles/fileUpload.css';
 import i18n from '../../../../locales/i18n';
-import { Container, Row } from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 import DropZone from "./DropZone";
 
-export function Upload({addFiles, uploadProgress, uploading, successfulUploaded, files}) {
+export function Upload({addFiles, uploadProgress, successfulUploaded, files}) {
   let onFilesAdded = filesToAdd => {
     let array = [].concat(files);
 
@@ -23,7 +23,7 @@ export function Upload({addFiles, uploadProgress, uploading, successfulUploaded,
         <div>
           <DropZone
             onFilesAddedFunk={onFilesAdded}
-            disabled={uploading || successfulUploaded}
+            disabled={Object.values(uploadProgress).length || successfulUploaded}
           />
         </div>
         {(!files || files.length === 0) && (

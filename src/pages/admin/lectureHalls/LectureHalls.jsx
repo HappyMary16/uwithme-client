@@ -14,8 +14,7 @@ export default function LectureHalls() {
   const {data: lectureHalls} = useFetchLectureHallsQuery();
   const {data: buildings} = useFetchBuildingsQuery();
 
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
-  const isNewFetching = useSelector(selectApiLoading);
+  const isFetching = useSelector(selectApiLoading);
 
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
 
@@ -34,7 +33,7 @@ export default function LectureHalls() {
         </Col>
       </Row>
 
-      <EmptyPage list={buildings} isFetching={isFetching || isNewFetching}/>
+      <EmptyPage list={buildings} isFetching={isFetching}/>
 
       <BuildingsList buildings={buildings} lectureHalls={lectureHalls}/>
     </Container>

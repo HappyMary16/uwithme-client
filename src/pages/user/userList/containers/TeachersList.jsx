@@ -9,10 +9,9 @@ export default function TeachersList() {
 
   const {data: users} = useFetchUsersQuery({role: TEACHER});
 
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
-  const isNewFetching = useSelector(selectApiLoading);
+  const isFetching = useSelector(selectApiLoading);
 
   return (
-    <UsersList users={users} isFetching={isFetching || isNewFetching}/>
+    <UsersList users={users} isFetching={isFetching}/>
   );
 }

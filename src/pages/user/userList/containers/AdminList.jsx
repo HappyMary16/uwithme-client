@@ -14,8 +14,7 @@ export default function AdminsList() {
 
   const {data: users} = useFetchUsersQuery({role: ADMIN});
 
-  const isFetching = useSelector(state => state.navigationReducers.isFetching);
-  const isNewFetching = useSelector(selectApiLoading);
+  const isFetching = useSelector(selectApiLoading);
 
   function deleteAdminFunc(userId) {
     unAssignRole({userId, role: ADMIN});
@@ -23,7 +22,7 @@ export default function AdminsList() {
 
   return (
     <ListGroup variant={'flush'}>
-      <EmptyPage list={users} isFetching={isFetching || isNewFetching}/>
+      <EmptyPage list={users} isFetching={isFetching}/>
       {users &&
         users.map(user => (
           <AdminListItem key={user.id}
