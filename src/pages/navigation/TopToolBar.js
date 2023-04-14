@@ -3,26 +3,19 @@ import '../../styles/navigation.css';
 import {Col, Nav, Row} from 'react-bootstrap';
 import {MenuIcon} from '../icons/MenuIcon';
 import {SwitchAccountPanel} from './components/SwitchAccoutPanel';
-import {changeIsMenuOpen} from "../../actions/navigationActions";
-import {useDispatch} from "react-redux";
 import {useFetchUserQuery} from "../../store/user/userApiSlice";
 import {getId} from "../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 
-export function TopToolBar() {
+export function TopToolBar({onMenuClick}) {
 
-  const dispatch = useDispatch();
   const user = useFetchUserQuery(getId() ?? skipToken).data;
-
-  function openMenu() {
-    dispatch(changeIsMenuOpen());
-  }
 
   return (
     <Nav className={"app-bar"}>
       {user && (
         <Col xs={2} sm={1}>
-          <MenuIcon onClick={openMenu}/>
+          <MenuIcon onClick={onMenuClick}/>
         </Col>
       )}
       {user && (

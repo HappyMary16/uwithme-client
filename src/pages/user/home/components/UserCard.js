@@ -7,8 +7,8 @@ import {CalendarWeekFill} from 'react-bootstrap-icons';
 import {SCHEDULE, USER_SCHEDULE} from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
 import {downloadAvatar, uploadAvatar} from "../../../../services/avatarService";
-import {addError} from "../../../../actions/messageAction";
 import {useDispatch} from "react-redux";
+import {errorAdded} from "../../../../store/message/messageSlice";
 
 export function UserCard({user, isMine}) {
 
@@ -31,7 +31,7 @@ export function UserCard({user, isMine}) {
 
   let handleSave = avatar => {
     setOpen(false);
-    uploadAvatar(avatar, (error) => dispatch(addError(error)))
+    uploadAvatar(avatar, (error) => dispatch(errorAdded(error)))
       .then(() => downloadAvatar(user.id))
       .then(response => setAvatar(response))
   };

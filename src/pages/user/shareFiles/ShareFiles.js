@@ -64,7 +64,7 @@ export default function ShareFiles() {
         isFetching={isFetching}
       />
 
-      {subjects && subjects.length > 0 && (
+      {subjects?.length > 0 && (
         <div>
           <Select
             className={"selector"}

@@ -1,6 +1,4 @@
 import {loadState, saveState} from './StateLoader';
-import messageReducers from '../reducers/messageReducers';
-import navigationReducers from '../reducers/navigationReducers';
 import {configureStore} from '@reduxjs/toolkit'
 import authSlice from "./user/authSlice";
 import studCabinetSlice from "./studcabinet/studCabinetSlice";
@@ -14,6 +12,7 @@ import {buildingApiSlice} from "./lecturehall/buildingApiSlice";
 import {lectureHallApiSlice} from "./lecturehall/lectureHallApiSlice";
 import {fileApiSlice} from "./file/fileApiSlice";
 import {subjectApiSlice} from "./subject/subjectApiSlice";
+import messageSlice from "./message/messageSlice";
 
 export const store = configureStore({
   preloadedState: {
@@ -23,10 +22,9 @@ export const store = configureStore({
     messageReducers: loadState("messageReducers")
   },
   reducer: {
-    navigationReducers,
-    messageReducers,
     auth: authSlice,
     studCabinet: studCabinetSlice,
+    message: messageSlice,
     [studCabinetApiSlice.reducerPath]: studCabinetApiSlice.reducer,
     [tenantApiSlice.reducerPath]: tenantApiSlice.reducer,
     [departmentApiSlice.reducerPath]: departmentApiSlice.reducer,

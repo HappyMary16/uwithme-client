@@ -6,7 +6,6 @@ import {hasRole} from '../../../../utils/UsersUtil';
 import {ADMIN, STUDENT} from '../../../../constants/userRoles';
 import {useDispatch} from "react-redux";
 import {useFetchUserQuery, useUpdateUserMutation} from "../../../../store/user/userApiSlice";
-import {setMessage} from "../../../../actions/messageAction";
 import {useFetchTenantsQuery} from "../../../../store/tenant/tenantApiSlice";
 import {
   useFetchDepartmentsByUniversityIdQuery,
@@ -15,6 +14,7 @@ import {
 import {skipToken} from "@reduxjs/toolkit/query";
 import {getId} from "../../../../services/authService";
 import {useFetchGroupsQuery} from "../../../../store/group/groupApiSlice";
+import {messageAdded} from "../../../../store/message/messageSlice";
 
 export default function EditSetting({isEditMode, setEditMode}) {
 
@@ -65,15 +65,15 @@ export default function EditSetting({isEditMode, setEditMode}) {
     e.preventDefault();
 
     if (!university) {
-      dispatch(setMessage(i18n.t("please_choose_university")));
+      dispatch(messageAdded(i18n.t("please_choose_university")));
     }
 
     if (university && !institute) {
-      dispatch(setMessage(i18n.t("please_choose_institute")));
+      dispatch(messageAdded(i18n.t("please_choose_institute")));
     }
 
     if (institute && !department) {
-      dispatch(setMessage(i18n.t("please_choose_department")));
+      dispatch(messageAdded(i18n.t("please_choose_department")));
     }
 
     if (user && university && institute && department) {

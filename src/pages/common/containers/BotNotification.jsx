@@ -1,5 +1,5 @@
-import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {closeBotNotification} from '../../../actions/messageAction';
 import {Notification} from '../components/Notification';
 import i18n from '../../../locales/i18n';
@@ -11,7 +11,7 @@ export default function BotNotification() {
 
   const dispatch = useDispatch();
 
-  const wasBotNotificationShowed = useSelector(state => state.messageReducers.wasBotNotificationShowed);
+  const wasBotNotificationShowed = useState(false);
 
   function closeMessage() {
     dispatch(closeBotNotification());

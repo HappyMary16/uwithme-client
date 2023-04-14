@@ -5,7 +5,6 @@ import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
 import {ADMIN, STUDENT, UserRoles} from '../../../constants/userRoles';
 import {useDispatch} from 'react-redux';
-import {setMessage} from '../../../actions/messageAction';
 import {useSaveUserMutation} from "../../../store/user/userApiSlice";
 import {useFetchTenantsQuery} from "../../../store/tenant/tenantApiSlice";
 import {
@@ -14,6 +13,7 @@ import {
 } from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
+import {messageAdded} from "../../../store/message/messageSlice";
 
 export default function ChooseRole() {
 
@@ -37,20 +37,20 @@ export default function ChooseRole() {
     e.preventDefault();
 
     if (!userRole) {
-      dispatch(setMessage(i18n.t("please_choose_your_user_type")));
+      dispatch(messageAdded(i18n.t("please_choose_your_user_type")));
     }
 
     if (userRole && userRole !== ADMIN) {
       if (!university) {
-        dispatch(setMessage(i18n.t("please_choose_university")));
+        dispatch(messageAdded(i18n.t("please_choose_university")));
       }
 
       if (university && !institute) {
-        dispatch(setMessage(i18n.t("please_choose_institute")));
+        dispatch(messageAdded(i18n.t("please_choose_institute")));
       }
 
       if (institute && !department) {
-        dispatch(setMessage(i18n.t("please_choose_department")));
+        dispatch(messageAdded(i18n.t("please_choose_department")));
       }
     }
 

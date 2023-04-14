@@ -1,16 +1,16 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {ErrorMessage} from '../components/ErrorMessage';
-import {removeError} from '../../../actions/messageAction';
+import {errorRemoved, selectErrors} from "../../../store/message/messageSlice";
 
 export default function ErrorContainer() {
 
   const dispatch = useDispatch();
 
-  const errors = useSelector(state => state.messageReducers.errors);
+  const errors = useSelector(selectErrors);
 
   function closeMessage(errorId) {
-    dispatch(removeError(errorId));
+    dispatch(errorRemoved(errorId));
   }
 
   return (

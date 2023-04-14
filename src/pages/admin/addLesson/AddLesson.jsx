@@ -25,7 +25,7 @@ export default function AddLesson() {
   const {data: user} = useFetchUserQuery(getId() ?? skipToken);
 
   const role = useSelector(selectActiveRole);
-  const {data: teachers} = useFetchUsersQuery(TEACHER);
+  const {data: teachers} = useFetchUsersQuery({role: TEACHER});
   const {data: groups} = useFetchGroupsQuery();
   const {data: teacherSubjects} = useFetchSubjectsByUserIdQuery(role === TEACHER ? getId() ?? skipToken : skipToken)
   const {data: subjects} = useFetchSubjectsQuery(role === TEACHER && skipToken)

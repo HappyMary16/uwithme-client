@@ -36,7 +36,12 @@ export default function GroupPage() {
   }
 
   function removeStudent() {
-    updateUser({...studentToRemove, groupId: null});
+    updateUser({
+      userId: studentToRemove.id,
+      universityId: studentToRemove.universityId,
+      departmentId: studentToRemove.department.id,
+      groupId: null
+    });
   }
 
   function addStudent(studentIds) {

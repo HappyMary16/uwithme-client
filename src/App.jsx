@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {UserToolBar} from './pages/user/UserToolBar';
 
@@ -23,11 +23,9 @@ import {Container} from 'react-bootstrap';
 import {authService, getId} from './services/authService';
 import {CustomSpinner} from './pages/navigation/components/CustomSpinner';
 import {Message} from './pages/common/components/Message';
-import {removeMessage} from './actions/messageAction';
 import ErrorContainer from './pages/common/containers/ErrorContainer';
 import * as config from './config';
 import {signOut} from './actions/authActions';
-import {changeIsMenuOpen} from './actions/navigationActions';
 import {ADMIN, STUDENT} from './constants/userRoles';
 import BotNotification from './pages/common/containers/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
@@ -36,6 +34,7 @@ import {PRE_HOME} from "./constants/links";
 import {useFetchUserQuery} from "./store/user/userApiSlice";
 import {selectActiveRole, selectClientVersion} from "./store/user/authSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {messageRemoved, selectMessage} from "./store/message/messageSlice";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)
@@ -48,12 +47,12 @@ export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [menuOpened, setMenuOpened] = useState(false);
+
   const {data, error} = useFetchUserQuery(getId() ?? skipToken);
   const activeRole = useSelector(selectActiveRole);
   const clientVersion = useSelector(selectClientVersion);
-  const isMenuOpen = useSelector(state => state.navigationReducers.isMenuOpen);
-  const message = useSelector(state => state.messageReducers.message);
-
+  const message = useSelector(selectMessage);
   const isFetching = useSelector(selectApiLoading);
 
   const isLoggedIn = authService.isLoggedIn();
@@ -82,18 +81,13 @@ export default function App() {
   return (
     <Container fluid className={"main-container"}>
       {activeRole === ADMIN
-        ? <AdminToolBar isOpen={isMenuOpen} onClose={() => dispatch(changeIsMenuOpen())}/>
-        : <UserToolBar isOpen={isMenuOpen} onClose={() => dispatch(changeIsMenuOpen())}/>}
+        ? <AdminToolBar isOpen={menuOpened} onClose={() => setMenuOpened(!menuOpened)}/>
+        : <UserToolBar isOpen={menuOpened} onClose={() => setMenuOpened(!menuOpened)}/>}
 
-      <TopToolBar/>
+      <TopToolBar onMenuClick={() => setMenuOpened(!menuOpened)}/>
       <CustomSpinner isFetching={isFetching}/>
 
-      <Message
-        open={!!message}
-        message={message}
-        handleClose={() => dispatch(removeMessage())}
-      />
-
+      <Message open={!!message} message={message} handleClose={() => dispatch(messageRemoved())}/>
       <ErrorContainer/>
 
       <Container className={'main-page-container'}>
