@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import i18n from '../../../../locales/i18n';
 import {getName} from '../../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
@@ -6,24 +6,19 @@ import {Card, Col, Row} from 'react-bootstrap';
 import {CalendarWeekFill} from 'react-bootstrap-icons';
 import {SCHEDULE, USER_SCHEDULE} from '../../../../constants/links';
 import {useNavigate} from "react-router-dom";
-import {downloadAvatar, uploadAvatar} from "../../../../services/avatarService";
 import {useDispatch} from "react-redux";
 import {errorAdded} from "../../../../store/message/messageSlice";
+import {useAvatarUploader} from "../../../../hooks/useAvatatUploader";
+import {useAvatarDownloader} from "../../../../hooks/useAvatarDownloader";
 
 export function UserCard({user, isMine}) {
 
   const dispatch = useDispatch();
+  const uploadAvatar = useAvatarUploader();
+  const [avatar, downloadAvatar] = useAvatarDownloader(user?.id);
 
   const [open, setOpen] = React.useState(false);
-  const [avatar, setAvatar] = React.useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      downloadAvatar(user.id)
-        .then(response => setAvatar(response))
-    }
-  }, [user])
 
   let handleClickAvatar = () => {
     setOpen(true);
@@ -32,8 +27,7 @@ export function UserCard({user, isMine}) {
   let handleSave = avatar => {
     setOpen(false);
     uploadAvatar(avatar, (error) => dispatch(errorAdded(error)))
-      .then(() => downloadAvatar(user.id))
-      .then(response => setAvatar(response))
+      .then(() => downloadAvatar())
   };
 
   return (

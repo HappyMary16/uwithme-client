@@ -1,6 +1,7 @@
 import i18n from '../../../locales/i18n';
-import { Row } from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import React from 'react';
+import {Link} from "react-router-dom";
 
 export function EmptyPage({message, linkText, href, list, isFetching}) {
   return (
@@ -9,9 +10,9 @@ export function EmptyPage({message, linkText, href, list, isFetching}) {
         <div>
           <h5>{message??i18n.t('there_is_no_data')}</h5>
           {href && linkText && (
-            <link href={href}>
+            <Link to={href}>
               <h5>{linkText}</h5>
-            </link>
+            </Link>
           )}
         </div>
       )}

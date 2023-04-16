@@ -1,10 +1,15 @@
 import React from 'react';
 import {isPossibleToOpen} from '../../../../utils/FileUtil';
 import {Col, Collapse, ListGroup, Row} from 'react-bootstrap';
-import {ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill} from 'react-bootstrap-icons';
-import {downloadFile} from "../../../../services/fileService";
+import {ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill, TrashFill} from 'react-bootstrap-icons';
+import {useFileDownloader} from "../../../../hooks/useFileDownloader";
+import {useDeleteFileMutation} from "../../../../store/file/fileApiSlice";
 
 export default function ListFiles({open, files}) {
+
+  const downloadFile = useFileDownloader();
+  const [deleteFile] = useDeleteFileMutation();
+
   return (
     <Collapse in={open}>
       <ListGroup>
@@ -32,6 +37,11 @@ export default function ListFiles({open, files}) {
                     className={"icon"}
                     size={22}
                     onClick={() => downloadFile(file.id, file.name, true)}
+                  />
+                  <TrashFill
+                    onClick={() => deleteFile(file.id)}
+                    className={'delete-icon icon'}
+                    size={'1.4em'}
                   />
                 </Row>
               </Col>

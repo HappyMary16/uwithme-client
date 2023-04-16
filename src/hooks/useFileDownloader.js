@@ -1,7 +1,11 @@
-import {http} from "./http";
 import {FILES} from "../constants/serverApi";
+import {http} from "../services/http";
 
-export function downloadFile(fileId, fileName, loading) {
+export function useFileDownloader() {
+  return downloadFile;
+}
+
+function downloadFile(fileId, fileName, loading) {
   http({
     url: FILES + fileId,
     method: "get"

@@ -59,8 +59,8 @@ export default function ShareFiles() {
       <EmptyPage
         message={i18n.t("you_do_not_have_any_file")}
         href={ADD_FILE}
-        linkText={"add_files_page"}
-        list={subjects}
+        linkText={i18n.t("add_files_page")}
+        list={subjectId ? files : subjects}
         isFetching={isFetching}
       />
 

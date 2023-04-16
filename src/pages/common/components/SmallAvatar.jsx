@@ -1,23 +1,14 @@
 import {Image} from 'react-bootstrap';
-import React, {useEffect} from 'react';
-import {downloadAvatar} from "../../../services/avatarService";
+import React from 'react';
+import {useAvatarDownloader} from "../../../hooks/useAvatarDownloader";
 
 export function SmallAvatar({size = "30px", user, image}) {
-  const [avatar, setAvatar] = React.useState(image??"");
-
-  useEffect(() => {
-    if (user && !image) {
-      downloadAvatar(user.id)
-        .then(response => {
-          setAvatar(response)
-        })
-    }
-  }, [user, image])
+  const [avatar] = useAvatarDownloader(user?.id);
 
   return (
     <Image roundedCircle
            alt="photo"
-           src={avatar === "" ? '/empty-avatar.jpg' : avatar}
+           src={avatar === "" ? image??'/empty-avatar.jpg' : avatar}
            width={size}
            height={size}/>
   );

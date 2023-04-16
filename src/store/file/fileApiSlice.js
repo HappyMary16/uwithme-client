@@ -22,14 +22,13 @@ export const fileApiSlice = createApi({
       }),
       invalidatesTags: ['FileApi'],
     }),
-    saveFile: builder.mutation({
-      query: (file) => ({
-        url: ``,
-        method: 'POST',
-        body: file,
+    deleteFile: builder.mutation({
+      query: (fileId) => ({
+        url: `/${fileId}`,
+        method: 'DELETE'
       }),
       invalidatesTags: ['FileApi'],
-    })
+    }),
   })
 });
 
@@ -44,5 +43,5 @@ function toClientDepartmentRepresentation(obj) {
 export const {
   useFetchFilesQuery,
   useAddAccessToFilesMutation,
-  useSaveFileMutation
+  useDeleteFileMutation
 } = fileApiSlice;
