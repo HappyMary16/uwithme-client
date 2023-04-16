@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import BootstrapTable from '@musicstory/react-bootstrap-table-next';
+import BootstrapTable from "@happymary16/react-bootstrap-table-next";
 import {LogInStudCabinet} from './LogInStudCabinet';
 import {EmptyPage} from '../../common/components/EmptyPage';
 import i18n from '../../../locales/i18n';

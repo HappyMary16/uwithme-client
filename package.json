@@ -5,7 +5,7 @@
   "private": true,
   "main": "electron-app.js",
   "dependencies": {
-    "@musicstory/react-bootstrap-table-next": "^1.0.5",
+    "@happymary16/react-bootstrap-table-next": "^4.0.3",
     "@reduxjs/toolkit": "^1.9.3",
     "bootstrap": "^4.2.1",
     "i18next": "^22.4.13",
