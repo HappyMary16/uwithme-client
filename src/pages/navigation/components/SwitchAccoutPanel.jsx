@@ -9,10 +9,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useFetchUserQuery} from "../../../store/user/userApiSlice";
 import {roleActivated, selectActiveRole} from "../../../store/user/authSlice";
 import {useNavigate} from "react-router-dom";
-import {signOut} from "../../../actions/authActions";
 import {authService, getId} from "../../../services/authService";
 import {USER_HOME} from "../../../constants/links";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {signOut} from "../../../store/actions";
 
 const textByRole = {
   ROLE_STUDENT: i18n.t('to_student'),

@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {SIGN_OUT} from "../../actions/authActions";
 import {studCabinetApiSlice} from "./studCabinetApiSlice";
+import {signOut} from "../actions";
 
 const initialState = {
   semester: null,
@@ -27,11 +27,10 @@ const studCabinetSlice = createSlice({
           password: meta.arg.originalArgs.password
         };
       })
-      .addMatcher((action) => action.type === SIGN_OUT,
-        (state) => {
-          state.semester = null;
-          state.credentials = null;
-        })
+      .addMatcher(signOut.match, (state) => {
+        state.semester = null;
+        state.credentials = null;
+      })
   }
 });
 

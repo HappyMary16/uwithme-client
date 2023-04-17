@@ -1,9 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 import * as config from "../../config";
-import {SIGN_OUT} from "../../actions/authActions";
 import {ADMIN, STUDENT, TEACHER} from "../../constants/userRoles";
 import {userApiSlice} from "./userApiSlice";
 import {getId} from "../../services/authService";
+import {signOut} from "../actions";
 
 const initialState = {
   activeRole: null,
@@ -26,11 +26,10 @@ const authSlice = createSlice({
           state.clientVersion = config.CLIENT_VERSION;
         }
       })
-      .addMatcher((action) => action.type === SIGN_OUT,
-        (state) => {
-          state.activeRole = null;
-          state.clientVersion = config.CLIENT_VERSION;
-        })
+      .addMatcher(signOut.match, (state) => {
+        state.activeRole = null;
+        state.clientVersion = config.CLIENT_VERSION;
+      })
   }
 });
 

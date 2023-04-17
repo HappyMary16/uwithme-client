@@ -12,6 +12,6 @@ export function getId() {
 }
 
 export function hasAnyRole(roles) {
-  return authService.isLoggedIn() && authService.getUserInfo('roles')
+  return authService.isLoggedIn() && (authService.getUserInfo('roles') ?? [])
     .some(role => roles.includes(role));
 }

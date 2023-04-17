@@ -25,7 +25,6 @@ import {CustomSpinner} from './pages/navigation/components/CustomSpinner';
 import {Message} from './pages/common/components/Message';
 import ErrorContainer from './pages/common/containers/ErrorContainer';
 import * as config from './config';
-import {signOut} from './actions/authActions';
 import {ADMIN, STUDENT} from './constants/userRoles';
 import BotNotification from './pages/common/containers/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
@@ -35,6 +34,7 @@ import {useFetchUserQuery} from "./store/user/userApiSlice";
 import {selectActiveRole, selectClientVersion} from "./store/user/authSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {messageRemoved, selectMessage} from "./store/message/messageSlice";
+import {signOut} from "./store/actions";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)

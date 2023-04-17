@@ -1,9 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {SIGN_OUT} from "../../actions/authActions";
 import {fileApiSlice} from "../file/fileApiSlice";
 import {getMessage} from "../../utils/MessageUtil";
 import {lessonApiSlice} from "../lesson/lessonApiSlice";
 import i18n from "../../locales/i18n";
+import {signOut} from "../actions";
 
 const initialState = {
   message: null,
@@ -41,11 +41,10 @@ const messageSlice = createSlice({
       .addMatcher(lessonApiSlice.endpoints.saveLessons.matchFulfilled, (state) => {
         state.message = i18n.t("Пари додані в розклад");
       })
-      .addMatcher((action) => action.type === SIGN_OUT,
-        (state) => {
-          state.message = null;
-          state.errors = null;
-        })
+      .addMatcher(signOut.match, (state) => {
+        state.message = null;
+        state.errors = [];
+      })
   }
 });
 

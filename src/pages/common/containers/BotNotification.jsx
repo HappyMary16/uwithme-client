@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {closeBotNotification} from '../../../actions/messageAction';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Notification} from '../components/Notification';
 import i18n from '../../../locales/i18n';
 import {SmallAvatar} from '../components/SmallAvatar';
 import {Col, Row} from 'react-bootstrap';
 import {TELEGRAM_BOT_URI} from '../../../config';
+import {botShown, selectBotShown} from "../../../store/bot/botSlice";
 
 export default function BotNotification() {
 
   const dispatch = useDispatch();
 
-  const wasBotNotificationShowed = useState(false);
+  const wasBotNotificationShown = useSelector(selectBotShown);
 
   function closeMessage() {
-    dispatch(closeBotNotification());
+    dispatch(botShown());
   }
 
   return (
@@ -35,7 +35,7 @@ export default function BotNotification() {
             @UniversityWithMe_bot
           </a>
         </div>}
-      show={!wasBotNotificationShowed}
+      show={!wasBotNotificationShown}
       onClose={closeMessage}/>
   );
 }
