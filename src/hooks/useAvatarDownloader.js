@@ -1,26 +1,23 @@
 import {AVATAR} from "../constants/serverApi";
 import {http} from "../services/http";
 import {arrayBufferToDataUrl} from "../utils/FileUtil";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export function useAvatarDownloader(userId) {
-
   const [avatar, setAvatar] = useState();
 
-  function updateAvatar() {
-    if (userId) {
+  useEffect(() => {
       downloadAvatar(userId, setAvatar);
-    }
-  }
+  }, [userId])
 
-  if (!avatar) {
-    updateAvatar();
-  }
-
-  return [avatar, updateAvatar]
+  return [avatar, () => downloadAvatar(userId, setAvatar)]
 }
 
 function downloadAvatar(userId, setAvatar) {
+  if (!userId) {
+    return;
+  }
+
   http({
     url: AVATAR + userId,
     method: "GET"

@@ -17,9 +17,7 @@ import messageSlice from "./message/messageSlice";
 export const store = configureStore({
   preloadedState: {
     auth: loadState("auth"),
-    studCabinet: loadState('studCabinet'),
-    navigationReducers: loadState("navigationReducers"),
-    messageReducers: loadState("messageReducers")
+    studCabinet: loadState('studCabinet')
   },
   reducer: {
     auth: authSlice,

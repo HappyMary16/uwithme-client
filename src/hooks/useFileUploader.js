@@ -37,23 +37,22 @@ export function useFileUploader() {
 }
 
 function startXhr(file, subjectName, fileType, monitor) {
-  authService.getToken()
-    .then(token => {
-      const formData = new FormData();
-      formData.append("files", file);
+    const token = authService.getToken();
 
-      const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append("files", file);
 
-      xhr.open(
+    const xhr = new XMLHttpRequest();
+
+    xhr.open(
         "POST",
         apiRoot + FILES + subjectName + "/" + fileType,
         true
-      );
+    );
 
-      xhr.setRequestHeader("Authorization", "Bearer " + token);
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
 
-      xhr.upload.onprogress = event => monitor(event);
+    xhr.upload.onprogress = event => monitor(event);
 
-      xhr.send(formData);
-    })
+    xhr.send(formData);
 }

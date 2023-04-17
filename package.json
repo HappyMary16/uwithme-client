@@ -4,6 +4,12 @@
   "version": "1.0.0",
   "private": true,
   "main": "electron-app.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "electron:build": "electron-builder build --config electron-builder.json"
+  },
   "dependencies": {
     "@happymary16/react-bootstrap-table-next": "^4.0.3",
     "@reduxjs/toolkit": "^1.9.3",
@@ -21,13 +27,16 @@
     "react-router-dom": "^6.9.0",
     "react-select": "^5.7.2",
     "react-switch": "^7.0.0",
-    "tcomad-oidc": "3.2.2"
+    "tcomad-oidc": "4.1.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "electron": "electron .",
-    "electron:build": "electron-builder build --config electron-builder.json"
+  "devDependencies": {
+    "react-scripts": "^5.0.1",
+    "@capacitor/android": "^4.7.1",
+    "@capacitor/cli": "^4.7.1",
+    "@capacitor/core": "^4.7.1",
+    "@capacitor/ios": "^4.7.1",
+    "electron": "^23.2.0",
+    "electron-builder": "^23.6.0"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,14 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-scripts": "^5.0.1",
-    "@capacitor/android": "^4.7.1",
-    "@capacitor/cli": "^4.7.1",
-    "@capacitor/core": "^4.7.1",
-    "@capacitor/ios": "^4.7.1",
-    "electron": "^23.2.0",
-    "electron-builder": "^23.6.0"
   }
 }

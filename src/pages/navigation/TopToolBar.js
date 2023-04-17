@@ -6,6 +6,7 @@ import {SwitchAccountPanel} from './components/SwitchAccoutPanel';
 import {useFetchUserQuery} from "../../store/user/userApiSlice";
 import {getId} from "../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
+import uwmLogo from "../../assets/UniversityWithMeLongLogo.png"
 
 export function TopToolBar({onMenuClick}) {
 
@@ -22,7 +23,7 @@ export function TopToolBar({onMenuClick}) {
         <Col>
           <Row className="justify-content-center">
             <img
-              src="./UniversityWithMeLongLogo.png"
+              src={uwmLogo}
               alt=""
               title="institute"
               className={"app-icon"}
@@ -33,7 +34,7 @@ export function TopToolBar({onMenuClick}) {
       {!user && (
         <Col>
           <img
-            src="./UniversityWithMeLongLogo.png"
+            src={uwmLogo}
             alt=""
             title="institute"
             className={"app-icon"}

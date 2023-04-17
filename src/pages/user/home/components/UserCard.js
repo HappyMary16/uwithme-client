@@ -10,6 +10,7 @@ import {useDispatch} from "react-redux";
 import {errorAdded} from "../../../../store/message/messageSlice";
 import {useAvatarUploader} from "../../../../hooks/useAvatatUploader";
 import {useAvatarDownloader} from "../../../../hooks/useAvatarDownloader";
+import emptyAvatar from "../../../../assets/empty-avatar.png"
 
 export function UserCard({user, isMine}) {
 
@@ -46,7 +47,7 @@ export function UserCard({user, isMine}) {
             <img
               className={"avatar"}
               alt="Avatar"
-              src={!avatar ? "/empty-avatar.jpg" : avatar}
+              src={!avatar ? emptyAvatar : avatar}
               onClick={handleClickAvatar}
             />
           </Row>
