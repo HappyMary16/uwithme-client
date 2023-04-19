@@ -7,8 +7,9 @@ export default function baseUri(resource = "") {
     baseUrl: URL + "/api" + resource,
     prepareHeaders: (headers) => {
       const authResult =  authService.getToken();
-      headers.set('Authorization', 'Bearer ' + authResult);
       headers.set('Content-Type', 'application/json');
+      headers.set('Authorization', 'Bearer ' + authResult);
+      headers.set('X-Cache', 'api');
       return headers;
     }
   })

@@ -7,6 +7,7 @@ import {CustomSpinner} from "./pages/navigation/components/CustomSpinner";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {createRoot} from "react-dom/client";
 import {PageRouter} from "./pages/navigation/PageRouter";
+import {register} from "register-service-worker"
 import {
   ADD_FILE,
   ADD_LESSON,
@@ -189,3 +190,5 @@ root.render(
     }
   </React.StrictMode>
 );
+
+register(`${process.env.PUBLIC_URL}/service-worker.js`);

@@ -7,7 +7,10 @@ export function http({method, url, body}) {
     fetch(apiRoot + url, {
       method: method,
       body: body,
-      headers: [["Authorization", "Bearer " + token]]
+      headers: [
+        ["Authorization", "Bearer " + token],
+        ["X-Cache", "files"]
+      ]
     }).then(response => resolve(response))
   })
 }
