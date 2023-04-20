@@ -7,6 +7,14 @@ export const groupApiSlice = createApi({
   baseQuery: baseUri('/groups'),
   endpoints: (builder) => ({
     fetchGroups: builder.query({
+      query: () => ({
+        url: ``,
+        method: 'GET'
+      }),
+      transformResponse: (response) => response.map(toClientDepartmentRepresentation),
+      providesTags: ['GroupApi']
+    }),
+    fetchGroupsByDepartment: builder.query({
       query: (departmentId) => ({
         url: ``,
         method: 'GET',
@@ -44,6 +52,7 @@ function toClientDepartmentRepresentation(department) {
 
 export const {
   useFetchGroupsQuery,
+  useFetchGroupsByDepartmentQuery,
   useFetchGroupByIdQuery,
   useSaveGroupMutation
 } = groupApiSlice;

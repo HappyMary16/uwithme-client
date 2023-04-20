@@ -12,8 +12,9 @@ import {
   useFetchSubDepartmentsQuery
 } from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
-import {useFetchGroupsQuery} from "../../../store/group/groupApiSlice";
+import {useFetchGroupsByDepartmentQuery} from "../../../store/group/groupApiSlice";
 import {messageAdded} from "../../../store/message/messageSlice";
+import logo from "../../../assets/logo192.png"
 
 export default function ChooseRole() {
 
@@ -31,7 +32,7 @@ export default function ChooseRole() {
   const {data: universities} = useFetchTenantsQuery();
   const {currentData: institutes} = useFetchDepartmentsByUniversityIdQuery(university?.value ?? skipToken);
   const {currentData: departments} = useFetchSubDepartmentsQuery(institute?.value ?? skipToken);
-  const {currentData: groups} = useFetchGroupsQuery(department?.value ?? skipToken);
+  const {currentData: groups} = useFetchGroupsByDepartmentQuery(department?.value ?? skipToken);
 
   function submit(e) {
     e.preventDefault();
@@ -79,14 +80,14 @@ export default function ChooseRole() {
       <Col xs={12} md={8} lg={6} xl={5}>
         <Row className="justify-content-center">
           <img
-            src="/logo32.png"
+            src={logo}
             alt=""
             title="icon"
             className={"avatar-icon"}
           />
         </Row>
         <Row className="justify-content-center margin-bottom">
-          <h5>{i18n.t("continue_sign_up")}</h5>
+          <h5 className={"text-center"}>{i18n.t("continue_sign_up")}</h5>
         </Row>
         <Form onSubmit={submit}>
           <Select
@@ -136,12 +137,12 @@ export default function ChooseRole() {
               className={"selector"}
               theme={selectorColors}
               placeholder={i18n.t("group")}
-              options={groups}
+              options={groups?.filter(group => group.visible)}
               value={group}
               onChange={setGroup}
             />
           )}
-          <Button block variant={"purple"} type={"submit"}>
+          <Button variant={"purple"} type={"submit"}>
             {i18n.t("sign_up")}
           </Button>
         </Form>

@@ -9,17 +9,17 @@
 .menu-icon {
     top: 15%;
     position: absolute;
-    margin-left: 0 !important;
+    margin-left: 10px;
 }
 
 .app-icon {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
-    max-width: 100%;
+    width: auto;
     max-height: 3em;
 }
 
-.overlay {
-    min-width: 15em;
-    margin-right: 1em;
+.popover {
+    min-width: 200px;
+    margin-right: 10px;
 }

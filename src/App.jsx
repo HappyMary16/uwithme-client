@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
-import {UserToolBar} from './pages/user/UserToolBar';
+import {UserToolBar} from './pages/navigation/UserToolBar';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {AdminToolBar} from './pages/admin/AdminToolBar';
+import {AdminToolBar} from './pages/navigation/AdminToolBar';
 import "bootstrap/dist/css/bootstrap.min.css"
 import './styles/button.css';
 import './styles/listItem.css';
@@ -21,12 +21,12 @@ import './styles/table.css';
 import './styles/notification.css';
 import {Container} from 'react-bootstrap';
 import {authService, getId} from './services/authService';
-import {CustomSpinner} from './pages/navigation/components/CustomSpinner';
+import {CustomSpinner} from './pages/common/CustomSpinner';
 import {Message} from './pages/common/components/Message';
-import ErrorContainer from './pages/common/containers/ErrorContainer';
+import ErrorContainer from './pages/common/ErrorContainer';
 import * as config from './config';
 import {ADMIN, STUDENT} from './constants/userRoles';
-import BotNotification from './pages/common/containers/BotNotification';
+import BotNotification from './pages/common/BotNotification';
 import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
