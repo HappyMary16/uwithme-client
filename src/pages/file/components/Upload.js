@@ -23,7 +23,7 @@ export function Upload({addFiles, uploadProgress, successfulUploaded, files}) {
         <div>
           <DropZone
             onFilesAddedFunk={onFilesAdded}
-            disabled={Object.values(uploadProgress).length || successfulUploaded}
+            disabled={Object.values(uploadProgress).length && !successfulUploaded}
           />
         </div>
         {(!files || files.length === 0) && (

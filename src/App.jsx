@@ -32,10 +32,12 @@ import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
 import {useFetchUserQuery} from "./store/user/userApiSlice";
-import {selectActiveRole, selectClientVersion} from "./store/user/authSlice";
+import {selectActiveRole} from "./store/user/authSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {messageRemoved, selectMessage} from "./store/message/messageSlice";
 import {signOut} from "./store/actions";
+import {loadState, saveState} from "./store/StateLoader";
+import {CLIENT_VERSION_STATE} from "./constants/common";
 
 export const selectApiLoading = (state) => {
   return Object.values(state)
@@ -52,24 +54,24 @@ export default function App() {
 
   const {data, error} = useFetchUserQuery(getId() ?? skipToken);
   const activeRole = useSelector(selectActiveRole);
-  const clientVersion = useSelector(selectClientVersion);
   const message = useSelector(selectMessage);
   const isFetching = useSelector(selectApiLoading);
 
   const isLoggedIn = authService.isLoggedIn();
 
   useEffect(() => {
-    data && authService.tryToRefresh()
-  }, [data])
-
-  useEffect(() => {
-    if (config.CLIENT_VERSION !== clientVersion) {
+    if (config.CLIENT_VERSION !== loadState(CLIENT_VERSION_STATE)) {
       console.log("Client version is updated")
-      dispatch(signOut());
+      localStorage.clear();
+      saveState(CLIENT_VERSION_STATE, config.CLIENT_VERSION);
     } else {
       console.log("Client version is not changed")
     }
-  }, [clientVersion, dispatch])
+  }, [])
+
+  useEffect(() => {
+    data && authService.tryToRefresh()
+  }, [data])
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -82,8 +84,8 @@ export default function App() {
   return (
     <Container fluid className={"main-container"}>
       {activeRole === ADMIN
-        ? <AdminToolBar isOpen={menuOpened} onClose={() => setMenuOpened(!menuOpened)}/>
-        : <UserToolBar isOpen={menuOpened} onClose={() => setMenuOpened(!menuOpened)}/>}
+        ? <AdminToolBar isOpen={menuOpened} onClose={() => setMenuOpened(false)}/>
+        : <UserToolBar isOpen={menuOpened} onClose={() => setMenuOpened(false)}/>}
 
       <TopToolBar onMenuClick={() => setMenuOpened(!menuOpened)}/>
       <CustomSpinner isFetching={isFetching}/>

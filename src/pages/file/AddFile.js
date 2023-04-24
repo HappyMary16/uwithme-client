@@ -78,7 +78,7 @@ export default function AddFile() {
         uploadProgress={progress}
         addFiles={setFiles}
         files={files}
-        successfulUploaded={uploadSuccess}
+        successfulUploaded={completed}
       />
       <Col
         xs={12}

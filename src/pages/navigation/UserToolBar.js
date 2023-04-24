@@ -16,24 +16,24 @@ import {TEST_SYSTEM_URI} from '../../config';
 import {useSelector} from "react-redux";
 import {selectActiveRole} from "../../store/user/authSlice";
 import {STUDENT, TEACHER} from "../../constants/userRoles";
-import {Link} from "react-router-dom";
 
-export function UserToolBar({ isOpen, onClose }) {
+export function UserToolBar({isOpen, onClose}) {
 
   const activeRole = useSelector(selectActiveRole);
 
   return (
-    <Menu isOpen={isOpen} onClose={() => onClose()}>
-      <Link to={USER_HOME}>{i18n.t('home_page')}</Link>
-      <Link to={SCHEDULE}>{i18n.t('schedule')}</Link>
-      <Link to={FILES_PAGE}>{i18n.t('page_with_files')}</Link>
-      {activeRole === TEACHER && <Link to={TEST_SYSTEM_URI} target = "_blank" rel = "noopener noreferrer">{i18n.t('tests')}</Link>}
-      {activeRole === STUDENT && <Link to={TEACHERS}>{i18n.t('teachers')}</Link>}
-      {activeRole === TEACHER && <Link to={STUDENTS}>{i18n.t('students')}</Link>}
-      {activeRole === STUDENT && <Link to={STUDENTS_RATING}>{i18n.t('students-rating')}</Link>}
-      {activeRole === STUDENT && <Link to={SUBJECT_SCORES}>{i18n.t('subjects-scores')}</Link>}
-      {activeRole === STUDENT && <Link to={DEBTS}>{i18n.t('debts')}</Link>}
-      <Link to={SETTING}>{i18n.t('setting')}</Link>
+    <Menu isOpen={isOpen} onClose={onClose}>
+      <a href={USER_HOME}>{i18n.t('home_page')}</a>
+      <a href={SCHEDULE}>{i18n.t('schedule')}</a>
+      <a href={FILES_PAGE}>{i18n.t('page_with_files')}</a>
+      {activeRole === TEACHER &&
+        <a href={TEST_SYSTEM_URI} target="_blank" rel="noopener noreferrer">{i18n.t('tests')}</a>}
+      {activeRole === STUDENT && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
+      {activeRole === TEACHER && <a href={STUDENTS}>{i18n.t('students')}</a>}
+      {activeRole === STUDENT && <a href={STUDENTS_RATING}>{i18n.t('students-rating')}</a>}
+      {activeRole === STUDENT && <a href={SUBJECT_SCORES}>{i18n.t('subjects-scores')}</a>}
+      {activeRole === STUDENT && <a href={DEBTS}>{i18n.t('debts')}</a>}
+      <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>
   );
 }

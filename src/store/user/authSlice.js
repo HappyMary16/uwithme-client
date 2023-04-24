@@ -1,13 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import * as config from "../../config";
 import {ADMIN, STUDENT, TEACHER} from "../../constants/userRoles";
 import {userApiSlice} from "./userApiSlice";
 import {getId} from "../../services/authService";
 import {signOut} from "../actions";
 
 const initialState = {
-  activeRole: null,
-  clientVersion: config.CLIENT_VERSION
+  activeRole: null
 };
 
 const authSlice = createSlice({
@@ -23,12 +21,10 @@ const authSlice = createSlice({
       .addMatcher(userApiSlice.endpoints.fetchUser.matchFulfilled, (state, {payload}) => {
         if (payload.id === getId()) {
           state.activeRole = state.activeRole ?? getDefaultActiveRole(payload.roles);
-          state.clientVersion = config.CLIENT_VERSION;
         }
       })
       .addMatcher(signOut.match, (state) => {
         state.activeRole = null;
-        state.clientVersion = config.CLIENT_VERSION;
       })
   }
 });
@@ -50,6 +46,5 @@ function getDefaultActiveRole(roles) {
 export const {roleActivated} = authSlice.actions;
 
 export const selectActiveRole = (state) => state.auth.activeRole;
-export const selectClientVersion = (state) => state.auth.clientVersion;
 
 export default authSlice.reducer;

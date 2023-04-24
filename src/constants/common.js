@@ -1,0 +1,1 @@
+export const CLIENT_VERSION_STATE = 'CLIENT_VERSION';

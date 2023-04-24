@@ -4,10 +4,10 @@ import {Container, ProgressBar} from 'react-bootstrap';
 export function FilesProgress({files, uploadProgress}) {
   return (
     <Container>
-      {files.map(file => {
+      {files.map((file, i) => {
         const now = uploadProgress[file.name];
         return (
-          <div className={'margin-bottom'}>
+          <div key={i} className={'margin-bottom'}>
             <p>{file.name}</p>
             {!!now && <ProgressBar now={now} label={`${now}%`}/>}
           </div>
