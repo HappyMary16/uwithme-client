@@ -64,6 +64,7 @@ export default function App() {
       console.log("Client version is updated")
       localStorage.clear();
       saveState(CLIENT_VERSION_STATE, config.CLIENT_VERSION);
+      window.location.reload();
     } else {
       console.log("Client version is not changed")
     }

@@ -15,6 +15,7 @@ import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchGroupsByDepartmentQuery} from "../../../store/group/groupApiSlice";
 import {messageAdded} from "../../../store/message/messageSlice";
 import logo from "../../../assets/logo192.png"
+import {authService} from "../../../services/authService";
 
 export default function ChooseRole() {
 
@@ -63,7 +64,7 @@ export default function ChooseRole() {
         groupId: group?.value,
         universityId: university?.value,
         universityName
-      });
+      }).then(() => authService.tryToRefresh());
     }
   }
 

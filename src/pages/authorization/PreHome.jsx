@@ -9,13 +9,13 @@ import {skipToken} from "@reduxjs/toolkit/query";
 export default function PreHome() {
 
   const navigate = useNavigate();
-  const {error, isFetching} = useFetchUserQuery(getId() ?? skipToken);
+  const {error, currentData, isFetching} = useFetchUserQuery(getId() ?? skipToken);
 
   useEffect(() => {
-    if (!isFetching && error?.status !== 404) {
+    if (!isFetching && currentData) {
       navigate(USER_HOME);
     }
-  }, [error, isFetching, navigate])
+  }, [currentData, isFetching, navigate])
 
   return <div>{error?.status === 404 && <ChooseRole/>}</div>;
 }

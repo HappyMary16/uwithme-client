@@ -30,7 +30,6 @@ export function Student({ student, removeStudent }) {
               removeStudent(student);
             }}
             className={"delete-icon icon"}
-            size={"1.6em"}
           />
         </Col>
       </Row>

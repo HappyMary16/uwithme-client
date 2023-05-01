@@ -63,8 +63,8 @@ export function SwitchAccountPanel() {
                   onMouseDown={() => updateUserRoleFunc(role)}>
                   <ListItem icon={<SwitchAccountIcon/>} text={textByRole[role]} openEnabled={false}/>
                 </ListGroup.Item>)}
-              <ListGroup.Item action onMouseDown={signOutFunc}>
-                <ListItem icon={<LogOutIcon size={'20px'}/>} text={i18n.t('sign_out')} openEnabled={false}/>
+              <ListGroup.Item action onMouseDown={signOutFunc} className={"no-padding"}>
+                <ListItem icon={<LogOutIcon/>} text={i18n.t('sign_out')} openEnabled={false} smSize={2}/>
               </ListGroup.Item>
             </ListGroup>
           </Popover.Body>

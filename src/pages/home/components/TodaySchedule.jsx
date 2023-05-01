@@ -32,8 +32,8 @@ export function TodaySchedule({lessons, user}) {
             {hasRole(user, TEACHER) && <th>{i18n.t('group')}</th>}
           </tr>
           {lessons &&
-            getTodayLessons(lessons, weekNumber ? 1 : 2).map(lesson => (
-              <tr key={lesson.name}>
+            getTodayLessons(lessons, weekNumber ? 1 : 2).map((lesson, i) => (
+              <tr key={i}>
                 <td>{getLessonTime(lesson.lessonTime)}</td>
                 <td>{lesson.subjectName}</td>
                 <td>{lesson.lectureHall}</td>

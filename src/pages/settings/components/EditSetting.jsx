@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import i18n from '../../../locales/i18n';
 import {CustomSelector} from '../../common/components/CustomSelector';
-import {hasRole} from '../../../utils/UsersUtil';
 import {ADMIN, STUDENT} from '../../../constants/userRoles';
 import {useDispatch} from "react-redux";
 import {useFetchUserQuery, useUpdateUserMutation} from "../../../store/user/userApiSlice";
@@ -15,6 +14,7 @@ import {skipToken} from "@reduxjs/toolkit/query";
 import {getId} from "../../../services/authService";
 import {useFetchGroupsByDepartmentQuery} from "../../../store/group/groupApiSlice";
 import {messageAdded} from "../../../store/message/messageSlice";
+import {hasRole} from "../../../utils/UsersUtil";
 
 export default function EditSetting({isEditMode, setEditMode}) {
 
@@ -31,7 +31,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
 
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(isEditMode ? university?.value ?? skipToken : skipToken);
   const {data: departments} = useFetchSubDepartmentsQuery(isEditMode ? institute?.value ?? skipToken : skipToken);
-  const {data: groups} = useFetchGroupsByDepartmentQuery(isEditMode && hasRole(STUDENT) ? department?.value ?? skipToken : skipToken);
+  const {data: groups} = useFetchGroupsByDepartmentQuery(isEditMode && hasRole(user, STUDENT) ? department?.value ?? skipToken : skipToken);
   const universities = useFetchTenantsQuery().data
 
   useEffect(() => {

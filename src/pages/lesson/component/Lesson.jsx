@@ -1,11 +1,15 @@
 import React from 'react';
-import {hasRole} from '../../../utils/UsersUtil';
 import {getGroupList} from '../../../utils/ScheduleUtil';
 import {Col, Row} from 'react-bootstrap';
 import {TrashFill} from 'react-bootstrap-icons';
 import {TEACHER} from '../../../constants/userRoles';
+import {selectActiveRole} from "../../../store/user/authSlice";
+import {useSelector} from "react-redux";
 
 export function Lesson({ lesson, user, isEditMode = false, deleteLesson }) {
+
+  const activeRole = useSelector(selectActiveRole);
+
   return (
     <div className={'lesson'}>
       {isEditMode && (
@@ -25,8 +29,9 @@ export function Lesson({ lesson, user, isEditMode = false, deleteLesson }) {
       <Row>
         <Col xs={8}>
           <p>{lesson.subjectName}</p>
-          <p
-            className={'secondary-text text'}>{hasRole(user, TEACHER) ? getGroupList(lesson.groups) : lesson.teacherName}</p>
+          <p className={'secondary-text text'}>
+            {!user && activeRole === TEACHER ? getGroupList(lesson.groups) : lesson.teacherName}
+          </p>
         </Col>
         <Col xs={4}>
           <p>{lesson.lectureHall}</p>

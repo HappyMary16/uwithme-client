@@ -1,6 +1,6 @@
 import React from "react";
 
-export function LogOutIcon({ onClick, size='2em' }) {
+export function LogOutIcon({ onClick, size='20px' }) {
   return (
     <div onClick={onClick} className={"icon"}>
       <svg
