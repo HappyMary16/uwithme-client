@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '../../../locales/i18n';
 import { Button, Modal } from 'react-bootstrap';
 
-export const ErrorMessage = ({ error, handleClose }) => {
+export function ErrorMessage({ error, handleClose }) {
   return (
     <Modal show={true} onHide={() => handleClose(error.id)} centered>
       <Modal.Header className="justify-content-center">
@@ -16,4 +16,4 @@ export const ErrorMessage = ({ error, handleClose }) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}

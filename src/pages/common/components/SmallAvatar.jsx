@@ -1,16 +1,16 @@
-import { Image } from 'react-bootstrap';
+import {Image} from 'react-bootstrap';
 import React from 'react';
+import {useAvatarDownloader} from "../../../hooks/useAvatarDownloader";
+import emptyAvatar from "../../../assets/empty-avatar.png"
 
-export const SmallAvatar = ({ size = "30px", avatar }) => {
+export function SmallAvatar({size = "30px", user, image}) {
+  const [avatar] = useAvatarDownloader(user?.id);
+
   return (
-    <Image
-      roundedCircle
-      alt="photo"
-      src={
-        avatar === undefined || avatar === null ? '/empty-avatar.jpg' : avatar
-      }
-      width={size}
-      height={size}
-    />
+    <Image roundedCircle
+           alt="photo"
+           src={avatar ?? image ?? emptyAvatar}
+           width={size}
+           height={size}/>
   );
-};
+}

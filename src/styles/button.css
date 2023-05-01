@@ -1,4 +1,5 @@
 .btn-purple {
+    width: 100%;
     margin-bottom: 0.5em;
     background-color: #eeeeee;
     border-color: #5c71c5;
@@ -20,6 +21,7 @@
 }
 
 .btn-red {
+    width: 100%;
     margin-bottom: 0.5em;
     background-color: #eeeeee;
     border-color: red;

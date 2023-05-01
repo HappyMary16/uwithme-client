@@ -1,30 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, {useEffect} from "react";
 import ChooseRole from "./components/ChooseRole";
-import { history } from "../../store/Store";
-import { USER_HOME } from "../../constants/links";
-import { signInRequest } from "../../actions/authActions";
+import {USER_HOME} from "../../constants/links";
+import {useNavigate} from "react-router-dom";
+import {useFetchUserQuery} from "../../store/user/userApiSlice";
+import {getId} from "../../services/authService";
+import {skipToken} from "@reduxjs/toolkit/query";
 
-class PreHome extends Component {
-  componentDidMount() {
-    const { user, dispatch } = this.props;
-    dispatch(signInRequest());
-    if (user) {
-      history.push(USER_HOME);
+export default function PreHome() {
+
+  const navigate = useNavigate();
+  const {error, currentData, isFetching} = useFetchUserQuery(getId() ?? skipToken);
+
+  useEffect(() => {
+    if (!isFetching && currentData) {
+      navigate(USER_HOME);
     }
-  }
+  }, [currentData, isFetching, navigate])
 
-  render() {
-    const { isRegistrationComplete } = this.props;
-    return <div>{!isRegistrationComplete && <ChooseRole />}</div>;
-  }
+  return <div>{error?.status === 404 && <ChooseRole/>}</div>;
 }
-
-const mapStateToProps = state => {
-  return {
-    user: state.authReducers.user,
-    isRegistrationComplete: state.authReducers.isRegistrationComplete
-  };
-};
-
-export default connect(mapStateToProps)(PreHome);

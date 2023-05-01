@@ -1,4 +1,4 @@
-import { LECTURE, TASK } from '../constants/userRoles';
+import {LECTURE, TASK} from '../constants/userRoles';
 
 export function getLectures(files) {
   if (files) {
@@ -14,11 +14,6 @@ export function getTasks(files) {
   } else {
     return [];
   }
-}
-
-export function getUploadProgressByFileName(uploadProgress, file) {
-  const progress = uploadProgress && uploadProgress.filter(p => p.file === file)[0];
-  return progress ? progress.progress : null;
 }
 
 export function isPossibleToOpen(fileName) {

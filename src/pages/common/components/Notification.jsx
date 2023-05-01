@@ -1,13 +1,9 @@
 import React from 'react';
-import { Toast } from 'react-bootstrap';
+import {Toast} from 'react-bootstrap';
 
-export const Notification = ({ header, text, show, onClose }) => {
-
+export function Notification({header, text, show, onClose}) {
   return (
-    <div
-      aria-live="polite"
-      aria-atomic="true"
-    >
+    <div aria-live="polite" aria-atomic="true">
       <div className={"notification-container"}>
         <Toast show={show} onClose={onClose} delay={0} animation={false}>
           <Toast.Header>
@@ -18,4 +14,4 @@ export const Notification = ({ header, text, show, onClose }) => {
       </div>
     </div>
   );
-};
+}

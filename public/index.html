@@ -2,54 +2,30 @@
 <html lang="ua" xmlns="http://www.w3.org/1999/html">
 <head>
     <base href="/">
-    <meta charset="utf-8"/>
+
     <title>University With Me</title>
-    <meta
-            name="Description"
-            content="University With Me - додаток для надання інформації (навчальних матеріалів, розкладу, оцінок) студентам під час навчального процесу."
-    />
-    <link rel="manifest" href="manifest.json"/>
-    <meta name="theme-color" content="#343A40"/>
-    <link rel="apple-touch-icon" href="appleLogo.png"/>
-    <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="black"
-    />
-    <meta
-            name="viewport"
-            content="width=device-width, minimum-scale=1, maximum-scale=1, height=device-height, user-scalable=no, initial-scale=1, viewport-fit=cover"
-    />
-    <style>
-        body {
-            height: auto;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-            background-color: #eeeeee !important;
-        }
 
-        #root {
-            background-color: white !important;
-            min-height: 100vh !important;
-        }
-    </style>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color"
+          content="#343A40"
+    />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black"
+    />
+    <meta name="Description"
+          content="University With Me - додаток для надання інформації студентам під час навчального процесу."
+    />
 
-    <link rel="stylesheet"
-          href="./bootstrap.min.css"
-          crossorigin="anonymous"/>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/appleLogo.png"/>
 
-    <script src="./config/env.js"></script>
+    <script src="%PUBLIC_URL%/config/env.js"></script>
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
-
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js');
-        });
-    }
-</script>
-
 </body>
 </html>

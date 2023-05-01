@@ -1,11 +1,10 @@
 import React from 'react';
 import Switch from 'react-switch';
-import { lightGreyColor } from '../../../styles/styles';
-import { Row } from 'react-bootstrap';
+import {lightGreyColor} from '../../../styles/styles';
 
-export const SwitchWeek = ({ weekNumber, setWeekNumber }) => {
+export function SwitchWeek({ weekNumber, setWeekNumber }) {
   return (
-    <Row className="justify-content-end switch-week-margin">
+    <div className="justify-content-end d-flex switch-week-margin">
       <Switch
         offColor={lightGreyColor}
         onColor={lightGreyColor}
@@ -18,6 +17,6 @@ export const SwitchWeek = ({ weekNumber, setWeekNumber }) => {
         className="react-switch"
         id="icon-switch"
       />
-    </Row>
+    </div>
   );
-};
+}

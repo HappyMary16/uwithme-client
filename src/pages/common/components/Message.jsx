@@ -1,13 +1,8 @@
 import React from 'react';
 import i18n from '../../../locales/i18n';
-import { Button, Modal } from 'react-bootstrap';
+import {Button, Modal} from 'react-bootstrap';
 
-export const Message = ({
-  open = false,
-  message,
-  handleClose,
-  description
-}) => {
+export function Message({open, message, handleClose, description}) {
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header className="justify-content-center">
@@ -21,4 +16,4 @@ export const Message = ({
       </Modal.Footer>
     </Modal>
   );
-};
+}
