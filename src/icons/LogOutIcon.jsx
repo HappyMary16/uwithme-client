@@ -1,20 +1,12 @@
 import React from "react";
 
-export function LogOutIcon({ onClick, size='20px' }) {
+export function LogOutIcon({ onClick}) {
   return (
     <div onClick={onClick} className={"icon"}>
-      <svg
-        version="1.0"
-        xmlns="http://www.w3.org/2000/svg"
-        height={size}
-        viewBox="0 0 128.000000 128.000000"
-        preserveAspectRatio="xMidYMid meet"
-        className="st1"
-      >
-        <g
-          transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-          stroke="none"
-        >
+      <svg version="1.0" xmlns="http://www.w3.org/2000/svg" height='20px' viewBox="0 0 128.000000 128.000000"
+        preserveAspectRatio="xMidYMid meet" className="st1">
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
+          stroke="none">
           <path
             d="M65 1271 c-11 -5 -29 -19 -40 -31 -19 -21 -20 -38 -23 -534 -3 -561
 -4 -558 56 -586 53 -25 347 -120 370 -120 33 0 78 28 91 57 6 13 11 41 11 63
