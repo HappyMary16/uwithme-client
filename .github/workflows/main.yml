@@ -24,5 +24,5 @@ jobs:
         with:
           dockerfile: ./image/Dockerfile
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: uwithme-ui
+          image-name: uwithme-client
           image-tag: latest
