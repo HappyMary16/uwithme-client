@@ -25,7 +25,7 @@ export default function BotAuth() {
       dispatch(messageAdded(t("telegram_auth_error")));
       navigate(USER_HOME);
     }
-  }, [searchParams, dispatch, navigate, i18n])
+  }, [searchParams, dispatch, navigate, t])
 
   function loginCancel() {
     navigate(USER_HOME);
