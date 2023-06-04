@@ -32,3 +32,6 @@ export const ADMINS = "/admins";
 export const STUDENTS_RATING = "/studcab/students/rating";
 export const SUBJECT_SCORES = "/studcab/subjects/scores";
 export const DEBTS = "/studcab/students/debts";
+
+//bot
+export const BOT_AUTH = "/bot-auth"

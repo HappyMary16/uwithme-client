@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import {useSelector} from 'react-redux';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import {AddLectureHall} from './components/AddLectureHall';
 import {BuildingsList} from './components/BuildingsList';
 import {Button, Col, Row} from 'react-bootstrap';

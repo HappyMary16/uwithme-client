@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {CustomSelector} from '../../common/components/CustomSelector';
 import {ADMIN, STUDENT} from '../../../constants/userRoles';
 import {useDispatch} from "react-redux";

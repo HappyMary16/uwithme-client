@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';

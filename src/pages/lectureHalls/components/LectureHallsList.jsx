@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {Col, Collapse, ListGroup, Row} from 'react-bootstrap';
 import {DoorOpenFill} from 'react-bootstrap-icons';
 

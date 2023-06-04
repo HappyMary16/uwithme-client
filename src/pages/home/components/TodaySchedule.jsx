@@ -6,7 +6,7 @@ import {
   getLessonTime,
   getTodayLessons
 } from '../../../utils/ScheduleUtil';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {hasRole} from '../../../utils/UsersUtil';
 import {Table} from 'react-bootstrap';
 import {SwitchWeek} from '../../common/components/SwitchWeek';

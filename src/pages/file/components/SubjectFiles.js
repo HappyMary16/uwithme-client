@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {getLectures, getTasks} from '../../../utils/FileUtil';
 import ListFiles from './ListFiles';
 import {Collapse, ListGroup} from 'react-bootstrap';

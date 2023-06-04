@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FileTypes, LECTURE} from '../../constants/userRoles';
 import {Upload} from './components/Upload';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';

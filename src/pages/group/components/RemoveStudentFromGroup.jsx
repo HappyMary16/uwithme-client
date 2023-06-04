@@ -1,6 +1,6 @@
 import React from 'react';
 
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {getName} from '../../../utils/UsersUtil';
 import {Button, Modal} from 'react-bootstrap';
 

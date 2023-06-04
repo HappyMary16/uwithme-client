@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import {Provider} from 'react-redux';
-import '../src/locales/i18n';
+import './config/i18n';
 import App from './App';
 import {store} from './store/Store';
 import {CustomSpinner} from "./pages/common/CustomSpinner";
@@ -12,6 +12,7 @@ import {
   ADD_FILE,
   ADD_LESSON,
   ADMINS,
+  BOT_AUTH,
   DEBTS,
   FILES_PAGE,
   GROUP_PAGE_ROUTER,
@@ -49,6 +50,7 @@ import AddFile from "./pages/file/AddFile";
 import MySchedule from "./pages/lesson/MySchedule";
 import {authService, hasAnyRole} from "./services/authService";
 import AddLesson from "./pages/lesson/AddLesson";
+import BotAuth from "./pages/bot/BotAuth";
 
 // const Begin = lazy(() => import("./components/session/Begin"));
 // const Test = lazy(() => import("./components/test/Test"));
@@ -172,6 +174,10 @@ const router = createBrowserRouter([
           <PageRouter roles={[ADMIN]}>
             <AdminList/>
           </PageRouter>
+      },
+      {
+        path: BOT_AUTH,
+        element: <BotAuth/>
       }
     ]
   }

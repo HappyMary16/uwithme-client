@@ -4,7 +4,7 @@ import {Button, ListGroup, Overlay, Popover} from 'react-bootstrap';
 import {SmallAvatar} from '../common/components/SmallAvatar';
 import {ListItem} from '../common/components/ListItem';
 import {SwitchAccountIcon} from '../../icons/SwitchAccountIcon';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import {useDispatch, useSelector} from "react-redux";
 import {useFetchUserQuery} from "../../store/user/userApiSlice";
 import {roleActivated, selectActiveRole} from "../../store/user/authSlice";

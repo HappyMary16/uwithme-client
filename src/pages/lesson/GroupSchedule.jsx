@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Col, Row} from 'react-bootstrap';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';
 import {getGroupById} from '../../utils/StructureUtils';

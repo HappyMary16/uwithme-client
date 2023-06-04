@@ -1,4 +1,4 @@
-import i18n from '../locales/i18n';
+import i18n from '../config/i18n';
 
 export const STUDENT = 'ROLE_STUDENT';
 export const TEACHER = 'ROLE_TEACHER';

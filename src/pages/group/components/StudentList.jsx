@@ -1,6 +1,6 @@
 import React from 'react';
 import {Student} from './Student';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {Button, Col, Container, ListGroup, Row} from 'react-bootstrap';
 
 export function StudentsList({ students, addStudent, removeStudent }) {

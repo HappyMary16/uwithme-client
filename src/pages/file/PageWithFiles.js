@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {ADD_FILE, SHARE_FILES} from '../../constants/links';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import {TEACHER} from '../../constants/userRoles';
 import {useSelector} from 'react-redux';
 import {Button, Col, ListGroup, Row} from 'react-bootstrap';

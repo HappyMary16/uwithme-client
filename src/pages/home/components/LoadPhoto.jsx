@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import '../../../styles/fileUpload.css';
 import AvatarEditor from 'react-avatar-editor';
 import {Button, Form, Modal, Row} from 'react-bootstrap';

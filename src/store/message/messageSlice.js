@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {fileApiSlice} from "../file/fileApiSlice";
 import {getMessage} from "../../utils/MessageUtil";
 import {lessonApiSlice} from "../lesson/lessonApiSlice";
-import i18n from "../../locales/i18n";
+import i18n from "../../config/i18n";
 import {signOut} from "../actions";
 
 const initialState = {
@@ -15,7 +15,7 @@ const messageSlice = createSlice({
   initialState,
   reducers: {
     messageAdded: (state, message) => {
-      state.message = message;
+      state.message = message.payload;
     },
     messageRemoved: (state) => {
       state.message = null;

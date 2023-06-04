@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';
 import {Button, Col} from 'react-bootstrap';

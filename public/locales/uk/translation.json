@@ -1,4 +1,5 @@
 {
+  "next": "Далі",
   "sign_in": "Увійти",
   "user_name": "Ім'я користувача",
   "password": "Пароль",
@@ -121,7 +122,5 @@
   "to_student": "Режим студента",
   "to_teacher": "Режим викладача",
   "admins": "Адміністратори",
-  "bot_notification_header": "Telegram-bot ",
-  "bot_notification_text": "Заходь в нашого Telegram-бота",
   "tests": "Система тестування"
 }

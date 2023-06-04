@@ -1,4 +1,4 @@
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {Row} from 'react-bootstrap';
 import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";

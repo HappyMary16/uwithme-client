@@ -1,6 +1,6 @@
 import React from 'react';
 
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {Button, Modal} from 'react-bootstrap';
 
 export function RemoveDepartment({department, handleNo, handleYes}) {

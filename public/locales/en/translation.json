@@ -1,9 +1,9 @@
 {
+  "next": "Next",
   "sign_in": "Sign In",
   "user_name": "User name",
   "password": "Password",
   "sign_up_button": "Don't have an account? Sign Up",
-
   "sign_up": "Sign Up",
   "continue_sign_up": "Please, continue sign up",
   "first_name": "First Name",

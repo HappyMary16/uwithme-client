@@ -1,6 +1,6 @@
 import React from 'react';
 import {ADMINS, LECTURE_HALLS, SCHEDULE, SETTING, STUDENTS, TEACHERS, USER_HOME} from '../../constants/links';
-import i18n from '../../locales/i18n';
+import i18n from '../../config/i18n';
 import {slide as Menu} from 'react-burger-menu';
 
 export function AdminToolBar({isOpen = false, onClose}) {

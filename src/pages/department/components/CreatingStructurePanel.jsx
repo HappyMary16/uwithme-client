@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Button, Col, Container, Row} from 'react-bootstrap';
-import i18n from '../../../locales/i18n';
+import i18n from '../../../config/i18n';
 import {AddDepartment} from './AddDepartment';
 import {AddInstitute} from './AddInstitute';
 import {AddGroup} from './AddGroup';
