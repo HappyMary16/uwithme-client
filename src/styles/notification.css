@@ -11,9 +11,3 @@ div.toast-header button:active {
     border-color: #f7f8fc;
     box-shadow: 0 0 0 0 !important;
 }
-
-.notification-container {
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
-}
