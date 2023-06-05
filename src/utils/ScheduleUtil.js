@@ -1,5 +1,5 @@
-import { LESSONS_TIME } from '../constants/userRoles';
-import { getGroupById } from './StructureUtils';
+import {LESSONS_TIME} from '../constants/schedule';
+import {getGroupById} from './StructureUtils';
 
 export const getLessonTime = lessonNumber => {
   let lessonTime = LESSONS_TIME.find(lesson => lesson.value === lessonNumber);

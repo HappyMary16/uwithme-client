@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import i18n from '../../../config/i18n';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
-import {ADMIN, STUDENT, UserRoles} from '../../../constants/userRoles';
+import {ADMIN, STUDENT, TEACHER} from '../../../constants/userRoles';
 import {useDispatch} from 'react-redux';
 import {useSaveUserMutation} from "../../../store/user/userApiSlice";
 import {useFetchTenantsQuery} from "../../../store/tenant/tenantApiSlice";
@@ -16,10 +15,12 @@ import {useFetchGroupsByDepartmentQuery} from "../../../store/group/groupApiSlic
 import {messageAdded} from "../../../store/message/messageSlice";
 import logo from "../../../assets/logo192.png"
 import {authService} from "../../../services/authService";
+import {useTranslation} from "react-i18next";
 
 export default function ChooseRole() {
 
   const dispatch = useDispatch();
+  const {t} = useTranslation();
 
   const [userRole, setUserRole] = useState();
   const [university, setUniversity] = useState();
@@ -35,24 +36,35 @@ export default function ChooseRole() {
   const {currentData: departments} = useFetchSubDepartmentsQuery(institute?.value ?? skipToken);
   const {currentData: groups} = useFetchGroupsByDepartmentQuery(department?.value ?? skipToken);
 
+  const userRoles = [
+    {
+      value: STUDENT,
+      label: t('student')
+    },
+    {
+      value: TEACHER,
+      label: t('continue_like_teacher')
+    }
+  ];
+
   function submit(e) {
     e.preventDefault();
 
     if (!userRole) {
-      dispatch(messageAdded(i18n.t("please_choose_your_user_type")));
+      dispatch(messageAdded(t("please_choose_your_user_type")));
     }
 
     if (userRole && userRole !== ADMIN) {
       if (!university) {
-        dispatch(messageAdded(i18n.t("please_choose_university")));
+        dispatch(messageAdded(t("please_choose_university")));
       }
 
       if (university && !institute) {
-        dispatch(messageAdded(i18n.t("please_choose_institute")));
+        dispatch(messageAdded(t("please_choose_institute")));
       }
 
       if (institute && !department) {
-        dispatch(messageAdded(i18n.t("please_choose_department")));
+        dispatch(messageAdded(t("please_choose_department")));
       }
     }
 
@@ -88,19 +100,19 @@ export default function ChooseRole() {
           />
         </Row>
         <Row className="justify-content-center margin-bottom">
-          <h5 className={"text-center"}>{i18n.t("continue_sign_up")}</h5>
+          <h5 className={"text-center"}>{t("continue_sign_up")}</h5>
         </Row>
         <Form onSubmit={submit}>
           <Select
             className={"selector"}
             theme={selectorColors}
-            placeholder={i18n.t("user_type") + " *"}
-            options={UserRoles}
+            placeholder={t("user_type") + " *"}
+            options={userRoles}
             onChange={(e) => setUserRole(e.value)}
           />
           {userRole === ADMIN && (
             <Form.Control
-              placeholder={i18n.t("university_name") + " *"}
+              placeholder={t("university_name") + " *"}
               onChange={e => setUniversityName(e.target.value)}
               required
             />
@@ -110,7 +122,7 @@ export default function ChooseRole() {
               <Select
                 className={"selector"}
                 theme={selectorColors}
-                placeholder={i18n.t("university") + " *"}
+                placeholder={t("university") + " *"}
                 options={universities}
                 value={university}
                 onChange={setUniversity}
@@ -118,7 +130,7 @@ export default function ChooseRole() {
               <Select
                 className={"selector"}
                 theme={selectorColors}
-                placeholder={i18n.t("institute") + " *"}
+                placeholder={t("institute") + " *"}
                 options={institutes}
                 value={institute}
                 onChange={setInstitute}
@@ -126,7 +138,7 @@ export default function ChooseRole() {
               <Select
                 className={"selector"}
                 theme={selectorColors}
-                placeholder={i18n.t("department") + " *"}
+                placeholder={t("department") + " *"}
                 options={departments}
                 value={department}
                 onChange={setDepartment}
@@ -137,14 +149,14 @@ export default function ChooseRole() {
             <Select
               className={"selector"}
               theme={selectorColors}
-              placeholder={i18n.t("group")}
+              placeholder={t("group")}
               options={groups?.filter(group => group.visible)}
               value={group}
               onChange={setGroup}
             />
           )}
           <Button variant={"purple"} type={"submit"}>
-            {i18n.t("sign_up")}
+            {t("sign_up")}
           </Button>
         </Form>
       </Col>

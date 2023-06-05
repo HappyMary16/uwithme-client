@@ -3,7 +3,7 @@ import i18n from '../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
-import {LESSONS_TIME, TEACHER, WEEK_DAYS, WEEK_NUMBER} from '../../constants/userRoles';
+import {getLocalizedWeekDays, getLocalizedWeekNumber, LESSONS_TIME} from '../../constants/schedule';
 import {getLectureHallsByBuilding} from '../../utils/StructureUtils';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {getName} from '../../utils/UsersUtil';
@@ -17,8 +17,12 @@ import {useFetchBuildingsQuery} from "../../store/lecturehall/buildingApiSlice";
 import {useFetchGroupsQuery} from "../../store/group/groupApiSlice";
 import {useSaveLessonsMutation} from "../../store/lesson/lessonApiSlice";
 import {useFetchSubjectsByUserIdQuery, useFetchSubjectsQuery} from "../../store/subject/subjectApiSlice";
+import {TEACHER} from "../../constants/userRoles";
+import {useTranslation} from "react-i18next";
 
 export default function AddLesson() {
+
+  const {t} = useTranslation();
 
   const [saveLessons] = useSaveLessonsMutation();
 
@@ -119,7 +123,7 @@ export default function AddLesson() {
       <Select
         theme={selectorColors}
         onChange={opinion => setWeekDays(opinion)}
-        options={WEEK_DAYS}
+        options={getLocalizedWeekDays(i18n.t)}
         placeholder={i18n.t('week_day')}
         isMulti
         className={'selector'}
@@ -139,7 +143,7 @@ export default function AddLesson() {
         theme={selectorColors}
         isMulti
         onChange={opinion => setWeekNumbers(opinion)}
-        options={WEEK_NUMBER}
+        options={getLocalizedWeekNumber(t)}
         className={'selector'}
       />
 

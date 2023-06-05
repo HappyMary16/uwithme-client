@@ -1,16 +1,19 @@
 import React, {Fragment} from 'react';
-import {WEEK_DAYS} from '../../../constants/userRoles';
 import {ListGroup} from 'react-bootstrap';
 import {SmallScreenDay} from './SmallScreenDay';
 import {EmptyPage} from '../../common/components/EmptyPage';
+import {getLocalizedWeekDays} from "../../../constants/schedule";
+import {useTranslation} from "react-i18next";
 
 export function SmallScreenSchedule({lessons, user, isEditMode, deleteLesson, weekNumber}) {
+
+  const {t} = useTranslation();
 
   return (
     <Fragment>
       {lessons?.length
         ? <ListGroup variant="flush">
-          {WEEK_DAYS.map((day, i) => (
+          {getLocalizedWeekDays(t).map((day, i) => (
             <SmallScreenDay key={i}
                             day={day}
                             lessons={lessons}

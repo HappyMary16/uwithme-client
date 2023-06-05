@@ -1,17 +1,20 @@
 import React from 'react';
 import {Lesson} from './Lesson';
-import {LESSONS_TIME, WEEK_DAYS} from '../../../constants/userRoles';
 import {getLesson} from '../../../utils/ScheduleUtil';
 import {Table} from 'react-bootstrap';
+import {useTranslation} from "react-i18next";
+import {getLocalizedWeekDays, LESSONS_TIME} from "../../../constants/schedule";
 
 export function ScheduleTable({lessons, user, isEditMode, deleteLesson, weekNumber}) {
+
+  const {t} = useTranslation();
 
   return (
     <Table bordered size="sm">
       <thead>
       <tr>
         <th className={'schedule-th'}></th>
-        {WEEK_DAYS.map(weekDay => (
+        {getLocalizedWeekDays(t).map(weekDay => (
           <th className={'schedule-th'} key={weekDay.value}>
             {weekDay.label}
           </th>
@@ -26,7 +29,7 @@ export function ScheduleTable({lessons, user, isEditMode, deleteLesson, weekNumb
             <br/>
             {lessonTime.end}
           </th>
-          {WEEK_DAYS.map(weekDay => {
+          {getLocalizedWeekDays(t).map(weekDay => {
             let lesson = getLesson(
               lessons,
               weekDay.value,

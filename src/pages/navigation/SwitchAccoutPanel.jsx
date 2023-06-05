@@ -47,7 +47,7 @@ export function SwitchAccountPanel() {
   }
 
   return (
-    <div ref={ref} className={'justify-content-end d-flex'}>
+    <div ref={ref}>
       <Button onClick={handleClick} onBlur={() => setShow(false)} variant={'link'}>
         <SmallAvatar size={35} user={user}/>
       </Button>

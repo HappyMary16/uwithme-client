@@ -20,6 +20,9 @@ const authSlice = createSlice({
     builder
       .addMatcher(userApiSlice.endpoints.fetchUser.matchFulfilled, (state, {payload}) => {
         if (payload.id === getId()) {
+          if (!payload.roles.includes(state.activeRole)) {
+            state.activeRole = null;
+          }
           state.activeRole = state.activeRole ?? getDefaultActiveRole(payload.roles);
         }
       })
