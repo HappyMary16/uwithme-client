@@ -8,10 +8,13 @@ import {getSemesterById} from '../../../utils/StructureUtils';
 import Select from 'react-select';
 import {SEMESTER_NUMBER} from '../../../constants/userRoles';
 import {isPageSmall, isPageTiny} from '../../../utils/PageSizeUtil';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectCredentials} from "../../../store/studcabinet/studCabinetSlice";
 import {useFetchStudentInfoQuery} from "../../../store/studcabinet/studCabinetApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {messageAdded} from "../../../store/message/messageSlice";
+import {useTranslation} from "react-i18next";
+import {selectApiLoading} from "../../../App";
 
 function getColumns(columns) {
   let columnsToShow = columns;
@@ -29,17 +32,22 @@ function getColumns(columns) {
 }
 
 export default function StudCabinetPage({
-  isSemesterRequired,
   data,
   columns,
-  rowStyleFunc
+  rowStyleFunc,
+  semester,
+  setSemester
 }) {
 
+  const dispatch = useDispatch();
+  const {t} = useTranslation("studCabinet");
+
+  const isFetching = useSelector(selectApiLoading);
+
   const [shownColumns, setShownColumns] = useState(getColumns(columns));
-  const [semester, setSemester] = useState(1);
 
   const [credentials, setCredentials] = useState(useSelector(selectCredentials));
-  useFetchStudentInfoQuery(credentials ?? skipToken);
+  const {error} = useFetchStudentInfoQuery(credentials ?? skipToken);
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -47,23 +55,11 @@ export default function StudCabinetPage({
     }, true);
   }, [columns]);
 
-  function ifDataPresent(semester) {
-    if (isSemesterRequired) {
-      return (!!semester && data
-        && data.filter(studentScore => studentScore.semester === semester).length > 0);
-    } else {
-      return !!data && data.length > 0;
+  useEffect(() => {
+    if (error) {
+      dispatch(messageAdded(t("not_valid_credentials")));
     }
-  }
-
-  function getData(semester) {
-    if (isSemesterRequired) {
-      return (!!data
-        && data.filter(studentScore => studentScore.semester === semester));
-    } else {
-      return data;
-    }
-  }
+  }, [error, dispatch, t])
 
   return (
     <div>
@@ -71,7 +67,7 @@ export default function StudCabinetPage({
         handleCreate={setCredentials}
       />
 
-      {isSemesterRequired && !!semester && (
+      {semester && (
         <Select
           className={'selector'}
           placeholder={i18n.t('semester')}
@@ -82,13 +78,13 @@ export default function StudCabinetPage({
         />
       )}
 
-      {!ifDataPresent(semester) && <EmptyPage/>}
+      {!data?.length && !isFetching && <EmptyPage/>}
 
-      {ifDataPresent(semester) && (
+      {!!data?.length && (
         <BootstrapTable
           rowStyle={rowStyleFunc}
           keyField={'place'}
-          data={getData(semester)}
+          data={data}
           columns={shownColumns}
         />
       )}

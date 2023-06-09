@@ -9,39 +9,50 @@ export const studCabinetApiSlice = createApi({
     fetchStudentInfo: builder.query({
       query: (credentials) => ({
         url: `/students`,
-        method: 'GET',
-        params: credentials
+        method: 'POST',
+        body: credentials
       }),
       providesTags: ['StudentInfoApi']
     }),
     fetchStudentsRating: builder.query({
       query: ({credentials, semester}) => ({
         url: `/rating/${semester}`,
-        method: 'GET',
-        params: credentials
+        method: 'POST',
+        body: credentials
       }),
       providesTags: ['StudentsRatingApi']
     }),
     fetchStudentScores: builder.query({
       query: ({credentials, semester}) => ({
         url: `/scores/${semester}`,
-        method: 'GET',
-        params: credentials
+        method: 'POST',
+        body: credentials
       }),
       providesTags: ['StudentsRatingApi']
     }),
     fetchStudentDebts: builder.query({
       query: (credentials) => ({
         url: `/debts`,
-        method: 'GET',
-        params: credentials
+        method: 'POST',
+        body: credentials
       }),
       providesTags: ['StudentsRatingApi']
+    }),
+    fetchSyllabus: builder.query({
+      query: ({credentials, semester}) => ({
+        url: `/syllabus/${semester}`,
+        method: 'POST',
+        body: credentials
+      }),
+      providesTags: ['Syllabus']
     })
   })
 });
 
-export const {useFetchStudentInfoQuery,
+export const {
+  useFetchStudentInfoQuery,
   useFetchStudentsRatingQuery,
   useFetchStudentScoresQuery,
-  useFetchStudentDebtsQuery} = studCabinetApiSlice;
+  useFetchStudentDebtsQuery,
+  useFetchSyllabusQuery
+} = studCabinetApiSlice;

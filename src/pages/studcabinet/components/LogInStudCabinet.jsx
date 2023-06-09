@@ -1,13 +1,15 @@
 import React from 'react';
-import i18n from '../../../config/i18n';
 import {Button, Form, Modal} from 'react-bootstrap';
 import {USER_HOME} from '../../../constants/links';
 import {Message} from '../../common/components/Message';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectCredentials} from "../../../store/studcabinet/studCabinetSlice";
+import {useTranslation} from "react-i18next";
 
 export function LogInStudCabinet({handleCreate}) {
+
+  const {t, i18n} = useTranslation("studCabinet");
 
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
@@ -25,14 +27,14 @@ export function LogInStudCabinet({handleCreate}) {
     <div>
       <Message
         open={showMessage}
-        message={i18n.t('can-not-show-stud-cab-info')}
-        description={i18n.t('can-not-show-stud-cab-info-description')}
+        message={t('can_not_show_stud_cab_info')}
+        description={t('can_not_show_stud_cab_info_description')}
         handleClose={() => navigate(USER_HOME)}
       />
 
       <Modal show={!credentials} centered>
         <Modal.Header>
-          <Modal.Title>{i18n.t('log-in-stud-cab')}</Modal.Title>
+          <Modal.Title>{t('log_in_stud_cab')}</Modal.Title>
         </Modal.Header>
 
         <Form onSubmit={submit}>
@@ -50,8 +52,7 @@ export function LogInStudCabinet({handleCreate}) {
               required
             />
             <p>
-              Якщо ви не хочете вводити свої дані, ви можете переглянути
-              інформацію з кабінету студента в ньому ж.
+              {t("see_info_in_stud_cabinet")}
               <br/>
               <a href={'https://studcabinet.kpi.kharkov.ua/'}>
                 studcabinet.kpi.kharkov.ua

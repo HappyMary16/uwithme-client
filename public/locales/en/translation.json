@@ -11,8 +11,6 @@
   "surname": "Surname",
   "phone": "Phone",
   "email": "Email",
-  "confirm_password": "Confirm password",
-  "password_error": "Passwords are not equal",
   "user_type": "User type",
   "student_id": "Student ID",
   "science_degree": "Science degree",

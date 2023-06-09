@@ -25,6 +25,7 @@ import {
   STUDENTS,
   STUDENTS_RATING,
   SUBJECT_SCORES,
+  SYLLABUS,
   TEACHERS,
   USER_HOME_PAGE_ROUTER,
   USER_SCHEDULE_ROUTER
@@ -51,6 +52,7 @@ import MySchedule from "./pages/lesson/MySchedule";
 import {authService, hasAnyRole} from "./services/authService";
 import AddLesson from "./pages/lesson/AddLesson";
 import BotAuth from "./pages/bot/BotAuth";
+import Syllabus from "./pages/studcabinet/Syllabus";
 
 // const Begin = lazy(() => import("./components/session/Begin"));
 // const Test = lazy(() => import("./components/test/Test"));
@@ -145,6 +147,13 @@ const router = createBrowserRouter([
         element:
           <PageRouter roles={[STUDENT]}>
             <Debts/>
+          </PageRouter>
+      },
+      {
+        path: SYLLABUS,
+        element:
+          <PageRouter roles={[STUDENT]}>
+            <Syllabus/>
           </PageRouter>
       },
       {

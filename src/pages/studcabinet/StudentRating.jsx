@@ -1,20 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {selectedItemColor} from '../../styles/styles';
 import StudCabinetPage from './components/StudCabinetPage';
-import {selectCredentials} from "../../store/studcabinet/studCabinetSlice";
+import {selectCredentials, selectSemester} from "../../store/studcabinet/studCabinetSlice";
 import {useFetchStudentInfoQuery, useFetchStudentsRatingQuery} from "../../store/studcabinet/studCabinetApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function StudentRating() {
 
   const credentials = useSelector(selectCredentials);
-  const {data} = useFetchStudentsRatingQuery(credentials ? {credentials, semester: 1} : skipToken);
+  const [semester, setSemester] = useState(useSelector(selectSemester) ?? 1);
+  const {data} = useFetchStudentsRatingQuery(credentials ? {credentials, semester: semester} : skipToken);
   const {data: studentInfo} = useFetchStudentInfoQuery(credentials ?? skipToken);
 
   return (
     <StudCabinetPage
-      isSemesterRequired
+      semester={semester}
+      setSemester={setSemester}
       data={data}
       columns={[
         {

@@ -7,6 +7,7 @@ import {
   STUDENTS,
   STUDENTS_RATING,
   SUBJECT_SCORES,
+  SYLLABUS,
   TEACHERS,
   USER_HOME
 } from '../../constants/links';
@@ -30,8 +31,9 @@ export function UserToolBar({isOpen, onClose}) {
         <a href={TEST_SYSTEM_URI} target="_blank" rel="noopener noreferrer">{i18n.t('tests')}</a>}
       {activeRole === STUDENT && <a href={TEACHERS}>{i18n.t('teachers')}</a>}
       {activeRole === TEACHER && <a href={STUDENTS}>{i18n.t('students')}</a>}
-      {activeRole === STUDENT && <a href={STUDENTS_RATING}>{i18n.t('students-rating')}</a>}
-      {activeRole === STUDENT && <a href={SUBJECT_SCORES}>{i18n.t('subjects-scores')}</a>}
+      {activeRole === STUDENT && <a href={STUDENTS_RATING}>{i18n.t('students_rating')}</a>}
+      {activeRole === STUDENT && <a href={SUBJECT_SCORES}>{i18n.t('subjects_scores')}</a>}
+      {activeRole === STUDENT && <a href={SYLLABUS}>{i18n.t('syllabus')}</a>}
       {activeRole === STUDENT && <a href={DEBTS}>{i18n.t('debts')}</a>}
       <a href={SETTING}>{i18n.t('setting')}</a>
     </Menu>

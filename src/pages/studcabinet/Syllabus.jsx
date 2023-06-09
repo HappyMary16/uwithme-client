@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
-import {useFetchStudentScoresQuery} from "../../store/studcabinet/studCabinetApiSlice";
+import {useFetchSyllabusQuery} from "../../store/studcabinet/studCabinetApiSlice";
 import {selectCredentials, selectSemester} from "../../store/studcabinet/studCabinetSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 
-export default function SubjectsScores() {
+export default function Syllabus() {
 
   const credentials = useSelector(selectCredentials);
 
   const [semester, setSemester] = useState(useSelector(selectSemester) ?? 1);
-  const {data} = useFetchStudentScoresQuery(credentials ? {credentials, semester: semester} : skipToken);
+  const {data} = useFetchSyllabusQuery(credentials ? {credentials, semester: semester} : skipToken);
 
   return (
     <StudCabinetPage
@@ -23,31 +23,27 @@ export default function SubjectsScores() {
           text: 'Дисципліна'
         },
         {
-          dataField: 'teacher',
-          text: 'Викладач',
-          formatter: (value, row) => {
-            return value + ' (' + row.departmentShort + ')';
-          },
-          isNotInSmall: true
+          dataField: 'control',
+          text: 'Е/З'
         },
         {
-          dataField: 'control',
-          text: 'Е/З',
+          dataField: 'individualTask',
+          text: 'І/З',
           isNotInTiny: true
         },
         {
-          dataField: 'scoreNationalShort',
-          text: 'Нац',
+          dataField: 'credit',
+          text: 'Кред',
           isNotInSmall: true
         },
         {
-          dataField: 'scoreBologna',
-          text: 'Бал'
+          dataField: 'audit',
+          text: 'Год',
+          isNotInSmall: true
         },
         {
-          dataField: 'scoreECTS',
-          text: 'ECTS',
-          isNotInSmall: true
+          dataField: 'departmentShort',
+          text: 'Кафедра'
         }
       ]}
     />

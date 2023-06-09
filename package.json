@@ -29,7 +29,7 @@
     "react-select": "^5.7.2",
     "react-switch": "^7.0.0",
     "register-service-worker": "^1.7.2",
-    "tcomad-oidc": "4.1.1",
+    "tcomad-oidc": "4.1.6",
     "workbox-core": "^6.5.4",
     "workbox-expiration": "^6.5.4",
     "workbox-precaching": "^6.5.4",
