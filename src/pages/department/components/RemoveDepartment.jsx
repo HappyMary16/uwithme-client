@@ -1,11 +1,14 @@
-import i18n from '../../../config/i18n';
 import {Button, Modal} from 'react-bootstrap';
+import {useTranslation} from "react-i18next";
 
 export function RemoveDepartment({department, handleNo, handleYes}) {
+
+  const {t, i18n} = useTranslation("department");
+
   return (
     <Modal show={true} onHide={handleNo} centered>
       <Modal.Header>
-        <Modal.Title>{i18n.t('remove_department')}</Modal.Title>
+        <Modal.Title>{t('remove_department')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>{department.label}</Modal.Body>

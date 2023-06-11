@@ -1,12 +1,14 @@
-import i18n from '../../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
 import {getName} from '../../../utils/UsersUtil';
 import {Button, Modal} from 'react-bootstrap';
 import {useFetchUsersQuery} from "../../../store/user/userApiSlice";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export default function AddStudentToGroup({ open, handleClose, handleAdd }) {
+
+  const {t, i18n} = useTranslation("group");
 
   const {data: students} = useFetchUsersQuery({hasGroup: false})
   const [selectedStudents, setStudents] = useState('');
@@ -14,11 +16,11 @@ export default function AddStudentToGroup({ open, handleClose, handleAdd }) {
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header>
-        <Modal.Title>{i18n.t('add_student_to_group')}</Modal.Title>
+        <Modal.Title>{t('add_student_to_group')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <p className={'margin-bottom'}>{i18n.t('select_student')}</p>
+        <p className={'margin-bottom'}>{t('select_student')}</p>
         <Select
           theme={selectorColors}
           onChange={setStudents}
@@ -32,7 +34,7 @@ export default function AddStudentToGroup({ open, handleClose, handleAdd }) {
             })
           }
           isMulti
-          placeholder={i18n.t('student')}
+          placeholder={t('student')}
           menuPlacement={'auto'}
         />
       </Modal.Body>

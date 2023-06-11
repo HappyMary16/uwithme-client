@@ -10,11 +10,11 @@ import {useFetchGroupsByDepartmentQuery} from "../../../store/group/groupApiSlic
 
 export default function Department({department}) {
 
+  const [deleteDepartment] = useDeleteDepartmentMutation();
+
   const {data: groups} = useFetchGroupsByDepartmentQuery(department?.value ?? skipToken);
 
   const [open, setOpen] = useState(false);
-  const [deleteDepartment] = useDeleteDepartmentMutation();
-
   const [openRemoveDialog, setOpenRemoveDialog] = useState(false);
 
   return (

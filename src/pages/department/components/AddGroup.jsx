@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react';
-import i18n from '../../../config/i18n';
 import {selectorColors} from '../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {Button, Form, Modal} from 'react-bootstrap';
@@ -13,9 +12,11 @@ import {
 import {skipToken} from "@reduxjs/toolkit/query";
 import {getId} from "../../../services/authService";
 import {useSaveGroupMutation} from "../../../store/group/groupApiSlice";
+import {useTranslation} from "react-i18next";
 
 export function AddGroup({handleClose, group}) {
 
+  const {t, i18n} = useTranslation("group");
   const [saveDepartment] = useSaveDepartmentMutation();
   const [saveGroup] = useSaveGroupMutation();
 
@@ -115,7 +116,7 @@ export function AddGroup({handleClose, group}) {
   return (
     <Modal show={true} onHide={handleClose} centered>
       <Modal.Header>
-        <Modal.Title>{i18n.t('create_group')}</Modal.Title>
+        <Modal.Title>{t('create_group')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -144,19 +145,19 @@ export function AddGroup({handleClose, group}) {
           />
           <Form.Control
             type={'number'}
-            placeholder={i18n.t('start_year')}
+            placeholder={t('start_year')}
             onChange={e => setStartYear(e.target.value)}
             value={startYear}
           />
           <Form.Control
-            placeholder={i18n.t('group_name')}
+            placeholder={t('group_name')}
             onChange={e => setGroupName(e.target.value)}
             value={groupName}
           />
 
           <Form.Check
             type={'checkbox'}
-            label={i18n.t('show_in_registration')}
+            label={t('show_in_registration')}
             onChange={() => setVisible(!visible)}
             checked={visible}
           />

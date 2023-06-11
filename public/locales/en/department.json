@@ -1,0 +1,8 @@
+{
+  "create_institute": "Create institute",
+  "institute_name": "Institute name",
+  "create_department": "Create department",
+  "department_name": "Department name",
+  "create_group": "Create group",
+  "remove_department": "Are you sure that you want remove the department?"
+}
