@@ -1,12 +1,15 @@
 import {Fragment, useState} from 'react';
-import i18n from '../../../config/i18n';
 import {getLectures, getTasks} from '../../../utils/FileUtil';
 import ListFiles from './ListFiles';
 import {Collapse, ListGroup} from 'react-bootstrap';
 import {ListItem} from '../../common/components/ListItem';
 import {FolderFill} from 'react-bootstrap-icons';
+import {useTranslation} from "react-i18next";
 
 export function SubjectFiles({ name, files }) {
+
+  const {t} = useTranslation("file");
+
   const [open, setOpen] = useState(false);
   const [lectureOpen, setLectureOpen] = useState(false);
   const [taskOpen, setTaskOpen] = useState(false);
@@ -42,7 +45,7 @@ export function SubjectFiles({ name, files }) {
           >
             <ListItem
               open={lectureOpen}
-              text={i18n.t('lecture')}
+              text={t('lecture')}
               icon={<FolderFill className={'icon-color'} />}
             />
           </ListGroup.Item>
@@ -56,7 +59,7 @@ export function SubjectFiles({ name, files }) {
           >
             <ListItem
               open={taskOpen}
-              text={i18n.t('task')}
+              text={t('task')}
               icon={<FolderFill className={'icon-color'} />}
             />
           </ListGroup.Item>

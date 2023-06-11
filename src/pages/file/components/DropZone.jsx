@@ -1,8 +1,11 @@
-import i18n from '../../../config/i18n';
 import {CloudArrowUpFill} from 'react-bootstrap-icons';
 import {createRef, useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export default function DropZone({ disabled, onFilesAddedFunk }) {
+
+  const {t} = useTranslation("file");
+
   let fileInputRef = createRef();
   const [highLight, setHighLight] = useState(false);
 
@@ -62,7 +65,7 @@ export default function DropZone({ disabled, onFilesAddedFunk }) {
         onChange={onFilesAdded}
       />
       <CloudArrowUpFill size={30} className={'icon-color'} />
-      <span>{i18n.t('upload_files')}</span>
+      <span>{t('upload_files')}</span>
     </div>
   );
 }

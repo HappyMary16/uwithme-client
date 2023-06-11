@@ -1,7 +1,10 @@
-import i18n from '../../../config/i18n';
 import {Button, Modal} from 'react-bootstrap';
+import {useTranslation} from "react-i18next";
 
 export function Message({open, message, handleClose, description}) {
+
+  const {t} = useTranslation();
+
   return (
     <Modal show={open} onHide={handleClose} centered>
       <Modal.Header className="justify-content-center">
@@ -10,7 +13,7 @@ export function Message({open, message, handleClose, description}) {
       {!!description && <Modal.Body>{description}</Modal.Body>}
       <Modal.Footer>
         <Button onClick={handleClose} variant={'purple'}>
-          {i18n.t('close')}
+          {t('close')}
         </Button>
       </Modal.Footer>
     </Modal>

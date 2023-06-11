@@ -8,7 +8,7 @@ import logo from '../../assets/logo192.png'
 export default function BotNotification() {
 
   const dispatch = useDispatch();
-  const {t} = useTranslation('bot')
+  const {t} = useTranslation('bot');
 
   const wasBotNotificationShown = useSelector(selectBotShown);
 
