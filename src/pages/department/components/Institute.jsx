@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import {Fragment, useState} from 'react';
 import DepartmentsList from './DepartmentsList';
 import {ListGroup} from 'react-bootstrap';
 import {ListItem} from '../../common/components/ListItem';

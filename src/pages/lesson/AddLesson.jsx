@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import i18n from '../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';

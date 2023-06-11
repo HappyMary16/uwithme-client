@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import i18n from '../../../config/i18n';
 import '../../../styles/fileUpload.css';
 import AvatarEditor from 'react-avatar-editor';

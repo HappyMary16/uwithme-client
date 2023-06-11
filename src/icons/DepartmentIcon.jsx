@@ -1,5 +1,3 @@
-import React from "react";
-
 export function DepartmentIcon({ size = "25px" }) {
   return (
     <div>

@@ -1,5 +1,4 @@
 import {User} from './components/User';
-import React from 'react';
 import {useParams} from "react-router-dom";
 import {useFetchUserQuery} from "../../store/user/userApiSlice";
 import {useFetchLessonsByQueryParamsQuery} from "../../store/lesson/lessonApiSlice";

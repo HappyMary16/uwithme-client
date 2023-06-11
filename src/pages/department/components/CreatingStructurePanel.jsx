@@ -1,15 +1,14 @@
-import React from 'react';
-
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import i18n from '../../../config/i18n';
 import {AddDepartment} from './AddDepartment';
 import {AddInstitute} from './AddInstitute';
 import {AddGroup} from './AddGroup';
+import {useState} from "react";
 
 export function CreateStructurePanel() {
-  const [openInstituteDialog, setOpenInstituteDialog] = React.useState(false);
-  const [openDepartmentDialog, setOpenDepartmentDialog] = React.useState(false);
-  const [openGroupDialog, setOpenGroupDialog] = React.useState(false);
+  const [openInstituteDialog, setOpenInstituteDialog] = useState(false);
+  const [openDepartmentDialog, setOpenDepartmentDialog] = useState(false);
+  const [openGroupDialog, setOpenGroupDialog] = useState(false);
 
   return (
     <Container>

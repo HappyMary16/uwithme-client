@@ -1,4 +1,3 @@
-import React from 'react';
 import {Lesson} from './Lesson';
 import {getLesson} from '../../../utils/ScheduleUtil';
 import {Table} from 'react-bootstrap';

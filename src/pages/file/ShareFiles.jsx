@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import i18n from '../../config/i18n';
 import Select from 'react-select';

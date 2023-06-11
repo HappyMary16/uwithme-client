@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Toast, ToastContainer} from 'react-bootstrap';
 import {TELEGRAM_BOT_URI} from '../../config';

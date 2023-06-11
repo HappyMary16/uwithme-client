@@ -1,16 +1,15 @@
-import React from 'react';
-
 import i18n from '../../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
 import {getName} from '../../../utils/UsersUtil';
 import {Button, Modal} from 'react-bootstrap';
 import {useFetchUsersQuery} from "../../../store/user/userApiSlice";
+import {useState} from "react";
 
 export default function AddStudentToGroup({ open, handleClose, handleAdd }) {
 
   const {data: students} = useFetchUsersQuery({hasGroup: false})
-  const [selectedStudents, setStudents] = React.useState('');
+  const [selectedStudents, setStudents] = useState('');
 
   return (
     <Modal show={open} onHide={handleClose} centered>

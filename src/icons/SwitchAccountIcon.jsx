@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function SwitchAccountIcon({ onClick }) {
   return (
     <div onClick={onClick} className={'icon'}>

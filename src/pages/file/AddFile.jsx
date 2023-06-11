@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {FileTypes, LECTURE} from '../../constants/userRoles';
 import {Upload} from './components/Upload';
 import i18n from '../../config/i18n';

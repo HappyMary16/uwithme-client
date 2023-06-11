@@ -1,4 +1,3 @@
-import React from 'react';
 import {FilesProgress} from './FilesProgress';
 import '../../../styles/fileUpload.css';
 import i18n from '../../../config/i18n';

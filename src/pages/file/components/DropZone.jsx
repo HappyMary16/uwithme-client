@@ -1,10 +1,10 @@
-import React from 'react';
 import i18n from '../../../config/i18n';
 import {CloudArrowUpFill} from 'react-bootstrap-icons';
+import {createRef, useState} from "react";
 
 export default function DropZone({ disabled, onFilesAddedFunk }) {
-  let fileInputRef = React.createRef();
-  const [highLight, setHighLight] = React.useState(false);
+  let fileInputRef = createRef();
+  const [highLight, setHighLight] = useState(false);
 
   let openFileDialog = () => {
     if (disabled) return;

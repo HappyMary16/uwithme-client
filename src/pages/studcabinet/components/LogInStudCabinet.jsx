@@ -1,4 +1,3 @@
-import React from 'react';
 import {Button, Form, Modal} from 'react-bootstrap';
 import {USER_HOME} from '../../../constants/links';
 import {Message} from '../../common/components/Message';
@@ -6,14 +5,15 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectCredentials} from "../../../store/studcabinet/studCabinetSlice";
 import {useTranslation} from "react-i18next";
+import {useState} from "react";
 
 export function LogInStudCabinet({handleCreate}) {
 
   const {t, i18n} = useTranslation("studCabinet");
 
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [showMessage, setShowMessage] = React.useState(false);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [showMessage, setShowMessage] = useState(false);
   const navigate = useNavigate();
 
   const credentials = useSelector(selectCredentials);

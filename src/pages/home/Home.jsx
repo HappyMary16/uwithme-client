@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {ADMIN} from "../../constants/userRoles";
 import UniversityStructure from "../department/UniversityStructure";
 import UserHome from "./UserHome";
@@ -28,4 +28,4 @@ export default function Home() {
       {user && role !== ADMIN && <UserHome/>}
     </div>
   );
-};
+}

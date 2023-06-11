@@ -1,4 +1,3 @@
-import React from 'react';
 import {TodaySchedule} from './TodaySchedule';
 import {UserCard} from './UserCard';
 import {Container} from 'react-bootstrap';

@@ -1,5 +1,4 @@
 import {useSelector} from 'react-redux';
-import React from 'react';
 import {EmptyPage} from '../common/components/EmptyPage';
 import {ListGroup} from 'react-bootstrap';
 import {AdminListItem} from './components/AdminListItem';

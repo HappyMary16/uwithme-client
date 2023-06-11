@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import Select from 'react-select';
 import {selectorColors} from '../../../styles/styles';
@@ -20,7 +20,7 @@ import {useTranslation} from "react-i18next";
 export default function ChooseRole() {
 
   const dispatch = useDispatch();
-  const {t} = useTranslation();
+  const {t} = useTranslation("registration");
 
   const [userRole, setUserRole] = useState();
   const [university, setUniversity] = useState();
@@ -39,7 +39,7 @@ export default function ChooseRole() {
   const userRoles = [
     {
       value: STUDENT,
-      label: t('student')
+      label: t('continue_like_student')
     },
     {
       value: TEACHER,
@@ -76,7 +76,8 @@ export default function ChooseRole() {
         groupId: group?.value,
         universityId: university?.value,
         universityName
-      }).then(() => authService.tryToRefresh());
+      }).then(() => authService.tryToRefresh())
+        .then(() => window.location.reload());
     }
   }
 

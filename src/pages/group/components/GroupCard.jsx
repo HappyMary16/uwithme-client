@@ -1,4 +1,3 @@
-import React from 'react';
 import i18n from '../../../config/i18n';
 import {GROUP_SCHEDULE, USER_HOME_PAGE} from '../../../constants/links';
 import {Card, Col, Form, Row} from 'react-bootstrap';

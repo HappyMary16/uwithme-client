@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Col, Collapse, ListGroup, Row} from 'react-bootstrap';
 import {GROUP_PAGE} from '../../../constants/links';
 import {PeopleFill} from 'react-bootstrap-icons';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Department from './Department';
 import {Collapse, ListGroup} from 'react-bootstrap';
 

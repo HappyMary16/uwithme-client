@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 import i18n from '../../../config/i18n';
 import {getLectures, getTasks} from '../../../utils/FileUtil';
 import ListFiles from './ListFiles';
@@ -7,9 +7,9 @@ import {ListItem} from '../../common/components/ListItem';
 import {FolderFill} from 'react-bootstrap-icons';
 
 export function SubjectFiles({ name, files }) {
-  const [open, setOpen] = React.useState(false);
-  const [lectureOpen, setLectureOpen] = React.useState(false);
-  const [taskOpen, setTaskOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [lectureOpen, setLectureOpen] = useState(false);
+  const [taskOpen, setTaskOpen] = useState(false);
 
   const subjectHandleClick = () => {
     setOpen(!open);

@@ -1,4 +1,3 @@
-import React from 'react';
 import i18n from '../../../config/i18n';
 import {getName} from '../../../utils/UsersUtil';
 import LoadPhoto from './LoadPhoto';
@@ -11,6 +10,7 @@ import {errorAdded} from "../../../store/message/messageSlice";
 import {useAvatarUploader} from "../../../hooks/useAvatatUploader";
 import {useAvatarDownloader} from "../../../hooks/useAvatarDownloader";
 import emptyAvatar from "../../../assets/empty-avatar.png"
+import {useState} from "react";
 
 export function UserCard({user, isMine}) {
 
@@ -18,7 +18,7 @@ export function UserCard({user, isMine}) {
   const uploadAvatar = useAvatarUploader();
   const [avatar, downloadAvatar] = useAvatarDownloader(user?.id);
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   let handleClickAvatar = () => {

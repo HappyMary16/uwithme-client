@@ -1,4 +1,3 @@
-import React from 'react';
 import i18n from '../../../config/i18n';
 import {selectorColors} from '../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
@@ -8,6 +7,7 @@ import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchBuildingsQuery, useSaveBuildingMutation} from "../../../store/lecturehall/buildingApiSlice";
 import {useSaveLectureHallMutation} from "../../../store/lecturehall/lectureHallApiSlice";
+import {useState} from "react";
 
 export function AddLectureHall({handleClose}) {
 
@@ -17,9 +17,9 @@ export function AddLectureHall({handleClose}) {
   const {data: buildings} = useFetchBuildingsQuery();
   const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
 
-  const [building, setBuilding] = React.useState();
-  const [lectureHallName, setLectureHall] = React.useState({});
-  const [placeNumber, setPlaceNumber] = React.useState({});
+  const [building, setBuilding] = useState();
+  const [lectureHallName, setLectureHall] = useState({});
+  const [placeNumber, setPlaceNumber] = useState({});
 
   let onCreate = () => {
     if (building.label === building.value) {

@@ -1,5 +1,3 @@
-import React from "react";
-
 export function InstituteIcon({ size = "25px" }) {
   return (
     <svg

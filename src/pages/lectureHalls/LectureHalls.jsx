@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import {Fragment, useState} from 'react';
 import {useSelector} from 'react-redux';
 import i18n from '../../config/i18n';
 import {AddLectureHall} from './components/AddLectureHall';

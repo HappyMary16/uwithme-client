@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import ChooseRole from "./components/ChooseRole";
 import {USER_HOME} from "../../constants/links";
 import {useNavigate} from "react-router-dom";

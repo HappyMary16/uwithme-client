@@ -1,6 +1,6 @@
 import i18n from '../../../config/i18n';
 import {Row} from 'react-bootstrap';
-import React, {Fragment} from 'react';
+import {Fragment} from 'react';
 import {Link} from "react-router-dom";
 
 export function EmptyPage({message, linkText, href, list, isFetching}) {

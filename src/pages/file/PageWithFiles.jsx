@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import {Fragment} from 'react';
 import {ADD_FILE, SHARE_FILES} from '../../constants/links';
 import i18n from '../../config/i18n';
 import {TEACHER} from '../../constants/userRoles';

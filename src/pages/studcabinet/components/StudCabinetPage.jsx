@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import BootstrapTable from "@happymary16/react-bootstrap-table-next";
 import {LogInStudCabinet} from './LogInStudCabinet';
 import {EmptyPage} from '../../common/components/EmptyPage';

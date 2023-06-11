@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import i18n from '../../../config/i18n';
 import {CustomSelector} from '../../common/components/CustomSelector';

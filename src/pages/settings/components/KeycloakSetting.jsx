@@ -1,4 +1,3 @@
-import React from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import i18n from '../../../config/i18n';
 import {KEYCLOAK_USER_SETTINGS} from '../../../constants/keycloakApi';
@@ -14,7 +13,7 @@ export function KeycloakSetting({ user }) {
         required
         readOnly
       />
-      <Form.Label>{i18n.t('last_name')}</Form.Label>
+      <Form.Label>{i18n.t('middle_name')}</Form.Label>
       <Form.Control
         defaultValue={middleName}
         required

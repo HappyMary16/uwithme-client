@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {getCurrentWeek} from '../../../utils/ScheduleUtil';
 import {USER_HOME_PAGE} from '../../../constants/links';
 import {getName} from '../../../utils/UsersUtil';
@@ -14,8 +14,8 @@ export function Schedule({lessons, user, isEditMode, deleteLesson}) {
 
   const navigate = useNavigate();
 
-  let [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
-  let [isSmall, setSmall] = React.useState(isPageSmallForSchedule());
+  let [weekNumber, setWeekNumber] = useState(getCurrentWeek() === 1);
+  let [isSmall, setSmall] = useState(isPageSmallForSchedule());
 
   useEffect(() => {
     window.addEventListener('resize', () => {

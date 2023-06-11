@@ -1,4 +1,3 @@
-import React from 'react';
 import i18n from '../../../config/i18n';
 import {selectorColors} from '../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
@@ -10,6 +9,7 @@ import {
 } from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {getId} from "../../../services/authService";
+import {useState} from "react";
 
 export function AddDepartment({handleClose}) {
 
@@ -18,8 +18,8 @@ export function AddDepartment({handleClose}) {
   const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(universityId ?? skipToken);
 
-  const [institute, setInstitute] = React.useState();
-  const [departmentName, setDepartmentName] = React.useState();
+  const [institute, setInstitute] = useState();
+  const [departmentName, setDepartmentName] = useState();
 
   let onCreate = () => {
     let instituteId = institute.value;

@@ -41,8 +41,7 @@ export const userApiSlice = createApi({
       query: () => ({
         url: ``,
         method: 'DELETE'
-      }),
-      invalidatesTags: ['UserApi'],
+      })
     }),
     assignUserRole: builder.mutation({
       query: ({userId, role}) => ({
