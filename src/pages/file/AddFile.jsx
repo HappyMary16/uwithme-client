@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {FileTypes, LECTURE} from '../../constants/userRoles';
 import {Upload} from './components/Upload';
-import i18n from '../../config/i18n';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';
@@ -11,12 +10,14 @@ import {getId} from "../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {useFetchSubjectsByUserIdQuery} from "../../store/subject/subjectApiSlice";
 import {useFileUploader} from "../../hooks/useFileUploader";
+import {useTranslation} from "react-i18next";
 
 export default function AddFile() {
 
-  const {data: subjects} = useFetchSubjectsByUserIdQuery(getId() ?? skipToken);
-
+  const {t} = useTranslation("file");
   const {completed, progress, upload} = useFileUploader();
+
+  const {data: subjects} = useFetchSubjectsByUserIdQuery(getId() ?? skipToken);
 
   const [files, setFiles] = useState([]);
   const [subject, setSubject] = useState();
@@ -48,12 +49,12 @@ export default function AddFile() {
       <Message
         open={uploadSuccess}
         handleClose={uploadingEnded}
-        message={i18n.t("files_is_uploaded")}
+        message={t("files_is_uploaded")}
       />
       <CreatableSelect
         className={"selector"}
         theme={selectorColors}
-        placeholder={i18n.t("subject")}
+        placeholder={t("subject")}
         options={
           subjects &&
           subjects.map(subject => {
@@ -72,7 +73,7 @@ export default function AddFile() {
         theme={selectorColors}
         onChange={opinion => setFileType(opinion.value)}
         options={FileTypes}
-        placeholder={i18n.t("file_type")}
+        placeholder={t("file_type")}
       />
       <Upload
         uploadProgress={progress}
@@ -87,7 +88,7 @@ export default function AddFile() {
         xl={{offset: 10, span: 2}}
       >
         <Button type={"submit"} variant={"purple"} onClick={submit}>
-          {i18n.t("upload")}
+          {t("upload")}
         </Button>
       </Col>
     </div>

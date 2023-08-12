@@ -13,5 +13,6 @@ export function saveState(name, state) {
     let serializedState = JSON.stringify(state);
     localStorage.setItem('http://education-app.com:state.' + name, serializedState);
   } catch (err) {
+    //ignore
   }
 }

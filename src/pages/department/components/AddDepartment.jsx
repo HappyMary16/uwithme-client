@@ -1,5 +1,3 @@
-import React from 'react';
-import i18n from '../../../config/i18n';
 import {selectorColors} from '../../../styles/styles';
 import CreatableSelect from 'react-select/creatable';
 import {Button, Form, Modal} from 'react-bootstrap';
@@ -10,16 +8,19 @@ import {
 } from "../../../store/department/departmentApiSlice";
 import {skipToken} from "@reduxjs/toolkit/query";
 import {getId} from "../../../services/authService";
+import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export function AddDepartment({handleClose}) {
 
+  const {t, i18n} = useTranslation("department");
   const [saveDepartment] = useSaveDepartmentMutation();
 
   const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
   const {data: institutes} = useFetchDepartmentsByUniversityIdQuery(universityId ?? skipToken);
 
-  const [institute, setInstitute] = React.useState();
-  const [departmentName, setDepartmentName] = React.useState();
+  const [institute, setInstitute] = useState();
+  const [departmentName, setDepartmentName] = useState();
 
   let onCreate = () => {
     let instituteId = institute.value;
@@ -36,7 +37,7 @@ export function AddDepartment({handleClose}) {
   return (
     <Modal show onHide={handleClose} centered>
       <Modal.Header>
-        <Modal.Title>{i18n.t('create_department')}</Modal.Title>
+        <Modal.Title>{t('create_department')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -56,7 +57,7 @@ export function AddDepartment({handleClose}) {
             value={institute}
           />
           <Form.Control
-            placeholder={i18n.t('department_name')}
+            placeholder={t('department_name')}
             onChange={e => setDepartmentName(e.target.value)}
           />
         </Form.Group>

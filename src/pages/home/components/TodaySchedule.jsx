@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   areLessonsToday,
   getCurrentWeek,
@@ -11,9 +10,10 @@ import {hasRole} from '../../../utils/UsersUtil';
 import {Table} from 'react-bootstrap';
 import {SwitchWeek} from '../../common/components/SwitchWeek';
 import {STUDENT, TEACHER} from '../../../constants/userRoles';
+import {useState} from "react";
 
 export function TodaySchedule({lessons, user}) {
-  const [weekNumber, setWeekNumber] = React.useState(getCurrentWeek() === 1);
+  const [weekNumber, setWeekNumber] = useState(getCurrentWeek() === 1);
 
   return (
     <div>

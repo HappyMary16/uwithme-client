@@ -1,5 +1,3 @@
-import React from "react";
-
 export function LogOutIcon({ onClick}) {
   return (
     <div onClick={onClick} className={"icon"}>

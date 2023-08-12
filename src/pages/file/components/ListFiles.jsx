@@ -1,4 +1,3 @@
-import React from 'react';
 import {isPossibleToOpen} from '../../../utils/FileUtil';
 import {Col, Collapse, ListGroup, Row} from 'react-bootstrap';
 import {ArrowDownCircleFill, BookHalf, FileEarmarkRichtextFill, TrashFill} from 'react-bootstrap-icons';

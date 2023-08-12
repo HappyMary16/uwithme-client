@@ -1,4 +1,3 @@
-import React from 'react';
 import {getName, hasRole} from '../../../utils/UsersUtil';
 import {SmallAvatar} from '../../common/components/SmallAvatar';
 import {STUDENT, TEACHER} from '../../../constants/userRoles';

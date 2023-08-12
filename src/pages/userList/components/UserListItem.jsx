@@ -1,4 +1,3 @@
-import React from 'react';
 import {getName, hasRole} from '../../../utils/UsersUtil';
 import {USER_HOME_PAGE, USER_SCHEDULE} from '../../../constants/links';
 import {Col, ListGroup, Row} from 'react-bootstrap';

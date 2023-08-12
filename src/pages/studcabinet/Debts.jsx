@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
 import {selectCredentials} from "../../store/studcabinet/studCabinetSlice";

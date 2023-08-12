@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {GroupCard} from './components/GroupCard';
 import {StudentsList} from './components/StudentList';
 import AddStudentToGroup from './components/AddStudentToGroup';

@@ -1,4 +1,3 @@
-import React from 'react';
 import {getLectureHallsByBuilding} from '../../../utils/StructureUtils';
 import {Building} from './Building';
 import {ListGroup} from 'react-bootstrap';

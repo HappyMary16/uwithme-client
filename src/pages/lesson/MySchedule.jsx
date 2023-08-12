@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
 import {Schedule} from './component/Schedule';
 import {Button, Col, Row} from 'react-bootstrap';

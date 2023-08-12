@@ -17,8 +17,12 @@ jobs:
         uses: actions/setup-node@v2.5.2
         with:
           node-version: 18
-      - run: npm install
-      - run: npm run build
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
       - name: Build and Publish latest Docker image
         uses: VaultVulp/gp-docker-action@1.6.0
         with:

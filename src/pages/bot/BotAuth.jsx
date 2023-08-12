@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import logo from "../../assets/logo512.png"
 import {USER_HOME} from "../../constants/links";

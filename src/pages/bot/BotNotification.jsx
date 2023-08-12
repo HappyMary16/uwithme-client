@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Toast, ToastContainer} from 'react-bootstrap';
 import {TELEGRAM_BOT_URI} from '../../config';
@@ -9,7 +8,7 @@ import logo from '../../assets/logo192.png'
 export default function BotNotification() {
 
   const dispatch = useDispatch();
-  const {t} = useTranslation('bot')
+  const {t} = useTranslation('bot');
 
   const wasBotNotificationShown = useSelector(selectBotShown);
 

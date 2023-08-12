@@ -1,4 +1,3 @@
-import React from 'react';
 import {Schedule} from './component/Schedule';
 import {useParams} from "react-router-dom";
 import {useFetchUserQuery} from "../../store/user/userApiSlice";

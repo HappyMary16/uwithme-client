@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Col, Row} from 'react-bootstrap';
 import i18n from '../../config/i18n';
 import Select from 'react-select';

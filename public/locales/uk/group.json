@@ -1,0 +1,14 @@
+{
+  "create_group": "Створи групу",
+  "show_in_registration": "Показувати при реєстрації користувачів",
+  "group_schedule": "Розклад групи",
+  "add_student": "Додати студента",
+  "group_does_not_have_teacher": "В цій групі немає куратора",
+  "start_year": "Рік початку навчання",
+  "select_student": "Будь ласка, оберіть студента",
+  "add_student_to_group": "Додати студента в групу",
+  "remove_student_from_group": "Ви впевнені що хочете видалити студента з групи?",
+  "group_name": "Назва групи",
+  "student": "Студент",
+  "students": "Студенти"
+}

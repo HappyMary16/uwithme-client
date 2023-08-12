@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {selectedItemColor} from '../../styles/styles';
 import StudCabinetPage from './components/StudCabinetPage';
@@ -42,7 +42,7 @@ export default function StudentRating() {
           text: 'Рейтинг'
         }
       ]}
-      rowStyleFunc={(row, rowIndex) => {
+      rowStyleFunc={(row) => {
         if (row.studentId === studentInfo.studentId) {
           return selectedItemColor;
         }

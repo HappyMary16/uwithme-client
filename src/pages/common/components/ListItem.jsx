@@ -1,6 +1,5 @@
 import {Col, Row} from 'react-bootstrap';
 import {ChevronDown, ChevronUp, TrashFill} from 'react-bootstrap-icons';
-import React from 'react';
 
 export function ListItem({
   text,

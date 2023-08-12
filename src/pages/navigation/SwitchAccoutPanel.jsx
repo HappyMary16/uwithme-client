@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {LogOutIcon} from '../../icons/LogOutIcon';
 import {Button, ListGroup, Overlay, Popover} from 'react-bootstrap';
 import {SmallAvatar} from '../common/components/SmallAvatar';

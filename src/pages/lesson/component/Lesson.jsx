@@ -1,4 +1,3 @@
-import React from 'react';
 import {getGroupList} from '../../../utils/ScheduleUtil';
 import {Col, Row} from 'react-bootstrap';
 import {TrashFill} from 'react-bootstrap-icons';

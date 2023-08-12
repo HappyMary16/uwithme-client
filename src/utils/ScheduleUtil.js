@@ -56,7 +56,7 @@ export const getLessons = (lessons, weekDay, weekNumber) => {
 };
 
 let lessonFilter = (lesson, weekDay, lessonTime, weekNumber) => {
-  if (!!lessonTime) {
+  if (lessonTime) {
     return (
       lesson.weekDay === weekDay &&
       lesson.lessonTime === lessonTime &&

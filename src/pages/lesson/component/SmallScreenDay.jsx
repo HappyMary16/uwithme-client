@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 import {ListGroup} from 'react-bootstrap';
 import {ListItem} from '../../common/components/ListItem';
 import {LessonList} from './LessonList';
@@ -7,7 +7,7 @@ import {getLessons} from '../../../utils/ScheduleUtil';
 
 export function SmallScreenDay({ day, lessons, weekNumber, user, isEditMode, deleteLesson }) {
 
-  let [open, setOpen] = React.useState(false);
+  let [open, setOpen] = useState(false);
 
   return (
     <Fragment>

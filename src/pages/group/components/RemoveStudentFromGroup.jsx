@@ -1,14 +1,15 @@
-import React from 'react';
-
-import i18n from '../../../config/i18n';
 import {getName} from '../../../utils/UsersUtil';
 import {Button, Modal} from 'react-bootstrap';
+import {useTranslation} from "react-i18next";
 
 export function RemoveStudentFromGroup({open, student, handleNo, handleYes}) {
+
+  const {t, i18n} = useTranslation("group");
+
   return (
     <Modal show={open} onHide={handleNo} centered>
       <Modal.Header>
-        <Modal.Title>{i18n.t('remove_student_from_group')}</Modal.Title>
+        <Modal.Title>{t('remove_student_from_group')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>{getName(student)}</Modal.Body>

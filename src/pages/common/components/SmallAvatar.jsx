@@ -1,5 +1,4 @@
 import {Image} from 'react-bootstrap';
-import React from 'react';
 import {useAvatarDownloader} from "../../../hooks/useAvatarDownloader";
 import emptyAvatar from "../../../assets/empty-avatar.png"
 

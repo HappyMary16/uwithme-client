@@ -1,5 +1,4 @@
 import {User} from "./components/User";
-import React from "react";
 import {useFetchUserQuery} from "../../store/user/userApiSlice";
 import {getId} from "../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";

@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../styles/navigation.css';
 import {Col, Image, Nav, Row} from 'react-bootstrap';
 import {MenuIcon} from '../../icons/MenuIcon';

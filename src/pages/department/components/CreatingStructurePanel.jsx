@@ -1,15 +1,17 @@
-import React from 'react';
-
 import {Button, Col, Container, Row} from 'react-bootstrap';
-import i18n from '../../../config/i18n';
 import {AddDepartment} from './AddDepartment';
 import {AddInstitute} from './AddInstitute';
 import {AddGroup} from './AddGroup';
+import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export function CreateStructurePanel() {
-  const [openInstituteDialog, setOpenInstituteDialog] = React.useState(false);
-  const [openDepartmentDialog, setOpenDepartmentDialog] = React.useState(false);
-  const [openGroupDialog, setOpenGroupDialog] = React.useState(false);
+
+  const {t} = useTranslation("department");
+
+  const [openInstituteDialog, setOpenInstituteDialog] = useState(false);
+  const [openDepartmentDialog, setOpenDepartmentDialog] = useState(false);
+  const [openGroupDialog, setOpenGroupDialog] = useState(false);
 
   return (
     <Container>
@@ -26,7 +28,7 @@ export function CreateStructurePanel() {
             variant={'purple'}
             onClick={() => setOpenInstituteDialog(true)}
           >
-            {i18n.t('create_institute')}
+            {t('create_institute')}
           </Button>
         </Col>
         <Col sm={12} md={4} lg={3}>
@@ -34,7 +36,7 @@ export function CreateStructurePanel() {
             variant={'purple'}
             onClick={() => setOpenDepartmentDialog(true)}
           >
-            {i18n.t('create_department')}
+            {t('create_department')}
           </Button>
         </Col>
         <Col sm={12} md={4} lg={3}>
@@ -42,7 +44,7 @@ export function CreateStructurePanel() {
             variant={'purple'}
             onClick={() => setOpenGroupDialog(true)}
           >
-            {i18n.t('create_group')}
+            {t('create_group')}
           </Button>
         </Col>
       </Row>

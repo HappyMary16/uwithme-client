@@ -1,5 +1,3 @@
-import React from "react";
-
 export function MenuIcon({onClick}) {
   return (
     <div onClick={onClick} className={"icon menu-icon"}>

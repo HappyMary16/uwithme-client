@@ -1,4 +1,3 @@
-import React from 'react';
 import {Container, ProgressBar} from 'react-bootstrap';
 
 export function FilesProgress({files, uploadProgress}) {

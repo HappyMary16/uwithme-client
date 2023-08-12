@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useSelector} from 'react-redux';
-import i18n from '../../config/i18n';
 import Select from 'react-select';
 import {selectorColors} from '../../styles/styles';
 import {Button, Col} from 'react-bootstrap';
@@ -14,12 +13,14 @@ import {useFetchGroupsQuery} from "../../store/group/groupApiSlice";
 import {useFetchSubjectsByUserIdQuery} from "../../store/subject/subjectApiSlice";
 import {useAddAccessToFilesMutation, useFetchFilesQuery} from "../../store/file/fileApiSlice";
 import {selectApiLoading} from "../../App";
+import {useTranslation} from "react-i18next";
 
 let selectedGroups = [];
 let selectedFiles = [];
 
 export default function ShareFiles() {
 
+  const {t} = useTranslation("file");
   const navigate = useNavigate();
   const [addAccessToFiles] = useAddAccessToFilesMutation();
 
@@ -57,9 +58,9 @@ export default function ShareFiles() {
   return (
     <div>
       <EmptyPage
-        message={i18n.t("you_do_not_have_any_file")}
+        message={t("you_do_not_have_any_file")}
         href={ADD_FILE}
-        linkText={i18n.t("add_files_page")}
+        linkText={t("add_files_page")}
         list={subjectId ? files : subjects}
         isFetching={isFetching}
       />
@@ -76,7 +77,7 @@ export default function ShareFiles() {
                 label: s.name
               };
             })}
-            placeholder={i18n.t("subject")}
+            placeholder={t("subject")}
           />
           <SubjectFilesSelector
             lectures={files?.filter(file => file.fileType === 'LECTURE') ?? []}
@@ -86,7 +87,7 @@ export default function ShareFiles() {
           />
           <Select
             className={"selector"}
-            placeholder={i18n.t("groups")}
+            placeholder={t("groups")}
             theme={selectorColors}
             isMulti
             onChange={handleGroupChange}
@@ -100,7 +101,7 @@ export default function ShareFiles() {
             xl={{offset: 10, span: 2}}
           >
             <Button type={"submit"} variant={"purple"} onClick={submit}>
-              {i18n.t("upload")}
+              {t("upload")}
             </Button>
           </Col>
         </div>

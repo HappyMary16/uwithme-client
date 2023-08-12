@@ -1,0 +1,20 @@
+{
+  "sign_up": "Зареєструватись",
+  "continue_sign_up": "Будь ласка, завершіть реєстрацію",
+  "user_type": "Тип користувача",
+  "continue_like_student": "Продовжити як студент",
+  "continue_like_teacher": "Продовжити як викладач",
+  "please_choose_your_user_type": "Будь ласка, оберіть тип користувача яким ви хочете продовжити реєстрацію",
+  "please_choose_university": "Будь ласка, оберіть свій університет",
+  "please_choose_institute": "Будь ласка, оберіть свій інститут",
+  "please_choose_department": "Будь ласка, оберіть свою кафедру",
+  "university": "Університет",
+  "institute": "Інститут",
+  "department": "Кафедра",
+  "group": "Група",
+
+  "admin_username": "Логін адміністратора",
+  "admin_password": "Пароль адміністратора",
+  "add_university": "Зареєструвати новий університет",
+  "university_name": "Назва університету"
+}

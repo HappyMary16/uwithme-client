@@ -1,0 +1,20 @@
+{
+  "sign_up": "Sign Up",
+  "continue_sign_up": "Please, continue sign up",
+  "user_type": "User type",
+  "continue_like_student": "Continue like a student",
+  "continue_like_teacher": "Continue like a teacher",
+  "please_choose_your_user_type": "Please, choose your user type",
+  "please_choose_university": "Please, choose your university",
+  "please_choose_institute": "Please, choose your institute",
+  "please_choose_department": "Please, choose your department",
+  "university": "University",
+  "institute": "Institute",
+  "department": "Department",
+  "group": "Group",
+
+  "admin_username": "Admin username",
+  "admin_password": "Admin password",
+  "add_university": "Register a new university",
+  "university_name": "University name"
+}

@@ -1,19 +1,19 @@
-import React from 'react';
-
-import i18n from '../../../config/i18n';
 import {Button, Form, Modal} from 'react-bootstrap';
 import {useSaveDepartmentMutation} from "../../../store/department/departmentApiSlice";
 import {useFetchUserQuery} from "../../../store/user/userApiSlice";
 import {getId} from "../../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
+import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export function AddInstitute({handleClose}) {
 
+  const {t, i18n} = useTranslation("department");
   const [saveDepartment] = useSaveDepartmentMutation();
 
   const universityId = useFetchUserQuery(getId() ?? skipToken).data?.universityId;
 
-  const [name, setInstituteName] = React.useState('');
+  const [name, setInstituteName] = useState('');
 
   let onCreate = () => {
     saveDepartment({universityId, name});
@@ -23,13 +23,13 @@ export function AddInstitute({handleClose}) {
   return (
     <Modal show={true} centered>
       <Modal.Header>
-        <Modal.Title>{i18n.t('create_institute')}</Modal.Title>
+        <Modal.Title>{t('create_institute')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         <Form.Group>
           <Form.Control
-            placeholder={i18n.t('institute_name')}
+            placeholder={t('institute_name')}
             onChange={e => setInstituteName(e.target.value)}
           />
         </Form.Group>

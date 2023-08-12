@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {UserToolBar} from './pages/navigation/UserToolBar';
 
@@ -52,7 +52,7 @@ export default function App() {
 
   const [menuOpened, setMenuOpened] = useState(false);
 
-  const {data, error} = useFetchUserQuery(getId() ?? skipToken);
+  const {error} = useFetchUserQuery(getId() ?? skipToken);
   const activeRole = useSelector(selectActiveRole);
   const message = useSelector(selectMessage);
   const isFetching = useSelector(selectApiLoading);
@@ -71,16 +71,12 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    data && authService.tryToRefresh()
-  }, [data])
-
-  useEffect(() => {
     if (!isLoggedIn) {
       dispatch(signOut());
-    } else if (error?.status === 404) {
+    } else if (!isFetching && error?.status === 404) {
       navigate(PRE_HOME);
     }
-  }, [error, isLoggedIn, dispatch, navigate])
+  }, [error, isLoggedIn, dispatch, navigate, isFetching])
 
   return (
     <Container fluid className={"main-container"}>

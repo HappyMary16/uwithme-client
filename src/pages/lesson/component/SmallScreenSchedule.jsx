@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import {Fragment} from 'react';
 import {ListGroup} from 'react-bootstrap';
 import {SmallScreenDay} from './SmallScreenDay';
 import {EmptyPage} from '../../common/components/EmptyPage';

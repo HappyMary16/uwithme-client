@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Col, Row} from 'react-bootstrap';
 import i18n from '../../config/i18n';
 import EditSetting from './components/EditSetting';
@@ -7,7 +7,7 @@ import {KeycloakSetting} from './components/KeycloakSetting';
 import {ADMIN} from '../../constants/userRoles';
 import {selectActiveRole} from "../../store/user/authSlice";
 import {useDeleteUserMutation, useFetchUserQuery} from "../../store/user/userApiSlice";
-import {getId} from "../../services/authService";
+import {authService, getId} from "../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
 
 export default function Setting() {
@@ -31,7 +31,7 @@ export default function Setting() {
             md={{offset: activeRole === ADMIN ? 8 : 4, span: 4}}
             lg={{offset: activeRole === ADMIN ? 9 : 6, span: 3}}
           >
-            <Button variant={'red'} onClick={() => deleteUser()}>
+            <Button variant={'red'} onClick={() => deleteUser().then(() => authService.logout())}>
               {i18n.t('delete')}
             </Button>
           </Col>

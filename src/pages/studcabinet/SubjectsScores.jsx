@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import StudCabinetPage from './components/StudCabinetPage';
 import {useFetchStudentScoresQuery} from "../../store/studcabinet/studCabinetApiSlice";

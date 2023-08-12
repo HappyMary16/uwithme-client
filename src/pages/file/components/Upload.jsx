@@ -1,11 +1,13 @@
-import React from 'react';
 import {FilesProgress} from './FilesProgress';
 import '../../../styles/fileUpload.css';
-import i18n from '../../../config/i18n';
 import {Container, Row} from 'react-bootstrap';
 import DropZone from "./DropZone";
+import {useTranslation} from "react-i18next";
 
 export function Upload({addFiles, uploadProgress, successfulUploaded, files}) {
+
+  const {t} = useTranslation("file");
+
   let onFilesAdded = filesToAdd => {
     let array = [].concat(files);
 
@@ -29,7 +31,7 @@ export function Upload({addFiles, uploadProgress, successfulUploaded, files}) {
         {(!files || files.length === 0) && (
           <Container>
             <Row className={'justify-content-center'}>
-              <h5 className={'text'}>{i18n.t('choose_files')}</h5>
+              <h5 className={'text'}>{t('choose_files')}</h5>
             </Row>
           </Container>
         )}

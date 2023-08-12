@@ -1,11 +1,11 @@
-import React, {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 import {LectureHallsList} from './LectureHallsList';
 import {ListGroup} from 'react-bootstrap';
 import {ListItem} from '../../common/components/ListItem';
 import {DepartmentIcon} from '../../../icons/DepartmentIcon';
 
 export function Building({ building, lectureHalls }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Fragment>

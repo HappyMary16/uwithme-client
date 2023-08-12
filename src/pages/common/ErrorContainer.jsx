@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {ErrorMessage} from './components/ErrorMessage';
 import {errorRemoved, selectErrors} from "../../store/message/messageSlice";
@@ -15,8 +14,9 @@ export default function ErrorContainer() {
 
   return (
     <div>
-      {Array.isArray(errors) && errors.map((error) => (
+      {Array.isArray(errors) && errors.map((error, i) => (
         <ErrorMessage
+          key={i}
           error={error}
           handleClose={closeMessage}
         />
