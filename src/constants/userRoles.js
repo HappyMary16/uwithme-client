@@ -1,19 +1,6 @@
-import i18n from '../config/i18n';
-
 export const STUDENT = 'ROLE_STUDENT';
 export const TEACHER = 'ROLE_TEACHER';
 export const ADMIN = 'ROLE_ADMIN';
-
-export const FileTypes = [
-  {
-    value: 1,
-    label: i18n.t('lecture')
-  },
-  {
-    value: 2,
-    label: i18n.t('task')
-  }
-];
 
 export const LECTURE = 1;
 export const TASK = 2;
