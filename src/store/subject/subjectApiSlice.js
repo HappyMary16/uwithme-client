@@ -11,7 +11,7 @@ export const subjectApiSlice = createApi({
         url: ``,
         method: 'GET'
       }),
-      transformResponse: (response) => response.map(toClientDepartmentRepresentation),
+      transformResponse: (response) => response.map(toClientRepresentation),
       providesTags: ['SubjectApi']
     }),
     fetchSubjectsByUserId: builder.query({
@@ -20,25 +20,25 @@ export const subjectApiSlice = createApi({
         method: 'GET',
         params: {userId}
       }),
-      transformResponse: (response) => response.map(toClientDepartmentRepresentation),
+      transformResponse: (response) => response.map(toClientRepresentation),
       providesTags: ['SubjectApi']
     }),
     saveSubject: builder.mutation({
-      query: (building) => ({
+      query: (subject) => ({
         url: ``,
         method: 'POST',
-        body: building,
+        body: subject,
       }),
       invalidatesTags: ['SubjectApi'],
     })
   })
 });
 
-function toClientDepartmentRepresentation(department) {
+function toClientRepresentation(subject) {
   return {
-    ...department,
-    value: department.id,
-    label: department.name
+    ...subject,
+    value: subject.id??subject.subjectId,
+    label: subject.name??subject.subjectName
   };
 }
 
