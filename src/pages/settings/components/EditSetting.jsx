@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
-import i18n from '../../../config/i18n';
 import {CustomSelector} from '../../common/components/CustomSelector';
 import {ADMIN, STUDENT} from '../../../constants/userRoles';
 import {useDispatch} from "react-redux";
@@ -15,10 +14,12 @@ import {getId} from "../../../services/authService";
 import {useFetchGroupsByDepartmentQuery} from "../../../store/group/groupApiSlice";
 import {messageAdded} from "../../../store/message/messageSlice";
 import {hasRole} from "../../../utils/UsersUtil";
+import {useTranslation} from "react-i18next";
 
 export default function EditSetting({isEditMode, setEditMode}) {
 
   const dispatch = useDispatch();
+  const {t} = useTranslation();
 
   const user = useFetchUserQuery(getId() ?? skipToken).data;
   const universityId = user?.universityId;
@@ -65,15 +66,15 @@ export default function EditSetting({isEditMode, setEditMode}) {
     e.preventDefault();
 
     if (!university) {
-      dispatch(messageAdded(i18n.t("please_choose_university")));
+      dispatch(messageAdded(t("please_choose_university")));
     }
 
     if (university && !institute) {
-      dispatch(messageAdded(i18n.t("please_choose_institute")));
+      dispatch(messageAdded(t("please_choose_institute")));
     }
 
     if (institute && !department) {
-      dispatch(messageAdded(i18n.t("please_choose_department")));
+      dispatch(messageAdded(t("please_choose_department")));
     }
 
     if (user && university && institute && department) {
@@ -90,7 +91,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
 
   return (
     <Form onSubmit={submit}>
-      <Form.Label>{i18n.t('university')}</Form.Label>
+      <Form.Label>{t('university')}</Form.Label>
       <CustomSelector
         isEditMode={!hasRole(user, ADMIN) && isEditMode}
         options={universities}
@@ -98,14 +99,14 @@ export default function EditSetting({isEditMode, setEditMode}) {
         onChange={selectUniversity}
       />
       <div>
-        <Form.Label>{i18n.t('institute')}</Form.Label>
+        <Form.Label>{t('institute')}</Form.Label>
         <CustomSelector
           isEditMode={isEditMode}
           options={institutes}
           value={institute}
           onChange={selectInstitute}
         />
-        <Form.Label>{i18n.t('department')}</Form.Label>
+        <Form.Label>{t('department')}</Form.Label>
         <CustomSelector
           isEditMode={isEditMode}
           options={departments}
@@ -115,7 +116,7 @@ export default function EditSetting({isEditMode, setEditMode}) {
       </div>
       {hasRole(user, STUDENT) && (
         <div>
-          <Form.Label>{i18n.t('group')}</Form.Label>
+          <Form.Label>{t('group')}</Form.Label>
           <CustomSelector
             isEditMode={isEditMode}
             options={groups}
@@ -133,12 +134,12 @@ export default function EditSetting({isEditMode, setEditMode}) {
             xl={{offset: 6, span: 3}}
           >
             <Button variant={'purple'} onClick={() => setEditMode(false)}>
-              {i18n.t('cancel')}
+              {t('cancel')}
             </Button>
           </Col>
           <Col xs={12} md={4} lg={3} xl={3}>
             <Button variant={'purple'} type={'submit'}>
-              {i18n.t('save')}
+              {t('save')}
             </Button>
           </Col>
         </Row>

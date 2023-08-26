@@ -71,12 +71,7 @@ export default function ShareFiles() {
             className={"selector"}
             theme={selectorColors}
             onChange={opinion => setSubjectId(opinion.value)}
-            options={subjects.map(s => {
-              return {
-                value: s.id,
-                label: s.name
-              };
-            })}
+            options={subjects}
             placeholder={t("subject")}
           />
           <SubjectFilesSelector

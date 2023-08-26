@@ -16,7 +16,7 @@ import {useFetchLectureHallsQuery} from "../../store/lecturehall/lectureHallApiS
 import {useFetchBuildingsQuery} from "../../store/lecturehall/buildingApiSlice";
 import {useFetchGroupsQuery} from "../../store/group/groupApiSlice";
 import {useSaveLessonsMutation} from "../../store/lesson/lessonApiSlice";
-import {useFetchSubjectsByUserIdQuery, useFetchSubjectsQuery} from "../../store/subject/subjectApiSlice";
+import {useFetchSubjectsQuery} from "../../store/subject/subjectApiSlice";
 import {TEACHER} from "../../constants/userRoles";
 import {useTranslation} from "react-i18next";
 
@@ -31,8 +31,7 @@ export default function AddLesson() {
   const role = useSelector(selectActiveRole);
   const {data: teachers} = useFetchUsersQuery({role: TEACHER});
   const {data: groups} = useFetchGroupsQuery();
-  const {data: teacherSubjects} = useFetchSubjectsByUserIdQuery(role === TEACHER ? getId() ?? skipToken : skipToken)
-  const {data: subjects} = useFetchSubjectsQuery(role === TEACHER && skipToken)
+  const {data: subjects} = useFetchSubjectsQuery(getId() ?? skipToken)
   const {data: lectureHalls} = useFetchLectureHallsQuery();
   const {data: buildings} = useFetchBuildingsQuery();
 
@@ -70,26 +69,12 @@ export default function AddLesson() {
     saveLessons(lessons);
   }
 
-  function getSubjects() {
-    if (role === TEACHER) {
-      return teacherSubjects ?? [];
-    }
-    return subjects ?? [];
-  }
-
   return (
     <Form onSubmit={addLessons}>
       <CreatableSelect
         theme={selectorColors}
         placeholder={i18n.t('subject')}
-        options={
-          getSubjects().map(subject => {
-            return {
-              label: subject.name,
-              value: subject.id
-            };
-          })
-        }
+        options={subjects ?? []}
         onChange={opinion => setSubject(opinion)}
         className={'selector'}
       />

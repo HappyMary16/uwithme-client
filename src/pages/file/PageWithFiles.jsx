@@ -50,9 +50,9 @@ export default function PageWithFiles() {
           subjects.map((subject, i) => (
             <SubjectFiles
               key={i}
-              name={subject.name}
+              name={subject.subjectName}
               files={
-                files && files.filter(file => file.subjectId === subject.id)
+                files && files.filter(file => file.subjectId === subject.subjectId)
               }
             />
           ))}

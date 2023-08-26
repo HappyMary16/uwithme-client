@@ -8,7 +8,7 @@ import {Message} from '../common/components/Message';
 import {Button, Col} from 'react-bootstrap';
 import {getId} from "../../services/authService";
 import {skipToken} from "@reduxjs/toolkit/query";
-import {useFetchSubjectsByUserIdQuery, useSaveSubjectMutation} from "../../store/subject/subjectApiSlice";
+import {useFetchSubjectsQuery, useSaveSubjectMutation} from "../../store/subject/subjectApiSlice";
 import {useFileUploader} from "../../hooks/useFileUploader";
 import {useTranslation} from "react-i18next";
 
@@ -17,7 +17,7 @@ export default function AddFile() {
   const {t} = useTranslation("file");
   const {completed, progress, upload} = useFileUploader();
 
-  const {data: subjects} = useFetchSubjectsByUserIdQuery(getId() ?? skipToken);
+  const {data: subjects} = useFetchSubjectsQuery(getId() ?? skipToken);
   const [saveSubject] = useSaveSubjectMutation();
 
   const [files, setFiles] = useState([]);
@@ -77,15 +77,7 @@ export default function AddFile() {
         className={"selector"}
         theme={selectorColors}
         placeholder={t("subject")}
-        options={
-          subjects &&
-          subjects.map(subject => {
-            return {
-              label: subject.name,
-              value: subject.id
-            };
-          })
-        }
+        options={subjects}
         onChange={setSubject}
         onCreateOption={createSubject}
         value={subject}
