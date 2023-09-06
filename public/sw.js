@@ -11,7 +11,7 @@ clientsClaim();
 precacheAndRoute(self.__WB_MANIFEST);
 
 registerRoute(({request}) => request.mode === 'navigate',
-    createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
+    createHandlerBoundToURL('/index.html')
 );
 
 registerRoute(({request}) => request.method === "GET" && request.headers.get("X-Cache") === "api",
