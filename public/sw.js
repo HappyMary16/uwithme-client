@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
 import {clientsClaim} from "workbox-core";
-import {createHandlerBoundToURL, precacheAndRoute} from "workbox-precaching";
+import {precacheAndRoute} from "workbox-precaching";
 import {registerRoute} from "workbox-routing";
 import {NetworkFirst} from "workbox-strategies";
 import {ExpirationPlugin} from "workbox-expiration";
@@ -9,10 +9,6 @@ import {ExpirationPlugin} from "workbox-expiration";
 clientsClaim();
 
 precacheAndRoute(self.__WB_MANIFEST);
-
-registerRoute(({request}) => request.mode === 'navigate',
-    createHandlerBoundToURL('/index.html')
-);
 
 registerRoute(({request}) => request.method === "GET" && request.headers.get("X-Cache") === "api",
     new NetworkFirst({
