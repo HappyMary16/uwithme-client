@@ -1,8 +1,8 @@
 {
-  "name": "UniversityWithMe",
-  "short_name": "UWithMe",
+  "name": "University With Me",
+  "short_name": "U With Me",
   "version": "1.0",
-  "theme_color": "#343A40",
+  "theme_color": "#EEEEEE",
   "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
