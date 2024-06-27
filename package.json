@@ -10,6 +10,7 @@
   "dependencies": {
     "@happymary16/react-bootstrap-table-next": "^4.0.3",
     "@reduxjs/toolkit": "^1.9.3",
+    "auth-oidc": "^0.1.0",
     "bootstrap": "^5.2.3",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -24,8 +25,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-select": "^5.7.2",
-    "react-switch": "^7.0.0",
-    "tcomad-oidc": "^4.2.3"
+    "react-switch": "^7.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",

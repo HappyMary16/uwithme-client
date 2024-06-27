@@ -1,5 +1,5 @@
 import * as config from "../config";
-import {AuthService} from 'tcomad-oidc';
+import {AuthService} from 'auth-oidc';
 
 export const authService = new AuthService({
   authority: config.AUTHORITY,
