@@ -76,8 +76,7 @@ export default function ChooseRole() {
         groupId: group?.value,
         universityId: university?.value,
         universityName
-      }).then(() => authService.tryToRefresh())
-        .then(() => window.location.reload());
+      }).then(() => authService.refresh());
     }
   }
 

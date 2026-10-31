@@ -11,7 +11,6 @@ import {
   ADD_FILE,
   ADD_LESSON,
   ADMINS,
-  BOT_AUTH,
   DEBTS,
   FILES_PAGE,
   GROUP_PAGE_ROUTER,
@@ -50,7 +49,6 @@ import AddFile from "./pages/file/AddFile";
 import MySchedule from "./pages/lesson/MySchedule";
 import {authService, hasAnyRole} from "./services/authService";
 import AddLesson from "./pages/lesson/AddLesson";
-import BotAuth from "./pages/bot/BotAuth";
 import Syllabus from "./pages/studcabinet/Syllabus";
 
 // const Begin = lazy(() => import("./components/session/Begin"));
@@ -182,10 +180,6 @@ const router = createBrowserRouter([
           <PageRouter roles={[ADMIN]}>
             <AdminList/>
           </PageRouter>
-      },
-      {
-        path: BOT_AUTH,
-        element: <BotAuth/>
       }
     ]
   }
@@ -193,7 +187,7 @@ const router = createBrowserRouter([
 
 const root = createRoot(document.getElementById('root'));
 
-root.render(
+authService.init().then(() => root.render(
   <React.StrictMode>
     {authService.isLoggedIn() &&
       <Provider store={store}>
@@ -203,4 +197,4 @@ root.render(
       </Provider>
     }
   </React.StrictMode>
-);
+));

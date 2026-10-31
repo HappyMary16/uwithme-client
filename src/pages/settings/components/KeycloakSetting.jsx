@@ -1,6 +1,6 @@
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import i18n from '../../../config/i18n';
-import {KEYCLOAK_USER_SETTINGS} from '../../../constants/keycloakApi';
+import {KEYCLOAK_ACCOUNT_URI} from '../../../config';
 
 export function KeycloakSetting({ user }) {
   const { firstName, middleName, surname, email } = user??{};
@@ -38,7 +38,7 @@ export function KeycloakSetting({ user }) {
           <Button
             type={'submit'}
             variant={'purple'}
-            href={KEYCLOAK_USER_SETTINGS}
+            href={KEYCLOAK_ACCOUNT_URI}
           >
             {i18n.t('edit')}
           </Button>

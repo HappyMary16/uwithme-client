@@ -3,9 +3,7 @@ import {authService} from "./authService";
 
 export function http({method, url, body, isJson}) {
   return new Promise(resolve => {
-    const token = authService.getToken();
     const headers = [
-      ["Authorization", "Bearer " + token],
       ["X-Cache", "files"]
     ];
 
@@ -17,6 +15,11 @@ export function http({method, url, body, isJson}) {
       method: method,
       body: isJson ? JSON.stringify(body) : body,
       headers: headers
-    }).then(response => resolve(response))
+    }).then(response => {
+      if (response.status === 401) {
+        authService.login();
+      }
+      resolve(response);
+    })
   })
 }
