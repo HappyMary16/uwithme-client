@@ -26,8 +26,7 @@ import {CustomSpinner} from './pages/common/CustomSpinner';
 import {Message} from './pages/common/components/Message';
 import ErrorContainer from './pages/common/ErrorContainer';
 import * as config from './config';
-import {ADMIN, STUDENT} from './constants/userRoles';
-import BotNotification from './pages/bot/BotNotification';
+import {ADMIN} from './constants/userRoles';
 import {Outlet, useNavigate} from "react-router-dom";
 import {TopToolBar} from "./pages/navigation/TopToolBar";
 import {PRE_HOME} from "./constants/links";
@@ -93,7 +92,6 @@ export default function App() {
       <Container className={'main-page-container'}>
         <Outlet/>
       </Container>
-      {activeRole === STUDENT && <BotNotification/>}
     </Container>
   );
 }

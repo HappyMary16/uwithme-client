@@ -13,19 +13,16 @@ import {lectureHallApiSlice} from "./lecturehall/lectureHallApiSlice";
 import {fileApiSlice} from "./file/fileApiSlice";
 import {subjectApiSlice} from "./subject/subjectApiSlice";
 import messageSlice from "./message/messageSlice";
-import botSlice from "./bot/botSlice";
 
 export const store = configureStore({
   preloadedState: {
     auth: loadState("auth"),
-    studCabinet: loadState('studCabinet'),
-    bot: loadState('bot')
+    studCabinet: loadState('studCabinet')
   },
   reducer: {
     auth: authSlice,
     studCabinet: studCabinetSlice,
     message: messageSlice,
-    bot: botSlice,
     [studCabinetApiSlice.reducerPath]: studCabinetApiSlice.reducer,
     [tenantApiSlice.reducerPath]: tenantApiSlice.reducer,
     [departmentApiSlice.reducerPath]: departmentApiSlice.reducer,
@@ -55,5 +52,4 @@ export const store = configureStore({
 store.subscribe(() => {
   saveState("auth", store.getState().auth);
   saveState("studCabinet", store.getState().studCabinet)
-  saveState("bot", store.getState().bot);
 });

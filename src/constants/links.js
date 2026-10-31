@@ -33,6 +33,3 @@ export const STUDENTS_RATING = "/studcab/students/rating";
 export const SUBJECT_SCORES = "/studcab/subjects/scores";
 export const DEBTS = "/studcab/students/debts";
 export const SYLLABUS = "/studcab/syllabus";
-
-//bot
-export const BOT_AUTH = "/bot-auth"

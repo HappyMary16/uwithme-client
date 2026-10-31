@@ -1,6 +1,5 @@
 import {useState} from "react";
 import {apiRoot, FILES} from "../constants/serverApi";
-import {authService} from "../services/authService";
 
 export function useFileUploader() {
   const [progress, setProgress] = useState({});
@@ -37,8 +36,6 @@ export function useFileUploader() {
 }
 
 function startXhr(file, subjectName, fileType, monitor) {
-    const token = authService.getToken();
-
     const formData = new FormData();
     formData.append("files", file);
 
@@ -49,8 +46,6 @@ function startXhr(file, subjectName, fileType, monitor) {
         apiRoot + FILES + subjectName + "/" + fileType,
         true
     );
-
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
 
     xhr.upload.onprogress = event => monitor(event);
 

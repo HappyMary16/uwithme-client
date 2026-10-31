@@ -17,7 +17,7 @@ To build the application you need
 - [NPM](https://www.npmjs.com/)
 
 To run this project you should firstly run:
-- [Docker files](https://github.com/HappyMary16/uwithme-docker-files)
+- [Docker files](https://github.com/HappyMary16/uwithme-docker-files) (development configuration)
 - [University With Me Server](https://github.com/HappyMary16/uwithme-server)
 
 ## Running the application locally
@@ -29,3 +29,6 @@ npm install
 ```shell
 npm start
 ```
+
+Then open it at [http://localhost:4181](http://localhost:4181).
+Caddy from the Docker files logs you in with oauth2-proxy, serves the dev server and forwards `/api` to the server.
